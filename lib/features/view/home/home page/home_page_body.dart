@@ -38,7 +38,7 @@ class HomePageBody extends StatelessWidget {
             ],
           ),
 
-          //foreground
+          //myforeground
           Positioned(
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
