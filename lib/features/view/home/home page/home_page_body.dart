@@ -1,0 +1,251 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
+import 'package:get/get.dart';
+import 'package:quranlife/core/Utils/constants.dart';
+import 'package:quranlife/core/Utils/size_config.dart';
+import 'package:quranlife/core/widgets/gradient_background.dart';
+import 'package:quranlife/features/view/home/Drawer%20page/my_drawer.dart';
+import 'package:quranlife/features/view/home/home%20page/widgets/cart_card.dart';
+import 'package:quranlife/features/view/home/home%20page/widgets/wirds.dart';
+import 'package:quranlife/features/view/home/home%20page/widgets/mycategory.dart';
+import 'package:quranlife/core/widgets/cusstom_indicator.dart';
+import 'package:quranlife/features/controller/Auth%20controller/signoutcontroller.dart';
+import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
+import 'package:quranlife/features/view/home/salat%20time/widgets/currunet_pray_time.dart';
+
+class HomePageBody extends StatelessWidget {
+  HomePageBody({
+    super.key,
+  });
+  final MyHomeController homectrl = Get.find();
+  final GoogleSignoutController signoutctrl = Get.find();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      drawer: const MyDrawer(),
+      appBar: AppBar(
+        scrolledUnderElevation: 0,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.only(bottom: 8.0),
+        child: Stack(children: [
+          //gradient background
+          Gradientbackground(
+            gradientcolor: [
+              kmaincolor,
+              Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
+            ],
+          ),
+
+          //foreground
+          Positioned(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  left: 5,
+                  right: 5,
+                  top: 5,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // salat and calender pageview
+
+                    SizedBox(
+                      height: Sizeconfig.screenheight! < 768
+                          ? Sizeconfig.screenheight! / 2.7
+                          : Sizeconfig.screenheight! > 1010
+                              ? Sizeconfig.screenheight! / 4.3
+                              : Sizeconfig.screenheight! / 3.5,
+                      child: PageView(
+                          controller: homectrl.homepagecontroller,
+                          children: [
+                            //salat time
+                            Material(
+                              color: Colors.transparent,
+                              child: InkWell(
+                                overlayColor: const WidgetStatePropertyAll(
+                                    Colors.transparent),
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(12)),
+                                onTap: () {
+                                  Get.toNamed("salattime");
+                                },
+                                child: Ink(
+                                  child: CurrentPrayTime(
+                                    textcolor2: Get.isDarkMode
+                                        ? Colors.white
+                                        : Colors.black,
+                                    textcolor: Get.isDarkMode
+                                        ? kmaincolor4
+                                        : kmaincolor,
+                                    elevation: 2,
+                                    color: Get.isDarkMode
+                                        ? kmaincolor2dark.withOpacity(0.5)
+                                        : Colors.white.withOpacity(0.5),
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            //hijri calender
+                            Column(
+                              children: [
+                                SizedBox(
+                                  height: (Sizeconfig.screenheight! < 768
+                                          ? Sizeconfig.screenheight! / 2.7
+                                          : Sizeconfig.screenheight! > 1010
+                                              ? Sizeconfig.screenheight! / 4.3
+                                              : Sizeconfig.screenheight! /
+                                                  3.5) -
+                                      200,
+                                ),
+                                SizedBox(
+                                  height: 200,
+                                  child: Material(
+                                    color: Colors.transparent,
+                                    child: InkWell(
+                                      overlayColor:
+                                          const WidgetStatePropertyAll(
+                                              Colors.transparent),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(12)),
+                                      child: Ink(
+                                        child: Stack(
+                                          children: [
+                                            Card(
+                                              elevation: 2,
+                                              color: Get.isDarkMode
+                                                  ? kmaincolor2dark
+                                                      .withOpacity(0.5)
+                                                  : Colors.white
+                                                      .withOpacity(0.5),
+                                              child: const Center(
+                                                child: Text(
+                                                  "hijri calender",
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ]),
+                    ),
+
+                    //dots indicators
+
+                    /*I pass the color here because it doesn't chage in the real
+                    time when i change the theme if the bool Get.isDarkMode isn't 
+                    in the mainfile of page (not of preject it's of page 
+                    Like this page 'homepage').
+                    that err take a few time of me.
+                    */
+
+                    Container(
+                      alignment: Alignment.center,
+                      child: GetBuilder<MyHomeController>(
+                        builder: (c) => CustomIndicator(
+                          dotscolor: Get.isDarkMode
+                              ? const Color(0xffFD9B63)
+                              : kmaincolor,
+                          dotscount: 2,
+                          indposition: homectrl.homepagecontroller.page != null
+                              ? homectrl.homepagecontroller.page!.toInt()
+                              : 0,
+                        ),
+                      ),
+                    ),
+
+                    //categories widgets
+
+                    Text("Category",
+                        style: Theme.of(context).textTheme.titleLarge),
+                    SizedBox(
+                      height: Sizeconfig.screenheight! / 100,
+                    ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          MyCategory(
+                            categoryicon: FlutterIslamicIcons.allah,
+                          ),
+                          MyCategory(
+                            categoryicon: FlutterIslamicIcons.hadji,
+                          ),
+                          MyCategory(
+                            categoryicon: FlutterIslamicIcons.calendar,
+                          ),
+                          MyCategory(
+                            categoryicon: FlutterIslamicIcons.community,
+                          ),
+                          MyCategory(
+                            categoryicon: FlutterIslamicIcons.family,
+                          ),
+                          MyCategory(
+                            categoryicon: Icons.add,
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: Sizeconfig.screenheight! / 100,
+                    ),
+
+                    // nearset mosque to you
+
+                    Text("nearset mosque to you",
+                        style: Theme.of(context).textTheme.titleLarge),
+                    SizedBox(
+                      height: Sizeconfig.screenheight! / 100,
+                    ),
+
+                    // button that shows cart on tap
+
+                    SizedBox(
+                        height: Sizeconfig.screenheight! < 768
+                            ? Sizeconfig.screenheight! / 3.7
+                            : Sizeconfig.screenheight! > 1010
+                                ? Sizeconfig.screenheight! / 6
+                                : Sizeconfig.screenheight! / 5,
+                        child: CartCard(
+                          elevation: 2,
+                          color: Get.isDarkMode
+                              ? kmaincolor2dark.withOpacity(0.5)
+                              : Colors.white.withOpacity(0.5),
+                        )),
+                    SizedBox(
+                      height: Sizeconfig.screenheight! / 100,
+                    ),
+
+                    // The daily Wird cards
+
+                    Text("The Daily 'Wirds'",
+                        style: Theme.of(context).textTheme.titleLarge),
+                    SizedBox(
+                      height: Sizeconfig.screenheight! / 100,
+                    ),
+                    Wirds(
+                      mycolor: Get.isDarkMode
+                          ? kmaincolor2dark.withOpacity(0.5)
+                          : Colors.white.withOpacity(0.5),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ]),
+      ),
+    );
+  }
+}

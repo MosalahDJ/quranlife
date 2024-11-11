@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "667982982906",
+    "project_id": "quraanlife-50941",
+    "storage_bucket": "quraanlife-50941.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:667982982906:android:b3b143b87f8197ef5d2343",
+        "android_client_info": {
+          "package_name": "com.example.quranlife"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjyAte5J7rlFDa5wI-F1_op6uBW0rwKRs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
