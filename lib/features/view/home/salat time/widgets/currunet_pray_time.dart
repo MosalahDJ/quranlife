@@ -34,9 +34,6 @@ class CurrentPrayTime extends StatelessWidget {
           : Sizeconfig.screenheight! > 1010
               ? Sizeconfig.screenheight! / 4
               : Sizeconfig.screenheight! / 3.5,
-      // Sizeconfig.screenheight! < 700
-      //     ? Sizeconfig.screenheight! / 3
-      //     : Sizeconfig.screenheight! / 3.5,
       child: Stack(
         children: [
           //date text

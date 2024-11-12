@@ -96,9 +96,9 @@ class DeterminePrayersController extends GetxController {
       ];
 
       // Add next day's Fajr to prayers list
-      var nextDayFajr =
-          parseTime(fpfctrl.prayersdays[fpfctrl.formatDate(now)]['Fajr']!)
-              .add(const Duration(days: 1));
+      var nextDayFajr = parseTime(fpfctrl
+              .prayersdays[fpfctrl.formatDate(now.add(const Duration(days: 1)))]
+          ['Fajr']!);
       prayers.add(['Fajr', nextDayFajr]);
 
       //loop of prayers list for checking current and next prayer and time intile next

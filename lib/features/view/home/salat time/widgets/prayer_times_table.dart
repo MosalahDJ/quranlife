@@ -214,9 +214,11 @@ class Prayertimestable extends GetView<DeterminePrayersController> {
                     ),
                   ),
                   SizedBox(
-                    height: Sizeconfig.screenheight! < 800
+                    height: Sizeconfig.screenheight! < 768
                         ? Sizeconfig.screenheight! / 2
-                        : Sizeconfig.screenheight! / 2.45,
+                        : Sizeconfig.screenheight! > 1010
+                            ? Sizeconfig.screenheight! / 2.90
+                            : Sizeconfig.screenheight! / 2.45,
                     child: PageView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       controller: timespagectrl.timespagecontroller,
