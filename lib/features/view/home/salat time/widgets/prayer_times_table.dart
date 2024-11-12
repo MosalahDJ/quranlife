@@ -218,6 +218,7 @@ class Prayertimestable extends GetView<DeterminePrayersController> {
                         ? Sizeconfig.screenheight! / 2
                         : Sizeconfig.screenheight! / 2.45,
                     child: PageView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
                       controller: timespagectrl.timespagecontroller,
                       itemCount: fpfctrl.prayersdayskeys.length,
                       itemBuilder: (context, i) => Table(
