@@ -105,10 +105,6 @@ class CurrentPrayTime extends StatelessWidget {
                                         prayerctrl.nextPrayerTime.value,
                                         style: TextStyle(
                                           color: textcolor,
-
-                                          // color: Get.isDarkMode
-                                          //     ? const Color(0xffFD9B63)
-                                          //     : kmaincolor,
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -133,10 +129,6 @@ class CurrentPrayTime extends StatelessWidget {
                                         prayerctrl.timeUntilNext.value,
                                         style: TextStyle(
                                           color: textcolor,
-
-                                          // color: Get.isDarkMode
-                                          //     ? const Color(0xffFD9B63)
-                                          //     : kmaincolor,
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold,
                                         ),

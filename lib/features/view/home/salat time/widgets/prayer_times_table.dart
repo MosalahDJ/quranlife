@@ -60,14 +60,24 @@ class Prayertimestable extends GetView<DeterminePrayersController> {
                           : Colors.white),
                 ),
                 Visibility(
-                  //in this condition I chek if salat time = next prayer then
-                  //I check if date "$i" in the list of keys == current date
-                  //I use these funcs for making sure it range as same as each other
-                  //and the only diffrent is in the date not on string range
-                  visible: salattime == dpcctrl.nextPrayer.value &&
-                      fpfctrl.formatDateString(fpfctrl.getDateByIndex(
-                              timespagectrl.currentPage.value)!) ==
-                          fpfctrl.formatDate(DateTime.now()),
+                  // first check if current prayer = isha it for make the "timer
+                  //until next" visible in next day not in currnt day
+                  visible: prayerctrl.currentPrayer.value == "Isha"
+
+                      //I use these funcs for making sure it range as same as each other
+                      //and the only diffrent is in the date not on string range
+
+                      //in this condition I chek if salat time = next prayer
+                      ? (salattime == dpcctrl.nextPrayer.value &&
+                          //then I check if date "$i" in the list of keys == current date
+                          fpfctrl.formatDateString(fpfctrl.getDateByIndex(
+                                  timespagectrl.currentPage.value)!) ==
+                              fpfctrl.formatDate(
+                                  DateTime.now().add(const Duration(days: 1))))
+                      : (salattime == dpcctrl.nextPrayer.value &&
+                          fpfctrl.formatDateString(fpfctrl.getDateByIndex(
+                                  timespagectrl.currentPage.value)!) ==
+                              fpfctrl.formatDate(DateTime.now())),
                   child: Text(
                     "           -${dpcctrl.timeUntilNext.value}",
                     style: TextStyle(
