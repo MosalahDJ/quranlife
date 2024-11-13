@@ -136,7 +136,7 @@ class DeterminePrayersController extends GetxController {
         }
       }
 
-      // If we're after Isha and before next Fajr
+      // If we're after Isha
 
       if (now.isAfter(
           parseTime(fpfctrl.prayersdays[fpfctrl.formatDate(now)]['Isha']!))) {
@@ -145,6 +145,8 @@ class DeterminePrayersController extends GetxController {
         nextPrayerTime.value = formatTime(nextDayFajr);
         timeUntilNext.value = formatTimeUntil(nextDayFajr);
       }
+
+      //if we are before Fajr
 
       if (now.isBefore(
           parseTime(fpfctrl.prayersdays[fpfctrl.formatDate(now)]['Fajr']!))) {
@@ -160,7 +162,7 @@ class DeterminePrayersController extends GetxController {
       nextPrayer.value = "-";
       nextPrayerTime.value = "-";
       timeUntilNext.value = "-";
-    } finally {}
+    }
   }
 
   @override
