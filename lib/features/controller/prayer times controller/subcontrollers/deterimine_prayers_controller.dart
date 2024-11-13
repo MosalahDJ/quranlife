@@ -44,6 +44,21 @@ class DeterminePrayersController extends GetxController {
     );
   }
 
+  //we use this func for changing data type of time frome string to Datetime
+  //because we cauth it as String from the api
+  //I use this func not above the func because i need in this case tomorow's fajr
+  DateTime parsenextdayfajr(String time) {
+    var tomorow = DateTime.now().add(const Duration(days: 1));
+    var parts = time.split(':');
+    return DateTime(
+      tomorow.year,
+      tomorow.month,
+      tomorow.day,
+      int.parse(parts[0]),
+      int.parse(parts[1]),
+    );
+  }
+
   //making time format for time untile
   String formatTimeUntil(DateTime target) {
     var now = DateTime.now();
@@ -96,10 +111,11 @@ class DeterminePrayersController extends GetxController {
       ];
 
       // Add next day's Fajr to prayers list
-      var nextDayFajr = parseTime(fpfctrl
-              .prayersdays[fpfctrl.formatDate(now.add(const Duration(days: 1)))]
-          ['Fajr']!);
-      prayers.add(['Fajr', nextDayFajr]);
+      var nextDayFajr = parsenextdayfajr(fpfctrl.prayersdays[fpfctrl.formatDate(
+        now.add(
+          const Duration(days: 1),
+        ),
+      )]['Fajr']!);
 
       //loop of prayers list for checking current and next prayer and time intile next
       //we use "as datetime" and "as string" here beacause these data is requerd to be dynamic
@@ -120,7 +136,7 @@ class DeterminePrayersController extends GetxController {
           parseTime(fpfctrl.prayersdays[fpfctrl.formatDate(now)]['Isha']!))) {
         currentPrayer.value = 'Isha';
         nextPrayer.value = 'Fajr';
-        nextPrayerTime.value = "$nextDayFajr";
+        nextPrayerTime.value = formatTime(nextDayFajr);
         timeUntilNext.value = formatTimeUntil(nextDayFajr);
       }
     } catch (e) {

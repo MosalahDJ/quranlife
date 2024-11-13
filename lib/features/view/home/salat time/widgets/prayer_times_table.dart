@@ -69,15 +69,21 @@ class Prayertimestable extends GetView<DeterminePrayersController> {
 
                       //in this condition I chek if salat time = next prayer
                       ? (salattime == dpcctrl.nextPrayer.value &&
+                          //then I check if date "$i" in the list of keys == next date
+                          fpfctrl.formatDateString(fpfctrl.getDateByIndex(
+                                  timespagectrl.currentPage.value)!) ==
+                              fpfctrl.formatDate(
+                                DateTime.now().add(
+                                  const Duration(days: 1),
+                                ),
+                              ))
+                      : (salattime == dpcctrl.nextPrayer.value &&
                           //then I check if date "$i" in the list of keys == current date
                           fpfctrl.formatDateString(fpfctrl.getDateByIndex(
                                   timespagectrl.currentPage.value)!) ==
                               fpfctrl.formatDate(
-                                  DateTime.now().add(const Duration(days: 1))))
-                      : (salattime == dpcctrl.nextPrayer.value &&
-                          fpfctrl.formatDateString(fpfctrl.getDateByIndex(
-                                  timespagectrl.currentPage.value)!) ==
-                              fpfctrl.formatDate(DateTime.now())),
+                                DateTime.now(),
+                              )),
                   child: Text(
                     "           -${dpcctrl.timeUntilNext.value}",
                     style: TextStyle(

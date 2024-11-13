@@ -32,10 +32,13 @@ class Salattimebar extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        trailing: const Icon(
-          Icons.settings_applications_outlined,
-          color: Colors.white,
-        ),
+        //test button
+        trailing: IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.settings_applications_outlined,
+              color: Colors.white,
+            )),
       ),
     );
   }
