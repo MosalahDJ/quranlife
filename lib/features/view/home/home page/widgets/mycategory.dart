@@ -4,10 +4,11 @@ import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
 
 class MyCategory extends StatelessWidget {
-  MyCategory({super.key, required this.categoryicon});
+  MyCategory({super.key, required this.categoryicon, required this.ontap});
 
   final IconData categoryicon;
   final MyHomeController homectrl = Get.find();
+  final VoidCallback ontap;
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +16,7 @@ class MyCategory extends StatelessWidget {
       child: Row(
         children: [
           InkWell(
+            onTap: ontap,
             child: GetBuilder<MyHomeController>(
               builder: (_) => Card(
                 color: Get.isDarkMode

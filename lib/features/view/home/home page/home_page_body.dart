@@ -177,21 +177,29 @@ class HomePageBody extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           MyCategory(
+                            ontap: () {},
                             categoryicon: FlutterIslamicIcons.allah,
                           ),
                           MyCategory(
+                            ontap: () {},
                             categoryicon: FlutterIslamicIcons.hadji,
                           ),
                           MyCategory(
+                            ontap: () {
+                              Get.toNamed("hijri");
+                            },
                             categoryicon: FlutterIslamicIcons.calendar,
                           ),
                           MyCategory(
+                            ontap: () {},
                             categoryicon: FlutterIslamicIcons.community,
                           ),
                           MyCategory(
+                            ontap: () {},
                             categoryicon: FlutterIslamicIcons.family,
                           ),
                           MyCategory(
+                            ontap: () {},
                             categoryicon: Icons.add,
                           ),
                         ],

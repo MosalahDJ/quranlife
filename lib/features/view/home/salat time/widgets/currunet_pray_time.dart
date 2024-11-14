@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hijri/hijri_calendar.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/prayer_times_controller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/fetch_prayer_from_date.dart';
@@ -24,6 +25,7 @@ class CurrentPrayTime extends StatelessWidget {
   final FetchPrayerFromDate fpfctrl = Get.find();
   final PrayertimesController prtctrl = Get.find();
   final TimesPageController timespagectrl = Get.find();
+  final HijriCalendar hijri = HijriCalendar.now();
 
   @override
   Widget build(BuildContext context) {
@@ -43,13 +45,11 @@ class CurrentPrayTime extends StatelessWidget {
             child: Card(
               color: Colors.transparent,
               elevation: 0,
-              child: Obx(
-                () => Text(
-                  prayerctrl.currentdate.value,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                  ),
+              child: Text(
+                "${hijri.hDay} - ${hijri.shortMonthName} - ${hijri.hYear}  hijri",
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
                 ),
               ),
             ),

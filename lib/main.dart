@@ -6,6 +6,7 @@ import 'package:quranlife/core/Utils/thems.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/notification_controller.dart';
 import 'package:quranlife/features/view/auth/login%20page/loginpage.dart';
 import 'package:quranlife/features/view/auth/signin%20page/signin_page.dart';
+import 'package:quranlife/features/view/home/hijri%20calender/hijri_calender.dart';
 import 'package:quranlife/features/view/home/home_page.dart';
 import 'package:quranlife/features/view/home/Drawer%20page/more%20items%20pages/history_page.dart';
 import 'package:quranlife/features/view/home/Drawer%20page/more%20items%20pages/settings%20page/setting_page.dart';
@@ -59,6 +60,10 @@ class QuranLifeApp extends StatelessWidget {
       GetPage(
         name: "/signin",
         page: () => SigninPage(),
+      ),
+      GetPage(
+        name: "/hijri",
+        page: () => HijriCalender(),
       ),
       GetPage(
           name: "/history",

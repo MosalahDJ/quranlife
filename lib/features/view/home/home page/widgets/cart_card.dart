@@ -75,10 +75,7 @@ class CartCard extends StatelessWidget {
                 color: Colors.transparent,
                 child: InkWell(
                   borderRadius: const BorderRadius.all(Radius.circular(11)),
-                  onTap: () {
-
-                    print("${Sizeconfig.screenheight}");
-                  },
+                  onTap: () {},
                   child: SizedBox(
                     height: Sizeconfig.screenheight! < 768
                         ? Sizeconfig.screenheight! / 15
