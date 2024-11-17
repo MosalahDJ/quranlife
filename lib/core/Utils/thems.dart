@@ -143,8 +143,8 @@ class Themes {
             fontSize: 24, color: textcolor2dark, fontWeight: FontWeight.bold),
 
 // الاستخدام: عناوين رئيسية في البطاقات أو الأقسام. قد تستخدم في رؤوس الصفحات أو العناصر الهامة.
-        titleLarge: TextStyle(
-            fontSize: 22, color: textcolor3dark, fontWeight: FontWeight.bold),
+        titleLarge: const TextStyle(
+            fontSize: 22, color: Colors.white, fontWeight: FontWeight.bold),
 
 // الاستخدام: عناوين فرعية داخل البطاقات أو الأقسام. تساعد في تنظيم المحتوى داخل المكونات.
         titleMedium: TextStyle(

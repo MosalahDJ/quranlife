@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
+import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/fetch_prayer_from_date.dart';
 import 'package:quranlife/features/view/home/Drawer%20page/my_drawer.dart';
 import 'package:quranlife/features/view/home/home%20page/widgets/cart_card.dart';
 import 'package:quranlife/features/view/home/home%20page/widgets/wirds.dart';
@@ -12,6 +13,7 @@ import 'package:quranlife/core/widgets/cusstom_indicator.dart';
 import 'package:quranlife/features/controller/Auth%20controller/signoutcontroller.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
 import 'package:quranlife/features/view/home/salat%20time/widgets/currunet_pray_time.dart';
+import 'package:quranlife/features/view/home/salat%20time/widgets/salwatpageview.dart';
 
 class HomePageBody extends StatelessWidget {
   HomePageBody({
@@ -19,6 +21,7 @@ class HomePageBody extends StatelessWidget {
   });
   final MyHomeController homectrl = Get.find();
   final GoogleSignoutController signoutctrl = Get.find();
+  final FetchPrayerFromDate fpfctrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +93,7 @@ class HomePageBody extends StatelessWidget {
                               ),
                             ),
 
-                            //hijri calender
+                            //Salawattime
                             Column(
                               children: [
                                 SizedBox(
@@ -101,37 +104,84 @@ class HomePageBody extends StatelessWidget {
                                               : Sizeconfig.screenheight! /
                                                   3.5) -
                                       200,
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                        height: Sizeconfig.screenheight! / 120,
+                                      ),
+                                      SizedBox(
+                                          width: Sizeconfig.screenwidth,
+                                          child: Text("Mawaqit",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleLarge)),
+                                    ],
+                                  ),
                                 ),
                                 SizedBox(
                                   height: 200,
-                                  child: Material(
-                                    color: Colors.transparent,
-                                    child: InkWell(
-                                      overlayColor:
-                                          const WidgetStatePropertyAll(
-                                              Colors.transparent),
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(12)),
-                                      child: Ink(
-                                        child: Stack(
+                                  child: InkWell(
+                                    onTap: () => Get.toNamed("salattime"),
+                                    overlayColor: const WidgetStatePropertyAll(
+                                        Colors.transparent),
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(12)),
+                                    child: Ink(
+                                      child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
                                           children: [
-                                            Card(
-                                              elevation: 2,
-                                              color: Get.isDarkMode
-                                                  ? kmaincolor2dark
-                                                      .withOpacity(0.5)
-                                                  : Colors.white
-                                                      .withOpacity(0.5),
-                                              child: const Center(
-                                                child: Text(
-                                                  "hijri calender",
-                                                  textAlign: TextAlign.center,
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Salwatpageview(
+                                                  icon:
+                                                      "lib/core/assets/images/salat_icons/fajr.png",
+                                                  salatname: "fajr",
+                                                  salattime: "Fajr",
                                                 ),
-                                              ),
+                                                Salwatpageview(
+                                                  icon:
+                                                      "lib/core/assets/images/salat_icons/fajr.png",
+                                                  salatname: "Sunrise",
+                                                  salattime: "Sunrise",
+                                                ),
+                                                Salwatpageview(
+                                                  icon:
+                                                      "lib/core/assets/images/salat_icons/duhr.png",
+                                                  salatname: "Dhuhr",
+                                                  salattime: "Dhuhr",
+                                                ),
+                                              ],
                                             ),
-                                          ],
-                                        ),
-                                      ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Salwatpageview(
+                                                  icon:
+                                                      "lib/core/assets/images/salat_icons/ASR.png",
+                                                  salatname: "Asr",
+                                                  salattime: "Asr",
+                                                ),
+                                                Salwatpageview(
+                                                  icon:
+                                                      "lib/core/assets/images/salat_icons/MAGHRIB.png",
+                                                  salatname: "Maghrib",
+                                                  salattime: "Maghrib",
+                                                ),
+                                                Salwatpageview(
+                                                  icon:
+                                                      "lib/core/assets/images/salat_icons/ISHA.png",
+                                                  salatname: "Isha",
+                                                  salattime: "Isha",
+                                                ),
+                                              ],
+                                            )
+                                          ]),
                                     ),
                                   ),
                                 ),
@@ -146,7 +196,7 @@ class HomePageBody extends StatelessWidget {
                     time when i change the theme if the bool Get.isDarkMode isn't 
                     in the mainfile of page (not of preject it's of page 
                     Like this page 'homepage').
-                    that err take a few time of me.
+                    that problem take a few time of me.
                     */
 
                     Container(
