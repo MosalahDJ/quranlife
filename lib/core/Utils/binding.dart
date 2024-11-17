@@ -7,7 +7,6 @@ import 'package:quranlife/features/controller/Auth%20controller/signoutcontrolle
 import 'package:quranlife/features/controller/favorite%20controller/favoritecontroller.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
 import 'package:quranlife/features/controller/Auth%20controller/textvalidatecontroller.dart';
-import 'package:quranlife/features/controller/page%20controller/page_viewcontroller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/deterimine_prayers_controller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/fetch_prayer_from_date.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/location_controller.dart';
@@ -19,7 +18,6 @@ class Mybinding implements Bindings {
   @override
   void dependencies() {
     Get.put<Animationcontrollers>(Animationcontrollers());
-    Get.put<PageViewcontroller>(PageViewcontroller());
     Get.put<SignInController>(SignInController());
     Get.put<LogInController>(LogInController());
     Get.put<GoogleLogInController>(GoogleLogInController());

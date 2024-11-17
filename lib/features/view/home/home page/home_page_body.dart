@@ -5,8 +5,8 @@ import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/fetch_prayer_from_date.dart';
 import 'package:quranlife/features/view/home/Drawer%20page/my_drawer.dart';
-import 'package:quranlife/features/view/home/home%20page/categories.dart';
-import 'package:quranlife/features/view/home/home%20page/salawat_pageview.dart';
+import 'package:quranlife/features/view/home/home%20page/widgets/categories.dart';
+import 'package:quranlife/features/view/home/home%20page/widgets/salawat_pageview.dart';
 import 'package:quranlife/features/view/home/home%20page/widgets/cart_card.dart';
 import 'package:quranlife/features/view/home/home%20page/widgets/wirds.dart';
 import 'package:quranlife/core/widgets/cusstom_indicator.dart';
@@ -39,7 +39,7 @@ class HomePageBody extends StatelessWidget {
             ],
           ),
 
-          //myforeground
+          //foreground
           Positioned(
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
@@ -53,18 +53,15 @@ class HomePageBody extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // salawat pageview
-
                     SalawatPageview(),
 
                     //dots indicators
-
                     /*I pass the color here because it doesn't chage in the real
                     time when i change the theme if the bool Get.isDarkMode isn't 
                     in the mainfile of page (not of preject it's of page 
                     Like this page 'homepage').
                     that problem take a few time of me.
                     */
-
                     Container(
                       alignment: Alignment.center,
                       child: GetBuilder<MyHomeController>(
@@ -81,21 +78,17 @@ class HomePageBody extends StatelessWidget {
                     ),
 
                     //categories widgets
-
-                    const Categories(),
-
+                    const ServiceCategorie(),
                     SizedBox(
                       height: Sizeconfig.screenheight! / 100,
                     ),
 
                     // nearset mosque to you
-
                     Text("nearset mosque to you",
                         style: Theme.of(context).textTheme.titleLarge),
                     SizedBox(
                       height: Sizeconfig.screenheight! / 100,
                     ),
-
                     SizedBox(
                         height: Sizeconfig.screenheight! < 768
                             ? Sizeconfig.screenheight! / 3.7
@@ -113,7 +106,6 @@ class HomePageBody extends StatelessWidget {
                     ),
 
                     // The daily Wird cards
-
                     Text("The Daily 'Wirds'",
                         style: Theme.of(context).textTheme.titleLarge),
                     SizedBox(

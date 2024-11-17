@@ -6,12 +6,12 @@ import 'package:quranlife/features/view/auth/login%20page/loginpage.dart';
 import 'package:quranlife/core/widgets/cusstom_indicator.dart';
 import 'package:quranlife/features/view/onboarding%20pages/widgets/cusstom_page_view.dart';
 import 'package:quranlife/features/view/onboarding%20pages/widgets/page_view_buttons.dart';
-import 'package:quranlife/features/controller/page%20controller/page_viewcontroller.dart';
+import 'package:quranlife/features/controller/onboarding%20page%20controller/onboarding_pagecontroller.dart';
 
 class OnboardingBody extends StatelessWidget {
   OnboardingBody({super.key});
 
-  final PageViewcontroller pageviewctrl = Get.find();
+  final OnboardingPagecontroller pageviewctrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class OnboardingBody extends StatelessWidget {
                     //and we use the controller variable to get the value
                     //and we use the condition statment to make his value 0 if there
                     // is no value in controller
-                    child: GetBuilder<PageViewcontroller>(
+                    child: GetBuilder<OnboardingPagecontroller>(
                         builder: (on) => CustomIndicator(
                               dotscolor: Get.isDarkMode
                                   ? const Color(0xffFD9B63)
@@ -60,7 +60,7 @@ class OnboardingBody extends StatelessWidget {
                     //also we use the get builder for skip the error of "cant build a
                     // page view controller before building the ui page"
                     //visability widget help us to make a widget invisible
-                    child: GetBuilder<PageViewcontroller>(
+                    child: GetBuilder<OnboardingPagecontroller>(
                       builder: (on) => Visibility(
                           visible: pageviewctrl.pagecontroller.page == 3
                               ? false

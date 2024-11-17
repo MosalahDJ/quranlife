@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/features/view/home/home%20page/widgets/mycategory.dart';
 
-class Categories extends StatelessWidget {
-  const Categories({super.key});
+class ServiceCategorie extends StatelessWidget {
+  const ServiceCategorie({super.key});
 
   @override
   Widget build(BuildContext context) {

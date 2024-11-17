@@ -4,23 +4,25 @@ import 'package:get/get.dart';
 class MyHomeController extends GetxController {
   int selected = 0;
 
+  //bnbfunc
   bnbfunc(int val) {
     selected = val;
     update();
   }
 
+  //searchpage
   tosearchpage() {
     Get.toNamed("search");
   }
-  ////////
 
+  //focus node
   FocusNode searchfnode = FocusNode();
 
   unfocuskeyboardhome() {
     searchfnode.unfocus();
   }
 
-//////
+  //pagecontroller
   PageController homepagecontroller = PageController();
 
   int? currentPage;

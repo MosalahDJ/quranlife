@@ -1,8 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quranlife/features/view/home/home_page.dart';
-import 'package:quranlife/features/view/onboarding%20pages/on_boarding_view.dart';
 
 class Animationcontrollers extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -11,11 +9,11 @@ class Animationcontrollers extends GetxController
 
   tonextpage() {
     Future.delayed(const Duration(seconds: 5), () {
-      Get.off(
-        () => FirebaseAuth.instance.currentUser != null &&
+      Get.offNamed(
+        FirebaseAuth.instance.currentUser != null &&
                 FirebaseAuth.instance.currentUser!.emailVerified
-            ? HomePage()
-            : const OnBoardingView(),
+            ? "home"
+            : "onboarding",
       );
     });
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hijri/hijri_calendar.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
@@ -9,6 +10,7 @@ import 'package:quranlife/features/view/home/salat%20time/widgets/salwatpageview
 class SalawatPageview extends StatelessWidget {
   SalawatPageview({super.key});
   final MyHomeController homectrl = Get.find();
+  final HijriCalendar hijri = HijriCalendar.now();
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +60,13 @@ class SalawatPageview extends StatelessWidget {
                   ),
                   SizedBox(
                       width: Sizeconfig.screenwidth,
-                      child: Text("Mawaqit",
-                          style: Theme.of(context).textTheme.titleLarge)),
+                      child: Text(
+                        "  ${hijri.hDay} - ${hijri.shortMonthName} - ${hijri.hYear}  hijri",
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                        ),
+                      )),
                 ],
               ),
             ),

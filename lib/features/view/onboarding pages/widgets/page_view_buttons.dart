@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
-import 'package:quranlife/features/controller/page%20controller/page_viewcontroller.dart';
+import 'package:quranlife/features/controller/onboarding%20page%20controller/onboarding_pagecontroller.dart';
 
 class PageViewbutton extends StatelessWidget {
   PageViewbutton({super.key});
-  final PageViewcontroller pageviewctrl = Get.find();
+  final OnboardingPagecontroller pageviewctrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class PageViewbutton extends StatelessWidget {
       decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(8))),
       child: Center(
-        child: GetBuilder<PageViewcontroller>(
+        child: GetBuilder<OnboardingPagecontroller>(
             builder: (on) => Text(
                   pageviewctrl.pagecontroller.page == 3
                       ? "Get Started"

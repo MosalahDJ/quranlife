@@ -41,17 +41,12 @@ class CurrentPrayTime extends StatelessWidget {
           //date text
           Positioned(
             top: 0,
-            left: Sizeconfig.screenwidth! / 50,
+            left: 0,
             child: Card(
               color: Colors.transparent,
               elevation: 0,
-              child: Text(
-                "${hijri.hDay} - ${hijri.shortMonthName} - ${hijri.hYear}  hijri",
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                ),
-              ),
+              child: Text("Mawaqite",
+                  style: Theme.of(context).textTheme.titleLarge),
             ),
           ),
           //card

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:quranlife/core/Utils/binding.dart';
 import 'package:quranlife/core/Utils/thems.dart';
+import 'package:quranlife/features/controller/onboarding%20page%20controller/onboarding_pagecontroller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/notification_controller.dart';
 import 'package:quranlife/features/view/auth/login%20page/loginpage.dart';
 import 'package:quranlife/features/view/auth/signin%20page/signin_page.dart';
@@ -46,9 +47,13 @@ class QuranLifeApp extends StatelessWidget {
         page: () => const SplashView(),
       ),
       GetPage(
-        name: "/onboarding",
-        page: () => const OnBoardingView(),
-      ),
+          name: "/onboarding",
+          page: () => const OnBoardingView(),
+          binding: BindingsBuilder(
+            () => Get.lazyPut<OnboardingPagecontroller>(
+              () => OnboardingPagecontroller(),
+            ),
+          )),
       GetPage(
         name: "/login",
         page: () => LoginPage(),
