@@ -1,0 +1,57 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
+import 'package:get/get.dart';
+import 'package:quranlife/core/Utils/size_config.dart';
+import 'package:quranlife/features/view/home/home%20page/widgets/mycategory.dart';
+
+class Categories extends StatelessWidget {
+  const Categories({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text("Category", style: Theme.of(context).textTheme.titleLarge),
+        SizedBox(
+          height: Sizeconfig.screenheight! / 100,
+        ),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              MyCategory(
+                ontap: () {},
+                categoryicon: FlutterIslamicIcons.allah,
+              ),
+              MyCategory(
+                ontap: () {},
+                categoryicon: FlutterIslamicIcons.hadji,
+              ),
+              MyCategory(
+                ontap: () {
+                  Get.toNamed("hijri");
+                },
+                categoryicon: FlutterIslamicIcons.calendar,
+              ),
+              MyCategory(
+                ontap: () {},
+                categoryicon: FlutterIslamicIcons.community,
+              ),
+              MyCategory(
+                ontap: () {},
+                categoryicon: FlutterIslamicIcons.family,
+              ),
+              MyCategory(
+                ontap: () {},
+                categoryicon: Icons.add,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
