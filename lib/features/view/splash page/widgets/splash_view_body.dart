@@ -32,7 +32,7 @@ class SplashViewBody extends StatelessWidget {
               ),
             ),
             SizedBox(
-                height: Sizeconfig.screenheight! / 2,
+                height: Sizeconfig.screenheight! / 3.5,
                 width: Sizeconfig.screenwidth! / 1.2,
                 child: Image.asset(
                     "lib/core/assets/images/splash_view_image/splashimage.png")),
