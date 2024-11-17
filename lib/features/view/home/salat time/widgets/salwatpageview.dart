@@ -42,24 +42,22 @@ class Salwatpageview extends StatelessWidget {
                   color: Get.isDarkMode ? textcolor3dark : textcolor,
                   fontSize: Sizeconfig.screenheight! / 50),
             ),
-            Obx(
-              () => prtctrl.isLoading.value == true
-                  ? SizedBox(
-                      height: Sizeconfig.screenheight! / 32,
-                      child: const Center(
-                          child: CircularProgressIndicator(
-                        strokeAlign: -5,
-                        strokeWidth: 5,
-                      )),
-                    )
-                  : Text(
-                      "${fpfctrl.prayersdays[day][salattime] ?? "-"}",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Get.isDarkMode ? kmaincolor4 : kmaincolor,
-                          fontSize: Sizeconfig.screenheight! / 50),
-                    ),
-            ),
+            Obx(() => prtctrl.isLoading.value == true
+                ? SizedBox(
+                    height: Sizeconfig.screenheight! / 32,
+                    child: const Center(
+                        child: CircularProgressIndicator(
+                      strokeAlign: -5,
+                      strokeWidth: 5,
+                    )),
+                  )
+                : Text(
+                    fpfctrl.prayersdays[day]?[salattime]?.toString() ?? "-",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Get.isDarkMode ? kmaincolor4 : kmaincolor,
+                        fontSize: Sizeconfig.screenheight! / 50),
+                  )),
             SizedBox(
                 height: Sizeconfig.screenheight! / 27,
                 width: Sizeconfig.screenwidth! / 10,

@@ -86,7 +86,7 @@ class SalawatPageview extends StatelessWidget {
                             Salwatpageview(
                               icon:
                                   "lib/core/assets/images/salat_icons/fajr.png",
-                              salatname: "fajr",
+                              salatname: "Fajr",
                               salattime: "Fajr",
                             ),
                             Salwatpageview(
