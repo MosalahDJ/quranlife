@@ -34,6 +34,7 @@ dependencies:
   dots_indicator: ^3.0.0
   firebase_auth: ^5.0.0
   firebase_core: ^3.0.0
+  firebase_messaging: ^15.1.5
   flutter:
     sdk: flutter
   flutter_islamic_icons: ^1.0.2
@@ -41,6 +42,8 @@ dependencies:
   geolocator: ^13.0.1
   get: ^4.6.6
   google_sign_in: ^6.2.1
+  googleapis: ^13.2.0
+  googleapis_auth: ^1.6.0
   hijri: ^3.0.0
   http: ^1.2.2
   islamic_hijri_calendar: ^0.0.4
@@ -101,7 +104,6 @@ flutter:
     - lib/core/assets/images/background_image/
     - lib/core/assets/images/app_logo/
     - lib/core/assets/images/salat_icons/
-
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

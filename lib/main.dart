@@ -1,10 +1,11 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:quranlife/core/Utils/binding.dart';
 import 'package:quranlife/core/Utils/thems.dart';
 import 'package:quranlife/features/controller/onboarding%20page%20controller/onboarding_pagecontroller.dart';
-import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/notification_controller.dart';
+import 'package:quranlife/features/controller/notification%20controller/notification_controller.dart';
 import 'package:quranlife/features/view/auth/login%20page/loginpage.dart';
 import 'package:quranlife/features/view/auth/signin%20page/signin_page.dart';
 import 'package:quranlife/features/view/home/hijri%20calender/hijri_calender.dart';
@@ -18,11 +19,15 @@ import 'package:quranlife/features/controller/Auth%20controller/settingscontroll
 import 'package:quranlife/features/controller/more%20controllers/historycontroller.dart';
 import 'firebase_options.dart';
 
+Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+
   runApp(const QuranLifeApp());
 }
 

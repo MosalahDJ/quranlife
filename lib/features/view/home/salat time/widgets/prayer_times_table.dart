@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/fetch_prayer_from_date.dart';
-import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/notification_controller.dart';
+import 'package:quranlife/features/controller/notification%20controller/notification_controller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/deterimine_prayers_controller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/times_page_controller.dart';
 
