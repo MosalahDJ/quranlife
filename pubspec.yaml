@@ -95,6 +95,7 @@ flutter:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   assets:
+    - .env
     - lib/core/assets/images/splash_view_image/
     - lib/core/assets/images/on_boarding_image/
     - lib/core/assets/images/login_images/

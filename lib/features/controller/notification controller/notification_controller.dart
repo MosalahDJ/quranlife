@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:quranlife/features/controller/notification%20controller/acces_token.dart';
+import 'package:quranlife/features/controller/notification%20controller/my_acces_token.dart';
 
 class NotificationController extends GetxController {
   @override
