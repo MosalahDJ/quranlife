@@ -47,6 +47,10 @@ class SettingPage extends StatelessWidget {
               ),
             ),
 
+//i add notification controller that use firebase messaging func for handling & interacted with messages and notification also i add a class for getting acces token that is necissary for for firebase messaging and i make a little change in splashviewscreen
+
+            const Text("this is just a test"),
+
             //Other settings list tile
             //here
           ],
