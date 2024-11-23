@@ -18,6 +18,7 @@ import 'package:quranlife/features/view/splash%20page/splash_view.dart';
 import 'package:quranlife/features/controller/Auth%20controller/settingscontroller.dart';
 import 'package:quranlife/features/controller/more%20controllers/historycontroller.dart';
 import 'firebase_options.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {}
 
@@ -26,6 +27,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await dotenv.load(fileName: ".env");
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 
   runApp(const QuranLifeApp());
