@@ -17,11 +17,14 @@ class NotificationController extends GetxController {
   }
 
   final AccesToken acctokenctrl = Get.find();
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
 
   sendmessage(topicname, mytitle, mybody, mytype) async {
+    var mytoken = await acctokenctrl.getAccestoken();
+
     var headerslist = {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ${acctokenctrl.getAccestoken()}',
+      'Authorization': 'Bearer $mytoken',
     };
 
     var url = Uri.parse(
@@ -48,8 +51,6 @@ class NotificationController extends GetxController {
     }
   }
 
-  FirebaseMessaging messaging = FirebaseMessaging.instance;
-
   //permission
   requestnotificationpermission() async {
     await messaging.requestPermission(
@@ -63,39 +64,40 @@ class NotificationController extends GetxController {
     );
   }
 
+  //subscribe to topic
   subscribetotopic(String topicname) async {
     await FirebaseMessaging.instance.subscribeToTopic(topicname);
     print("subscribed");
   }
 
+  //unsbscribe frome topic
   unsbscribefrometopic(String topicname) async {
     await FirebaseMessaging.instance.unsubscribeFromTopic(topicname);
     print("unsubscribed");
   }
 
+  //handle notification on message
   onmessage() {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      print('Got a message whilst in the foreground!');
-      print('Message data: ${message.data}');
-
-      if (message.notification != null) {
-        print('Message also contained a notification: ${message.notification}');
+      if (message.notification != null && message.data["type"] == "adhan") {
+        Get.snackbar(message.notification!.title!, message.notification!.body!);
       }
     });
   }
 
+  //handling interaction with notification
   Future<void> setupInteractedMessage() async {
-    // Get any messages which caused the application to open from
-    // a terminated state.
     RemoteMessage? initialMessage =
         await FirebaseMessaging.instance.getInitialMessage();
 
     void handleMessage(RemoteMessage message) {
-      if (message.data['type'] == 'chat') {}
+      if (message.data['type'] == 'adhan') {
+        Get.toNamed("/salattime");
+      }
     }
 
-    // If the message also contains a data property with a "type" of "chat",
-    // navigate to a chat screen
+    // If the message also contains a data property with a "type" of "adhan",
+    // navigate to a salattime screen
     if (initialMessage != null) {
       handleMessage(initialMessage);
     }

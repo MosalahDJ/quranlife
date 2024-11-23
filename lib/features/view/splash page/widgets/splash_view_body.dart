@@ -17,25 +17,20 @@ class SplashViewBody extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(
-              height: Sizeconfig.screenheight! / 4,
-            ),
-            Center(
-              child: FadeTransition(
-                opacity: anctrl.fadinganimation!,
-                child: Text(
-                  "Quraan Life",
-                  style: TextStyle(
-                      fontSize: 50,
-                      fontWeight: FontWeight.bold,
-                      color: Get.isDarkMode ? kmaincolor3 : kmaincolor3dark),
-                ),
-              ),
-            ),
-            SizedBox(
                 height: Sizeconfig.screenheight! / 3.5,
                 width: Sizeconfig.screenwidth! / 1.2,
                 child: Image.asset(
                     "lib/core/assets/images/splash_view_image/splashimage.png")),
+            FadeTransition(
+              opacity: anctrl.fadinganimation!,
+              child: Text(
+                "Quraan Life",
+                style: TextStyle(
+                    fontSize: 50,
+                    fontWeight: FontWeight.bold,
+                    color: Get.isDarkMode ? kmaincolor3 : kmaincolor3dark),
+              ),
+            ),
           ],
         ),
       ),

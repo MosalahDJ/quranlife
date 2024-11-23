@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
-import 'package:quranlife/features/controller/notification%20controller/notification_controller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/fetch_prayer_from_date.dart';
 import 'package:quranlife/features/view/home/Drawer%20page/my_drawer.dart';
 import 'package:quranlife/features/view/home/home%20page/widgets/categories.dart';
@@ -21,7 +20,6 @@ class HomePageBody extends StatelessWidget {
   final MyHomeController homectrl = Get.find();
   final GoogleSignoutController signoutctrl = Get.find();
   final FetchPrayerFromDate fpfctrl = Get.find();
-  final NotificationController notictrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -54,22 +52,6 @@ class HomePageBody extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ElevatedButton(
-                        onPressed: () {
-                          notictrl.subscribetotopic("Salattime");
-                        },
-                        child: const Text("sbscribe to topic")),
-                    ElevatedButton(
-                        onPressed: () {
-                          notictrl.unsbscribefrometopic("Salattime");
-                        },
-                        child: const Text("unsbscribe from topic")),
-                    ElevatedButton(
-                        onPressed: () {
-                          notictrl.sendmessage(
-                              "Salattime", "mytitle", "mybody", "adhan");
-                        },
-                        child: const Text("send message")),
                     // salawat pageview
                     SalawatPageview(),
 

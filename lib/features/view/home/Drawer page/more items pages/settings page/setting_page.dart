@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/features/controller/Auth%20controller/settingscontroller.dart';
+import 'package:quranlife/features/controller/notification%20controller/notification_controller.dart';
 
 class SettingPage extends StatelessWidget {
   SettingPage({super.key});
+  final NotificationController notictrl = Get.find();
   final Settingscontroller stgctrl = Get.find();
 
   @override
@@ -26,7 +28,6 @@ class SettingPage extends StatelessWidget {
       ),
 
       //Settings body
-
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
