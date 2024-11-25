@@ -22,12 +22,15 @@ class AccesToken {
         "https://www.googleapis.com/auth/firebase.messaging",
       ];
 
+      //getting ServiceAccountCredentials
       final credentials =
           myauth.ServiceAccountCredentials.fromJson(serviceaccountJson);
 
+      //define client
       http.Client client =
           await myauth.clientViaServiceAccount(credentials, scopes);
 
+      //define access credential
       myauth.AccessCredentials accessCredentials =
           await myauth.obtainAccessCredentialsViaServiceAccount(
               credentials, scopes, client);
