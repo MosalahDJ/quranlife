@@ -40,9 +40,7 @@ class SettingPage extends StatelessWidget {
                   value: AppTheme.light,
                   groupValue: stgctrl.selectedTheme.value,
                   onChanged: (value) {
-                    if (value != null) {
-                      stgctrl.changeTheme(value);
-                    }
+                    stgctrl.changeTheme(value!);
                   },
                 ),
               ),
@@ -52,82 +50,11 @@ class SettingPage extends StatelessWidget {
                   value: AppTheme.dark,
                   groupValue: stgctrl.selectedTheme.value,
                   onChanged: (value) {
-                    if (value != null) {
-                      stgctrl.changeTheme(value);
-                    }
+                    stgctrl.changeTheme(value!);
                   },
                 ),
               ),
-              Obx(
-                () => RadioListTile<AppTheme>(
-                  title: const Text('System Theme'),
-                  value: AppTheme.system,
-                  groupValue: stgctrl.selectedTheme.value,
-                  onChanged: (value) {
-                    if (value != null) {
-                      stgctrl.changeTheme(value);
-                    }
-                  },
-                ),
-              ),
-              //system mode
-              // RadioListTile(
-              //   value: Get.isPlatformDarkMode
-              //       ? Themes().darkmode
-              //       : Themes().lightmode,
-              //   groupValue: stgctrl.themedata,
-              //   onChanged: stgctrl.todevicetheme(Get.isPlatformDarkMode
-              //       ? Themes().darkmode
-              //       : Themes().lightmode),
-              //   title: const Text("device theme"),
-              // ),
-
-              // //dark mode
-              // RadioListTile(
-              //   value: ThemeMode.dark,
-              //   groupValue: stgctrl.themedata,
-              //   onChanged: stgctrl.todarkmode(Themes().darkmode),
-              //   title: const Text("Dark theme"),
-              // ),
-
-              // //light mode
-              // RadioListTile(
-              //   value: ThemeMode.light,
-              //   groupValue: stgctrl.themedata,
-              //   onChanged: stgctrl.tolightmode(Themes().lightmode),
-              //   title: const Text("Light theme"),
-              // ),
             ]),
-
-            // SettingsListTile(
-            //   leading: const Icon(Icons.dark_mode),
-            //   title: "Theme mode",
-            //   trailing: GetBuilder<Settingscontroller>(
-            //     builder: (controller) {
-            //       return Switch(
-            //           activeColor: kmaincolor,
-            //           value: stgctrl.val,
-            //           onChanged: stgctrl.myswitch);
-            //     },
-            //   ),
-            // // ),
-            // ElevatedButton(
-            //     onPressed: () {
-            //       notictrl.subscribetotopic("adhan");
-            //     },
-            //     child: const Text("sbscribe")),
-            // ElevatedButton(
-            //     onPressed: () {
-            //       notictrl.unsbscribefrometopic("adhan");
-            //     },
-            //     child: const Text("unsbscribe")),
-            // ElevatedButton(
-            //     onPressed: () {
-            //       notictrl.sendmessage("adhan", "mytitle", "mybody", "adhan");
-            //     },
-            //     child: const Text("send")),
-            //Other settings list tile
-            //here
           ],
         ),
       ),
