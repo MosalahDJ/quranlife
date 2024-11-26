@@ -7,7 +7,7 @@ enum AppTheme {
   dark,
 }
 
-class Settingscontroller extends GetxController {
+class ThemeController extends GetxController {
   var selectedTheme = AppTheme.dark.obs;
 
   ThemeData get currentTheme {

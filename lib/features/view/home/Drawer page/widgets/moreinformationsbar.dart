@@ -16,10 +16,10 @@ class Moreinformations extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: Sizeconfig.screenheight! / 11,
+      height: Sizeconfig.screenheight! / 16,
       child: Card(
         elevation: 0,
-        color: Colors.white.withOpacity(0.4),
+        color: Colors.transparent,
         child: InkWell(
           borderRadius: const BorderRadius.all(Radius.circular(10)),
           onTap: onpressed,

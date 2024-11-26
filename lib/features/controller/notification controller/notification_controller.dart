@@ -11,6 +11,15 @@ class NotificationController extends GetxController {
   @override
   void onInit() {
     requestnotificationpermission();
+    adhansubscribition.value == true
+        ? subscribetotopic("Adhan")
+        : unsbscribefrometopic("Adhan");
+    adhkarsubscribition.value == true
+        ? subscribetotopic("Adhkar")
+        : unsbscribefrometopic("Adhkar");
+    quraansubscribition.value == true
+        ? subscribetotopic("Quraan")
+        : unsbscribefrometopic("Quraan");
     onmessage();
     setupInteractedMessage();
     super.onInit();
@@ -64,6 +73,17 @@ class NotificationController extends GetxController {
     );
   }
 
+  RxBool adhansubscribition = true.obs;
+  RxBool adhkarsubscribition = true.obs;
+  RxBool quraansubscribition = true.obs;
+
+  onchangesubscribtion(bool value, String topicname) {
+    value == false
+        ? subscribetotopic(topicname)
+        : unsbscribefrometopic(topicname);
+    update();
+  }
+
   //subscribe to topic
   subscribetotopic(String topicname) async {
     await FirebaseMessaging.instance.subscribeToTopic(topicname);
@@ -81,6 +101,11 @@ class NotificationController extends GetxController {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       if (message.notification != null && message.data["type"] == "adhan") {
         Get.snackbar(message.notification!.title!, message.notification!.body!);
+      } else if (message.notification != null &&
+          message.data["type"] == "quraan") {
+        Get.snackbar(message.notification!.title!, message.notification!.body!);
+      } else {
+        Get.snackbar(message.notification!.title!, message.notification!.body!);
       }
     });
   }
@@ -93,6 +118,10 @@ class NotificationController extends GetxController {
     void handleMessage(RemoteMessage message) {
       if (message.data['type'] == 'adhan') {
         Get.toNamed("/salattime");
+      } else if (message.data['type'] == 'quraan') {
+        Get.toNamed("/quraan");
+      } else {
+        Get.toNamed("/adkar");
       }
     }
 

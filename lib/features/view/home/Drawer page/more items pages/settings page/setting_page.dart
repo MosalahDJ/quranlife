@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
-import 'package:quranlife/features/controller/more%20controllers/settingscontroller.dart';
+import 'package:quranlife/core/widgets/gradient_background.dart';
+import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
 import 'package:quranlife/features/controller/notification%20controller/notification_controller.dart';
 
 class SettingPage extends StatelessWidget {
   SettingPage({super.key});
   final NotificationController notictrl = Get.find();
-  final Settingscontroller stgctrl = Get.find();
+  final ThemeController stgctrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -28,35 +29,111 @@ class SettingPage extends StatelessWidget {
       ),
 
       //Settings body
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            //themedata list tile
-            Settingtype(title: "Theme mode", listwidget: [
-              Obx(
-                () => RadioListTile<AppTheme>(
-                  title: const Text('Light Theme'),
-                  value: AppTheme.light,
-                  groupValue: stgctrl.selectedTheme.value,
-                  onChanged: (value) {
-                    stgctrl.changeTheme(value!);
-                  },
-                ),
-              ),
-              Obx(
-                () => RadioListTile<AppTheme>(
-                  title: const Text('Dark Theme'),
-                  value: AppTheme.dark,
-                  groupValue: stgctrl.selectedTheme.value,
-                  onChanged: (value) {
-                    stgctrl.changeTheme(value!);
-                  },
-                ),
-              ),
-            ]),
-          ],
-        ),
+      body: Stack(
+        children: [
+          Gradientbackground(
+            gradientcolor: [
+              kmaincolor,
+              Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                //themedata list tile
+                Settingtype(title: "Theme mode", listwidget: [
+                  Obx(
+                    () => RadioListTile<AppTheme>(
+                      title: const Text(
+                        'Light Theme',
+                        style: TextStyle(fontSize: 15),
+                      ),
+                      value: AppTheme.light,
+                      groupValue: stgctrl.selectedTheme.value,
+                      onChanged: (value) {
+                        stgctrl.changeTheme(value!);
+                      },
+                    ),
+                  ),
+                  Obx(
+                    () => RadioListTile<AppTheme>(
+                      title: const Text(
+                        'Dark Theme',
+                        style: TextStyle(fontSize: 15),
+                      ),
+                      value: AppTheme.dark,
+                      groupValue: stgctrl.selectedTheme.value,
+                      onChanged: (value) {
+                        stgctrl.changeTheme(value!);
+                      },
+                    ),
+                  ),
+                ]),
+                Settingtype(title: "Notifications", listwidget: [
+                  //adhan
+                  Obx(() => SwitchListTile(
+                      title: const Text(
+                        "Adhan notifications",
+                        style: TextStyle(fontSize: 15),
+                      ),
+                      value: notictrl.adhansubscribition.value,
+                      onChanged: (val) {
+                        val = !val;
+                        notictrl.adhansubscribition.value =
+                            !notictrl.adhansubscribition.value;
+                        notictrl.onchangesubscribtion(val, "Adhan");
+                      })),
+                  //adkhar
+                  Obx(() => SwitchListTile(
+                      title: const Text(
+                        "Adhkar notifications",
+                        style: TextStyle(fontSize: 15),
+                      ),
+                      value: notictrl.adhkarsubscribition.value,
+                      onChanged: (val) {
+                        val = !val;
+                        notictrl.adhkarsubscribition.value =
+                            !notictrl.adhkarsubscribition.value;
+                        notictrl.onchangesubscribtion(val, "Adhkar");
+                      })),
+                  //quraan
+                  Obx(() => SwitchListTile(
+                      title: const Text(
+                        "Quraan notifications",
+                        style: TextStyle(fontSize: 15),
+                      ),
+                      value: notictrl.quraansubscribition.value,
+                      onChanged: (val) {
+                        val = !val;
+                        notictrl.quraansubscribition.value =
+                            !notictrl.quraansubscribition.value;
+                        notictrl.onchangesubscribtion(val, "Quraan");
+                      })),
+
+                  ElevatedButton(
+                      onPressed: () {
+                        notictrl.sendmessage(
+                            "Adhkar", "Adhkar", "Adhkar body", "Adhkar");
+                      },
+                      child: const Text("Adhkar noti")),
+                  ElevatedButton(
+                      onPressed: () {
+                        notictrl.sendmessage(
+                            "Quraan", "Quraan", "Quraan body", "quraan");
+                      },
+                      child: const Text("quraan noti")),
+                  ElevatedButton(
+                      onPressed: () {
+                        notictrl.sendmessage(
+                            "Adhan", "Adhan", "Adhan body", "adhan");
+                      },
+                      child: const Text("Adhan noti")),
+                ])
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -78,6 +155,8 @@ class Settingtype extends StatelessWidget {
         Text(
           title,
           textAlign: TextAlign.start,
+          style: const TextStyle(
+              fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
         ),
         Column(children: listwidget),
       ],

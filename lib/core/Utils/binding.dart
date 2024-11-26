@@ -7,7 +7,7 @@ import 'package:quranlife/features/controller/Auth%20controller/signoutcontrolle
 import 'package:quranlife/features/controller/favorite%20controller/favoritecontroller.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
 import 'package:quranlife/features/controller/Auth%20controller/textvalidatecontroller.dart';
-import 'package:quranlife/features/controller/more%20controllers/settingscontroller.dart';
+import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
 import 'package:quranlife/features/controller/notification%20controller/my_acces_token.dart';
 import 'package:quranlife/features/controller/notification%20controller/notification_controller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/deterimine_prayers_controller.dart';
@@ -34,7 +34,7 @@ class Mybinding implements Bindings {
     Get.put<TimesPageController>(TimesPageController(), permanent: true);
     Get.put<AccesToken>(AccesToken());
     Get.put<NotificationController>(NotificationController(), permanent: true);
-    Get.put<Settingscontroller>(Settingscontroller(), permanent: true);
+    Get.put<ThemeController>(ThemeController(), permanent: true);
     Get.put<PrayertimesController>(PrayertimesController(), permanent: true);
     Get.put<MyHomeController>(MyHomeController());
     Get.put<FavoriteController>(FavoriteController(), permanent: true);
