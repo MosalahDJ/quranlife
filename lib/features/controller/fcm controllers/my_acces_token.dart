@@ -9,7 +9,7 @@ class AccesToken {
   Future<String> getAccestoken() async {
     try {
       //here i get the serviceaccount from .env file
-      //i use .env for make my acces token account credentials safe when i push project on github
+      //i use .env for make serviceaccount safe when i push project on github
       final String serviceaccountJsonString = dotenv.env['serviceaccountjson']!;
 
       //convert string to map

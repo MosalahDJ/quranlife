@@ -1,25 +1,15 @@
 // ignore_for_file: avoid_print
 
 import 'dart:convert';
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:quranlife/features/controller/notification%20controller/my_acces_token.dart';
+import 'package:quranlife/features/controller/fcm%20controllers/my_acces_token.dart';
 
-class NotificationController extends GetxController {
+class FCMController extends GetxController {
   @override
   void onInit() {
     requestnotificationpermission();
-    adhansubscribition.value == true
-        ? subscribetotopic("Adhan")
-        : unsbscribefrometopic("Adhan");
-    adhkarsubscribition.value == true
-        ? subscribetotopic("Adhkar")
-        : unsbscribefrometopic("Adhkar");
-    quraansubscribition.value == true
-        ? subscribetotopic("Quraan")
-        : unsbscribefrometopic("Quraan");
     onmessage();
     setupInteractedMessage();
     super.onInit();
@@ -73,10 +63,7 @@ class NotificationController extends GetxController {
     );
   }
 
-  RxBool adhansubscribition = true.obs;
-  RxBool adhkarsubscribition = true.obs;
-  RxBool quraansubscribition = true.obs;
-
+  //i use this func for changing subscribtion status
   onchangesubscribtion(bool value, String topicname) {
     value == false
         ? subscribetotopic(topicname)
@@ -134,18 +121,5 @@ class NotificationController extends GetxController {
     // Also handle any interaction when the app is in the background via a
     // Stream listener
     FirebaseMessaging.onMessageOpenedApp.listen(handleMessage);
-  }
-
-  // Volume control functions
-  RxBool fajrvolum = false.obs;
-  RxBool sunrizevolum = false.obs;
-  RxBool duhrvolum = false.obs;
-  RxBool asrvolum = false.obs;
-  RxBool maghribvolum = false.obs;
-  RxBool ishavolum = false.obs;
-
-  volumfunc(RxBool volum) {
-    volum.value = !volum.value;
-    update();
   }
 }

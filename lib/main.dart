@@ -5,7 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:quranlife/core/Utils/binding.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
 import 'package:quranlife/features/controller/onboarding%20page%20controller/onboarding_pagecontroller.dart';
-import 'package:quranlife/features/controller/notification%20controller/notification_controller.dart';
+import 'package:quranlife/features/controller/fcm%20controllers/fcm_controller.dart';
 import 'package:quranlife/features/view/auth/login%20page/loginpage.dart';
 import 'package:quranlife/features/view/auth/signin%20page/signin_page.dart';
 import 'package:quranlife/features/view/home/adkar%20page/adkar_page.dart';
@@ -95,8 +95,7 @@ class QuranLifeApp extends StatelessWidget {
         page: () => const PrayerTimesPage(),
         bindings: [
           BindingsBuilder(
-            () => Get.put<NotificationController>(NotificationController(),
-                permanent: true),
+            () => Get.put<FCMController>(FCMController(), permanent: true),
           ),
         ],
       ),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quranlife/features/controller/notification%20controller/notification_controller.dart';
+// import 'package:quranlife/features/controller/notification%20controller/fcm_controller.dart';
 
 class OnboardingPagecontroller extends GetxController {
   PageController pagecontroller = PageController();
-  final NotificationController notictrl = Get.find();
+  // final FCMController notictrl = Get.find();
 
   int? currentPage;
   @override
@@ -20,16 +20,16 @@ class OnboardingPagecontroller extends GetxController {
       });
     });
     // ignore: unnecessary_null_comparison
-    if (notictrl.adhansubscribition == null) {
-      Get.defaultDialog(
-        textConfirm: "confirm",
-        onConfirm: notictrl.subscribetotopic("Adhan"),
-        textCancel: "cancel",
-        onCancel: notictrl.unsbscribefrometopic("Adhan"),
-      );
-    } else {
-      null;
-    }
+    // if (notictrl.adhansubscribition == null) {
+    //   Get.defaultDialog(
+    //     textConfirm: "confirm",
+    //     onConfirm: notictrl.subscribetotopic("Adhan"),
+    //     textCancel: "cancel",
+    //     onCancel: notictrl.unsbscribefrometopic("Adhan"),
+    //   );
+    // } else {
+    //   null;
+    // }
   }
 
   @override

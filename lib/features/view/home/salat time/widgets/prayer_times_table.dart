@@ -3,8 +3,9 @@ import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/fetch_prayer_from_date.dart';
-import 'package:quranlife/features/controller/notification%20controller/notification_controller.dart';
+import 'package:quranlife/features/controller/fcm%20controllers/fcm_controller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/deterimine_prayers_controller.dart';
+import 'package:quranlife/features/controller/fcm%20controllers/adhan_noti_controller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/times_page_controller.dart';
 
 class Prayertimestable extends GetView<DeterminePrayersController> {
@@ -12,7 +13,8 @@ class Prayertimestable extends GetView<DeterminePrayersController> {
     super.key,
   });
   final DeterminePrayersController prayerctrl = Get.find();
-  final NotificationController notictrl = Get.find();
+  final FCMController notictrl = Get.find();
+  final AdhanNotiController adhanctrl = Get.find();
   final DeterminePrayersController dpcctrl = Get.find();
   final FetchPrayerFromDate fpfctrl = Get.find();
   final TimesPageController timespagectrl = Get.find();
@@ -98,7 +100,7 @@ class Prayertimestable extends GetView<DeterminePrayersController> {
         Obx(
           () => IconButton(
               onPressed: () {
-                notictrl.volumfunc(salatvolum);
+                adhanctrl.volumfunc(salatvolum);
                 // ignore: avoid_print
               },
               icon: Icon(
@@ -265,7 +267,7 @@ class Prayertimestable extends GetView<DeterminePrayersController> {
       myrow(
           "الفجر",
           "Fajr",
-          notictrl.fajrvolum,
+          adhanctrl.fajrvolum,
           fpfctrl.getDateByIndex(i) != null
               ? fpfctrl.getDateByIndex(i)!
               : fpfctrl.formatDate(fpfctrl.currentDate)),
@@ -273,7 +275,7 @@ class Prayertimestable extends GetView<DeterminePrayersController> {
       myrow(
           "الشروق",
           "Sunrise",
-          notictrl.sunrizevolum,
+          adhanctrl.sunrizevolum,
           fpfctrl.getDateByIndex(i) != null
               ? fpfctrl.getDateByIndex(i)!
               : fpfctrl.formatDate(fpfctrl.currentDate)),
@@ -281,7 +283,7 @@ class Prayertimestable extends GetView<DeterminePrayersController> {
       myrow(
           "الظهر",
           "Dhuhr",
-          notictrl.duhrvolum,
+          adhanctrl.duhrvolum,
           fpfctrl.getDateByIndex(i) != null
               ? fpfctrl.getDateByIndex(i)!
               : fpfctrl.formatDate(fpfctrl.currentDate)),
@@ -289,7 +291,7 @@ class Prayertimestable extends GetView<DeterminePrayersController> {
       myrow(
           "العصر",
           "Asr",
-          notictrl.asrvolum,
+          adhanctrl.asrvolum,
           fpfctrl.getDateByIndex(i) != null
               ? fpfctrl.getDateByIndex(i)!
               : fpfctrl.formatDate(fpfctrl.currentDate)),
@@ -297,7 +299,7 @@ class Prayertimestable extends GetView<DeterminePrayersController> {
       myrow(
           "المغرب",
           "Maghrib",
-          notictrl.maghribvolum,
+          adhanctrl.maghribvolum,
           fpfctrl.getDateByIndex(i) != null
               ? fpfctrl.getDateByIndex(i)!
               : fpfctrl.formatDate(fpfctrl.currentDate)),
@@ -305,7 +307,7 @@ class Prayertimestable extends GetView<DeterminePrayersController> {
       myrow(
           "العشاء",
           "Isha",
-          notictrl.ishavolum,
+          adhanctrl.ishavolum,
           fpfctrl.getDateByIndex(i) != null
               ? fpfctrl.getDateByIndex(i)!
               : fpfctrl.formatDate(fpfctrl.currentDate)),
