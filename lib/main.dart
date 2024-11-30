@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:quranlife/core/Utils/binding.dart';
+import 'package:quranlife/features/controller/notfication%20controller/notification_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
 import 'package:quranlife/features/controller/onboarding%20page%20controller/onboarding_pagecontroller.dart';
 import 'package:quranlife/features/controller/fcm%20controllers/fcm_controller.dart';
@@ -12,6 +13,7 @@ import 'package:quranlife/features/view/home/adkar%20page/adkar_page.dart';
 import 'package:quranlife/features/view/home/hijri%20calender/hijri_calender.dart';
 import 'package:quranlife/features/view/home/home_page.dart';
 import 'package:quranlife/features/view/home/Drawer%20page/more%20items%20pages/settings%20page/setting_page.dart';
+import 'package:quranlife/features/view/home/mytestpage.dart';
 import 'package:quranlife/features/view/home/quraan%20page/quraan_page.dart';
 import 'package:quranlife/features/view/home/salat%20time/prayer_time_page.dart';
 import 'package:quranlife/features/view/onboarding%20pages/on_boarding_view.dart';
@@ -23,6 +25,7 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await NotificationController.initialiseNotification();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -53,6 +56,10 @@ class QuranLifeApp extends StatelessWidget {
       GetPage(
         name: "/splashview",
         page: () => const SplashView(),
+      ),
+      GetPage(
+        name: "/mytest",
+        page: () => const Mytestpage(),
       ),
       GetPage(
           name: "/onboarding",
