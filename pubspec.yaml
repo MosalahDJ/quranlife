@@ -50,6 +50,7 @@ dependencies:
   hijri: ^3.0.0
   http: ^1.2.2
   islamic_hijri_calendar: ^0.0.4
+  timezone: ^0.10.0
 
 dev_dependencies:
   flutter_launcher_icons: ^0.14.1

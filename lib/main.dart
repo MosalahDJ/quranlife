@@ -58,7 +58,7 @@ class QuranLifeApp extends StatelessWidget {
         page: () => const SplashView(),
       ),
       GetPage(
-        name: "/mytest",
+        name: "/test",
         page: () => const Mytestpage(),
       ),
       GetPage(

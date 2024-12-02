@@ -16,7 +16,7 @@ class Adhkarnoticontroller extends GetxController {
         : cancelAdhkarNotification(id: 1);
   }
 
-  RxBool adhkarsubscribition = true.obs;
+  RxBool adhkarsubscribition = false.obs;
 
   //show periodic notification
   Future showPeriodicAdhkarNotification({

@@ -1,71 +1,65 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/features/controller/notfication%20controller/notification_controller.dart';
+import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/deterimine_prayers_controller.dart';
+import 'package:timezone/timezone.dart' as tz;
+import 'package:flutter_timezone/flutter_timezone.dart';
+
+final DeterminePrayersController dpcctrl = Get.find();
+
+DateTime nextsalattime = dpcctrl.parseTime(dpcctrl.nextPrayerTime.value);
+String prayername = dpcctrl.currentPrayer.value;
 
 class AdhanNotiController extends GetxController {
   @override
   void onInit() {
     super.onInit();
     adhansubscribition.value == true
-        ? showPeriodicAdhanNotification(
-            id: 1,
-            title: "periodic adhan",
-            body: "periodic adhan body",
-            pyload: "periodic adhan data",
-            repeatinterval: RepeatInterval.everyMinute)
-        : cancelAdhanNotification(id: 1);
+        ? schedulePrayerNotification()
+        : cancelAdhanNotification(id: nextsalattime.hashCode);
   }
 
   RxBool adhansubscribition = true.obs;
 
-  //show periodic notification
-  Future showPeriodicAdhanNotification({
-    required String title,
-    required String body,
-    required String pyload,
-    required RepeatInterval repeatinterval,
-    required int id,
-  }) async {
+  Future<void> schedulePrayerNotification() async {
+    final String timezone = await FlutterTimezone.getLocalTimezone();
+
+    final tz.TZDateTime scheduledTime =
+        tz.TZDateTime.from(nextsalattime, tz.getLocation(timezone));
+
     const AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails(
-      'Adhan',
-      'Adhan channel',
-      channelDescription: 'this chanel is for prayer notification',
+      'prayer_channel',
+      'Prayer Notifications',
+      channelDescription: 'Notifications for prayer times',
       importance: Importance.max,
       priority: Priority.high,
+      ticker: 'Prayer Notification',
     );
+
     const NotificationDetails notificationDetails =
         NotificationDetails(android: androidNotificationDetails);
-    await flutterLocalNotificationsPlugin.periodicallyShow(
-        id, title, body, repeatinterval, notificationDetails,
-        payload: pyload,
-        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle);
-    Future.delayed(
-      const Duration(minutes: 1),
-      () {
-        print("1 munute passed");
-      },
+
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+      nextsalattime.hashCode,
+      'وقت صلاة $prayername',
+      'حان الآن وقت صلاة $prayername.',
+      scheduledTime,
+      notificationDetails,
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.absoluteTime,
+      matchDateTimeComponents: DateTimeComponents.time, // جدولة فقط حسب الوقت
     );
+    print(prayername);
+    print(nextsalattime);
   }
 
-  //cancel specific notification
+//cancel specific notification
   Future cancelAdhanNotification({
     required int id,
   }) async {
     await flutterLocalNotificationsPlugin.cancel(id);
-  }
-
-  //i use this func for changing adhan subscribtion status
-  onchangesubscribtion(bool value) {
-    value == false
-        ? cancelAdhanNotification(id: 1)
-        : showPeriodicAdhanNotification(
-            id: 1,
-            title: "periodic adhan",
-            body: "periodic adhan body",
-            pyload: "periodic adhan data",
-            repeatinterval: RepeatInterval.everyMinute);
-    update();
   }
 
   // Volume control functions
@@ -79,5 +73,6 @@ class AdhanNotiController extends GetxController {
   volumfunc(RxBool volum) {
     volum.value = !volum.value;
     update();
+    // }
   }
 }

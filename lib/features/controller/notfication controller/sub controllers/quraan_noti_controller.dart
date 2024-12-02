@@ -9,14 +9,14 @@ class QuraanNotiController extends GetxController {
     quraansubscribition.value == true
         ? showPeriodicQuraanNotification(
             id: 1,
-            title: "periodic adhan",
-            body: "periodic adhan body",
-            pyload: "periodic adhan data",
+            title: "periodic quraan",
+            body: "periodic quraan body",
+            pyload: "periodic quraan data",
             repeatinterval: RepeatInterval.everyMinute)
         : cancelQuraanNotification(id: 1);
   }
 
-  RxBool quraansubscribition = true.obs;
+  RxBool quraansubscribition = false.obs;
 
   //show periodic notification
   Future showPeriodicQuraanNotification({

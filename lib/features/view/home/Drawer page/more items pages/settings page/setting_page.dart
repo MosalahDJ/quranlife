@@ -86,7 +86,7 @@ class SettingPage extends StatelessWidget {
                       onChanged: (val) {
                         adhanctrl.adhansubscribition.value =
                             !adhanctrl.adhansubscribition.value;
-                        adhanctrl.onchangesubscribtion(val);
+                        // adhanctrl.onchangesubscribtion(val);
                       })),
                   //adkhar
                   Obx(() => SwitchListTile(

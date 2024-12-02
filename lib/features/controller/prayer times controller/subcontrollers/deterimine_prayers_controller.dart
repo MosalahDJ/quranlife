@@ -108,11 +108,6 @@ class DeterminePrayersController extends GetxController {
           'Isha',
           parseTime(fpfctrl.prayersdays[fpfctrl.formatDate(now)]['Isha']!)
         ],
-        // [
-        //   'ndFajr',
-        //   parsenextdayfajr(fpfctrl.prayersdays[
-        //       fpfctrl.formatDate(now.add(const Duration(days: 1)))]['Fajr']!)
-        // ],
       ];
 
       // Add next day's Fajr to prayers list
