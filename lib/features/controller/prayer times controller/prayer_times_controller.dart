@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:quranlife/features/controller/fcm%20controllers/adhan_noti_controller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/deterimine_prayers_controller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/fetch_prayer_from_date.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/location_controller.dart';
@@ -10,7 +9,6 @@ class PrayertimesController extends GetxController {
   final LocationController locationctrl = Get.find();
   final FetchPrayerFromDate fpfctrl = Get.find();
   final TimesPageController timespagectrl = Get.find();
-  final AdhanNotiController adhanctrl = Get.find();
 
   RxBool isLoading = true.obs;
 
@@ -20,7 +18,6 @@ class PrayertimesController extends GetxController {
     await locationctrl.determinePosition();
     await fpfctrl.fetchPrayerTimes();
     prayerctrl.determineCurrentPrayer();
-    adhanctrl.sendAdhanNoti();
     timespagectrl.pagecontroller();
     isLoading(false);
     super.onInit();

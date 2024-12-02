@@ -5,7 +5,7 @@ import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/fetch_prayer_from_date.dart';
 import 'package:quranlife/features/controller/fcm%20controllers/fcm_controller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/deterimine_prayers_controller.dart';
-import 'package:quranlife/features/controller/fcm%20controllers/adhan_noti_controller.dart';
+import 'package:quranlife/features/controller/notfication%20controller/sub%20controllers/adhan_noti_controller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/times_page_controller.dart';
 
 class Prayertimestable extends GetView<DeterminePrayersController> {

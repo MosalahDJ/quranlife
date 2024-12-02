@@ -12,8 +12,8 @@ class Animationcontrollers extends GetxController
       Get.offNamed(
         FirebaseAuth.instance.currentUser != null &&
                 FirebaseAuth.instance.currentUser!.emailVerified
-            ? "mytest"
-            : "mytest",
+            ? "settings"
+            : "settings",
       );
     });
   }

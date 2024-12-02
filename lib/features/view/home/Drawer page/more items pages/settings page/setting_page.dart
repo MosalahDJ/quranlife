@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
-import 'package:quranlife/features/controller/fcm%20controllers/adhan_noti_controller.dart';
-import 'package:quranlife/features/controller/fcm%20controllers/adhkar_noti_controller.dart';
-import 'package:quranlife/features/controller/fcm%20controllers/fcm_controller.dart';
-import 'package:quranlife/features/controller/fcm%20controllers/quraan_noti_controller.dart';
+import 'package:quranlife/features/controller/notfication%20controller/sub%20controllers/adhan_noti_controller.dart';
+import 'package:quranlife/features/controller/notfication%20controller/sub%20controllers/adhkar_noti_controller.dart';
+import 'package:quranlife/features/controller/notfication%20controller/sub%20controllers/quraan_noti_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
 
 class SettingPage extends StatelessWidget {
@@ -13,7 +12,6 @@ class SettingPage extends StatelessWidget {
   final AdhanNotiController adhanctrl = Get.find();
   final QuraanNotiController quraanctrl = Get.find();
   final Adhkarnoticontroller adhkarctrl = Get.find();
-  final FCMController fcmctrl = Get.find();
   final ThemeController stgctrl = Get.find();
 
   @override
@@ -45,38 +43,39 @@ class SettingPage extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                //themedata list tile
-                Settingtype(title: "Theme mode", listwidget: [
-                  Obx(
-                    () => RadioListTile<AppTheme>(
-                      title: const Text(
-                        'Light Theme',
-                        style: TextStyle(fontSize: 15),
-                      ),
-                      value: AppTheme.light,
-                      groupValue: stgctrl.selectedTheme.value,
-                      onChanged: (value) {
-                        stgctrl.changeTheme(value!);
-                      },
+            child: Column(children: [
+              //themedata list tile
+              Settingtype(title: "Theme mode", listwidget: [
+                Obx(
+                  () => RadioListTile<AppTheme>(
+                    title: const Text(
+                      'Light Theme',
+                      style: TextStyle(fontSize: 15),
                     ),
+                    value: AppTheme.light,
+                    groupValue: stgctrl.selectedTheme.value,
+                    onChanged: (value) {
+                      stgctrl.changeTheme(value!);
+                    },
                   ),
-                  Obx(
-                    () => RadioListTile<AppTheme>(
-                      title: const Text(
-                        'Dark Theme',
-                        style: TextStyle(fontSize: 15),
-                      ),
-                      value: AppTheme.dark,
-                      groupValue: stgctrl.selectedTheme.value,
-                      onChanged: (value) {
-                        stgctrl.changeTheme(value!);
-                      },
+                ),
+                Obx(
+                  () => RadioListTile<AppTheme>(
+                    title: const Text(
+                      'Dark Theme',
+                      style: TextStyle(fontSize: 15),
                     ),
+                    value: AppTheme.dark,
+                    groupValue: stgctrl.selectedTheme.value,
+                    onChanged: (value) {
+                      stgctrl.changeTheme(value!);
+                    },
                   ),
-                ]),
-                Settingtype(title: "Notifications", listwidget: [
+                ),
+              ]),
+              Settingtype(
+                title: "Notifications",
+                listwidget: [
                   //adhan
                   Obx(() => SwitchListTile(
                       title: const Text(
@@ -85,10 +84,9 @@ class SettingPage extends StatelessWidget {
                       ),
                       value: adhanctrl.adhansubscribition.value,
                       onChanged: (val) {
-                        val = !val;
                         adhanctrl.adhansubscribition.value =
                             !adhanctrl.adhansubscribition.value;
-                        fcmctrl.onchangesubscribtion(val, "Adhan");
+                        adhanctrl.onchangesubscribtion(val);
                       })),
                   //adkhar
                   Obx(() => SwitchListTile(
@@ -98,10 +96,11 @@ class SettingPage extends StatelessWidget {
                       ),
                       value: adhkarctrl.adhkarsubscribition.value,
                       onChanged: (val) {
-                        val = !val;
                         adhkarctrl.adhkarsubscribition.value =
                             !adhkarctrl.adhkarsubscribition.value;
-                        fcmctrl.onchangesubscribtion(val, "Adhkar");
+                        adhkarctrl.onchangesubscribtion(
+                          val,
+                        );
                       })),
                   //quraan
                   Obx(() => SwitchListTile(
@@ -111,60 +110,32 @@ class SettingPage extends StatelessWidget {
                       ),
                       value: quraanctrl.quraansubscribition.value,
                       onChanged: (val) {
-                        val = !val;
                         quraanctrl.quraansubscribition.value =
                             !quraanctrl.quraansubscribition.value;
-                        fcmctrl.onchangesubscribtion(val, "Quraan");
+                        quraanctrl.onchangesubscribtion(val);
                       })),
-                  //morning and evening adhkar
-                  Obx(() => SwitchListTile(
-                      title: const Text(
-                        "morning and evening adhkar notifications",
-                        style: TextStyle(fontSize: 15),
-                      ),
-                      value: adhkarctrl.adhkarsubscribition.value,
-                      onChanged: (val) {
-                        val = !val;
-                        quraanctrl.quraansubscribition.value =
-                            !quraanctrl.quraansubscribition.value;
-                        fcmctrl.onchangesubscribtion(val, "Quraan");
-                      })),
-// //quraan
-//                   Obx(() => SwitchListTile(
-//                       title: const Text(
-//                         "Quraan notifications",
-//                         style: TextStyle(fontSize: 15),
-//                       ),
-//                       value: quraanctrl.quraansubscribition.value,
-//                       onChanged: (val) {
-//                         val = !val;
-//                         quraanctrl.quraansubscribition.value =
-//                             !quraanctrl.quraansubscribition.value;
-//                         fcmctrl.onchangesubscribtion(val, "Quraan");
-//                       })),
-
-                  ElevatedButton(
-                      onPressed: () {
-                        fcmctrl.sendmessage(
-                            "Adhkar", "Adhkar", "Adhkar body", "Adhkar");
-                      },
-                      child: const Text("Adhkar noti")),
-                  ElevatedButton(
-                      onPressed: () {
-                        fcmctrl.sendmessage(
-                            "Quraan", "Quraan", "Quraan body", "quraan");
-                      },
-                      child: const Text("quraan noti")),
-                  ElevatedButton(
-                      onPressed: () {
-                        fcmctrl.sendmessage(
-                            "Adhan", "Adhan", "Adhan body", "adhan");
-                      },
-                      child: const Text("Adhan noti")),
-                ])
-              ],
-            ),
-          ),
+                  // //morning and evening adhkar
+                  // Obx(() => SwitchListTile(
+                  //     title: const Text(
+                  //       "morning and evening adhkar notifications",
+                  //       style: TextStyle(fontSize: 15),
+                  //     ),
+                  //     value: adhkarctrl.adhkarsubscribition.value,
+                  //     onChanged: (val) {
+                  //       val = !val;
+                  //       quraanctrl.quraansubscribition.value =
+                  //           !quraanctrl.quraansubscribition.value;
+                  //       quraanctrl.onchangesubscribtion(val);
+                  //     })),
+                  // ElevatedButton(
+                  //     onPressed: () {
+                  //       NotificationController.cancelAllNotification();
+                  //     },
+                  //     child: const Text("cancel all noti")),])
+                ],
+              ),
+            ]),
+          )
         ],
       ),
     );

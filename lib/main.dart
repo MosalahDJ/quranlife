@@ -25,13 +25,13 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await NotificationController.initialiseNotification();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await dotenv.load(fileName: ".env");
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-
   runApp(const QuranLifeApp());
 }
 
