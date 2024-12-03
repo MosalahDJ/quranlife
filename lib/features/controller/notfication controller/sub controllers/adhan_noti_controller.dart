@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/features/controller/notfication%20controller/notification_controller.dart';
@@ -16,7 +18,7 @@ class AdhanNotiController extends GetxController {
     super.onInit();
     adhansubscribition.value == true
         ? schedulePrayerNotification()
-        : cancelAdhanNotification(id: nextsalattime.hashCode);
+        : cancelAdhanNotification(id: 1);
   }
 
   RxBool adhansubscribition = true.obs;
@@ -41,7 +43,7 @@ class AdhanNotiController extends GetxController {
         NotificationDetails(android: androidNotificationDetails);
 
     await flutterLocalNotificationsPlugin.zonedSchedule(
-      nextsalattime.hashCode,
+      1,
       'وقت صلاة $prayername',
       'حان الآن وقت صلاة $prayername.',
       scheduledTime,

@@ -40,12 +40,6 @@ class Adhkarnoticontroller extends GetxController {
         id, title, body, repeatinterval, notificationDetails,
         payload: pyload,
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle);
-    Future.delayed(
-      const Duration(minutes: 1),
-      () {
-        print("1 munute passed");
-      },
-    );
   }
 
   //cancel specific notification

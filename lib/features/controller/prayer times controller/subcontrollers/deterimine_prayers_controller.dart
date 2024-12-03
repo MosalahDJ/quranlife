@@ -33,30 +33,48 @@ class DeterminePrayersController extends GetxController {
   //we use this func for changing data type of time frome string to Datetime
   //because we cauth it as String from the api
   DateTime parseTime(String time) {
-    var now = DateTime.now();
-    var parts = time.split(':');
-    return DateTime(
-      now.year,
-      now.month,
-      now.day,
-      int.parse(parts[0]),
-      int.parse(parts[1]),
-    );
+    try {
+      var now = DateTime.now();
+      var parts = time.trim().split(':');
+      if (parts.length != 2) {
+        throw FormatException('Invalid time format: $time');
+      }
+      return DateTime(
+        now.year,
+        now.month,
+        now.day,
+        int.parse(parts[0].trim()),
+        int.parse(parts[1].trim()),
+      );
+    } catch (e) {
+      print('Error parsing time: $time - Error: $e');
+      // Return a default time in case of error
+      return DateTime.now();
+    }
   }
 
   //we use this func for changing data type of time frome string to Datetime
   //because we cauth it as String from the api
   //I use this func not above the func because i need in this case tomorow's fajr
   DateTime parsenextdayfajr(String time) {
-    var tomorow = DateTime.now().add(const Duration(days: 1));
-    var parts = time.split(':');
-    return DateTime(
-      tomorow.year,
-      tomorow.month,
-      tomorow.day,
-      int.parse(parts[0]),
-      int.parse(parts[1]),
-    );
+    try {
+      var tomorow = DateTime.now().add(const Duration(days: 1));
+      var parts = time.trim().split(':');
+      if (parts.length != 2) {
+        throw FormatException('Invalid time format: $time');
+      }
+      return DateTime(
+        tomorow.year,
+        tomorow.month,
+        tomorow.day,
+        int.parse(parts[0].trim()),
+        int.parse(parts[1].trim()),
+      );
+    } catch (e) {
+      print('Error parsing next day fajr time: $time - Error: $e');
+      // Return a default time in case of error
+      return DateTime.now().add(const Duration(days: 1));
+    }
   }
 
   //making time format for time untile

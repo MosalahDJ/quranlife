@@ -22,7 +22,7 @@ class Mytestpage extends StatelessWidget {
                 onPressed: () {
                   adhanctrl.schedulePrayerNotification();
                 },
-                child: Text("scheduled"))
+                child: const Text("scheduled"))
           ],
         ),
       ),
