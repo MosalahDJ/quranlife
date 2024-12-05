@@ -14,7 +14,7 @@ class BottomLoginPage extends StatelessWidget {
   final LogInController loginctrl = Get.find();
   final GoogleLogInController googlectrl = Get.find();
   final Txtvalcontroller txtvalctrl = Get.find();
-  final Passwordresetcontroller passreset = Get.find();
+  final PasswordresetController passreset = Get.find();
 
   @override
   Widget build(BuildContext context) {

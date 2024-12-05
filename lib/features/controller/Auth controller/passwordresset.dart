@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/features/controller/Auth%20controller/logincontroller.dart';
 
-class Passwordresetcontroller extends GetxController {
+class PasswordresetController extends GetxController {
   final LogInController loginctrl = Get.find();
 
   resetpassword(context) async {

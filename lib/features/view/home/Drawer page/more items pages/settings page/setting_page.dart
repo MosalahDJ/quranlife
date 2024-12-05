@@ -11,7 +11,7 @@ class SettingPage extends StatelessWidget {
   SettingPage({super.key});
   final AdhanNotiController adhanctrl = Get.find();
   final QuraanNotiController quraanctrl = Get.find();
-  final Adhkarnoticontroller adhkarctrl = Get.find();
+  final AdhkarnotiController adhkarctrl = Get.find();
   final ThemeController stgctrl = Get.find();
 
   @override
@@ -35,11 +35,15 @@ class SettingPage extends StatelessWidget {
       //Settings body
       body: Stack(
         children: [
-          Gradientbackground(
-            gradientcolor: [
-              kmaincolor,
-              Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
-            ],
+          GetBuilder<ThemeController>(
+            builder: (c) => Gradientbackground(
+              gradientcolor: [
+                kmaincolor,
+                c.selectedTheme.value == AppTheme.dark
+                    ? kmaincolor3dark
+                    : kmaincolor3,
+              ],
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -86,7 +90,7 @@ class SettingPage extends StatelessWidget {
                       onChanged: (val) {
                         adhanctrl.adhansubscribition.value =
                             !adhanctrl.adhansubscribition.value;
-                        // adhanctrl.onchangesubscribtion(val);
+                        adhanctrl.onchangesubscribtion(val);
                       })),
                   //adkhar
                   Obx(() => SwitchListTile(
@@ -130,6 +134,15 @@ class SettingPage extends StatelessWidget {
                   // ElevatedButton(
                   //     onPressed: () {
                   //       NotificationController.cancelAllNotification();
+                  //     },
+                  //     child: const Text("cancel all noti")),])
+                  //     },
+                  //     child: const Text("cancel all noti")),])
+                  //     },
+                  //     child: const Text("cancel all noti")),])
+                  //     },
+                  //     child: const Text("cancel all noti")),])
+
                   //     },
                   //     child: const Text("cancel all noti")),])
                 ],

@@ -2,7 +2,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/features/controller/notfication%20controller/notification_controller.dart';
 
-class Adhkarnoticontroller extends GetxController {
+class AdhkarnotiController extends GetxController {
   @override
   void onInit() {
     super.onInit();

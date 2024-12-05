@@ -15,8 +15,12 @@ class PrayertimesController extends GetxController {
   @override
   void onInit() async {
     isLoading(true);
-    await locationctrl.determinePosition();
-    await fpfctrl.fetchPrayerTimes();
+    //I use Future.wait in place of await in these two func for better
+    //performence & minimise pattient time
+    await Future.wait([
+      fpfctrl.fetchPrayerTimes(),
+      locationctrl.determinePosition(),
+    ]);
     prayerctrl.determineCurrentPrayer();
     timespagectrl.pagecontroller();
     isLoading(false);

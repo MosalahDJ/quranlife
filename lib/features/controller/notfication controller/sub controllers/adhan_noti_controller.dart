@@ -9,9 +9,6 @@ import 'package:flutter_timezone/flutter_timezone.dart';
 
 final DeterminePrayersController dpcctrl = Get.find();
 
-DateTime nextsalattime = dpcctrl.parseTime(dpcctrl.nextPrayerTime.value);
-String prayername = dpcctrl.currentPrayer.value;
-
 class AdhanNotiController extends GetxController {
   @override
   void onInit() {
@@ -24,10 +21,13 @@ class AdhanNotiController extends GetxController {
   RxBool adhansubscribition = true.obs;
 
   Future<void> schedulePrayerNotification() async {
+    DateTime nextsalattime = dpcctrl.parseTime(dpcctrl.nextPrayerTime.value);
+    String prayername = dpcctrl.currentPrayer.value;
+
     final String timezone = await FlutterTimezone.getLocalTimezone();
 
-    final tz.TZDateTime scheduledTime =
-        tz.TZDateTime.from(nextsalattime, tz.getLocation(timezone));
+    final tz.TZDateTime scheduledTime = tz.TZDateTime.from(
+        DateTime(2024, 12, 5, 4, 24), tz.getLocation(timezone));
 
     const AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails(
@@ -44,14 +44,14 @@ class AdhanNotiController extends GetxController {
 
     await flutterLocalNotificationsPlugin.zonedSchedule(
       1,
-      'وقت صلاة $prayername',
-      'حان الآن وقت صلاة $prayername.',
+      "adhan $prayername",
+      "it's time for adhan $prayername.",
       scheduledTime,
       notificationDetails,
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
-      matchDateTimeComponents: DateTimeComponents.time, // جدولة فقط حسب الوقت
+      matchDateTimeComponents: DateTimeComponents.time,
     );
     print(prayername);
     print(nextsalattime);
@@ -62,6 +62,14 @@ class AdhanNotiController extends GetxController {
     required int id,
   }) async {
     await flutterLocalNotificationsPlugin.cancel(id);
+  }
+
+  //i use this func for changing adhan subscribtion status
+  onchangesubscribtion(bool value) {
+    value == false
+        ? cancelAdhanNotification(id: 1)
+        : schedulePrayerNotification();
+    update();
   }
 
   // Volume control functions

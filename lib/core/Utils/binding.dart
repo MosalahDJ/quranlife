@@ -20,6 +20,7 @@ import 'package:quranlife/features/controller/prayer%20times%20controller/subcon
 import 'package:quranlife/features/controller/prayer%20times%20controller/prayer_times_controller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/times_page_controller.dart';
 import 'package:quranlife/features/controller/spalshview%20controller/animationcontroller.dart';
+import 'package:quranlife/features/controller/notfication%20controller/work_manager_controller.dart';
 
 class Mybinding implements Bindings {
   @override
@@ -32,7 +33,7 @@ class Mybinding implements Bindings {
     Get.put<GoogleLogInController>(GoogleLogInController());
     Get.put<GoogleSignoutController>(GoogleSignoutController());
     Get.put<Txtvalcontroller>(Txtvalcontroller());
-    Get.put<Passwordresetcontroller>(Passwordresetcontroller());
+    Get.put<PasswordresetController>(PasswordresetController());
     //prayertimes injection
     Get.put<LocationController>(LocationController(), permanent: true);
     Get.put<FetchPrayerFromDate>(FetchPrayerFromDate(), permanent: true);
@@ -47,7 +48,8 @@ class Mybinding implements Bindings {
     Get.put<NotificationController>(NotificationController(), permanent: true);
     Get.put<AdhanNotiController>(AdhanNotiController(), permanent: true);
     Get.put<QuraanNotiController>(QuraanNotiController(), permanent: true);
-    Get.put<Adhkarnoticontroller>(Adhkarnoticontroller(), permanent: true);
+    Get.put<AdhkarnotiController>(AdhkarnotiController(), permanent: true);
+    Get.put<WorkManagerController>(WorkManagerController(), permanent: true);
     //theme injection
     Get.put<ThemeController>(ThemeController(), permanent: true);
     //home injection
