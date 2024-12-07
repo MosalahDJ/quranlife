@@ -10,24 +10,31 @@ import 'package:flutter_timezone/flutter_timezone.dart';
 final DeterminePrayersController dpcctrl = Get.find();
 
 class AdhanNotiController extends GetxController {
-  @override
-  void onInit() {
-    super.onInit();
-    adhansubscribition.value == true
-        ? schedulePrayerNotification()
-        : cancelAdhanNotification(id: 1);
+  RxBool adhansubscribition = true.obs;
+  late DateTime nextsalattime;
+
+  nexSalatTimeChecking() async {
+    if (dpcctrl.nextPrayerTime.value == "-" ||
+        dpcctrl.nextPrayerTime.value == "") {
+      await Future.delayed(
+          const Duration(seconds: 3), () => nexSalatTimeChecking());
+      print(
+          "---------------------next salat time is null-----------------------");
+    } else {
+      nextsalattime = dpcctrl.parseTime(dpcctrl.nextPrayerTime.value);
+      print(
+          "------------------next salat time is : ${dpcctrl.nextPrayerTime.value}-------------------");
+    }
   }
 
-  RxBool adhansubscribition = true.obs;
-
   Future<void> schedulePrayerNotification() async {
-    DateTime nextsalattime = dpcctrl.parseTime(dpcctrl.nextPrayerTime.value);
-    String prayername = dpcctrl.currentPrayer.value;
+    await nexSalatTimeChecking();
+    String prayername = dpcctrl.nextPrayer.value;
 
     final String timezone = await FlutterTimezone.getLocalTimezone();
 
-    final tz.TZDateTime scheduledTime = tz.TZDateTime.from(
-        DateTime(2024, 12, 5, 4, 24), tz.getLocation(timezone));
+    final tz.TZDateTime scheduledTime =
+        tz.TZDateTime.from(nextsalattime, tz.getLocation(timezone));
 
     const AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails(

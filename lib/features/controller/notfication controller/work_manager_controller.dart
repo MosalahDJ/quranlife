@@ -2,9 +2,9 @@ import 'package:get/get.dart';
 import 'package:workmanager/workmanager.dart';
 import 'package:quranlife/features/controller/notfication%20controller/sub%20controllers/adhan_noti_controller.dart';
 
-class WorkManagerController extends GetxController {
-  final AdhanNotiController adhanController = Get.find();
+final AdhanNotiController adhanController = Get.find();
 
+class WorkManagerController extends GetxController {
   @override
   void onInit() {
     super.onInit();
@@ -22,12 +22,12 @@ class WorkManagerController extends GetxController {
   Future<void> scheduleAdhanNotification() async {
     // Schedule initial notification using AdhanNotiController
     await adhanController.schedulePrayerNotification();
-    
+
     // Register a periodic task to check and update prayer times
     await Workmanager().registerPeriodicTask(
       'adhan_periodic_task',
       'adhanTask',
-      frequency: const Duration(minutes: 15),  // Check every 15 minutes
+      frequency: const Duration(minutes: 15), // Check every 15 minutes
       constraints: Constraints(
         networkType: NetworkType.not_required,
         requiresBatteryNotLow: false,
@@ -44,8 +44,6 @@ class WorkManagerController extends GetxController {
       try {
         switch (taskName) {
           case 'adhanTask':
-            // Get instance of AdhanNotiController
-            final adhanController = Get.find<AdhanNotiController>();
             // Schedule next prayer notification
             await adhanController.schedulePrayerNotification();
             break;
