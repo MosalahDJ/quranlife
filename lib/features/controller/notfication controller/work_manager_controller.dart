@@ -5,12 +5,37 @@ import 'package:quranlife/features/controller/notfication%20controller/sub%20con
 import 'package:workmanager/workmanager.dart';
 import 'package:quranlife/features/controller/notfication%20controller/sub%20controllers/adhan_noti_controller.dart';
 
-final AdhanNotiController adhanController = Get.find();
-final AdhkarnotiController adhkarController = Get.find();
-final QuraanNotiController quraanController = Get.find();
-final NotificationController notificationController = Get.find();
+// Global instances for WorkManager callback
+final adhanController = Get.put(AdhanNotiController());
+final adhkarController = Get.put(AdhkarnotiController());
+final quraanController = Get.put(QuraanNotiController());
+final notificationController = Get.put(NotificationController());
 
 enum NotificationType { adhan, adhkar, quraan }
+
+@pragma('vm:entry-point') // Mandatory if the App is obfuscated or using Flutter 3.1+
+void callbackDispatcher() {
+  Workmanager().executeTask((task, inputData) async {
+    try {
+      switch (task) {
+        case 'adhanTask':
+          await adhanController.schedulePrayerNotification();
+          break;
+        case 'adhkarTask':
+          await adhkarController.showAdhkarNotification();
+          break;
+        case 'quranTask':
+          await quraanController.showQuraanNotification();
+          break;
+      }
+      return true;
+    } catch (err) {
+      // ignore: avoid_print
+      print('Error executing task: $err');
+      return false;
+    }
+  });
+}
 
 class WorkManagerController extends GetxController {
   RxBool adhansubscribition = false.obs;
@@ -21,9 +46,6 @@ class WorkManagerController extends GetxController {
   void onInit() {
     super.onInit();
     initializeWorkManager();
-    registerPeriodicTask(NotificationType.adhan);
-    registerPeriodicTask(NotificationType.adhkar);
-    registerPeriodicTask(NotificationType.quraan);
   }
 
   Future<void> initializeWorkManager() async {
@@ -31,47 +53,84 @@ class WorkManagerController extends GetxController {
       callbackDispatcher,
       isInDebugMode: true,
     );
+    // Register tasks based on saved preferences
+    if (adhansubscribition.value) await registerPeriodicTask(NotificationType.adhan);
+    if (adhkarsubscribition.value) await registerPeriodicTask(NotificationType.adhkar);
+    if (quraansubscribition.value) await registerPeriodicTask(NotificationType.quraan);
   }
 
   // Register periodic task with common configuration
   Future<void> registerPeriodicTask(NotificationType type) async {
     final taskConfig = _getTaskConfig(type);
-    await Workmanager().registerPeriodicTask(
-      taskConfig.uniqueName,
-      taskConfig.taskName,
-      frequency: const Duration(minutes: 15),
-      constraints: Constraints(
-        networkType: NetworkType.not_required,
-        requiresBatteryNotLow: false,
-        requiresCharging: false,
-        requiresDeviceIdle: false,
-        requiresStorageNotLow: false,
-      ),
-    );
+    
+    switch (type) {
+      case NotificationType.quraan:
+        // Schedule Quran notification once per day at 8:00 AM
+        await Workmanager().registerPeriodicTask(
+          taskConfig.uniqueName,
+          taskConfig.taskName,
+          frequency: const Duration(days: 1),
+          initialDelay: _getInitialDelay(),
+          constraints: Constraints(
+            networkType: NetworkType.not_required,
+            requiresBatteryNotLow: false,
+            requiresCharging: false,
+            requiresDeviceIdle: false,
+            requiresStorageNotLow: false,
+          ),
+          existingWorkPolicy: ExistingWorkPolicy.replace,
+        );
+        break;
+        
+      case NotificationType.adhkar:
+        // Schedule Adhkar notifications every 15 minutes
+        await Workmanager().registerPeriodicTask(
+          taskConfig.uniqueName,
+          taskConfig.taskName,
+          frequency: const Duration(minutes: 15),
+          constraints: Constraints(
+            networkType: NetworkType.not_required,
+            requiresBatteryNotLow: false,
+            requiresCharging: false,
+            requiresDeviceIdle: false,
+            requiresStorageNotLow: false,
+          ),
+          existingWorkPolicy: ExistingWorkPolicy.replace,
+        );
+        break;
+        
+      case NotificationType.adhan:
+        // Schedule Adhan notifications based on prayer times
+        await Workmanager().registerPeriodicTask(
+          taskConfig.uniqueName,
+          taskConfig.taskName,
+          frequency: const Duration(minutes: 15),
+          constraints: Constraints(
+            networkType: NetworkType.not_required,
+            requiresBatteryNotLow: false,
+            requiresCharging: false,
+            requiresDeviceIdle: false,
+            requiresStorageNotLow: false,
+          ),
+          existingWorkPolicy: ExistingWorkPolicy.replace,
+        );
+        break;
+    }
   }
 
-  // This function will be called by WorkManager in initialization
-  static void callbackDispatcher() {
-    Workmanager().executeTask((taskName, inputData) async {
-      try {
-        switch (taskName) {
-          case 'adhanTask':
-            await adhanController.schedulePrayerNotification();
-            break;
-          case 'adhkarTask':
-            await adhkarController.showAdhkarNotification();
-            break;
-          case 'quranTask':
-            await quraanController.showQuraanNotification();
-            break;
-        }
-        return Future.value(true);
-      } catch (err) {
-        // ignore: avoid_print
-        print('Error executing task: $err');
-        return Future.value(false);
-      }
-    });
+  // Calculate initial delay to 8:00 AM for Quran notifications
+  Duration _getInitialDelay() {
+    final now = DateTime.now();
+    final eightAM = DateTime(now.year, now.month, now.day, 8, 0);
+    
+    if (now.isAfter(eightAM)) {
+      // If it's after 8 AM, schedule for next day
+      final tomorrow = eightAM.add(const Duration(days: 1));
+      return tomorrow.difference(now);
+    } else {
+      // If it's before 8 AM, schedule for today
+      return eightAM.difference(now);
+    }
   }
 
   // Cancel notification for specific type
@@ -113,8 +172,24 @@ class WorkManagerController extends GetxController {
   }
 
   // Unified subscription change handler
-  void onChangeSubscription(NotificationType type, bool value) {
-    value ? registerPeriodicTask(type) : cancelNotification(type);
+  void onChangeSubscription(NotificationType type, bool value) async {
+    switch (type) {
+      case NotificationType.adhan:
+        adhansubscribition.value = value;
+        break;
+      case NotificationType.adhkar:
+        adhkarsubscribition.value = value;
+        break;
+      case NotificationType.quraan:
+        quraansubscribition.value = value;
+        break;
+    }
+    
+    if (value) {
+      await registerPeriodicTask(type);
+    } else {
+      await cancelNotification(type);
+    }
     update();
   }
 }
