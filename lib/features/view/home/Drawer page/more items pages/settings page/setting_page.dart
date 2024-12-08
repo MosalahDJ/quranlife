@@ -2,23 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
-import 'package:quranlife/features/controller/notfication%20controller/sub%20controllers/adhan_noti_controller.dart';
-import 'package:quranlife/features/controller/notfication%20controller/sub%20controllers/adhkar_noti_controller.dart';
-import 'package:quranlife/features/controller/notfication%20controller/sub%20controllers/quraan_noti_controller.dart';
+import 'package:quranlife/features/controller/notfication%20controller/work_manager_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
 
 class SettingPage extends StatelessWidget {
   SettingPage({super.key});
-  final AdhanNotiController adhanctrl = Get.find();
-  final QuraanNotiController quraanctrl = Get.find();
-  final AdhkarnotiController adhkarctrl = Get.find();
+  final WorkManagerController wkmctrl = Get.find();
   final ThemeController stgctrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       //Settings appbar
-
       appBar: AppBar(
         scrolledUnderElevation: 0,
         elevation: 0,
@@ -86,11 +81,12 @@ class SettingPage extends StatelessWidget {
                         "Adhan notifications",
                         style: TextStyle(fontSize: 15),
                       ),
-                      value: adhanctrl.adhansubscribition.value,
+                      value: wkmctrl.adhansubscribition.value,
                       onChanged: (val) {
-                        adhanctrl.adhansubscribition.value =
-                            !adhanctrl.adhansubscribition.value;
-                        adhanctrl.onchangesubscribtion(val);
+                        wkmctrl.adhansubscribition.value =
+                            !wkmctrl.adhansubscribition.value;
+                        wkmctrl.onChangeSubscription(
+                            NotificationType.adhan, val);
                       })),
                   //adkhar
                   Obx(() => SwitchListTile(
@@ -98,13 +94,12 @@ class SettingPage extends StatelessWidget {
                         "Adhkar notifications",
                         style: TextStyle(fontSize: 15),
                       ),
-                      value: adhkarctrl.adhkarsubscribition.value,
+                      value: wkmctrl.adhkarsubscribition.value,
                       onChanged: (val) {
-                        adhkarctrl.adhkarsubscribition.value =
-                            !adhkarctrl.adhkarsubscribition.value;
-                        adhkarctrl.onchangesubscribtion(
-                          val,
-                        );
+                        wkmctrl.adhkarsubscribition.value =
+                            !wkmctrl.adhkarsubscribition.value;
+                        wkmctrl.onChangeSubscription(
+                            NotificationType.adhkar, val);
                       })),
                   //quraan
                   Obx(() => SwitchListTile(
@@ -112,39 +107,13 @@ class SettingPage extends StatelessWidget {
                         "Quraan notifications",
                         style: TextStyle(fontSize: 15),
                       ),
-                      value: quraanctrl.quraansubscribition.value,
+                      value: wkmctrl.quraansubscribition.value,
                       onChanged: (val) {
-                        quraanctrl.quraansubscribition.value =
-                            !quraanctrl.quraansubscribition.value;
-                        quraanctrl.onchangesubscribtion(val);
+                        wkmctrl.quraansubscribition.value =
+                            !wkmctrl.quraansubscribition.value;
+                        wkmctrl.onChangeSubscription(
+                            NotificationType.quraan, val);
                       })),
-                  // //morning and evening adhkar
-                  // Obx(() => SwitchListTile(
-                  //     title: const Text(
-                  //       "morning and evening adhkar notifications",
-                  //       style: TextStyle(fontSize: 15),
-                  //     ),
-                  //     value: adhkarctrl.adhkarsubscribition.value,
-                  //     onChanged: (val) {
-                  //       val = !val;
-                  //       quraanctrl.quraansubscribition.value =
-                  //           !quraanctrl.quraansubscribition.value;
-                  //       quraanctrl.onchangesubscribtion(val);
-                  //     })),
-                  // ElevatedButton(
-                  //     onPressed: () {
-                  //       NotificationController.cancelAllNotification();
-                  //     },
-                  //     child: const Text("cancel all noti")),])
-                  //     },
-                  //     child: const Text("cancel all noti")),])
-                  //     },
-                  //     child: const Text("cancel all noti")),])
-                  //     },
-                  //     child: const Text("cancel all noti")),])
-
-                  //     },
-                  //     child: const Text("cancel all noti")),])
                 ],
               ),
             ]),

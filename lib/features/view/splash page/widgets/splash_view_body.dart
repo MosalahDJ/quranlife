@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
-import 'package:quranlife/features/controller/spalshview%20controller/animationcontroller.dart';
+import 'package:quranlife/features/controller/spalshview%20controller/splash_view_controller.dart';
 
 class SplashViewBody extends StatelessWidget {
   SplashViewBody({super.key});
 
-  final Animationcontrollers anctrl = Get.find();
+  final SplashViewController anctrl = Get.find();
 
   @override
   Widget build(BuildContext context) {

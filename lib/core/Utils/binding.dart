@@ -9,7 +9,7 @@ import 'package:quranlife/features/controller/home%20controller/myhomecontroller
 import 'package:quranlife/features/controller/Auth%20controller/textvalidatecontroller.dart';
 import 'package:quranlife/features/controller/notfication%20controller/sub%20controllers/adhan_noti_controller.dart';
 import 'package:quranlife/features/controller/notfication%20controller/sub%20controllers/adhkar_noti_controller.dart';
-import 'package:quranlife/features/controller/notfication%20controller/notification_controller.dart';
+import 'package:quranlife/features/controller/notfication%20controller/notification_initializition.dart';
 import 'package:quranlife/features/controller/notfication%20controller/sub%20controllers/quraan_noti_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
 import 'package:quranlife/features/controller/fcm%20controllers/my_acces_token.dart';
@@ -19,14 +19,14 @@ import 'package:quranlife/features/controller/prayer%20times%20controller/subcon
 import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/location_controller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/prayer_times_controller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/times_page_controller.dart';
-import 'package:quranlife/features/controller/spalshview%20controller/animationcontroller.dart';
+import 'package:quranlife/features/controller/spalshview%20controller/splash_view_controller.dart';
 import 'package:quranlife/features/controller/notfication%20controller/work_manager_controller.dart';
 
 class Mybinding implements Bindings {
   @override
   void dependencies() {
     //splashview injection
-    Get.put<Animationcontrollers>(Animationcontrollers());
+    Get.put<SplashViewController>(SplashViewController());
     //auth ijection
     Get.put<SignInController>(SignInController());
     Get.put<LogInController>(LogInController());

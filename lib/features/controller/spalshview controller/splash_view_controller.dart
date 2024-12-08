@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Animationcontrollers extends GetxController
+class SplashViewController extends GetxController
     with GetSingleTickerProviderStateMixin {
   AnimationController? animationcontroller;
   Animation<double>? fadinganimation;
@@ -34,6 +34,6 @@ class Animationcontrollers extends GetxController
   @override
   void onClose() {
     super.onClose();
-    Animationcontrollers().dispose();
+    SplashViewController().dispose();
   }
 }
