@@ -3,6 +3,7 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LocationController extends GetxController {
   //getting current location
@@ -16,6 +17,7 @@ class LocationController extends GetxController {
     try {
       bool serviceEnabled;
       LocationPermission permission;
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
 
       // check if location services are enabled.
       serviceEnabled = await Geolocator.isLocationServiceEnabled();
@@ -41,8 +43,10 @@ class LocationController extends GetxController {
 
       if (permission == LocationPermission.whileInUse) {
         Position position = await Geolocator.getCurrentPosition();
-        latitude = position.latitude;
-        longtude = position.longitude;
+        await prefs.setDouble("latitude", position.latitude);
+        latitude = prefs.getDouble("latitude")!;
+        await prefs.setDouble("longtude", position.longitude);
+        longtude = prefs.getDouble("longtude")!;
       }
 
       //we use this func from geocoding for getting place informations from
@@ -50,9 +54,11 @@ class LocationController extends GetxController {
       List<Placemark> placemarks =
           await placemarkFromCoordinates(latitude, longtude);
       //city
-      location.value = placemarks[0].locality!;
+      await prefs.setString("city", placemarks[0].locality!);
+      location.value = prefs.getString("city")!;
       //street
-      sublocation.value = placemarks[0].administrativeArea!;
+      await prefs.setString("street", placemarks[0].administrativeArea!);
+      sublocation.value = prefs.getString("street")!;
     } on LocationServiceDisabledException catch (e) {
       Get.snackbar("$e",
           "Location services are required for getting your position to calculate prayer times");

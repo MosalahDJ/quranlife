@@ -11,7 +11,7 @@ class QuraanNotiController extends GetxController {
       'Quraan Notifications',
       tag: "quraan_tag",
       channelDescription: 'Notifications for quraan',
-      importance: Importance.max,
+      importance: Importance.max, 
       priority: Priority.high,
     );
     const NotificationDetails notificationDetails =

@@ -8,12 +8,12 @@ class SplashViewController extends GetxController
   Animation<double>? fadinganimation;
 
   tonextpage() {
-    Future.delayed(const Duration(seconds: 5), () {
+    Future.delayed(const Duration(seconds: 0), () {
       Get.offNamed(
         FirebaseAuth.instance.currentUser != null &&
                 FirebaseAuth.instance.currentUser!.emailVerified
-            ? "home"
-            : "onboarding",
+            ? "test"
+            : "test",
       );
     });
   }

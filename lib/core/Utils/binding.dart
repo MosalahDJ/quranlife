@@ -11,6 +11,7 @@ import 'package:quranlife/features/controller/notfication%20controller/sub%20con
 import 'package:quranlife/features/controller/notfication%20controller/sub%20controllers/adhkar_noti_controller.dart';
 import 'package:quranlife/features/controller/notfication%20controller/notification_initializition.dart';
 import 'package:quranlife/features/controller/notfication%20controller/sub%20controllers/quraan_noti_controller.dart';
+import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/get_response_body.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
 import 'package:quranlife/features/controller/fcm%20controllers/my_acces_token.dart';
 import 'package:quranlife/features/controller/fcm%20controllers/fcm_controller.dart';
@@ -34,8 +35,13 @@ class Mybinding implements Bindings {
     Get.put<GoogleSignoutController>(GoogleSignoutController());
     Get.put<Txtvalcontroller>(Txtvalcontroller());
     Get.put<PasswordresetController>(PasswordresetController());
-    //prayertimes injection
+    //api injection
     Get.put<LocationController>(LocationController(), permanent: true);
+
+    Get.put<GetResponseBody>(
+      GetResponseBody(),
+    );
+    //prayertimes injection
     Get.put<FetchPrayerFromDate>(FetchPrayerFromDate(), permanent: true);
     Get.put<DeterminePrayersController>(DeterminePrayersController(),
         permanent: true);
