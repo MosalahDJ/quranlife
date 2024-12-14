@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:quranlife/features/controller/fcm%20controllers/fcm_controller.dart';
 import 'package:quranlife/features/controller/onboarding%20page%20controller/onboarding_pagecontroller.dart';
 import 'package:quranlife/features/view/auth/login%20page/loginpage.dart';
 import 'package:quranlife/features/view/auth/signin%20page/signin_page.dart';
@@ -10,6 +9,7 @@ import 'package:quranlife/features/view/home/home_page.dart';
 import 'package:quranlife/features/view/home/mytestpage.dart';
 import 'package:quranlife/features/view/home/quraan%20page/quraan_page.dart';
 import 'package:quranlife/features/view/home/salat%20time/prayer_time_page.dart';
+import 'package:quranlife/features/view/home/salat%20time/widgets/tablerow.dart';
 import 'package:quranlife/features/view/onboarding%20pages/on_boarding_view.dart';
 import 'package:quranlife/features/view/splash%20page/splash_view.dart';
 
@@ -65,7 +65,7 @@ class Myrouts {
         page: () => const PrayerTimesPage(),
         bindings: [
           BindingsBuilder(
-            () => Get.put<FCMController>(FCMController(), permanent: true),
+            () => Get.put<SalawatTableRow>(SalawatTableRow(), permanent: true),
           ),
         ],
       ),

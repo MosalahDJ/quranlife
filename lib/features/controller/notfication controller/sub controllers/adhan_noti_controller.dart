@@ -3,7 +3,7 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/features/controller/notfication%20controller/notification_initializition.dart';
-import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/deterimine_prayers_controller.dart';
+import 'package:quranlife/features/controller/prayer%20times%20controller/deterimine_prayers_controller.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:flutter_timezone/flutter_timezone.dart';
 

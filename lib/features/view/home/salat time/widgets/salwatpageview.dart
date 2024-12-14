@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
-import 'package:quranlife/features/controller/prayer%20times%20controller/prayer_times_controller.dart';
-import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/fetch_prayer_from_date.dart';
+import 'package:quranlife/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
+import 'package:quranlife/features/controller/spalshview%20controller/splash_view_controller.dart';
 
 class Salwatpageview extends StatelessWidget {
   Salwatpageview({
@@ -16,7 +16,7 @@ class Salwatpageview extends StatelessWidget {
   final String salattime;
   final String icon;
   final FetchPrayerFromDate fpfctrl = Get.find();
-  final PrayertimesController prtctrl = Get.find();
+  final SplashViewController initialctrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class Salwatpageview extends StatelessWidget {
                   color: Get.isDarkMode ? textcolor3dark : textcolor,
                   fontSize: Sizeconfig.screenheight! / 50),
             ),
-            Obx(() => prtctrl.isLoading.value == true
+            Obx(() => initialctrl.isLoading.value == true
                 ? SizedBox(
                     height: Sizeconfig.screenheight! / 32,
                     child: const Center(

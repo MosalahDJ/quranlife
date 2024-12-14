@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/fetch_prayer_from_date.dart';
-import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/get_response_body.dart';
+import 'package:quranlife/features/controller/prayer%20times%20controller/get_response_body.dart';
 
 // final DeterminePrayersController dpcctrl = Get.find();
 final GetResponseBody rbctrl = Get.find();

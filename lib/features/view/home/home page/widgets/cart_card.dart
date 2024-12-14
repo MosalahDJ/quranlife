@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
-import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/fetch_prayer_from_date.dart';
-import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/location_controller.dart';
+import 'package:quranlife/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
+import 'package:quranlife/features/controller/prayer%20times%20controller/location_controller.dart';
 
 class CartCard extends StatelessWidget {
   CartCard({super.key, required this.color, required this.elevation});

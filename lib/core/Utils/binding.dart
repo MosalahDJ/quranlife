@@ -11,15 +11,14 @@ import 'package:quranlife/features/controller/notfication%20controller/sub%20con
 import 'package:quranlife/features/controller/notfication%20controller/sub%20controllers/adhkar_noti_controller.dart';
 import 'package:quranlife/features/controller/notfication%20controller/notification_initializition.dart';
 import 'package:quranlife/features/controller/notfication%20controller/sub%20controllers/quraan_noti_controller.dart';
-import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/get_response_body.dart';
+import 'package:quranlife/features/controller/prayer%20times%20controller/get_response_body.dart';
+import 'package:quranlife/features/controller/prayer%20times%20controller/location_controller.dart';
+import 'package:quranlife/features/controller/prayer%20times%20controller/times_page_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
 import 'package:quranlife/features/controller/fcm%20controllers/my_acces_token.dart';
 import 'package:quranlife/features/controller/fcm%20controllers/fcm_controller.dart';
-import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/deterimine_prayers_controller.dart';
-import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/fetch_prayer_from_date.dart';
-import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/location_controller.dart';
-import 'package:quranlife/features/controller/prayer%20times%20controller/prayer_times_controller.dart';
-import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/times_page_controller.dart';
+import 'package:quranlife/features/controller/prayer%20times%20controller/deterimine_prayers_controller.dart';
+import 'package:quranlife/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:quranlife/features/controller/spalshview%20controller/splash_view_controller.dart';
 import 'package:quranlife/features/controller/notfication%20controller/work_manager_controller.dart';
 
@@ -27,6 +26,12 @@ class Mybinding implements Bindings {
   @override
   void dependencies() {
     //splashview injection
+    Get.put<LocationController>(LocationController(), permanent: true);
+    Get.put<GetResponseBody>(GetResponseBody());
+    Get.put<FetchPrayerFromDate>(FetchPrayerFromDate(), permanent: true);
+    Get.put<DeterminePrayersController>(DeterminePrayersController(),
+        permanent: true);
+    Get.put<TimesPageController>(TimesPageController(), permanent: true);
     Get.put<SplashViewController>(SplashViewController());
     //auth ijection
     Get.put<SignInController>(SignInController());
@@ -36,17 +41,7 @@ class Mybinding implements Bindings {
     Get.put<Txtvalcontroller>(Txtvalcontroller());
     Get.put<PasswordresetController>(PasswordresetController());
     //api injection
-    Get.put<LocationController>(LocationController(), permanent: true);
-
-    Get.put<GetResponseBody>(
-      GetResponseBody(),
-    );
     //prayertimes injection
-    Get.put<FetchPrayerFromDate>(FetchPrayerFromDate(), permanent: true);
-    Get.put<DeterminePrayersController>(DeterminePrayersController(),
-        permanent: true);
-    Get.put<TimesPageController>(TimesPageController(), permanent: true);
-    Get.put<PrayertimesController>(PrayertimesController(), permanent: true);
     //fcm injection
     Get.put<AccesToken>(AccesToken());
     Get.put<FCMController>(FCMController(), permanent: true);

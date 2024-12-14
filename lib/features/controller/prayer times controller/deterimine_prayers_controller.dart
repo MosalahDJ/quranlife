@@ -2,7 +2,7 @@
 
 import 'dart:async';
 import 'package:get/get.dart';
-import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/fetch_prayer_from_date.dart';
+import 'package:quranlife/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 
 class DeterminePrayersController extends GetxController {
   @override

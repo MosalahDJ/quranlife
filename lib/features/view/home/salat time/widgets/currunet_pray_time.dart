@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
-import 'package:quranlife/features/controller/prayer%20times%20controller/prayer_times_controller.dart';
-import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/fetch_prayer_from_date.dart';
-import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/location_controller.dart';
-import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/deterimine_prayers_controller.dart';
-import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/times_page_controller.dart';
+import 'package:quranlife/features/controller/prayer%20times%20controller/location_controller.dart';
+import 'package:quranlife/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
+import 'package:quranlife/features/controller/prayer%20times%20controller/deterimine_prayers_controller.dart';
+import 'package:quranlife/features/controller/prayer%20times%20controller/times_page_controller.dart';
+import 'package:quranlife/features/controller/spalshview%20controller/splash_view_controller.dart';
 
 class CurrentPrayTime extends StatelessWidget {
   CurrentPrayTime(
@@ -23,9 +23,9 @@ class CurrentPrayTime extends StatelessWidget {
   final DeterminePrayersController prayerctrl = Get.find();
   final LocationController locationctrl = Get.find();
   final FetchPrayerFromDate fpfctrl = Get.find();
-  final PrayertimesController prtctrl = Get.find();
   final TimesPageController timespagectrl = Get.find();
   final HijriCalendar hijri = HijriCalendar.now();
+  final SplashViewController initialctrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +66,7 @@ class CurrentPrayTime extends StatelessWidget {
                     Obx(
                       () => Expanded(
                         flex: 1,
-                        child: prtctrl.isLoading.value == true
+                        child: initialctrl.isLoading.value == true
                             ? const Center(child: CircularProgressIndicator())
                             : Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -152,7 +152,7 @@ class CurrentPrayTime extends StatelessWidget {
                 child: InkWell(
                   borderRadius: const BorderRadius.all(Radius.circular(11)),
                   onTap: () async {
-                    prtctrl.isLoading(true);
+                    initialctrl.isLoading(true);
                     await locationctrl.determinePosition();
                     await fpfctrl.fetchPrayerTimes();
                     prayerctrl.determineCurrentPrayer();
@@ -162,7 +162,7 @@ class CurrentPrayTime extends StatelessWidget {
                         ? Get.snackbar("Conection field",
                             "please check your internet conection then retry")
                         : null;
-                    prtctrl.isLoading(false);
+                    initialctrl.isLoading(false);
                   },
                   child: SizedBox(
                     height: Sizeconfig.screenheight! < 768
@@ -183,7 +183,7 @@ class CurrentPrayTime extends StatelessWidget {
                                       ? Sizeconfig.screenheight! / 30
                                       : Sizeconfig.screenheight! / 20,
                               width: Sizeconfig.screenwidth! / 3.5,
-                              child: prtctrl.isLoading.value == true
+                              child: initialctrl.isLoading.value == true
                                   ? const Center(
                                       child: CircularProgressIndicator(
                                       strokeAlign: -5,

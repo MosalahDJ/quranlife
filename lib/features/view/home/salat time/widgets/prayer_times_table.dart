@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
-import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/fetch_prayer_from_date.dart';
+import 'package:quranlife/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:quranlife/features/controller/fcm%20controllers/fcm_controller.dart';
-import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/deterimine_prayers_controller.dart';
+import 'package:quranlife/features/controller/prayer%20times%20controller/deterimine_prayers_controller.dart';
 import 'package:quranlife/features/controller/notfication%20controller/sub%20controllers/adhan_noti_controller.dart';
-import 'package:quranlife/features/controller/prayer%20times%20controller/subcontrollers/times_page_controller.dart';
+import 'package:quranlife/features/controller/prayer%20times%20controller/times_page_controller.dart';
+import 'package:quranlife/features/view/home/salat%20time/widgets/tablerow.dart';
 
 class Prayertimestable extends GetView<DeterminePrayersController> {
   Prayertimestable({
@@ -18,120 +18,7 @@ class Prayertimestable extends GetView<DeterminePrayersController> {
   final DeterminePrayersController dpcctrl = Get.find();
   final FetchPrayerFromDate fpfctrl = Get.find();
   final TimesPageController timespagectrl = Get.find();
-
-  //rows of the table
-  TableRow myrow(
-      String salatname, String salattime, RxBool salatvolum, String day) {
-    return TableRow(
-      children: [
-        Obx(
-          () => Text(
-            salatname,
-            style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-
-                //in this condition I check if salat time = current prayer then
-                //I check if date "$i" in the list of keys == current date
-                //I use these funcs for making sure it range as same as each other
-                //and the only diffrent is in the date not on string range
-                color: salattime == prayerctrl.currentPrayer.value &&
-                        fpfctrl.formatDateString(fpfctrl.getDateByIndex(
-                                timespagectrl.currentPage.value)!) ==
-                            fpfctrl.formatDate(DateTime.now())
-                    ? kmaincolor4
-                    : Colors.white),
-          ),
-        ),
-        Obx(() => Row(
-              children: [
-                Text(
-                  fpfctrl.prayersdays[day][salattime] ?? "-",
-                  style: TextStyle(
-                      fontSize: 18,
-
-                      //in this condition I chek if salat time = current prayer then
-                      //I check if date "$i" in the list of keys == current date
-                      //I use these funcs for making sure it range as same as each other
-                      //and the only diffrent is in the date not on string range
-                      color: salattime == prayerctrl.currentPrayer.value &&
-                              fpfctrl.formatDateString(fpfctrl.getDateByIndex(
-                                      timespagectrl.currentPage.value)!) ==
-                                  fpfctrl.formatDate(DateTime.now())
-                          ? kmaincolor4
-                          : Colors.white),
-                ),
-                Visibility(
-                  // first check if current prayer = isha it for make the "timer
-                  //until next" visible in next day not in currnt day
-                  visible: prayerctrl.currentPrayer.value == "Isha"
-
-                      //I use these funcs for making sure it range as same as each other
-                      //and the only diffrent is in the date not on string range
-
-                      //in this condition I chek if salat time = next prayer
-                      ? (salattime == dpcctrl.nextPrayer.value &&
-                          //then I check if date "$i" in the list of keys == next date
-                          fpfctrl.formatDateString(fpfctrl.getDateByIndex(
-                                  timespagectrl.currentPage.value)!) ==
-                              fpfctrl.formatDate(
-                                DateTime.now().add(
-                                  const Duration(days: 1),
-                                ),
-                              ))
-                      : (salattime == dpcctrl.nextPrayer.value &&
-                          //then I check if date "$i" in the list of keys == current date
-                          fpfctrl.formatDateString(fpfctrl.getDateByIndex(
-                                  timespagectrl.currentPage.value)!) ==
-                              fpfctrl.formatDate(
-                                DateTime.now(),
-                              )),
-                  child: Text(
-                    "           -${dpcctrl.timeUntilNext.value}",
-                    style: TextStyle(
-                        fontSize: 16,
-                        color: salattime == prayerctrl.currentPrayer.value
-                            ? kmaincolor4
-                            : Colors.white),
-                  ),
-                ),
-              ],
-            )),
-        Obx(
-          () => IconButton(
-              onPressed: () {
-                adhanctrl.volumfunc(salatvolum);
-                // ignore: avoid_print
-              },
-              icon: Icon(
-                salatvolum.value ? Icons.volume_up : Icons.volume_off,
-
-                //in this condition I chek if salat time = current prayer then
-                //I check if date "$i" in the list of keys == current date
-                //I use these funcs for making sure it range as same as each other
-                //and the only diffrent is in the date not on string range
-                color: salattime == prayerctrl.currentPrayer.value &&
-                        fpfctrl.formatDateString(fpfctrl.getDateByIndex(
-                                timespagectrl.currentPage.value)!) ==
-                            fpfctrl.formatDate(DateTime.now())
-                    ? kmaincolor4
-                    : Colors.white,
-              )),
-        ),
-      ],
-    );
-  }
-
-  //space bettwen rows in table
-  TableRow myspace() {
-    return TableRow(
-      children: [
-        SizedBox(height: Sizeconfig.screenheight! / 70),
-        SizedBox(height: Sizeconfig.screenheight! / 70),
-        SizedBox(height: Sizeconfig.screenheight! / 70),
-      ],
-    );
-  }
+  final SalawatTableRow tablerowctrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -182,10 +69,22 @@ class Prayertimestable extends GetView<DeterminePrayersController> {
                           ),
                         ),
                         SizedBox(
-                          width: Sizeconfig.screenwidth! / 3.8,
+                          width: Sizeconfig.screenwidth! / 2.6,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
+                              //return to first page
+                              IconButton(
+                                  iconSize: 30,
+                                  onPressed: () {
+                                    timespagectrl.timespagecontroller
+                                        .jumpToPage(
+                                      0,
+                                    );
+                                  },
+                                  icon: const Icon(
+                                    Icons.keyboard_double_arrow_left_sharp,
+                                  )),
                               //return to past page
                               IconButton(
                                   iconSize: 20,
@@ -249,7 +148,7 @@ class Prayertimestable extends GetView<DeterminePrayersController> {
                           1: FlexColumnWidth(2), // Column of prayer time
                           2: FlexColumnWidth(1), // Column of prayer sound
                         },
-                        children: mytablerows(i),
+                        children: tablerowctrl.mytablerows(i),
                       ),
                     ),
                   ),
@@ -260,57 +159,5 @@ class Prayertimestable extends GetView<DeterminePrayersController> {
         ),
       ],
     );
-  }
-
-  List<TableRow> mytablerows(int i) {
-    return [
-      myrow(
-          "الفجر",
-          "Fajr",
-          adhanctrl.fajrvolum,
-          fpfctrl.getDateByIndex(i) != null
-              ? fpfctrl.getDateByIndex(i)!
-              : fpfctrl.formatDate(fpfctrl.currentDate)),
-      myspace(),
-      myrow(
-          "الشروق",
-          "Sunrise",
-          adhanctrl.sunrizevolum,
-          fpfctrl.getDateByIndex(i) != null
-              ? fpfctrl.getDateByIndex(i)!
-              : fpfctrl.formatDate(fpfctrl.currentDate)),
-      myspace(),
-      myrow(
-          "الظهر",
-          "Dhuhr",
-          adhanctrl.duhrvolum,
-          fpfctrl.getDateByIndex(i) != null
-              ? fpfctrl.getDateByIndex(i)!
-              : fpfctrl.formatDate(fpfctrl.currentDate)),
-      myspace(),
-      myrow(
-          "العصر",
-          "Asr",
-          adhanctrl.asrvolum,
-          fpfctrl.getDateByIndex(i) != null
-              ? fpfctrl.getDateByIndex(i)!
-              : fpfctrl.formatDate(fpfctrl.currentDate)),
-      myspace(),
-      myrow(
-          "المغرب",
-          "Maghrib",
-          adhanctrl.maghribvolum,
-          fpfctrl.getDateByIndex(i) != null
-              ? fpfctrl.getDateByIndex(i)!
-              : fpfctrl.formatDate(fpfctrl.currentDate)),
-      myspace(),
-      myrow(
-          "العشاء",
-          "Isha",
-          adhanctrl.ishavolum,
-          fpfctrl.getDateByIndex(i) != null
-              ? fpfctrl.getDateByIndex(i)!
-              : fpfctrl.formatDate(fpfctrl.currentDate)),
-    ];
   }
 }
