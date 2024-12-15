@@ -28,12 +28,12 @@ class SplashViewController extends GetxController
     timespagectrl.pagecontroller();
     isLoading(false);
     Future.delayed(
-        const Duration(seconds: 1),
+        const Duration(seconds: 2),
         () => Get.offNamed(
               FirebaseAuth.instance.currentUser != null &&
                       FirebaseAuth.instance.currentUser!.emailVerified
-                  ? "onboarding"
-                  : "onboarding",
+                  ? "home"
+                  : "home",
             ));
   }
 
@@ -44,7 +44,6 @@ class SplashViewController extends GetxController
         duration: const Duration(milliseconds: 250), vsync: this);
     fadinganimation =
         Tween<double>(begin: .2, end: 1).animate(animationcontroller!);
-
     animationcontroller?.repeat(reverse: true);
 
     tonextpage();

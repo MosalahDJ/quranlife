@@ -6,13 +6,23 @@ import 'package:geocoding/geocoding.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocationController extends GetxController {
-  //getting current location
+  late String location;
+  late String sublocation;
+  @override
+  onInit() async {
+    super.onInit();
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    location = prefs.getString("city") == null
+        ? "Get Location"
+        : prefs.getString("city")!;
+    sublocation =
+        prefs.getString("street") == null ? "" : prefs.getString("street")!;
+  }
 
+  //getting current location
+  late SharedPreferences prefs;
   late double latitude;
   late double longtude;
-  RxString location = "Get Location".obs;
-  RxString sublocation = "".obs;
-  late SharedPreferences prefs;
 
   Future<void> determinePosition() async {
     prefs = await SharedPreferences.getInstance();
@@ -28,7 +38,6 @@ class LocationController extends GetxController {
       try {
         bool serviceEnabled;
         LocationPermission permission;
-        final SharedPreferences prefs = await SharedPreferences.getInstance();
 
         // check if location services are enabled.
         serviceEnabled = await Geolocator.isLocationServiceEnabled();
@@ -66,10 +75,9 @@ class LocationController extends GetxController {
             await placemarkFromCoordinates(latitude, longtude);
         //city
         await prefs.setString("city", placemarks[0].locality!);
-        location.value = prefs.getString("city")!;
         //street
         await prefs.setString("street", placemarks[0].administrativeArea!);
-        sublocation.value = prefs.getString("street")!;
+        update();
       } on LocationServiceDisabledException catch (e) {
         Get.snackbar("$e",
             "Location services are required for getting your position to calculate prayer times");

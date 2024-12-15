@@ -26,6 +26,15 @@ class GetResponseBody extends GetxController {
     return "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
   }
 
+  bool isPositionChanged() {
+    if (prefs.getDouble("latitude")! != locationctrl.latitude ||
+        prefs.getDouble("longtude")! != locationctrl.longtude) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   Future<void> gettingresponse() async {
     prefs = await SharedPreferences.getInstance();
     //I add it here to ensure ir's updated
@@ -42,6 +51,7 @@ class GetResponseBody extends GetxController {
     try {
       if (prefs.getString("responsebody") == null ||
           prefs.getString("responsebody")!.length < 448000 ||
+          isPositionChanged() ||
           mycurrentdate.isAtSameMomentAs(refreshingdate) ||
           mycurrentdate.isAfter(refreshingdate)) {
         //I remove the old data from responsebody to ensure data will not merged inside it
@@ -78,16 +88,6 @@ class GetResponseBody extends GetxController {
         null;
       }
     } catch (e) {
-      // try {
-      //   Future.delayed(
-      //       const Duration(seconds: 3),
-      //       () => Get.snackbar("Conection Field",
-      //               "Please check your internet conection then try again")
-      //           .show());
-      // } catch (e) {
-      //   print(e);
-      // }
-
       print('There was an error: $e');
     }
   }

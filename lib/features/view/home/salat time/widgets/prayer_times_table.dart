@@ -37,6 +37,7 @@ class Prayertimestable extends GetView<DeterminePrayersController> {
         SizedBox(
           height: Sizeconfig.screenheight! / 100,
         ),
+        //inside of box
         Container(
           padding: const EdgeInsets.only(left: 10),
           decoration: BoxDecoration(
@@ -45,6 +46,7 @@ class Prayertimestable extends GetView<DeterminePrayersController> {
           child: Card(
             color: Colors.transparent,
             elevation: 0,
+            //date and table iside this get builder
             child: GetBuilder<TimesPageController>(
               builder: (c) => Column(
                 children: [
@@ -75,16 +77,16 @@ class Prayertimestable extends GetView<DeterminePrayersController> {
                             children: [
                               //return to first page
                               IconButton(
-                                  iconSize: 30,
-                                  onPressed: () {
-                                    timespagectrl.timespagecontroller
-                                        .jumpToPage(
-                                      0,
-                                    );
-                                  },
-                                  icon: const Icon(
-                                    Icons.keyboard_double_arrow_left_sharp,
-                                  )),
+                                iconSize: 30,
+                                onPressed: () {
+                                  timespagectrl.timespagecontroller.jumpToPage(
+                                    0,
+                                  );
+                                },
+                                icon: const Icon(
+                                  Icons.keyboard_double_arrow_left_sharp,
+                                ),
+                              ),
                               //return to past page
                               IconButton(
                                   iconSize: 20,

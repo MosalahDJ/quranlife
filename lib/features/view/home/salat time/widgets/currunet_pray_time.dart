@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
+import 'package:quranlife/features/controller/prayer%20times%20controller/get_response_body.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/location_controller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/deterimine_prayers_controller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/times_page_controller.dart';
 import 'package:quranlife/features/controller/spalshview%20controller/splash_view_controller.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
 class CurrentPrayTime extends StatelessWidget {
   CurrentPrayTime(
@@ -26,6 +28,7 @@ class CurrentPrayTime extends StatelessWidget {
   final TimesPageController timespagectrl = Get.find();
   final HijriCalendar hijri = HijriCalendar.now();
   final SplashViewController initialctrl = Get.find();
+  final GetResponseBody grbctrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -154,10 +157,10 @@ class CurrentPrayTime extends StatelessWidget {
                   onTap: () async {
                     initialctrl.isLoading(true);
                     await locationctrl.determinePosition();
+                    await grbctrl.gettingresponse();
                     await fpfctrl.fetchPrayerTimes();
                     prayerctrl.determineCurrentPrayer();
                     timespagectrl.pagecontroller();
-
                     prayerctrl.currentPrayer.value == "-"
                         ? Get.snackbar("Conection field",
                             "please check your internet conection then retry")
@@ -175,30 +178,30 @@ class CurrentPrayTime extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 8.0),
                       child: Row(
                         children: [
-                          Obx(
-                            () => SizedBox(
-                              height: Sizeconfig.screenheight! < 768
-                                  ? Sizeconfig.screenheight! / 11
-                                  : Sizeconfig.screenheight! > 1010
-                                      ? Sizeconfig.screenheight! / 30
-                                      : Sizeconfig.screenheight! / 20,
-                              width: Sizeconfig.screenwidth! / 3.5,
-                              child: initialctrl.isLoading.value == true
-                                  ? const Center(
-                                      child: CircularProgressIndicator(
-                                      strokeAlign: -5,
-                                    ))
-                                  : Center(
-                                      child: Text(
+                          SizedBox(
+                            height: Sizeconfig.screenheight! < 768
+                                ? Sizeconfig.screenheight! / 11
+                                : Sizeconfig.screenheight! > 1010
+                                    ? Sizeconfig.screenheight! / 30
+                                    : Sizeconfig.screenheight! / 20,
+                            width: Sizeconfig.screenwidth! / 3.5,
+                            child: initialctrl.isLoading.value == true
+                                ? const Center(
+                                    child: CircularProgressIndicator(
+                                    strokeAlign: -5,
+                                  ))
+                                : Center(
+                                    child: GetBuilder<LocationController>(
+                                      builder: (c) => Text(
                                         textAlign: TextAlign.center,
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
-                                        "${locationctrl.location.value},${locationctrl.sublocation.value}",
+                                        "${locationctrl.location},${locationctrl.sublocation}",
                                         style: const TextStyle(
                                             fontSize: 15, color: Colors.white),
                                       ),
                                     ),
-                            ),
+                                  ),
                           ),
                           const Icon(
                             Icons.location_on_rounded,
