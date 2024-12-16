@@ -51,45 +51,45 @@ class FetchPrayerFromDate extends GetxController {
     return null;
   }
 
-  //this func is maded for parssing date to use it on removepastday func
-  DateTime myparseDate(String date) {
-    try {
-      var parts = date.trim().split('-');
-      return DateTime(
-        int.parse(parts[0].trim()),
-        int.parse(parts[1].trim()),
-        int.parse(parts[2].trim()),
-      );
-    } catch (e) {
-      print('Error parsing time: $date - Error: $e');
-      return DateTime(1533, 1, 1);
-    }
-  }
+  // //this func is maded for parssing date to use it on removepastday func
+  // DateTime myparseDate(String date) {
+  //   try {
+  //     var parts = date.trim().split('-');
+  //     return DateTime(
+  //       int.parse(parts[0].trim()),
+  //       int.parse(parts[1].trim()),
+  //       int.parse(parts[2].trim()),
+  //     );
+  //   } catch (e) {
+  //     print('Error parsing time: $date - Error: $e');
+  //     return DateTime(1533, 1, 1);
+  //   }
+  // }
 
-  //this func is maded for getting current date to use it on removepastday func
-  DateTime mycurrentdate() {
-    DateTime now = DateTime.now();
-    return DateTime(now.year, now.month, now.day);
-  }
+  // //this func is maded for getting current date to use it on removepastday func
+  // DateTime mycurrentdate() {
+  //   DateTime now = DateTime.now();
+  //   return DateTime(now.year, now.month, now.day);
+  // }
 
-  //removing pastdays for ensure it always show current date as first value on prayer table
-  removepastday() {
-    for (int i = 0; i < prayersdayskeys.length; i++) {
-      if (myparseDate(prayersdayskeys[i]).isBefore(mycurrentdate())) {
-        prayersdays.remove(prayersdayskeys[i]);
-        prayersdayskeys.remove(prayersdayskeys[i]);
-      } else {
-        null;
-      }
-    }
-  }
+  // //removing pastdays for ensure it always show current date as first value on prayer table
+  // removepastday() {
+  //   for (int i = 0; i < prayersdayskeys.length; i++) {
+  //     if (myparseDate(prayersdayskeys[i]).isBefore(mycurrentdate())) {
+  //       prayersdays.remove(prayersdayskeys[i]);
+  //       prayersdayskeys.remove(prayersdayskeys[i]);
+  //     } else {
+  //       null;
+  //     }
+  //   }
+  // }
 
   Future<void> fetchPrayerTimes() async {
     try {
       prayersdayskeys = data.keys.toList();
       for (int i = 0; i < prayersdayskeys.length; i++) {
         // removing past date
-        removepastday();
+        // removepastday();
 
         // storing prayertimes in this map
         var timings = data[prayersdayskeys[i]]['data']['timings'];

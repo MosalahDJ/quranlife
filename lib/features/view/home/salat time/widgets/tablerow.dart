@@ -47,7 +47,7 @@ class SalawatTableRow {
                   style: TextStyle(
                       fontSize: 18,
 
-                      //in this condition I chek if salat time = current prayer then
+                      //in this condition I check if salat time = current prayer then
                       //I check if date "$i" in the list of keys == current date
                       //I use these funcs for making sure it range as same as each other
                       //and the only diffrent is in the date not on string range

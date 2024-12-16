@@ -13,7 +13,8 @@ final notificationController = Get.put(NotificationController());
 
 enum NotificationType { adhan, adhkar, quraan }
 
-@pragma('vm:entry-point') // Mandatory if the App is obfuscated or using Flutter 3.1+
+@pragma(
+    'vm:entry-point') // Mandatory if the App is obfuscated or using Flutter 3.1+
 void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) async {
     try {
@@ -54,15 +55,21 @@ class WorkManagerController extends GetxController {
       isInDebugMode: true,
     );
     // Register tasks based on saved preferences
-    if (adhansubscribition.value) await registerPeriodicTask(NotificationType.adhan);
-    if (adhkarsubscribition.value) await registerPeriodicTask(NotificationType.adhkar);
-    if (quraansubscribition.value) await registerPeriodicTask(NotificationType.quraan);
+    if (adhansubscribition.value) {
+      await registerPeriodicTask(NotificationType.adhan);
+    }
+    if (adhkarsubscribition.value) {
+      await registerPeriodicTask(NotificationType.adhkar);
+    }
+    if (quraansubscribition.value) {
+      await registerPeriodicTask(NotificationType.quraan);
+    }
   }
 
   // Register periodic task with common configuration
   Future<void> registerPeriodicTask(NotificationType type) async {
     final taskConfig = _getTaskConfig(type);
-    
+
     switch (type) {
       case NotificationType.quraan:
         // Schedule Quran notification once per day at 8:00 AM
@@ -81,7 +88,7 @@ class WorkManagerController extends GetxController {
           existingWorkPolicy: ExistingWorkPolicy.replace,
         );
         break;
-        
+
       case NotificationType.adhkar:
         // Schedule Adhkar notifications every 15 minutes
         await Workmanager().registerPeriodicTask(
@@ -98,7 +105,7 @@ class WorkManagerController extends GetxController {
           existingWorkPolicy: ExistingWorkPolicy.replace,
         );
         break;
-        
+
       case NotificationType.adhan:
         // Schedule Adhan notifications based on prayer times
         await Workmanager().registerPeriodicTask(
@@ -122,7 +129,7 @@ class WorkManagerController extends GetxController {
   Duration _getInitialDelay() {
     final now = DateTime.now();
     final eightAM = DateTime(now.year, now.month, now.day, 8, 0);
-    
+
     if (now.isAfter(eightAM)) {
       // If it's after 8 AM, schedule for next day
       final tomorrow = eightAM.add(const Duration(days: 1));
@@ -184,7 +191,7 @@ class WorkManagerController extends GetxController {
         quraansubscribition.value = value;
         break;
     }
-    
+
     if (value) {
       await registerPeriodicTask(type);
     } else {

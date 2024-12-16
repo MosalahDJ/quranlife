@@ -26,7 +26,7 @@ class Mytestpage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton(onPressed: () {}, child: const Text("scheduled")),
-              Text("text: "),
+              const Text("text: "),
             ],
           ),
         ),

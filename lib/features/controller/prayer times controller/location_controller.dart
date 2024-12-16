@@ -29,7 +29,7 @@ class LocationController extends GetxController {
     //I add it here to ensure ir's updated
     DateTime mycurrentdate = DateTime.now();
     //select last day of data
-    DateTime endDate = mycurrentdate.add(const Duration(days: 365));
+    DateTime endDate = mycurrentdate.add(const Duration(days: 180));
     DateTime refreshingdate = endDate.subtract(const Duration(days: 7));
 
     if (prefs.getString("responsebody") == null ||

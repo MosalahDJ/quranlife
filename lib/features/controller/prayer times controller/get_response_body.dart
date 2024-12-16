@@ -50,7 +50,7 @@ class GetResponseBody extends GetxController {
     // log("${prefs.getString("responsebody")}");
     try {
       if (prefs.getString("responsebody") == null ||
-          prefs.getString("responsebody")!.length < 448000 ||
+          prefs.getString("responsebody")!.length < 224000 ||
           isPositionChanged() ||
           mycurrentdate.isAtSameMomentAs(refreshingdate) ||
           mycurrentdate.isAfter(refreshingdate)) {
