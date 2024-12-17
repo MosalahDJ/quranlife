@@ -24,6 +24,7 @@ class SplashViewController extends GetxController
     await locationctrl.determinePosition();
     await responsectrl.gettingresponse();
     await fpfctrl.fetchPrayerTimes();
+    timespagectrl.getcurrentpage();
     prayerctrl.determineCurrentPrayer();
     timespagectrl.pagecontroller();
     isLoading(false);

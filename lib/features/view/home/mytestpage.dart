@@ -6,6 +6,21 @@ import 'package:quranlife/features/controller/spalshview%20controller/splash_vie
 final SplashViewController spctrl = Get.find();
 final FetchPrayerFromDate fpfctrl = Get.find();
 
+RxInt getIndexByDate() {
+  final dates = fpfctrl.prayersdayskeys;
+  late int value = 0;
+  for (int index = 0; index < dates.length; index++) {
+    if (fpfctrl.formatDateString(dates[index]) ==
+        fpfctrl.formatDate(DateTime.now())) {
+      value = index;
+      return value.obs;
+    } else {
+      continue;
+    }
+  }
+  return value.obs;
+}
+
 class Mytestpage extends StatelessWidget {
   const Mytestpage({super.key});
 
@@ -25,7 +40,11 @@ class Mytestpage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ElevatedButton(onPressed: () {}, child: const Text("scheduled")),
+              ElevatedButton(
+                  onPressed: () {
+                    getIndexByDate();
+                  },
+                  child: const Text("scheduled")),
               const Text("text: "),
             ],
           ),

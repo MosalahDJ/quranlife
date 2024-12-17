@@ -4,7 +4,7 @@ import 'package:hijri/hijri_calendar.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
-// import 'package:quranlife/features/controller/spalshview%20controller/splash_view_controller.dart';
+import 'package:quranlife/features/controller/prayer%20times%20controller/times_page_controller.dart';
 import 'package:quranlife/features/view/home/salat%20time/widgets/currunet_pray_time.dart';
 import 'package:quranlife/features/view/home/salat%20time/widgets/salwatpageview.dart';
 
@@ -12,7 +12,7 @@ class SalawatPageview extends StatelessWidget {
   SalawatPageview({super.key});
   final MyHomeController homectrl = Get.find();
   final HijriCalendar hijri = HijriCalendar.now();
-  // final SplashViewController spctrl = Get.find();
+  final TimesPageController timespagectrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +30,7 @@ class SalawatPageview extends StatelessWidget {
             overlayColor: const WidgetStatePropertyAll(Colors.transparent),
             borderRadius: const BorderRadius.all(Radius.circular(12)),
             onTap: () {
+              timespagectrl.getcurrentpage();
               Get.toNamed("salattime");
             },
             child: Ink(

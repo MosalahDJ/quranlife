@@ -80,18 +80,21 @@ class Prayertimestable extends GetView<DeterminePrayersController> {
                                 iconSize: 30,
                                 onPressed: () {
                                   timespagectrl.timespagecontroller.jumpToPage(
-                                    0,
+                                    timespagectrl.currentday,
                                   );
                                 },
                                 icon: const Icon(
-                                  Icons.keyboard_double_arrow_left_sharp,
+                                  Icons.keyboard_double_arrow_down,
                                 ),
                               ),
                               //return to past page
                               IconButton(
                                   iconSize: 20,
                                   onPressed: () {
-                                    timespagectrl.currentPage.value == 1
+                                    timespagectrl.currentPage.value ==
+                                                timespagectrl.currentday + 1 ||
+                                            timespagectrl.currentPage.value ==
+                                                timespagectrl.currentday
                                         ? timespagectrl.timespagecontroller
                                             .jumpToPage(
                                             timespagectrl.currentPage.value - 1,
@@ -111,7 +114,10 @@ class Prayertimestable extends GetView<DeterminePrayersController> {
                               IconButton(
                                   iconSize: 20,
                                   onPressed: () {
-                                    timespagectrl.currentPage.value == 0
+                                    timespagectrl.currentPage.value ==
+                                                timespagectrl.currentday - 1 ||
+                                            timespagectrl.currentPage.value ==
+                                                timespagectrl.currentday
                                         ? timespagectrl.timespagecontroller
                                             .jumpToPage(
                                             timespagectrl.currentPage.value + 1,
