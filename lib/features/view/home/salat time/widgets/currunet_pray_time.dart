@@ -144,6 +144,7 @@ class CurrentPrayTime extends StatelessWidget {
               ),
             ),
           ),
+          //get position button
           Positioned(
               bottom: Sizeconfig.screenheight! < 768
                   ? Sizeconfig.screenheight! / 50
