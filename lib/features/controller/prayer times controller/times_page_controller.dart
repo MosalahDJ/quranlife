@@ -9,6 +9,8 @@ class TimesPageController extends GetxController {
   late RxInt currentPage = 0.obs;
   int currentday = 0;
 
+  //i use this func for selecting currentpage with current day
+  //I use it in splashviewController
   void getcurrentpage() {
     final dates = fpfctrl.prayersdayskeys;
     late int value = 0;

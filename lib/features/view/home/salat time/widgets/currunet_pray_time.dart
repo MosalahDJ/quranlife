@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hijri/hijri_calendar.dart';
@@ -154,18 +155,28 @@ class CurrentPrayTime extends StatelessWidget {
                 color: Colors.transparent,
                 child: InkWell(
                   borderRadius: const BorderRadius.all(Radius.circular(11)),
-                  onTap: () async {
-                    initialctrl.isLoading(true);
-                    await locationctrl.determinePosition();
-                    await grbctrl.gettingresponse();
-                    await fpfctrl.fetchPrayerTimes();
-                    prayerctrl.determineCurrentPrayer();
-                    timespagectrl.pagecontroller();
-                    prayerctrl.currentPrayer.value == "-"
-                        ? Get.snackbar("Conection field",
-                            "please check your internet conection then retry")
-                        : null;
-                    initialctrl.isLoading(false);
+                  onTap: () {
+                    AwesomeDialog(
+                      context: context,
+                      title: "Get new data",
+                      desc:
+                          "Get current place, and demande new data frome the server! , \nit took few minuts ",
+                      btnOkOnPress: () async {
+                        initialctrl.isLoading(true);
+                        await locationctrl.determinePosition();
+                        await grbctrl.demendeNewResponse();
+                        await fpfctrl.fetchPrayerTimes();
+                        prayerctrl.determineCurrentPrayer();
+                        timespagectrl.pagecontroller();
+                        prayerctrl.currentPrayer.value == "-"
+                            ? Get.snackbar("Conection field",
+                                "please check your internet conection then retry")
+                            : null;
+                        initialctrl.isLoading(false);
+                      },
+                      btnCancelText: "Cancel",
+                      btnOkText: "OK",
+                    ).show();
                   },
                   child: SizedBox(
                     height: Sizeconfig.screenheight! < 768

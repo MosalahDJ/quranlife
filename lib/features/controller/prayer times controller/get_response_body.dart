@@ -26,67 +26,70 @@ class GetResponseBody extends GetxController {
     return "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
   }
 
-  bool isPositionChanged() {
-    if (prefs.getDouble("latitude")! != locationctrl.latitude ||
-        prefs.getDouble("longtude")! != locationctrl.longtude) {
-      return true;
+  initileresponse() async {
+    prefs = await SharedPreferences.getInstance();
+    //I add it here to ensure ir's updated
+    DateTime mycurrentdate = DateTime.now();
+    //select last day of data
+    DateTime endDate = mycurrentdate.add(const Duration(days: 180));
+    DateTime refreshingdate = endDate.subtract(const Duration(days: 7));
+
+    if (prefs.getString("responsebody") == null ||
+        prefs.getString("responsebody")!.length < 224000 ||
+        mycurrentdate.isAtSameMomentAs(refreshingdate) ||
+        mycurrentdate.isAfter(refreshingdate)) {
+      await gettingresponse(mycurrentdate, endDate);
     } else {
-      return false;
+      null;
     }
   }
 
-  Future<void> gettingresponse() async {
+  demendeNewResponse() async {
     prefs = await SharedPreferences.getInstance();
     //I add it here to ensure ir's updated
     DateTime mycurrentdate = DateTime.now();
     //select last day of data
     DateTime endDate = mycurrentdate.add(const Duration(days: 365));
+    await gettingresponse(mycurrentdate, endDate);
+  }
+
+  Future<void> gettingresponse(
+    DateTime mycurrentdate,
+    DateTime endDate,
+  ) async {
+    await locationctrl.determinePosition();
     //day before last day
     DateTime dayBeforEndDate = endDate.subtract(const Duration(days: 1));
-
-    DateTime refreshingdate = endDate.subtract(const Duration(days: 7));
-
-    //loop for each day for add it's data to responsebody
-    // log("${prefs.getString("responsebody")}");
     try {
-      if (prefs.getString("responsebody") == null ||
-          prefs.getString("responsebody")!.length < 224000 ||
-          isPositionChanged() ||
-          mycurrentdate.isAtSameMomentAs(refreshingdate) ||
-          mycurrentdate.isAfter(refreshingdate)) {
-        //I remove the old data from responsebody to ensure data will not merged inside it
-        await prefs.remove("responsebody");
-        while (mycurrentdate.isBefore(endDate)) {
-          //I add this var for passing it as date in url
-          String formattedDate = formatDate(mycurrentdate);
+      //I remove the old data from responsebody to ensure data will not merged inside it
+      await prefs.remove("responsebody");
+      while (mycurrentdate.isBefore(endDate)) {
+        //I add this var for passing it as date in url
+        String formattedDate = formatDate(mycurrentdate);
 
-          //getting response
-          var response = await http.get(Uri.parse(
-              "https://api.aladhan.com/v1/timings/$formattedDate?latitude=${locationctrl.latitude}&longitude=${locationctrl.longtude}&method=19"));
+        //getting response
+        var response = await http.get(Uri.parse(
+            "https://api.aladhan.com/v1/timings/$formattedDate?latitude=${locationctrl.latitude}&longitude=${locationctrl.longtude}&method=19"));
 
-          //if succes store responsebody in cash
-          if (response.statusCode == 200) {
-            //check if we are in dayBeforEndDate for passing data corectly without
-            //comma in last of responsebody
-            newRB = mycurrentdate == dayBeforEndDate
-                ? addDateToResponseWhitoutcomma(formattedDate, response.body)
-                : addDateToResponse(formattedDate, response.body);
-            //add the new response body of new date to current responsebody
-            await prefs.setString(
-                "responsebody", "${responsebody ?? ""}$newRB");
-            // getting data from cash to this var
-            responsebody = prefs.getString("responsebody");
-          }
-          // shift to the next day
-          mycurrentdate = mycurrentdate.add(const Duration(days: 1));
+        //if succes store responsebody in cash
+        if (response.statusCode == 200) {
+          //check if we are in dayBeforEndDate for passing data corectly without
+          //comma in last of responsebody
+          newRB = mycurrentdate == dayBeforEndDate
+              ? addDateToResponseWhitoutcomma(formattedDate, response.body)
+              : addDateToResponse(formattedDate, response.body);
+          //add the new response body of new date to current responsebody
+          await prefs.setString("responsebody", "${responsebody ?? ""}$newRB");
+          // getting data from cash to this var
+          responsebody = prefs.getString("responsebody");
         }
-        // add curlyBraces to response body
-        await prefs.setString("responsebody", "{$responsebody}");
-        //I use this methode for restart app for making sure data is ready
-        Restart.restartApp();
-      } else {
-        null;
+        // shift to the next day
+        mycurrentdate = mycurrentdate.add(const Duration(days: 1));
       }
+      // add curlyBraces to response body
+      await prefs.setString("responsebody", "{$responsebody}");
+      //I use this methode for restart app for making sure data is ready
+      Restart.restartApp();
     } catch (e) {
       print('There was an error: $e');
     }

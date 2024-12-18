@@ -16,17 +16,15 @@ class SplashViewController extends GetxController
   final DeterminePrayersController prayerctrl = Get.find();
   final TimesPageController timespagectrl = Get.find();
   final GetResponseBody responsectrl = Get.find();
-
   RxBool isLoading = true.obs;
 
   tonextpage() async {
     isLoading(true);
-    await locationctrl.determinePosition();
-    await responsectrl.gettingresponse();
+    await responsectrl.initileresponse();
     await fpfctrl.fetchPrayerTimes();
-    timespagectrl.getcurrentpage();
     prayerctrl.determineCurrentPrayer();
     timespagectrl.pagecontroller();
+    timespagectrl.getcurrentpage();
     isLoading(false);
     Future.delayed(
         const Duration(seconds: 2),
