@@ -31,6 +31,10 @@ class SplashViewBody extends StatelessWidget {
                     color: Get.isDarkMode ? kmaincolor3 : kmaincolor3dark),
               ),
             ),
+            const Text(
+              "Please be patient...",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            )
           ],
         ),
       ),
