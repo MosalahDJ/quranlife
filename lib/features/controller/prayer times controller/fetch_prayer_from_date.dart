@@ -2,10 +2,12 @@
 
 import 'dart:convert';
 import 'package:get/get.dart';
+import 'package:quranlife/features/controller/prayer%20times%20controller/get_response_body.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FetchPrayerFromDate extends GetxController {
   late SharedPreferences prefs;
+  final GetResponseBody responsectrl = Get.find();
 
   RxMap prayersdays = <String, Map<String, String>>{}.obs;
   DateTime currentDate = DateTime.now();
@@ -24,7 +26,7 @@ class FetchPrayerFromDate extends GetxController {
         data = jsonDecode(responsebody);
         await fetchPrayerTimes();
       } catch (e) {
-        print('Error decoding response body: $e');
+        print("$e");
       }
     }
   }

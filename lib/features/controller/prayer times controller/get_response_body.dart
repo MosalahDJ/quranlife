@@ -1,9 +1,13 @@
 // ignore_for_file: avoid_print
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:restart_app/restart_app.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/location_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+
+DateTime mycurrentdate = DateTime.now();
+DateTime endDate = mycurrentdate.add(const Duration(days: 180));
 
 class GetResponseBody extends GetxController {
   final LocationController locationctrl = Get.find();
@@ -11,6 +15,7 @@ class GetResponseBody extends GetxController {
   String newRB = "";
   String? responsebody;
 
+  //these two func maded for add every date as key to his response
   String addDateToResponse(String date, String newrb) {
     String result = '"$date":$newrb,';
     return result;
@@ -26,30 +31,83 @@ class GetResponseBody extends GetxController {
     return "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
   }
 
+  String formatDateString(String date) {
+    List parts = date.split("-");
+    return "${parts[0]}-${parts[1].toString().padLeft(2, '0')}-${parts[2].toString().padLeft(2, '0')}";
+  }
+
+  //I use this func for parsing String date when i get it from SHPF
+  DateTime parseTime(String date) {
+    try {
+      var parts = date.trim().split('-');
+      if (parts.length != 3) {
+        throw FormatException('Invalid time format: $date');
+      }
+      return DateTime(
+        int.parse(parts[0].trim()),
+        int.parse(parts[1].trim()),
+        int.parse(parts[2].trim()),
+      );
+    } catch (e) {
+      print('Error parsing time: $date - Error: $e');
+      // Return a default time in case of error
+      return DateTime.now();
+    }
+  }
+
+  //I use this func for defining end date and refreshing date it makes me ensure
+  //that there value doesn't change in every run time
+  void defineRefreshingDate() async {
+    prefs = await SharedPreferences.getInstance();
+    DateTime refreshingdate = endDate.subtract(const Duration(days: 3));
+    await prefs.setString("refreshingdate", formatDate(refreshingdate));
+  }
+
+  //checking if current date is after refreshing date
+  Future<bool> isAfterRefreshingDate() async {
+    prefs = await SharedPreferences.getInstance();
+    DateTime refreshingDate;
+    //checking if it has a null value
+    if (prefs.getString("refreshingdate") == null) {
+      //get it a value
+      defineRefreshingDate();
+      String rfdate = prefs.getString("refreshingdate")!;
+      refreshingDate = parseTime(rfdate);
+    } else {
+      refreshingDate = parseTime(prefs.getString("refreshingdate")!);
+    }
+    // check if currentdate is after refreshingdate
+    if (mycurrentdate.isAfter(refreshingDate)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  //i use this func when open the app
   initileresponse() async {
     prefs = await SharedPreferences.getInstance();
-    //I add it here to ensure ir's updated
-    DateTime mycurrentdate = DateTime.now();
+    //I add it here to ensure it's updated
     //select last day of data
-    DateTime endDate = mycurrentdate.add(const Duration(days: 180));
-    DateTime refreshingdate = endDate.subtract(const Duration(days: 7));
-
     if (prefs.getString("responsebody") == null ||
-        prefs.getString("responsebody")!.length < 224000 ||
-        mycurrentdate.isAtSameMomentAs(refreshingdate) ||
-        mycurrentdate.isAfter(refreshingdate)) {
+        prefs.getString("responsebody")!.length < 220000 ||
+        await isAfterRefreshingDate()) {
+      Get.snackbar("Downloading Data...",
+          "Please be pationet it take's a while at first time",
+          duration: const Duration(
+            seconds: 15,
+          ),
+          margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+          padding: const EdgeInsets.all(20));
       await gettingresponse(mycurrentdate, endDate);
     } else {
       null;
     }
   }
 
+  //I use this func on demende
   demendeNewResponse() async {
     prefs = await SharedPreferences.getInstance();
-    //I add it here to ensure ir's updated
-    DateTime mycurrentdate = DateTime.now();
-    //select last day of data
-    DateTime endDate = mycurrentdate.add(const Duration(days: 365));
     await gettingresponse(mycurrentdate, endDate);
   }
 
@@ -81,7 +139,7 @@ class GetResponseBody extends GetxController {
           //add the new response body of new date to current responsebody
           await prefs.setString("responsebody", "${responsebody ?? ""}$newRB");
           // getting data from cash to this var
-          responsebody = prefs.getString("responsebody");
+          responsebody = await prefs.getString("responsebody");
         }
         // shift to the next day
         mycurrentdate = mycurrentdate.add(const Duration(days: 1));

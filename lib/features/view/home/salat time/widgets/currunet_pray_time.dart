@@ -175,6 +175,7 @@ class CurrentPrayTime extends StatelessWidget {
                             : null;
                         initialctrl.isLoading(false);
                       },
+                      btnCancelOnPress: () {},
                       btnCancelText: "Cancel",
                       btnOkText: "OK",
                     ).show();

@@ -1,25 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
+import 'package:quranlife/features/controller/prayer%20times%20controller/get_response_body.dart';
 import 'package:quranlife/features/controller/spalshview%20controller/splash_view_controller.dart';
 
 final SplashViewController spctrl = Get.find();
 final FetchPrayerFromDate fpfctrl = Get.find();
-
-RxInt getIndexByDate() {
-  final dates = fpfctrl.prayersdayskeys;
-  late int value = 0;
-  for (int index = 0; index < dates.length; index++) {
-    if (fpfctrl.formatDateString(dates[index]) ==
-        fpfctrl.formatDate(DateTime.now())) {
-      value = index;
-      return value.obs;
-    } else {
-      continue;
-    }
-  }
-  return value.obs;
-}
+final GetResponseBody responsectrl = Get.find();
 
 class Mytestpage extends StatelessWidget {
   const Mytestpage({super.key});
@@ -41,8 +28,9 @@ class Mytestpage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton(
-                  onPressed: () {
-                    getIndexByDate();
+                  onPressed: () async {
+                    // bool value = await responsectrl.isAfterRefreshingDate();
+                    // print(value);
                   },
                   child: const Text("scheduled")),
               const Text("text: "),
