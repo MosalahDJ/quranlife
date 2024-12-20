@@ -55,12 +55,15 @@ class GetResponseBody extends GetxController {
     }
   }
 
-  //I use this func for defining end date and refreshing date it makes me ensure
-  //that there value doesn't change in every run time
-  void defineRefreshingDate() async {
-    prefs = await SharedPreferences.getInstance();
-    DateTime refreshingdate = endDate.subtract(const Duration(days: 3));
-    await prefs.setString("refreshingdate", formatDate(refreshingdate));
+  //I use this func for defining end date and refreshing date
+  Future<void> defineRefreshingDate() async {
+    try {
+      prefs = await SharedPreferences.getInstance();
+      final refreshingdate = endDate.subtract(const Duration(days: 3));
+      await prefs.setString("refreshingdate", formatDate(refreshingdate));
+    } catch (e) {
+      print('Error setting refreshing date: $e');
+    }
   }
 
   //checking if current date is after refreshing date
@@ -69,8 +72,8 @@ class GetResponseBody extends GetxController {
     DateTime refreshingDate;
     //checking if it has a null value
     if (prefs.getString("refreshingdate") == null) {
-      //get it a value
-      defineRefreshingDate();
+      //get it's value
+      await defineRefreshingDate();
       String rfdate = prefs.getString("refreshingdate")!;
       refreshingDate = parseTime(rfdate);
     } else {
