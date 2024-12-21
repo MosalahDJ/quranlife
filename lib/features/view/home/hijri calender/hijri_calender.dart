@@ -59,7 +59,7 @@ class HijriCalender extends StatelessWidget {
                     height: Sizeconfig.screenheight! / 60,
                   ),
                   Card(
-                    elevation: 10,
+                    elevation: 0.1,
                     color: Get.isDarkMode
                         ? kmaincolor2dark.withOpacity(0.5)
                         : Colors.white.withOpacity(0.5),

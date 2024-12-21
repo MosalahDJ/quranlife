@@ -1,25 +1,61 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/thems.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 enum AppTheme {
   light,
   dark,
+  system,
 }
 
 class ThemeController extends GetxController {
-  var selectedTheme = AppTheme.dark.obs;
+  var selectedTheme = AppTheme.system.obs;
+  late SharedPreferences prefs;
 
+  @override
+  void onInit() async {
+    super.onInit();
+    await initializeTheme();
+  }
+
+  // initialize app theme
+  Future<void> initializeTheme() async {
+    prefs = await SharedPreferences.getInstance();
+    //getting AppTheme.values from SHPF
+    String? savedTheme = prefs.getString('theme');
+    //if it not null selectedTheme = savedTheme
+    if (savedTheme != null) {
+      selectedTheme.value = AppTheme.values.firstWhere(
+        (e) => e.toString() == savedTheme,
+        // if it null use AppTheme.system as value
+        orElse: () => AppTheme.system,
+      );
+    }
+
+    _applyTheme();
+  }
+
+  // getting the value of currentTheme in initale entre
   ThemeData get currentTheme {
+    if (selectedTheme.value == AppTheme.system) {
+      return Get.isPlatformDarkMode ? Themes().darkmode : Themes().lightmode;
+    }
     return selectedTheme.value == AppTheme.light
         ? Themes().lightmode
         : Themes().darkmode;
   }
 
-  void changeTheme(AppTheme theme) {
+  //func for changing the theme and save it in Shpf then aply it
+  void changeTheme(AppTheme theme) async {
     selectedTheme.value = theme;
-    Get.changeTheme(
-        theme == AppTheme.light ? Themes().lightmode : Themes().darkmode);
+    await prefs.setString('theme', theme.toString());
+    _applyTheme();
     update();
+  }
+
+  //helper func for applying the theme
+  void _applyTheme() {
+    Get.changeTheme(currentTheme);
   }
 }
