@@ -10,6 +10,7 @@ class SplashView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //I use it here fore initialize the screen size
     Sizeconfig().init(context);
 
     return GetBuilder<ThemeController>(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
-import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/features/controller/notfication%20controller/work_manager_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
 

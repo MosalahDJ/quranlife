@@ -103,8 +103,6 @@ class GetResponseBody extends GetxController {
           margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
           padding: const EdgeInsets.all(20));
       await gettingresponse(mycurrentdate, endDate);
-      //I use this methode for restart app for making sure data is ready
-      Restart.restartApp();
     } else {
       null;
     }
@@ -144,13 +142,15 @@ class GetResponseBody extends GetxController {
           //add the new response body of new date to current responsebody
           await prefs.setString("responsebody", "${responsebody ?? ""}$newRB");
           // getting data from cash to this var
-          responsebody = await prefs.getString("responsebody");
+          responsebody = prefs.getString("responsebody");
         }
         // shift to the next day
         mycurrentdate = mycurrentdate.add(const Duration(days: 1));
       }
       // add curlyBraces to response body
       await prefs.setString("responsebody", "{$responsebody}");
+      //I use this methode for restart app for making sure data is ready
+      Restart.restartApp();
     } catch (e) {
       print('There was an error: $e');
     }

@@ -75,18 +75,6 @@ class Prayertimestable extends GetView<DeterminePrayersController> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              //return to first page
-                              IconButton(
-                                iconSize: 30,
-                                onPressed: () {
-                                  timespagectrl.timespagecontroller.jumpToPage(
-                                    timespagectrl.currentday,
-                                  );
-                                },
-                                icon: const Icon(
-                                  Icons.keyboard_double_arrow_down,
-                                ),
-                              ),
                               //return to past page
                               IconButton(
                                   iconSize: 20,
@@ -110,6 +98,18 @@ class Prayertimestable extends GetView<DeterminePrayersController> {
                                   icon: const Icon(
                                     Icons.arrow_back_ios_new_sharp,
                                   )),
+                              //return to first page
+                              IconButton(
+                                iconSize: 30,
+                                onPressed: () {
+                                  timespagectrl.timespagecontroller.jumpToPage(
+                                    timespagectrl.currentday,
+                                  );
+                                },
+                                icon: const Icon(
+                                  Icons.keyboard_double_arrow_down,
+                                ),
+                              ),
                               //going to next page
                               IconButton(
                                   iconSize: 20,

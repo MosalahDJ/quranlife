@@ -16,6 +16,7 @@ class MyData extends GetxController {
       try {
         prayerData = jsonDecode(responsebody);
       } catch (e) {
+        // ignore: avoid_print
         print("$e");
       }
     }

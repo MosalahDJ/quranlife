@@ -10,11 +10,19 @@ import 'package:quranlife/features/view/splash%20page/splash_view.dart';
 import 'package:quranlife/myrouts.dart';
 import 'firebase_options.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter/services.dart';
 
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Force portrait
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
   await Future.wait([
     Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
@@ -22,6 +30,7 @@ void main() async {
     NotificationController.initialiseNotification(),
     dotenv.load(fileName: ".env"),
   ]);
+
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   runApp(const QuranLifeApp());
 }
@@ -35,6 +44,8 @@ class QuranLifeApp extends StatelessWidget {
         Get.put<ThemeController>(ThemeController(), permanent: true);
 
     return GetMaterialApp(
+      title: 'Quran Life',
+
       theme: Themes().lightmode,
       darkTheme: Themes().darkmode,
       //using thememode for changing theme whene user change selected theme value
