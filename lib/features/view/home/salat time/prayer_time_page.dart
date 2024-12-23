@@ -73,6 +73,7 @@ class PrayerTimesPage extends StatelessWidget {
                                     ? Sizeconfig.screenheight! / 4.3
                                     : Sizeconfig.screenheight! / 3.5,
                             child: CurrentPrayTime(
+                              mawaqitTextColor: Colors.white,
                               textcolor2: Colors.white,
                               textcolor: kmaincolor4,
                               elevation: 0,

@@ -30,7 +30,7 @@ class Salwatpageview extends StatelessWidget {
       child: Container(
         decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(10))),
-        height: Sizeconfig.screenheight! / 9.5,
+        height: 200 / 2.25,
         width: Sizeconfig.screenwidth! / 3.5,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -44,19 +44,29 @@ class Salwatpageview extends StatelessWidget {
             ),
             Obx(() => initialctrl.isLoading.value == true
                 ? SizedBox(
-                    height: Sizeconfig.screenheight! / 32,
-                    child: const Center(
+                    height: 200 / 7,
+                    child: Center(
                         child: CircularProgressIndicator(
+                      color: Get.isDarkMode ? kmaincolor3dark : kmaincolor,
                       strokeAlign: -5,
                       strokeWidth: 5,
                     )),
                   )
-                : Text(
-                    fpfctrl.prayersdays[day]?[salattime]?.toString() ?? "-",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Get.isDarkMode ? kmaincolor4 : kmaincolor,
-                        fontSize: Sizeconfig.screenheight! / 50),
+                : SizedBox(
+                    height: 200 / 7,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          fpfctrl.prayersdays[day]?[salattime]?.toString() ??
+                              "-",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Get.isDarkMode ? kmaincolor4 : kmaincolor,
+                              fontSize: Sizeconfig.screenheight! / 50),
+                        ),
+                      ],
+                    ),
                   )),
             SizedBox(
                 height: Sizeconfig.screenheight! / 27,

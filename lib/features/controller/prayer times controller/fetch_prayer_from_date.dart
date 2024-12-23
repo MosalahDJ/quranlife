@@ -1,34 +1,20 @@
 // ignore_for_file: avoid_print
-
-import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/get_response_body.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:quranlife/features/model/data.dart';
 
 class FetchPrayerFromDate extends GetxController {
-  late SharedPreferences prefs;
   final GetResponseBody responsectrl = Get.find();
+  final MyData datactrl = Get.find();
 
   RxMap prayersdays = <String, Map<String, String>>{}.obs;
   DateTime currentDate = DateTime.now();
   List prayersdayskeys = [];
-  Map<dynamic, dynamic> data = {};
 
   @override
   void onInit() async {
     super.onInit();
-    prefs = await SharedPreferences.getInstance();
-
-    String? responsebody = prefs.getString("responsebody");
-
-    if (responsebody != null) {
-      try {
-        data = jsonDecode(responsebody);
-        await fetchPrayerTimes();
-      } catch (e) {
-        print("$e");
-      }
-    }
+    await fetchPrayerTimes();
   }
 
   //this func maded for making date string as same as date in the url and make sure it's dynamic
@@ -55,13 +41,11 @@ class FetchPrayerFromDate extends GetxController {
 
   Future<void> fetchPrayerTimes() async {
     try {
-      prayersdayskeys = data.keys.toList();
+      prayersdayskeys = datactrl.prayerData.keys.toList();
       for (int i = 0; i < prayersdayskeys.length; i++) {
-        // removing past date
-        // removepastday();
-
         // storing prayertimes in this map
-        var timings = data[prayersdayskeys[i]]['data']['timings'];
+        var timings =
+            datactrl.prayerData[prayersdayskeys[i]]['data']['timings'];
         Map<String, String> dailyPrayers = {
           'Fajr': timings['Fajr'],
           'Sunrise': timings['Sunrise'],

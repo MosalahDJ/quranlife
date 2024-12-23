@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 DateTime mycurrentdate = DateTime.now();
-DateTime endDate = mycurrentdate.add(const Duration(days: 180));
+DateTime endDate = mycurrentdate.add(const Duration(days: 4));
 
 class GetResponseBody extends GetxController {
   final LocationController locationctrl = Get.find();
@@ -93,7 +93,7 @@ class GetResponseBody extends GetxController {
     //I add it here to ensure it's updated
     //select last day of data
     if (prefs.getString("responsebody") == null ||
-        prefs.getString("responsebody")!.length < 220000 ||
+        // prefs.getString("responsebody")!.length < 220000 ||
         await isAfterRefreshingDate()) {
       Get.snackbar("Downloading Data...",
           "Please be pationet it take's a while at first time",
@@ -103,6 +103,8 @@ class GetResponseBody extends GetxController {
           margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
           padding: const EdgeInsets.all(20));
       await gettingresponse(mycurrentdate, endDate);
+      //I use this methode for restart app for making sure data is ready
+      Restart.restartApp();
     } else {
       null;
     }
@@ -149,8 +151,6 @@ class GetResponseBody extends GetxController {
       }
       // add curlyBraces to response body
       await prefs.setString("responsebody", "{$responsebody}");
-      //I use this methode for restart app for making sure data is ready
-      Restart.restartApp();
     } catch (e) {
       print('There was an error: $e');
     }

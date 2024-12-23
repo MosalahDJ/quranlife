@@ -35,6 +35,7 @@ class SalawatPageview extends StatelessWidget {
             },
             child: Ink(
               child: CurrentPrayTime(
+                mawaqitTextColor: Get.isDarkMode ? Colors.white : Colors.black,
                 textcolor2: Get.isDarkMode ? Colors.white : Colors.black,
                 textcolor: Get.isDarkMode ? kmaincolor4 : kmaincolor,
                 elevation: 2,

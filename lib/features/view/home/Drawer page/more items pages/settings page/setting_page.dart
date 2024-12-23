@@ -8,7 +8,7 @@ import 'package:quranlife/features/controller/settings%20controllers/theme_contr
 class SettingPage extends StatelessWidget {
   SettingPage({super.key});
   final WorkManagerController wkmctrl = Get.find();
-  final ThemeController stgctrl = Get.find();
+  final ThemeController themctrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -28,113 +28,93 @@ class SettingPage extends StatelessWidget {
       ),
 
       //Settings body
-      body: Stack(
-        children: [
-          GetBuilder<ThemeController>(
-            builder: (c) => Gradientbackground(
-              gradientcolor: [
-                kmaincolor,
-                c.selectedTheme.value == AppTheme.dark
-                    ? kmaincolor3dark
-                    : kmaincolor3,
-              ],
-            ),
-          ),
-          Material(
-            color: Colors.transparent,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(children: [
-                //themedata list tile
-                Settingtype(title: "Theme mode", listwidget: [
-                  Obx(
-                    () => RadioListTile<AppTheme>(
-                      title: const Text(
-                        'System Theme',
-                        style: TextStyle(fontSize: 15),
-                      ),
-                      value: AppTheme.system,
-                      groupValue: stgctrl.selectedTheme.value,
-                      onChanged: (value) {
-                        stgctrl.changeTheme(value!);
-                      },
-                    ),
-                  ),
-                  Obx(
-                    () => RadioListTile<AppTheme>(
-                      title: const Text(
-                        'Light Theme',
-                        style: TextStyle(fontSize: 15),
-                      ),
-                      value: AppTheme.light,
-                      groupValue: stgctrl.selectedTheme.value,
-                      onChanged: (value) {
-                        stgctrl.changeTheme(value!);
-                      },
-                    ),
-                  ),
-                  Obx(
-                    () => RadioListTile<AppTheme>(
-                      title: const Text(
-                        'Dark Theme',
-                        style: TextStyle(fontSize: 15),
-                      ),
-                      value: AppTheme.dark,
-                      groupValue: stgctrl.selectedTheme.value,
-                      onChanged: (value) {
-                        stgctrl.changeTheme(value!);
-                      },
-                    ),
-                  ),
-                ]),
-                Settingtype(
-                  title: "Notifications",
-                  listwidget: [
-                    //adhan
-                    Obx(() => SwitchListTile(
-                        title: const Text(
-                          "Adhan notifications",
-                          style: TextStyle(fontSize: 15),
-                        ),
-                        value: wkmctrl.adhansubscribition.value,
-                        onChanged: (val) {
-                          wkmctrl.adhansubscribition.value =
-                              !wkmctrl.adhansubscribition.value;
-                          wkmctrl.onChangeSubscription(
-                              NotificationType.adhan, val);
-                        })),
-                    //adkhar
-                    Obx(() => SwitchListTile(
-                        title: const Text(
-                          "Adhkar notifications",
-                          style: TextStyle(fontSize: 15),
-                        ),
-                        value: wkmctrl.adhkarsubscribition.value,
-                        onChanged: (val) {
-                          wkmctrl.adhkarsubscribition.value =
-                              !wkmctrl.adhkarsubscribition.value;
-                          wkmctrl.onChangeSubscription(
-                              NotificationType.adhkar, val);
-                        })),
-                    //quraan
-                    Obx(() => SwitchListTile(
-                        title: const Text(
-                          "Quraan notifications",
-                          style: TextStyle(fontSize: 15),
-                        ),
-                        value: wkmctrl.quraansubscribition.value,
-                        onChanged: (val) {
-                          wkmctrl.quraansubscribition.value =
-                              !wkmctrl.quraansubscribition.value;
-                          wkmctrl.onChangeSubscription(
-                              NotificationType.quraan, val);
-                        })),
-                  ],
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(children: [
+          //themedata list tile
+          Settingtype(title: "Theme mode", listwidget: [
+            Obx(
+              () => RadioListTile<AppTheme>(
+                title: const Text(
+                  'System Theme',
+                  style: TextStyle(fontSize: 15),
                 ),
-              ]),
+                value: AppTheme.system,
+                groupValue: themctrl.selectedTheme.value,
+                onChanged: (value) {
+                  themctrl.changeTheme(value!);
+                },
+              ),
             ),
-          )
-        ],
+            Obx(
+              () => RadioListTile<AppTheme>(
+                title: const Text(
+                  'Light Theme',
+                  style: TextStyle(fontSize: 15),
+                ),
+                value: AppTheme.light,
+                groupValue: themctrl.selectedTheme.value,
+                onChanged: (value) {
+                  themctrl.changeTheme(value!);
+                },
+              ),
+            ),
+            Obx(
+              () => RadioListTile<AppTheme>(
+                title: const Text(
+                  'Dark Theme',
+                  style: TextStyle(fontSize: 15),
+                ),
+                value: AppTheme.dark,
+                groupValue: themctrl.selectedTheme.value,
+                onChanged: (value) {
+                  themctrl.changeTheme(value!);
+                },
+              ),
+            ),
+          ]),
+          Settingtype(
+            title: "Notifications",
+            listwidget: [
+              //adhan
+              Obx(() => SwitchListTile(
+                  title: const Text(
+                    "Adhan notifications",
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  value: wkmctrl.adhansubscribition.value,
+                  onChanged: (val) {
+                    wkmctrl.adhansubscribition.value =
+                        !wkmctrl.adhansubscribition.value;
+                    wkmctrl.onChangeSubscription(NotificationType.adhan, val);
+                  })),
+              //adkhar
+              Obx(() => SwitchListTile(
+                  title: const Text(
+                    "Adhkar notifications",
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  value: wkmctrl.adhkarsubscribition.value,
+                  onChanged: (val) {
+                    wkmctrl.adhkarsubscribition.value =
+                        !wkmctrl.adhkarsubscribition.value;
+                    wkmctrl.onChangeSubscription(NotificationType.adhkar, val);
+                  })),
+              //quraan
+              Obx(() => SwitchListTile(
+                  title: const Text(
+                    "Quraan notifications",
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  value: wkmctrl.quraansubscribition.value,
+                  onChanged: (val) {
+                    wkmctrl.quraansubscribition.value =
+                        !wkmctrl.quraansubscribition.value;
+                    wkmctrl.onChangeSubscription(NotificationType.quraan, val);
+                  })),
+            ],
+          ),
+        ]),
       ),
     );
   }

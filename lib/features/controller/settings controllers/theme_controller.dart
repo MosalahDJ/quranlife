@@ -36,7 +36,7 @@ class ThemeController extends GetxController {
     _applyTheme();
   }
 
-  // getting the value of currentTheme in initale entre
+  //getting the value of currentTheme in initale entry
   ThemeData get currentTheme {
     if (selectedTheme.value == AppTheme.system) {
       return Get.isPlatformDarkMode ? Themes().darkmode : Themes().lightmode;
@@ -46,7 +46,8 @@ class ThemeController extends GetxController {
         : Themes().darkmode;
   }
 
-  //func for changing the theme and save it in Shpf then aply it
+  //func for changing the theme and save it in Shpf then aply it I use it in
+  //setting page for changing manually
   void changeTheme(AppTheme theme) async {
     selectedTheme.value = theme;
     await prefs.setString('theme', theme.toString());

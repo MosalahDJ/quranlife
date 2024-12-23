@@ -21,6 +21,7 @@ import 'package:quranlife/features/controller/prayer%20times%20controller/deteri
 import 'package:quranlife/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:quranlife/features/controller/spalshview%20controller/splash_view_controller.dart';
 import 'package:quranlife/features/controller/notfication%20controller/work_manager_controller.dart';
+import 'package:quranlife/features/model/data.dart';
 
 class Mybinding implements Bindings {
   @override
@@ -28,6 +29,7 @@ class Mybinding implements Bindings {
     //splashview injection
     Get.put<LocationController>(LocationController(), permanent: true);
     Get.put<GetResponseBody>(GetResponseBody());
+    Get.put<MyData>(MyData());
     Get.put<FetchPrayerFromDate>(FetchPrayerFromDate(), permanent: true);
     Get.put<DeterminePrayersController>(DeterminePrayersController(),
         permanent: true);

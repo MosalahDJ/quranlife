@@ -1,7 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hijri/hijri_calendar.dart';
+import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/get_response_body.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/location_controller.dart';
@@ -17,17 +17,18 @@ class CurrentPrayTime extends StatelessWidget {
       required this.color,
       required this.elevation,
       required this.textcolor,
-      required this.textcolor2});
+      required this.textcolor2,
+      required this.mawaqitTextColor});
 
   final Color color;
   final Color textcolor;
   final Color textcolor2;
+  final Color mawaqitTextColor;
   final double elevation;
   final DeterminePrayersController prayerctrl = Get.find();
   final LocationController locationctrl = Get.find();
   final FetchPrayerFromDate fpfctrl = Get.find();
   final TimesPageController timespagectrl = Get.find();
-  final HijriCalendar hijri = HijriCalendar.now();
   final SplashViewController initialctrl = Get.find();
   final GetResponseBody grbctrl = Get.find();
 
@@ -47,11 +48,12 @@ class CurrentPrayTime extends StatelessWidget {
             top: 0,
             left: 0,
             child: Card(
-              color: Colors.transparent,
-              elevation: 0,
-              child: Text("Mawaqite",
-                  style: Theme.of(context).textTheme.titleLarge),
-            ),
+                color: Colors.transparent,
+                elevation: 0,
+                child: Text(
+                  "Mawaqite",
+                  style: TextStyle(color: mawaqitTextColor, fontSize: 22),
+                )),
           ),
           //card
           Positioned(
@@ -71,7 +73,12 @@ class CurrentPrayTime extends StatelessWidget {
                       () => Expanded(
                         flex: 1,
                         child: initialctrl.isLoading.value == true
-                            ? const Center(child: CircularProgressIndicator())
+                            ? Center(
+                                child: CircularProgressIndicator(
+                                color: Get.isDarkMode
+                                    ? kmaincolor3dark
+                                    : kmaincolor,
+                              ))
                             : Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment:
@@ -199,8 +206,11 @@ class CurrentPrayTime extends StatelessWidget {
                                     : Sizeconfig.screenheight! / 20,
                             width: Sizeconfig.screenwidth! / 3.5,
                             child: initialctrl.isLoading.value == true
-                                ? const Center(
+                                ? Center(
                                     child: CircularProgressIndicator(
+                                    color: Get.isDarkMode
+                                        ? kmaincolor3dark
+                                        : kmaincolor,
                                     strokeAlign: -5,
                                   ))
                                 : Center(
