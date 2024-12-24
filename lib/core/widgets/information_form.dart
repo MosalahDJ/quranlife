@@ -35,8 +35,9 @@ class InformationsForm extends StatelessWidget {
           style: Theme.of(context).textTheme.titleLarge,
         ),
         TextFormField(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           focusNode: focusnode,
-          validator: isrequired ? validator : null,
+          validator: validator,
           controller: textctrl,
           maxLines: lines,
           obscureText: obsecure == null ? false : obsecure!,

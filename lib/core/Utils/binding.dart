@@ -36,11 +36,11 @@ class Mybinding implements Bindings {
     Get.put<TimesPageController>(TimesPageController(), permanent: true);
     Get.put<SplashViewController>(SplashViewController());
     //auth ijection
+    Get.put<Txtvalcontroller>(Txtvalcontroller());
     Get.put<SignInController>(SignInController());
     Get.put<LogInController>(LogInController());
     Get.put<GoogleLogInController>(GoogleLogInController());
     Get.put<GoogleSignoutController>(GoogleSignoutController());
-    Get.put<Txtvalcontroller>(Txtvalcontroller());
     Get.put<PasswordresetController>(PasswordresetController());
     //api injection
     //prayertimes injection

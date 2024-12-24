@@ -18,106 +18,109 @@ class BottomLoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Center(
-          child: SizedBox(
-            height: Sizeconfig.screenheight! / 15,
-            width: Sizeconfig.screenwidth! / 3,
-            child: ElevatedButton(
-              style: ButtonStyle(
-                  backgroundColor: WidgetStatePropertyAll(kmaincolor4)),
-              child: Text(
-                "Login",
-                style: Theme.of(context).textTheme.titleMedium,
+    return SingleChildScrollView(
+      physics: const NeverScrollableScrollPhysics(),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Center(
+            child: SizedBox(
+              height: Sizeconfig.screenheight! / 15,
+              width: Sizeconfig.screenwidth! / 3,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor: WidgetStatePropertyAll(kmaincolor4)),
+                child: Text(
+                  "Login",
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                onPressed: () {
+                  if (txtvalctrl.loginemailstate.currentState!.validate() &&
+                      txtvalctrl.loginpasswordstate.currentState!.validate()) {
+                    loginctrl.unfocuskeyboardlogin();
+                    loginctrl.login(context);
+                  }
+                },
               ),
-              onPressed: () {
-                if (txtvalctrl.loginemailstate.currentState!.validate() &&
-                    txtvalctrl.loginpasswordstate.currentState!.validate()) {
-                  loginctrl.unfocuskeyboardlogin();
-                  loginctrl.login(context);
-                }
-              },
             ),
           ),
-        ),
-        SizedBox(
-          height: Sizeconfig.screenheight! / 100,
-        ),
-        Row(
-          children: [
-            const Expanded(
-              child: Divider(
-                color: Color(0xFF3D3825),
-                endIndent: 10,
-                height: 10,
+          SizedBox(
+            height: Sizeconfig.screenheight! / 100,
+          ),
+          Row(
+            children: [
+              const Expanded(
+                child: Divider(
+                  color: Color(0xFF3D3825),
+                  endIndent: 10,
+                  height: 10,
+                ),
               ),
-            ),
-            Text(
-              "Or login with:",
-              style: Theme.of(context).textTheme.labelLarge,
-            ),
-            const Expanded(
-              child: Divider(
-                color: Color(0xFF3D3825),
-                indent: 10,
-                height: 10,
+              Text(
+                "Or Login with:",
+                style: Theme.of(context).textTheme.labelLarge,
               ),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: Sizeconfig.screenheight! / 100,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            LoginButtons(
-              onpress: () {
-                loginctrl.unfocuskeyboardlogin();
-              },
-              imageasset:
-                  "lib/core/assets/images/login_images/login_button_image/Facebook.png",
-            ),
-            LoginButtons(
-              onpress: () async {
-                loginctrl.unfocuskeyboardlogin();
-
-                googlectrl.signInWithGoogle(context);
-              },
-              imageasset:
-                  "lib/core/assets/images/login_images/login_button_image/google.png",
-            ),
-            LoginButtons(
-              onpress: () {
-                loginctrl.unfocuskeyboardlogin();
-              },
-              imageasset:
-                  "lib/core/assets/images/login_images/login_button_image/X.png",
-            ),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text("you don't have an account?,"),
-            TextButton(
-                onPressed: () {
+              const Expanded(
+                child: Divider(
+                  color: Color(0xFF3D3825),
+                  indent: 10,
+                  height: 10,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: Sizeconfig.screenheight! / 100,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              LoginButtons(
+                onpress: () {
+                  loginctrl.unfocuskeyboardlogin();
+                },
+                imageasset:
+                    "lib/core/assets/images/login_images/login_button_image/Facebook.png",
+              ),
+              LoginButtons(
+                onpress: () async {
                   loginctrl.unfocuskeyboardlogin();
 
-                  Get.offAll(() => SigninPage(),
-                      duration: const Duration(milliseconds: 500),
-                      transition: Transition.rightToLeft);
+                  googlectrl.signInWithGoogle(context);
                 },
-                child: Text(
-                  "sign in",
-                  style: TextStyle(
-                      color: Get.isDarkMode ? textcolordark : kmaincolor),
-                ))
-          ],
-        )
-      ],
+                imageasset:
+                    "lib/core/assets/images/login_images/login_button_image/google.png",
+              ),
+              LoginButtons(
+                onpress: () {
+                  loginctrl.unfocuskeyboardlogin();
+                },
+                imageasset:
+                    "lib/core/assets/images/login_images/login_button_image/X.png",
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text("Don't have an account?"),
+              TextButton(
+                  onPressed: () {
+                    loginctrl.unfocuskeyboardlogin();
+
+                    Get.offAll(() => SigninPage(),
+                        duration: const Duration(milliseconds: 500),
+                        transition: Transition.rightToLeft);
+                  },
+                  child: Text(
+                    "Sign in",
+                    style: TextStyle(
+                        color: Get.isDarkMode ? textcolordark : kmaincolor),
+                  ))
+            ],
+          )
+        ],
+      ),
     );
   }
 }

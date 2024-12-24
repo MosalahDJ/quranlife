@@ -12,28 +12,51 @@ class SigninPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        scrolledUnderElevation: 0,
-        backgroundColor: Get.isDarkMode ? kmaincolor3dark : kmaincolor,
-        leading: IconButton(
-            onPressed: () {
-              signinctrl.unfocuskeyboardsignin();
+    return WillPopScope(
+      onWillPop: () async {
+        bool? shouldPop = await showDialog<bool>(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Are you sure?'),
+            content:
+                const Text('Do you want to leave the registration process?'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context, false),
+                child: const Text('No'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(context, true),
+                child: const Text('Yes'),
+              ),
+            ],
+          ),
+        );
+        return shouldPop ?? false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          scrolledUnderElevation: 0,
+          backgroundColor: Get.isDarkMode ? kmaincolor3dark : kmaincolor,
+          leading: IconButton(
+              onPressed: () {
+                signinctrl.unfocuskeyboardsignin();
 
-              Get.offAll(() => LoginPage(),
-                  duration: const Duration(milliseconds: 500),
-                  transition: Transition.leftToRight);
-            },
-            icon: const Icon(
-              Icons.arrow_back_outlined,
-              color: Colors.white,
-            )),
-        title: Text(
-          "Signin",
-          style: Theme.of(context).textTheme.headlineSmall,
+                Get.offAll(() => LoginPage(),
+                    duration: const Duration(milliseconds: 500),
+                    transition: Transition.leftToRight);
+              },
+              icon: const Icon(
+                Icons.arrow_back_outlined,
+                color: Colors.white,
+              )),
+          title: Text(
+            "Signin",
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
         ),
+        body: SigneinPageBody(),
       ),
-      body: SigneinPageBody(),
     );
   }
 }

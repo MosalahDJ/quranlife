@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/generalbutton.dart';
 import 'package:quranlife/core/widgets/information_form.dart';
@@ -46,32 +47,69 @@ class SigneinPageBody extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            InformationsForm(
-              focusnode: signinctrl.namefnode,
-              formtitle: "name",
-              hint: "Enter your name",
-              keyboardtype: TextInputType.name,
-              obsecure: false,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            InformationsForm(
-              focusnode: signinctrl.numberfnode,
-              formtitle: "number",
-              hint: "Enter your phone number",
-              keyboardtype: TextInputType.number,
-              obsecure: false,
+            Form(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              key: txtvalctrl.signinnamestate,
+              child: InformationsForm(
+                textctrl: signinctrl.name,
+                focusnode: signinctrl.namefnode,
+                formtitle: "name",
+                hint: "Enter your name",
+                keyboardtype: TextInputType.name,
+                obsecure: false,
+                isrequired: true,
+                validator: (val) {
+                  if (val == null || val.isEmpty) {
+                    return 'Name is required';
+                  }
+                  if (val.length < 2) {
+                    return 'Name must be at least 2 characters';
+                  }
+                  return null;
+                },
+              ),
             ),
             const SizedBox(
               height: 10,
             ),
             Form(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              key: txtvalctrl.signinphonestate,
+              child: InformationsForm(
+                textctrl: signinctrl.number,
+                focusnode: signinctrl.numberfnode,
+                isrequired: true,
+                formtitle: "number",
+                hint: "Enter your phone number",
+                keyboardtype: TextInputType.number,
+                obsecure: false,
+                validator: (val) {
+                  if (val == null || val.isEmpty) {
+                    return 'Phone number is required';
+                  }
+                  if (!RegExp(r'^\d{10}$').hasMatch(val)) {
+                    return 'Enter a valid 10-digit phone number';
+                  }
+                  return null;
+                },
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Form(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               key: txtvalctrl.signinemailstate,
               child: InformationsForm(
                 focusnode: signinctrl.emailfnodesign,
                 validator: (val) {
-                  return val == "" ? "cant ba empty" : null;
+                  if (val == null || val.isEmpty) {
+                    return 'Email is required';
+                  }
+                  if (!GetUtils.isEmail(val)) {
+                    return 'Please enter a valid email address';
+                  }
+                  return null;
                 },
                 isrequired: true,
                 textctrl: signinctrl.emailcontroller,
@@ -85,12 +123,19 @@ class SigneinPageBody extends StatelessWidget {
               height: 10,
             ),
             Form(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               key: txtvalctrl.signinpasswordstate,
               child: InformationsForm(
                 focusnode: signinctrl.passwordfnodesign,
                 lines: 1,
                 validator: (val) {
-                  return val == "" ? "cant ba empty" : null;
+                  if (val == null || val.isEmpty) {
+                    return 'Password is required';
+                  }
+                  if (val.length < 6) {
+                    return 'Password must be at least 6 characters';
+                  }
+                  return null;
                 },
                 suffixbutton: GetBuilder<SignInController>(
                   builder: (c) => IconButton(
@@ -115,24 +160,39 @@ class SigneinPageBody extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            InformationsForm(
-              focusnode: signinctrl.passwordfnodesign2,
-              lines: 1,
-              formtitle: "Password",
-              hint: "Enter your Password",
-              keyboardtype: TextInputType.emailAddress,
-              obsecure: signinctrl.visibility2,
-              suffixbutton: GetBuilder<SignInController>(
-                builder: (c) => IconButton(
-                    onPressed: signinctrl.visibilityfunc2,
-                    icon: Icon(
-                      signinctrl.visibility2
-                          ? Icons.visibility_off
-                          : Icons.visibility,
-                      color: Get.isDarkMode
-                          ? Colors.white
-                          : const Color(0xFF3D3825),
-                    )),
+            Form(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              key: txtvalctrl.signinpasswordstate2,
+              child: InformationsForm(
+                focusnode: signinctrl.passwordfnodesign2,
+                lines: 1,
+                validator: (val) {
+                  if (val == null || val.isEmpty) {
+                    return 'Please confirm your password';
+                  }
+                  if (val != signinctrl.password.text) {
+                    return 'Passwords do not match';
+                  }
+                  return null;
+                },
+                formtitle: "Password",
+                hint: "Enter your Password",
+                keyboardtype: TextInputType.emailAddress,
+                obsecure: signinctrl.visibility2,
+                suffixbutton: GetBuilder<SignInController>(
+                  builder: (c) => IconButton(
+                      onPressed: signinctrl.visibilityfunc2,
+                      icon: Icon(
+                        signinctrl.visibility2
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                        color: Get.isDarkMode
+                            ? Colors.white
+                            : const Color(0xFF3D3825),
+                      )),
+                ),
+                isrequired: true,
+                textctrl: signinctrl.password2,
               ),
             ),
             const SizedBox(
@@ -141,16 +201,35 @@ class SigneinPageBody extends StatelessWidget {
             SizedBox(
               height: Sizeconfig.screenheight! / 15,
               width: Sizeconfig.screenwidth! / 3,
-              child: GeneralButton(
-                buttontext: "submit",
-                ontap: () {
-                  signinctrl.unfocuskeyboardsignin();
+              child: GetBuilder<SignInController>(
+                builder: (controller) => controller.isLoading
+                    ? Center(
+                        child: CircularProgressIndicator(
+                        color: Get.isDarkMode ? kmaincolor4 : kmaincolor3dark,
+                      ))
+                    : GeneralButton(
+                        buttontext: "submit",
+                        ontap: () {
+                          signinctrl.unfocuskeyboardsignin();
 
-                  if (txtvalctrl.signinemailstate.currentState!.validate() &&
-                      txtvalctrl.signinpasswordstate.currentState!.validate()) {
-                    signinctrl.signin(context);
-                  }
-                },
+                          // Validate all forms
+                          bool isValid = txtvalctrl
+                                  .signinnamestate.currentState!
+                                  .validate() &&
+                              txtvalctrl.signinphonestate.currentState!
+                                  .validate() &&
+                              txtvalctrl.signinemailstate.currentState!
+                                  .validate() &&
+                              txtvalctrl.signinpasswordstate.currentState!
+                                  .validate() &&
+                              txtvalctrl.signinpasswordstate2.currentState!
+                                  .validate();
+
+                          if (isValid) {
+                            signinctrl.signin(context);
+                          }
+                        },
+                      ),
               ),
             ),
             const SizedBox(

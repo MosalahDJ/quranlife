@@ -39,103 +39,100 @@ class LoginPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: SingleChildScrollView(
-          child: SizedBox(
-            height: Sizeconfig.screenheight! / 1.10,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  children: [
-                    SizedBox(
-                      height: Sizeconfig.screenheight! / 100,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                children: [
+                  SizedBox(
+                    height: Sizeconfig.screenheight! / 100,
+                  ),
+                  SizedBox(
+                    height: Sizeconfig.screenheight! / 4.2,
+                    width: Sizeconfig.screenwidth,
+                    child: Image.asset(
+                        "lib/core/assets/images/app_logo/pnglogo.png"),
+                  ),
+                  Center(
+                    child: Text(
+                      "Quran Life",
+                      style: TextStyle(
+                          color: Get.isDarkMode
+                              ? const Color(0xFFE5AB57)
+                              : const Color(0xFF3D3825),
+                          fontSize: 35),
                     ),
-                    SizedBox(
-                      height: Sizeconfig.screenheight! / 4.2,
-                      width: Sizeconfig.screenwidth,
-                      child: Image.asset(
-                          "lib/core/assets/images/app_logo/pnglogo.png"),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  Form(
+                    key: txtvalctrl.loginemailstate,
+                    child: InformationsForm(
+                      focusnode: loginctrl.emailfnodelog,
+                      keyboardtype: TextInputType.emailAddress,
+                      validator: (val) {
+                        return val == "" ? "Can't be empty" : null;
+                      },
+                      isrequired: true,
+                      textctrl: loginctrl.emailcontroller,
+                      formtitle: "Email",
+                      hint: "Enter your email address",
                     ),
-                    Center(
+                  ),
+                  SizedBox(
+                    height: Sizeconfig.screenheight! / 50,
+                  ),
+                  Form(
+                    key: txtvalctrl.loginpasswordstate,
+                    child: GetBuilder<LogInController>(
+                      builder: (controller) {
+                        return InformationsForm(
+                          focusnode: loginctrl.passwordfnodelog,
+                          suffixbutton: IconButton(
+                              onPressed: loginctrl.visibilityfunc,
+                              icon: Icon(
+                                loginctrl.visibility
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                                color: Get.isDarkMode
+                                    ? Colors.white
+                                    : const Color(0xFF3D3825),
+                              )),
+                          lines: 1,
+                          obsecure: loginctrl.visibility,
+                          validator: (val) {
+                            return val == "" ? "Can't be empty" : null;
+                          },
+                          isrequired: true,
+                          textctrl: loginctrl.passwordcontroller,
+                          formtitle: "Password",
+                          hint: "Enter your password",
+                        );
+                      },
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: TextButton(
+                      onPressed: () {
+                        loginctrl.unfocuskeyboardlogin();
+                        passreset.resetpassword(context);
+                      },
                       child: Text(
-                        "Quraan Life",
-                        style: TextStyle(
-                            color: Get.isDarkMode
-                                ? const Color(0xFFE5AB57)
-                                : const Color(0xFF3D3825),
-                            fontSize: 35),
+                        "Forgot password?",
+                        style: Theme.of(context).textTheme.labelLarge,
                       ),
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Form(
-                      key: txtvalctrl.loginemailstate,
-                      child: InformationsForm(
-                        focusnode: loginctrl.emailfnodelog,
-                        keyboardtype: TextInputType.emailAddress,
-                        validator: (val) {
-                          return val == "" ? "cant be empty" : null;
-                        },
-                        isrequired: true,
-                        textctrl: loginctrl.emailcontroller,
-                        formtitle: "Email",
-                        hint: "enter your email address",
-                      ),
-                    ),
-                    SizedBox(
-                      height: Sizeconfig.screenheight! / 50,
-                    ),
-                    Form(
-                      key: txtvalctrl.loginpasswordstate,
-                      child: GetBuilder<LogInController>(
-                        builder: (controller) {
-                          return InformationsForm(
-                            focusnode: loginctrl.passwordfnodelog,
-                            suffixbutton: IconButton(
-                                onPressed: loginctrl.visibilityfunc,
-                                icon: Icon(
-                                  loginctrl.visibility
-                                      ? Icons.visibility_off
-                                      : Icons.visibility,
-                                  color: Get.isDarkMode
-                                      ? Colors.white
-                                      : const Color(0xFF3D3825),
-                                )),
-                            lines: 1,
-                            obsecure: loginctrl.visibility,
-                            validator: (val) {
-                              return val == "" ? "cant be empty" : null;
-                            },
-                            isrequired: true,
-                            textctrl: loginctrl.passwordcontroller,
-                            formtitle: "Password",
-                            hint: "enter your password",
-                          );
-                        },
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: TextButton(
-                        onPressed: () {
-                          loginctrl.unfocuskeyboardlogin();
-                          passreset.resetpassword(context);
-                        },
-                        child: Text(
-                          "forgot password?",
-                          style: Theme.of(context).textTheme.labelLarge,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                BottomLoginPage(),
-              ],
-            ),
+                  ),
+                ],
+              ),
+              BottomLoginPage(),
+            ],
           ),
         ),
       ),
