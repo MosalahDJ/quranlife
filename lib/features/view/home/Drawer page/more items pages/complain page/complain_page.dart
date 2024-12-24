@@ -11,7 +11,7 @@ class ComplainPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Complain Page",
+          "Contact Us",
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: kmaincolor,
@@ -28,14 +28,14 @@ class ComplainPage extends StatelessWidget {
               height: Sizeconfig.screenheight! / 90,
             ),
             const Text(
-              "Complain Page",
+              "Contact Us",
               style: TextStyle(fontSize: 20, color: Colors.white),
             ),
             SizedBox(
               height: Sizeconfig.screenheight! / 90,
             ),
             const Text(
-              " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud  .",
+              "We value your feedback. Please use the form below to send us your questions, concerns, or suggestions. We'll get back to you as soon as possible.",
               style: TextStyle(color: Colors.white),
             ),
             SizedBox(

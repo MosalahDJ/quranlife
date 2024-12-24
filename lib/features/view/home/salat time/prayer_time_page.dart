@@ -48,7 +48,7 @@ class PrayerTimesPage extends StatelessWidget {
                             color: Colors.black.withOpacity(0.4),
                             child: const Text(
                               textDirection: TextDirection.rtl,
-                              "『 إِنَّ ٱلصَّلَاةَ كَانَتْ عَلَى ٱلْمُؤْمِنِينَ كِتَابًا مَوْقُوتًا 』\n﴿ صَدَقَ اللهُ العَظِيمْ ﴾",
+                              "『 إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا 』\n﴿ صَدَقَ اللهُ العَظِيم ﴾",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   color: Colors.white,

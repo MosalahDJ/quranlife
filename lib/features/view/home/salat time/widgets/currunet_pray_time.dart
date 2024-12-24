@@ -91,7 +91,7 @@ class CurrentPrayTime extends StatelessWidget {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Text(
-                                        "Next time: ",
+                                        "Next Prayer: ",
                                         style: TextStyle(
                                           color: textcolor2,
                                           fontSize: 17,
@@ -123,7 +123,7 @@ class CurrentPrayTime extends StatelessWidget {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Text(
-                                        "Left: ",
+                                        "Time Remaining: ",
                                         style: TextStyle(
                                           color: textcolor2,
                                           fontSize: 17,
@@ -166,9 +166,9 @@ class CurrentPrayTime extends StatelessWidget {
                   onTap: () {
                     AwesomeDialog(
                       context: context,
-                      title: "Get new data",
+                      title: "Get New Data",
                       desc:
-                          "Get current place, and demande new data frome the server! , \nit took few minuts ",
+                          "Get current location and request new data from the server.\nThis may take a few minutes.",
                       btnOkOnPress: () async {
                         initialctrl.isLoading(true);
                         await locationctrl.determinePosition();

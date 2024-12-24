@@ -42,7 +42,7 @@ class CartCard extends StatelessWidget {
                         child: Column(
                           children: [
                             Text(
-                                "you are new here? \nand you want to find a mosque?\ndon't wory we can find nearest mosque to your place. ")
+                                "Are you new here?\nLooking for a mosque?\nDon't worry, we'll help you find the nearest mosque.")
                           ],
                         ),
                       ),
@@ -99,7 +99,7 @@ class CartCard extends StatelessWidget {
                                 textAlign: TextAlign.center,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
-                                "find masjid",
+                                "Find Mosque",
                                 style: TextStyle(
                                     fontSize: 15, color: Colors.white),
                               ),

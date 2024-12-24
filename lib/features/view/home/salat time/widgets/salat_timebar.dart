@@ -15,7 +15,7 @@ class Salattimebar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "مواقيت الصلاة",
+              "Prayer Times",
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,

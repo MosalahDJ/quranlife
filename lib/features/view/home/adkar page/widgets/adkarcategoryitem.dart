@@ -34,7 +34,7 @@ class AdkarCategoryItem extends StatelessWidget {
                         ),
                       ),
                       const Text(
-                        "hello world ",
+                        "Category Name",
                         textAlign: TextAlign.center,
                       )
                     ],

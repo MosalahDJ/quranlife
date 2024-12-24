@@ -26,28 +26,28 @@ class CusstomPageView extends StatelessWidget {
             imageasset:
                 "lib/core/assets/images/on_boarding_image/onboarding1.png",
             subtitle:
-                "Your daily Islamic companion to strengthen your faith and practice Quranic teachings in your life",
+                "Your daily Islamic companion to strengthen your faith and practice Quranic teachings in your daily life.",
             title: "Welcome to Quran Life",
           ),
           MyPageView(
             imageasset:
                 "lib/core/assets/images/on_boarding_image/onboarding2.png",
             subtitle:
-                "Quran Life reminds you of prayer times, provides you with dhikr and duas, ensuring you perform your obligations on time",
-            title: "Anytime, Anywhere",
+                "Quran Life reminds you of prayer times and provides you with dhikr and duas, ensuring you fulfill your religious obligations on time.",
+            title: "Prayer Times & Reminders",
           ),
           MyPageView(
             imageasset:
                 "lib/core/assets/images/on_boarding_image/onboarding3.png",
             subtitle:
-                "Quran Life helps all believers stay committed to their prayers, providing guidance and appropriate duas for every moment",
-            title: "for Every Muslim",
+                "Quran Life supports all believers in maintaining their prayers, providing guidance and appropriate duas for every occasion.",
+            title: "For Every Muslim",
           ),
           MyPageView(
             imageasset:
                 "lib/core/assets/images/on_boarding_image/onboarding4.png",
             subtitle:
-                "Quran Life helps you find the nearest mosques, and connects you with your brothers and sisters in faith",
+                "Quran Life helps you locate nearby mosques and connects you with your brothers and sisters in faith.",
             title: "Islamic Community",
           ),
         ],

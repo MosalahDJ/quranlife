@@ -59,7 +59,7 @@ class SigneinPageBody extends StatelessWidget {
               child: InformationsForm(
                 textctrl: signinctrl.name,
                 focusnode: signinctrl.namefnode,
-                formtitle: "name",
+                formtitle: "Name", // Capitalized
                 hint: "Enter your name",
                 keyboardtype: TextInputType.name,
                 obsecure: false,
@@ -86,7 +86,7 @@ class SigneinPageBody extends StatelessWidget {
                 textctrl: signinctrl.number,
                 focusnode: signinctrl.numberfnode,
                 isrequired: true,
-                formtitle: "number",
+                formtitle: "Phone Number", // Changed from "number"
                 hint: "Enter your phone number",
                 keyboardtype: TextInputType.number,
                 obsecure: false,
@@ -122,7 +122,7 @@ class SigneinPageBody extends StatelessWidget {
                 isrequired: true,
                 textctrl: signinctrl.emailcontroller,
                 formtitle: "Email",
-                hint: "Enter your Email",
+                hint: "Enter your email", // Lowercase "email"
                 keyboardtype: TextInputType.emailAddress,
                 obsecure: false,
               ),
@@ -162,7 +162,7 @@ class SigneinPageBody extends StatelessWidget {
                 isrequired: true,
                 textctrl: signinctrl.password,
                 formtitle: "Password",
-                hint: "Enter your Password",
+                hint: "Enter your password", // Lowercase "password"
                 keyboardtype: TextInputType.emailAddress,
                 obsecure: signinctrl.visibility,
               ),
@@ -187,7 +187,7 @@ class SigneinPageBody extends StatelessWidget {
                   return null;
                 },
                 formtitle: "Password",
-                hint: "Enter your Password",
+                hint: "Enter your password", // Lowercase "password"
                 keyboardtype: TextInputType.emailAddress,
                 obsecure: signinctrl.visibility2,
                 suffixbutton: GetBuilder<SignInController>(
@@ -221,7 +221,7 @@ class SigneinPageBody extends StatelessWidget {
                         color: Get.isDarkMode ? kmaincolor4 : kmaincolor3dark,
                       ))
                     : GeneralButton(
-                        buttontext: "submit",
+                        buttontext: "Submit", // Capitalized
                         ontap: () {
                           signinctrl.unfocuskeyboardsignin();
 

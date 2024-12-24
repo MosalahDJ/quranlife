@@ -30,7 +30,7 @@ class Prayertimestable extends GetView<DeterminePrayersController> {
             elevation: 0,
             color: Colors.transparent,
             child: Text(
-              "Prayer  Board",
+              "Prayer Board",
               textAlign: TextAlign.start,
               style: TextStyle(color: Colors.white, fontSize: 25),
             )),

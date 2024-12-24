@@ -16,7 +16,7 @@ class WhoAmI extends StatelessWidget {
           color: const Color.fromARGB(255, 38, 198, 218),
           child: const Text(
             textAlign: TextAlign.center,
-            "Who Am I ?",
+            "Who Am I?", // Fixed spacing before question mark
             style: TextStyle(
               color: Colors.white,
               fontSize: 30,
@@ -45,7 +45,7 @@ class WhoAmI extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               ),
               Text(
-                "Mobile Application Developper",
+                "Mobile Application Developer", // Fixed "Developper" to "Developer"
                 style: TextStyle(color: Colors.black, fontSize: 14),
               )
             ],

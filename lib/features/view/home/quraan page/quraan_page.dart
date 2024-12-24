@@ -26,7 +26,7 @@ class QuraanPage extends StatelessWidget {
             centerTitle: true,
             backgroundColor: kmaincolor,
             title: const Text(
-              "اَلقرآن الكريم",
+              "The Holy Qur'an",
               textAlign: TextAlign.center,
             ),
 
@@ -44,11 +44,11 @@ class QuraanPage extends StatelessWidget {
                   ),
                   Tab(
                     icon: Icon(FlutterIslamicIcons.quran),
-                    child: Text("Juzu'a"),
+                    child: Text("Juz'"),
                   ),
                   Tab(
                     icon: Icon(FlutterIslamicIcons.quran),
-                    child: Text("Ayah"),
+                    child: Text("Verse"),
                   ),
                 ]),
           ),

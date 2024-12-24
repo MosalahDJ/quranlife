@@ -74,7 +74,7 @@ class DuaaPage extends StatelessWidget {
                             //counter text
 
                             child: Text(
-                              "num",
+                              "Count",
                               style: Theme.of(context).textTheme.titleLarge,
                               textAlign: TextAlign.center,
                             ),

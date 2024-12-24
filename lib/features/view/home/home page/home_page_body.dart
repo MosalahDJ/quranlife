@@ -83,8 +83,8 @@ class HomePageBody extends StatelessWidget {
                       height: Sizeconfig.screenheight! / 100,
                     ),
 
-                    // nearset mosque to you
-                    Text("nearset mosque to you",
+                    // Nearest Mosque
+                    Text("Nearest Mosque",
                         style: Theme.of(context).textTheme.titleLarge),
                     SizedBox(
                       height: Sizeconfig.screenheight! / 100,
@@ -105,8 +105,8 @@ class HomePageBody extends StatelessWidget {
                       height: Sizeconfig.screenheight! / 100,
                     ),
 
-                    // The daily Wird cards
-                    Text("The Daily 'Wirds'",
+                    // Daily Wird
+                    Text("Daily Wird",
                         style: Theme.of(context).textTheme.titleLarge),
                     SizedBox(
                       height: Sizeconfig.screenheight! / 100,

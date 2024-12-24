@@ -12,7 +12,7 @@ class RefferalPage extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: kmaincolor,
           title: const Text(
-            "Refferal Page",
+            "Referral Page",
             style: TextStyle(color: Color(0xFFFFFFFF)),
           ),
           centerTitle: true,
@@ -29,7 +29,7 @@ class RefferalPage extends StatelessWidget {
             height: Sizeconfig.screenheight! / 60,
           ),
           Text(
-            "Share this health app with your Friends ",
+            "Share this Health App with Your Friends",
             style: TextStyle(
               color: kmaincolor,
               fontSize: 30,
@@ -40,7 +40,7 @@ class RefferalPage extends StatelessWidget {
             height: Sizeconfig.screenheight! / 60,
           ),
           const Text(
-            "Share our health friendly application with your Friends by giving theme a chance to range their food calories and vitamins and all aauther things in this app ",
+            "Share our health-friendly application with your friends. Give them a chance to track their food calories, vitamins, and other features in this app.",
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 15),
           ),
@@ -48,7 +48,7 @@ class RefferalPage extends StatelessWidget {
             height: Sizeconfig.screenheight! / 30,
           ),
           Text(
-            "Your Refferal Link: ",
+            "Your Referral Link:",
             style: TextStyle(
               color: kmaincolor,
               fontSize: 20,

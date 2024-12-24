@@ -29,14 +29,14 @@ class MoreItems extends StatelessWidget {
             Get.to(() => const ComplainPage());
           },
           icondata: Icons.message_rounded,
-          textdata: "Complain",
+          textdata: "Complaint",
         ),
         Moreinformations(
           onpressed: () {
             Get.to(() => const RefferalPage());
           },
           icondata: Icons.share_outlined,
-          textdata: "Referral",
+          textdata: "Referrals",
         ),
         Moreinformations(
           onpressed: () {
@@ -59,7 +59,7 @@ class MoreItems extends StatelessWidget {
             Get.offAllNamed("login");
           },
           icondata: Icons.logout_outlined,
-          textdata: "Logout",
+          textdata: "Log Out",
         ),
       ],
     );

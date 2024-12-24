@@ -22,7 +22,7 @@ class ComplainContainer extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "How can we help you  ",
+                "How Can We Help You?",
                 style: TextStyle(color: Colors.white, fontSize: 18),
               ),
               Icon(
@@ -38,15 +38,15 @@ class ComplainContainer extends StatelessWidget {
           child: Column(
             children: [
               const ComplainForm(
-                titletext: "name",
+                titletext: "Name",
                 maxlines: 1,
               ),
               const ComplainForm(
-                titletext: "email",
+                titletext: "Email",
                 maxlines: 1,
               ),
               const ComplainForm(
-                titletext: "description",
+                titletext: "Description",
                 maxlines: 5,
               ),
               ElevatedButton(
@@ -59,7 +59,7 @@ class ComplainContainer extends StatelessWidget {
                       backgroundColor: WidgetStatePropertyAll(kmaincolor)),
                   onPressed: () {},
                   child: const Text(
-                    "send complain",
+                    "Send Message",
                     style: TextStyle(color: Colors.white),
                   ))
             ],

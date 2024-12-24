@@ -10,7 +10,7 @@ class AboutUsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "About us",
+          "About Us", // Capitalized "Us"
           style: TextStyle(color: Color(0xFFFFFFFF)),
         ),
         backgroundColor: const Color(0xFF424242),
@@ -80,12 +80,12 @@ class AboutUsPage extends StatelessWidget {
                   child: Column(
                     children: [
                       const Text(
-                        "'We Can Build your future Mobile APP of ",
+                        "'We Can Build Your Future Mobile App for", // Fixed capitalization and preposition
                         style:
                             TextStyle(color: Color(0xFFFFFFFF), fontSize: 40),
                       ),
                       const Text(
-                        "both android and apple OS'",
+                        "Both Android and iOS'", // Fixed capitalization and OS names
                         style: TextStyle(
                             color: Color(0xFF26C6DA),
                             fontSize: 40,
@@ -102,7 +102,7 @@ class AboutUsPage extends StatelessWidget {
                         height: Sizeconfig.screenheight! / 25,
                       ),
                       const Text(
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure .",
+                        "We specialize in mobile app development, creating innovative solutions for both personal and business needs. Our team of experienced developers ensures high-quality, user-friendly applications that meet modern standards and requirements.", // Replaced Lorem ipsum with relevant content
                         style:
                             TextStyle(color: Color(0xFFFFFFFF), fontSize: 14),
                       ),
@@ -110,7 +110,7 @@ class AboutUsPage extends StatelessWidget {
                         height: Sizeconfig.screenheight! / 70,
                       ),
                       const Text(
-                        "dolor in reprehenderit  in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum .",
+                        "With a focus on performance and user experience, we deliver cutting-edge mobile applications that help our clients achieve their goals and stay ahead in the digital world.", // Replaced Lorem ipsum with relevant content
                         style:
                             TextStyle(color: Color(0xFFFFFFFF), fontSize: 14),
                       )

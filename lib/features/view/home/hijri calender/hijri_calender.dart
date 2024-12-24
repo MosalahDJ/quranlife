@@ -18,7 +18,7 @@ class HijriCalender extends StatelessWidget {
         elevation: 0,
         scrolledUnderElevation: 0,
         centerTitle: true,
-        title: const Text("hijri calender"),
+        title: const Text("Hijri Calendar"),
       ),
       body: Stack(
         children: [
@@ -44,7 +44,7 @@ class HijriCalender extends StatelessWidget {
                     child: SizedBox(
                       width: Sizeconfig.screenwidth,
                       child: Text(
-                        "${hijri.hDay} - ${hijri.shortMonthName} - ${hijri.hYear}  hijri",
+                        "${hijri.hDay} - ${hijri.shortMonthName} - ${hijri.hYear} Hijri",
                         textAlign: TextAlign.start,
                         style: TextStyle(
                           color: Get.isDarkMode
@@ -87,7 +87,7 @@ class HijriCalender extends StatelessWidget {
                     child: SizedBox(
                       width: Sizeconfig.screenwidth,
                       child: Text(
-                        "Important Note About Islamic Occasions",
+                        "Important Notes About Islamic Occasions",
                         textAlign: TextAlign.start,
                         style: TextStyle(
                           color: Get.isDarkMode ? kmaincolor4 : kmaincolor,
@@ -100,22 +100,22 @@ class HijriCalender extends StatelessWidget {
                     height: Sizeconfig.screenheight! / 60,
                   ),
                   noticeText(
-                      "Islamic occasions do not occur in the same Gregorian month each year, but rather move forward by 11 days annually."),
+                      "Islamic occasions do not occur in the same Gregorian months each year. They move forward by 11 days annually."),
                   SizedBox(
                     height: Sizeconfig.screenheight! / 60,
                   ),
                   noticeText(
-                      "Ramadan doesn't always come in the same Gregorian month, but rather moves through all months of the year over the years."),
+                      "Ramadan occurs in different Gregorian months as it moves through all months of the year over time."),
                   SizedBox(
                     height: Sizeconfig.screenheight! / 60,
                   ),
                   noticeText(
-                      "Do not link any Islamic occasion to a specific Gregorian month."),
+                      "Do not associate any Islamic occasion with a specific Gregorian month."),
                   SizedBox(
                     height: Sizeconfig.screenheight! / 60,
                   ),
                   noticeText(
-                      "Please follow the guidelines of your country's Religious Affairs Directory for accurate determination of religious occasions dates."),
+                      "Please follow your country's Religious Affairs Directory guidelines for accurate religious occasion dates."),
                   SizedBox(
                     height: Sizeconfig.screenheight! / 60,
                   ),
