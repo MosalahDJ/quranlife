@@ -7,9 +7,12 @@ import 'package:quranlife/core/widgets/information_form.dart';
 import 'package:quranlife/features/controller/Auth%20controller/signncontroller.dart';
 import 'package:quranlife/features/controller/Auth%20controller/textvalidatecontroller.dart';
 
+/// A stateless widget that handles user registration form with validation
+/// Includes fields for name, phone, email, and password with confirmation
 class SigneinPageBody extends StatelessWidget {
   SigneinPageBody({super.key});
 
+  // Controllers for sign-in and validation logic
   final SignInController signinctrl = Get.find();
   final Txtvalcontroller txtvalctrl = Get.find();
 
@@ -20,6 +23,7 @@ class SigneinPageBody extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
+            // App branding section
             Column(
               children: [
                 SizedBox(
@@ -47,6 +51,8 @@ class SigneinPageBody extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
+
+            // Registration form fields
             Form(
               autovalidateMode: AutovalidateMode.onUserInteraction,
               key: txtvalctrl.signinnamestate,
@@ -72,6 +78,7 @@ class SigneinPageBody extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
+
             Form(
               autovalidateMode: AutovalidateMode.onUserInteraction,
               key: txtvalctrl.signinphonestate,
@@ -97,6 +104,7 @@ class SigneinPageBody extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
+
             Form(
               autovalidateMode: AutovalidateMode.onUserInteraction,
               key: txtvalctrl.signinemailstate,
@@ -122,6 +130,8 @@ class SigneinPageBody extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
+
+            // Password fields with visibility toggles
             Form(
               autovalidateMode: AutovalidateMode.onUserInteraction,
               key: txtvalctrl.signinpasswordstate,
@@ -160,6 +170,7 @@ class SigneinPageBody extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
+
             Form(
               autovalidateMode: AutovalidateMode.onUserInteraction,
               key: txtvalctrl.signinpasswordstate2,
@@ -198,6 +209,8 @@ class SigneinPageBody extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
+
+            // Submit button with form validation
             SizedBox(
               height: Sizeconfig.screenheight! / 15,
               width: Sizeconfig.screenwidth! / 3,
