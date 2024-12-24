@@ -37,7 +37,7 @@ class GetResponseBody extends GetxController {
   }
 
   //I use this func for parsing String date when i get it from SHPF
-  DateTime parseTime(String date) {
+  DateTime parseDate(String date) {
     try {
       var parts = date.trim().split('-');
       if (parts.length != 3) {
@@ -70,14 +70,22 @@ class GetResponseBody extends GetxController {
   Future<bool> isAfterRefreshingDate() async {
     prefs = await SharedPreferences.getInstance();
     DateTime refreshingDate;
+
+    //check if refreshingdate is exist and if it's after current date remove it
+    //to get new one
+    if (prefs.getString("refreshingdate") != null &&
+        DateTime.now().isAfter(parseDate(prefs.getString("refreshingdate")!))) {
+      prefs.remove("refreshingdate");
+    }
+
     //checking if it has a null value
     if (prefs.getString("refreshingdate") == null) {
       //get it's value
       await defineRefreshingDate();
       String rfdate = prefs.getString("refreshingdate")!;
-      refreshingDate = parseTime(rfdate);
+      refreshingDate = parseDate(rfdate);
     } else {
-      refreshingDate = parseTime(prefs.getString("refreshingdate")!);
+      refreshingDate = parseDate(prefs.getString("refreshingdate")!);
     }
     // check if currentdate is after refreshingdate
     if (mycurrentdate.isAfter(refreshingDate)) {

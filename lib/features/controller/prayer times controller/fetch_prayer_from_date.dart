@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_print
 import 'package:get/get.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/get_response_body.dart';
-import 'package:quranlife/features/model/data.dart';
+import 'package:quranlife/features/model/prayer_data.dart';
 
 class FetchPrayerFromDate extends GetxController {
   final GetResponseBody responsectrl = Get.find();

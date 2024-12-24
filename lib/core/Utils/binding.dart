@@ -21,7 +21,7 @@ import 'package:quranlife/features/controller/prayer%20times%20controller/deteri
 import 'package:quranlife/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:quranlife/features/controller/spalshview%20controller/splash_view_controller.dart';
 import 'package:quranlife/features/controller/notfication%20controller/work_manager_controller.dart';
-import 'package:quranlife/features/model/data.dart';
+import 'package:quranlife/features/model/prayer_data.dart';
 
 class Mybinding implements Bindings {
   @override
