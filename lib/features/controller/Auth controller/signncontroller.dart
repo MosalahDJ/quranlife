@@ -13,16 +13,18 @@ class SignInController extends GetxController {
 
   // Text Controllers
   final TextEditingController name = TextEditingController();
+  final TextEditingController lastname = TextEditingController();
   final TextEditingController emailcontroller = TextEditingController();
   final TextEditingController password = TextEditingController();
   final TextEditingController password2 = TextEditingController();
-  final TextEditingController number = TextEditingController();
+  final TextEditingController gendre = TextEditingController();
 
   // Focus Nodes
   final FocusNode emailfnodesign = FocusNode();
   final FocusNode passwordfnodesign = FocusNode();
   final FocusNode passwordfnodesign2 = FocusNode();
   final FocusNode namefnode = FocusNode();
+  final FocusNode lastnamefnode = FocusNode();
   final FocusNode numberfnode = FocusNode();
 
   // State variables

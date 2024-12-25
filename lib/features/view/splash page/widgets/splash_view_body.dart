@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
@@ -16,24 +17,33 @@ class SplashViewBody extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            SizedBox(
-                height: Sizeconfig.screenheight! / 3.5,
-                width: Sizeconfig.screenwidth! / 1.2,
-                child: Image.asset(
-                    "lib/core/assets/images/splash_view_image/splashimage.png")),
-            FadeTransition(
-              opacity: anctrl.fadinganimation!,
-              child: Text(
-                "Quran Life",
-                style: TextStyle(
-                    fontSize: 50,
-                    fontWeight: FontWeight.bold,
-                    color: Get.isDarkMode ? kmaincolor3 : kmaincolor3dark),
+            FadeInDown(
+              duration: const Duration(milliseconds: 800),
+              child: SizedBox(
+                  height: Sizeconfig.screenheight! / 3.5,
+                  width: Sizeconfig.screenwidth! / 1.2,
+                  child: Image.asset(
+                      "lib/core/assets/images/splash_view_image/splashimage.png")),
+            ),
+            FadeInUp(
+              duration: const Duration(milliseconds: 800),
+              child: FadeTransition(
+                opacity: anctrl.fadinganimation!,
+                child: Text(
+                  "Quran Life",
+                  style: TextStyle(
+                      fontSize: 50,
+                      fontWeight: FontWeight.bold,
+                      color: Get.isDarkMode ? kmaincolor3 : kmaincolor3dark),
+                ),
               ),
             ),
-            const Text(
-              "Please wait...",
-              style: TextStyle(color: Colors.white, fontSize: 20),
+            FadeInUp(
+              duration: const Duration(milliseconds: 800),
+              child: const Text(
+                "Please wait...",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
             )
           ],
         ),

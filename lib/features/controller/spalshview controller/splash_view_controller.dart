@@ -31,8 +31,8 @@ class SplashViewController extends GetxController
         () => Get.offNamed(
               FirebaseAuth.instance.currentUser != null &&
                       FirebaseAuth.instance.currentUser!.emailVerified
-                  ? "login"
-                  : "login",
+                  ? "onboarding"
+                  : "onboarding",
             ));
   }
 

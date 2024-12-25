@@ -7,7 +7,8 @@ class Txtvalcontroller extends GetxController {
   GlobalKey<FormState> signinpasswordstate = GlobalKey<FormState>();
   GlobalKey<FormState> signinpasswordstate2 = GlobalKey<FormState>();
   GlobalKey<FormState> signinnamestate = GlobalKey<FormState>();
-  GlobalKey<FormState> signinphonestate = GlobalKey<FormState>();
+  GlobalKey<FormState> signinlastnamestate = GlobalKey<FormState>();
+  GlobalKey<FormState> signingendrestate = GlobalKey<FormState>();
 
   //Login form state
   GlobalKey<FormState> loginemailstate = GlobalKey<FormState>();

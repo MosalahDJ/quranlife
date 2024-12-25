@@ -13,7 +13,8 @@ class InformationsForm extends StatelessWidget {
       this.isrequired = false,
       this.validator,
       this.suffixbutton,
-      required this.focusnode});
+      required this.focusnode,
+      this.prefixicon});
   final String formtitle;
   final TextInputType? keyboardtype;
   final bool? obsecure;
@@ -23,6 +24,8 @@ class InformationsForm extends StatelessWidget {
   final bool isrequired;
   final String? Function(String?)? validator;
   final Widget? suffixbutton;
+  final Widget? prefixicon;
+
   final FocusNode focusnode;
 
   @override
@@ -44,6 +47,7 @@ class InformationsForm extends StatelessWidget {
           keyboardType: keyboardtype,
           cursorColor: kmaincolor,
           decoration: InputDecoration(
+            prefixIcon: prefixicon,
             suffixIcon: Visibility(
               visible: suffixbutton == null ? false : true,
               child: suffixbutton == null ? const Text("") : suffixbutton!,

@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
@@ -16,31 +17,40 @@ class MyPageView extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
-            height: Sizeconfig.screenheight! / 2.5,
+        FadeInDown(
+          duration: const Duration(milliseconds: 800),
+          child: SizedBox(
+              height: Sizeconfig.screenheight! / 2.5,
+              width: Sizeconfig.screenwidth,
+              child: Image.asset(imageasset!)),
+        ),
+        FadeInUp(
+          duration: const Duration(milliseconds: 800),
+          child: SizedBox(
             width: Sizeconfig.screenwidth,
-            child: Image.asset(imageasset!)),
-        SizedBox(
-          width: Sizeconfig.screenwidth,
-          child: Text(
-            textAlign: TextAlign.center,
-            title!,
-            style: TextStyle(
-                color: Get.isDarkMode ? Colors.white : kmaincolor,
-                fontSize: 27,
-                fontWeight: FontWeight.bold),
+            child: Text(
+              textAlign: TextAlign.center,
+              title!,
+              style: TextStyle(
+                  color: Get.isDarkMode ? Colors.white : kmaincolor,
+                  fontSize: 27,
+                  fontWeight: FontWeight.bold),
+            ),
           ),
         ),
         const SizedBox(
           height: 15,
         ),
-        Text(
-          subtitle!,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-              color: Get.isDarkMode ? Colors.white : Colors.black,
-              fontSize: 14,
-              fontWeight: FontWeight.bold),
+        FadeInUp(
+          duration: const Duration(milliseconds: 800),
+          child: Text(
+            subtitle!,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: Get.isDarkMode ? Colors.white : Colors.black,
+                fontSize: 14,
+                fontWeight: FontWeight.bold),
+          ),
         ),
       ],
     );
