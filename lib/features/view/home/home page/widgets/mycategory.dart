@@ -12,27 +12,21 @@ class MyCategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Row(
-        children: [
-          InkWell(
-            onTap: ontap,
-            child: GetBuilder<MyHomeController>(
-              builder: (_) => Card(
-                color: Get.isDarkMode
-                    ? kmaincolor2dark.withOpacity(0.5)
-                    : Colors.white.withOpacity(0.5),
-                child: Container(
-                    margin: const EdgeInsets.all(10),
-                    child: Icon(
-                      size: 30,
-                      categoryicon,
-                      color: Get.isDarkMode ? textcolor3dark : textcolor,
-                    )),
-              ),
-            ),
-          ),
-        ],
+    return InkWell(
+      onTap: ontap,
+      child: GetBuilder<MyHomeController>(
+        builder: (_) => Card(
+          color: Get.isDarkMode
+              ? kmaincolor2dark.withOpacity(0.5)
+              : Colors.white.withOpacity(0.5),
+          child: Container(
+              margin: const EdgeInsets.all(10),
+              child: Icon(
+                size: 30,
+                categoryicon,
+                color: Get.isDarkMode ? textcolor3dark : textcolor1,
+              )),
+        ),
       ),
     );
   }

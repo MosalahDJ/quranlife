@@ -82,7 +82,7 @@ class Themes {
 
 // الاستخدام: عناوين أو تسميات الأزرار الكبيرة أو الحقول الهامة.
         labelLarge: TextStyle(
-            fontSize: 14, color: textcolor, fontWeight: FontWeight.bold),
+            fontSize: 14, color: hintcolor, fontWeight: FontWeight.bold),
 
 // الاستخدام: عناوين أو تسميات الأزرار المتوسطة أو الحقول.
         labelMedium: TextStyle(
@@ -90,7 +90,7 @@ class Themes {
 
 // الاستخدام: تسميات الأزرار الصغيرة أو الأيقونات. تستعمل غالباً في الأماكن ذات الحجم الصغير.
         labelSmall: TextStyle(
-            fontSize: 12, color: textcolor, fontWeight: FontWeight.bold),
+            fontSize: 12, color: hintcolor, fontWeight: FontWeight.bold),
       ));
 
 //=================================================Darktheme=======================================================================

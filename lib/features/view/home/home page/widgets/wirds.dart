@@ -100,7 +100,7 @@ class WirdCard extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 20,
-                  color: Get.isDarkMode ? Colors.white : textcolor,
+                  color: Get.isDarkMode ? Colors.white : textcolor1,
                 ),
               ),
             )),

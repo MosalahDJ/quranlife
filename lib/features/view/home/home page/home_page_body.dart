@@ -21,108 +21,112 @@ class HomePageBody extends StatelessWidget {
   final GoogleSignoutController signoutctrl = Get.find();
   final FetchPrayerFromDate fpfctrl = Get.find();
 
+  final double _sectionSpacing = 24.0;
+  final double _contentPadding = 16.0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const MyDrawer(),
       appBar: AppBar(
         scrolledUnderElevation: 0,
+        title:
+            Text('QuranLife', style: Theme.of(context).textTheme.headlineSmall),
+        centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(bottom: 8.0),
-        child: Stack(children: [
-          //gradient background
+      body: Stack(
+        children: [
           Gradientbackground(
             gradientcolor: [
               kmaincolor,
               Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
             ],
           ),
-
-          //foreground
-          Positioned(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  left: 5,
-                  right: 5,
-                  top: 5,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // salawat pageview
-                    SalawatPageview(),
-
-                    //dots indicators
-                    /*I pass the color here because it doesn't chage in the real
-                    time when i change the theme if the bool Get.isDarkMode isn't 
-                    in the mainfile of page (not of preject it's of page 
-                    Like this page 'homepage').
-                    that problem take a few time of me.
-                    */
-                    Container(
-                      alignment: Alignment.center,
-                      child: GetBuilder<MyHomeController>(
-                        builder: (c) => CustomIndicator(
-                          dotscolor: Get.isDarkMode
-                              ? const Color(0xffFD9B63)
-                              : kmaincolor,
-                          dotscount: 2,
-                          indposition: homectrl.homepagecontroller.page != null
-                              ? homectrl.homepagecontroller.page!.toInt()
-                              : 0,
+          SafeArea(
+            child: RefreshIndicator(
+              onRefresh: () async {
+                await fpfctrl.fetchPrayerTimes();
+              },
+              child: SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                child: Padding(
+                  padding: EdgeInsets.all(_contentPadding),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Prayer Times Section
+                      SalawatPageview(),
+                      SizedBox(height: _sectionSpacing / 2),
+                      Center(
+                        child: GetBuilder<MyHomeController>(
+                          builder: (c) => CustomIndicator(
+                            dotscolor: Get.isDarkMode
+                                ? const Color(0xffFD9B63)
+                                : kmaincolor,
+                            dotscount: 2,
+                            indposition:
+                                homectrl.homepagecontroller.page?.toInt() ?? 0,
+                          ),
                         ),
                       ),
-                    ),
+                      SizedBox(height: _sectionSpacing),
 
-                    //categories widgets
-                    const ServiceCategorie(),
-                    SizedBox(
-                      height: Sizeconfig.screenheight! / 100,
-                    ),
+                      // Categories Section
+                      const ServiceCategorie(),
+                      SizedBox(height: _sectionSpacing),
 
-                    // Nearest Mosque
-                    Text("Nearest Mosque",
-                        style: Theme.of(context).textTheme.titleLarge),
-                    SizedBox(
-                      height: Sizeconfig.screenheight! / 100,
-                    ),
-                    SizedBox(
-                        height: Sizeconfig.screenheight! < 768
-                            ? Sizeconfig.screenheight! / 3.7
-                            : Sizeconfig.screenheight! > 1010
-                                ? Sizeconfig.screenheight! / 6
-                                : Sizeconfig.screenheight! / 5,
-                        child: CartCard(
-                          elevation: 2,
-                          color: Get.isDarkMode
-                              ? kmaincolor2dark.withOpacity(0.5)
-                              : Colors.white.withOpacity(0.5),
-                        )),
-                    SizedBox(
-                      height: Sizeconfig.screenheight! / 100,
-                    ),
+                      // Nearest Mosque Section
+                      _buildSectionHeader(context, "Nearest Mosque"),
+                      const SizedBox(height: 12),
+                      _buildMosqueCard(),
+                      SizedBox(height: _sectionSpacing),
 
-                    // Daily Wird
-                    Text("Daily Wird",
-                        style: Theme.of(context).textTheme.titleLarge),
-                    SizedBox(
-                      height: Sizeconfig.screenheight! / 100,
-                    ),
-                    Wirds(
-                      mycolor: Get.isDarkMode
-                          ? kmaincolor2dark.withOpacity(0.5)
-                          : Colors.white.withOpacity(0.5),
-                    ),
-                  ],
+                      // Daily Wird Section
+                      _buildSectionHeader(context, "Daily Wird"),
+                      const SizedBox(height: 12),
+                      _buildWirdCard(),
+                      SizedBox(height: _sectionSpacing),
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
-        ]),
+        ],
       ),
+    );
+  }
+
+  Widget _buildSectionHeader(BuildContext context, String title) {
+    return Text(
+      title,
+      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
+    );
+  }
+
+  Widget _buildMosqueCard() {
+    return SizedBox(
+      height: Sizeconfig.screenheight! < 768
+          ? Sizeconfig.screenheight! / 3.7
+          : Sizeconfig.screenheight! > 1010
+              ? Sizeconfig.screenheight! / 6
+              : Sizeconfig.screenheight! / 5,
+      child: CartCard(
+        elevation: 2,
+        color: Get.isDarkMode
+            ? kmaincolor2dark.withOpacity(0.7)
+            : Colors.white.withOpacity(0.7),
+      ),
+    );
+  }
+
+  Widget _buildWirdCard() {
+    return Wirds(
+      mycolor: Get.isDarkMode
+          ? kmaincolor2dark.withOpacity(0.7)
+          : Colors.white.withOpacity(0.7),
     );
   }
 }

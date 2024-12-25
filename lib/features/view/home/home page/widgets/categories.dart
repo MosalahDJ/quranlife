@@ -17,9 +17,12 @@ class ServiceCategorie extends StatelessWidget {
         SizedBox(
           height: Sizeconfig.screenheight! / 100,
         ),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
+        ExpansionTile(
+          trailing: MyCategory(
+            ontap: () {},
+            categoryicon: Icons.arrow_drop_down,
+          ),
+          title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               MyCategory(
@@ -40,16 +43,45 @@ class ServiceCategorie extends StatelessWidget {
                 ontap: () {},
                 categoryicon: FlutterIslamicIcons.community,
               ),
-              MyCategory(
-                ontap: () {},
-                categoryicon: FlutterIslamicIcons.family,
-              ),
-              MyCategory(
-                ontap: () {},
-                categoryicon: Icons.add,
-              ),
             ],
           ),
+          children: [
+            Wrap(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    MyCategory(
+                      ontap: () {},
+                      categoryicon: FlutterIslamicIcons.allah,
+                    ),
+                    MyCategory(
+                      ontap: () {},
+                      categoryicon: FlutterIslamicIcons.hadji,
+                    ),
+                    MyCategory(
+                      ontap: () {
+                        Get.toNamed("hijri");
+                      },
+                      categoryicon: FlutterIslamicIcons.calendar,
+                    ),
+                    MyCategory(
+                      ontap: () {},
+                      categoryicon: FlutterIslamicIcons.community,
+                    ),
+                    MyCategory(
+                      ontap: () {},
+                      categoryicon: FlutterIslamicIcons.family,
+                    ),
+                    MyCategory(
+                      ontap: () {},
+                      categoryicon: Icons.add,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
         ),
       ],
     );

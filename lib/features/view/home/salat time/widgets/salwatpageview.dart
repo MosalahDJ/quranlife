@@ -39,7 +39,7 @@ class Salwatpageview extends StatelessWidget {
               salatname,
               textAlign: TextAlign.center,
               style: TextStyle(
-                  color: Get.isDarkMode ? textcolor3dark : textcolor,
+                  color: Get.isDarkMode ? textcolor3dark : textcolor1,
                   fontSize: Sizeconfig.screenheight! / 50),
             ),
             Obx(() => initialctrl.isLoading.value == true
@@ -74,7 +74,7 @@ class Salwatpageview extends StatelessWidget {
                 child: Image.asset(
                   icon,
                   alignment: Alignment.center,
-                  color: Get.isDarkMode ? textcolor3dark : textcolor,
+                  color: Get.isDarkMode ? textcolor3dark : textcolor1,
                   fit: BoxFit.fill,
                 ))
           ],
