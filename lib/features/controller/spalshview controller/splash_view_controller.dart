@@ -18,14 +18,7 @@ class SplashViewController extends GetxController
   final GetResponseBody responsectrl = Get.find();
   RxBool isLoading = true.obs;
 
-  tonextpage() async {
-    isLoading(true);
-    await responsectrl.initileresponse();
-    await fpfctrl.fetchPrayerTimes();
-    prayerctrl.determineCurrentPrayer();
-    timespagectrl.pagecontroller();
-    timespagectrl.getcurrentpage();
-    isLoading(false);
+  tonextpage() {
     Future.delayed(
         const Duration(seconds: 2),
         () => Get.offNamed(
@@ -37,14 +30,20 @@ class SplashViewController extends GetxController
   }
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
     animationcontroller = AnimationController(
         duration: const Duration(milliseconds: 250), vsync: this);
     fadinganimation =
         Tween<double>(begin: .2, end: 1).animate(animationcontroller!);
     animationcontroller?.repeat(reverse: true);
-
+    isLoading(true);
+    await responsectrl.initileresponse();
+    await fpfctrl.fetchPrayerTimes();
+    prayerctrl.determineCurrentPrayer();
+    timespagectrl.pagecontroller();
+    timespagectrl.getcurrentpage();
+    isLoading(false);
     tonextpage();
   }
 

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
+import 'package:quranlife/features/controller/prayer%20times%20controller/times_page_controller.dart';
 import 'package:quranlife/features/controller/spalshview%20controller/splash_view_controller.dart';
 
 class Salwatpageview extends StatelessWidget {
@@ -15,12 +16,12 @@ class Salwatpageview extends StatelessWidget {
   final String salatname;
   final String salattime;
   final String icon;
-  final FetchPrayerFromDate fpfctrl = Get.find();
+  final TimesPageController timectrl = Get.find();
   final SplashViewController initialctrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    String day = fpfctrl.formatDate(DateTime.now());
+    String day = timectrl.formatDate(DateTime.now());
 
     return Card(
       elevation: 2,

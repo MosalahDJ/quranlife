@@ -8,7 +8,7 @@ class DeterminePrayersController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    startTimer();
+    _startTimer();
   }
 
   final FetchPrayerFromDate fpfctrl = Get.find();
@@ -21,8 +21,13 @@ class DeterminePrayersController extends GetxController {
   RxString timeUntilNext = "".obs;
   RxBool isnextprayer = false.obs;
 
+  //this func maded for making date string as same as date in the url and make sure it's dynamic
+  String _formatDate(DateTime date) {
+    return "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
+  }
+
   //timer func for refreshing date and prayertime periodicly after each second
-  void startTimer() {
+  void _startTimer() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       currentdate.value =
           "${DateTime.now().day.toString().padLeft(2, '0')}-${DateTime.now().month.toString().padLeft(2, '0')}-${DateTime.now().year}";
@@ -32,7 +37,7 @@ class DeterminePrayersController extends GetxController {
 
   //we use this func for changing data type of time frome string to Datetime
   //because we cauth it as String from the api
-  DateTime parseTime(String time) {
+  DateTime _parseTime(String time) {
     try {
       var now = DateTime.now();
       var parts = time.trim().split(':');
@@ -56,7 +61,7 @@ class DeterminePrayersController extends GetxController {
   //we use this func for changing data type of time frome string to Datetime
   //because we cauth it as String from the api
   //I use this func not above the func because i need in this case tomorow's fajr
-  DateTime parsenextdayfajr(String time) {
+  DateTime _parsenextdayfajr(String time) {
     try {
       var tomorow = DateTime.now().add(const Duration(days: 1));
       var parts = time.trim().split(':');
@@ -78,7 +83,7 @@ class DeterminePrayersController extends GetxController {
   }
 
   //making time format for time untile
-  String formatTimeUntil(DateTime target) {
+  String _formatTimeUntil(DateTime target) {
     var now = DateTime.now();
     var difference = target.difference(now);
     var hours = difference.inHours;
@@ -89,7 +94,7 @@ class DeterminePrayersController extends GetxController {
   }
 
   //making time format for next time
-  String formatTime(DateTime target) {
+  String _formatTime(DateTime target) {
     var hours = target.hour.toString().padLeft(2, '0');
     var minute = target.minute.toString().padLeft(2, '0');
     return "${hours.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')}";
@@ -102,34 +107,22 @@ class DeterminePrayersController extends GetxController {
       //we use this list for store iside it list's of prayer name and prayer time
       //and we use parse time for ensure it DateTime is not String
       var prayers = [
-        [
-          'Fajr',
-          parseTime(fpfctrl.prayersdays[fpfctrl.formatDate(now)]['Fajr']!)
-        ],
+        ['Fajr', _parseTime(fpfctrl.prayersdays[_formatDate(now)]['Fajr']!)],
         [
           'Sunrise',
-          parseTime(fpfctrl.prayersdays[fpfctrl.formatDate(now)]['Sunrise']!)
+          _parseTime(fpfctrl.prayersdays[_formatDate(now)]['Sunrise']!)
         ],
-        [
-          'Dhuhr',
-          parseTime(fpfctrl.prayersdays[fpfctrl.formatDate(now)]['Dhuhr']!)
-        ],
-        [
-          'Asr',
-          parseTime(fpfctrl.prayersdays[fpfctrl.formatDate(now)]['Asr']!)
-        ],
+        ['Dhuhr', _parseTime(fpfctrl.prayersdays[_formatDate(now)]['Dhuhr']!)],
+        ['Asr', _parseTime(fpfctrl.prayersdays[_formatDate(now)]['Asr']!)],
         [
           'Maghrib',
-          parseTime(fpfctrl.prayersdays[fpfctrl.formatDate(now)]['Maghrib']!)
+          _parseTime(fpfctrl.prayersdays[_formatDate(now)]['Maghrib']!)
         ],
-        [
-          'Isha',
-          parseTime(fpfctrl.prayersdays[fpfctrl.formatDate(now)]['Isha']!)
-        ],
+        ['Isha', _parseTime(fpfctrl.prayersdays[_formatDate(now)]['Isha']!)],
       ];
 
       // Add next day's Fajr to prayers list
-      var nextDayFajr = parsenextdayfajr(fpfctrl.prayersdays[fpfctrl.formatDate(
+      var nextDayFajr = _parsenextdayfajr(fpfctrl.prayersdays[_formatDate(
         now.add(
           const Duration(days: 1),
         ),
@@ -143,8 +136,8 @@ class DeterminePrayersController extends GetxController {
             now.isBefore(prayers[i + 1][1] as DateTime)) {
           currentPrayer.value = prayers[i][0] as String;
           nextPrayer.value = prayers[i + 1][0] as String;
-          nextPrayerTime.value = formatTime(prayers[i + 1][1] as DateTime);
-          timeUntilNext.value = formatTimeUntil(prayers[i + 1][1] as DateTime);
+          nextPrayerTime.value = _formatTime(prayers[i + 1][1] as DateTime);
+          timeUntilNext.value = _formatTimeUntil(prayers[i + 1][1] as DateTime);
           return;
         }
       }
@@ -152,21 +145,21 @@ class DeterminePrayersController extends GetxController {
       // If we're after Isha
 
       if (now.isAfter(
-          parseTime(fpfctrl.prayersdays[fpfctrl.formatDate(now)]['Isha']!))) {
+          _parseTime(fpfctrl.prayersdays[_formatDate(now)]['Isha']!))) {
         currentPrayer.value = 'Isha';
         nextPrayer.value = 'Fajr';
-        nextPrayerTime.value = formatTime(nextDayFajr);
-        timeUntilNext.value = formatTimeUntil(nextDayFajr);
+        nextPrayerTime.value = _formatTime(nextDayFajr);
+        timeUntilNext.value = _formatTimeUntil(nextDayFajr);
       }
 
       //if we are before Fajr
 
       if (now.isBefore(
-          parseTime(fpfctrl.prayersdays[fpfctrl.formatDate(now)]['Fajr']!))) {
+          _parseTime(fpfctrl.prayersdays[_formatDate(now)]['Fajr']!))) {
         currentPrayer.value = 'Isha';
         nextPrayer.value = 'Fajr';
-        nextPrayerTime.value = formatTime(prayers[0][1] as DateTime);
-        timeUntilNext.value = formatTimeUntil(prayers[0][1] as DateTime);
+        nextPrayerTime.value = _formatTime(prayers[0][1] as DateTime);
+        timeUntilNext.value = _formatTimeUntil(prayers[0][1] as DateTime);
       }
     } catch (e) {
       // if there any err we use "-" as value

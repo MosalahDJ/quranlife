@@ -9,14 +9,26 @@ class TimesPageController extends GetxController {
   late RxInt currentPage = 0.obs;
   int currentday = 0;
 
+  //this func maded for making date string as same as date in the url and make sure it's dynamic
+  String formatDate(DateTime date) {
+    return "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
+  }
+
+  //this func maded for making date string as same as date returned by
+  //formatDate func for cheking if it = to date and and show the left time in
+  //the table of prayertimes just in the current date
+  String formatDateString(String date) {
+    List parts = date.split("-");
+    return "${parts[0]}-${parts[1].toString().padLeft(2, '0')}-${parts[2].toString().padLeft(2, '0')}";
+  }
+
   //i use this func for selecting currentpage with current day
   //I use it in splashviewController
   void getcurrentpage() {
     final dates = fpfctrl.prayersdayskeys;
     late int value = 0;
     for (int index = 0; index < dates.length; index++) {
-      if (fpfctrl.formatDateString(dates[index]) ==
-          fpfctrl.formatDate(DateTime.now())) {
+      if (formatDateString(dates[index]) == formatDate(DateTime.now())) {
         value = index;
         currentday = value;
         currentPage = value.obs;

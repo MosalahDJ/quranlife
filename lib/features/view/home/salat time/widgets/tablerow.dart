@@ -5,14 +5,14 @@ import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/features/controller/fcm%20controllers/fcm_controller.dart';
 import 'package:quranlife/features/controller/notfication%20controller/sub%20controllers/adhan_noti_controller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/deterimine_prayers_controller.dart';
-import 'package:quranlife/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
+// import 'package:quranlife/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/times_page_controller.dart';
 
 final DeterminePrayersController prayerctrl = Get.find();
 final FCMController notictrl = Get.find();
 final AdhanNotiController adhanctrl = Get.find();
 final DeterminePrayersController dpcctrl = Get.find();
-final FetchPrayerFromDate fpfctrl = Get.find();
+// final FetchPrayerFromDate fpfctrl = Get.find();
 final TimesPageController timespagectrl = Get.find();
 
 class SalawatTableRow {
@@ -33,9 +33,9 @@ class SalawatTableRow {
                 //I use these funcs for making sure it range as same as each other
                 //and the only diffrent is in the date not on string range
                 color: salattime == prayerctrl.currentPrayer.value &&
-                        fpfctrl.formatDateString(fpfctrl.getDateByIndex(
+                        timespagectrl.formatDateString(fpfctrl.getDateByIndex(
                                 timespagectrl.currentPage.value)!) ==
-                            fpfctrl.formatDate(DateTime.now())
+                            timespagectrl.formatDate(DateTime.now())
                     ? kmaincolor4
                     : Colors.white),
           ),
@@ -52,9 +52,10 @@ class SalawatTableRow {
                       //I use these funcs for making sure it range as same as each other
                       //and the only diffrent is in the date not on string range
                       color: salattime == prayerctrl.currentPrayer.value &&
-                              fpfctrl.formatDateString(fpfctrl.getDateByIndex(
-                                      timespagectrl.currentPage.value)!) ==
-                                  fpfctrl.formatDate(DateTime.now())
+                              timespagectrl.formatDateString(
+                                      fpfctrl.getDateByIndex(
+                                          timespagectrl.currentPage.value)!) ==
+                                  timespagectrl.formatDate(DateTime.now())
                           ? kmaincolor4
                           : Colors.white),
                 ),
@@ -69,18 +70,18 @@ class SalawatTableRow {
                       //in this condition I chek if salat time = next prayer
                       ? (salattime == dpcctrl.nextPrayer.value &&
                           //then I check if date "$i" in the list of keys == next date
-                          fpfctrl.formatDateString(fpfctrl.getDateByIndex(
+                          timespagectrl.formatDateString(fpfctrl.getDateByIndex(
                                   timespagectrl.currentPage.value)!) ==
-                              fpfctrl.formatDate(
+                              timespagectrl.formatDate(
                                 DateTime.now().add(
                                   const Duration(days: 1),
                                 ),
                               ))
                       : (salattime == dpcctrl.nextPrayer.value &&
                           //then I check if date "$i" in the list of keys == current date
-                          fpfctrl.formatDateString(fpfctrl.getDateByIndex(
+                          timespagectrl.formatDateString(fpfctrl.getDateByIndex(
                                   timespagectrl.currentPage.value)!) ==
-                              fpfctrl.formatDate(
+                              timespagectrl.formatDate(
                                 DateTime.now(),
                               )),
                   child: Text(
@@ -108,9 +109,9 @@ class SalawatTableRow {
                 //I use these funcs for making sure it range as same as each other
                 //and the only diffrent is in the date not on string range
                 color: salattime == prayerctrl.currentPrayer.value &&
-                        fpfctrl.formatDateString(fpfctrl.getDateByIndex(
+                        timespagectrl.formatDateString(fpfctrl.getDateByIndex(
                                 timespagectrl.currentPage.value)!) ==
-                            fpfctrl.formatDate(DateTime.now())
+                            timespagectrl.formatDate(DateTime.now())
                     ? kmaincolor4
                     : Colors.white,
               )),
@@ -138,7 +139,7 @@ class SalawatTableRow {
           adhanctrl.fajrvolum,
           fpfctrl.getDateByIndex(i) != null
               ? fpfctrl.getDateByIndex(i)!
-              : fpfctrl.formatDate(fpfctrl.currentDate)),
+              : timespagectrl.formatDate(fpfctrl.currentDate)),
       myspace(),
       myrow(
           "الشروق",
@@ -146,7 +147,7 @@ class SalawatTableRow {
           adhanctrl.sunrizevolum,
           fpfctrl.getDateByIndex(i) != null
               ? fpfctrl.getDateByIndex(i)!
-              : fpfctrl.formatDate(fpfctrl.currentDate)),
+              : timespagectrl.formatDate(fpfctrl.currentDate)),
       myspace(),
       myrow(
           "الظهر",
@@ -154,7 +155,7 @@ class SalawatTableRow {
           adhanctrl.duhrvolum,
           fpfctrl.getDateByIndex(i) != null
               ? fpfctrl.getDateByIndex(i)!
-              : fpfctrl.formatDate(fpfctrl.currentDate)),
+              : timespagectrl.formatDate(fpfctrl.currentDate)),
       myspace(),
       myrow(
           "العصر",
@@ -162,7 +163,7 @@ class SalawatTableRow {
           adhanctrl.asrvolum,
           fpfctrl.getDateByIndex(i) != null
               ? fpfctrl.getDateByIndex(i)!
-              : fpfctrl.formatDate(fpfctrl.currentDate)),
+              : timespagectrl.formatDate(fpfctrl.currentDate)),
       myspace(),
       myrow(
           "المغرب",
@@ -170,7 +171,7 @@ class SalawatTableRow {
           adhanctrl.maghribvolum,
           fpfctrl.getDateByIndex(i) != null
               ? fpfctrl.getDateByIndex(i)!
-              : fpfctrl.formatDate(fpfctrl.currentDate)),
+              : timespagectrl.formatDate(fpfctrl.currentDate)),
       myspace(),
       myrow(
           "العشاء",
@@ -178,7 +179,7 @@ class SalawatTableRow {
           adhanctrl.ishavolum,
           fpfctrl.getDateByIndex(i) != null
               ? fpfctrl.getDateByIndex(i)!
-              : fpfctrl.formatDate(fpfctrl.currentDate)),
+              : timespagectrl.formatDate(fpfctrl.currentDate)),
     ];
   }
 }

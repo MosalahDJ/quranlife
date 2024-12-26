@@ -16,28 +16,23 @@ class GetResponseBody extends GetxController {
   String? responsebody;
 
   //these two func maded for add every date as key to his response
-  String addDateToResponse(String date, String newrb) {
+  String _addDateToResponse(String date, String newrb) {
     String result = '"$date":$newrb,';
     return result;
   }
 
-  String addDateToResponseWhitoutcomma(String date, String newrb) {
+  String _addDateToResponseWhitoutcomma(String date, String newrb) {
     String result = '"$date":$newrb';
     return result;
   }
 
   //this func maded for making date string as same as date in the url and make sure it's dynamic
-  String formatDate(DateTime date) {
+  String _formatDate(DateTime date) {
     return "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
   }
 
-  String formatDateString(String date) {
-    List parts = date.split("-");
-    return "${parts[0]}-${parts[1].toString().padLeft(2, '0')}-${parts[2].toString().padLeft(2, '0')}";
-  }
-
   //I use this func for parsing String date when i get it from SHPF
-  DateTime parseDate(String date) {
+  DateTime _parseDate(String date) {
     try {
       var parts = date.trim().split('-');
       if (parts.length != 3) {
@@ -56,36 +51,37 @@ class GetResponseBody extends GetxController {
   }
 
   //I use this func for defining end date and refreshing date
-  Future<void> defineRefreshingDate() async {
+  Future<void> _defineRefreshingDate() async {
     try {
       prefs = await SharedPreferences.getInstance();
       final refreshingdate = endDate.subtract(const Duration(days: 3));
-      await prefs.setString("refreshingdate", formatDate(refreshingdate));
+      await prefs.setString("refreshingdate", _formatDate(refreshingdate));
     } catch (e) {
       print('Error setting refreshing date: $e');
     }
   }
 
   //checking if current date is after refreshing date
-  Future<bool> isAfterRefreshingDate() async {
+  Future<bool> _isAfterRefreshingDate() async {
     prefs = await SharedPreferences.getInstance();
     DateTime refreshingDate;
 
     //check if refreshingdate is exist and if it's after current date remove it
     //to get new one
     if (prefs.getString("refreshingdate") != null &&
-        DateTime.now().isAfter(parseDate(prefs.getString("refreshingdate")!))) {
+        DateTime.now()
+            .isAfter(_parseDate(prefs.getString("refreshingdate")!))) {
       prefs.remove("refreshingdate");
     }
 
     //checking if it has a null value
     if (prefs.getString("refreshingdate") == null) {
       //get it's value
-      await defineRefreshingDate();
+      await _defineRefreshingDate();
       String rfdate = prefs.getString("refreshingdate")!;
-      refreshingDate = parseDate(rfdate);
+      refreshingDate = _parseDate(rfdate);
     } else {
-      refreshingDate = parseDate(prefs.getString("refreshingdate")!);
+      refreshingDate = _parseDate(prefs.getString("refreshingdate")!);
     }
     // check if currentdate is after refreshingdate
     if (mycurrentdate.isAfter(refreshingDate)) {
@@ -102,7 +98,7 @@ class GetResponseBody extends GetxController {
     //select last day of data
     if (prefs.getString("responsebody") == null ||
         // prefs.getString("responsebody")!.length < 220000 ||
-        await isAfterRefreshingDate()) {
+        await _isAfterRefreshingDate()) {
       Get.snackbar("Downloading Data...",
           "Please be pationet it take's a while at first time",
           duration: const Duration(
@@ -110,7 +106,7 @@ class GetResponseBody extends GetxController {
           ),
           margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
           padding: const EdgeInsets.all(20));
-      await gettingresponse(mycurrentdate, endDate);
+      await _gettingresponse(mycurrentdate, endDate);
     } else {
       null;
     }
@@ -119,10 +115,10 @@ class GetResponseBody extends GetxController {
   //I use this func on demende
   demendeNewResponse() async {
     prefs = await SharedPreferences.getInstance();
-    await gettingresponse(mycurrentdate, endDate);
+    await _gettingresponse(mycurrentdate, endDate);
   }
 
-  Future<void> gettingresponse(
+  Future<void> _gettingresponse(
     DateTime mycurrentdate,
     DateTime endDate,
   ) async {
@@ -134,7 +130,7 @@ class GetResponseBody extends GetxController {
       await prefs.remove("responsebody");
       while (mycurrentdate.isBefore(endDate)) {
         //I add this var for passing it as date in url
-        String formattedDate = formatDate(mycurrentdate);
+        String formattedDate = _formatDate(mycurrentdate);
 
         //getting response
         var response = await http.get(Uri.parse(
@@ -145,8 +141,8 @@ class GetResponseBody extends GetxController {
           //check if we are in dayBeforEndDate for passing data corectly without
           //comma in last of responsebody
           newRB = mycurrentdate == dayBeforEndDate
-              ? addDateToResponseWhitoutcomma(formattedDate, response.body)
-              : addDateToResponse(formattedDate, response.body);
+              ? _addDateToResponseWhitoutcomma(formattedDate, response.body)
+              : _addDateToResponse(formattedDate, response.body);
           //add the new response body of new date to current responsebody
           await prefs.setString("responsebody", "${responsebody ?? ""}$newRB");
           // getting data from cash to this var
