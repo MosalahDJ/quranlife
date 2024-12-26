@@ -15,10 +15,11 @@ DateTime endDate = mycurrentdate.add(const Duration(days: 4));
 class GetResponseBody extends GetxController {
   final LocationController locationctrl = Get.find();
   final MyData datactrl = Get.find();
+  Map<dynamic, dynamic> prayerData = {};
 
   late SharedPreferences prefs;
   String newRB = "";
-  String? responsebody;
+  late String responsebody;
 
   //these two func maded for add every date as key to his response
   String _addDateToResponse(String date, String newrb) {
@@ -70,6 +71,7 @@ class GetResponseBody extends GetxController {
   Future<bool> _isAfterRefreshingDate() async {
     prefs = await SharedPreferences.getInstance();
     DateTime refreshingDate;
+    print("befor : $endDate");
 
     //check if refreshingdate is exist and if it's after current date remove it
     //to get new one
@@ -85,6 +87,7 @@ class GetResponseBody extends GetxController {
       await _defineRefreshingDate();
       String rfdate = prefs.getString("refreshingdate")!;
       refreshingDate = _parseDate(rfdate);
+      print("after : $endDate");
     } else {
       refreshingDate = _parseDate(prefs.getString("refreshingdate")!);
     }
@@ -121,14 +124,6 @@ class GetResponseBody extends GetxController {
   demendeNewResponse() async {
     prefs = await SharedPreferences.getInstance();
     await _gettingresponse(mycurrentdate, endDate);
-    String? responsebody = prefs.getString("responsebody");
-    if (responsebody != null) {
-      try {
-        datactrl.prayerData = jsonDecode(responsebody);
-      } catch (e) {
-        print("$e");
-      }
-    }
   }
 
   Future<void> _gettingresponse(
@@ -159,7 +154,7 @@ class GetResponseBody extends GetxController {
           //add the new response body of new date to current responsebody
           await prefs.setString("responsebody", "${responsebody ?? ""}$newRB");
           // getting data from cash to this var
-          responsebody = prefs.getString("responsebody");
+          responsebody = prefs.getString("responsebody")!;
         }
         // shift to the next day
         mycurrentdate = mycurrentdate.add(const Duration(days: 1));
@@ -167,9 +162,29 @@ class GetResponseBody extends GetxController {
       // add curlyBraces to response body
       await prefs.setString("responsebody", "{$responsebody}");
       //I use this methode for restart app for making sure data is ready
+      if (responsebody != null) {
+        try {
+          prayerData = jsonDecode(responsebody);
+        } catch (e) {
+          print("$e");
+        }
+      }
       Restart.restartApp();
     } catch (e) {
       print('There was an error: $e');
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+//there are many errors here i think its the model doesn't work perfectly because it doesn't reload new data whene the refreshing date comme's and i can't call it before get_response_body because it's not befor him in bindings so try to fix it and make it work perfectly
