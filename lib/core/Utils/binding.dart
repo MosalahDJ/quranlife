@@ -35,7 +35,7 @@ class Mybinding implements Bindings {
         permanent: true);
     Get.put<TimesPageController>(TimesPageController(), permanent: true);
     Get.put<SplashViewController>(SplashViewController());
-    //auth ijection
+    //auth injection
     Get.put<Txtvalcontroller>(Txtvalcontroller());
     Get.put<SignInController>(SignInController());
     Get.put<LogInController>(LogInController());

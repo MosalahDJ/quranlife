@@ -1,6 +1,9 @@
 // ignore_for_file: avoid_print
+import 'dart:convert';
+
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:quranlife/features/model/prayer_data.dart';
 import 'package:restart_app/restart_app.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/location_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -11,6 +14,8 @@ DateTime endDate = mycurrentdate.add(const Duration(days: 4));
 
 class GetResponseBody extends GetxController {
   final LocationController locationctrl = Get.find();
+  final MyData datactrl = Get.find();
+
   late SharedPreferences prefs;
   String newRB = "";
   String? responsebody;
@@ -116,6 +121,14 @@ class GetResponseBody extends GetxController {
   demendeNewResponse() async {
     prefs = await SharedPreferences.getInstance();
     await _gettingresponse(mycurrentdate, endDate);
+    String? responsebody = prefs.getString("responsebody");
+    if (responsebody != null) {
+      try {
+        datactrl.prayerData = jsonDecode(responsebody);
+      } catch (e) {
+        print("$e");
+      }
+    }
   }
 
   Future<void> _gettingresponse(
