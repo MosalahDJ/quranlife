@@ -1,25 +1,53 @@
 // ignore_for_file: avoid_print
+import 'dart:async';
 import 'dart:convert';
-
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:quranlife/features/model/prayer_data.dart';
-import 'package:restart_app/restart_app.dart';
+import 'package:quranlife/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/location_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 DateTime mycurrentdate = DateTime.now();
-DateTime endDate = mycurrentdate.add(const Duration(days: 4));
 
 class GetResponseBody extends GetxController {
   final LocationController locationctrl = Get.find();
-  final MyData datactrl = Get.find();
-  Map<dynamic, dynamic> prayerData = {};
+  late DateTime endDate;
+
+  @override
+  void onInit() {
+    super.onInit();
+    _updateDates();
+    // Add periodic check for data refresh
+    ever(_checkRefreshTimer, (_) => _checkAndRefresh());
+  }
+
+  final _checkRefreshTimer = 0.obs;
+
+  // Start periodic check every hour
+  void startPeriodicCheck() {
+    Timer.periodic(const Duration(hours: 1), (timer) {
+      _checkRefreshTimer.value = DateTime.now().millisecondsSinceEpoch;
+    });
+  }
+
+  Future<void> _checkAndRefresh() async {
+    if (await _isAfterRefreshingDate()) {
+      _updateDates();
+      await _gettingresponse(mycurrentdate, endDate);
+      // Notify FetchPrayerFromDate to reload data
+      Get.find<FetchPrayerFromDate>().loadPrayerData();
+    }
+  }
+
+  void _updateDates() {
+    mycurrentdate = DateTime.now();
+    endDate = mycurrentdate.add(const Duration(days: 180));
+  }
 
   late SharedPreferences prefs;
   String newRB = "";
-  late String responsebody;
+  String responsebody = "";
 
   //these two func maded for add every date as key to his response
   String _addDateToResponse(String date, String newrb) {
@@ -69,55 +97,73 @@ class GetResponseBody extends GetxController {
 
   //checking if current date is after refreshing date
   Future<bool> _isAfterRefreshingDate() async {
-    prefs = await SharedPreferences.getInstance();
-    DateTime refreshingDate;
-    print("befor : $endDate");
+    try {
+      prefs = await SharedPreferences.getInstance();
+      if (prefs.getString("refreshingdate") == null) {
+        await _defineRefreshingDate();
+        return false;
+      }
 
-    //check if refreshingdate is exist and if it's after current date remove it
-    //to get new one
-    if (prefs.getString("refreshingdate") != null &&
-        DateTime.now()
-            .isAfter(_parseDate(prefs.getString("refreshingdate")!))) {
-      prefs.remove("refreshingdate");
-    }
+      DateTime refreshingDate = _parseDate(prefs.getString("refreshingdate")!);
+      DateTime now = DateTime.now();
 
-    //checking if it has a null value
-    if (prefs.getString("refreshingdate") == null) {
-      //get it's value
-      await _defineRefreshingDate();
-      String rfdate = prefs.getString("refreshingdate")!;
-      refreshingDate = _parseDate(rfdate);
-      print("after : $endDate");
-    } else {
-      refreshingDate = _parseDate(prefs.getString("refreshingdate")!);
-    }
-    // check if currentdate is after refreshingdate
-    if (mycurrentdate.isAfter(refreshingDate)) {
-      return true;
-    } else {
+      // Check if we've passed the refresh date
+      if (now.isAfter(refreshingDate)) {
+        await prefs.remove("refreshingdate");
+        return true;
+      }
+      return false;
+    } catch (e) {
+      print('Error checking refresh date: $e');
       return false;
     }
   }
 
+  Future<bool> _shouldRefreshData() async {
+    try {
+      prefs = await SharedPreferences.getInstance();
+      if (prefs.getString("responsebody") == null) return true;
+
+      if (prefs.getString("responsebody")!.length < 220000) return true;
+
+      Map<String, dynamic> data = jsonDecode(prefs.getString("responsebody")!);
+      List<String> dates = data.keys.toList();
+      if (dates.isEmpty) return true;
+
+      dates.sort();
+      DateTime oldestStoredDate = _parseDate(dates.first);
+      DateTime latestStoredDate = _parseDate(dates.last);
+      DateTime currentDate = DateTime.now();
+
+      // Check if current date is within our stored date range
+      if (currentDate.isBefore(oldestStoredDate) ||
+          currentDate.isAfter(latestStoredDate)) {
+        return true;
+      }
+
+      return false; // Don't refresh if we have valid data
+    } catch (e) {
+      print('Error checking data validity: $e');
+      return true;
+    }
+  }
+
   //i use this func when open the app
-  initileresponse() async {
+  Future<bool> initileresponse() async {
     prefs = await SharedPreferences.getInstance();
-    //I add it here to ensure it's updated
-    //select last day of data
-    if (prefs.getString("responsebody") == null ||
-        // prefs.getString("responsebody")!.length < 220000 ||
-        await _isAfterRefreshingDate()) {
+    bool needsRefresh = await _shouldRefreshData();
+
+    if (needsRefresh) {
+      _updateDates();
       Get.snackbar("Downloading Data...",
-          "Please be pationet it take's a while at first time",
-          duration: const Duration(
-            seconds: 15,
-          ),
+          "Please be patient it takes a while at first time",
+          duration: const Duration(seconds: 15),
           margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
           padding: const EdgeInsets.all(20));
       await _gettingresponse(mycurrentdate, endDate);
-    } else {
-      null;
+      return true; // Data was refreshed
     }
+    return false; // No refresh needed
   }
 
   //I use this func on demende
@@ -134,8 +180,8 @@ class GetResponseBody extends GetxController {
     //day before last day
     DateTime dayBeforEndDate = endDate.subtract(const Duration(days: 1));
     try {
-      //I remove the old data from responsebody to ensure data will not merged inside it
-      await prefs.remove("responsebody");
+      String tempResponseBody = "";
+
       while (mycurrentdate.isBefore(endDate)) {
         //I add this var for passing it as date in url
         String formattedDate = _formatDate(mycurrentdate);
@@ -143,7 +189,6 @@ class GetResponseBody extends GetxController {
         //getting response
         var response = await http.get(Uri.parse(
             "https://api.aladhan.com/v1/timings/$formattedDate?latitude=${locationctrl.latitude}&longitude=${locationctrl.longtude}&method=19"));
-
         //if succes store responsebody in cash
         if (response.statusCode == 200) {
           //check if we are in dayBeforEndDate for passing data corectly without
@@ -151,40 +196,22 @@ class GetResponseBody extends GetxController {
           newRB = mycurrentdate == dayBeforEndDate
               ? _addDateToResponseWhitoutcomma(formattedDate, response.body)
               : _addDateToResponse(formattedDate, response.body);
-          //add the new response body of new date to current responsebody
-          await prefs.setString("responsebody", "${responsebody ?? ""}$newRB");
-          // getting data from cash to this var
-          responsebody = prefs.getString("responsebody")!;
+          tempResponseBody += newRB;
         }
         // shift to the next day
         mycurrentdate = mycurrentdate.add(const Duration(days: 1));
       }
-      // add curlyBraces to response body
-      await prefs.setString("responsebody", "{$responsebody}");
-      //I use this methode for restart app for making sure data is ready
-      if (responsebody != null) {
-        try {
-          prayerData = jsonDecode(responsebody);
-        } catch (e) {
-          print("$e");
-        }
-      }
-      Restart.restartApp();
+
+      // Save all data at once
+      await prefs.setString("responsebody", "{$tempResponseBody}");
+
+      // Update the refreshing date
+      await _defineRefreshingDate();
+
+      // Notify FetchPrayerFromDate to reload data instead of restarting
+      Get.find<FetchPrayerFromDate>().loadPrayerData();
     } catch (e) {
       print('There was an error: $e');
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-//there are many errors here i think its the model doesn't work perfectly because it doesn't reload new data whene the refreshing date comme's and i can't call it before get_response_body because it's not befor him in bindings so try to fix it and make it work perfectly

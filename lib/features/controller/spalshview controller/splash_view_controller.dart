@@ -38,13 +38,21 @@ class SplashViewController extends GetxController
         Tween<double>(begin: .2, end: 1).animate(animationcontroller!);
     animationcontroller?.repeat(reverse: true);
     isLoading(true);
-    await responsectrl.initileresponse();
-    await fpfctrl.fetchPrayerTimes();
+    bool wasDataRefreshed = await responsectrl.initileresponse();
+
+    // Only fetch prayer times if we didn't just refresh the data
+    if (!wasDataRefreshed) {
+      await fpfctrl.loadPrayerData();
+    }
+
     prayerctrl.determineCurrentPrayer();
     timespagectrl.pagecontroller();
     timespagectrl.getcurrentpage();
     isLoading(false);
     tonextpage();
+
+    // Start periodic check after initial setup
+    Get.find<GetResponseBody>().startPeriodicCheck();
   }
 
   @override
