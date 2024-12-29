@@ -18,8 +18,8 @@ class PageViewbutton extends StatelessWidget {
         child: GetBuilder<OnboardingPagecontroller>(
             builder: (on) => Text(
                   pageviewctrl.pagecontroller.page == 3
-                      ? "Get Started"
-                      : "next",
+                      ? 'get_started'.tr
+                      : 'next'.tr,
                   style: Theme.of(context).textTheme.titleMedium,
                   textAlign: TextAlign.left,
                 )),

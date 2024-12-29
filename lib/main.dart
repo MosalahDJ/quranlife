@@ -11,6 +11,7 @@ import 'package:quranlife/myrouts.dart';
 import 'firebase_options.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/services.dart';
+import 'package:quranlife/core/localization/translations.dart';
 
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {}
 
@@ -58,6 +59,9 @@ class QuranLifeApp extends StatelessWidget {
       initialBinding: Mybinding(),
       home: const SplashView(),
       getPages: Myrouts.getpages,
+      translations: Messages(),
+      locale: const Locale('en', 'US'), // Default locale
+      fallbackLocale: const Locale('en', 'US'),
     );
   }
 }

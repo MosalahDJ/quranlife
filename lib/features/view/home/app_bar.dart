@@ -24,6 +24,7 @@ class MyAppBar extends AppBar {
       actions: [
         IconButton(
             onPressed: homectrl.tosearchpage,
+            tooltip: 'search'.tr,
             icon: Icon(
               Icons.search,
               color: Theme.of(context).iconTheme.color,
@@ -34,6 +35,7 @@ class MyAppBar extends AppBar {
               await signoutctrl.googlesignout();
               Get.offAllNamed("login");
             },
+            tooltip: 'logout'.tr,
             icon: Icon(
               Icons.logout_outlined,
               color: Theme.of(context).iconTheme.color,
@@ -41,7 +43,7 @@ class MyAppBar extends AppBar {
             )),
       ],
       title: Text(
-        "hey, User",
+        'hey_user'.tr,
         style: Theme.of(context).textTheme.headlineSmall,
       ),
     );

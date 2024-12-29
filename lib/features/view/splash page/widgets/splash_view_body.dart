@@ -30,7 +30,7 @@ class SplashViewBody extends StatelessWidget {
               child: FadeTransition(
                 opacity: anctrl.fadinganimation!,
                 child: Text(
-                  "Quran Life",
+                  'quran_life'.tr,
                   style: TextStyle(
                       fontSize: 50,
                       fontWeight: FontWeight.bold,
@@ -40,9 +40,9 @@ class SplashViewBody extends StatelessWidget {
             ),
             FadeInUp(
               duration: const Duration(milliseconds: 800),
-              child: const Text(
-                "Please wait...",
-                style: TextStyle(color: Colors.white, fontSize: 20),
+              child: Text(
+                'please_wait'.tr,
+                style: const TextStyle(color: Colors.white, fontSize: 20),
               ),
             )
           ],

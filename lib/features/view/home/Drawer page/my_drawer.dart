@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
-import 'package:quranlife/features/view/home/widgets/more_items.dart';
 
 class MyDrawer extends Drawer {
   const MyDrawer({super.key});
@@ -10,32 +9,109 @@ class MyDrawer extends Drawer {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      
       width: Sizeconfig.screenwidth! / 1.19,
       backgroundColor: Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
       child: Column(
         children: [
-          SizedBox(
-            height: Sizeconfig.screenheight! / 9,
-          ),
-          ListTile(
-              leading: const CircleAvatar(
-                backgroundImage: AssetImage(
-                    "lib/core/assets/images/more_page_images/me.png"),
-                maxRadius: 25,
+          _buildProfileHeader(context),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  _buildMainMenuSection(context),
+                  const Divider(thickness: 0.5),
+                  _buildSettingsSection(context),
+                ],
               ),
-              title: Text(
-                "Mohamed Salah",
-                style: Theme.of(context).textTheme.labelLarge,
-              ),
-              subtitle: Text(
-                "mohamedsalah@gmail.com",
-                style: Theme.of(context).textTheme.labelSmall,
-              )),
-          SizedBox(
-            height: Sizeconfig.screenheight! / 20,
+            ),
           ),
-          MoreItems(),
+          _buildBottomSection(context),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildProfileHeader(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(top: 50, bottom: 20),
+      decoration: BoxDecoration(
+        color: Get.isDarkMode
+            ? kmaincolor3dark.withOpacity(0.9)
+            : kmaincolor3.withOpacity(0.9),
+        borderRadius: const BorderRadius.only(
+          bottomLeft: Radius.circular(20),
+          bottomRight: Radius.circular(20),
+        ),
+      ),
+      child: Column(
+        children: [
+          const CircleAvatar(
+            backgroundImage:
+                AssetImage("lib/core/assets/images/more_page_images/me.png"),
+            radius: 40,
+          ),
+          const SizedBox(height: 12),
+          Text(
+            "Mohamed Salah",
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            "mohamedsalah@gmail.com",
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMainMenuSection(BuildContext context) {
+    return Column(
+      children: [
+        _buildMenuItem(context, "Home", Icons.home_outlined),
+        _buildMenuItem(context, "My Quran", Icons.book_outlined),
+        _buildMenuItem(context, "Bookmarks", Icons.bookmark_border),
+        _buildMenuItem(context, "About Us", Icons.info_outline),
+      ],
+    );
+  }
+
+  Widget _buildSettingsSection(BuildContext context) {
+    return Column(
+      children: [
+        _buildMenuItem(context, "Settings", Icons.settings_outlined),
+        _buildMenuItem(context, "Help & Feedback", Icons.help_outline),
+      ],
+    );
+  }
+
+  Widget _buildMenuItem(BuildContext context, String title, IconData icon) {
+    return ListTile(
+      leading:
+          Icon(icon, color: Get.isDarkMode ? Colors.white70 : Colors.black54),
+      title: Text(
+        title,
+        style: Theme.of(context).textTheme.bodyLarge,
+      ),
+      onTap: () {
+        Get.toNamed("settings");
+      },
+    );
+  }
+
+  Widget _buildBottomSection(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Divider(),
+          Text(
+            "QuranLife v1.0.0",
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
         ],
       ),
     );

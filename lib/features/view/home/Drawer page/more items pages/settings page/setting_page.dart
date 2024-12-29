@@ -3,11 +3,13 @@ import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/features/controller/notfication%20controller/work_manager_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
+import 'package:quranlife/features/controller/settings%20controllers/language_controller.dart';
 
 class SettingPage extends StatelessWidget {
   SettingPage({super.key});
   final WorkManagerController wkmctrl = Get.find();
   final ThemeController themctrl = Get.find();
+  final LanguageController langCtrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -111,6 +113,38 @@ class SettingPage extends StatelessWidget {
                         !wkmctrl.quraansubscribition.value;
                     wkmctrl.onChangeSubscription(NotificationType.quraan, val);
                   })),
+            ],
+          ),
+          // Add language settings section
+          Settingtype(
+            title: "Language",
+            listwidget: [
+              Obx(
+                () => RadioListTile<String>(
+                  title: const Text(
+                    'English',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  value: 'en',
+                  groupValue: langCtrl.language.value,
+                  onChanged: (value) {
+                    langCtrl.changeLanguage(value!);
+                  },
+                ),
+              ),
+              Obx(
+                () => RadioListTile<String>(
+                  title: const Text(
+                    'العربية',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  value: 'ar',
+                  groupValue: langCtrl.language.value,
+                  onChanged: (value) {
+                    langCtrl.changeLanguage(value!);
+                  },
+                ),
+              ),
             ],
           ),
         ]),

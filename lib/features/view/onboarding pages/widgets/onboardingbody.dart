@@ -69,7 +69,7 @@ class OnboardingBody extends StatelessWidget {
                             onPressed: () {
                               Get.offAllNamed("/login");
                             },
-                            child: Text("Skip",
+                            child: Text('skip'.tr,
                                 style: Theme.of(context).textTheme.bodyLarge),
                           )),
                     )),

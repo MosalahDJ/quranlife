@@ -14,6 +14,7 @@ import 'package:quranlife/features/controller/notfication%20controller/sub%20con
 import 'package:quranlife/features/controller/prayer%20times%20controller/get_response_body.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/location_controller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/times_page_controller.dart';
+import 'package:quranlife/features/controller/settings%20controllers/language_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
 import 'package:quranlife/features/controller/fcm%20controllers/my_acces_token.dart';
 import 'package:quranlife/features/controller/fcm%20controllers/fcm_controller.dart';
@@ -21,10 +22,11 @@ import 'package:quranlife/features/controller/prayer%20times%20controller/deteri
 import 'package:quranlife/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:quranlife/features/controller/spalshview%20controller/splash_view_controller.dart';
 import 'package:quranlife/features/controller/notfication%20controller/work_manager_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Mybinding implements Bindings {
   @override
-  void dependencies() {
+  void dependencies() async {
     //splashview injection
     Get.put<LocationController>(LocationController(), permanent: true);
     Get.put<GetResponseBody>(GetResponseBody());
@@ -33,6 +35,9 @@ class Mybinding implements Bindings {
         permanent: true);
     Get.put<TimesPageController>(TimesPageController(), permanent: true);
     Get.put<SplashViewController>(SplashViewController());
+    // LanguageController
+    final prefs = await SharedPreferences.getInstance();
+    Get.put(LanguageController(prefs), permanent: true);
     //auth injection
     Get.put<Txtvalcontroller>(Txtvalcontroller());
     Get.put<SignInController>(SignInController());

@@ -22,17 +22,16 @@ class LoginPage extends StatelessWidget {
           bool shouldPop = await showDialog<bool>(
                 context: context,
                 builder: (context) => AlertDialog(
-                  title: const Text('Are you sure?'),
-                  content:
-                      const Text('Do you want to leave the login process?'),
+                  title: Text('are_you_sure'.tr),
+                  content: Text('leave_login'.tr),
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.pop(context, false),
-                      child: const Text('No'),
+                      child: Text('no'.tr),
                     ),
                     TextButton(
                       onPressed: () => Navigator.pop(context, true),
-                      child: const Text('Yes'),
+                      child: Text('yes'.tr),
                     ),
                   ],
                 ),
@@ -58,7 +57,7 @@ class LoginPage extends StatelessWidget {
                 ))
           ],
           title: Text(
-            "Login",
+            "login".tr,
             style: Theme.of(context).textTheme.headlineSmall,
           ),
           backgroundColor: Get.isDarkMode ? kmaincolor3dark : kmaincolor,

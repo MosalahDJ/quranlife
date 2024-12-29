@@ -24,19 +24,19 @@ class SignInFormHelpers {
         textctrl: controller,
         focusnode: focusNode,
         formtitle: title,
-        hint: "Enter your $title",
+        hint: "enter_$title".tr.toLowerCase(),
         keyboardtype: keyboardType ?? TextInputType.text,
         obsecure: false,
         isrequired: true,
         validator: (val) {
           if (val == null || val.isEmpty) {
-            return '$title is required';
+            return 'field_required'.trParams({'s': title});
           }
           if (title == "Email" && !GetUtils.isEmail(val)) {
-            return 'Please enter a valid email address';
+            return 'valid_email'.tr;
           }
           if (title == "Password" && val.length < 6) {
-            return 'Password must be at least 6 characters';
+            return 'password_length'.tr;
           }
           return null;
         },
@@ -54,7 +54,7 @@ class SignInFormHelpers {
         focusnode: signinctrl.numberfnode,
         isrequired: true,
         formtitle: "Gender",
-        hint: "Select your gender",
+        hint: "select_gender".tr,
         keyboardtype: TextInputType.none,
         obsecure: false,
         suffixbutton: DropdownButtonHideUnderline(
@@ -72,7 +72,7 @@ class SignInFormHelpers {
                   ? null
                   : signinctrl.gendre.text,
               hint: Text(
-                "Select gender",
+                "select_gender".tr,
                 style: TextStyle(
                   color: Get.isDarkMode ? Colors.white70 : Colors.grey[600],
                 ),
@@ -86,7 +86,7 @@ class SignInFormHelpers {
                 DropdownMenuItem(
                   value: "Male",
                   child: Text(
-                    "Male",
+                    "male".tr,
                     style: TextStyle(
                       color: Get.isDarkMode
                           ? Colors.white
@@ -97,7 +97,7 @@ class SignInFormHelpers {
                 DropdownMenuItem(
                   value: "Female",
                   child: Text(
-                    "Female",
+                    "female".tr,
                     style: TextStyle(
                       color: Get.isDarkMode
                           ? Colors.white
@@ -114,7 +114,7 @@ class SignInFormHelpers {
         ),
         validator: (val) {
           if (val == null || val.isEmpty) {
-            return 'Gender is required';
+            return 'field_required'.trParams({'s': 'gender'.tr});
           }
           return null;
         },

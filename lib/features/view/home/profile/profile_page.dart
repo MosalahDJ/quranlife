@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
-import 'package:quranlife/features/view/home/widgets/more_items.dart';
 
 class ProfilePage extends StatelessWidget {
   ProfilePage({super.key});
@@ -99,10 +98,6 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: MoreItems(),
             ),
           ],
         ));

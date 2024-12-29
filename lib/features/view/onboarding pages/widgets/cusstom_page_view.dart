@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/features/view/onboarding%20pages/widgets/mypageview.dart';
 
@@ -19,36 +20,32 @@ class CusstomPageView extends StatelessWidget {
       width: Sizeconfig.screenwidth,
       child: PageView(
         controller: pagecontroller,
-        children: const [
+        children: [
           //I made a class and named it MyPageView it has the page viw body
           //and i caled it her for every page in this pageview
           MyPageView(
             imageasset:
                 "lib/core/assets/images/on_boarding_image/onboarding1.png",
-            subtitle:
-                "Your daily Islamic companion to strengthen your faith and practice Quranic teachings in your daily life.",
-            title: "Welcome to Quran Life",
+            subtitle: 'welcome_subtitle'.tr,
+            title: 'welcome_title'.tr,
           ),
           MyPageView(
             imageasset:
                 "lib/core/assets/images/on_boarding_image/onboarding2.png",
-            subtitle:
-                "Quran Life reminds you of prayer times and provides you with dhikr and duas, ensuring you fulfill your religious obligations on time.",
-            title: "Prayer Times & Reminders",
+            subtitle: 'prayer_times_subtitle'.tr,
+            title: 'prayer_times_title'.tr,
           ),
           MyPageView(
             imageasset:
                 "lib/core/assets/images/on_boarding_image/onboarding3.png",
-            subtitle:
-                "Quran Life supports all believers in maintaining their prayers, providing guidance and appropriate duas for every occasion.",
-            title: "For Every Muslim",
+            subtitle: 'for_muslim_subtitle'.tr,
+            title: 'for_muslim_title'.tr,
           ),
           MyPageView(
             imageasset:
                 "lib/core/assets/images/on_boarding_image/onboarding4.png",
-            subtitle:
-                "Quran Life helps you locate nearby mosques and connects you with your brothers and sisters in faith.",
-            title: "Islamic Community",
+            subtitle: 'community_subtitle'.tr,
+            title: 'community_title'.tr,
           ),
         ],
       ),

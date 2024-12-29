@@ -19,17 +19,16 @@ class SigninPage extends StatelessWidget {
           bool shouldPop = await showDialog<bool>(
                 context: context,
                 builder: (context) => AlertDialog(
-                  title: const Text('Are you sure?'),
-                  content: const Text(
-                      'Do you want to leave the registration process?'),
+                  title: Text('are_you_sure'.tr),
+                  content: Text('leave_registration'.tr),
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.pop(context, false),
-                      child: const Text('No'),
+                      child: Text('no'.tr),
                     ),
                     TextButton(
                       onPressed: () => Navigator.pop(context, true),
-                      child: const Text('Yes'),
+                      child: Text('yes'.tr),
                     ),
                   ],
                 ),
@@ -58,7 +57,7 @@ class SigninPage extends StatelessWidget {
                 color: Colors.white,
               )),
           title: Text(
-            "Signin",
+            "registration".tr,
             style: Theme.of(context).textTheme.headlineSmall,
           ),
         ),

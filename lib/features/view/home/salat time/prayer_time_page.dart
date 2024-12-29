@@ -12,93 +12,95 @@ class PrayerTimesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: Sizeconfig.screenheight,
-      decoration: const BoxDecoration(
-          image: DecorationImage(
-              fit: BoxFit.cover,
-              image: AssetImage(
-                  "lib/core/assets/images/background_image/newbackground.jpg"))),
-      child: SizedBox(
-        height: Sizeconfig.screenheight,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              //sized box
-              SizedBox(
-                height: Sizeconfig.screenheight! / 40,
-              ),
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          fit: BoxFit.cover,
+          image: const AssetImage(
+              "lib/core/assets/images/background_image/newbackground.jpg"),
+          colorFilter: ColorFilter.mode(
+            Colors.black.withOpacity(0.3),
+            BlendMode.darken,
+          ),
+        ),
+      ),
+      child: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: Sizeconfig.screenheight! * 0.02,
+                  horizontal: Sizeconfig.screenwidth! * 0.04,
+                ),
+                child: Column(
+                  children: [
+                    const Salattimebar(),
 
-              //salat page bar
-              const Salattimebar(),
+                    SizedBox(height: Sizeconfig.screenheight! * 0.03),
 
-              //bottom of page
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: SizedBox(
-                  height: Sizeconfig.screenheight! / 1.14,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        //text box
-                        SizedBox(
-                          width: Sizeconfig.screenwidth,
-                          child: Card(
-                            elevation: 0,
-                            color: Colors.black.withOpacity(0.4),
-                            child: const Text(
-                              textDirection: TextDirection.rtl,
-                              "『 إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا 』\n﴿ صَدَقَ اللهُ العَظِيم ﴾",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
+                    // Quran Verse Card
+                    Card(
+                      color: Colors.transparent,
+                      child: Container(
+                        width: Sizeconfig.screenwidth,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 16, horizontal: 12),
+                        decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.5),
+                          borderRadius: BorderRadius.circular(15),
+                          border:
+                              Border.all(color: Colors.white.withOpacity(0.1)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 10,
+                              spreadRadius: 2,
                             ),
+                          ],
+                        ),
+                        child: const Text(
+                          "إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا\nصَدَقَ اللهُ العَظِيم",
+                          textDirection: TextDirection.rtl,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            height: 1.5,
+                            fontFamily: 'Amiri', // Add an Arabic font
                           ),
                         ),
-
-                        //sizedbox
-                        SizedBox(
-                          height: Sizeconfig.screenheight! / 150,
-                        ),
-
-                        //Current Pray Time card
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 04),
-                          child: SizedBox(
-                            height: Sizeconfig.screenheight! < 768
-                                ? Sizeconfig.screenheight! / 2.7
-                                : Sizeconfig.screenheight! > 1024
-                                    ? Sizeconfig.screenheight! / 4.3
-                                    : Sizeconfig.screenheight! / 3.5,
-                            child: CurrentPrayTime(
-                              mawaqitTextColor: Colors.white,
-                              textcolor2: Colors.white,
-                              textcolor: kmaincolor4,
-                              elevation: 0,
-                              color: Colors.black.withOpacity(0.4),
-                            ),
-                          ),
-                        ),
-
-                        //Prayer times table
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 08),
-                          child: Prayertimestable(),
-                        ),
-
-                        //sizedbox
-                        const SizedBox(
-                          height: 10,
-                        )
-                      ],
+                      ),
                     ),
-                  ),
+
+                    SizedBox(height: Sizeconfig.screenheight! * 0.03),
+
+                    // Current Prayer Time Card
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: CurrentPrayTime(
+                        mawaqitTextColor: Colors.white,
+                        textcolor2: Colors.white,
+                        textcolor: kmaincolor4,
+                        elevation: 2,
+                        color: Colors.black.withOpacity(0.5),
+                      ),
+                    ),
+
+                    SizedBox(height: Sizeconfig.screenheight! * 0.03),
+
+                    // Prayer Times Table
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: Prayertimestable(),
+                    ),
+
+                    SizedBox(height: Sizeconfig.screenheight! * 0.02),
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

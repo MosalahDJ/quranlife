@@ -29,13 +29,23 @@ class HomePage extends StatelessWidget {
                 onTap: (value) {
                   homectrl.bnbfunc(value);
                 },
-                items: const [
-                  Icon(FlutterIslamicIcons.mosque),
-                  Icon(
-                    FlutterIslamicIcons.tasbih3,
+                items: [
+                  Tooltip(
+                    message: 'home'.tr,
+                    child: const Icon(FlutterIslamicIcons.mosque),
                   ),
-                  Icon(FlutterIslamicIcons.solidQuran2),
-                  Icon(Icons.more_vert),
+                  Tooltip(
+                    message: 'adkar'.tr,
+                    child: const Icon(FlutterIslamicIcons.tasbih3),
+                  ),
+                  Tooltip(
+                    message: 'quran'.tr,
+                    child: const Icon(FlutterIslamicIcons.solidQuran2),
+                  ),
+                  Tooltip(
+                    message: 'profile'.tr,
+                    child: const Icon(Icons.more_vert),
+                  ),
                 ],
               )),
       body: GetBuilder<MyHomeController>(

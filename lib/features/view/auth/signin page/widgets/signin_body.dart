@@ -46,7 +46,7 @@ class SigneinPageBody extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      "Create Your Account",
+                      "create_account".tr,
                       style:
                           Theme.of(context).textTheme.headlineSmall?.copyWith(
                                 fontWeight: FontWeight.bold,
@@ -57,7 +57,7 @@ class SigneinPageBody extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      "Please fill in the form below",
+                      "fill_form".tr,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color: Colors.grey[600],
                           ),
@@ -90,7 +90,7 @@ class SigneinPageBody extends StatelessWidget {
                             Expanded(
                               child: signInFormHelpers.buildFormField(
                                 context,
-                                title: "First Name",
+                                title: "first_name".tr,
                                 controller: signinctrl.name,
                                 focusNode: signinctrl.namefnode,
                                 formKey: txtvalctrl.signinnamestate,
@@ -100,7 +100,7 @@ class SigneinPageBody extends StatelessWidget {
                             Expanded(
                               child: signInFormHelpers.buildFormField(
                                 context,
-                                title: "Last Name",
+                                title: "last_name".tr,
                                 controller: signinctrl.lastname,
                                 focusNode: signinctrl.lastnamefnode,
                                 formKey: txtvalctrl.signinlastnamestate,
@@ -117,7 +117,7 @@ class SigneinPageBody extends StatelessWidget {
                         // Email field
                         signInFormHelpers.buildFormField(
                           context,
-                          title: "Email",
+                          title: "email".tr,
                           controller: signinctrl.emailcontroller,
                           focusNode: signinctrl.emailfnodesign,
                           formKey: txtvalctrl.signinemailstate,
@@ -128,7 +128,7 @@ class SigneinPageBody extends StatelessWidget {
                         // Password fields
                         signInFormHelpers.buildPasswordField(
                           context,
-                          title: "Password",
+                          title: "password".tr,
                           controller: signinctrl.password,
                           formKey: txtvalctrl.signinpasswordstate,
                           isConfirmation: false,
@@ -136,7 +136,7 @@ class SigneinPageBody extends StatelessWidget {
                         const SizedBox(height: 20),
                         signInFormHelpers.buildPasswordField(
                           context,
-                          title: "Confirm Password",
+                          title: "confirm_password".tr,
                           controller: signinctrl.password2,
                           formKey: txtvalctrl.signinpasswordstate2,
                           isConfirmation: true,
@@ -170,9 +170,9 @@ class SigneinPageBody extends StatelessWidget {
                     ),
                     child: controller.isLoading
                         ? const CircularProgressIndicator()
-                        : const Text(
-                            "Create Account",
-                            style: TextStyle(
+                        : Text(
+                            "create_account_button".tr,
+                            style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                               color: Colors.white,

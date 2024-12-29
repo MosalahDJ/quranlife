@@ -43,7 +43,7 @@ class LoginBody extends StatelessWidget {
                         ),
                         const SizedBox(height: 16),
                         Text(
-                          "Quran Life",
+                          "quran_life".tr,
                           style: TextStyle(
                             color: Get.isDarkMode
                                 ? const Color(0xFFE5AB57)
@@ -82,11 +82,11 @@ class LoginBody extends StatelessWidget {
                             focusnode: loginctrl.emailfnodelog,
                             keyboardtype: TextInputType.emailAddress,
                             validator: (val) =>
-                                val!.isEmpty ? "Please enter your email" : null,
+                                val!.isEmpty ? "please_enter_email".tr : null,
                             isrequired: true,
                             textctrl: loginctrl.emailcontroller,
-                            formtitle: "Email",
-                            hint: "Enter your email address",
+                            formtitle: "email".tr,
+                            hint: "enter_email".tr,
                             prefixicon:
                                 Icon(Icons.email_outlined, color: kmaincolor4),
                           ),
@@ -111,12 +111,12 @@ class LoginBody extends StatelessWidget {
                               lines: 1,
                               obsecure: loginctrl.visibility,
                               validator: (val) => val!.isEmpty
-                                  ? "Please enter your password"
+                                  ? "please_enter_password".tr
                                   : null,
                               isrequired: true,
                               textctrl: loginctrl.passwordcontroller,
-                              formtitle: "Password",
-                              hint: "Enter your password",
+                              formtitle: "password".tr,
+                              hint: "enter_password".tr,
                             ),
                           ),
                         ),
@@ -129,7 +129,7 @@ class LoginBody extends StatelessWidget {
                               passreset.resetpassword(context);
                             },
                             child: Text(
-                              "Forgot password?",
+                              "forgot_password".tr,
                               style: TextStyle(color: kmaincolor4),
                             ),
                           ),
@@ -158,8 +158,8 @@ class LoginBody extends StatelessWidget {
                                 loginctrl.login(context);
                               }
                             },
-                            child: const Text(
-                              "Login",
+                            child: Text(
+                              "login".tr,
                               style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.white,
@@ -188,7 +188,7 @@ class LoginBody extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: Text(
-                              "Or Login with",
+                              "or_login_with".tr,
                               style: TextStyle(
                                   color: kmaincolor4.withOpacity(0.8)),
                             ),
@@ -223,7 +223,7 @@ class LoginBody extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Don't have an account? ",
+                            "no_account".tr,
                             style: TextStyle(
                                 color: Get.isDarkMode
                                     ? Colors.white70
@@ -237,7 +237,7 @@ class LoginBody extends StatelessWidget {
                                   transition: Transition.rightToLeft);
                             },
                             child: Text(
-                              "Sign in",
+                              "sign_in".tr,
                               style: TextStyle(
                                 color: kmaincolor4,
                                 fontWeight: FontWeight.bold,

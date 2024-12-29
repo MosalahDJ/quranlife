@@ -38,129 +38,139 @@ class Prayertimestable extends GetView<DeterminePrayersController> {
           height: Sizeconfig.screenheight! / 100,
         ),
         //inside of box
-        Container(
-          padding: const EdgeInsets.only(left: 10),
-          decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(15)),
-              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.4))]),
-          child: Card(
-            color: Colors.transparent,
-            elevation: 0,
-            //date and table iside this get builder
-            child: GetBuilder<TimesPageController>(
-              builder: (c) => Column(
-                children: [
-                  SizedBox(
-                    width: Sizeconfig.screenwidth! / 1.1,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Obx(
-                          () => Text(
-                            fpfctrl.getDateByIndex(
-                                        timespagectrl.currentPage.value) ==
-                                    null
-                                ? "-"
-                                : fpfctrl.getDateByIndex(
-                                    timespagectrl.currentPage.value)!,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
+        Card(
+          color: Colors.transparent,
+          child: Container(
+            padding: const EdgeInsets.only(left: 10),
+            decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(15)),
+                boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.4))]),
+            child: Card(
+              color: Colors.transparent,
+              elevation: 0,
+              //date and table iside this get builder
+              child: GetBuilder<TimesPageController>(
+                builder: (c) => Column(
+                  children: [
+                    SizedBox(
+                      width: Sizeconfig.screenwidth! / 1.1,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Obx(
+                            () => Text(
+                              fpfctrl.getDateByIndex(
+                                          timespagectrl.currentPage.value) ==
+                                      null
+                                  ? "-"
+                                  : fpfctrl.getDateByIndex(
+                                      timespagectrl.currentPage.value)!,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          width: Sizeconfig.screenwidth! / 2.6,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              //return to past page
-                              IconButton(
-                                  iconSize: 20,
+                          SizedBox(
+                            width: Sizeconfig.screenwidth! / 2.6,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                //return to past page
+                                IconButton(
+                                    iconSize: 20,
+                                    onPressed: () {
+                                      timespagectrl.currentPage.value ==
+                                                  timespagectrl.currentday +
+                                                      1 ||
+                                              timespagectrl.currentPage.value ==
+                                                  timespagectrl.currentday
+                                          ? timespagectrl.timespagecontroller
+                                              .jumpToPage(
+                                              timespagectrl.currentPage.value -
+                                                  1,
+                                            )
+                                          : timespagectrl.timespagecontroller
+                                              .animateToPage(
+                                              timespagectrl.currentPage.value -
+                                                  1,
+                                              duration: const Duration(
+                                                  milliseconds: 300),
+                                              curve: Curves.bounceIn,
+                                            );
+                                    },
+                                    icon: const Icon(
+                                      Icons.arrow_back_ios_new_sharp,
+                                    )),
+                                //return to first page
+                                IconButton(
+                                  iconSize: 30,
                                   onPressed: () {
-                                    timespagectrl.currentPage.value ==
-                                                timespagectrl.currentday + 1 ||
-                                            timespagectrl.currentPage.value ==
-                                                timespagectrl.currentday
-                                        ? timespagectrl.timespagecontroller
-                                            .jumpToPage(
-                                            timespagectrl.currentPage.value - 1,
-                                          )
-                                        : timespagectrl.timespagecontroller
-                                            .animateToPage(
-                                            timespagectrl.currentPage.value - 1,
-                                            duration: const Duration(
-                                                milliseconds: 300),
-                                            curve: Curves.bounceIn,
-                                          );
+                                    timespagectrl.timespagecontroller
+                                        .jumpToPage(
+                                      timespagectrl.currentday,
+                                    );
                                   },
                                   icon: const Icon(
-                                    Icons.arrow_back_ios_new_sharp,
-                                  )),
-                              //return to first page
-                              IconButton(
-                                iconSize: 30,
-                                onPressed: () {
-                                  timespagectrl.timespagecontroller.jumpToPage(
-                                    timespagectrl.currentday,
-                                  );
-                                },
-                                icon: const Icon(
-                                  Icons.keyboard_double_arrow_down,
+                                    Icons.keyboard_double_arrow_down,
+                                  ),
                                 ),
-                              ),
-                              //going to next page
-                              IconButton(
-                                  iconSize: 20,
-                                  onPressed: () {
-                                    timespagectrl.currentPage.value ==
-                                                timespagectrl.currentday - 1 ||
-                                            timespagectrl.currentPage.value ==
-                                                timespagectrl.currentday
-                                        ? timespagectrl.timespagecontroller
-                                            .jumpToPage(
-                                            timespagectrl.currentPage.value + 1,
-                                          )
-                                        : timespagectrl.timespagecontroller
-                                            .animateToPage(
-                                            timespagectrl.currentPage.value + 1,
-                                            duration: const Duration(
-                                                milliseconds: 300),
-                                            curve: Curves.bounceIn,
-                                          );
-                                  },
-                                  icon: const Icon(
-                                      Icons.arrow_forward_ios_sharp)),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: Sizeconfig.screenheight! < 768
-                        ? Sizeconfig.screenheight! / 2
-                        : Sizeconfig.screenheight! > 1010
-                            ? Sizeconfig.screenheight! / 2.90
-                            : Sizeconfig.screenheight! / 2.45,
-                    child: PageView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      controller: timespagectrl.timespagecontroller,
-                      itemCount: fpfctrl.prayersdayskeys.length,
-                      itemBuilder: (context, i) => Table(
-                        defaultVerticalAlignment:
-                            TableCellVerticalAlignment.middle,
-                        columnWidths: const {
-                          0: FlexColumnWidth(1), // Column of prayer name
-                          1: FlexColumnWidth(2), // Column of prayer time
-                          2: FlexColumnWidth(1), // Column of prayer sound
-                        },
-                        children: tablerowctrl.mytablerows(i),
+                                //going to next page
+                                IconButton(
+                                    iconSize: 20,
+                                    onPressed: () {
+                                      timespagectrl.currentPage.value ==
+                                                  timespagectrl.currentday -
+                                                      1 ||
+                                              timespagectrl.currentPage.value ==
+                                                  timespagectrl.currentday
+                                          ? timespagectrl.timespagecontroller
+                                              .jumpToPage(
+                                              timespagectrl.currentPage.value +
+                                                  1,
+                                            )
+                                          : timespagectrl.timespagecontroller
+                                              .animateToPage(
+                                              timespagectrl.currentPage.value +
+                                                  1,
+                                              duration: const Duration(
+                                                  milliseconds: 300),
+                                              curve: Curves.bounceIn,
+                                            );
+                                    },
+                                    icon: const Icon(
+                                        Icons.arrow_forward_ios_sharp)),
+                              ],
+                            ),
+                          )
+                        ],
                       ),
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      height: Sizeconfig.screenheight! < 768
+                          ? Sizeconfig.screenheight! / 2
+                          : Sizeconfig.screenheight! > 1010
+                              ? Sizeconfig.screenheight! / 2.90
+                              : Sizeconfig.screenheight! / 2.45,
+                      child: PageView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        controller: timespagectrl.timespagecontroller,
+                        itemCount: fpfctrl.prayersdayskeys.length,
+                        itemBuilder: (context, i) => Table(
+                          defaultVerticalAlignment:
+                              TableCellVerticalAlignment.middle,
+                          columnWidths: const {
+                            0: FlexColumnWidth(1), // Column of prayer name
+                            1: FlexColumnWidth(2), // Column of prayer time
+                            2: FlexColumnWidth(1), // Column of prayer sound
+                          },
+                          children: tablerowctrl.mytablerows(i),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

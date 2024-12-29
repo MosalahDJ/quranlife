@@ -33,8 +33,8 @@ class AdkarCategoryItem extends StatelessWidget {
                           alignment: Alignment.topCenter,
                         ),
                       ),
-                      const Text(
-                        "Category Name",
+                      Text(
+                        "category_name".tr,
                         textAlign: TextAlign.center,
                       )
                     ],
