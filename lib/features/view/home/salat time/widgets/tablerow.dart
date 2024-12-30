@@ -134,7 +134,7 @@ class SalawatTableRow {
   List<TableRow> mytablerows(int i) {
     return [
       myrow(
-          "الفجر",
+          "fajr".tr,
           "Fajr",
           adhanctrl.fajrvolum,
           fpfctrl.getDateByIndex(i) != null
@@ -142,7 +142,7 @@ class SalawatTableRow {
               : timespagectrl.formatDate(fpfctrl.currentDate)),
       myspace(),
       myrow(
-          "الشروق",
+          "sunrise".tr,
           "Sunrise",
           adhanctrl.sunrizevolum,
           fpfctrl.getDateByIndex(i) != null
@@ -150,7 +150,7 @@ class SalawatTableRow {
               : timespagectrl.formatDate(fpfctrl.currentDate)),
       myspace(),
       myrow(
-          "الظهر",
+          "dhuhr".tr,
           "Dhuhr",
           adhanctrl.duhrvolum,
           fpfctrl.getDateByIndex(i) != null
@@ -158,7 +158,7 @@ class SalawatTableRow {
               : timespagectrl.formatDate(fpfctrl.currentDate)),
       myspace(),
       myrow(
-          "العصر",
+          "asr".tr,
           "Asr",
           adhanctrl.asrvolum,
           fpfctrl.getDateByIndex(i) != null
@@ -166,7 +166,7 @@ class SalawatTableRow {
               : timespagectrl.formatDate(fpfctrl.currentDate)),
       myspace(),
       myrow(
-          "المغرب",
+          "maghrib".tr,
           "Maghrib",
           adhanctrl.maghribvolum,
           fpfctrl.getDateByIndex(i) != null
@@ -174,7 +174,7 @@ class SalawatTableRow {
               : timespagectrl.formatDate(fpfctrl.currentDate)),
       myspace(),
       myrow(
-          "العشاء",
+          "isha".tr,
           "Isha",
           adhanctrl.ishavolum,
           fpfctrl.getDateByIndex(i) != null

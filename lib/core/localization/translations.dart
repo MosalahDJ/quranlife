@@ -82,6 +82,25 @@ class Messages extends Translations {
           'hey_user': 'Hey, User',
           'search': 'Search',
           'logout': 'Logout',
+
+          // Prayer Times Page
+          'prayer_times': 'Prayer Times',
+          'prayer_board': 'Prayer Board',
+          'next_prayer': 'Next Prayer: ',
+          'time_remaining': 'Time Remaining: ',
+          'get_new_data': 'Get New Data',
+          'get_location_desc':
+              'Get current location and request new data from the server.\nThis may take a few minutes.',
+          'connection_failed': 'Connection failed',
+          'check_internet': 'Please check your internet connection then retry',
+
+          // Prayer Names
+          'fajr': 'Fajr',
+          'sunrise': 'Sunrise',
+          'dhuhr': 'Dhuhr',
+          'asr': 'Asr',
+          'maghrib': 'Maghrib',
+          'isha': 'Isha',
         },
         'ar': {
           // Login Page
@@ -161,6 +180,25 @@ class Messages extends Translations {
           'hey_user': 'مرحباً',
           'search': 'بحث',
           'logout': 'تسجيل خروج',
+
+          // Prayer Times Page
+          'prayer_times': 'مواقيت الصلاة',
+          'prayer_board': 'لوحة الصلوات',
+          'next_prayer': 'الصلاة القادمة: ',
+          'time_remaining': 'الوقت المتبقي: ',
+          'get_new_data': 'تحديث البيانات',
+          'get_location_desc':
+              'الحصول على الموقع الحالي وطلب بيانات جديدة من الخادم.\nقد يستغرق هذا بضع دقائق.',
+          'connection_failed': 'فشل الاتصال',
+          'check_internet': 'يرجى التحقق من اتصال الإنترنت ثم إعادة المحاولة',
+
+          // Arabic Prayer Names
+          'fajr': 'الفجر',
+          'sunrise': 'الشروق',
+          'dhuhr': 'الظهر',
+          'asr': 'العصر',
+          'maghrib': 'المغرب',
+          'isha': 'العشاء',
         },
         'fr': {
           // Login Page
@@ -242,27 +280,28 @@ class Messages extends Translations {
           'hey_user': 'Bonjour',
           'search': 'Rechercher',
           'logout': 'Déconnexion',
+
+          // Prayer Times Page
+          'prayer_times': 'Heures de Prière',
+          'prayer_board': 'Tableau des Prières',
+          'next_prayer': 'Prochaine Prière: ',
+          'time_remaining': 'Temps Restant: ',
+          'get_new_data': 'Mettre à jour',
+          'get_location_desc':
+              'Obtenir la position actuelle et demander de nouvelles données du serveur.\nCela peut prendre quelques minutes.',
+          'connection_failed': 'Échec de connexion',
+          'check_internet':
+              'Veuillez vérifier votre connexion Internet puis réessayer',
+
+          // Prayer Names (Keep English versions for internal use)
+          'fajr': 'Fajr',
+          'sunrise': 'Sunrise',
+          'dhuhr': 'Dhuhr',
+          'asr': 'Asr',
+          'maghrib': 'Maghrib',
+          'isha': 'Isha',
         },
       };
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//edit the localisation for every text appear on the ui in thes pages
-
+// edit the localisation for every text appear on the ui in thes pages

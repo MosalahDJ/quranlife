@@ -91,7 +91,7 @@ class CurrentPrayTime extends StatelessWidget {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Text(
-                                        "Next Prayer: ",
+                                        "next_prayer".tr,
                                         style: TextStyle(
                                           color: textcolor2,
                                           fontSize: 17,
@@ -99,7 +99,7 @@ class CurrentPrayTime extends StatelessWidget {
                                       ),
                                       //next salat
                                       Text(
-                                        prayerctrl.nextPrayer.value,
+                                        prayerctrl.nextPrayer.value.tr,
                                         style: TextStyle(
                                           color: textcolor,
                                           fontSize: 25,
@@ -123,7 +123,7 @@ class CurrentPrayTime extends StatelessWidget {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Text(
-                                        "Time Remaining: ",
+                                        "time_remaining".tr,
                                         style: TextStyle(
                                           color: textcolor2,
                                           fontSize: 17,
@@ -166,9 +166,8 @@ class CurrentPrayTime extends StatelessWidget {
                   onTap: () {
                     AwesomeDialog(
                       context: context,
-                      title: "Get New Data",
-                      desc:
-                          "Get current location and request new data from the server.\nThis may take a few minutes.",
+                      title: "get_new_data".tr,
+                      desc: "get_location_desc".tr,
                       btnOkOnPress: () async {
                         initialctrl.isLoading(true);
                         await locationctrl.determinePosition();
@@ -177,8 +176,8 @@ class CurrentPrayTime extends StatelessWidget {
                         prayerctrl.determineCurrentPrayer();
                         timespagectrl.pagecontroller();
                         prayerctrl.currentPrayer.value == "-"
-                            ? Get.snackbar("Conection field",
-                                "please check your internet conection then retry")
+                            ? Get.snackbar(
+                                "connection_failed".tr, "check_internet".tr)
                             : null;
                         initialctrl.isLoading(false);
                       },

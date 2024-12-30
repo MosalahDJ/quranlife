@@ -11,12 +11,12 @@ class Salattimebar extends StatelessWidget {
       elevation: 0,
       child: ListTile(
         titleTextStyle: const TextStyle(),
-        title: const Row(
+        title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Prayer Times",
-              style: TextStyle(
+              "prayer_times".tr,
+              style: const TextStyle(
                   color: Colors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.bold),

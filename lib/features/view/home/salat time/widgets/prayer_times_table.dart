@@ -26,13 +26,13 @@ class Prayertimestable extends GetView<DeterminePrayersController> {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Card(
+        Card(
             elevation: 0,
             color: Colors.transparent,
             child: Text(
-              "Prayer Board",
+              "prayer_board".tr,
               textAlign: TextAlign.start,
-              style: TextStyle(color: Colors.white, fontSize: 25),
+              style: const TextStyle(color: Colors.white, fontSize: 25),
             )),
         SizedBox(
           height: Sizeconfig.screenheight! / 100,
