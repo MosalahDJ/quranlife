@@ -135,6 +135,19 @@ class SettingPage extends StatelessWidget {
               Obx(
                 () => RadioListTile<String>(
                   title: const Text(
+                    'Français',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  value: 'fr',
+                  groupValue: langCtrl.language.value,
+                  onChanged: (value) {
+                    langCtrl.changeLanguage(value!);
+                  },
+                ),
+              ),
+              Obx(
+                () => RadioListTile<String>(
+                  title: const Text(
                     'العربية',
                     style: TextStyle(fontSize: 15),
                   ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quranlife/core/Utils/constants.dart';
+import 'package:get/get.dart';
 
 class Themes {
 //=================================================lighttheme=======================================================================
@@ -54,7 +55,11 @@ class Themes {
 
 // الاستخدام: عناوين رئيسية في البطاقات أو الأقسام. قد تستخدم في رؤوس الصفحات أو العناصر الهامة.
         titleLarge: TextStyle(
-            fontSize: 22, color: textcolor3, fontWeight: FontWeight.bold),
+            fontSize: 22,
+            color: textcolor3,
+            fontWeight: FontWeight.bold,
+            fontFamily:
+                Get.locale?.languageCode == 'ar' ? 'Cairo' : 'Poppins-Black'),
 
 // الاستخدام: عناوين فرعية داخل البطاقات أو الأقسام. تساعد في تنظيم المحتوى داخل المكونات.
         titleMedium: TextStyle(
@@ -68,11 +73,17 @@ class Themes {
         bodyLarge: TextStyle(
           fontSize: 16,
           color: textcolor3,
+          fontFamily:
+              Get.locale?.languageCode == 'ar' ? 'Cairo' : 'Poppins-Black',
         ),
 
 // الاستخدام: النصوص المتوسطة في المحتوى. تستخدم للفقرات العادية والنصوص التوضيحية.
         bodyMedium: TextStyle(
-            fontSize: 14, color: textcolor3, fontWeight: FontWeight.bold),
+            fontSize: 14,
+            color: textcolor3,
+            fontWeight: FontWeight.bold,
+            fontFamily:
+                Get.locale?.languageCode == 'ar' ? 'Cairo' : 'Poppins-Black'),
 
 // الاستخدام: النصوص الصغيرة في المحتوى. تستخدم في النصوص الأقل أهمية أو النصوص التوضيحية القصيرة.
         bodySmall: TextStyle(
@@ -143,8 +154,12 @@ class Themes {
             fontSize: 24, color: textcolor2dark, fontWeight: FontWeight.bold),
 
 // الاستخدام: عناوين رئيسية في البطاقات أو الأقسام. قد تستخدم في رؤوس الصفحات أو العناصر الهامة.
-        titleLarge: const TextStyle(
-            fontSize: 22, color: Colors.white, fontWeight: FontWeight.bold),
+        titleLarge: TextStyle(
+            fontSize: 22,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontFamily:
+                Get.locale?.languageCode == 'ar' ? 'Cairo' : 'Poppins-Black'),
 
 // الاستخدام: عناوين فرعية داخل البطاقات أو الأقسام. تساعد في تنظيم المحتوى داخل المكونات.
         titleMedium: TextStyle(
@@ -158,11 +173,17 @@ class Themes {
         bodyLarge: TextStyle(
           fontSize: 16,
           color: textcolor3dark,
+          fontFamily:
+              Get.locale?.languageCode == 'ar' ? 'Cairo' : 'Poppins-Black',
         ),
 
 // الاستخدام: النصوص المتوسطة في المحتوى. تستخدم للفقرات العادية والنصوص التوضيحية.
         bodyMedium: TextStyle(
-            fontSize: 14, color: textcolor3dark, fontWeight: FontWeight.bold),
+            fontSize: 14,
+            color: textcolor3dark,
+            fontWeight: FontWeight.bold,
+            fontFamily:
+                Get.locale?.languageCode == 'ar' ? 'Cairo' : 'Poppins-Black'),
 
 // الاستخدام: النصوص الصغيرة في المحتوى. تستخدم في النصوص الأقل أهمية أو النصوص التوضيحية القصيرة.
         bodySmall: TextStyle(

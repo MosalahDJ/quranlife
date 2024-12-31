@@ -5,9 +5,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:quranlife/core/Utils/binding.dart';
 import 'package:quranlife/core/Utils/thems.dart';
 import 'package:quranlife/features/controller/notfication%20controller/notification_initializition.dart';
+import 'package:quranlife/features/controller/settings%20controllers/language_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
 import 'package:quranlife/features/view/splash%20page/splash_view.dart';
 import 'package:quranlife/myrouts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/services.dart';
@@ -17,6 +19,8 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  final prefs = await SharedPreferences.getInstance();
 
   // Force portrait
   SystemChrome.setPreferredOrientations([
@@ -33,16 +37,19 @@ void main() async {
   ]);
 
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-  runApp(const QuranLifeApp());
+  runApp(QuranLifeApp(prefs: prefs));
 }
 
 class QuranLifeApp extends StatelessWidget {
-  const QuranLifeApp({super.key});
+  final SharedPreferences prefs;
+  const QuranLifeApp({super.key, required this.prefs});
 
   @override
   Widget build(BuildContext context) {
     final themeController =
         Get.put<ThemeController>(ThemeController(), permanent: true);
+    final languageController =
+        Get.put<LanguageController>(LanguageController(prefs), permanent: true);
 
     return GetMaterialApp(
       title: 'Quran Life',
@@ -60,7 +67,7 @@ class QuranLifeApp extends StatelessWidget {
       home: const SplashView(),
       getPages: Myrouts.getpages,
       translations: Messages(),
-      locale: const Locale('en', 'US'), // Default locale
+      locale: Locale(languageController.language.value), // Use stored language
       fallbackLocale: const Locale('en', 'US'),
     );
   }

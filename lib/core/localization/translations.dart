@@ -38,7 +38,7 @@ class Messages extends Translations {
           'registration': 'Registration',
 
           // Validation Messages
-          'field_required': '%s is required',
+          'field_required': 'required',
           'valid_email': 'Please enter a valid email address',
           'password_length': 'Password must be at least 6 characters',
           'passwords_match': 'Passwords do not match',
@@ -85,6 +85,7 @@ class Messages extends Translations {
 
           // Prayer Times Page
           'prayer_times': 'Prayer Times',
+          'mawaqit': 'Timings',
           'prayer_board': 'Prayer Board',
           'next_prayer': 'Next Prayer: ',
           'time_remaining': 'Time Remaining: ',
@@ -101,6 +102,32 @@ class Messages extends Translations {
           'asr': 'Asr',
           'maghrib': 'Maghrib',
           'isha': 'Isha',
+
+          // Home Page
+          'refresh_prayer_times': 'Pull to refresh prayer times',
+          'nearest_mosque': 'Nearest Mosque',
+          'daily_wird': 'Daily Wird',
+          'quranlife': 'QuranLife',
+          'category': 'Category',
+
+          // Home Page Categories
+          'prayer_info': 'Prayer Info',
+          'mosque_finder': 'Mosque Finder',
+          'qibla_direction': 'Qibla Direction',
+          'islamic_calendar': 'Islamic Calendar',
+
+          // Quran Page
+          'holy_quran': 'The Holy Qur\'an',
+          'surah': 'Surah',
+          'juz': 'Juz\'',
+          'verse': 'Verse',
+          'surah_name': 'Surah Name',
+          'search_verses': 'Search verses...',
+          'mosque_finder_desc':
+              'Are you new here?\nLooking for a mosque?\nDon\'t worry, we\'ll help you find the nearest mosque.',
+          'find_mosque': 'Find Mosque',
+          'profile_name': 'Mohamed salah',
+          'profile_email': 'mohamedsalah@gmail.com',
         },
         'ar': {
           // Login Page
@@ -136,7 +163,7 @@ class Messages extends Translations {
           'registration': 'التسجيل',
 
           // Validation Messages
-          'field_required': '%s مطلوب',
+          'field_required': 'مطلوب',
           'valid_email': 'يرجى إدخال بريد إلكتروني صحيح',
           'password_length': 'يجب أن تكون كلمة المرور 6 أحرف على الأقل',
           'passwords_match': 'كلمات المرور غير متطابقة',
@@ -183,6 +210,7 @@ class Messages extends Translations {
 
           // Prayer Times Page
           'prayer_times': 'مواقيت الصلاة',
+          'mawaqit': 'مواقيت',
           'prayer_board': 'لوحة الصلوات',
           'next_prayer': 'الصلاة القادمة: ',
           'time_remaining': 'الوقت المتبقي: ',
@@ -199,6 +227,32 @@ class Messages extends Translations {
           'asr': 'العصر',
           'maghrib': 'المغرب',
           'isha': 'العشاء',
+
+          // Home Page
+          'refresh_prayer_times': 'اسحب لتحديث أوقات الصلاة',
+          'nearest_mosque': 'أقرب مسجد اليك',
+          'daily_wird': 'الورد اليومي',
+          'quranlife': 'حياة القرآن',
+          'category': 'أقسام',
+
+          // Home Page Categories
+          'prayer_info': 'معلومات الصلاة',
+          'mosque_finder': 'البحث عن المساجد',
+          'qibla_direction': 'اتجاه القبلة',
+          'islamic_calendar': 'التقويم الهجري',
+
+          // Quran Page
+          'holy_quran': 'القرآن الكريم',
+          'surah': 'سورة',
+          'juz': 'جزء',
+          'verse': 'آية',
+          'surah_name': 'اسم السورة',
+          'search_verses': 'بحث في الآيات...',
+          'mosque_finder_desc':
+              'هل أنت جديد هنا؟\nتبحث عن مسجد؟\nلا تقلق، سنساعدك في العثور على أقرب مسجد.',
+          'find_mosque': 'ابحث عن مسجد',
+          'profile_name': 'محمد صلاح',
+          'profile_email': 'mohamedsalah@gmail.com',
         },
         'fr': {
           // Login Page
@@ -235,7 +289,7 @@ class Messages extends Translations {
           'registration': 'Inscription',
 
           // Validation Messages
-          'field_required': '%s est requis',
+          'field_required': 'requis',
           'valid_email': 'Veuillez entrer une adresse e-mail valide',
           'password_length':
               'Le mot de passe doit contenir au moins 6 caractères',
@@ -283,6 +337,7 @@ class Messages extends Translations {
 
           // Prayer Times Page
           'prayer_times': 'Heures de Prière',
+          'mawaqit': 'Horaires',
           'prayer_board': 'Tableau des Prières',
           'next_prayer': 'Prochaine Prière: ',
           'time_remaining': 'Temps Restant: ',
@@ -295,13 +350,41 @@ class Messages extends Translations {
 
           // Prayer Names (Keep English versions for internal use)
           'fajr': 'Fajr',
-          'sunrise': 'Sunrise',
+          'sunrise': 'lever du soleil',
           'dhuhr': 'Dhuhr',
           'asr': 'Asr',
           'maghrib': 'Maghrib',
           'isha': 'Isha',
+
+          // Home Page
+          'refresh_prayer_times': 'Tirez pour actualiser les heures de prière',
+          'nearest_mosque': 'Mosquée la plus proche',
+          'daily_wird': 'Wird Quotidien',
+          'quranlife': 'Vie du Coran',
+          'category': 'Catégories',
+
+          // Home Page Categories
+          'prayer_info': 'Info Prière',
+          'mosque_finder': 'Chercheur de Mosquée',
+          'qibla_direction': 'Direction Qibla',
+          'islamic_calendar': 'Calendrier Islamique',
+
+          // Quran Page
+          'holy_quran': 'Le Saint Coran',
+          'surah': 'Sourate',
+          'juz': 'Juz\'',
+          'verse': 'Verset',
+          'surah_name': 'Nom de la Sourate',
+          'search_verses': 'Rechercher des versets...',
+          'mosque_finder_desc':
+              'Vous êtes nouveau ici?\nVous cherchez une mosquée?\nNe vous inquiétez pas, nous vous aiderons à trouver la mosquée la plus proche.',
+          'find_mosque': 'Trouver une Mosquée',
+          'profile_name': 'Mohamed salah',
+          'profile_email': 'mohamedsalah@gmail.com',
         },
       };
 }
 
-// edit the localisation for every text appear on the ui in thes pages
+
+
+//make every text apeare on UI of these pages localizeable

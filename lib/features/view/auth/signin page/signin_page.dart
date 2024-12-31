@@ -47,7 +47,6 @@ class SigninPage extends StatelessWidget {
           leading: IconButton(
               onPressed: () {
                 signinctrl.unfocuskeyboardsignin();
-
                 Get.offAll(() => LoginPage(),
                     duration: const Duration(milliseconds: 500),
                     transition: Transition.leftToRight);

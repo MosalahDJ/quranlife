@@ -12,6 +12,7 @@ class SignInFormHelpers {
   Widget buildFormField(
     BuildContext context, {
     required String title,
+    required String hint,
     required TextEditingController controller,
     required FocusNode focusNode,
     required GlobalKey<FormState> formKey,
@@ -24,13 +25,13 @@ class SignInFormHelpers {
         textctrl: controller,
         focusnode: focusNode,
         formtitle: title,
-        hint: "enter_$title".tr.toLowerCase(),
+        hint: hint,
         keyboardtype: keyboardType ?? TextInputType.text,
         obsecure: false,
         isrequired: true,
         validator: (val) {
           if (val == null || val.isEmpty) {
-            return 'field_required'.trParams({'s': title});
+            return 'field_required'.tr;
           }
           if (title == "Email" && !GetUtils.isEmail(val)) {
             return 'valid_email'.tr;
@@ -53,7 +54,7 @@ class SignInFormHelpers {
         textctrl: signinctrl.gendre,
         focusnode: signinctrl.numberfnode,
         isrequired: true,
-        formtitle: "Gender",
+        formtitle: "gender".tr,
         hint: "select_gender".tr,
         keyboardtype: TextInputType.none,
         obsecure: false,
@@ -114,7 +115,7 @@ class SignInFormHelpers {
         ),
         validator: (val) {
           if (val == null || val.isEmpty) {
-            return 'field_required'.trParams({'s': 'gender'.tr});
+            return 'field_required'.tr;
           }
           return null;
         },
@@ -126,6 +127,8 @@ class SignInFormHelpers {
   Widget buildPasswordField(
     BuildContext context, {
     required String title,
+    required String hint,
+    required bool obsecure,
     required TextEditingController controller,
     required GlobalKey<FormState> formKey,
     required bool isConfirmation,
@@ -152,30 +155,27 @@ class SignInFormHelpers {
           }
           return null;
         },
-        suffixbutton: GetBuilder<SignInController>(
-          builder: (c) => IconButton(
-            onPressed: isConfirmation
-                ? signinctrl.visibilityfunc2
-                : signinctrl.visibilityfunc,
-            icon: Icon(
-              isConfirmation
-                  ? (signinctrl.visibility2
-                      ? Icons.visibility_off
-                      : Icons.visibility)
-                  : (signinctrl.visibility
-                      ? Icons.visibility_off
-                      : Icons.visibility),
-              color: Get.isDarkMode ? Colors.white : const Color(0xFF3D3825),
-            ),
+        suffixbutton: IconButton(
+          onPressed: isConfirmation
+              ? signinctrl.visibilityfunc2
+              : signinctrl.visibilityfunc,
+          icon: Icon(
+            isConfirmation
+                ? (signinctrl.visibility2
+                    ? Icons.visibility_off
+                    : Icons.visibility)
+                : (signinctrl.visibility
+                    ? Icons.visibility_off
+                    : Icons.visibility),
+            color: Get.isDarkMode ? Colors.white : const Color(0xFF3D3825),
           ),
         ),
         isrequired: true,
         textctrl: controller,
         formtitle: title,
-        hint: "Enter your $title",
+        hint: hint,
         keyboardtype: TextInputType.emailAddress,
-        obsecure:
-            isConfirmation ? signinctrl.visibility2 : signinctrl.visibility,
+        obsecure: obsecure,
       ),
     );
   }

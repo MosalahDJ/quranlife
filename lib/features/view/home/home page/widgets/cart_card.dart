@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/location_controller.dart';
+import 'package:quranlife/features/controller/settings%20controllers/language_controller.dart';
 
 class CartCard extends StatelessWidget {
   CartCard({super.key, required this.color, required this.elevation});
@@ -12,6 +13,7 @@ class CartCard extends StatelessWidget {
 
   final LocationController locationctrl = Get.find();
   final FetchPrayerFromDate fpfctrl = Get.find();
+  final LanguageController langctrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -33,28 +35,32 @@ class CartCard extends StatelessWidget {
             child: Card(
               elevation: 2,
               color: color,
-              child: const Padding(
-                  padding: EdgeInsets.all(8.0),
+              child: Padding(
+                  padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: [
                       Expanded(
                         flex: 1,
                         child: Column(
                           children: [
-                            Text(
-                                "Are you new here?\nLooking for a mosque?\nDon't worry, we'll help you find the nearest mosque.")
+                            Text("mosque_finder_desc".tr,
+                                style: const TextStyle(color: Colors.black87))
                           ],
                         ),
                       ),
-                      Expanded(flex: 1, child: Column())
+                      const Expanded(flex: 1, child: Column())
                     ],
                   )),
             ),
           ),
           //masjid png image
           Positioned(
-            right: Sizeconfig.screenwidth! / 40,
-            left: Sizeconfig.screenwidth! / 2,
+            right: langctrl.language.value == "ar"
+                ? Sizeconfig.screenwidth! / 2
+                : Sizeconfig.screenwidth! / 40,
+            left: langctrl.language.value == "ar"
+                ? Sizeconfig.screenwidth! / 40
+                : Sizeconfig.screenwidth! / 2,
             bottom: Sizeconfig.screenheight! < 768
                 ? Sizeconfig.screenheight! / 20
                 : Sizeconfig.screenheight! > 1010
@@ -70,7 +76,12 @@ class CartCard extends StatelessWidget {
           //button for going to cart
           Positioned(
               bottom: Sizeconfig.screenheight! / 100,
-              right: Sizeconfig.screenwidth! / 40,
+              right: langctrl.language.value == "ar"
+                  ? Sizeconfig.screenwidth! / 2.05
+                  : Sizeconfig.screenwidth! / 40,
+              left: langctrl.language.value == "ar"
+                  ? Sizeconfig.screenwidth! / 40
+                  : Sizeconfig.screenwidth! / 2.05,
               child: Card(
                 color: Colors.transparent,
                 child: InkWell(
@@ -94,13 +105,13 @@ class CartCard extends StatelessWidget {
                                     ? Sizeconfig.screenheight! / 30
                                     : Sizeconfig.screenheight! / 20,
                             width: Sizeconfig.screenwidth! / 3.5,
-                            child: const Center(
+                            child: Center(
                               child: Text(
                                 textAlign: TextAlign.center,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
-                                "Find Mosque",
-                                style: TextStyle(
+                                "find_mosque".tr,
+                                style: const TextStyle(
                                     fontSize: 15, color: Colors.white),
                               ),
                             ),

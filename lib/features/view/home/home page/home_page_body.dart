@@ -4,6 +4,7 @@ import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
+import 'package:quranlife/features/controller/settings%20controllers/language_controller.dart';
 import 'package:quranlife/features/view/home/Drawer%20page/my_drawer.dart';
 import 'package:quranlife/features/view/home/home%20page/widgets/categories.dart';
 import 'package:quranlife/features/view/home/home%20page/widgets/salawat_pageview.dart';
@@ -20,6 +21,7 @@ class HomePageBody extends StatelessWidget {
   final MyHomeController homectrl = Get.find();
   final GoogleSignoutController signoutctrl = Get.find();
   final FetchPrayerFromDate fpfctrl = Get.find();
+  final LanguageController langctrl = Get.find();
 
   final double _sectionSpacing = 24.0;
   final double _contentPadding = 16.0;
@@ -30,8 +32,8 @@ class HomePageBody extends StatelessWidget {
       drawer: const MyDrawer(),
       appBar: AppBar(
         scrolledUnderElevation: 0,
-        title:
-            Text('QuranLife', style: Theme.of(context).textTheme.headlineSmall),
+        title: Text('quranlife'.tr,
+            style: Theme.of(context).textTheme.headlineSmall),
         centerTitle: true,
       ),
       body: Stack(
@@ -72,17 +74,17 @@ class HomePageBody extends StatelessWidget {
                       SizedBox(height: _sectionSpacing),
 
                       // Categories Section
-                      const ServiceCategorie(),
+                      _buildSectionHeader(context, "category".tr),
+                      ServiceCategorie(),
                       SizedBox(height: _sectionSpacing),
 
                       // Nearest Mosque Section
-                      _buildSectionHeader(context, "Nearest Mosque"),
                       const SizedBox(height: 12),
-                      _buildMosqueCard(),
+                      _buildMosqueCard(context),
                       SizedBox(height: _sectionSpacing),
 
                       // Daily Wird Section
-                      _buildSectionHeader(context, "Daily Wird"),
+                      _buildSectionHeader(context, "daily_wird".tr),
                       const SizedBox(height: 12),
                       _buildWirdCard(),
                       SizedBox(height: _sectionSpacing),
@@ -106,19 +108,40 @@ class HomePageBody extends StatelessWidget {
     );
   }
 
-  Widget _buildMosqueCard() {
-    return SizedBox(
-      height: Sizeconfig.screenheight! < 768
-          ? Sizeconfig.screenheight! / 3.7
-          : Sizeconfig.screenheight! > 1010
-              ? Sizeconfig.screenheight! / 6
-              : Sizeconfig.screenheight! / 5,
-      child: CartCard(
-        elevation: 2,
-        color: Get.isDarkMode
-            ? kmaincolor2dark.withOpacity(0.7)
-            : Colors.white.withOpacity(0.7),
-      ),
+  Widget _buildMosqueCard(context) {
+    return Stack(
+      children: [
+        Positioned(
+          top: 0,
+          left:
+              langctrl.language.value == "ar" ? Sizeconfig.screenwidth! / 3 : 0,
+          right: langctrl.language.value == "ar"
+              ? 0
+              : Sizeconfig.screenwidth! / 1.6,
+          child: Card(
+              color: Colors.transparent,
+              elevation: 0,
+              child: Text("nearest_mosque".tr,
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ))),
+        ),
+        Positioned(
+          child: SizedBox(
+            height: Sizeconfig.screenheight! < 768
+                ? Sizeconfig.screenheight! / 3.7
+                : Sizeconfig.screenheight! > 1010
+                    ? Sizeconfig.screenheight! / 6
+                    : Sizeconfig.screenheight! / 5,
+            child: CartCard(
+              elevation: 2,
+              color: Get.isDarkMode
+                  ? kmaincolor2dark.withOpacity(0.7)
+                  : Colors.white.withOpacity(0.7),
+            ),
+          ),
+        ),
+      ],
     );
   }
 

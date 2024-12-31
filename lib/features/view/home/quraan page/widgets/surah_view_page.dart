@@ -69,7 +69,7 @@ class Surahviewpage extends StatelessWidget {
                     height: Sizeconfig.screenheight! / 15,
                     width: Sizeconfig.screenwidth! / 2.5,
                     alignment: Alignment.center,
-                    child: const Text("Surah Name"),
+                    child: Text("surah_name".tr),
                   ),
                 ),
               ),

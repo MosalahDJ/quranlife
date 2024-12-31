@@ -8,6 +8,7 @@ import 'package:quranlife/features/controller/prayer%20times%20controller/locati
 import 'package:quranlife/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/deterimine_prayers_controller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/times_page_controller.dart';
+import 'package:quranlife/features/controller/settings%20controllers/language_controller.dart';
 import 'package:quranlife/features/controller/spalshview%20controller/splash_view_controller.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 
@@ -31,6 +32,7 @@ class CurrentPrayTime extends StatelessWidget {
   final TimesPageController timespagectrl = Get.find();
   final SplashViewController initialctrl = Get.find();
   final GetResponseBody grbctrl = Get.find();
+  final LanguageController langctrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -46,12 +48,17 @@ class CurrentPrayTime extends StatelessWidget {
           //date text
           Positioned(
             top: 0,
-            left: 0,
+            left: langctrl.language.value == "ar"
+                ? Sizeconfig.screenwidth! / 1.6
+                : 0,
+            right: langctrl.language.value == "ar"
+                ? 0
+                : Sizeconfig.screenwidth! / 1.6,
             child: Card(
                 color: Colors.transparent,
                 elevation: 0,
                 child: Text(
-                  "Mawaqite",
+                  "mawaqit".tr,
                   style: TextStyle(color: mawaqitTextColor, fontSize: 22),
                 )),
           ),
@@ -158,7 +165,12 @@ class CurrentPrayTime extends StatelessWidget {
                   : Sizeconfig.screenheight! > 1010
                       ? Sizeconfig.screenheight! / 200
                       : Sizeconfig.screenheight! / 100,
-              right: Sizeconfig.screenwidth! / 40,
+              right: langctrl.language.value == "ar"
+                  ? Sizeconfig.screenwidth! / 2.05
+                  : Sizeconfig.screenwidth! / 40,
+              left: langctrl.language.value == "ar"
+                  ? Sizeconfig.screenwidth! / 40
+                  : Sizeconfig.screenwidth! / 2.05,
               child: Card(
                 color: Colors.transparent,
                 child: InkWell(
@@ -215,6 +227,7 @@ class CurrentPrayTime extends StatelessWidget {
                                 : Center(
                                     child: GetBuilder<LocationController>(
                                       builder: (c) => Text(
+                                        textDirection: TextDirection.ltr,
                                         textAlign: TextAlign.center,
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
@@ -238,8 +251,12 @@ class CurrentPrayTime extends StatelessWidget {
               )),
           //masjid png image
           Positioned(
-            right: Sizeconfig.screenwidth! / 50,
-            left: Sizeconfig.screenwidth! / 2.1,
+            right: langctrl.language.value == "ar"
+                ? Sizeconfig.screenwidth! / 2.1
+                : Sizeconfig.screenwidth! / 50,
+            left: langctrl.language.value == "ar"
+                ? Sizeconfig.screenwidth! / 50
+                : Sizeconfig.screenwidth! / 2.1,
             bottom: Sizeconfig.screenheight! < 768
                 ? Sizeconfig.screenheight! / 9
                 : Sizeconfig.screenheight! > 1010

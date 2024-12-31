@@ -38,10 +38,10 @@ class AyahViewPage extends StatelessWidget {
                       color: Color.fromARGB(255, 229, 240, 219),
                       fontSize: 15,
                       fontFamily: "Poppins-Black"),
-                  decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      hintText: "Search verses...",
-                      hintStyle: TextStyle(
+                  decoration: InputDecoration(
+                      border: const UnderlineInputBorder(),
+                      hintText: "search_verses".tr,
+                      hintStyle: const TextStyle(
                           color: Color.fromARGB(255, 219, 239, 201),
                           fontSize: 15)),
                 )),

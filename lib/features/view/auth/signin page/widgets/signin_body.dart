@@ -91,6 +91,7 @@ class SigneinPageBody extends StatelessWidget {
                               child: signInFormHelpers.buildFormField(
                                 context,
                                 title: "first_name".tr,
+                                hint: "enter_first_name".tr,
                                 controller: signinctrl.name,
                                 focusNode: signinctrl.namefnode,
                                 formKey: txtvalctrl.signinnamestate,
@@ -101,6 +102,7 @@ class SigneinPageBody extends StatelessWidget {
                               child: signInFormHelpers.buildFormField(
                                 context,
                                 title: "last_name".tr,
+                                hint: "enter_last_name".tr,
                                 controller: signinctrl.lastname,
                                 focusNode: signinctrl.lastnamefnode,
                                 formKey: txtvalctrl.signinlastnamestate,
@@ -118,6 +120,7 @@ class SigneinPageBody extends StatelessWidget {
                         signInFormHelpers.buildFormField(
                           context,
                           title: "email".tr,
+                          hint: "enter_email".tr,
                           controller: signinctrl.emailcontroller,
                           focusNode: signinctrl.emailfnodesign,
                           formKey: txtvalctrl.signinemailstate,
@@ -126,20 +129,28 @@ class SigneinPageBody extends StatelessWidget {
                         const SizedBox(height: 20),
 
                         // Password fields
-                        signInFormHelpers.buildPasswordField(
-                          context,
-                          title: "password".tr,
-                          controller: signinctrl.password,
-                          formKey: txtvalctrl.signinpasswordstate,
-                          isConfirmation: false,
+                        GetBuilder<SignInController>(
+                          builder: (c) => signInFormHelpers.buildPasswordField(
+                            context,
+                            title: "password".tr,
+                            hint: "enter_password".tr,
+                            obsecure: signinctrl.visibility,
+                            controller: signinctrl.password,
+                            formKey: txtvalctrl.signinpasswordstate,
+                            isConfirmation: false,
+                          ),
                         ),
                         const SizedBox(height: 20),
-                        signInFormHelpers.buildPasswordField(
-                          context,
-                          title: "confirm_password".tr,
-                          controller: signinctrl.password2,
-                          formKey: txtvalctrl.signinpasswordstate2,
-                          isConfirmation: true,
+                        GetBuilder<SignInController>(
+                          builder: (c) => signInFormHelpers.buildPasswordField(
+                            context,
+                            title: "confirm_password".tr,
+                            hint: "enter_password".tr,
+                            obsecure: signinctrl.visibility2,
+                            controller: signinctrl.password2,
+                            formKey: txtvalctrl.signinpasswordstate2,
+                            isConfirmation: true,
+                          ),
                         ),
                       ],
                     ),

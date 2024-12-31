@@ -73,22 +73,23 @@ class ProfilePage extends StatelessWidget {
                       SizedBox(
                         width: Sizeconfig.screenwidth! / 20,
                       ),
-                      const Column(
+                      Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Text(
-                            "Mohamed salah",
+                            "profile_name".tr, // Replace "Mohamed salah"
                             textAlign: TextAlign.start,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                             ),
                           ),
                           Text(
-                            "mohamedsalah@gmail.com",
+                            "profile_email"
+                                .tr, // Replace "mohamedsalah@gmail.com"
                             textAlign: TextAlign.start,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                             ),
                           )

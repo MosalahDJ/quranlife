@@ -25,8 +25,8 @@ class QuraanPage extends StatelessWidget {
           appBar: AppBar(
             centerTitle: true,
             backgroundColor: kmaincolor,
-            title: const Text(
-              "The Holy Qur'an",
+            title: Text(
+              "holy_quran".tr,
               textAlign: TextAlign.center,
             ),
 
@@ -37,18 +37,18 @@ class QuraanPage extends StatelessWidget {
                 labelColor: kmaincolor4,
                 indicatorColor: kmaincolor4,
                 dividerColor: kmaincolor,
-                tabs: const [
+                tabs: [
                   Tab(
                     icon: Icon(FlutterIslamicIcons.quran),
-                    child: Text("Surah"),
+                    child: Text("surah".tr),
                   ),
                   Tab(
                     icon: Icon(FlutterIslamicIcons.quran),
-                    child: Text("Juz'"),
+                    child: Text("juz".tr),
                   ),
                   Tab(
                     icon: Icon(FlutterIslamicIcons.quran),
-                    child: Text("Verse"),
+                    child: Text("verse".tr),
                   ),
                 ]),
           ),
