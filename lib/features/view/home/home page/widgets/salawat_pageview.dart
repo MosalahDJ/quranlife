@@ -49,6 +49,7 @@ class SalawatPageview extends StatelessWidget {
 
         //Salawattime
         Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SizedBox(
               height: (Sizeconfig.screenheight! < 768
