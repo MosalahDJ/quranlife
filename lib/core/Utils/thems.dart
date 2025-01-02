@@ -9,7 +9,7 @@ class Themes {
       bottomNavigationBarTheme:
           BottomNavigationBarThemeData(backgroundColor: kmaincolor3),
       brightness: Brightness.light,
-      fontFamily: "Poppins-Black",
+      fontFamily: Get.locale?.languageCode == 'ar' ? 'Cairo' : 'Poppins-Black',
       appBarTheme: AppBarTheme(backgroundColor: kmaincolor),
       scaffoldBackgroundColor: kmaincolor3,
       dialogBackgroundColor: kmaincolor3,
@@ -109,7 +109,7 @@ class Themes {
       bottomNavigationBarTheme:
           BottomNavigationBarThemeData(backgroundColor: kmaincolor3dark),
       brightness: Brightness.dark,
-      fontFamily: "Poppins-Black",
+      fontFamily: Get.locale?.languageCode == 'ar' ? 'Cairo' : 'Poppins-Black',
       appBarTheme: AppBarTheme(backgroundColor: kmaincolor),
       scaffoldBackgroundColor: kmaincolor3dark,
       dialogBackgroundColor: kmaincolor3dark,

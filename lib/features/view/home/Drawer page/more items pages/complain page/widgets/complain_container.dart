@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/features/view/home/Drawer%20page/more%20items%20pages/complain%20page/widgets/complain_form.dart';
+import 'package:get/get.dart';
 
 class ComplainContainer extends StatelessWidget {
   const ComplainContainer({super.key});
@@ -18,14 +19,14 @@ class ComplainContainer extends StatelessWidget {
           ),
           height: Sizeconfig.screenheight! / 12,
           alignment: Alignment.center,
-          child: const Row(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "How Can We Help You?",
-                style: TextStyle(color: Colors.white, fontSize: 18),
+                'how_can_we_help'.tr,
+                style: const TextStyle(color: Colors.white, fontSize: 18),
               ),
-              Icon(
+              const Icon(
                 size: 30,
                 Icons.face,
                 color: Colors.white,
@@ -37,30 +38,28 @@ class ComplainContainer extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              const ComplainForm(
-                titletext: "Name",
+              ComplainForm(
+                titletext: 'name'.tr,
                 maxlines: 1,
               ),
-              const ComplainForm(
-                titletext: "Email",
+              ComplainForm(
+                titletext: 'email'.tr,
                 maxlines: 1,
               ),
-              const ComplainForm(
-                titletext: "Description",
+              ComplainForm(
+                titletext: 'description'.tr,
                 maxlines: 5,
               ),
               ElevatedButton(
                   style: ButtonStyle(
                       elevation: const WidgetStatePropertyAll(10),
-                      textStyle: const WidgetStatePropertyAll(TextStyle(
-                          fontFamily: "Poppins-Black",
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold)),
+                      textStyle: const WidgetStatePropertyAll(
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                       backgroundColor: WidgetStatePropertyAll(kmaincolor)),
                   onPressed: () {},
-                  child: const Text(
-                    "Send Message",
-                    style: TextStyle(color: Colors.white),
+                  child: Text(
+                    'send_message'.tr,
+                    style: const TextStyle(color: Colors.white),
                   ))
             ],
           ),

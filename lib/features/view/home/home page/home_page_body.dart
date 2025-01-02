@@ -117,11 +117,13 @@ class HomePageBody extends StatelessWidget {
               langctrl.language.value == "ar" ? Sizeconfig.screenwidth! / 3 : 0,
           right: langctrl.language.value == "ar"
               ? 0
-              : Sizeconfig.screenwidth! / 1.6,
+              : langctrl.language.value == "fr"
+                  ? Sizeconfig.screenwidth! / 9
+                  : Sizeconfig.screenwidth! / 4,
           child: Card(
               color: Colors.transparent,
               elevation: 0,
-              child: Text("nearest_mosque".tr,
+              child: Text("search_for_a_mosque".tr,
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.bold,
                       ))),
@@ -132,7 +134,7 @@ class HomePageBody extends StatelessWidget {
                 ? Sizeconfig.screenheight! / 3.7
                 : Sizeconfig.screenheight! > 1010
                     ? Sizeconfig.screenheight! / 6
-                    : Sizeconfig.screenheight! / 5,
+                    : Sizeconfig.screenheight! / 4.5,
             child: CartCard(
               elevation: 2,
               color: Get.isDarkMode

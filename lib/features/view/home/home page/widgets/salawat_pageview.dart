@@ -90,19 +90,19 @@ class SalawatPageview extends StatelessWidget {
                             Salwatpageview(
                               icon:
                                   "lib/core/assets/images/salat_icons/fajr.png",
-                              salatname: "Fajr",
+                              salatname: "fajr".tr,
                               salattime: "Fajr",
                             ),
                             Salwatpageview(
                               icon:
                                   "lib/core/assets/images/salat_icons/fajr.png",
-                              salatname: "Sunrise",
+                              salatname: "sunrise".tr,
                               salattime: "Sunrise",
                             ),
                             Salwatpageview(
                               icon:
                                   "lib/core/assets/images/salat_icons/duhr.png",
-                              salatname: "Dhuhr",
+                              salatname: "dhuhr".tr,
                               salattime: "Dhuhr",
                             ),
                           ],
@@ -113,19 +113,19 @@ class SalawatPageview extends StatelessWidget {
                             Salwatpageview(
                               icon:
                                   "lib/core/assets/images/salat_icons/ASR.png",
-                              salatname: "Asr",
+                              salatname: "asr".tr,
                               salattime: "Asr",
                             ),
                             Salwatpageview(
                               icon:
                                   "lib/core/assets/images/salat_icons/MAGHRIB.png",
-                              salatname: "Maghrib",
+                              salatname: "maghrib".tr,
                               salattime: "Maghrib",
                             ),
                             Salwatpageview(
                               icon:
                                   "lib/core/assets/images/salat_icons/ISHA.png",
-                              salatname: "Isha",
+                              salatname: "isha".tr,
                               salattime: "Isha",
                             ),
                           ],

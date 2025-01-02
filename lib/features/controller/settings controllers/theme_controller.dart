@@ -26,6 +26,7 @@ class ThemeController extends GetxController {
     String? savedTheme = prefs.getString('theme');
     //if it not null selectedTheme = savedTheme
     if (savedTheme != null) {
+      Get.updateLocale(Locale(prefs.getString('language') ?? 'en'));
       selectedTheme.value = AppTheme.values.firstWhere(
         (e) => e.toString() == savedTheme,
         // if it null use AppTheme.system as value

@@ -105,7 +105,7 @@ class Messages extends Translations {
 
           // Home Page
           'refresh_prayer_times': 'Pull to refresh prayer times',
-          'nearest_mosque': 'Nearest Mosque',
+          'search_for_a_mosque': 'Search for a mosque',
           'daily_wird': 'Daily Wird',
           'quranlife': 'QuranLife',
           'category': 'Category',
@@ -124,10 +124,60 @@ class Messages extends Translations {
           'surah_name': 'Surah Name',
           'search_verses': 'Search verses...',
           'mosque_finder_desc':
-              'Are you new here?\nLooking for a mosque?\nDon\'t worry, we\'ll help you find the nearest mosque.',
+              'Looking for a mosque?\nDon\'t worry, we\'ll help you find the nearest mosque.',
           'find_mosque': 'Find Mosque',
           'profile_name': 'Mohamed salah',
           'profile_email': 'mohamedsalah@gmail.com',
+
+          // Hijri Calendar Page
+          'hijri_calendar': 'Hijri Calendar',
+          'important_notes': 'Important Notes About Islamic Occasions',
+          'note_yearly_shift':
+              'Islamic occasions do not occur in the same Gregorian months each year. They move forward by 11 days annually.',
+          'note_ramadan':
+              'Ramadan occurs in different Gregorian months as it moves through all months of the year over time.',
+          'note_association':
+              'Do not associate any Islamic occasion with a specific Gregorian month.',
+          'note_guidelines':
+              'Please follow your country\'s Religious Affairs Directory guidelines for accurate religious occasion dates.',
+
+          // Referral Page
+          'referral_page': 'Referral Page',
+          'share_app': 'Share this Health App with Your Friends',
+          'share_description':
+              'Share our health-friendly application with your friends. Give them a chance to track their food calories, vitamins, and other features in this app.',
+          'your_referral_link': 'Your Referral Link:',
+          'or_share_with': 'Or Share with:',
+
+          // Contact/Complain Page
+          'contact_us': 'Contact Us',
+          'how_can_we_help': 'How Can We Help You?',
+          'contact_description':
+              'We value your feedback. Please use the form below to send us your questions, concerns, or suggestions. We\'ll get back to you as soon as possible.',
+          'name': 'Name',
+          'description': 'Description',
+          'send_message': 'Send Message',
+
+          // Drawer Menu
+          'my_quran': 'My Quran',
+          'bookmarks': 'Bookmarks',
+          'about_us': 'About Us',
+          'settings': 'Settings',
+          'help_feedback': 'Help & Feedback',
+          'app_version': 'QuranLife v1.0.0',
+
+          // Settings Page
+          'theme_mode': 'Theme mode',
+          'system_theme': 'System Theme',
+          'light_theme': 'Light Theme',
+          'dark_theme': 'Dark Theme',
+          'notifications': 'Notifications',
+          'adhan_notifications': 'Adhan notifications',
+          'adhkar_notifications': 'Adhkar notifications',
+          'quran_notifications': 'Quran notifications',
+          'arabic': 'Arabic',
+          'english': 'English',
+          'french': 'French',
         },
         'ar': {
           // Login Page
@@ -230,7 +280,7 @@ class Messages extends Translations {
 
           // Home Page
           'refresh_prayer_times': 'اسحب لتحديث أوقات الصلاة',
-          'nearest_mosque': 'أقرب مسجد اليك',
+          'search_for_a_mosque': 'البحث عن مسجد',
           'daily_wird': 'الورد اليومي',
           'quranlife': 'حياة القرآن',
           'category': 'أقسام',
@@ -249,10 +299,59 @@ class Messages extends Translations {
           'surah_name': 'اسم السورة',
           'search_verses': 'بحث في الآيات...',
           'mosque_finder_desc':
-              'هل أنت جديد هنا؟\nتبحث عن مسجد؟\nلا تقلق، سنساعدك في العثور على أقرب مسجد.',
+              'تبحث عن مسجد؟\nسنساعدك في العثور على أقرب مسجد اليك.',
           'find_mosque': 'ابحث عن مسجد',
           'profile_name': 'محمد صلاح',
           'profile_email': 'mohamedsalah@gmail.com',
+
+          // Hijri Calendar Page
+          'hijri_calendar': 'التقويم الهجري',
+          'important_notes': 'ملاحظات مهمة حول المناسبات الإسلامية',
+          'note_yearly_shift':
+              'المناسبات الإسلامية لا تقع في نفس الشهور الميلادية كل عام. تتقدم 11 يوماً سنوياً.',
+          'note_ramadan':
+              'يأتي رمضان في شهور ميلادية مختلفة حيث يتنقل عبر جميع شهور السنة مع مرور الوقت.',
+          'note_association': 'لا تربط أي مناسبة إسلامية بشهر ميلادي محدد.',
+          'note_guidelines':
+              'يرجى اتباع إرشادات مديرية الشؤون الدينية في بلدك للحصول على تواريخ دقيقة للمناسبات الدينية.',
+
+          // Referral Page
+          'referral_page': 'صفحة الإحالة',
+          'share_app': 'شارك هذا التطبيق الصحي مع أصدقائك',
+          'share_description':
+              'شارك تطبيقنا الصحي مع أصدقائك. امنحهم فرصة لتتبع السعرات الحرارية والفيتامينات والميزات الأخرى في هذا التطبيق.',
+          'your_referral_link': 'رابط الإحالة الخاص بك:',
+          'or_share_with': 'أو شارك عبر:',
+
+          // Contact/Complain Page
+          'contact_us': 'اتصل بنا',
+          'how_can_we_help': 'كيف يمكننا مساعدتك؟',
+          'contact_description':
+              'نحن نقدر ملاحظاتك. يرجى استخدام النموذج أدناه لإرسال أسئلتك أو مخاوفك أو اقتراحاتك. سنعود إليك في أقرب وقت ممكن.',
+          'name': 'الاسم',
+          'description': 'الوصف',
+          'send_message': 'إرسال الرسالة',
+
+          // Drawer Menu
+          'my_quran': 'قرآني',
+          'bookmarks': 'المفضلة',
+          'about_us': 'من نحن',
+          'settings': 'الإعدادات',
+          'help_feedback': 'المساعدة والتعليقات',
+          'app_version': 'حياة القرآن نسخة ١.٠.٠',
+
+          // Settings Page
+          'theme_mode': 'مظهر التطبيق',
+          'system_theme': 'مظهر النظام',
+          'light_theme': 'المظهر الفاتح',
+          'dark_theme': 'المظهر الداكن',
+          'notifications': 'الإشعارات',
+          'adhan_notifications': 'إشعارات الأذان',
+          'adhkar_notifications': 'إشعارات الأذكار',
+          'quran_notifications': 'إشعارات القرآن',
+          'arabic': 'العربية',
+          'english': 'الإنجليزية',
+          'french': 'الفرنسية',
         },
         'fr': {
           // Login Page
@@ -350,7 +449,7 @@ class Messages extends Translations {
 
           // Prayer Names (Keep English versions for internal use)
           'fajr': 'Fajr',
-          'sunrise': 'lever du soleil',
+          'sunrise': 'lv du soleil',
           'dhuhr': 'Dhuhr',
           'asr': 'Asr',
           'maghrib': 'Maghrib',
@@ -358,7 +457,7 @@ class Messages extends Translations {
 
           // Home Page
           'refresh_prayer_times': 'Tirez pour actualiser les heures de prière',
-          'nearest_mosque': 'Mosquée la plus proche',
+          'search_for_a_mosque': 'Recherche d’une mosquée',
           'daily_wird': 'Wird Quotidien',
           'quranlife': 'Vie du Coran',
           'category': 'Catégories',
@@ -377,10 +476,60 @@ class Messages extends Translations {
           'surah_name': 'Nom de la Sourate',
           'search_verses': 'Rechercher des versets...',
           'mosque_finder_desc':
-              'Vous êtes nouveau ici?\nVous cherchez une mosquée?\nNe vous inquiétez pas, nous vous aiderons à trouver la mosquée la plus proche.',
+              'Vous cherchez une mosquée?\nnous vous aiderons à trouver la mosquée la plus proche.',
           'find_mosque': 'Trouver une Mosquée',
           'profile_name': 'Mohamed salah',
           'profile_email': 'mohamedsalah@gmail.com',
+
+          // Hijri Calendar Page
+          'hijri_calendar': 'Calendrier Hijri',
+          'important_notes': 'Notes Importantes sur les Occasions Islamiques',
+          'note_yearly_shift':
+              'Les occasions islamiques ne se produisent pas dans les mêmes mois grégoriens chaque année. Elles avancent de 11 jours par an.',
+          'note_ramadan':
+              'Le Ramadan se produit dans différents mois grégoriens car il se déplace à travers tous les mois de l\'année au fil du temps.',
+          'note_association':
+              'N\'associez pas une occasion islamique à un mois grégorien spécifique.',
+          'note_guidelines':
+              'Veuillez suivre les directives de la Direction des Affaires Religieuses de votre pays pour des dates précises des occasions religieuses.',
+
+          // Referral Page
+          'referral_page': 'Referral Page',
+          'share_app': 'Share this Health App with Your Friends',
+          'share_description':
+              'Share our health-friendly application with your friends. Give them a chance to track their food calories, vitamins, and other features in this app.',
+          'your_referral_link': 'Your Referral Link:',
+          'or_share_with': 'Or Share with:',
+
+          // Contact/Complain Page
+          'contact_us': 'Contact Us',
+          'how_can_we_help': 'How Can We Help You?',
+          'contact_description':
+              'We value your feedback. Please use the form below to send us your questions, concerns, or suggestions. We\'ll get back to you as soon as possible.',
+          'name': 'Name',
+          'description': 'Description',
+          'send_message': 'Send Message',
+
+          // Drawer Menu
+          'my_quran': 'My Quran',
+          'bookmarks': 'Bookmarks',
+          'about_us': 'About Us',
+          'settings': 'Settings',
+          'help_feedback': 'Help & Feedback',
+          'app_version': 'QuranLife v1.0.0',
+
+          // Settings Page
+          'theme_mode': 'Mode d\'affichage',
+          'system_theme': 'Thème système',
+          'light_theme': 'Thème clair',
+          'dark_theme': 'Thème sombre',
+          'notifications': 'Notifications',
+          'adhan_notifications': 'Notifications Adhan',
+          'adhkar_notifications': 'Notifications Adhkar',
+          'quran_notifications': 'Notifications Coran',
+          'arabic': 'arabe',
+          'english': 'anglais',
+          'french': 'français',
         },
       };
 }

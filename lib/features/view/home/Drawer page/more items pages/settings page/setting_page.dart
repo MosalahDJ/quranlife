@@ -19,11 +19,9 @@ class SettingPage extends StatelessWidget {
         scrolledUnderElevation: 0,
         elevation: 0,
         centerTitle: true,
-        title: const Text(
-          "Settings",
-          style: TextStyle(
-            color: Colors.white,
-          ),
+        title: Text(
+          'settings'.tr,
+          style: const TextStyle(color: Colors.white),
         ),
         backgroundColor: kmaincolor,
       ),
@@ -33,13 +31,11 @@ class SettingPage extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Column(children: [
           //themedata list tile
-          Settingtype(title: "Theme mode", listwidget: [
+          Settingtype(title: "theme_mode".tr, listwidget: [
             Obx(
               () => RadioListTile<AppTheme>(
-                title: const Text(
-                  'System Theme',
-                  style: TextStyle(fontSize: 15),
-                ),
+                title: Text('system_theme'.tr,
+                    style: const TextStyle(fontSize: 15)),
                 value: AppTheme.system,
                 groupValue: themctrl.selectedTheme.value,
                 onChanged: (value) {
@@ -49,10 +45,8 @@ class SettingPage extends StatelessWidget {
             ),
             Obx(
               () => RadioListTile<AppTheme>(
-                title: const Text(
-                  'Light Theme',
-                  style: TextStyle(fontSize: 15),
-                ),
+                title: Text('light_theme'.tr,
+                    style: const TextStyle(fontSize: 15)),
                 value: AppTheme.light,
                 groupValue: themctrl.selectedTheme.value,
                 onChanged: (value) {
@@ -62,10 +56,8 @@ class SettingPage extends StatelessWidget {
             ),
             Obx(
               () => RadioListTile<AppTheme>(
-                title: const Text(
-                  'Dark Theme',
-                  style: TextStyle(fontSize: 15),
-                ),
+                title:
+                    Text('dark_theme'.tr, style: const TextStyle(fontSize: 15)),
                 value: AppTheme.dark,
                 groupValue: themctrl.selectedTheme.value,
                 onChanged: (value) {
@@ -74,56 +66,28 @@ class SettingPage extends StatelessWidget {
               ),
             ),
           ]),
-          Settingtype(
-            title: "Notifications",
-            listwidget: [
-              //adhan
-              Obx(() => SwitchListTile(
-                  title: const Text(
-                    "Adhan notifications",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  value: wkmctrl.adhansubscribition.value,
-                  onChanged: (val) {
-                    wkmctrl.adhansubscribition.value =
-                        !wkmctrl.adhansubscribition.value;
-                    wkmctrl.onChangeSubscription(NotificationType.adhan, val);
-                  })),
-              //adkhar
-              Obx(() => SwitchListTile(
-                  title: const Text(
-                    "Adhkar notifications",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  value: wkmctrl.adhkarsubscribition.value,
-                  onChanged: (val) {
-                    wkmctrl.adhkarsubscribition.value =
-                        !wkmctrl.adhkarsubscribition.value;
-                    wkmctrl.onChangeSubscription(NotificationType.adhkar, val);
-                  })),
-              //quraan
-              Obx(() => SwitchListTile(
-                  title: const Text(
-                    "Quraan notifications",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  value: wkmctrl.quraansubscribition.value,
-                  onChanged: (val) {
-                    wkmctrl.quraansubscribition.value =
-                        !wkmctrl.quraansubscribition.value;
-                    wkmctrl.onChangeSubscription(NotificationType.quraan, val);
-                  })),
-            ],
-          ),
           // Add language settings section
           Settingtype(
             title: "Language",
             listwidget: [
               Obx(
                 () => RadioListTile<String>(
-                  title: const Text(
-                    'English',
-                    style: TextStyle(fontSize: 15),
+                  title: Text(
+                    'arabic'.tr,
+                    style: const TextStyle(fontSize: 15),
+                  ),
+                  value: 'ar',
+                  groupValue: langCtrl.language.value,
+                  onChanged: (value) {
+                    langCtrl.changeLanguage(value!);
+                  },
+                ),
+              ),
+              Obx(
+                () => RadioListTile<String>(
+                  title: Text(
+                    'english'.tr,
+                    style: const TextStyle(fontSize: 15),
                   ),
                   value: 'en',
                   groupValue: langCtrl.language.value,
@@ -134,9 +98,9 @@ class SettingPage extends StatelessWidget {
               ),
               Obx(
                 () => RadioListTile<String>(
-                  title: const Text(
-                    'Français',
-                    style: TextStyle(fontSize: 15),
+                  title: Text(
+                    'french'.tr,
+                    style: const TextStyle(fontSize: 15),
                   ),
                   value: 'fr',
                   groupValue: langCtrl.language.value,
@@ -145,19 +109,41 @@ class SettingPage extends StatelessWidget {
                   },
                 ),
               ),
-              Obx(
-                () => RadioListTile<String>(
-                  title: const Text(
-                    'العربية',
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  value: 'ar',
-                  groupValue: langCtrl.language.value,
-                  onChanged: (value) {
-                    langCtrl.changeLanguage(value!);
-                  },
-                ),
-              ),
+            ],
+          ),
+          Settingtype(
+            title: 'notifications'.tr,
+            listwidget: [
+              //adhan
+              Obx(() => SwitchListTile(
+                  title: Text('adhan_notifications'.tr,
+                      style: const TextStyle(fontSize: 15)),
+                  value: wkmctrl.adhansubscribition.value,
+                  onChanged: (val) {
+                    wkmctrl.adhansubscribition.value =
+                        !wkmctrl.adhansubscribition.value;
+                    wkmctrl.onChangeSubscription(NotificationType.adhan, val);
+                  })),
+              //adkhar
+              Obx(() => SwitchListTile(
+                  title: Text('adhkar_notifications'.tr,
+                      style: const TextStyle(fontSize: 15)),
+                  value: wkmctrl.adhkarsubscribition.value,
+                  onChanged: (val) {
+                    wkmctrl.adhkarsubscribition.value =
+                        !wkmctrl.adhkarsubscribition.value;
+                    wkmctrl.onChangeSubscription(NotificationType.adhkar, val);
+                  })),
+              //quraan
+              Obx(() => SwitchListTile(
+                  title: Text('quran_notifications'.tr,
+                      style: const TextStyle(fontSize: 15)),
+                  value: wkmctrl.quraansubscribition.value,
+                  onChanged: (val) {
+                    wkmctrl.quraansubscribition.value =
+                        !wkmctrl.quraansubscribition.value;
+                    wkmctrl.onChangeSubscription(NotificationType.quraan, val);
+                  })),
             ],
           ),
         ]),
@@ -182,8 +168,10 @@ class Settingtype extends StatelessWidget {
         Text(
           title,
           textAlign: TextAlign.start,
-          style: const TextStyle(
-              fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              fontSize: 18,
+              color: Get.isDarkMode ? Colors.white : Colors.black,
+              fontWeight: FontWeight.bold),
         ),
         Column(children: listwidget),
       ],

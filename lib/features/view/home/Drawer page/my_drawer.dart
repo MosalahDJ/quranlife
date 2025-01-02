@@ -70,10 +70,10 @@ class MyDrawer extends Drawer {
   Widget _buildMainMenuSection(BuildContext context) {
     return Column(
       children: [
-        _buildMenuItem(context, "Home", Icons.home_outlined),
-        _buildMenuItem(context, "My Quran", Icons.book_outlined),
-        _buildMenuItem(context, "Bookmarks", Icons.bookmark_border),
-        _buildMenuItem(context, "About Us", Icons.info_outline),
+        _buildMenuItem(context, 'home'.tr, Icons.home_outlined),
+        _buildMenuItem(context, 'my_quran'.tr, Icons.book_outlined),
+        _buildMenuItem(context, 'bookmarks'.tr, Icons.bookmark_border),
+        _buildMenuItem(context, 'about_us'.tr, Icons.info_outline),
       ],
     );
   }
@@ -81,8 +81,8 @@ class MyDrawer extends Drawer {
   Widget _buildSettingsSection(BuildContext context) {
     return Column(
       children: [
-        _buildMenuItem(context, "Settings", Icons.settings_outlined),
-        _buildMenuItem(context, "Help & Feedback", Icons.help_outline),
+        _buildMenuItem(context, 'settings'.tr, Icons.settings_outlined),
+        _buildMenuItem(context, 'help_feedback'.tr, Icons.help_outline),
       ],
     );
   }
@@ -109,7 +109,7 @@ class MyDrawer extends Drawer {
         children: [
           const Divider(),
           Text(
-            "QuranLife v1.0.0",
+            'app_version'.tr,
             style: Theme.of(context).textTheme.bodySmall,
           ),
         ],

@@ -7,10 +7,12 @@ class ServiceCategorie extends StatelessWidget {
   ServiceCategorie({super.key});
   final ExpansionTileController expansionTileController =
       ExpansionTileController();
+  final GlobalKey<State<StatefulWidget>> _expansionTileKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
+      key: _expansionTileKey,
       controller: expansionTileController,
       trailing: MyCategory(
         ontap: () {

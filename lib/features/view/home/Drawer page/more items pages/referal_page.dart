@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/features/view/auth/login%20page/widgets/loginbuttons.dart';
+import 'package:get/get.dart';
 
 class RefferalPage extends StatelessWidget {
   const RefferalPage({super.key});
@@ -11,9 +12,9 @@ class RefferalPage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: kmaincolor,
-          title: const Text(
-            "Referral Page",
-            style: TextStyle(color: Color(0xFFFFFFFF)),
+          title: Text(
+            'referral_page'.tr,
+            style: const TextStyle(color: Color(0xFFFFFFFF)),
           ),
           centerTitle: true,
         ),
@@ -29,7 +30,7 @@ class RefferalPage extends StatelessWidget {
             height: Sizeconfig.screenheight! / 60,
           ),
           Text(
-            "Share this Health App with Your Friends",
+            'share_app'.tr,
             style: TextStyle(
               color: kmaincolor,
               fontSize: 30,
@@ -39,16 +40,16 @@ class RefferalPage extends StatelessWidget {
           SizedBox(
             height: Sizeconfig.screenheight! / 60,
           ),
-          const Text(
-            "Share our health-friendly application with your friends. Give them a chance to track their food calories, vitamins, and other features in this app.",
+          Text(
+            'share_description'.tr,
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 15),
+            style: const TextStyle(fontSize: 15),
           ),
           SizedBox(
             height: Sizeconfig.screenheight! / 30,
           ),
           Text(
-            "Your Referral Link:",
+            'your_referral_link'.tr,
             style: TextStyle(
               color: kmaincolor,
               fontSize: 20,
@@ -89,7 +90,7 @@ class RefferalPage extends StatelessWidget {
                 ),
               ),
               Text(
-                "Or Share with:",
+                'or_share_with'.tr,
                 style: TextStyle(fontSize: 17, color: kmaincolor),
               ),
               const Expanded(

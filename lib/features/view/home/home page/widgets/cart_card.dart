@@ -41,11 +41,16 @@ class CartCard extends StatelessWidget {
                     children: [
                       Expanded(
                         flex: 1,
-                        child: Column(
-                          children: [
-                            Text("mosque_finder_desc".tr,
-                                style: const TextStyle(color: Colors.black87))
-                          ],
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              Text("mosque_finder_desc".tr,
+                                  style: TextStyle(
+                                      color: Get.isDarkMode
+                                          ? Colors.white
+                                          : Colors.black87))
+                            ],
+                          ),
                         ),
                       ),
                       const Expanded(flex: 1, child: Column())

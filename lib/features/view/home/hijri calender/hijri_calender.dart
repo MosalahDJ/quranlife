@@ -18,7 +18,7 @@ class HijriCalender extends StatelessWidget {
         elevation: 0,
         scrolledUnderElevation: 0,
         centerTitle: true,
-        title: const Text("Hijri Calendar"),
+        title: Text('hijri_calendar'.tr),
       ),
       body: Stack(
         children: [
@@ -87,7 +87,7 @@ class HijriCalender extends StatelessWidget {
                     child: SizedBox(
                       width: Sizeconfig.screenwidth,
                       child: Text(
-                        "Important Notes About Islamic Occasions",
+                        'important_notes'.tr,
                         textAlign: TextAlign.start,
                         style: TextStyle(
                           color: Get.isDarkMode ? kmaincolor4 : kmaincolor,
@@ -99,23 +99,19 @@ class HijriCalender extends StatelessWidget {
                   SizedBox(
                     height: Sizeconfig.screenheight! / 60,
                   ),
-                  noticeText(
-                      "Islamic occasions do not occur in the same Gregorian months each year. They move forward by 11 days annually."),
+                  noticeText('note_yearly_shift'.tr),
                   SizedBox(
                     height: Sizeconfig.screenheight! / 60,
                   ),
-                  noticeText(
-                      "Ramadan occurs in different Gregorian months as it moves through all months of the year over time."),
+                  noticeText('note_ramadan'.tr),
                   SizedBox(
                     height: Sizeconfig.screenheight! / 60,
                   ),
-                  noticeText(
-                      "Do not associate any Islamic occasion with a specific Gregorian month."),
+                  noticeText('note_association'.tr),
                   SizedBox(
                     height: Sizeconfig.screenheight! / 60,
                   ),
-                  noticeText(
-                      "Please follow your country's Religious Affairs Directory guidelines for accurate religious occasion dates."),
+                  noticeText('note_guidelines'.tr),
                   SizedBox(
                     height: Sizeconfig.screenheight! / 60,
                   ),
