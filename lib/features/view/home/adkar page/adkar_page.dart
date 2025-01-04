@@ -18,7 +18,10 @@ class AdkarPage extends StatelessWidget {
 
         appBar: AppBar(
           centerTitle: true,
-          title: Text("daily_supplications".tr),
+          title: Text(
+            "daily_supplications".tr,
+            style: const TextStyle(color: Colors.white),
+          ),
           scrolledUnderElevation: 0,
         ),
 

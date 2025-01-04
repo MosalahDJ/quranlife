@@ -2,6 +2,9 @@ import 'package:get/get.dart';
 import 'package:quranlife/features/controller/onboarding%20page%20controller/onboarding_pagecontroller.dart';
 import 'package:quranlife/features/view/auth/login%20page/loginpage.dart';
 import 'package:quranlife/features/view/auth/signin%20page/signin_page.dart';
+import 'package:quranlife/features/view/home/Drawer%20page/more%20items%20pages/about_us%20page/about_us_page.dart';
+import 'package:quranlife/features/view/home/Drawer%20page/more%20items%20pages/complain%20page/complain_page.dart';
+import 'package:quranlife/features/view/home/Drawer%20page/more%20items%20pages/referal_page.dart';
 import 'package:quranlife/features/view/home/Drawer%20page/more%20items%20pages/settings%20page/setting_page.dart';
 import 'package:quranlife/features/view/home/adkar%20page/adkar_page.dart';
 import 'package:quranlife/features/view/home/hijri%20calender/hijri_calender.dart';
@@ -59,6 +62,18 @@ class Myrouts {
       GetPage(
         name: "/adkar",
         page: () => AdkarPage(),
+      ),
+      GetPage(
+        name: "/aboutus",
+        page: () => const AboutUsPage(),
+      ),
+      GetPage(
+        name: "/help",
+        page: () => const ComplainPage(),
+      ),
+      GetPage(
+        name: "/refferal",
+        page: () => const RefferalPage(),
       ),
       GetPage(
         name: "/salattime",

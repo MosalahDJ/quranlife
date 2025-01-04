@@ -40,6 +40,7 @@ class SettingPage extends StatelessWidget {
                 groupValue: themctrl.selectedTheme.value,
                 onChanged: (value) {
                   themctrl.changeTheme(value!);
+                  themctrl.initializeTheme();
                 },
               ),
             ),
@@ -51,6 +52,7 @@ class SettingPage extends StatelessWidget {
                 groupValue: themctrl.selectedTheme.value,
                 onChanged: (value) {
                   themctrl.changeTheme(value!);
+                  themctrl.initializeTheme();
                 },
               ),
             ),
@@ -62,6 +64,7 @@ class SettingPage extends StatelessWidget {
                 groupValue: themctrl.selectedTheme.value,
                 onChanged: (value) {
                   themctrl.changeTheme(value!);
+                  themctrl.initializeTheme();
                 },
               ),
             ),
@@ -80,6 +83,8 @@ class SettingPage extends StatelessWidget {
                   groupValue: langCtrl.language.value,
                   onChanged: (value) {
                     langCtrl.changeLanguage(value!);
+                    Get.updateLocale(Locale(value));
+                    themctrl.initializeTheme();
                   },
                 ),
               ),
@@ -93,6 +98,8 @@ class SettingPage extends StatelessWidget {
                   groupValue: langCtrl.language.value,
                   onChanged: (value) {
                     langCtrl.changeLanguage(value!);
+                    Get.updateLocale(Locale(value));
+                    themctrl.initializeTheme();
                   },
                 ),
               ),
@@ -106,6 +113,8 @@ class SettingPage extends StatelessWidget {
                   groupValue: langCtrl.language.value,
                   onChanged: (value) {
                     langCtrl.changeLanguage(value!);
+                    Get.updateLocale(Locale(value));
+                    themctrl.initializeTheme();
                   },
                 ),
               ),

@@ -26,7 +26,7 @@ class Salwatpageview extends StatelessWidget {
       elevation: 2,
       color: Get.isDarkMode
           ? kmaincolor2dark.withOpacity(0.5)
-          : Colors.white.withOpacity(0.5),
+          : Colors.white.withOpacity(0.7),
       child: Container(
         decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(10))),

@@ -13,19 +13,22 @@ import 'package:quranlife/features/controller/spalshview%20controller/splash_vie
 // import 'package:shared_preferences/shared_preferences.dart';
 
 class CurrentPrayTime extends StatelessWidget {
-  CurrentPrayTime(
-      {super.key,
-      required this.color,
-      required this.elevation,
-      required this.textcolor,
-      required this.textcolor2,
-      required this.mawaqitTextColor});
+  CurrentPrayTime({
+    super.key,
+    required this.color,
+    required this.elevation,
+    required this.textcolor,
+    required this.textcolor2,
+    required this.onpressed,
+    required this.moreIconVisibility,
+  });
 
   final Color color;
   final Color textcolor;
   final Color textcolor2;
-  final Color mawaqitTextColor;
   final double elevation;
+  final bool moreIconVisibility;
+  final VoidCallback onpressed;
   final DeterminePrayersController prayerctrl = Get.find();
   final LocationController locationctrl = Get.find();
   final FetchPrayerFromDate fpfctrl = Get.find();
@@ -59,7 +62,30 @@ class CurrentPrayTime extends StatelessWidget {
                 elevation: 0,
                 child: Text(
                   "mawaqit".tr,
-                  style: TextStyle(color: mawaqitTextColor, fontSize: 22),
+                  style: const TextStyle(color: Colors.white, fontSize: 22),
+                )),
+          ),
+          //morebutton
+          Positioned(
+            top: 0,
+            left: langctrl.language.value == "ar"
+                ? 0
+                : Sizeconfig.screenwidth! / 1.3,
+            right: langctrl.language.value == "ar"
+                ? Sizeconfig.screenwidth! / 1.3
+                : 0,
+            child: Card(
+                color: Colors.transparent,
+                elevation: 0,
+                child: Visibility(
+                  visible: moreIconVisibility,
+                  child: IconButton(
+                      onPressed: onpressed,
+                      icon: const Icon(
+                        Icons.more_horiz,
+                        size: 30,
+                        color: Colors.white,
+                      )),
                 )),
           ),
           //card

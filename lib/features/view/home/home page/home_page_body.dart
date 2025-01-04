@@ -58,7 +58,7 @@ class HomePageBody extends StatelessWidget {
                     children: [
                       // Prayer Times Section
                       SalawatPageview(),
-                      SizedBox(height: _sectionSpacing / 2),
+                      SizedBox(height: _sectionSpacing / 3),
                       Center(
                         child: GetBuilder<MyHomeController>(
                           builder: (c) => CustomIndicator(
@@ -71,20 +71,31 @@ class HomePageBody extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height: _sectionSpacing),
+                      SizedBox(height: _sectionSpacing / 2),
 
                       // Categories Section
-                      _buildSectionHeader(context, "category".tr),
+                      _buildSectionHeader(
+                        context,
+                        "category".tr,
+                        () {},
+                      ),
                       ServiceCategorie(),
-                      SizedBox(height: _sectionSpacing),
+                      SizedBox(height: _sectionSpacing / 2),
 
                       // Nearest Mosque Section
                       const SizedBox(height: 12),
-                      _buildMosqueCard(context),
+                      _buildMosqueCard(
+                        context,
+                        () {},
+                      ),
                       SizedBox(height: _sectionSpacing),
 
                       // Daily Wird Section
-                      _buildSectionHeader(context, "daily_wird".tr),
+                      _buildSectionHeader(
+                        context,
+                        "daily_wird".tr,
+                        () {},
+                      ),
                       const SizedBox(height: 12),
                       _buildWirdCard(),
                       SizedBox(height: _sectionSpacing),
@@ -99,18 +110,51 @@ class HomePageBody extends StatelessWidget {
     );
   }
 
-  Widget _buildSectionHeader(BuildContext context, String title) {
-    return Text(
-      title,
-      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+  Widget _buildSectionHeader(
+      BuildContext context, String title, VoidCallback moreIconOnpressed) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+        ),
+        IconButton(
+            onPressed: moreIconOnpressed,
+            icon: Icon(
+              Icons.more_horiz,
+              size: 30,
+              color: Get.isDarkMode ? Colors.white : Colors.black,
+            )),
+      ],
     );
   }
 
-  Widget _buildMosqueCard(context) {
+  Widget _buildMosqueCard(context, VoidCallback moreIcononpressed) {
     return Stack(
       children: [
+        //morebutton
+        Positioned(
+          top: 0,
+          left: langctrl.language.value == "ar"
+              ? 0
+              : Sizeconfig.screenwidth! / 1.3,
+          right: langctrl.language.value == "ar"
+              ? Sizeconfig.screenwidth! / 1.2
+              : 0,
+          child: Card(
+              color: Colors.transparent,
+              elevation: 0,
+              child: IconButton(
+                  onPressed: moreIcononpressed,
+                  icon: Icon(
+                    Icons.more_horiz,
+                    size: 30,
+                    color: Get.isDarkMode ? Colors.white : Colors.black,
+                  ))),
+        ),
         Positioned(
           top: 0,
           left:

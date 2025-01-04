@@ -28,6 +28,7 @@ class QuraanPage extends StatelessWidget {
             title: Text(
               "holy_quran".tr,
               textAlign: TextAlign.center,
+              style: const TextStyle(color: Colors.white),
             ),
 
             //TabBar

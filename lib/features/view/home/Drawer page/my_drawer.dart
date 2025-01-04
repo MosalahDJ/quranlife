@@ -70,10 +70,16 @@ class MyDrawer extends Drawer {
   Widget _buildMainMenuSection(BuildContext context) {
     return Column(
       children: [
-        _buildMenuItem(context, 'home'.tr, Icons.home_outlined),
-        _buildMenuItem(context, 'my_quran'.tr, Icons.book_outlined),
-        _buildMenuItem(context, 'bookmarks'.tr, Icons.bookmark_border),
-        _buildMenuItem(context, 'about_us'.tr, Icons.info_outline),
+        _buildMenuItem(
+            context, 'home'.tr, Icons.home_outlined, () => Get.toNamed("home")),
+        _buildMenuItem(context, 'my_quran'.tr, Icons.book_outlined,
+            () => Get.toNamed("quraan")),
+        _buildMenuItem(context, 'bookmarks'.tr, Icons.bookmark_border,
+            () => Get.toNamed("adkar")),
+        _buildMenuItem(context, 'about_us'.tr, Icons.info_outline,
+            () => Get.toNamed("aboutus")),
+        _buildMenuItem(context, 'refferal'.tr, Icons.share_outlined,
+            () => Get.toNamed("refferal")),
       ],
     );
   }
@@ -81,13 +87,16 @@ class MyDrawer extends Drawer {
   Widget _buildSettingsSection(BuildContext context) {
     return Column(
       children: [
-        _buildMenuItem(context, 'settings'.tr, Icons.settings_outlined),
-        _buildMenuItem(context, 'help_feedback'.tr, Icons.help_outline),
+        _buildMenuItem(context, 'settings'.tr, Icons.settings_outlined,
+            () => Get.toNamed("settings")),
+        _buildMenuItem(context, 'help_feedback'.tr, Icons.help_outline,
+            () => Get.toNamed("help")),
       ],
     );
   }
 
-  Widget _buildMenuItem(BuildContext context, String title, IconData icon) {
+  Widget _buildMenuItem(
+      BuildContext context, String title, IconData icon, ontap) {
     return ListTile(
       leading:
           Icon(icon, color: Get.isDarkMode ? Colors.white70 : Colors.black54),
@@ -95,9 +104,7 @@ class MyDrawer extends Drawer {
         title,
         style: Theme.of(context).textTheme.bodyLarge,
       ),
-      onTap: () {
-        Get.toNamed("settings");
-      },
+      onTap: ontap,
     );
   }
 
@@ -108,10 +115,10 @@ class MyDrawer extends Drawer {
         mainAxisSize: MainAxisSize.min,
         children: [
           const Divider(),
-          Text(
-            'app_version'.tr,
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
+          Text('app_version'.tr,
+              style: TextStyle(
+                  fontSize: 10,
+                  color: Get.isDarkMode ? Colors.white : Colors.black)),
         ],
       ),
     );

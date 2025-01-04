@@ -181,6 +181,24 @@ class Messages extends Translations {
           'arabic': 'Arabic',
           'english': 'English',
           'french': 'French',
+
+          // New Translations
+          'who_am_i': 'Who Am I?',
+          'developer_name': 'Djehel Mohamed Salah',
+          'developer_title': 'Mobile Application Developer',
+          'social_facebook': 'Djehel Mohamed Salah',
+          'social_instagram': 'moh.medsalah',
+          'social_linkedin': 'Djehel Mohamed Salah',
+          'social_twitter': 'Djehel Mohamed Salah',
+          'building_future': 'Building the Future',
+          'mobile_apps': 'Through Mobile Apps',
+          'our_expertise': 'Our Expertise',
+          'our_mission': 'Our Mission',
+          'our_vision': 'Our Vision',
+          'expertise_description':
+              'We specialize in creating innovative mobile solutions',
+          'mission_description': 'To provide high-quality mobile applications',
+          'vision_description': 'To lead the mobile development industry',
         },
         'ar': {
           // Login Page
@@ -358,6 +376,23 @@ class Messages extends Translations {
           'arabic': 'العربية',
           'english': 'الإنجليزية',
           'french': 'الفرنسية',
+
+          // New Translations
+          'who_am_i': 'من أنا؟',
+          'developer_name': 'جحال محمد صلاح',
+          'developer_title': 'مطور تطبيقات الموبايل',
+          'social_facebook': 'جحال محمد صلاح',
+          'social_instagram': 'moh.medsalah',
+          'social_linkedin': 'جحال محمد صلاح',
+          'social_twitter': 'جحال محمد صلاح',
+          'building_future': 'نبني المستقبل',
+          'mobile_apps': 'من خلال تطبيقات الموبايل',
+          'our_expertise': 'خبرتنا',
+          'our_mission': 'مهمتنا',
+          'our_vision': 'رؤيتنا',
+          'expertise_description': 'نحن متخصصون في إنشاء حلول مبتكرة للموبايل',
+          'mission_description': 'تقديم تطبيقات موبايل عالية الجودة',
+          'vision_description': 'أن نقود صناعة تطوير تطبيقات الموبايل',
         },
         'fr': {
           // Login Page
@@ -539,6 +574,25 @@ class Messages extends Translations {
           'arabic': 'arabe',
           'english': 'anglais',
           'french': 'français',
+
+          // New Translations
+          'who_am_i': 'Qui suis-je?',
+          'developer_name': 'Djehel Mohamed Salah',
+          'developer_title': 'Développeur d\'Applications Mobiles',
+          'social_facebook': 'Djehel Mohamed Salah',
+          'social_instagram': 'moh.medsalah',
+          'social_linkedin': 'Djehel Mohamed Salah',
+          'social_twitter': 'Djehel Mohamed Salah',
+          'building_future': 'Construire l\'Avenir',
+          'mobile_apps': 'À Travers les Applications Mobiles',
+          'our_expertise': 'Notre Expertise',
+          'our_mission': 'Notre Mission',
+          'our_vision': 'Notre Vision',
+          'expertise_description':
+              'Nous sommes spécialisés dans la création de solutions mobiles innovantes',
+          'mission_description':
+              'Fournir des applications mobiles de haute qualité',
+          'vision_description': 'Diriger l\'industrie du développement mobile',
         },
       };
 }

@@ -35,13 +35,14 @@ class SalawatPageview extends StatelessWidget {
             },
             child: Ink(
               child: CurrentPrayTime(
-                mawaqitTextColor: Get.isDarkMode ? Colors.white : Colors.black,
+                moreIconVisibility: true,
+                onpressed: () {},
                 textcolor2: Get.isDarkMode ? Colors.white : Colors.black,
                 textcolor: Get.isDarkMode ? kmaincolor4 : kmaincolor,
                 elevation: 2,
                 color: Get.isDarkMode
                     ? kmaincolor2dark.withOpacity(0.5)
-                    : Colors.white.withOpacity(0.5),
+                    : Colors.white.withOpacity(0.7),
               ),
             ),
           ),
