@@ -79,7 +79,7 @@ class HomePageBody extends StatelessWidget {
                         "category".tr,
                         () {},
                       ),
-                      ServiceCategorie(),
+                      const ServiceCategorie(),
                       SizedBox(height: _sectionSpacing / 2),
 
                       // Nearest Mosque Section

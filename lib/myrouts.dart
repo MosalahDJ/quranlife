@@ -69,7 +69,7 @@ class Myrouts {
       ),
       GetPage(
         name: "/help",
-        page: () => const ComplainPage(),
+        page: () => ComplainPage(),
       ),
       GetPage(
         name: "/refferal",

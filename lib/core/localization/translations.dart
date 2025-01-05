@@ -156,10 +156,16 @@ class Messages extends Translations {
           'contact_us': 'Contact Us',
           'how_can_we_help': 'How Can We Help You?',
           'contact_description':
-              'We value your feedback. Please use the form below to send us your questions, concerns, or suggestions. We\'ll get back to you as soon as possible.',
+              'We value your feedback. Please use the form below to send us your questions, concerns, or suggestions. We\'ll get responde to you as soon as possible.',
           'name': 'Name',
           'description': 'Description',
           'send_message': 'Send Message',
+          'direct_message': 'Direct Message',
+          'telegram': 'Telegram',
+          'follow_us': 'Follow Us',
+          'address': 'Address',
+          'address_details': 'Constantine, Algeria',
+          'working_hours': 'Working Hours',
 
           // Drawer Menu
           'my_quran': 'My Quran',
@@ -199,6 +205,25 @@ class Messages extends Translations {
               'We specialize in creating innovative mobile solutions',
           'mission_description': 'To provide high-quality mobile applications',
           'vision_description': 'To lead the mobile development industry',
+
+          // Categories
+          'islamic_occasions': 'Islamic Occasions',
+          'community': 'Community',
+          'learn_islam': 'Learn Islam',
+
+          // Hijri Months
+          'hijri_month_Muharram': 'Muharram',
+          'hijri_month_Safar': 'Safar',
+          'hijri_month_Rabi\' al-awwal': 'Rabi al-Awwal',
+          'hijri_month_Rabi\' al-thani': 'Rabi al-Thani',
+          'hijri_month_Jumada al-awwal': 'Jumada al-Awwal',
+          'hijri_month_Jumada al-thani': 'Jumada al-Thani',
+          'hijri_month_Rajab': 'Rajab',
+          'hijri_month_Sha\'aban': 'Shaban',
+          'hijri_month_Ramadan': 'Ramadan',
+          'hijri_month_Shawwal': 'Shawwal',
+          'hijri_month_Dhu al-Qi\'dah': 'Dhu al-Qidah',
+          'hijri_month_Dhu al-Hijjah': 'Dhu al-Hijjah',
         },
         'ar': {
           // Login Page
@@ -351,10 +376,16 @@ class Messages extends Translations {
           'contact_us': 'اتصل بنا',
           'how_can_we_help': 'كيف يمكننا مساعدتك؟',
           'contact_description':
-              'نحن نقدر ملاحظاتك. يرجى استخدام النموذج أدناه لإرسال أسئلتك أو مخاوفك أو اقتراحاتك. سنعود إليك في أقرب وقت ممكن.',
+              'نحن نقدر ملاحظاتك. يرجى استخدام النموذج أدناه لإرسال أسئلتك أو مخاوفك أو اقتراحاتك. سنرد عليك في أقرب وقت ممكن.',
           'name': 'الاسم',
           'description': 'الوصف',
           'send_message': 'إرسال الرسالة',
+          'direct_message': 'رسالة مباشرة',
+          'telegram': 'تلغرام',
+          'follow_us': 'تابعنا',
+          'address': 'العنوان',
+          'address_details': 'قسنطينة,الجزائر',
+          'working_hours': 'ساعات العمل',
 
           // Drawer Menu
           'my_quran': 'قرآني',
@@ -393,6 +424,34 @@ class Messages extends Translations {
           'expertise_description': 'نحن متخصصون في إنشاء حلول مبتكرة للموبايل',
           'mission_description': 'تقديم تطبيقات موبايل عالية الجودة',
           'vision_description': 'أن نقود صناعة تطوير تطبيقات الموبايل',
+
+          // Categories
+          'islamic_occasions_info': 'معلومات المناسبات الإسلامية',
+          'prayer_calendar': 'تقويم الصلوات',
+          'islamic_events': 'الأحداث الإسلامية',
+          'nearest_mosques': 'المساجد القريبة',
+          'quran_section': 'قسم القرآن',
+          'hadith_section': 'قسم الحديث',
+          'names_of_allah': 'أسماء الله تعالى',
+          'qibla_finder': 'محدد القبلة',
+          'salah_times': 'أوقات الصلاة',
+          'islamic_occasions': 'المناسبات الإسلامية',
+          'community': 'المجتمع',
+          'learn_islam': 'تعلم الإسلام',
+
+          // Hijri Months
+          'hijri_month_Muharram': 'محرم',
+          'hijri_month_Safar': 'صفر',
+          'hijri_month_Rabi\' al-awwal': 'ربيع الأول',
+          'hijri_month_Rabi\' al-thani': 'ربيع الثاني',
+          'hijri_month_Jumada al-awwal': 'جمادى الأولى',
+          'hijri_month_Jumada al-thani': 'جمادى الثانية',
+          'hijri_month_Rajab': 'رجب',
+          'hijri_month_Sha\'aban': 'شعبان',
+          'hijri_month_Ramadan': 'رمضان',
+          'hijri_month_Shawwal': 'شوال',
+          'hijri_month_Dhu al-Qi\'dah': 'ذو القعدة',
+          'hijri_month_Dhu al-Hijjah': 'ذو الحجة',
         },
         'fr': {
           // Login Page
@@ -553,6 +612,12 @@ class Messages extends Translations {
           'name': 'Name',
           'description': 'Description',
           'send_message': 'Send Message',
+          'direct_message': 'Message Direct',
+          'telegram': 'Telegram',
+          'follow_us': 'Suivez-nous',
+          'address': 'Adresse',
+          'address_details': '123 Rue Principale, Nom de la Ville',
+          'working_hours': 'Heures d\'ouverture',
 
           // Drawer Menu
           'my_quran': 'My Quran',
@@ -593,6 +658,25 @@ class Messages extends Translations {
           'mission_description':
               'Fournir des applications mobiles de haute qualité',
           'vision_description': 'Diriger l\'industrie du développement mobile',
+
+          // Categories
+          'islamic_occasions': 'Occasions Islamiques',
+          'community': 'Communauté',
+          'learn_islam': 'Apprendre l\'Islam',
+
+          // Hijri Months
+          'hijri_month_Muharram': 'Mouharram',
+          'hijri_month_Safar': 'Safar',
+          'hijri_month_Rabi\' al-awwal': 'Rabi al-Awwal',
+          'hijri_month_Rabi\' al-thani': 'Rabi al-Thani',
+          'hijri_month_Jumada al-awwal': 'Joumada al-Awwal',
+          'hijri_month_Jumada al-thani': 'Joumada al-Thani',
+          'hijri_month_Rajab': 'Rajab',
+          'hijri_month_Sha\'aban': 'Chaabane',
+          'hijri_month_Ramadan': 'Ramadan',
+          'hijri_month_Shawwal': 'Chawwal',
+          'hijri_month_Dhu al-Qi\'dah': 'Dhou al-Qida',
+          'hijri_month_Dhu al-Hijjah': 'Dhou al-Hijja',
         },
       };
 }

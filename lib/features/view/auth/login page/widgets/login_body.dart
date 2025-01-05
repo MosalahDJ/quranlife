@@ -160,7 +160,7 @@ class LoginBody extends StatelessWidget {
                             },
                             child: Text(
                               "login".tr,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 color: Colors.white,
                                 fontWeight: FontWeight.w600,

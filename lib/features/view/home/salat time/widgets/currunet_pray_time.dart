@@ -50,7 +50,7 @@ class CurrentPrayTime extends StatelessWidget {
         children: [
           //date text
           Positioned(
-            top: 0,
+            top: Sizeconfig.screenheight! / 200,
             left: langctrl.language.value == "ar"
                 ? Sizeconfig.screenwidth! / 1.6
                 : 0,
@@ -65,121 +65,113 @@ class CurrentPrayTime extends StatelessWidget {
                   style: const TextStyle(color: Colors.white, fontSize: 22),
                 )),
           ),
-          //morebutton
-          Positioned(
-            top: 0,
-            left: langctrl.language.value == "ar"
-                ? 0
-                : Sizeconfig.screenwidth! / 1.3,
-            right: langctrl.language.value == "ar"
-                ? Sizeconfig.screenwidth! / 1.3
-                : 0,
-            child: Card(
-                color: Colors.transparent,
-                elevation: 0,
-                child: Visibility(
-                  visible: moreIconVisibility,
-                  child: IconButton(
-                      onPressed: onpressed,
-                      icon: const Icon(
-                        Icons.more_horiz,
-                        size: 30,
-                        color: Colors.white,
-                      )),
-                )),
-          ),
           //card
           Positioned(
             bottom: 0,
             left: 0,
             right: 0,
             height: 200,
-            child: Card(
-              elevation: elevation,
-              color: color,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Obx(
-                      () => Expanded(
-                        flex: 1,
-                        child: initialctrl.isLoading.value == true
-                            ? Center(
-                                child: CircularProgressIndicator(
-                                color: Get.isDarkMode
-                                    ? kmaincolor3dark
-                                    : kmaincolor,
-                              ))
-                            : Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text(
-                                        "next_prayer".tr,
-                                        style: TextStyle(
-                                          color: textcolor2,
-                                          fontSize: 17,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+                borderRadius: const BorderRadius.all(Radius.circular(12)),
+                onTap: () {
+                  timespagectrl.getcurrentpage();
+                  Get.toNamed("salattime");
+                },
+                child: Ink(
+                  child: Card(
+                    elevation: elevation,
+                    color: color,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Obx(
+                            () => Expanded(
+                              flex: 1,
+                              child: initialctrl.isLoading.value == true
+                                  ? Center(
+                                      child: CircularProgressIndicator(
+                                      color: Get.isDarkMode
+                                          ? kmaincolor3dark
+                                          : kmaincolor,
+                                    ))
+                                  : Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Text(
+                                              "next_prayer".tr,
+                                              style: TextStyle(
+                                                color: textcolor2,
+                                                fontSize: 17,
+                                              ),
+                                            ),
+                                            //next salat
+                                            Text(
+                                              prayerctrl.nextPrayer.value.tr,
+                                              style: TextStyle(
+                                                color: textcolor,
+                                                fontSize: 25,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            //next salat time
+                                            Text(
+                                              prayerctrl.nextPrayerTime.value,
+                                              style: TextStyle(
+                                                color: textcolor,
+                                                fontSize: 25,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ),
-                                      //next salat
-                                      Text(
-                                        prayerctrl.nextPrayer.value.tr,
-                                        style: TextStyle(
-                                          color: textcolor,
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      //next salat time
-                                      Text(
-                                        prayerctrl.nextPrayerTime.value,
-                                        style: TextStyle(
-                                          color: textcolor,
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text(
-                                        "time_remaining".tr,
-                                        style: TextStyle(
-                                          color: textcolor2,
-                                          fontSize: 17,
-                                        ),
-                                      ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Text(
+                                              "time_remaining".tr,
+                                              style: TextStyle(
+                                                color: textcolor2,
+                                                fontSize: 17,
+                                              ),
+                                            ),
 
-                                      //time untile next salat
-                                      Text(
-                                        prayerctrl.timeUntilNext.value,
-                                        style: TextStyle(
-                                          color: textcolor,
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold,
+                                            //time untile next salat
+                                            Text(
+                                              prayerctrl.timeUntilNext.value,
+                                              style: TextStyle(
+                                                color: textcolor,
+                                                fontSize: 25,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
+                                      ],
+                                    ),
+                            ),
+                          ),
+                          const Expanded(flex: 1, child: Column()),
+                        ],
                       ),
                     ),
-                    const Expanded(flex: 1, child: Column()),
-                  ],
+                  ),
                 ),
               ),
             ),
@@ -252,14 +244,23 @@ class CurrentPrayTime extends StatelessWidget {
                                   ))
                                 : Center(
                                     child: GetBuilder<LocationController>(
-                                      builder: (c) => Text(
-                                        textDirection: TextDirection.ltr,
-                                        textAlign: TextAlign.center,
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                        "${locationctrl.location},${locationctrl.sublocation}",
-                                        style: const TextStyle(
-                                            fontSize: 15, color: Colors.white),
+                                      builder: (c) => Padding(
+                                        padding: EdgeInsets.only(
+                                            right:
+                                                langctrl.language.value == "ar"
+                                                    ? 10.0
+                                                    : 0),
+                                        child: Text(
+                                          textDirection: TextDirection.ltr,
+                                          textAlign: TextAlign.center,
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          "${locationctrl.location},${locationctrl.sublocation}",
+                                          style: const TextStyle(
+                                            fontSize: 15,
+                                            color: Colors.white,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -288,11 +289,47 @@ class CurrentPrayTime extends StatelessWidget {
                 : Sizeconfig.screenheight! > 1010
                     ? Sizeconfig.screenheight! / 25
                     : Sizeconfig.screenheight! / 17,
-            child: Image.asset(
-              "lib/core/assets/images/homeimages/masjid3d.png",
-              height: Sizeconfig.screenheight! / 4,
-              fit: BoxFit.contain,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+                borderRadius: const BorderRadius.all(Radius.circular(12)),
+                onTap: () {
+                  timespagectrl.getcurrentpage();
+                  Get.toNamed("salattime");
+                },
+                child: Ink(
+                  child: Image.asset(
+                    "lib/core/assets/images/homeimages/masjid3d.png",
+                    height: Sizeconfig.screenheight! / 4,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
             ),
+          ),
+          //morebutton
+          Positioned(
+            top: 0,
+            left: langctrl.language.value == "ar"
+                ? 0
+                : Sizeconfig.screenwidth! / 1.3,
+            right: langctrl.language.value == "ar"
+                ? Sizeconfig.screenwidth! / 1.3
+                : 0,
+            child: Card(
+                color: Colors.transparent,
+                elevation: 0,
+                child: Visibility(
+                  visible: moreIconVisibility,
+                  child: IconButton(
+                      onPressed: onpressed,
+                      icon: const Icon(
+                        Icons.more_horiz,
+                        size: 30,
+                        color: Colors.white,
+                      )),
+                )),
           ),
         ],
       ),

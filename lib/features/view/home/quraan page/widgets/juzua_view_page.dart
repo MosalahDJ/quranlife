@@ -60,7 +60,7 @@ class JuzuaViewPage extends StatelessWidget {
                           width: Sizeconfig.screenwidth! / 1.05,
                           alignment: Alignment.center,
                           padding: const EdgeInsets.all(8),
-                          child: Text("juz".tr + " ${index + 1}"),
+                          child: Text("${"juz".tr} ${index + 1}"),
                         ),
                       ),
                     ),

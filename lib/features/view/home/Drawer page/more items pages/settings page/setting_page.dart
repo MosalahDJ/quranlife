@@ -11,6 +11,34 @@ class SettingPage extends StatelessWidget {
   final ThemeController themctrl = Get.find();
   final LanguageController langCtrl = Get.find();
 
+  Widget _buildThemeOption(AppTheme theme, String title) {
+    return Obx(() => RadioListTile<AppTheme>(
+          title: Text(title),
+          value: theme,
+          groupValue: themctrl.selectedTheme.value,
+          onChanged: (value) {
+            themctrl.changeTheme(value!);
+            themctrl.initializeTheme();
+          },
+          activeColor: Get.isDarkMode ? kmaincolor4 : kmaincolor,
+          controlAffinity: ListTileControlAffinity.trailing,
+        ));
+  }
+
+  Widget _buildLanguageOption(String lang, String title) {
+    return Obx(() => RadioListTile<String>(
+          title: Text(title),
+          value: lang,
+          groupValue: langCtrl.language.value,
+          onChanged: (value) {
+            langCtrl.changeLanguage(value!);
+            Get.updateLocale(Locale(value));
+          },
+          activeColor: Get.isDarkMode ? kmaincolor4 : kmaincolor,
+          controlAffinity: ListTileControlAffinity.trailing,
+        ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,135 +55,64 @@ class SettingPage extends StatelessWidget {
       ),
 
       //Settings body
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(children: [
-          //themedata list tile
-          Settingtype(title: "theme_mode".tr, listwidget: [
-            Obx(
-              () => RadioListTile<AppTheme>(
-                title: Text('system_theme'.tr,
-                    style: const TextStyle(fontSize: 15)),
-                value: AppTheme.system,
-                groupValue: themctrl.selectedTheme.value,
-                onChanged: (value) {
-                  themctrl.changeTheme(value!);
-                  themctrl.initializeTheme();
-                },
-              ),
+      body: GetBuilder<ThemeController>(
+        builder: (c) => Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(children: [
+            //themedata list tile
+            Settingtype(title: "theme_mode".tr, listwidget: [
+              _buildThemeOption(AppTheme.system, 'system_theme'.tr),
+              _buildThemeOption(AppTheme.light, 'light_theme'.tr),
+              _buildThemeOption(AppTheme.dark, 'dark_theme'.tr),
+            ]),
+            // Add language settings section
+            Settingtype(
+              title: "Language",
+              listwidget: [
+                _buildLanguageOption('ar', 'arabic'.tr),
+                _buildLanguageOption('en', 'english'.tr),
+                _buildLanguageOption('fr', 'french'.tr),
+              ],
             ),
-            Obx(
-              () => RadioListTile<AppTheme>(
-                title: Text('light_theme'.tr,
-                    style: const TextStyle(fontSize: 15)),
-                value: AppTheme.light,
-                groupValue: themctrl.selectedTheme.value,
-                onChanged: (value) {
-                  themctrl.changeTheme(value!);
-                  themctrl.initializeTheme();
-                },
-              ),
-            ),
-            Obx(
-              () => RadioListTile<AppTheme>(
-                title:
-                    Text('dark_theme'.tr, style: const TextStyle(fontSize: 15)),
-                value: AppTheme.dark,
-                groupValue: themctrl.selectedTheme.value,
-                onChanged: (value) {
-                  themctrl.changeTheme(value!);
-                  themctrl.initializeTheme();
-                },
-              ),
+            Settingtype(
+              title: 'notifications'.tr,
+              listwidget: [
+                //adhan
+                Obx(() => SwitchListTile(
+                    title: Text('adhan_notifications'.tr,
+                        style: const TextStyle(fontSize: 15)),
+                    value: wkmctrl.adhansubscribition.value,
+                    onChanged: (val) {
+                      wkmctrl.adhansubscribition.value =
+                          !wkmctrl.adhansubscribition.value;
+                      wkmctrl.onChangeSubscription(NotificationType.adhan, val);
+                    })),
+                //adkhar
+                Obx(() => SwitchListTile(
+                    title: Text('adhkar_notifications'.tr,
+                        style: const TextStyle(fontSize: 15)),
+                    value: wkmctrl.adhkarsubscribition.value,
+                    onChanged: (val) {
+                      wkmctrl.adhkarsubscribition.value =
+                          !wkmctrl.adhkarsubscribition.value;
+                      wkmctrl.onChangeSubscription(
+                          NotificationType.adhkar, val);
+                    })),
+                //quraan
+                Obx(() => SwitchListTile(
+                    title: Text('quran_notifications'.tr,
+                        style: const TextStyle(fontSize: 15)),
+                    value: wkmctrl.quraansubscribition.value,
+                    onChanged: (val) {
+                      wkmctrl.quraansubscribition.value =
+                          !wkmctrl.quraansubscribition.value;
+                      wkmctrl.onChangeSubscription(
+                          NotificationType.quraan, val);
+                    })),
+              ],
             ),
           ]),
-          // Add language settings section
-          Settingtype(
-            title: "Language",
-            listwidget: [
-              Obx(
-                () => RadioListTile<String>(
-                  title: Text(
-                    'arabic'.tr,
-                    style: const TextStyle(fontSize: 15),
-                  ),
-                  value: 'ar',
-                  groupValue: langCtrl.language.value,
-                  onChanged: (value) {
-                    langCtrl.changeLanguage(value!);
-                    Get.updateLocale(Locale(value));
-                    themctrl.initializeTheme();
-                  },
-                ),
-              ),
-              Obx(
-                () => RadioListTile<String>(
-                  title: Text(
-                    'english'.tr,
-                    style: const TextStyle(fontSize: 15),
-                  ),
-                  value: 'en',
-                  groupValue: langCtrl.language.value,
-                  onChanged: (value) {
-                    langCtrl.changeLanguage(value!);
-                    Get.updateLocale(Locale(value));
-                    themctrl.initializeTheme();
-                  },
-                ),
-              ),
-              Obx(
-                () => RadioListTile<String>(
-                  title: Text(
-                    'french'.tr,
-                    style: const TextStyle(fontSize: 15),
-                  ),
-                  value: 'fr',
-                  groupValue: langCtrl.language.value,
-                  onChanged: (value) {
-                    langCtrl.changeLanguage(value!);
-                    Get.updateLocale(Locale(value));
-                    themctrl.initializeTheme();
-                  },
-                ),
-              ),
-            ],
-          ),
-          Settingtype(
-            title: 'notifications'.tr,
-            listwidget: [
-              //adhan
-              Obx(() => SwitchListTile(
-                  title: Text('adhan_notifications'.tr,
-                      style: const TextStyle(fontSize: 15)),
-                  value: wkmctrl.adhansubscribition.value,
-                  onChanged: (val) {
-                    wkmctrl.adhansubscribition.value =
-                        !wkmctrl.adhansubscribition.value;
-                    wkmctrl.onChangeSubscription(NotificationType.adhan, val);
-                  })),
-              //adkhar
-              Obx(() => SwitchListTile(
-                  title: Text('adhkar_notifications'.tr,
-                      style: const TextStyle(fontSize: 15)),
-                  value: wkmctrl.adhkarsubscribition.value,
-                  onChanged: (val) {
-                    wkmctrl.adhkarsubscribition.value =
-                        !wkmctrl.adhkarsubscribition.value;
-                    wkmctrl.onChangeSubscription(NotificationType.adhkar, val);
-                  })),
-              //quraan
-              Obx(() => SwitchListTile(
-                  title: Text('quran_notifications'.tr,
-                      style: const TextStyle(fontSize: 15)),
-                  value: wkmctrl.quraansubscribition.value,
-                  onChanged: (val) {
-                    wkmctrl.quraansubscribition.value =
-                        !wkmctrl.quraansubscribition.value;
-                    wkmctrl.onChangeSubscription(NotificationType.quraan, val);
-                  })),
-            ],
-          ),
-        ]),
+        ),
       ),
     );
   }

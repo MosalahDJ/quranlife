@@ -40,15 +40,15 @@ class QuraanPage extends StatelessWidget {
                 dividerColor: kmaincolor,
                 tabs: [
                   Tab(
-                    icon: Icon(FlutterIslamicIcons.quran),
+                    icon: const Icon(FlutterIslamicIcons.quran),
                     child: Text("surah".tr),
                   ),
                   Tab(
-                    icon: Icon(FlutterIslamicIcons.quran),
+                    icon: const Icon(FlutterIslamicIcons.quran),
                     child: Text("juz".tr),
                   ),
                   Tab(
-                    icon: Icon(FlutterIslamicIcons.quran),
+                    icon: const Icon(FlutterIslamicIcons.quran),
                     child: Text("verse".tr),
                   ),
                 ]),
