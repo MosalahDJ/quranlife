@@ -34,6 +34,8 @@ class SettingPage extends StatelessWidget {
           onChanged: (value) {
             langCtrl.changeLanguage(value!);
             Get.updateLocale(Locale(value));
+            // Force theme refresh when language changes
+            themctrl.changeTheme(themctrl.selectedTheme.value);
           },
           activeColor: Get.isDarkMode ? kmaincolor4 : kmaincolor,
           controlAffinity: ListTileControlAffinity.trailing,

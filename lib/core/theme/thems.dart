@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:get/get.dart';
 
+String get _fontFamily =>
+    Get.locale?.languageCode == 'ar' ? 'Cairo' : 'Poppins-Black';
+
 class Themes {
 //=================================================lighttheme=======================================================================
 
@@ -57,8 +60,7 @@ class Themes {
             fontSize: 22,
             color: textcolor3,
             fontWeight: FontWeight.bold,
-            fontFamily:
-                Get.locale?.languageCode == 'ar' ? 'Cairo' : 'Poppins-Black'),
+            fontFamily: _fontFamily),
 
 // الاستخدام: عناوين فرعية داخل البطاقات أو الأقسام. تساعد في تنظيم المحتوى داخل المكونات.
         titleMedium: TextStyle(
@@ -72,8 +74,7 @@ class Themes {
         bodyLarge: TextStyle(
           fontSize: 16,
           color: textcolor3,
-          fontFamily:
-              Get.locale?.languageCode == 'ar' ? 'Cairo' : 'Poppins-Black',
+          fontFamily: _fontFamily,
         ),
 
 // الاستخدام: النصوص المتوسطة في المحتوى. تستخدم للفقرات العادية والنصوص التوضيحية.
@@ -81,8 +82,7 @@ class Themes {
             fontSize: 14,
             color: textcolor3,
             fontWeight: FontWeight.bold,
-            fontFamily:
-                Get.locale?.languageCode == 'ar' ? 'Cairo' : 'Poppins-Black'),
+            fontFamily: _fontFamily),
 
 // الاستخدام: النصوص الصغيرة في المحتوى. تستخدم في النصوص الأقل أهمية أو النصوص التوضيحية القصيرة.
         bodySmall: TextStyle(
@@ -156,8 +156,7 @@ class Themes {
             fontSize: 22,
             color: Colors.white,
             fontWeight: FontWeight.bold,
-            fontFamily:
-                Get.locale?.languageCode == 'ar' ? 'Cairo' : 'Poppins-Black'),
+            fontFamily: _fontFamily),
 
 // الاستخدام: عناوين فرعية داخل البطاقات أو الأقسام. تساعد في تنظيم المحتوى داخل المكونات.
         titleMedium: TextStyle(
@@ -171,8 +170,7 @@ class Themes {
         bodyLarge: TextStyle(
           fontSize: 16,
           color: textcolor3dark,
-          fontFamily:
-              Get.locale?.languageCode == 'ar' ? 'Cairo' : 'Poppins-Black',
+          fontFamily: _fontFamily,
         ),
 
 // الاستخدام: النصوص المتوسطة في المحتوى. تستخدم للفقرات العادية والنصوص التوضيحية.
@@ -180,8 +178,7 @@ class Themes {
             fontSize: 14,
             color: textcolor3dark,
             fontWeight: FontWeight.bold,
-            fontFamily:
-                Get.locale?.languageCode == 'ar' ? 'Cairo' : 'Poppins-Black'),
+            fontFamily: _fontFamily),
 
 // الاستخدام: النصوص الصغيرة في المحتوى. تستخدم في النصوص الأقل أهمية أو النصوص التوضيحية القصيرة.
         bodySmall: TextStyle(

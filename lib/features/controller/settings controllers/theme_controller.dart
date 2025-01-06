@@ -53,6 +53,8 @@ class ThemeController extends GetxController {
     selectedTheme.value = theme;
     await prefs.setString('theme', theme.toString());
     _applyTheme();
+    // Force update to rebuild with new font
+    Get.forceAppUpdate();
     update();
   }
 
