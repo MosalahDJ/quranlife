@@ -5,6 +5,7 @@ import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:quranlife/features/controller/settings%20controllers/language_controller.dart';
+import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
 import 'package:quranlife/features/view/home/Drawer%20page/my_drawer.dart';
 import 'package:quranlife/features/view/home/home%20page/widgets/categories.dart';
 import 'package:quranlife/features/view/home/home%20page/widgets/salawat_pageview.dart';
@@ -31,6 +32,15 @@ class HomePageBody extends StatelessWidget {
     return Scaffold(
       drawer: const MyDrawer(),
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            },
+            icon: const Icon(
+              Icons.menu,
+              color: Colors.white,
+              size: 26,
+            )),
         scrolledUnderElevation: 0,
         title: Text('quranlife'.tr,
             style: Theme.of(context).textTheme.headlineSmall),
@@ -79,7 +89,15 @@ class HomePageBody extends StatelessWidget {
                         "category".tr,
                         () {},
                       ),
-                      const ServiceCategorie(),
+                      GetBuilder<ThemeController>(
+                          builder: (c) => ServiceCategorie(
+                                categorycolor: Get.isDarkMode
+                                    ? kmaincolor2dark.withOpacity(0.7)
+                                    : Colors.white.withOpacity(0.7),
+                                categorytitlecolor: Get.isDarkMode
+                                    ? kmaincolor2dark.withOpacity(0.7)
+                                    : Colors.white.withOpacity(0.7),
+                              )),
                       SizedBox(height: _sectionSpacing / 2),
 
                       // Nearest Mosque Section

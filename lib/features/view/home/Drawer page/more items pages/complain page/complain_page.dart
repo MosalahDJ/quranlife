@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:get/get.dart';
+import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/features/controller/Complaine%20Controller/complain_controller.dart';
 
 class ComplainPage extends StatelessWidget {
@@ -15,8 +16,8 @@ class ComplainPage extends StatelessWidget {
         centerTitle: true,
         title: Text(
           'contact_us'.tr,
-          style: const TextStyle(
-            color: Colors.white,
+          style: TextStyle(
+            color: Get.isDarkMode ? Colors.white : Colors.black,
             fontSize: 24,
             fontWeight: FontWeight.bold,
           ),
@@ -29,11 +30,17 @@ class ComplainPage extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
-            colors: [
-              kmaincolor,
-              kmaincolor.withOpacity(0.8),
-              kmaincolor.withOpacity(0.6),
-            ],
+            colors: Get.isDarkMode
+                ? [
+                    kmaincolor3dark,
+                    kmaincolor3dark.withOpacity(0.8),
+                    kmaincolor3dark.withOpacity(0.6),
+                  ]
+                : [
+                    kmaincolor3,
+                    kmaincolor3.withOpacity(0.8),
+                    kmaincolor3.withOpacity(0.6),
+                  ],
           ),
         ),
         child: SafeArea(
@@ -58,7 +65,7 @@ class ComplainPage extends StatelessWidget {
                         title: 'telegram'.tr,
                         icon: Icons.telegram,
                         color: const Color.fromARGB(255, 34, 158, 225),
-                        onTap: () => cmplctrl.launchWhatsApp(),
+                        onTap: () => cmplctrl.launchTelegram(),
                       ),
                       _buildContactOption(
                         title: 'email'.tr,
@@ -102,10 +109,10 @@ class ComplainPage extends StatelessWidget {
         children: [
           Text(
             'how_can_we_help'.tr,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              color: Get.isDarkMode ? Colors.white : Colors.black,
             ),
           ),
           const SizedBox(height: 10),
@@ -114,7 +121,9 @@ class ComplainPage extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16,
-              color: Colors.white.withOpacity(0.9),
+              color: Get.isDarkMode
+                  ? Colors.white.withOpacity(0.9)
+                  : Colors.black.withOpacity(0.9),
             ),
           ),
         ],
@@ -168,9 +177,64 @@ class ComplainPage extends StatelessWidget {
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (context) => Container(
-          // Implement your message form here
+      builder: (context) => Center(
+        child: Container(
+          decoration: BoxDecoration(
+            color: kmaincolor,
+            borderRadius: const BorderRadius.all(Radius.circular(12)),
           ),
+          padding: const EdgeInsets.all(20),
+          height: Sizeconfig.screenheight! / 5,
+          width: Sizeconfig.screenwidth! / 1.1,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                "Support Request",
+                style: TextStyle(fontSize: 22),
+                textAlign: TextAlign.center,
+              ),
+              const Text(
+                "Open Direct message page and send your question.",
+                style: TextStyle(fontSize: 14),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ElevatedButton(
+                      onPressed: () {},
+                      child: SizedBox(
+                          height: Sizeconfig.screenheight! / 35,
+                          width: Sizeconfig.screenwidth! / 5,
+                          child: SizedBox(
+                              height: Sizeconfig.screenheight! / 35,
+                              width: Sizeconfig.screenwidth! / 4,
+                              child: Text(
+                                "cancel",
+                                textAlign: TextAlign.center,
+                                style:
+                                    TextStyle(fontSize: 16, color: kmaincolor4),
+                              )))),
+                  ElevatedButton(
+                      onPressed: () {},
+                      child: SizedBox(
+                          height: Sizeconfig.screenheight! / 35,
+                          width: Sizeconfig.screenwidth! / 5,
+                          child: SizedBox(
+                              height: Sizeconfig.screenheight! / 35,
+                              width: Sizeconfig.screenwidth! / 4,
+                              child: Text(
+                                "ok",
+                                textAlign: TextAlign.center,
+                                style:
+                                    TextStyle(fontSize: 16, color: kmaincolor),
+                              )))),
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

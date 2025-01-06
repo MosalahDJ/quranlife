@@ -18,6 +18,7 @@ class SettingPage extends StatelessWidget {
           groupValue: themctrl.selectedTheme.value,
           onChanged: (value) {
             themctrl.changeTheme(value!);
+            Get.updateLocale(Locale(langCtrl.language.value));
             themctrl.initializeTheme();
           },
           activeColor: Get.isDarkMode ? kmaincolor4 : kmaincolor,
