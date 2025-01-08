@@ -4,7 +4,7 @@ import 'package:quranlife/features/controller/Auth%20controller/logincontroller.
 import 'package:quranlife/features/controller/Auth%20controller/passwordresset.dart';
 import 'package:quranlife/features/controller/Auth%20controller/signncontroller.dart';
 import 'package:quranlife/features/controller/Auth%20controller/signoutcontroller.dart';
-import 'package:quranlife/features/controller/Complaine%20Controller/complain_controller.dart';
+import 'package:quranlife/features/controller/Url%20Luncher%20Controller/url_luncher_controller.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
 import 'package:quranlife/features/controller/Auth%20controller/textvalidatecontroller.dart';
 import 'package:quranlife/features/controller/notfication%20controller/sub%20controllers/adhan_noti_controller.dart';
@@ -59,6 +59,6 @@ class Mybinding implements Bindings {
     //home injection
     Get.put<MyHomeController>(MyHomeController());
     //complain injection
-    Get.put<ComplainController>(ComplainController(), permanent: true);
+    Get.put<UrlLuncherController>(UrlLuncherController(), permanent: true);
   }
 }

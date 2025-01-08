@@ -62,7 +62,7 @@ class CurrentPrayTime extends StatelessWidget {
                 elevation: 0,
                 child: Text(
                   "mawaqit".tr,
-                  style: const TextStyle(color: Colors.white, fontSize: 22),
+                  style: const TextStyle(color: Colors.white, fontSize: 21),
                 )),
           ),
           //card

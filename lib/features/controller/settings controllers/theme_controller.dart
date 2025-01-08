@@ -55,7 +55,6 @@ class ThemeController extends GetxController {
     _applyTheme();
     // Force update to rebuild with new font
     Get.forceAppUpdate();
-    update();
   }
 
   //helper func for applying the theme

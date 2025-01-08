@@ -4,24 +4,24 @@ class Messages extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'en': {
-          // Login Page
+          // Authentication
           'quran_life': 'Quran Life',
-          'email': 'Email',
+          'email': 'Email Address',
           'enter_email': 'Enter your email address',
           'password': 'Password',
           'enter_password': 'Enter your password',
-          'forgot_password': 'Forgot password?',
-          'login': 'Login',
-          'or_login_with': 'Or Login with',
+          'forgot_password': 'Forgot Password?',
+          'login': 'Sign In',
+          'or_login_with': 'Or Sign In With',
           'no_account': 'Don\'t have an account?',
-          'sign_in': 'Sign in',
-          'please_enter_email': 'Please enter your email',
+          'sign_in': 'Create Account',
+          'please_enter_email': 'Please enter your email address',
           'please_enter_password': 'Please enter your password',
-          'leave_login': 'Do you want to leave the login process?',
+          'leave_login': 'Do you want to exit the sign-in process?',
 
-          // Sign Up Page
+          // Registration
           'create_account': 'Create Your Account',
-          'fill_form': 'Please fill in the form below',
+          'fill_form': 'Please complete the form below',
           'first_name': 'First Name',
           'last_name': 'Last Name',
           'enter_first_name': 'Enter your first name',
@@ -31,16 +31,15 @@ class Messages extends Translations {
           'male': 'Male',
           'female': 'Female',
           'confirm_password': 'Confirm Password',
-          'enter_confirm_password': 'Enter your password again',
+          'enter_confirm_password': 'Re-enter your password',
           'create_account_button': 'Create Account',
-          'leave_registration':
-              'Do you want to leave the registration process?',
+          'leave_registration': 'Do you want to exit the registration process?',
           'registration': 'Registration',
 
-          // Validation Messages
-          'field_required': 'required',
+          // Validation
+          'field_required': 'This field is required',
           'valid_email': 'Please enter a valid email address',
-          'password_length': 'Password must be at least 6 characters',
+          'password_length': 'Password must be at least 6 characters long',
           'passwords_match': 'Passwords do not match',
 
           // Common
@@ -83,17 +82,18 @@ class Messages extends Translations {
           'search': 'Search',
           'logout': 'Logout',
 
-          // Prayer Times Page
+          // Prayer Times
           'prayer_times': 'Prayer Times',
-          'mawaqit': 'Timings',
+          'mawaqit': 'Schedule',
           'prayer_board': 'Prayer Board',
           'next_prayer': 'Next Prayer: ',
           'time_remaining': 'Time Remaining: ',
-          'get_new_data': 'Get New Data',
+          'get_new_data': 'Update Prayer Times',
           'get_location_desc':
-              'Get current location and request new data from the server.\nThis may take a few minutes.',
-          'connection_failed': 'Connection failed',
-          'check_internet': 'Please check your internet connection then retry',
+              'Updating location and prayer times...\nThis may take a moment.',
+          'connection_failed': 'Connection Failed',
+          'check_internet':
+              'Please check your internet connection and try again',
 
           // Prayer Names
           'fajr': 'Fajr',
@@ -162,7 +162,7 @@ class Messages extends Translations {
           'send_message': 'Send Message',
           'direct_message': 'Direct Message',
           'telegram': 'Telegram',
-          'follow_us': 'Follow Us',
+          'send_email': 'Send Email',
           'address': 'Address',
           'address_details': 'Constantine, Algeria',
           'working_hours': 'Working Hours',
@@ -175,15 +175,17 @@ class Messages extends Translations {
           'help_feedback': 'Help & Feedback',
           'app_version': 'QuranLife v1.0.0',
 
-          // Settings Page
-          'theme_mode': 'Theme mode',
-          'system_theme': 'System Theme',
-          'light_theme': 'Light Theme',
-          'dark_theme': 'Dark Theme',
+          // Settings
+          'theme_mode': 'Display Theme',
+          'system_theme': 'System Default',
+          'light_theme': 'Light Mode',
+          'dark_theme': 'Dark Mode',
           'notifications': 'Notifications',
-          'adhan_notifications': 'Adhan notifications',
-          'adhkar_notifications': 'Adhkar notifications',
-          'quran_notifications': 'Quran notifications',
+          'adhan_notifications': 'Prayer Time Notifications',
+          'adhkar_notifications': 'Daily Remembrance Notifications',
+          'quran_notifications': 'Quran Reading Reminders',
+
+          // Languages
           'arabic': 'Arabic',
           'english': 'English',
           'french': 'French',
@@ -202,9 +204,11 @@ class Messages extends Translations {
           'our_mission': 'Our Mission',
           'our_vision': 'Our Vision',
           'expertise_description':
-              'We specialize in creating innovative mobile solutions',
-          'mission_description': 'To provide high-quality mobile applications',
-          'vision_description': 'To lead the mobile development industry',
+              'We specialize in building beautiful, high-performance apps for Android and iOS using Flutter. With a focus on intuitive design and solving technical challenges, We create apps that are both functional and delightful to use.',
+          'mission_description':
+              'To empower businesses and individuals by transforming ideas into innovative, user-friendly mobile apps. We deliver scalable solutions that combine cutting-edge technology with exceptional design for meaningful impact.',
+          'vision_description':
+              ' We envision a world where technology simplifies and enhances everyday life for everyone.',
 
           // Categories
           'islamic_occasions': 'Islamic Occasions',
@@ -226,20 +230,20 @@ class Messages extends Translations {
           'hijri_month_Dhu al-Hijjah': 'Dhu al-Hijjah',
         },
         'ar': {
-          // Login Page
-          'quran_life': 'حياة القرآن',
+          // Authentication
+          'quran_life': 'قرآن لايف',
           'email': 'البريد الإلكتروني',
-          'enter_email': 'أدخل بريدك الإلكتروني',
+          'enter_email': 'أدخل عنوان بريدك الإلكتروني',
           'password': 'كلمة المرور',
           'enter_password': 'أدخل كلمة المرور',
           'forgot_password': 'نسيت كلمة المرور؟',
           'login': 'تسجيل الدخول',
           'or_login_with': 'أو سجل الدخول باستخدام',
           'no_account': 'ليس لديك حساب؟',
-          'sign_in': 'إنشاء حساب',
+          'sign_in': 'إنشاء حساب جديد',
           'please_enter_email': 'الرجاء إدخال البريد الإلكتروني',
           'please_enter_password': 'الرجاء إدخال كلمة المرور',
-          'leave_login': 'هل تريد مغادرة عملية تسجيل الدخول؟',
+          'leave_login': 'هل تريد الخروج من عملية تسجيل الدخول؟',
 
           // Sign Up Page
           'create_account': 'إنشاء حسابك',
@@ -304,17 +308,17 @@ class Messages extends Translations {
           'search': 'بحث',
           'logout': 'تسجيل خروج',
 
-          // Prayer Times Page
+          // Prayer Times
           'prayer_times': 'مواقيت الصلاة',
-          'mawaqit': 'مواقيت',
+          'mawaqit': 'الصلوات',
           'prayer_board': 'لوحة الصلوات',
           'next_prayer': 'الصلاة القادمة: ',
           'time_remaining': 'الوقت المتبقي: ',
-          'get_new_data': 'تحديث البيانات',
+          'get_new_data': 'تحديث مواقيت الصلاة',
           'get_location_desc':
-              'الحصول على الموقع الحالي وطلب بيانات جديدة من الخادم.\nقد يستغرق هذا بضع دقائق.',
+              'جاري تحديث الموقع ومواقيت الصلاة...\nيرجى الانتظار.',
           'connection_failed': 'فشل الاتصال',
-          'check_internet': 'يرجى التحقق من اتصال الإنترنت ثم إعادة المحاولة',
+          'check_internet': 'يرجى التحقق من اتصال الإنترنت والمحاولة مرة أخرى',
 
           // Arabic Prayer Names
           'fajr': 'الفجر',
@@ -328,7 +332,7 @@ class Messages extends Translations {
           'refresh_prayer_times': 'اسحب لتحديث أوقات الصلاة',
           'search_for_a_mosque': 'البحث عن مسجد',
           'daily_wird': 'الورد اليومي',
-          'quranlife': 'حياة القرآن',
+          'quranlife': 'قرآن لايف',
           'category': 'أقسام',
           'quran_wird': 'ورد القرآن   ',
           'hadith_wird': 'ورد الحديث   ',
@@ -376,13 +380,13 @@ class Messages extends Translations {
           'contact_us': 'اتصل بنا',
           'how_can_we_help': 'كيف يمكننا مساعدتك؟',
           'contact_description':
-              'نحن نقدر ملاحظاتك. يرجى استخدام النموذج أدناه لإرسال أسئلتك أو مخاوفك أو اقتراحاتك. سنرد عليك في أقرب وقت ممكن.',
+              'نحن نقدر ملاحظاتك. يرجى استخدام النموذج أدناه لإرسال أسئلتك أو استفساراتك أو اقتراحاتك. سنرد عليك في أقرب وقت ممكن.',
           'name': 'الاسم',
           'description': 'الوصف',
-          'send_message': 'إرسال الرسالة',
+          'send_message': 'إرسال',
           'direct_message': 'رسالة مباشرة',
           'telegram': 'تلغرام',
-          'follow_us': 'تابعنا',
+          'send_email': 'إرسال بريد إلكتروني',
           'address': 'العنوان',
           'address_details': 'قسنطينة,الجزائر',
           'working_hours': 'ساعات العمل',
@@ -395,15 +399,17 @@ class Messages extends Translations {
           'help_feedback': 'المساعدة والتعليقات',
           'app_version': 'حياة القرآن نسخة ١.٠.٠',
 
-          // Settings Page
-          'theme_mode': 'مظهر التطبيق',
-          'system_theme': 'مظهر النظام',
-          'light_theme': 'المظهر الفاتح',
-          'dark_theme': 'المظهر الداكن',
+          // Settings
+          'theme_mode': 'نمط العرض',
+          'system_theme': 'النمط الافتراضي للنظام',
+          'light_theme': 'النمط الفاتح',
+          'dark_theme': 'النمط الداكن',
           'notifications': 'الإشعارات',
-          'adhan_notifications': 'إشعارات الأذان',
-          'adhkar_notifications': 'إشعارات الأذكار',
-          'quran_notifications': 'إشعارات القرآن',
+          'adhan_notifications': 'تنبيهات مواقيت الصلاة',
+          'adhkar_notifications': 'تنبيهات الأذكار اليومية',
+          'quran_notifications': 'تذكير بقراءة القرآن',
+
+          // Languages
           'arabic': 'العربية',
           'english': 'الإنجليزية',
           'french': 'الفرنسية',
@@ -421,9 +427,12 @@ class Messages extends Translations {
           'our_expertise': 'خبرتنا',
           'our_mission': 'مهمتنا',
           'our_vision': 'رؤيتنا',
-          'expertise_description': 'نحن متخصصون في إنشاء حلول مبتكرة للموبايل',
-          'mission_description': 'تقديم تطبيقات موبايل عالية الجودة',
-          'vision_description': 'أن نقود صناعة تطوير تطبيقات الموبايل',
+          'expertise_description':
+              'نحن متخصصون في بناء تطبيقات جميلة وعالية الأداء لنظامي Android و iOS باستخدام Flutter. مع التركيز على التصميم البديهي وحل التحديات التقنية، نخلق تطبيقات تكون وظيفية وسارة للاستخدام.',
+          'mission_description':
+              'تمكين الشركات والأفراد من خلال تحويل الأفكار إلى تطبيقات جوال مبتكرة وسهلة الاستخدام. نقدم حلولاً قابلة للتطوير تجمع بين التكنولوجيا المتطورة والتصميم الاستثنائي لتحقيق تأثير ذو معنى.',
+          'vision_description':
+              'نحن نتطلع إلى عالم حيث تُبسّط التكنولوجيا وتعزز الحياة اليومية للجميع.',
 
           // Categories
           'islamic_occasions_info': 'معلومات المناسبات الإسلامية',
@@ -454,20 +463,20 @@ class Messages extends Translations {
           'hijri_month_Dhu al-Hijjah': 'ذو الحجة',
         },
         'fr': {
-          // Login Page
-          'quran_life': 'Vie du Coran',
-          'email': 'E-mail',
-          'enter_email': 'Entrez votre adresse e-mail',
+          // Authentication
+          'quran_life': 'Quran Life',
+          'email': 'Adresse e-mail',
+          'enter_email': 'Saisissez votre adresse e-mail',
           'password': 'Mot de passe',
-          'enter_password': 'Entrez votre mot de passe',
-          'forgot_password': 'Mot de passe oublié?',
-          'login': 'Connexion',
+          'enter_password': 'Saisissez votre mot de passe',
+          'forgot_password': 'Mot de passe oublié ?',
+          'login': 'Se connecter',
           'or_login_with': 'Ou connectez-vous avec',
-          'no_account': 'Vous n\'avez pas de compte?',
-          'sign_in': 'S\'inscrire',
-          'please_enter_email': 'Veuillez entrer votre e-mail',
-          'please_enter_password': 'Veuillez entrer votre mot de passe',
-          'leave_login': 'Voulez-vous quitter le processus de connexion?',
+          'no_account': 'Vous n\'avez pas de compte ?',
+          'sign_in': 'Créer un compte',
+          'please_enter_email': 'Veuillez saisir votre adresse e-mail',
+          'please_enter_password': 'Veuillez saisir votre mot de passe',
+          'leave_login': 'Voulez-vous quitter le processus de connexion ?',
 
           // Sign Up Page
           'create_account': 'Créez votre compte',
@@ -534,18 +543,18 @@ class Messages extends Translations {
           'search': 'Rechercher',
           'logout': 'Déconnexion',
 
-          // Prayer Times Page
-          'prayer_times': 'Heures de Prière',
-          'mawaqit': 'Horaires',
-          'prayer_board': 'Tableau des Prières',
-          'next_prayer': 'Prochaine Prière: ',
-          'time_remaining': 'Temps Restant: ',
-          'get_new_data': 'Mettre à jour',
+          // Prayer Times
+          'prayer_times': 'Horaires des prières',
+          'mawaqit': 'prières',
+          'prayer_board': 'Tableau des prières',
+          'next_prayer': 'Prochaine prière : ',
+          'time_remaining': 'Temps restant : ',
+          'get_new_data': 'Mettre à jour les horaires',
           'get_location_desc':
-              'Obtenir la position actuelle et demander de nouvelles données du serveur.\nCela peut prendre quelques minutes.',
-          'connection_failed': 'Échec de connexion',
+              'Mise à jour de la localisation et des horaires de prière...\nVeuillez patienter.',
+          'connection_failed': 'Échec de la connexion',
           'check_internet':
-              'Veuillez vérifier votre connexion Internet puis réessayer',
+              'Veuillez vérifier votre connexion Internet et réessayer',
 
           // Prayer Names (Keep English versions for internal use)
           'fajr': 'Fajr',
@@ -559,7 +568,7 @@ class Messages extends Translations {
           'refresh_prayer_times': 'Tirez pour actualiser les heures de prière',
           'search_for_a_mosque': 'Recherche d’une mosquée',
           'daily_wird': 'Wird Quotidien',
-          'quranlife': 'Vie du Coran',
+          'quranlife': 'QuranLife',
           'category': 'Catégories',
           'quran_wird': '   Wird du Coran',
           'hadith_wird': '   Wird du Hadith',
@@ -597,45 +606,47 @@ class Messages extends Translations {
               'Veuillez suivre les directives de la Direction des Affaires Religieuses de votre pays pour des dates précises des occasions religieuses.',
 
           // Referral Page
-          'referral_page': 'Referral Page',
-          'share_app': 'Share this Health App with Your Friends',
+          'referral_page': 'Page de Parrainage',
+          'share_app': 'Partagez cette Application avec Vos Amis',
           'share_description':
-              'Share our health-friendly application with your friends. Give them a chance to track their food calories, vitamins, and other features in this app.',
-          'your_referral_link': 'Your Referral Link:',
-          'or_share_with': 'Or Share with:',
+              'Partagez notre application avec vos amis. Donnez-leur la chance de découvrir toutes les fonctionnalités de cette application.',
+          'your_referral_link': 'Votre Lien de Parrainage:',
+          'or_share_with': 'Ou Partagez avec:',
 
           // Contact/Complain Page
-          'contact_us': 'Contact Us',
-          'how_can_we_help': 'How Can We Help You?',
+          'contact_us': 'Contactez-nous',
+          'how_can_we_help': 'Comment Pouvons-nous Vous Aider?',
           'contact_description':
-              'We value your feedback. Please use the form below to send us your questions, concerns, or suggestions. We\'ll get back to you as soon as possible.',
-          'name': 'Name',
+              'Nous apprécions vos commentaires. Veuillez utiliser le formulaire ci-dessous pour nous envoyer vos questions, préoccupations ou suggestions. Nous vous répondrons dès que possible.',
+          'name': 'Nom',
           'description': 'Description',
-          'send_message': 'Send Message',
+          'send_message': 'Envoyer le Message',
           'direct_message': 'Message Direct',
           'telegram': 'Telegram',
-          'follow_us': 'Suivez-nous',
+          'send_email': 'envoyer un email',
           'address': 'Adresse',
           'address_details': '123 Rue Principale, Nom de la Ville',
           'working_hours': 'Heures d\'ouverture',
 
           // Drawer Menu
-          'my_quran': 'My Quran',
-          'bookmarks': 'Bookmarks',
-          'about_us': 'About Us',
-          'settings': 'Settings',
-          'help_feedback': 'Help & Feedback',
+          'my_quran': 'Mon Coran',
+          'bookmarks': 'Favoris',
+          'about_us': 'À Propos de Nous',
+          'settings': 'Paramètres',
+          'help_feedback': 'Aide et Commentaires',
           'app_version': 'QuranLife v1.0.0',
 
-          // Settings Page
-          'theme_mode': 'Mode d\'affichage',
+          // Settings
+          'theme_mode': 'Thème d\'affichage',
           'system_theme': 'Thème système',
-          'light_theme': 'Thème clair',
-          'dark_theme': 'Thème sombre',
+          'light_theme': 'Mode clair',
+          'dark_theme': 'Mode sombre',
           'notifications': 'Notifications',
-          'adhan_notifications': 'Notifications Adhan',
-          'adhkar_notifications': 'Notifications Adhkar',
-          'quran_notifications': 'Notifications Coran',
+          'adhan_notifications': 'Notifications des heures de prière',
+          'adhkar_notifications': 'Notifications des invocations quotidiennes',
+          'quran_notifications': 'Rappels de lecture du Coran',
+
+          // Languages
           'arabic': 'arabe',
           'english': 'anglais',
           'french': 'français',
@@ -654,10 +665,11 @@ class Messages extends Translations {
           'our_mission': 'Notre Mission',
           'our_vision': 'Notre Vision',
           'expertise_description':
-              'Nous sommes spécialisés dans la création de solutions mobiles innovantes',
+              'Nous sommes spécialisés dans la création d\'applications belles et performantes pour Android et iOS en utilisant Flutter. En mettant l\'accent sur un design intuitif et la résolution de défis techniques, nous créons des applications à la fois fonctionnelles et agréables à utiliser.',
           'mission_description':
-              'Fournir des applications mobiles de haute qualité',
-          'vision_description': 'Diriger l\'industrie du développement mobile',
+              'Permettre aux entreprises et aux individus de transformer leurs idées en applications mobiles innovantes et conviviales. Nous proposons des solutions évolutives qui combinent une technologie de pointe et un design exceptionnel pour un impact significatif.',
+          'vision_description':
+              'Nous envisageons un monde où la technologie simplifie et améliore la vie quotidienne de tous.',
 
           // Categories
           'islamic_occasions': 'Occasions Islamiques',
@@ -680,7 +692,3 @@ class Messages extends Translations {
         },
       };
 }
-
-
-
-//make every text apeare on UI of these pages localizeable

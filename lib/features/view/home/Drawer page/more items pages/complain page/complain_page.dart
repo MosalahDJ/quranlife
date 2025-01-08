@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
-import 'package:quranlife/features/controller/Complaine%20Controller/complain_controller.dart';
+import 'package:quranlife/features/controller/Url%20Luncher%20Controller/url_luncher_controller.dart';
 
 class ComplainPage extends StatelessWidget {
   ComplainPage({super.key});
-  final ComplainController cmplctrl = Get.find();
+  final UrlLuncherController urllunchctrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -65,13 +65,14 @@ class ComplainPage extends StatelessWidget {
                         title: 'telegram'.tr,
                         icon: Icons.telegram,
                         color: const Color.fromARGB(255, 34, 158, 225),
-                        onTap: () => cmplctrl.launchTelegram(),
+                        onTap: () =>
+                            urllunchctrl.launchurl('https://t.me/0655663020'),
                       ),
                       _buildContactOption(
                         title: 'email'.tr,
                         icon: Icons.email_rounded,
                         color: Colors.red,
-                        onTap: () => cmplctrl.launchEmail(),
+                        onTap: () => urllunchctrl.launchEmail(),
                       ),
                     ],
                   ),
@@ -81,7 +82,7 @@ class ComplainPage extends StatelessWidget {
                   margin: const EdgeInsets.all(16),
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Get.isDarkMode ? kmaincolordark : Colors.white,
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Column(
@@ -140,7 +141,7 @@ class ComplainPage extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       child: Material(
-        color: Colors.white,
+        color: Get.isDarkMode ? kmaincolordark : Colors.white,
         borderRadius: BorderRadius.circular(15),
         child: InkWell(
           onTap: onTap,

@@ -1,29 +1,29 @@
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ComplainController extends GetxController {
-  Future<void> launchTelegram() async {
-    final Uri telegramUri = Uri.parse('https://t.me/0655663020');
+class UrlLuncherController extends GetxController {
+  Future<void> launchurl(String url) async {
+    final uri = Uri.parse(url);
 
     try {
       if (!await launchUrl(
-        telegramUri,
+        uri,
         mode: LaunchMode.externalApplication,
       )) {
-        throw 'Could not launch Telegram';
+        throw 'Could not launch Site';
       }
     } catch (e) {
       Get.snackbar(
         'Error',
-        'Could not open Telegram',
+        'Could not open Site',
         snackPosition: SnackPosition.BOTTOM,
       );
     }
   }
 
   Future<void> launchEmail() async {
-    final String subject = Uri.decodeComponent('Support Request');
-    final String body = Uri.decodeComponent('Hello, I need help with...');
+    final String subject = Uri.decodeComponent('');
+    final String body = Uri.decodeComponent('');
 
     final Uri emailLaunchUri = Uri(
       scheme: 'mailto',

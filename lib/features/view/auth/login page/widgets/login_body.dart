@@ -87,8 +87,9 @@ class LoginBody extends StatelessWidget {
                             textctrl: loginctrl.emailcontroller,
                             formtitle: "email".tr,
                             hint: "enter_email".tr,
-                            prefixicon:
-                                Icon(Icons.email_outlined, color: kmaincolor4),
+                            prefixicon: Icon(Icons.email_outlined,
+                                color:
+                                    Get.isDarkMode ? kmaincolor4 : kmaincolor),
                           ),
                         ),
                         const SizedBox(height: 16),
@@ -103,11 +104,14 @@ class LoginBody extends StatelessWidget {
                                   loginctrl.visibility
                                       ? Icons.visibility_off
                                       : Icons.visibility,
-                                  color: kmaincolor4,
+                                  color:
+                                      Get.isDarkMode ? kmaincolor4 : kmaincolor,
                                 ),
                               ),
-                              prefixicon:
-                                  Icon(Icons.lock_outline, color: kmaincolor4),
+                              prefixicon: Icon(Icons.lock_outline,
+                                  color: Get.isDarkMode
+                                      ? kmaincolor4
+                                      : kmaincolor),
                               lines: 1,
                               obsecure: loginctrl.visibility,
                               validator: (val) => val!.isEmpty
@@ -130,7 +134,10 @@ class LoginBody extends StatelessWidget {
                             },
                             child: Text(
                               "forgot_password".tr,
-                              style: TextStyle(color: kmaincolor4),
+                              style: TextStyle(
+                                  color: Get.isDarkMode
+                                      ? kmaincolor4
+                                      : kmaincolor),
                             ),
                           ),
                         ),
@@ -143,7 +150,8 @@ class LoginBody extends StatelessWidget {
                           height: 50,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: kmaincolor4,
+                              backgroundColor:
+                                  Get.isDarkMode ? kmaincolor4 : kmaincolor,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12),
                               ),
@@ -183,19 +191,25 @@ class LoginBody extends StatelessWidget {
                       Row(
                         children: [
                           Expanded(
-                              child:
-                                  Divider(color: kmaincolor4.withOpacity(0.5))),
+                              child: Divider(
+                                  color: Get.isDarkMode
+                                      ? kmaincolor4.withOpacity(0.5)
+                                      : kmaincolor.withOpacity(0.5))),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: Text(
                               "or_login_with".tr,
                               style: TextStyle(
-                                  color: kmaincolor4.withOpacity(0.8)),
+                                  color: Get.isDarkMode
+                                      ? kmaincolor4.withOpacity(0.8)
+                                      : kmaincolor.withOpacity(0.8)),
                             ),
                           ),
                           Expanded(
-                              child:
-                                  Divider(color: kmaincolor4.withOpacity(0.5))),
+                              child: Divider(
+                                  color: Get.isDarkMode
+                                      ? kmaincolor4.withOpacity(0.5)
+                                      : kmaincolor.withOpacity(0.5))),
                         ],
                       ),
                       SizedBox(height: Sizeconfig.screenheight! * 0.03),
@@ -203,17 +217,17 @@ class LoginBody extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           _buildSocialButton(
-                            "lib/core/assets/images/login_images/login_button_image/google.png",
+                            "lib/core/assets/images/login_images/google.png",
                             () => googlectrl.signInWithGoogle(context),
                           ),
                           const SizedBox(width: 20),
                           _buildSocialButton(
-                            "lib/core/assets/images/login_images/login_button_image/Facebook.png",
+                            "lib/core/assets/images/login_images/Facebook.png",
                             () {},
                           ),
                           const SizedBox(width: 20),
                           _buildSocialButton(
-                            "lib/core/assets/images/login_images/login_button_image/X.png",
+                            "lib/core/assets/images/login_images/X.png",
                             () {},
                           ),
                         ],
@@ -239,7 +253,8 @@ class LoginBody extends StatelessWidget {
                             child: Text(
                               "sign_in".tr,
                               style: TextStyle(
-                                color: kmaincolor4,
+                                color:
+                                    Get.isDarkMode ? kmaincolor4 : kmaincolor,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
