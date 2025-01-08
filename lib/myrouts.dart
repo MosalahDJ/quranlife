@@ -73,7 +73,7 @@ class Myrouts {
       ),
       GetPage(
         name: "/refferal",
-        page: () => const RefferalPage(),
+        page: () => RefferalPage(),
       ),
       GetPage(
         name: "/salattime",

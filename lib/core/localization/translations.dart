@@ -18,6 +18,7 @@ class Messages extends Translations {
           'please_enter_email': 'Please enter your email address',
           'please_enter_password': 'Please enter your password',
           'leave_login': 'Do you want to exit the sign-in process?',
+          'log_out': 'Log Out',
 
           // Registration
           'create_account': 'Create Your Account',
@@ -103,6 +104,13 @@ class Messages extends Translations {
           'maghrib': 'Maghrib',
           'isha': 'Isha',
 
+          'Fajr': 'Fajr',
+          'Sunrise': 'Sunrise',
+          'Dhuhr': 'Dhuhr',
+          'Asr': 'Asr',
+          'Maghrib': 'Maghrib',
+          'Isha': 'Isha',
+
           // Home Page
           'refresh_prayer_times': 'Pull to refresh prayer times',
           'search_for_a_mosque': 'Search for a mosque',
@@ -146,11 +154,12 @@ class Messages extends Translations {
 
           // Referral Page
           'referral_page': 'Referral Page',
-          'share_app': 'Share this Health App with Your Friends',
+          'share_app': 'Share QuranLife',
           'share_description':
-              'Share our health-friendly application with your friends. Give them a chance to track their food calories, vitamins, and other features in this app.',
+              'Share the QuranLife app with your friends. Help them connect with the Quran, track prayer times, and strengthen their faith through daily Islamic guidance. Enjoy multiple features such as supplications, Qibla direction, and Quran recitation with a smooth and beneficial experience.',
           'your_referral_link': 'Your Referral Link:',
           'or_share_with': 'Or Share with:',
+          'refferal': 'Referral',
 
           // Contact/Complain Page
           'contact_us': 'Contact Us',
@@ -244,6 +253,7 @@ class Messages extends Translations {
           'please_enter_email': 'الرجاء إدخال البريد الإلكتروني',
           'please_enter_password': 'الرجاء إدخال كلمة المرور',
           'leave_login': 'هل تريد الخروج من عملية تسجيل الدخول؟',
+          'log_out': 'تسجيل الخروج',
 
           // Sign Up Page
           'create_account': 'إنشاء حسابك',
@@ -286,7 +296,7 @@ class Messages extends Translations {
           'skip': 'تخطي',
           'get_started': 'ابدأ الآن',
           'next': 'التالي',
-          'welcome_title': 'مرحباً بك في حياة القرآن',
+          'welcome_title': 'مرحباً بك في قرآن لايف',
           'welcome_subtitle':
               'رفيقك الإسلامي اليومي لتقوية إيمانك وممارسة تعاليم القرآن في حياتك اليومية.',
           'prayer_times_title': 'مواقيت الصلاة والتذكير',
@@ -327,6 +337,13 @@ class Messages extends Translations {
           'asr': 'العصر',
           'maghrib': 'المغرب',
           'isha': 'العشاء',
+
+          'Fajr': 'الفجر',
+          'Sunrise': 'الشروق',
+          'Dhuhr': 'الظهر',
+          'Asr': 'العصر',
+          'Maghrib': 'المغرب',
+          'Isha': 'العشاء',
 
           // Home Page
           'refresh_prayer_times': 'اسحب لتحديث أوقات الصلاة',
@@ -370,11 +387,12 @@ class Messages extends Translations {
 
           // Referral Page
           'referral_page': 'صفحة الإحالة',
-          'share_app': 'شارك هذا التطبيق الصحي مع أصدقائك',
+          'share_app': 'شارك قرآن لايف',
           'share_description':
-              'شارك تطبيقنا الصحي مع أصدقائك. امنحهم فرصة لتتبع السعرات الحرارية والفيتامينات والميزات الأخرى في هذا التطبيق.',
+              'شارك تطبيق قرآن لايف مع أصدقائك .ساعدهم على التواصل مع القرآن، متابعة أوقات الصلاة، وتعزيز إيمانهم من خلال التوجيهات الإسلامية اليومية. استمتع بميزات متعددة مثل الأدعية، تحديد القبلة، وتلاوة القرآن بتجربة سلسة ومفيدة',
           'your_referral_link': 'رابط الإحالة الخاص بك:',
           'or_share_with': 'أو شارك عبر:',
+          'refferal': 'إحالة',
 
           // Contact/Complain Page
           'contact_us': 'اتصل بنا',
@@ -477,6 +495,7 @@ class Messages extends Translations {
           'please_enter_email': 'Veuillez saisir votre adresse e-mail',
           'please_enter_password': 'Veuillez saisir votre mot de passe',
           'leave_login': 'Voulez-vous quitter le processus de connexion ?',
+          'log_out': 'Déconnexion',
 
           // Sign Up Page
           'create_account': 'Créez votre compte',
@@ -564,6 +583,13 @@ class Messages extends Translations {
           'maghrib': 'Maghrib',
           'isha': 'Isha',
 
+          'Fajr': 'Fajr',
+          'Sunrise': 'lv du soleil',
+          'Dhuhr': 'Dhuhr',
+          'Asr': 'Asr',
+          'Maghrib': 'Maghrib',
+          'Isha': 'Isha',
+
           // Home Page
           'refresh_prayer_times': 'Tirez pour actualiser les heures de prière',
           'search_for_a_mosque': 'Recherche d’une mosquée',
@@ -607,11 +633,12 @@ class Messages extends Translations {
 
           // Referral Page
           'referral_page': 'Page de Parrainage',
-          'share_app': 'Partagez cette Application avec Vos Amis',
+          'share_app': 'Partagez QuranLife',
           'share_description':
-              'Partagez notre application avec vos amis. Donnez-leur la chance de découvrir toutes les fonctionnalités de cette application.',
+              'Partagez l\'application QuranLife avec vos amis. Aidez-les à se connecter au Coran, à suivre les heures de prière et à renforcer leur foi grâce à des conseils islamiques quotidiens. Profitez de fonctionnalités multiples telles que les invocations, la détermination de la Qibla et la récitation du Coran avec une expérience fluide et utile.',
           'your_referral_link': 'Votre Lien de Parrainage:',
           'or_share_with': 'Ou Partagez avec:',
+          'refferal': 'Parrainage',
 
           // Contact/Complain Page
           'contact_us': 'Contactez-nous',

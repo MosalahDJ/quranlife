@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
+import 'package:quranlife/features/controller/Auth%20controller/logincontroller.dart';
 
 class MyDrawer extends Drawer {
-  const MyDrawer({super.key});
+  MyDrawer({super.key});
+  final LogInController logctrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -45,9 +47,11 @@ class MyDrawer extends Drawer {
       ),
       child: Column(
         children: [
-          const CircleAvatar(
-            backgroundImage:
-                AssetImage("lib/core/assets/images/more_page_images/me.png"),
+          CircleAvatar(
+            backgroundColor: Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
+            backgroundImage: const AssetImage(
+              "lib/core/assets/images/background_image/islamic_patern_portrait.jpg",
+            ),
             radius: 40,
           ),
           const SizedBox(height: 12),
@@ -91,6 +95,8 @@ class MyDrawer extends Drawer {
             () => Get.toNamed("settings")),
         _buildMenuItem(context, 'help_feedback'.tr, Icons.help_outline,
             () => Get.toNamed("help")),
+        _buildMenuItem(context, 'log_out'.tr, Icons.logout_outlined,
+            () => logctrl.signOut(context)),
       ],
     );
   }

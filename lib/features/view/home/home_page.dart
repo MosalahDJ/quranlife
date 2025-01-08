@@ -17,7 +17,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const MyDrawer(),
+      drawer: MyDrawer(),
       bottomNavigationBar: GetBuilder<MyHomeController>(
           builder: (controller) => CurvedNavigationBar(
                 buttonBackgroundColor: kmaincolor4,

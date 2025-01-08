@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LogInController extends GetxController {
   final TextEditingController emailcontroller = TextEditingController();
@@ -40,6 +41,27 @@ class LogInController extends GetxController {
     } catch (e) {
       // ignore: avoid_print
       print(e);
+    }
+  }
+
+  Future<void> signOut(BuildContext context) async {
+    try {
+      // Sign out from Firebase
+      await FirebaseAuth.instance.signOut();
+      // Sign out from Google
+      await GoogleSignIn().signOut();
+      // Navigate to login page
+      Get.offAllNamed("login");
+    } on FirebaseAuthException catch (e) {
+      AwesomeDialog(
+        context: context,
+        body: Text(e.message ?? "Error signing out"),
+      ).show();
+    } catch (e) {
+      AwesomeDialog(
+        context: context,
+        body: const Text("An error occurred while signing out"),
+      ).show();
     }
   }
 

@@ -52,6 +52,7 @@ dependencies:
   http: ^1.2.2
   islamic_hijri_calendar: ^0.0.4
   restart_app: ^1.3.2
+  share_plus: ^10.1.3
   shared_preferences: ^2.2.2
   timezone: ^0.10.0
   url_launcher: ^6.3.1
@@ -107,9 +108,7 @@ flutter:
     - lib/core/assets/images/splash_view_image/
     - lib/core/assets/images/on_boarding_image/
     - lib/core/assets/images/login_images/
-    - lib/core/assets/images/login_images/login_button_image/
     - lib/core/assets/images/homeimages/
-    - lib/core/assets/images/more_page_images/
     - lib/core/assets/images/refferal_image/
     - lib/core/assets/images/background_image/
     - lib/core/assets/images/app_logo/

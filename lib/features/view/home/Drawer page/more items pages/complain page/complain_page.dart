@@ -6,7 +6,7 @@ import 'package:quranlife/features/controller/Url%20Luncher%20Controller/url_lun
 
 class ComplainPage extends StatelessWidget {
   ComplainPage({super.key});
-  final UrlLuncherController urllunchctrl = Get.find();
+  final UrlLuncherAndSharingController urllunchctrl = Get.find();
 
   @override
   Widget build(BuildContext context) {

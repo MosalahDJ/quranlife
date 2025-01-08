@@ -59,6 +59,7 @@ class Mybinding implements Bindings {
     //home injection
     Get.put<MyHomeController>(MyHomeController());
     //complain injection
-    Get.put<UrlLuncherController>(UrlLuncherController(), permanent: true);
+    Get.put<UrlLuncherAndSharingController>(UrlLuncherAndSharingController(),
+        permanent: true);
   }
 }

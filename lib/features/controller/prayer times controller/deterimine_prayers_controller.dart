@@ -106,6 +106,7 @@ class DeterminePrayersController extends GetxController {
       var now = DateTime.now();
       //we use this list for store iside it list's of prayer name and prayer time
       //and we use parse time for ensure it DateTime is not String
+
       var prayers = [
         ['Fajr', _parseTime(fpfctrl.prayersdays[_formatDate(now)]['Fajr']!)],
         [
