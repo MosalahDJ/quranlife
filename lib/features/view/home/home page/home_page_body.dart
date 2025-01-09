@@ -102,9 +102,11 @@ class HomePageBody extends StatelessWidget {
 
                       // Nearest Mosque Section
                       const SizedBox(height: 12),
-                      _buildMosqueCard(
-                        context,
-                        () {},
+                      CartCard(
+                        elevation: 2,
+                        color: Get.isDarkMode
+                            ? kmaincolor2dark.withOpacity(0.7)
+                            : Colors.white.withOpacity(0.7),
                       ),
                       SizedBox(height: _sectionSpacing),
 
@@ -130,82 +132,54 @@ class HomePageBody extends StatelessWidget {
 
   Widget _buildSectionHeader(
       BuildContext context, String title, VoidCallback moreIconOnpressed) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          title,
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
+    return Material(
+      color: Colors.transparent,
+      child: SizedBox(
+        height: Sizeconfig.screenheight! * 0.055,
+        width: Sizeconfig.screenwidth,
+        child: Stack(
+          children: [
+            Positioned(
+              top: Sizeconfig.screenheight! / 200,
+              left: langctrl.language.value == "ar"
+                  ? Sizeconfig.screenwidth! / 2
+                  : 0,
+              right: langctrl.language.value == "ar"
+                  ? 0
+                  : Sizeconfig.screenwidth! / 2,
+              child: Text(
+                title,
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
-        ),
-        IconButton(
-            onPressed: moreIconOnpressed,
-            icon: Icon(
-              Icons.more_horiz,
-              size: 30,
-              color: Get.isDarkMode ? Colors.white : Colors.black,
-            )),
-      ],
-    );
-  }
-
-  Widget _buildMosqueCard(context, VoidCallback moreIcononpressed) {
-    return Stack(
-      children: [
-        //morebutton
-        Positioned(
-          top: 0,
-          left: langctrl.language.value == "ar"
-              ? 0
-              : Sizeconfig.screenwidth! / 1.3,
-          right: langctrl.language.value == "ar"
-              ? Sizeconfig.screenwidth! / 1.2
-              : 0,
-          child: Card(
-              color: Colors.transparent,
-              elevation: 0,
-              child: IconButton(
-                  onPressed: moreIcononpressed,
+            ),
+            Positioned(
+              top: 0,
+              left: langctrl.language.value == "ar"
+                  ? 0
+                  : Sizeconfig.screenwidth! / 1.25,
+              right: langctrl.language.value == "ar"
+                  ? Sizeconfig.screenwidth! / 1.25
+                  : 0,
+              child: Material(
+                elevation: 0,
+                color: Colors.transparent,
+                borderRadius: BorderRadius.circular(20),
+                child: IconButton(
+                  alignment: Alignment.center,
+                  onPressed: moreIconOnpressed,
                   icon: Icon(
                     Icons.more_horiz,
                     size: 30,
                     color: Get.isDarkMode ? Colors.white : Colors.black,
-                  ))),
-        ),
-        Positioned(
-          top: 0,
-          left:
-              langctrl.language.value == "ar" ? Sizeconfig.screenwidth! / 3 : 0,
-          right: langctrl.language.value == "ar"
-              ? 0
-              : langctrl.language.value == "fr"
-                  ? Sizeconfig.screenwidth! / 9
-                  : Sizeconfig.screenwidth! / 4,
-          child: Card(
-              color: Colors.transparent,
-              elevation: 0,
-              child: Text("search_for_a_mosque".tr,
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ))),
-        ),
-        Positioned(
-          child: SizedBox(
-            height: Sizeconfig.screenheight! < 768
-                ? Sizeconfig.screenheight! / 3.7
-                : Sizeconfig.screenheight! > 1010
-                    ? Sizeconfig.screenheight! / 6
-                    : Sizeconfig.screenheight! / 4.5,
-            child: CartCard(
-              elevation: 2,
-              color: Get.isDarkMode
-                  ? kmaincolor2dark.withOpacity(0.7)
-                  : Colors.white.withOpacity(0.7),
+                  ),
+                ),
+              ),
             ),
-          ),
+          ],
         ),
-      ],
+      ),
     );
   }
 

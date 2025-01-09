@@ -83,6 +83,27 @@ class Messages extends Translations {
           'search': 'Search',
           'logout': 'Logout',
 
+          //category items
+          "teaching_prayer": "Teaching Prayer",
+          "wudu_ghusl": "Wudu And Ghusl",
+          "qibla_direction": "Qibla Direction",
+          "electronic_tasbih": "Electronic Tasbih",
+          "friday_sunnahs": "Friday Sunnahs",
+          "al-arba'in_nawawiyyah": "Al-Arba'in Nawawiyyah",
+          "tasbih": "Glorification of Allah",
+          "al-Hamd": "Praise",
+          "istighfar": "Seeking Forgiveness",
+          "islamic_ruqyah": "Islamic Ruqyah",
+          "quranic_supplications": "Quranic Supplications",
+          "prophets_supplications": "Prophets' Supplications",
+          "asma_ul-husna": "Names of Allah",
+          "community": "Community",
+          "ai_bot": "AI Bot",
+          "statistics": "Statistics",
+          'islamic_calendar': 'Islamic Calendar',
+          'hajj_umrah': 'Hajj and Umrah',
+          'zakat': 'Zakat',
+
           // Prayer Times
           'prayer_times': 'Prayer Times',
           'mawaqit': 'Schedule',
@@ -121,12 +142,6 @@ class Messages extends Translations {
           'hadith_wird': '   Hadith Wird',
           'allah_names': '   Allah Names',
 
-          // Home Page Categories
-          'prayer_info': 'Prayer Info',
-          'mosque_finder': 'Mosque Finder',
-          'qibla_direction': 'Qibla Direction',
-          'islamic_calendar': 'Islamic Calendar',
-
           // Quran Page
           'holy_quran': 'The Holy Qur\'an',
           'surah': 'Surah',
@@ -156,7 +171,7 @@ class Messages extends Translations {
           'referral_page': 'Referral Page',
           'share_app': 'Share QuranLife',
           'share_description':
-              'Share the QuranLife app with your friends. Help them connect with the Quran, track prayer times, and strengthen their faith through daily Islamic guidance. Enjoy multiple features such as supplications, Qibla direction, and Quran recitation with a smooth and beneficial experience.',
+              'Share the QuranLife app with your friends. Help them connect with the Quran, track prayer times, and strengthen their faith through daily Islamic guidance. Enjoy multiple features with a smooth and beneficial experience.',
           'your_referral_link': 'Your Referral Link:',
           'or_share_with': 'Or Share with:',
           'refferal': 'Referral',
@@ -301,13 +316,13 @@ class Messages extends Translations {
               'رفيقك الإسلامي اليومي لتقوية إيمانك وممارسة تعاليم القرآن في حياتك اليومية.',
           'prayer_times_title': 'مواقيت الصلاة والتذكير',
           'prayer_times_subtitle':
-              'يذكرك تطبيق حياة القرآن بأوقات الصلاة ويزودك بالأذكار والأدعية، لضمان أداء واجباتك الدينية في وقتها.',
+              'يذكرك تطبيق قرآن لايف بأوقات الصلاة ويزودك بالأذكار والأدعية، لضمان أداء واجباتك الدينية في وقتها.',
           'for_muslim_title': 'لكل مسلم',
           'for_muslim_subtitle':
-              'يدعم تطبيق حياة القرآن جميع المؤمنين في الحفاظ على صلواتهم، ويوفر التوجيه والأدعية المناسبة لكل مناسبة.',
+              'يدعم تطبيق قرآن لايف جميع المؤمنين في الحفاظ على صلواتهم، ويوفر التوجيه والأدعية المناسبة لكل مناسبة.',
           'community_title': 'المجتمع الإسلامي',
           'community_subtitle':
-              'يساعدك تطبيق حياة القرآن في العثور على المساجد القريبة ويربطك بإخوانك وأخواتك في الإيمان.',
+              'يساعدك تطبيق قرآن لايف في العثور على المساجد القريبة ويربطك بإخوانك وأخواتك في الإيمان.',
 
           // Home Page Navigation
           'home': 'الرئيسية',
@@ -317,6 +332,26 @@ class Messages extends Translations {
           'hey_user': 'مرحباً',
           'search': 'بحث',
           'logout': 'تسجيل خروج',
+          //category items
+          "teaching_prayer": "تعليم الصلاة",
+          "wudu_ghusl": "الوضوء والغسل",
+          "qibla_direction": "اتجاه القبلة",
+          "electronic_tasbih": "المسبحة الإلكترونية",
+          "friday_sunnahs": "سنن الجمعة",
+          "al-arba'in_nawawiyyah": "الأربعون النووية",
+          "tasbih": "التسبيح",
+          "al-Hamd": "الحمد",
+          "istighfar": "الاستغفار",
+          "islamic_ruqyah": "الرقية الشرعية",
+          "quranic_supplications": "أدعية قرآنية",
+          "prophets_supplications": "أدعية الأنبياء",
+          "asma_ul-husna": "أسماء الله الحسنى",
+          "community": "المجتمع",
+          "ai_bot": "AI Bot",
+          "statistics": "إحصائيات",
+          'islamic_calendar': 'التقويم الإسلامي',
+          'hajj_umrah': 'الحج والعمرة',
+          'zakat': 'الزكاة',
 
           // Prayer Times
           'prayer_times': 'مواقيت الصلاة',
@@ -355,12 +390,6 @@ class Messages extends Translations {
           'hadith_wird': 'ورد الحديث   ',
           'allah_names': 'أسماء الله   ',
 
-          // Home Page Categories
-          'prayer_info': 'معلومات الصلاة',
-          'mosque_finder': 'البحث عن المساجد',
-          'qibla_direction': 'اتجاه القبلة',
-          'islamic_calendar': 'التقويم الهجري',
-
           // Quran Page
           'holy_quran': 'القرآن الكريم',
           'surah': 'سورة',
@@ -389,7 +418,7 @@ class Messages extends Translations {
           'referral_page': 'صفحة الإحالة',
           'share_app': 'شارك قرآن لايف',
           'share_description':
-              'شارك تطبيق قرآن لايف مع أصدقائك .ساعدهم على التواصل مع القرآن، متابعة أوقات الصلاة، وتعزيز إيمانهم من خلال التوجيهات الإسلامية اليومية. استمتع بميزات متعددة مثل الأدعية، تحديد القبلة، وتلاوة القرآن بتجربة سلسة ومفيدة',
+              'شارك تطبيق قرآن لايف مع أصدقائك .ساعدهم على التواصل مع القرآن، متابعة أوقات الصلاة، وتعزيز إيمانهم من خلال التوجيهات الإسلامية اليومية. استمتع بميزات متعددة بتجربة سلسة ومفيدة',
           'your_referral_link': 'رابط الإحالة الخاص بك:',
           'or_share_with': 'أو شارك عبر:',
           'refferal': 'إحالة',
@@ -415,7 +444,7 @@ class Messages extends Translations {
           'about_us': 'من نحن',
           'settings': 'الإعدادات',
           'help_feedback': 'المساعدة والتعليقات',
-          'app_version': 'حياة القرآن نسخة ١.٠.٠',
+          'app_version': ' قرآن لايف نسخة ١.٠.٠',
 
           // Settings
           'theme_mode': 'نمط العرض',
@@ -562,6 +591,27 @@ class Messages extends Translations {
           'search': 'Rechercher',
           'logout': 'Déconnexion',
 
+          //category items
+          "teaching_prayer": "Apprentissage de la Prière",
+          "wudu_ghusl": "Wudu et Ghusl",
+          "qibla_direction": "Direction de la Qibla",
+          "electronic_tasbih": "Tasbih Électronique",
+          "friday_sunnahs": "Sounnahs du Vendredi",
+          "al-arba'in_nawawiyyah": "Al-Arba'in Nawawiyyah",
+          "tasbih": "Glorification d'Allah",
+          "al-Hamd": "Louange",
+          "istighfar": "Demande de Pardon",
+          "islamic_ruqyah": "Ruqyah Islamique",
+          "quranic_supplications": "Invocations Coraniques",
+          "prophets_supplications": "Invocations des Prophètes",
+          "asma_ul-husna": "Noms d'Allah",
+          "community": "Communauté",
+          "ai_bot": "AI Bot",
+          "statistics": "Statistiques",
+          'islamic_calendar': 'Calendrier Islamique',
+          'hajj_umrah': 'Hajj et Omra',
+          'zakat': 'Zakat',
+
           // Prayer Times
           'prayer_times': 'Horaires des prières',
           'mawaqit': 'prières',
@@ -600,12 +650,6 @@ class Messages extends Translations {
           'hadith_wird': '   Wird du Hadith',
           'allah_names': '   Noms d\'Allah',
 
-          // Home Page Categories
-          'prayer_info': 'Info Prière',
-          'mosque_finder': 'Chercheur de Mosquée',
-          'qibla_direction': 'Direction Qibla',
-          'islamic_calendar': 'Calendrier Islamique',
-
           // Quran Page
           'holy_quran': 'Le Saint Coran',
           'surah': 'Sourate',
@@ -635,7 +679,7 @@ class Messages extends Translations {
           'referral_page': 'Page de Parrainage',
           'share_app': 'Partagez QuranLife',
           'share_description':
-              'Partagez l\'application QuranLife avec vos amis. Aidez-les à se connecter au Coran, à suivre les heures de prière et à renforcer leur foi grâce à des conseils islamiques quotidiens. Profitez de fonctionnalités multiples telles que les invocations, la détermination de la Qibla et la récitation du Coran avec une expérience fluide et utile.',
+              'Partagez l\'application QuranLife avec vos amis. Aidez-les à se connecter au Coran, à suivre les heures de prière et à renforcer leur foi grâce à des conseils islamiques quotidiens. Profitez de fonctionnalités multiples avec une expérience fluide et utile.',
           'your_referral_link': 'Votre Lien de Parrainage:',
           'or_share_with': 'Ou Partagez avec:',
           'refferal': 'Parrainage',

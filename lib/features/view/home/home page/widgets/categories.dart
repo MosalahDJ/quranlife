@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
-import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class ServiceCategorie extends StatelessWidget {
   const ServiceCategorie(
@@ -36,11 +37,11 @@ class ServiceCategorie extends StatelessWidget {
           childAspectRatio: 1,
           children: [
             categoryTitle(
-                () {}, Icons.menu_book, 'quran_wird'.tr, categorytitlecolor),
-            categoryTitle(() {}, Icons.record_voice_over, 'hadith_wird'.tr,
+                () {}, MdiIcons.robot, 'ai_bot'.tr, categorytitlecolor),
+            categoryTitle(() {}, Icons.people_alt_rounded, 'community'.tr,
                 categorytitlecolor),
-            categoryTitle(
-                () {}, Icons.explore, 'allah_names'.tr, categorytitlecolor),
+            categoryTitle(() {}, Icons.analytics_rounded, 'statistics'.tr,
+                categorytitlecolor),
           ],
         ),
         children: [
@@ -52,29 +53,35 @@ class ServiceCategorie extends StatelessWidget {
             crossAxisSpacing: 10,
             childAspectRatio: 1,
             children: [
-              mycategory(() {}, FlutterIslamicIcons.allah, 'quran_wird'.tr,
+              mycategory(() {}, FlutterIslamicIcons.kowtow,
+                  'teaching_prayer'.tr, categorycolor),
+              mycategory(() {}, FlutterIslamicIcons.wudhu, 'wudu_ghusl'.tr,
                   categorycolor),
-              mycategory(() {}, FlutterIslamicIcons.hadji, 'prayer_times'.tr,
+              mycategory(() {}, FlutterIslamicIcons.qibla, 'qibla_direction'.tr,
                   categorycolor),
-              mycategory(() {}, FlutterIslamicIcons.calendar,
-                  'islamic_occasions'.tr, categorycolor),
-              mycategory(() {}, FlutterIslamicIcons.family, 'community'.tr,
-                  categorycolor),
-              mycategory(() {}, FlutterIslamicIcons.allah, 'learn_islam'.tr,
-                  categorycolor),
-              mycategory(() {}, FlutterIslamicIcons.hadji, 'prayer_info'.tr,
-                  categorycolor),
-              mycategory(() {}, FlutterIslamicIcons.calendar,
-                  'qibla_direction'.tr, categorycolor),
+              mycategory(() {}, FlutterIslamicIcons.tasbihHand,
+                  'electronic_tasbih'.tr, categorycolor),
               mycategory(() {}, FlutterIslamicIcons.community,
-                  'mosque_finder'.tr, categorycolor),
-              mycategory(() {}, FlutterIslamicIcons.allah, 'daily_wird'.tr,
+                  'friday_sunnahs'.tr, categorycolor),
+              mycategory(() {}, FlutterIslamicIcons.quran,
+                  'al-arba\'in_nawawiyyah'.tr, categorycolor),
+              mycategory(() {}, FlutterIslamicIcons.kaaba, 'hajj_umrah'.tr,
                   categorycolor),
-              mycategory(() {}, FlutterIslamicIcons.hadji, 'hadith_wird'.tr,
+              mycategory(() {}, Icons.volunteer_activism_rounded, 'al-Hamd'.tr,
                   categorycolor),
+              mycategory(() {}, FlutterIslamicIcons.prayingPerson,
+                  'istighfar'.tr, categorycolor),
+              mycategory(() {}, FontAwesomeIcons.bookQuran, 'islamic_ruqyah'.tr,
+                  categorycolor),
+              mycategory(() {}, Icons.favorite_rounded,
+                  'quranic_supplications'.tr, categorycolor),
+              mycategory(() {}, MdiIcons.accountVoice,
+                  'prophets_supplications'.tr, categorycolor),
               mycategory(() {}, FlutterIslamicIcons.calendar,
                   'islamic_calendar'.tr, categorycolor),
-              mycategory(() {}, FlutterIslamicIcons.community, 'allah_names'.tr,
+              mycategory(() {}, FlutterIslamicIcons.allah99, 'asma_ul-husna'.tr,
+                  categorycolor),
+              mycategory(() {}, FlutterIslamicIcons.solidZakat, 'zakat'.tr,
                   categorycolor),
             ],
           ),

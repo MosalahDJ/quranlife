@@ -71,10 +71,13 @@ class CartCard extends StatelessWidget {
                 : Sizeconfig.screenheight! > 1010
                     ? Sizeconfig.screenheight! / 250
                     : Sizeconfig.screenheight! / 150,
-            child: Image.asset(
-              "lib/core/assets/images/homeimages/masjid_map.png",
-              height: Sizeconfig.screenheight! / 4,
-              fit: BoxFit.contain,
+            child: Material(
+              color: Colors.transparent,
+              child: Image.asset(
+                "lib/core/assets/images/homeimages/masjid_map.png",
+                height: Sizeconfig.screenheight! / 4,
+                fit: BoxFit.contain,
+              ),
             ),
           ),
 
@@ -132,6 +135,40 @@ class CartCard extends StatelessWidget {
                   ),
                 ),
               )),
+          Positioned(
+            top: 0,
+            left: langctrl.language.value == "ar"
+                ? Sizeconfig.screenwidth! / 3
+                : 0,
+            right: langctrl.language.value == "ar"
+                ? 0
+                : langctrl.language.value == "fr"
+                    ? Sizeconfig.screenwidth! / 9
+                    : Sizeconfig.screenwidth! / 4,
+            child: Text("search_for_a_mosque".tr,
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    )),
+          ),
+
+          //morebutton
+          Positioned(
+            top: 0,
+            left: langctrl.language.value == "ar"
+                ? 0
+                : Sizeconfig.screenwidth! / 1.25,
+            right: langctrl.language.value == "ar"
+                ? Sizeconfig.screenwidth! / 1.25
+                : 0,
+            child: IconButton(
+                alignment: Alignment.center,
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.more_horiz,
+                  size: 30,
+                  color: Colors.white,
+                )),
+          ),
         ],
       ),
     );
