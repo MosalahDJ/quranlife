@@ -119,6 +119,7 @@ class HomePageBody extends StatelessWidget {
                       const SizedBox(height: 12),
                       _buildWirdCard(),
                       SizedBox(height: _sectionSpacing),
+                      SizedBox(height: _sectionSpacing),
                     ],
                   ),
                 ),
