@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class MyHomeController extends GetxController {
-  int selected = 0;
+  int selected = 2;
 
   //bnbfunc
   bnbfunc(int val) {

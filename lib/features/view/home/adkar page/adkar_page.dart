@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
+import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/features/view/home/adkar%20page/widgets/adkarcategoryitem.dart';
 import 'package:quranlife/features/controller/Auth%20controller/signoutcontroller.dart';
@@ -36,8 +37,19 @@ class AdkarPage extends StatelessWidget {
               Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
             ],
           ),
-          //front of page
 
+          SizedBox(
+            height: Sizeconfig.screenheight,
+            width: Sizeconfig.screenwidth,
+            child: Image.asset(
+              "lib/core/assets/images/background_image/arch.jpg",
+              fit: BoxFit.cover,
+              opacity: const AlwaysStoppedAnimation<double>(0.2),
+              height: Sizeconfig.screenheight,
+              width: Sizeconfig.screenwidth,
+            ),
+          ),
+          //front of page
           Positioned(
             child: Padding(
               padding:

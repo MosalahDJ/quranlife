@@ -20,6 +20,17 @@ class AyahViewPage extends StatelessWidget {
 
       backround,
 
+      SizedBox(
+        height: Sizeconfig.screenheight,
+        width: Sizeconfig.screenwidth,
+        child: Image.asset(
+          "lib/core/assets/images/background_image/arch.jpg",
+          fit: BoxFit.cover,
+          opacity: const AlwaysStoppedAnimation<double>(0.2),
+          height: Sizeconfig.screenheight,
+          width: Sizeconfig.screenwidth,
+        ),
+      ),
       //front of page
 
       Positioned(

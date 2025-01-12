@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:quranlife/features/controller/settings%20controllers/language_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
-import 'package:quranlife/features/view/home/Drawer%20page/my_drawer.dart';
-import 'package:quranlife/features/view/home/home%20page/widgets/categories.dart';
+import 'package:quranlife/features/view/home/categories_page/categories_page.dart';
 import 'package:quranlife/features/view/home/home%20page/widgets/salawat_pageview.dart';
 import 'package:quranlife/features/view/home/home%20page/widgets/cart_card.dart';
 import 'package:quranlife/features/view/home/home%20page/widgets/wirds.dart';
@@ -30,17 +30,7 @@ class HomePageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: MyDrawer(),
       appBar: AppBar(
-        leading: IconButton(
-            onPressed: () {
-              Scaffold.of(context).openDrawer();
-            },
-            icon: const Icon(
-              Icons.menu,
-              color: Colors.white,
-              size: 26,
-            )),
         scrolledUnderElevation: 0,
         title: Text('quranlife'.tr,
             style: Theme.of(context).textTheme.headlineSmall),
@@ -53,6 +43,17 @@ class HomePageBody extends StatelessWidget {
               kmaincolor,
               Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
             ],
+          ),
+          SizedBox(
+            height: Sizeconfig.screenheight,
+            width: Sizeconfig.screenwidth,
+            child: Image.asset(
+              "lib/core/assets/images/background_image/arch.jpg",
+              fit: BoxFit.cover,
+              opacity: const AlwaysStoppedAnimation<double>(0.2),
+              height: Sizeconfig.screenheight,
+              width: Sizeconfig.screenwidth,
+            ),
           ),
           SafeArea(
             child: RefreshIndicator(
@@ -90,14 +91,22 @@ class HomePageBody extends StatelessWidget {
                         () {},
                       ),
                       GetBuilder<ThemeController>(
-                          builder: (c) => ServiceCategorie(
-                                categorycolor: Get.isDarkMode
-                                    ? kmaincolor2dark.withOpacity(0.7)
-                                    : Colors.white.withOpacity(0.7),
-                                categorytitlecolor: Get.isDarkMode
-                                    ? kmaincolor2dark.withOpacity(0.7)
-                                    : Colors.white.withOpacity(0.7),
-                              )),
+                        builder: (c) => GridView.count(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          crossAxisCount: 3,
+                          mainAxisSpacing: 10,
+                          crossAxisSpacing: 10,
+                          childAspectRatio: 1,
+                          children: [
+                            mycategory(() {}, MdiIcons.robot, 'ai_bot'.tr),
+                            mycategory(() {}, Icons.people_alt_rounded,
+                                'community'.tr),
+                            mycategory(() {}, Icons.analytics_rounded,
+                                'statistics'.tr),
+                          ],
+                        ),
+                      ),
                       SizedBox(height: _sectionSpacing / 2),
 
                       // Nearest Mosque Section
@@ -168,7 +177,9 @@ class HomePageBody extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 child: IconButton(
                   alignment: Alignment.center,
-                  onPressed: moreIconOnpressed,
+                  onPressed: title == "category".tr
+                      ? () => Get.to(() => const CategoriesPage())
+                      : moreIconOnpressed,
                   icon: Icon(
                     Icons.more_horiz,
                     size: 30,
@@ -178,6 +189,60 @@ class HomePageBody extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget mycategory(
+    VoidCallback ontap,
+    IconData categoryicon,
+    String iconname,
+  ) {
+    return Material(
+      elevation: 2,
+      borderRadius: const BorderRadius.all(Radius.circular(10)),
+      color: Colors.transparent,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(12),
+        onTap: ontap,
+        child: GetBuilder<MyHomeController>(
+          builder: (_) => Container(
+            decoration: BoxDecoration(
+              color: Get.isDarkMode
+                  ? kmaincolor2dark.withOpacity(0.7)
+                  : Colors.white.withOpacity(0.7),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Get.isDarkMode
+                        ? kmaincolor2dark.withOpacity(0.1)
+                        : Colors.grey.withOpacity(0.1),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    categoryicon,
+                    size: 28,
+                    color: Get.isDarkMode ? textcolor3dark : textcolor1,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  iconname,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

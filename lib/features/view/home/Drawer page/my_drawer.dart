@@ -2,48 +2,59 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
+import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/features/controller/Auth%20controller/logincontroller.dart';
 
-class MyDrawer extends Drawer {
-  MyDrawer({super.key});
+class ProfilePageBody extends StatelessWidget {
+  ProfilePageBody({super.key});
   final LogInController logctrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      width: Sizeconfig.screenwidth! / 1.19,
-      backgroundColor: Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
-      child: Column(
-        children: [
-          _buildProfileHeader(context),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  _buildMainMenuSection(context),
-                  const Divider(thickness: 0.5),
-                  _buildSettingsSection(context),
-                ],
+    return Stack(
+      children: [
+        Gradientbackground(
+          gradientcolor: [
+            kmaincolor,
+            Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
+          ],
+        ),
+        SizedBox(
+          height: Sizeconfig.screenheight,
+          width: Sizeconfig.screenwidth,
+          child: Image.asset(
+            "lib/core/assets/images/background_image/arch.jpg",
+            fit: BoxFit.cover,
+            opacity: const AlwaysStoppedAnimation<double>(0.2),
+            height: Sizeconfig.screenheight,
+            width: Sizeconfig.screenwidth,
+          ),
+        ),
+        Column(
+          children: [
+            _buildProfileHeader(context),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    _buildMainMenuSection(context),
+                    const Divider(thickness: 0.5),
+                    _buildSettingsSection(context),
+                  ],
+                ),
               ),
             ),
-          ),
-          _buildBottomSection(context),
-        ],
-      ),
+            _buildBottomSection(context),
+          ],
+        ),
+      ],
     );
   }
 
   Widget _buildProfileHeader(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(top: 50, bottom: 20),
-      decoration: BoxDecoration(
-        color: Get.isDarkMode
-            ? kmaincolor3dark.withOpacity(0.9)
-            : kmaincolor3.withOpacity(0.9),
-        borderRadius: const BorderRadius.only(
-          bottomLeft: Radius.circular(20),
-          bottomRight: Radius.circular(20),
-        ),
+    return Padding(
+      padding: const EdgeInsets.only(
+        top: 20,
       ),
       child: Column(
         children: [

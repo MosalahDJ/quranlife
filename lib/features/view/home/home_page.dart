@@ -1,14 +1,14 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
-import 'package:quranlife/features/view/home/Drawer%20page/my_drawer.dart';
 import 'package:quranlife/features/view/home/adkar%20page/adkar_page.dart';
+import 'package:quranlife/features/view/home/categories_page/categories_page.dart';
 import 'package:quranlife/features/view/home/quraan%20page/quraan_page.dart';
 import 'package:quranlife/features/view/home/home%20page/home_page_body.dart';
 import 'package:quranlife/features/view/home/profile/profile_page.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
+import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -17,34 +17,57 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: MyDrawer(),
       bottomNavigationBar: GetBuilder<MyHomeController>(
-          builder: (controller) => CurvedNavigationBar(
-                buttonBackgroundColor: kmaincolor4,
-                index: homectrl.selected,
-                backgroundColor:
-                    Theme.of(context).bottomNavigationBarTheme.backgroundColor!,
-                color: kmaincolor,
-                height: 65,
-                onTap: (value) {
+          builder: (controller) => FlashyTabBar(
+                selectedIndex: homectrl.selected,
+                backgroundColor: kmaincolor,
+                showElevation: true,
+                animationCurve: Curves.easeInOutCubic,
+                animationDuration: const Duration(seconds: 1),
+                iconSize: 30,
+                onItemSelected: (value) {
                   homectrl.bnbfunc(value);
                 },
                 items: [
-                  Tooltip(
-                    message: 'home'.tr,
-                    child: const Icon(FlutterIslamicIcons.mosque),
+                  FlashyTabBarItem(
+                    icon: const Icon(
+                      Icons.more_vert,
+                    ),
+                    title: Text('more'.tr),
+                    activeColor: kmaincolor4,
+                    inactiveColor: Colors.white,
                   ),
-                  Tooltip(
-                    message: 'adkar'.tr,
-                    child: const Icon(FlutterIslamicIcons.tasbih3),
+                  FlashyTabBarItem(
+                    icon: const Icon(
+                      Icons.category,
+                    ),
+                    title: Text('categorie'.tr),
+                    activeColor: kmaincolor4,
+                    inactiveColor: Colors.white,
                   ),
-                  Tooltip(
-                    message: 'quran'.tr,
-                    child: const Icon(FlutterIslamicIcons.solidQuran2),
+                  FlashyTabBarItem(
+                    icon: const Icon(
+                      FlutterIslamicIcons.mosque,
+                    ),
+                    title: Text('home'.tr),
+                    activeColor: kmaincolor4,
+                    inactiveColor: Colors.white,
                   ),
-                  Tooltip(
-                    message: 'profile'.tr,
-                    child: const Icon(Icons.more_vert),
+                  FlashyTabBarItem(
+                    icon: const Icon(
+                      FlutterIslamicIcons.tasbih3,
+                    ),
+                    title: Text('adkar'.tr),
+                    activeColor: kmaincolor4,
+                    inactiveColor: Colors.white,
+                  ),
+                  FlashyTabBarItem(
+                    icon: const Icon(
+                      FlutterIslamicIcons.solidQuran2,
+                    ),
+                    title: Text('quran'.tr),
+                    activeColor: kmaincolor4,
+                    inactiveColor: Colors.white,
                   ),
                 ],
               )),
@@ -53,10 +76,11 @@ class HomePage extends StatelessWidget {
           return IndexedStack(
             index: homectrl.selected,
             children: [
+              ProfilePage(),
+              const CategoriesPage(),
               HomePageBody(),
               AdkarPage(),
               QuraanPage(),
-              ProfilePage(),
             ],
           );
         },
