@@ -78,7 +78,7 @@ class Messages extends Translations {
           'home': 'Home',
           'adkar': 'Adkar',
           'quran': 'Quran',
-          'profile': 'Profile',
+          'more': 'More',
           'hey_user': 'Hey, User',
           'search': 'Search',
           'logout': 'Logout',
@@ -236,7 +236,6 @@ class Messages extends Translations {
 
           // Categories
           'islamic_occasions': 'Islamic Occasions',
-          'community': 'Community',
           'learn_islam': 'Learn Islam',
 
           // Hijri Months
@@ -328,7 +327,7 @@ class Messages extends Translations {
           'home': 'الرئيسية',
           'adkar': 'أذكار',
           'quran': 'القرآن',
-          'profile': 'الملف الشخصي',
+          'more': 'أخرى',
           'hey_user': 'مرحباً',
           'search': 'بحث',
           'logout': 'تسجيل خروج',
@@ -492,7 +491,6 @@ class Messages extends Translations {
           'qibla_finder': 'محدد القبلة',
           'salah_times': 'أوقات الصلاة',
           'islamic_occasions': 'المناسبات الإسلامية',
-          'community': 'المجتمع',
           'learn_islam': 'تعلم الإسلام',
 
           // Hijri Months
@@ -586,7 +584,7 @@ class Messages extends Translations {
           'home': 'Accueil',
           'adkar': 'Adhkar',
           'quran': 'Coran',
-          'profile': 'Profil',
+          'more': 'plus',
           'hey_user': 'Bonjour',
           'search': 'Rechercher',
           'logout': 'Déconnexion',
@@ -744,7 +742,6 @@ class Messages extends Translations {
 
           // Categories
           'islamic_occasions': 'Occasions Islamiques',
-          'community': 'Communauté',
           'learn_islam': 'Apprendre l\'Islam',
 
           // Hijri Months

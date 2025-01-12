@@ -5,7 +5,6 @@ import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
 import 'package:quranlife/features/view/home/categories_page/widgets/categories.dart';
-import 'dart:ui';
 
 class CategoriesPage extends StatelessWidget {
   const CategoriesPage({super.key});
