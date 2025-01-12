@@ -15,53 +15,84 @@ class AdkarPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        //appbar
-
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text(
-            "daily_supplications".tr,
-            style: const TextStyle(color: Colors.white),
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        centerTitle: true,
+        title: AnimatedDefaultTextStyle(
+          duration: const Duration(milliseconds: 200),
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 1.2,
           ),
-          scrolledUnderElevation: 0,
+          child: Text("daily_supplications".tr),
         ),
-
-        //Body
-
-        body: Stack(children: [
-          //gradient background
-
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search, color: Colors.white),
+            onPressed: () {
+              // Implement search functionality
+            },
+          ),
+        ],
+      ),
+      body: Stack(
+        children: [
           Gradientbackground(
             gradientcolor: [
               kmaincolor,
               Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
             ],
           ),
-
-          SizedBox(
-            height: Sizeconfig.screenheight,
-            width: Sizeconfig.screenwidth,
+          ShaderMask(
+            shaderCallback: (bounds) => const LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Colors.black45, Colors.black12],
+            ).createShader(bounds),
+            blendMode: BlendMode.dstIn,
             child: Image.asset(
               "lib/core/assets/images/background_image/arch.jpg",
               fit: BoxFit.cover,
-              opacity: const AlwaysStoppedAnimation<double>(0.2),
               height: Sizeconfig.screenheight,
               width: Sizeconfig.screenwidth,
             ),
           ),
-          //front of page
-          Positioned(
+          SafeArea(
             child: Padding(
               padding:
-                  const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 8.0),
-              child: AdkarCollections(
-                adkarcategorycolor: Get.isDarkMode
-                    ? kmaincolor2dark.withOpacity(0.5)
-                    : Colors.white.withOpacity(0.5),
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: Text(
+                      "Choose a Category".tr,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: AdkarCollections(
+                      adkarcategorycolor: Get.isDarkMode
+                          ? kmaincolor2dark.withOpacity(0.7)
+                          : Colors.white.withOpacity(0.9),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
-        ]));
+        ],
+      ),
+    );
   }
 }
 
@@ -76,14 +107,20 @@ class AdkarCollections extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          crossAxisCount: 2,
-          childAspectRatio: 0.9),
+      physics: const BouncingScrollPhysics(),
+      padding: EdgeInsets.zero,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 16,
+        mainAxisSpacing: 16,
+        childAspectRatio: MediaQuery.of(context).size.width > 600 ? 1.2 : 0.95,
+      ),
       itemCount: 10,
-      itemBuilder: (context, i) => AdkarCategoryItem(
-        adkarcategorycolor: adkarcategorycolor,
+      itemBuilder: (context, index) => Hero(
+        tag: 'adkar_category_$index',
+        child: AdkarCategoryItem(
+          adkarcategorycolor: adkarcategorycolor,
+        ),
       ),
     );
   }

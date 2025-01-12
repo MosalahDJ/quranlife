@@ -35,7 +35,7 @@ class AyahViewPage extends StatelessWidget {
 
       Positioned(
         child: Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 8.0),
+            padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 2),
 
             //gridviewbuilder
             child: ListView(
