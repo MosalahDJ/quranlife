@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget {
                 items: [
                   FlashyTabBarItem(
                     icon: const Icon(
-                      Icons.more_vert,
+                      Icons.person_rounded,
                     ),
                     title: Text('more'.tr),
                     activeColor: kmaincolor4,
@@ -39,7 +39,7 @@ class HomePage extends StatelessWidget {
                   ),
                   FlashyTabBarItem(
                     icon: const Icon(
-                      Icons.category,
+                      Icons.dashboard_rounded,
                     ),
                     title: Text('categorie'.tr),
                     activeColor: kmaincolor4,
