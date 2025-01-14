@@ -91,20 +91,24 @@ class HomePageBody extends StatelessWidget {
                         () {},
                       ),
                       GetBuilder<ThemeController>(
-                        builder: (c) => GridView.count(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          crossAxisCount: 3,
-                          mainAxisSpacing: 10,
-                          crossAxisSpacing: 10,
-                          childAspectRatio: 1,
-                          children: [
-                            mycategory(() {}, MdiIcons.robot, 'ai_bot'.tr),
-                            mycategory(() {}, Icons.people_alt_rounded,
-                                'community'.tr),
-                            mycategory(() {}, Icons.analytics_rounded,
-                                'statistics'.tr),
-                          ],
+                        builder: (c) => Card(
+                          elevation: 0,
+                          color: Colors.transparent,
+                          child: GridView.count(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            crossAxisCount: 3,
+                            mainAxisSpacing: 10,
+                            crossAxisSpacing: 10,
+                            childAspectRatio: 1,
+                            children: [
+                              mycategory(() {}, MdiIcons.robot, 'ai_bot'.tr),
+                              mycategory(() {}, Icons.people_alt_rounded,
+                                  'community'.tr),
+                              mycategory(() {}, Icons.analytics_rounded,
+                                  'statistics'.tr),
+                            ],
+                          ),
                         ),
                       ),
                       SizedBox(height: _sectionSpacing / 2),
