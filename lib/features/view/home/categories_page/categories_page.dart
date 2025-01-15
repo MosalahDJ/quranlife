@@ -6,6 +6,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
+import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
 
@@ -20,8 +21,8 @@ class CategoriesPage extends StatelessWidget {
       appBar: AppBar(
         scrolledUnderElevation: 0,
         backgroundColor: Colors.transparent,
-        title: Text(
-          'category'.tr,
+        title: ShimmerText(
+          text: 'category'.tr,
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         centerTitle: true,

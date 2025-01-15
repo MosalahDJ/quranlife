@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
+import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/features/view/home/adkar%20page/widgets/adkarcategoryitem.dart';
 import 'package:quranlife/features/controller/Auth%20controller/signoutcontroller.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
@@ -20,7 +21,8 @@ class AdkarPage extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.transparent,
         centerTitle: true,
-        title: Text("daily_supplications".tr,
+        title: ShimmerText(
+            text: "daily_supplications".tr,
             style: Theme.of(context).textTheme.headlineSmall),
       ),
       body: Stack(

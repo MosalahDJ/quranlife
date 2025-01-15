@@ -3,6 +3,7 @@ import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
+import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/features/view/home/quraan%20page/widgets/ayah_view_page.dart';
 import 'package:quranlife/features/view/home/quraan%20page/widgets/juzua_view_page.dart';
 import 'package:quranlife/features/view/home/quraan%20page/widgets/surah_view_page.dart';
@@ -25,9 +26,8 @@ class QuraanPage extends StatelessWidget {
           appBar: AppBar(
             centerTitle: true,
             backgroundColor: kmaincolor,
-            title: Text(
-              "holy_quran".tr,
-              textAlign: TextAlign.center,
+            title: ShimmerText(
+              text: "holy_quran".tr,
               style: Theme.of(context).textTheme.headlineSmall,
             ),
 

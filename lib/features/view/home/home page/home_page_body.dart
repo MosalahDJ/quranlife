@@ -15,6 +15,7 @@ import 'package:quranlife/features/view/home/home%20page/widgets/wirds.dart';
 import 'package:quranlife/core/widgets/cusstom_indicator.dart';
 import 'package:quranlife/features/controller/Auth%20controller/signoutcontroller.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
+import 'package:quranlife/core/widgets/shimmer_text.dart';
 
 class HomePageBody extends StatelessWidget {
   HomePageBody({
@@ -35,8 +36,10 @@ class HomePageBody extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         scrolledUnderElevation: 0,
-        title: Text('quranlife'.tr,
-            style: Theme.of(context).textTheme.headlineSmall),
+        title: ShimmerText(
+          text: 'quranlife'.tr,
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
         centerTitle: true,
       ),
       body: Stack(

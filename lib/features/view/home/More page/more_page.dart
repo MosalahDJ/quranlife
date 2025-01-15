@@ -11,45 +11,43 @@ class ProfilePageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          Gradientbackground(
-            gradientcolor: [
-              kmaincolor,
-              Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
-            ],
-          ),
-          SizedBox(
+    return Stack(
+      children: [
+        Gradientbackground(
+          gradientcolor: [
+            kmaincolor,
+            Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
+          ],
+        ),
+        SizedBox(
+          height: Sizeconfig.screenheight,
+          width: Sizeconfig.screenwidth,
+          child: Image.asset(
+            "lib/core/assets/images/background_image/arch.jpg",
+            fit: BoxFit.cover,
+            opacity: const AlwaysStoppedAnimation<double>(0.2),
             height: Sizeconfig.screenheight,
             width: Sizeconfig.screenwidth,
-            child: Image.asset(
-              "lib/core/assets/images/background_image/arch.jpg",
-              fit: BoxFit.cover,
-              opacity: const AlwaysStoppedAnimation<double>(0.2),
-              height: Sizeconfig.screenheight,
-              width: Sizeconfig.screenwidth,
-            ),
           ),
-          Column(
-            children: [
-              _buildProfileHeader(context),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      _buildMainMenuSection(context),
-                      const Divider(thickness: 0.5),
-                      _buildSettingsSection(context),
-                    ],
-                  ),
+        ),
+        Column(
+          children: [
+            _buildProfileHeader(context),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    _buildMainMenuSection(context),
+                    const Divider(thickness: 0.5),
+                    _buildSettingsSection(context),
+                  ],
                 ),
               ),
-              _buildBottomSection(context),
-            ],
-          ),
-        ],
-      ),
+            ),
+            _buildBottomSection(context),
+          ],
+        ),
+      ],
     );
   }
 
@@ -71,13 +69,15 @@ class ProfilePageBody extends StatelessWidget {
           Text(
             "Mohamed Salah",
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+                fontWeight: FontWeight.bold,
+                color: Get.isDarkMode ? Colors.white70 : Colors.black54),
           ),
           const SizedBox(height: 4),
           Text(
             "mohamedsalah@gmail.com",
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  color: Get.isDarkMode ? Colors.white70 : Colors.black54,
+                ),
           ),
         ],
       ),
@@ -121,7 +121,9 @@ class ProfilePageBody extends StatelessWidget {
           Icon(icon, color: Get.isDarkMode ? Colors.white70 : Colors.black54),
       title: Text(
         title,
-        style: Theme.of(context).textTheme.bodyLarge,
+        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+              color: Get.isDarkMode ? Colors.white70 : Colors.black54,
+            ),
       ),
       onTap: ontap,
     );
