@@ -22,10 +22,7 @@ class CategoriesPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         title: Text(
           'category'.tr,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Get.isDarkMode ? Colors.white : Colors.black87,
-          ),
+          style: Theme.of(context).textTheme.headlineSmall,
         ),
         centerTitle: true,
       ),
@@ -198,8 +195,8 @@ Widget mycategory(
         builder: (_) => Container(
           decoration: BoxDecoration(
             color: Get.isDarkMode
-                ? kmaincolor2dark.withOpacity(0.85)
-                : Colors.white.withOpacity(0.9),
+                ? kmaincolor2dark.withOpacity(0.7)
+                : Colors.white.withOpacity(0.7),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Column(

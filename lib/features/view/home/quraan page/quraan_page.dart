@@ -21,14 +21,14 @@ class QuraanPage extends StatelessWidget {
       length: 3,
       child: Scaffold(
           //appbar
-          extendBodyBehindAppBar: true,
+
           appBar: AppBar(
             centerTitle: true,
-            backgroundColor: Colors.transparent,
+            backgroundColor: kmaincolor,
             title: Text(
               "holy_quran".tr,
               textAlign: TextAlign.center,
-              style: const TextStyle(color: Colors.white),
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
 
             //TabBar

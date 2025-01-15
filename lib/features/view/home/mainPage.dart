@@ -10,8 +10,8 @@ import 'package:quranlife/features/view/home/profile/profile_page.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 
-class HomePage extends StatelessWidget {
-  HomePage({super.key});
+class MainPage extends StatelessWidget {
+  MainPage({super.key});
   final MyHomeController homectrl = Get.find();
 
   @override

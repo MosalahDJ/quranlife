@@ -20,7 +20,8 @@ class AdkarPage extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.transparent,
         centerTitle: true,
-        title: Text("daily_supplications".tr),
+        title: Text("daily_supplications".tr,
+            style: Theme.of(context).textTheme.headlineSmall),
       ),
       body: Stack(
         children: [
@@ -44,7 +45,7 @@ class AdkarPage extends StatelessWidget {
               child: AdkarCollections(
                 adkarcategorycolor: Get.isDarkMode
                     ? kmaincolor2dark.withOpacity(0.7)
-                    : Colors.white.withOpacity(0.9),
+                    : Colors.white.withOpacity(0.7),
               ),
             ),
           ),
@@ -76,8 +77,13 @@ class AdkarCollections extends StatelessWidget {
       itemCount: 10,
       itemBuilder: (context, index) => Hero(
         tag: 'adkar_category_$index',
-        child: AdkarCategoryItem(
-          adkarcategorycolor: adkarcategorycolor,
+        child: Material(
+          borderRadius: BorderRadius.circular(12),
+          color: Colors.transparent,
+          elevation: 2,
+          child: AdkarCategoryItem(
+            adkarcategorycolor: adkarcategorycolor,
+          ),
         ),
       ),
     );

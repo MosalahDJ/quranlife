@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/features/controller/Auth%20controller/textvalidatecontroller.dart';
 import 'package:quranlife/features/view/auth/login%20page/loginpage.dart';
-import 'package:quranlife/features/view/home/home_page.dart';
+import 'package:quranlife/features/view/home/mainPage.dart';
 
 class SignInController extends GetxController {
   final Txtvalcontroller txtvalctrl = Get.find();
@@ -95,7 +95,7 @@ class SignInController extends GetxController {
   // Handle email verification response
   void _handleEmailVerificationResponse() {
     if (FirebaseAuth.instance.currentUser!.emailVerified) {
-      Get.offAll(() => HomePage());
+      Get.offAll(() => MainPage());
     } else {
       _showVerificationRequiredMessage();
       Get.offAll(() => LoginPage());

@@ -17,21 +17,11 @@ class MyHomeController extends GetxController {
     update();
   }
 
-  //searchpage
-  tosearchpage() {
-    Get.toNamed("search");
-  }
-
   //focus node
   FocusNode searchfnode = FocusNode();
 
   unfocuskeyboardhome() {
     searchfnode.unfocus();
-  }
-
-  Future<void> refreshData() async {
-    // تحديث أي بيانات إضافية
-    update();
   }
 
   //pagecontroller

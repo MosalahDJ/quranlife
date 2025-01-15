@@ -8,7 +8,7 @@ import 'package:quranlife/features/view/home/More%20page/more%20items%20pages/Re
 import 'package:quranlife/features/view/home/More%20page/more%20items%20pages/settings%20page/setting_page.dart';
 import 'package:quranlife/features/view/home/adkar%20page/adkar_page.dart';
 import 'package:quranlife/features/view/home/categories_page/hijri%20calender/hijri_calender.dart';
-import 'package:quranlife/features/view/home/home_page.dart';
+import 'package:quranlife/features/view/home/mainPage.dart';
 import 'package:quranlife/features/view/home/mytestpage.dart';
 import 'package:quranlife/features/view/home/quraan%20page/quraan_page.dart';
 import 'package:quranlife/features/view/home/salat%20time/prayer_time_page.dart';
@@ -41,7 +41,7 @@ class Myrouts {
       ),
       GetPage(
         name: "/home",
-        page: () => HomePage(),
+        page: () => MainPage(),
       ),
       GetPage(
         name: "/signin",

@@ -44,7 +44,7 @@ class Surahviewpage extends StatelessWidget {
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   childAspectRatio: 2,
-                  crossAxisSpacing: 5,
+                  crossAxisSpacing: 10,
                   mainAxisSpacing: 10),
               itemCount: 116,
               itemBuilder: (context, index) =>
@@ -65,19 +65,25 @@ class Surahviewpage extends StatelessWidget {
                   //better experience than using Container directly, as it is
                   //specifically designed for this purpose.
 
-                  child: Ink(
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(20)),
-                      color: Get.isDarkMode
-                          ? kmaincolor2dark.withOpacity(0.5)
-                          : Colors.white.withOpacity(0.5),
-                    ),
-                    child: Container(
-                      padding: const EdgeInsets.all(08),
-                      height: Sizeconfig.screenheight! / 15,
-                      width: Sizeconfig.screenwidth! / 2.5,
-                      alignment: Alignment.center,
-                      child: Text("surah_name".tr),
+                  child: Material(
+                    elevation: 2,
+                    borderRadius: const BorderRadius.all(Radius.circular(12)),
+                    color: Colors.transparent,
+                    child: Ink(
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(12)),
+                        color: Get.isDarkMode
+                            ? kmaincolor2dark.withOpacity(0.7)
+                            : Colors.white.withOpacity(0.7),
+                      ),
+                      child: Container(
+                        padding: const EdgeInsets.all(08),
+                        height: Sizeconfig.screenheight! / 15,
+                        width: Sizeconfig.screenwidth! / 2.5,
+                        alignment: Alignment.center,
+                        child: Text("surah_name".tr),
+                      ),
                     ),
                   ),
                 ),

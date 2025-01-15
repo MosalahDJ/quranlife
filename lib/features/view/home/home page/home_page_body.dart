@@ -62,8 +62,6 @@ class HomePageBody extends StatelessWidget {
             child: RefreshIndicator(
               onRefresh: () async {
                 await fpfctrl.fetchPrayerTimes();
-                await homectrl.refreshData();
-
                 return Future.delayed(
                   const Duration(milliseconds: 1500),
                   () {
@@ -92,7 +90,10 @@ class HomePageBody extends StatelessWidget {
                             seconds: 1,
                           ),
                           animate: true,
-                          child: SalawatPageview()),
+                          child: SalawatPageview(
+                            morebuttoncolor:
+                                Get.isDarkMode ? Colors.white : Colors.black,
+                          )),
                       SizedBox(height: _sectionSpacing / 3),
                       FadeInLeft(
                         key: homectrl.rebuildKey1.value,

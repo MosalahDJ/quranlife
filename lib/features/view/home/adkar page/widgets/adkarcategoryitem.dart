@@ -16,13 +16,13 @@ class AdkarCategoryItem extends StatelessWidget {
         builder: (_) => Material(
               color: Colors.transparent,
               child: InkWell(
-                borderRadius: const BorderRadius.all(Radius.circular(20)),
+                borderRadius: const BorderRadius.all(Radius.circular(12)),
                 overlayColor: WidgetStatePropertyAll(kmaincolor4),
                 onTap: () => Get.to(() => DuaaPage()),
                 child: Ink(
                   decoration: BoxDecoration(
                     color: adkarcategorycolor,
-                    borderRadius: const BorderRadius.all(Radius.circular(20)),
+                    borderRadius: const BorderRadius.all(Radius.circular(12)),
                   ),
                   child: Column(
                     children: [

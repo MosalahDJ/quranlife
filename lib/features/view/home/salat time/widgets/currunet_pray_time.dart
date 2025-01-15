@@ -21,9 +21,11 @@ class CurrentPrayTime extends StatelessWidget {
     required this.textcolor2,
     required this.onpressed,
     required this.moreIconVisibility,
+    required this.morebuttoncolor,
   });
 
   final Color color;
+  final Color morebuttoncolor;
   final Color textcolor;
   final Color textcolor2;
   final double elevation;
@@ -62,7 +64,7 @@ class CurrentPrayTime extends StatelessWidget {
                 elevation: 0,
                 child: Text(
                   "mawaqit".tr,
-                  style: const TextStyle(color: Colors.white, fontSize: 21),
+                  style: TextStyle(color: morebuttoncolor, fontSize: 21),
                 )),
           ),
           //card
@@ -324,10 +326,10 @@ class CurrentPrayTime extends StatelessWidget {
                   visible: moreIconVisibility,
                   child: IconButton(
                       onPressed: onpressed,
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.more_horiz,
                         size: 30,
-                        color: Colors.white,
+                        color: morebuttoncolor,
                       )),
                 )),
           ),

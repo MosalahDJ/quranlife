@@ -10,11 +10,12 @@ import 'package:quranlife/features/view/home/salat%20time/widgets/currunet_pray_
 import 'package:quranlife/features/view/home/salat%20time/widgets/salwatpageview.dart';
 
 class SalawatPageview extends StatelessWidget {
-  SalawatPageview({super.key});
+  SalawatPageview({super.key, required this.morebuttoncolor});
   final MyHomeController homectrl = Get.find();
   final HijriCalendar hijri = HijriCalendar.now();
   final TimesPageController timespagectrl = Get.find();
   final LanguageController langctrl = Get.find();
+  final Color morebuttoncolor;
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +28,7 @@ class SalawatPageview extends StatelessWidget {
       child: PageView(controller: homectrl.homepagecontroller, children: [
         //salat time
         CurrentPrayTime(
+          morebuttoncolor: morebuttoncolor,
           moreIconVisibility: true,
           onpressed: () {},
           textcolor2: Get.isDarkMode ? Colors.white : Colors.black,
@@ -48,17 +50,17 @@ class SalawatPageview extends StatelessWidget {
               children: [
                 Text(
                   "  ${hijri.hDay} - ${'hijri_month_${hijri.longMonthName}'.tr} - ${hijri.hYear}",
-                  style: const TextStyle(
-                    color: Colors.white,
+                  style: TextStyle(
+                    color: morebuttoncolor,
                     fontSize: 18,
                   ),
                 ),
                 IconButton(
                     onPressed: () {},
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.more_horiz,
                       size: 30,
-                      color: Colors.white,
+                      color: morebuttoncolor,
                     )),
               ],
             ),

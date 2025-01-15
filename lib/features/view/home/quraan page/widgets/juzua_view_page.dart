@@ -50,9 +50,11 @@ class JuzuaViewPage extends StatelessWidget {
                     // there is a gradient in the background.
 
                     Material(
+                      elevation: 2,
+                      borderRadius: const BorderRadius.all(Radius.circular(12)),
                       color: Colors.transparent,
                       child: InkWell(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(12),
                         onTap: () {},
 
                         // It is preferable to use Ink with InkWell because it
@@ -63,9 +65,9 @@ class JuzuaViewPage extends StatelessWidget {
                         child: Ink(
                           decoration: BoxDecoration(
                             color: Get.isDarkMode
-                                ? kmaincolor2dark.withOpacity(0.5)
-                                : Colors.white.withOpacity(0.5),
-                            borderRadius: BorderRadius.circular(20),
+                                ? kmaincolor2dark.withOpacity(0.7)
+                                : Colors.white.withOpacity(0.7),
+                            borderRadius: BorderRadius.circular(12),
                           ),
                           child: Container(
                             height: Sizeconfig.screenheight! / 15,

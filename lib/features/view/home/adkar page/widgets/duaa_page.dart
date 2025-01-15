@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
-import 'package:quranlife/features/view/home/app_bar.dart';
 import 'package:quranlife/features/controller/Auth%20controller/signoutcontroller.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
 
@@ -15,13 +14,6 @@ class DuaaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //appbar
-
-      appBar: MyAppBar(
-        homectrl: homectrl,
-        signoutctrl: signoutctrl,
-      ),
-
       // duaa listview
       body: ListView.builder(
           itemCount: 10,

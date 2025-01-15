@@ -220,14 +220,14 @@ class LoginBody extends StatelessWidget {
                             "lib/core/assets/images/login_images/google.png",
                             () => googlectrl.signInWithGoogle(context),
                           ),
-                          const SizedBox(width: 20),
+                          const SizedBox(width: 30),
                           _buildSocialButton(
-                            "lib/core/assets/images/login_images/Facebook.png",
+                            "lib/core/assets/images/login_images/Facebookm.png",
                             () {},
                           ),
-                          const SizedBox(width: 20),
+                          const SizedBox(width: 30),
                           _buildSocialButton(
-                            "lib/core/assets/images/login_images/X.png",
+                            "lib/core/assets/images/login_images/Xm.png",
                             () {},
                           ),
                         ],
@@ -278,10 +278,14 @@ class LoginBody extends StatelessWidget {
         border: Border.all(color: Colors.grey.withOpacity(0.2)),
         borderRadius: BorderRadius.circular(12),
       ),
-      child: IconButton(
-        onPressed: onPressed,
-        icon: Image.asset(imagePath, height: 24),
-        iconSize: 24,
+      child: InkWell(
+        radius: 12,
+        onTap: onPressed,
+        child: Image.asset(
+          fit: BoxFit.fill,
+          imagePath,
+          height: 40,
+        ),
       ),
     );
   }

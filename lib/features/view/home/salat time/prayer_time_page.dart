@@ -79,6 +79,7 @@ class PrayerTimesPage extends StatelessWidget {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(15),
                       child: CurrentPrayTime(
+                        morebuttoncolor: Colors.white,
                         onpressed: () {},
                         moreIconVisibility: false,
                         textcolor2: Colors.white,

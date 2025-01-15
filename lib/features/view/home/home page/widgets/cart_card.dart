@@ -163,10 +163,10 @@ class CartCard extends StatelessWidget {
             child: IconButton(
                 alignment: Alignment.center,
                 onPressed: () {},
-                icon: const Icon(
+                icon: Icon(
                   Icons.more_horiz,
                   size: 30,
-                  color: Colors.white,
+                  color: Get.isDarkMode ? Colors.white : Colors.black,
                 )),
           ),
         ],
