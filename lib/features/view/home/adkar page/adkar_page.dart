@@ -20,24 +20,7 @@ class AdkarPage extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.transparent,
         centerTitle: true,
-        title: AnimatedDefaultTextStyle(
-          duration: const Duration(milliseconds: 200),
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 1.2,
-          ),
-          child: Text("daily_supplications".tr),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search, color: Colors.white),
-            onPressed: () {
-              // Implement search functionality
-            },
-          ),
-        ],
+        title: Text("daily_supplications".tr),
       ),
       body: Stack(
         children: [
@@ -47,46 +30,21 @@ class AdkarPage extends StatelessWidget {
               Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
             ],
           ),
-          ShaderMask(
-            shaderCallback: (bounds) => const LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [Colors.black45, Colors.black12],
-            ).createShader(bounds),
-            blendMode: BlendMode.dstIn,
-            child: Image.asset(
-              "lib/core/assets/images/background_image/arch.jpg",
-              fit: BoxFit.cover,
-              height: Sizeconfig.screenheight,
-              width: Sizeconfig.screenwidth,
-            ),
+          Image.asset(
+            "lib/core/assets/images/background_image/arch.jpg",
+            fit: BoxFit.cover,
+            opacity: const AlwaysStoppedAnimation<double>(0.2),
+            height: Sizeconfig.screenheight,
+            width: Sizeconfig.screenwidth,
           ),
           SafeArea(
             child: Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    child: Text(
-                      "Choose a Category".tr,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: AdkarCollections(
-                      adkarcategorycolor: Get.isDarkMode
-                          ? kmaincolor2dark.withOpacity(0.7)
-                          : Colors.white.withOpacity(0.9),
-                    ),
-                  ),
-                ],
+                  const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 2.0),
+              child: AdkarCollections(
+                adkarcategorycolor: Get.isDarkMode
+                    ? kmaincolor2dark.withOpacity(0.7)
+                    : Colors.white.withOpacity(0.9),
               ),
             ),
           ),

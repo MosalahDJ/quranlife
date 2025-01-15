@@ -15,9 +15,11 @@ class CategoriesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         scrolledUnderElevation: 0,
-        backgroundColor: kmaincolor,
+        backgroundColor: Colors.transparent,
         title: Text(
           'category'.tr,
           style: TextStyle(
@@ -55,123 +57,125 @@ class CategoriesPage extends StatelessWidget {
               right: 8,
               top: 2,
             ),
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Column(
-                children: [
-                  SizedBox(
-                    width: Sizeconfig.screenwidth,
-                    height: Sizeconfig.screenheight! / 80,
-                  ),
-                  GetBuilder<ThemeController>(
-                      builder: (controller) => GridView.count(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            crossAxisCount: 3,
-                            mainAxisSpacing: 10,
-                            crossAxisSpacing: 10,
-                            childAspectRatio: 1,
-                            children: [
-                              mycategory(
-                                () {},
-                                MdiIcons.robot,
-                                'ai_bot'.tr,
-                              ),
-                              mycategory(
-                                () {},
-                                Icons.people_alt_rounded,
-                                'community'.tr,
-                              ),
-                              mycategory(
-                                () {},
-                                Icons.analytics_rounded,
-                                'statistics'.tr,
-                              ),
-                              mycategory(
-                                () {},
-                                FlutterIslamicIcons.kowtow,
-                                'teaching_prayer'.tr,
-                              ),
-                              mycategory(
-                                () {},
-                                FlutterIslamicIcons.wudhu,
-                                'wudu_ghusl'.tr,
-                              ),
-                              mycategory(
-                                () {},
-                                FlutterIslamicIcons.qibla,
-                                'qibla_direction'.tr,
-                              ),
-                              mycategory(
-                                () {},
-                                FlutterIslamicIcons.tasbihHand,
-                                'electronic_tasbih'.tr,
-                              ),
-                              mycategory(
-                                () {},
-                                FlutterIslamicIcons.community,
-                                'friday_sunnahs'.tr,
-                              ),
-                              mycategory(
-                                () {},
-                                FlutterIslamicIcons.quran,
-                                'al-arba\'in_nawawiyyah'.tr,
-                              ),
-                              mycategory(
-                                () {},
-                                FlutterIslamicIcons.kaaba,
-                                'hajj_umrah'.tr,
-                              ),
-                              mycategory(
-                                () {},
-                                Icons.volunteer_activism_rounded,
-                                'al-Hamd'.tr,
-                              ),
-                              mycategory(
-                                () {},
-                                FlutterIslamicIcons.prayingPerson,
-                                'istighfar'.tr,
-                              ),
-                              mycategory(
-                                () {},
-                                FontAwesomeIcons.bookQuran,
-                                'islamic_ruqyah'.tr,
-                              ),
-                              mycategory(
-                                () {},
-                                Icons.favorite_rounded,
-                                'quranic_supplications'.tr,
-                              ),
-                              mycategory(
-                                () {},
-                                MdiIcons.accountVoice,
-                                'prophets_supplications'.tr,
-                              ),
-                              mycategory(
-                                () {},
-                                FlutterIslamicIcons.calendar,
-                                'islamic_calendar'.tr,
-                              ),
-                              mycategory(
-                                () {},
-                                FlutterIslamicIcons.allah99,
-                                'asma_ul-husna'.tr,
-                              ),
-                              mycategory(
-                                () {},
-                                FlutterIslamicIcons.solidZakat,
-                                'zakat'.tr,
-                              ),
-                            ],
-                          )),
-                  SizedBox(
-                    width: Sizeconfig.screenwidth,
-                    height: Sizeconfig.screenheight! / 80,
-                  ),
-                ],
+            child: SafeArea(
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      width: Sizeconfig.screenwidth,
+                      height: Sizeconfig.screenheight! / 80,
+                    ),
+                    GetBuilder<ThemeController>(
+                        builder: (controller) => GridView.count(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              crossAxisCount: 3,
+                              mainAxisSpacing: 10,
+                              crossAxisSpacing: 10,
+                              childAspectRatio: 1,
+                              children: [
+                                mycategory(
+                                  () {},
+                                  MdiIcons.robot,
+                                  'ai_bot'.tr,
+                                ),
+                                mycategory(
+                                  () {},
+                                  Icons.people_alt_rounded,
+                                  'community'.tr,
+                                ),
+                                mycategory(
+                                  () {},
+                                  Icons.analytics_rounded,
+                                  'statistics'.tr,
+                                ),
+                                mycategory(
+                                  () {},
+                                  FlutterIslamicIcons.kowtow,
+                                  'teaching_prayer'.tr,
+                                ),
+                                mycategory(
+                                  () {},
+                                  FlutterIslamicIcons.wudhu,
+                                  'wudu_ghusl'.tr,
+                                ),
+                                mycategory(
+                                  () {},
+                                  FlutterIslamicIcons.qibla,
+                                  'qibla_direction'.tr,
+                                ),
+                                mycategory(
+                                  () {},
+                                  FlutterIslamicIcons.tasbihHand,
+                                  'electronic_tasbih'.tr,
+                                ),
+                                mycategory(
+                                  () {},
+                                  FlutterIslamicIcons.community,
+                                  'friday_sunnahs'.tr,
+                                ),
+                                mycategory(
+                                  () {},
+                                  FlutterIslamicIcons.quran,
+                                  'al-arba\'in_nawawiyyah'.tr,
+                                ),
+                                mycategory(
+                                  () {},
+                                  FlutterIslamicIcons.kaaba,
+                                  'hajj_umrah'.tr,
+                                ),
+                                mycategory(
+                                  () {},
+                                  Icons.volunteer_activism_rounded,
+                                  'al-Hamd'.tr,
+                                ),
+                                mycategory(
+                                  () {},
+                                  FlutterIslamicIcons.prayingPerson,
+                                  'istighfar'.tr,
+                                ),
+                                mycategory(
+                                  () {},
+                                  FontAwesomeIcons.bookQuran,
+                                  'islamic_ruqyah'.tr,
+                                ),
+                                mycategory(
+                                  () {},
+                                  Icons.favorite_rounded,
+                                  'quranic_supplications'.tr,
+                                ),
+                                mycategory(
+                                  () {},
+                                  MdiIcons.accountVoice,
+                                  'prophets_supplications'.tr,
+                                ),
+                                mycategory(
+                                  () {},
+                                  FlutterIslamicIcons.calendar,
+                                  'islamic_calendar'.tr,
+                                ),
+                                mycategory(
+                                  () {},
+                                  FlutterIslamicIcons.allah99,
+                                  'asma_ul-husna'.tr,
+                                ),
+                                mycategory(
+                                  () {},
+                                  FlutterIslamicIcons.solidZakat,
+                                  'zakat'.tr,
+                                ),
+                              ],
+                            )),
+                    SizedBox(
+                      width: Sizeconfig.screenwidth,
+                      height: Sizeconfig.screenheight! / 80,
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
+          )
         ],
       ),
     );

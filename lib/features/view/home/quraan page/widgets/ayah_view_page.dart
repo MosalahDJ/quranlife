@@ -34,40 +34,42 @@ class AyahViewPage extends StatelessWidget {
       //front of page
 
       Positioned(
-        child: Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 2),
+        child: SafeArea(
+          child: Padding(
+              padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 2),
 
-            //gridviewbuilder
-            child: ListView(
-              physics: const NeverScrollableScrollPhysics(),
-              children: [
-                Form(
-                    child: TextFormField(
-                  cursorColor: const Color.fromARGB(255, 229, 240, 219),
-                  focusNode: homectrl.searchfnode,
-                  style: const TextStyle(
-                      color: Color.fromARGB(255, 229, 240, 219),
-                      fontSize: 15,
-                      fontFamily: "Poppins-Black"),
-                  decoration: InputDecoration(
-                      border: const UnderlineInputBorder(),
-                      hintText: "search_verses".tr,
-                      hintStyle: const TextStyle(
-                          color: Color.fromARGB(255, 219, 239, 201),
-                          fontSize: 15)),
-                )),
-                SizedBox(
-                  height: Sizeconfig.screenheight! / 40,
-                ),
-                SizedBox(
-                  height: Sizeconfig.screenheight! / 1.6,
-                  child: ListView.builder(
-                    itemCount: 1,
-                    itemBuilder: (context, index) => const Text("data"),
+              //gridviewbuilder
+              child: ListView(
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
+                  Form(
+                      child: TextFormField(
+                    cursorColor: const Color.fromARGB(255, 229, 240, 219),
+                    focusNode: homectrl.searchfnode,
+                    style: const TextStyle(
+                        color: Color.fromARGB(255, 229, 240, 219),
+                        fontSize: 15,
+                        fontFamily: "Poppins-Black"),
+                    decoration: InputDecoration(
+                        border: const UnderlineInputBorder(),
+                        hintText: "search_verses".tr,
+                        hintStyle: const TextStyle(
+                            color: Color.fromARGB(255, 219, 239, 201),
+                            fontSize: 15)),
+                  )),
+                  SizedBox(
+                    height: Sizeconfig.screenheight! / 40,
                   ),
-                )
-              ],
-            )),
+                  SizedBox(
+                    height: Sizeconfig.screenheight! / 1.6,
+                    child: ListView.builder(
+                      itemCount: 1,
+                      itemBuilder: (context, index) => const Text("data"),
+                    ),
+                  )
+                ],
+              )),
+        ),
       ),
     ]);
   }

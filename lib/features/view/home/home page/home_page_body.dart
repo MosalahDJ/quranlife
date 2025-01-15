@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:animate_do/animate_do.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
@@ -30,7 +31,9 @@ class HomePageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         scrolledUnderElevation: 0,
         title: Text('quranlife'.tr,
             style: Theme.of(context).textTheme.headlineSmall),
@@ -59,6 +62,21 @@ class HomePageBody extends StatelessWidget {
             child: RefreshIndicator(
               onRefresh: () async {
                 await fpfctrl.fetchPrayerTimes();
+                await homectrl.refreshData();
+
+                return Future.delayed(
+                  const Duration(milliseconds: 1500),
+                  () {
+                    // homectrl.rebuildKey.value = UniqueKey();
+                    homectrl.rebuildKey1.value = UniqueKey();
+                    homectrl.rebuildKey2.value = UniqueKey();
+                    homectrl.rebuildKey3.value = UniqueKey();
+                    homectrl.rebuildKey4.value = UniqueKey();
+                    homectrl.rebuildKey5.value = UniqueKey();
+                    homectrl.rebuildKey6.value = UniqueKey();
+                    homectrl.update();
+                  },
+                );
               },
               child: SingleChildScrollView(
                 physics: const AlwaysScrollableScrollPhysics(),
@@ -68,46 +86,74 @@ class HomePageBody extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Prayer Times Section
-                      SalawatPageview(),
+                      FadeInLeft(
+                          key: homectrl.rebuildKey.value,
+                          duration: const Duration(
+                            seconds: 1,
+                          ),
+                          animate: true,
+                          child: SalawatPageview()),
                       SizedBox(height: _sectionSpacing / 3),
-                      Center(
-                        child: GetBuilder<MyHomeController>(
-                          builder: (c) => CustomIndicator(
-                            dotscolor: Get.isDarkMode
-                                ? const Color(0xffFD9B63)
-                                : kmaincolor,
-                            dotscount: 2,
-                            indposition:
-                                homectrl.homepagecontroller.page?.toInt() ?? 0,
+                      FadeInLeft(
+                        key: homectrl.rebuildKey1.value,
+                        duration: const Duration(
+                          seconds: 1,
+                        ),
+                        animate: true,
+                        child: Center(
+                          child: GetBuilder<MyHomeController>(
+                            builder: (c) => CustomIndicator(
+                              dotscolor: Get.isDarkMode
+                                  ? const Color(0xffFD9B63)
+                                  : kmaincolor,
+                              dotscount: 2,
+                              indposition:
+                                  homectrl.homepagecontroller.page?.toInt() ??
+                                      0,
+                            ),
                           ),
                         ),
                       ),
                       SizedBox(height: _sectionSpacing / 2),
 
                       // Categories Section
-                      _buildSectionHeader(
-                        context,
-                        "category".tr,
-                        () {},
+                      FadeInRight(
+                        key: homectrl.rebuildKey2.value,
+                        duration: const Duration(
+                          seconds: 1,
+                        ),
+                        animate: true,
+                        child: _buildSectionHeader(
+                          context,
+                          "category".tr,
+                          () {},
+                        ),
                       ),
-                      GetBuilder<ThemeController>(
-                        builder: (c) => Card(
-                          elevation: 0,
-                          color: Colors.transparent,
-                          child: GridView.count(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            crossAxisCount: 3,
-                            mainAxisSpacing: 10,
-                            crossAxisSpacing: 10,
-                            childAspectRatio: 1,
-                            children: [
-                              mycategory(() {}, MdiIcons.robot, 'ai_bot'.tr),
-                              mycategory(() {}, Icons.people_alt_rounded,
-                                  'community'.tr),
-                              mycategory(() {}, Icons.analytics_rounded,
-                                  'statistics'.tr),
-                            ],
+                      FadeInRight(
+                        key: homectrl.rebuildKey3.value,
+                        duration: const Duration(
+                          seconds: 1,
+                        ),
+                        animate: true,
+                        child: GetBuilder<ThemeController>(
+                          builder: (c) => Card(
+                            elevation: 0,
+                            color: Colors.transparent,
+                            child: GridView.count(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              crossAxisCount: 3,
+                              mainAxisSpacing: 10,
+                              crossAxisSpacing: 10,
+                              childAspectRatio: 1,
+                              children: [
+                                mycategory(() {}, MdiIcons.robot, 'ai_bot'.tr),
+                                mycategory(() {}, Icons.people_alt_rounded,
+                                    'community'.tr),
+                                mycategory(() {}, Icons.analytics_rounded,
+                                    'statistics'.tr),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -115,22 +161,42 @@ class HomePageBody extends StatelessWidget {
 
                       // Nearest Mosque Section
                       const SizedBox(height: 12),
-                      CartCard(
-                        elevation: 2,
-                        color: Get.isDarkMode
-                            ? kmaincolor2dark.withOpacity(0.7)
-                            : Colors.white.withOpacity(0.7),
+                      FadeInLeft(
+                        key: homectrl.rebuildKey4.value,
+                        duration: const Duration(
+                          seconds: 1,
+                        ),
+                        animate: true,
+                        child: CartCard(
+                          elevation: 2,
+                          color: Get.isDarkMode
+                              ? kmaincolor2dark.withOpacity(0.7)
+                              : Colors.white.withOpacity(0.7),
+                        ),
                       ),
                       SizedBox(height: _sectionSpacing),
 
                       // Daily Wird Section
-                      _buildSectionHeader(
-                        context,
-                        "daily_wird".tr,
-                        () {},
+                      FadeInRight(
+                        key: homectrl.rebuildKey5.value,
+                        duration: const Duration(
+                          seconds: 1,
+                        ),
+                        animate: true,
+                        child: _buildSectionHeader(
+                          context,
+                          "daily_wird".tr,
+                          () {},
+                        ),
                       ),
                       const SizedBox(height: 12),
-                      _buildWirdCard(),
+                      FadeInRight(
+                          key: homectrl.rebuildKey6.value,
+                          duration: const Duration(
+                            seconds: 1,
+                          ),
+                          animate: true,
+                          child: _buildWirdCard()),
                       SizedBox(height: _sectionSpacing),
                     ],
                   ),

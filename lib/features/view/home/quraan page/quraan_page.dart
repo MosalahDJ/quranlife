@@ -21,10 +21,10 @@ class QuraanPage extends StatelessWidget {
       length: 3,
       child: Scaffold(
           //appbar
-
+          extendBodyBehindAppBar: true,
           appBar: AppBar(
             centerTitle: true,
-            backgroundColor: kmaincolor,
+            backgroundColor: Colors.transparent,
             title: Text(
               "holy_quran".tr,
               textAlign: TextAlign.center,

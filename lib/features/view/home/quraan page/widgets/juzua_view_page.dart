@@ -36,48 +36,50 @@ class JuzuaViewPage extends StatelessWidget {
         //front of page
 
         Positioned(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 2),
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 2),
 
-            //Listviewbuilder
-            child: ListView.builder(
-              itemCount: 30,
-              itemBuilder: (context, index) => Column(
-                children: [
-                  // We replaced the Container with Material because it allows
-                  // the button's overlay color to appear in the area where
-                  // there is a gradient in the background.
+              //Listviewbuilder
+              child: ListView.builder(
+                itemCount: 30,
+                itemBuilder: (context, index) => Column(
+                  children: [
+                    // We replaced the Container with Material because it allows
+                    // the button's overlay color to appear in the area where
+                    // there is a gradient in the background.
 
-                  Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(20),
-                      onTap: () {},
+                    Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(20),
+                        onTap: () {},
 
-                      // It is preferable to use Ink with InkWell because it
-                      //separates the design from the logic and also provides a
-                      //better experience than using Container directly, as it is
-                      //specifically designed for this purpose.
+                        // It is preferable to use Ink with InkWell because it
+                        //separates the design from the logic and also provides a
+                        //better experience than using Container directly, as it is
+                        //specifically designed for this purpose.
 
-                      child: Ink(
-                        decoration: BoxDecoration(
-                          color: Get.isDarkMode
-                              ? kmaincolor2dark.withOpacity(0.5)
-                              : Colors.white.withOpacity(0.5),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Container(
-                          height: Sizeconfig.screenheight! / 15,
-                          width: Sizeconfig.screenwidth! / 1.05,
-                          alignment: Alignment.center,
-                          padding: const EdgeInsets.all(8),
-                          child: Text("${"juz".tr} ${index + 1}"),
+                        child: Ink(
+                          decoration: BoxDecoration(
+                            color: Get.isDarkMode
+                                ? kmaincolor2dark.withOpacity(0.5)
+                                : Colors.white.withOpacity(0.5),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Container(
+                            height: Sizeconfig.screenheight! / 15,
+                            width: Sizeconfig.screenwidth! / 1.05,
+                            alignment: Alignment.center,
+                            padding: const EdgeInsets.all(8),
+                            child: Text("${"juz".tr} ${index + 1}"),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: Sizeconfig.screenheight! / 80),
-                ],
+                    SizedBox(height: Sizeconfig.screenheight! / 80),
+                  ],
+                ),
               ),
             ),
           ),

@@ -3,6 +3,13 @@ import 'package:get/get.dart';
 
 class MyHomeController extends GetxController {
   int selected = 2;
+  final Rx<Key> rebuildKey = UniqueKey().obs;
+  final Rx<Key> rebuildKey1 = UniqueKey().obs;
+  final Rx<Key> rebuildKey2 = UniqueKey().obs;
+  final Rx<Key> rebuildKey3 = UniqueKey().obs;
+  final Rx<Key> rebuildKey4 = UniqueKey().obs;
+  final Rx<Key> rebuildKey5 = UniqueKey().obs;
+  final Rx<Key> rebuildKey6 = UniqueKey().obs;
 
   //bnbfunc
   bnbfunc(int val) {
@@ -20,6 +27,11 @@ class MyHomeController extends GetxController {
 
   unfocuskeyboardhome() {
     searchfnode.unfocus();
+  }
+
+  Future<void> refreshData() async {
+    // تحديث أي بيانات إضافية
+    update();
   }
 
   //pagecontroller
