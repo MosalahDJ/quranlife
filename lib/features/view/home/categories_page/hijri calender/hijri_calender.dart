@@ -5,6 +5,7 @@ import 'package:islamic_hijri_calendar/islamic_hijri_calendar.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
+import 'package:quranlife/core/widgets/shimmer_text.dart';
 
 class HijriCalender extends StatelessWidget {
   HijriCalender({super.key});
@@ -18,7 +19,10 @@ class HijriCalender extends StatelessWidget {
         elevation: 0,
         scrolledUnderElevation: 0,
         centerTitle: true,
-        title: Text('hijri_calendar'.tr),
+        title: ShimmerText(
+          text: 'hijri_calendar'.tr,
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
       ),
       body: Stack(
         children: [
@@ -28,6 +32,18 @@ class HijriCalender extends StatelessWidget {
               kmaincolor,
               Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
             ],
+          ),
+
+          SizedBox(
+            height: Sizeconfig.screenheight,
+            width: Sizeconfig.screenwidth,
+            child: Image.asset(
+              "lib/core/assets/images/background_image/islamic_patern_portrait.jpg",
+              fit: BoxFit.cover,
+              opacity: const AlwaysStoppedAnimation<double>(0.1),
+              height: Sizeconfig.screenheight,
+              width: Sizeconfig.screenwidth,
+            ),
           ),
           SingleChildScrollView(
             child: Padding(

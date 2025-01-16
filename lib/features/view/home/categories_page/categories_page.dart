@@ -149,7 +149,9 @@ class CategoriesPage extends StatelessWidget {
                                   'prophets_supplications'.tr,
                                 ),
                                 mycategory(
-                                  () {},
+                                  () {
+                                    Get.toNamed("hijri");
+                                  },
                                   FlutterIslamicIcons.calendar,
                                   'islamic_calendar'.tr,
                                 ),
