@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quranlife/core/widgets/shimmer_text.dart';
 
 class Salattimebar extends StatelessWidget {
   const Salattimebar({super.key});
@@ -14,8 +15,8 @@ class Salattimebar extends StatelessWidget {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              "prayer_times".tr,
+            ShimmerText(
+              text: "prayer_times".tr,
               style: const TextStyle(
                   color: Colors.white,
                   fontSize: 20,

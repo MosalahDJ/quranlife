@@ -25,7 +25,7 @@ class SalawatPageview extends StatelessWidget {
           : Sizeconfig.screenheight! > 1010
               ? Sizeconfig.screenheight! / 4.3
               : Sizeconfig.screenheight! / 3.4,
-      child: PageView(controller: homectrl.homepagecontroller, children: [
+      child: PageView(controller: homectrl.salawatPageController, children: [
         //salat time
         CurrentPrayTime(
           morebuttoncolor: morebuttoncolor,

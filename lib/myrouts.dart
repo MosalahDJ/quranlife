@@ -2,10 +2,10 @@ import 'package:get/get.dart';
 import 'package:quranlife/features/controller/onboarding%20page%20controller/onboarding_pagecontroller.dart';
 import 'package:quranlife/features/view/auth/login%20page/loginpage.dart';
 import 'package:quranlife/features/view/auth/signin%20page/signin_page.dart';
-import 'package:quranlife/features/view/home/More%20page/more%20items%20pages/about_us%20page/about_us_page.dart';
-import 'package:quranlife/features/view/home/More%20page/more%20items%20pages/complain%20page/complain_page.dart';
-import 'package:quranlife/features/view/home/More%20page/more%20items%20pages/Referal%20Page/referal_page.dart';
-import 'package:quranlife/features/view/home/More%20page/more%20items%20pages/settings%20page/setting_page.dart';
+import 'package:quranlife/features/view/home/profile/More%20page/more%20items%20pages/about_us%20page/about_us_page.dart';
+import 'package:quranlife/features/view/home/profile/More%20page/more%20items%20pages/complain%20page/complain_page.dart';
+import 'package:quranlife/features/view/home/profile/More%20page/more%20items%20pages/Referal%20Page/referal_page.dart';
+import 'package:quranlife/features/view/home/profile/More%20page/more%20items%20pages/settings%20page/setting_page.dart';
 import 'package:quranlife/features/view/home/adkar%20page/adkar_page.dart';
 import 'package:quranlife/features/view/home/categories_page/hijri%20calender/hijri_calender.dart';
 import 'package:quranlife/features/view/home/mainPage.dart';
@@ -77,7 +77,7 @@ class Myrouts {
       ),
       GetPage(
         name: "/salattime",
-        page: () => const PrayerTimesPage(),
+        page: () => PrayerTimesPage(),
         bindings: [
           BindingsBuilder(
             () => Get.put<SalawatTableRow>(SalawatTableRow(), permanent: true),

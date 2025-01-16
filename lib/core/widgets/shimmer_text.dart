@@ -1,15 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
+import 'package:quranlife/features/controller/settings%20controllers/language_controller.dart';
 
 class ShimmerText extends StatefulWidget {
   final String text;
   final TextStyle? style;
+  final TextAlign? textalign;
+  final TextDirection? textdirection;
+  final double? begin;
+  final double? end;
+  final Color? color;
 
   const ShimmerText({
-    Key? key,
+    super.key,
     required this.text,
     this.style,
-  }) : super(key: key);
+    this.textalign,
+    this.textdirection,
+    this.begin,
+    this.end,
+    this.color,
+  });
 
   @override
   State<ShimmerText> createState() => _ShimmerTextState();
@@ -19,6 +31,17 @@ class _ShimmerTextState extends State<ShimmerText>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
+  final LanguageController langCtrl = Get.find();
+
+  void _updateAnimation() {
+    _animation = Tween<double>(
+      begin: widget.begin ?? (langCtrl.language.value == "ar" ? 2 : -2),
+      end: widget.end ?? (langCtrl.language.value == "ar" ? -2 : 2),
+    ).animate(_controller)
+      ..addListener(() {
+        setState(() {});
+      });
+  }
 
   @override
   void initState() {
@@ -28,10 +51,12 @@ class _ShimmerTextState extends State<ShimmerText>
       vsync: this,
     )..repeat();
 
-    _animation = Tween<double>(begin: -2, end: 2).animate(_controller)
-      ..addListener(() {
-        setState(() {});
-      });
+    _updateAnimation();
+
+    // Listen to language changes
+    ever(langCtrl.language, (_) {
+      _updateAnimation();
+    });
 
     // Repeat the animation every 5 seconds
     Future.delayed(const Duration(seconds: 5), () {
@@ -56,13 +81,15 @@ class _ShimmerTextState extends State<ShimmerText>
           end: Alignment(_animation.value, 0),
           colors: [
             Colors.white,
-            kmaincolor4,
+            widget.color ?? kmaincolor4,
             Colors.white,
           ],
           stops: const [0.0, 0.5, 1.0],
         ).createShader(bounds);
       },
       child: Text(
+        textAlign: widget.textalign ?? TextAlign.start,
+        textDirection: widget.textdirection ?? TextDirection.ltr,
         widget.text,
         style: widget.style,
       ),

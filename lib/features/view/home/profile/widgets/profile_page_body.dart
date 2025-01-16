@@ -70,13 +70,13 @@ class ProfilePageBody extends StatelessWidget {
             "Mohamed Salah",
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
-                color: Get.isDarkMode ? Colors.white70 : Colors.black54),
+                color: Get.isDarkMode ? Colors.white70 : Colors.black),
           ),
           const SizedBox(height: 4),
           Text(
             "mohamedsalah@gmail.com",
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  color: Get.isDarkMode ? Colors.white70 : Colors.black54,
+                  color: Get.isDarkMode ? Colors.white70 : Colors.black,
                 ),
           ),
         ],
@@ -118,11 +118,11 @@ class ProfilePageBody extends StatelessWidget {
       BuildContext context, String title, IconData icon, ontap) {
     return ListTile(
       leading:
-          Icon(icon, color: Get.isDarkMode ? Colors.white70 : Colors.black54),
+          Icon(icon, color: Get.isDarkMode ? Colors.white70 : Colors.black87),
       title: Text(
         title,
         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-              color: Get.isDarkMode ? Colors.white70 : Colors.black54,
+              color: Get.isDarkMode ? Colors.white70 : Colors.black87,
             ),
       ),
       onTap: ontap,

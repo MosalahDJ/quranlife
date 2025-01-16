@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/information_form.dart';
+import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/features/view/auth/signin%20page/signin_page.dart';
 import 'package:quranlife/features/controller/Auth%20controller/logincontroller.dart';
 import 'package:quranlife/features/controller/Auth%20controller/googlelogincontroller.dart';
@@ -42,8 +43,8 @@ class LoginBody extends StatelessWidget {
                           height: Sizeconfig.screenheight! * 0.2,
                         ),
                         const SizedBox(height: 16),
-                        Text(
-                          "quran_life".tr,
+                        ShimmerText(
+                          text: "quran_life".tr,
                           style: TextStyle(
                             color: Get.isDarkMode
                                 ? const Color(0xFFE5AB57)

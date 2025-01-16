@@ -112,7 +112,7 @@ class Messages extends Translations {
           'time_remaining': 'Time Remaining: ',
           'get_new_data': 'Update Prayer Times',
           'get_location_desc':
-              'Updating location and prayer times...\nThis may take a moment.',
+              'Updating location and prayer times may take a few minutes. Do you want to continue?',
           'connection_failed': 'Connection Failed',
           'check_internet':
               'Please check your internet connection and try again',
@@ -360,7 +360,7 @@ class Messages extends Translations {
           'time_remaining': 'الوقت المتبقي: ',
           'get_new_data': 'تحديث مواقيت الصلاة',
           'get_location_desc':
-              'جاري تحديث الموقع ومواقيت الصلاة...\nيرجى الانتظار.',
+              'تحديث الموقع ومواقيت الصلاة قد يستغرق بضع دقائق، هل تريد الاستمرار؟',
           'connection_failed': 'فشل الاتصال',
           'check_internet': 'يرجى التحقق من اتصال الإنترنت والمحاولة مرة أخرى',
 
@@ -618,7 +618,7 @@ class Messages extends Translations {
           'time_remaining': 'Temps restant : ',
           'get_new_data': 'Mettre à jour les horaires',
           'get_location_desc':
-              'Mise à jour de la localisation et des horaires de prière...\nVeuillez patienter.',
+              'La mise à jour de la localisation et des horaires de prière peut prendre quelques minutes. Voulez-vous continuer ?',
           'connection_failed': 'Échec de la connexion',
           'check_internet':
               'Veuillez vérifier votre connexion Internet et réessayer',

@@ -16,6 +16,7 @@ class DeterminePrayersController extends GetxController {
   Timer? _timer;
   RxString currentdate = "".obs;
   RxString currentPrayer = "".obs;
+  RxString currentPrayertime = "".obs;
   RxString nextPrayer = "".obs;
   RxString nextPrayerTime = "".obs;
   RxString timeUntilNext = "".obs;
@@ -139,6 +140,7 @@ class DeterminePrayersController extends GetxController {
           nextPrayer.value = prayers[i + 1][0] as String;
           nextPrayerTime.value = _formatTime(prayers[i + 1][1] as DateTime);
           timeUntilNext.value = _formatTimeUntil(prayers[i + 1][1] as DateTime);
+          currentPrayertime.value = _formatTime(prayers[i][1] as DateTime);
           return;
         }
       }

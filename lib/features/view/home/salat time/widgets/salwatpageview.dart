@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
+import 'package:quranlife/features/controller/prayer%20times%20controller/deterimine_prayers_controller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/times_page_controller.dart';
 import 'package:quranlife/features/controller/spalshview%20controller/splash_view_controller.dart';
 
@@ -17,6 +18,7 @@ class Salwatpageview extends StatelessWidget {
   final String icon;
   final SplashViewController initialctrl = Get.find();
   final TimesPageController timespagectrl = Get.find();
+  final DeterminePrayersController dpcctrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +35,15 @@ class Salwatpageview extends StatelessWidget {
         child: Ink(
           child: Card(
             elevation: 2,
-            color: Get.isDarkMode
-                ? kmaincolor2dark.withOpacity(0.5)
-                : Colors.white.withOpacity(0.7),
+            //if salat time = curent prayer time use color else use other color
+            color: fpfctrl.prayersdays[day]?[salattime]?.toString() ==
+                    dpcctrl.currentPrayertime.value
+                ? Get.isDarkMode
+                    ? kmaincolor3.withOpacity(0.4)
+                    : kmaincolor4.withOpacity(0.7)
+                : Get.isDarkMode
+                    ? kmaincolor2dark.withOpacity(0.5)
+                    : Colors.white.withOpacity(0.7),
             child: Container(
               decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(10))),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
+import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/features/view/home/salat%20time/widgets/currunet_pray_time.dart';
 import 'package:quranlife/features/view/home/salat%20time/widgets/prayer_times_table.dart';
 import 'package:quranlife/features/view/home/salat%20time/widgets/salat_timebar.dart';
@@ -58,10 +59,14 @@ class PrayerTimesPage extends StatelessWidget {
                             ),
                           ],
                         ),
-                        child: const Text(
-                          "إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا\nصَدَقَ اللهُ العَظِيم",
-                          textDirection: TextDirection.rtl,
-                          textAlign: TextAlign.center,
+                        child: const ShimmerText(
+                          text:
+                              "إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا\nصَدَقَ اللهُ العَظِيم",
+                          textalign: TextAlign.center,
+                          textdirection: TextDirection.rtl,
+                          begin: 2,
+                          end: -2,
+                          color: Color(0xFFFFD700),
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 22,

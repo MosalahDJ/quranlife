@@ -63,18 +63,20 @@ class HomePageBody extends StatelessWidget {
           ),
           SafeArea(
             child: RefreshIndicator(
+              color: Get.isDarkMode ? kmaincolor4 : kmaincolor,
               onRefresh: () async {
                 await fpfctrl.fetchPrayerTimes();
                 return Future.delayed(
                   const Duration(milliseconds: 1500),
                   () {
-                    // homectrl.rebuildKey.value = UniqueKey();
+                    homectrl.rebuildKey.value = UniqueKey();
                     homectrl.rebuildKey1.value = UniqueKey();
                     homectrl.rebuildKey2.value = UniqueKey();
                     homectrl.rebuildKey3.value = UniqueKey();
                     homectrl.rebuildKey4.value = UniqueKey();
                     homectrl.rebuildKey5.value = UniqueKey();
                     homectrl.rebuildKey6.value = UniqueKey();
+                    homectrl.currentPage = 0;
                     homectrl.update();
                   },
                 );
@@ -111,9 +113,7 @@ class HomePageBody extends StatelessWidget {
                                   ? const Color(0xffFD9B63)
                                   : kmaincolor,
                               dotscount: 2,
-                              indposition:
-                                  homectrl.homepagecontroller.page?.toInt() ??
-                                      0,
+                              indposition: c.currentPage ?? 0,
                             ),
                           ),
                         ),
@@ -229,7 +229,7 @@ class HomePageBody extends StatelessWidget {
                   : 0,
               right: langctrl.language.value == "ar"
                   ? 0
-                  : Sizeconfig.screenwidth! / 2,
+                  : Sizeconfig.screenwidth! / 2.5,
               child: Text(
                 title,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(

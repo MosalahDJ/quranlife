@@ -26,11 +26,14 @@ class MyHomeController extends GetxController {
 
   //pagecontroller
   PageController homepagecontroller = PageController();
+  PageController salawatPageController =
+      PageController(); // إضافة controller جديد
 
   int? currentPage;
   @override
   void onInit() {
     super.onInit();
+    currentPage = 0; // إضافة قيمة افتراضية
     //w made the page controller here on init state for lunching whene the page
     //open and we add a listener to it let it value change if we change the page
     //also we use the update for refreshing the ui if the value change
@@ -40,11 +43,18 @@ class MyHomeController extends GetxController {
         update();
       });
     });
+    salawatPageController.addListener(() {
+      if (salawatPageController.hasClients) {
+        currentPage = salawatPageController.page?.toInt() ?? 0;
+        update();
+      }
+    });
   }
 
   @override
   void onClose() {
     homepagecontroller.dispose();
+    salawatPageController.dispose(); // لا تنس dispose للـ controller الجديد
     super.onClose();
   }
 }
