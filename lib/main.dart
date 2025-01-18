@@ -52,7 +52,7 @@ class QuranLifeApp extends StatelessWidget {
         Get.put<LanguageController>(LanguageController(prefs), permanent: true);
 
     return GetMaterialApp(
-      title: 'Quran Life',
+      title: 'QuranLife',
 
       theme: Themes().lightmode,
       darkTheme: Themes().darkmode,
