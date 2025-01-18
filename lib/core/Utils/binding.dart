@@ -14,6 +14,7 @@ import 'package:quranlife/features/controller/notfication%20controller/sub%20con
 import 'package:quranlife/features/controller/prayer%20times%20controller/get_response_body.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/location_controller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/times_page_controller.dart';
+import 'package:quranlife/features/controller/quraan%20controller/quraan_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/language_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
 import 'package:quranlife/features/controller/fcm%20controllers/my_acces_token.dart';
@@ -58,6 +59,7 @@ class Mybinding implements Bindings {
     Get.put<ThemeController>(ThemeController(), permanent: true);
     //home injection
     Get.put<MyHomeController>(MyHomeController());
+    Get.put<QuraanController>(QuraanController());
     //complain injection
     Get.put<UrlLuncherAndSharingController>(UrlLuncherAndSharingController(),
         permanent: true);
