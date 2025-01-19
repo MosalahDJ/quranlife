@@ -34,7 +34,7 @@ class Ayah {
   final int page;
   final int ruku;
   final int hizbQuarter;
-  final bool sajda;
+  final dynamic sajda;
 
   Ayah({
     required this.number,
@@ -60,7 +60,7 @@ class Ayah {
       page: map['page'],
       ruku: map['ruku'],
       hizbQuarter: map['hizbQuarter'],
-      sajda: map['sajda'],
+      sajda: map["sajda"],
     );
   }
 }

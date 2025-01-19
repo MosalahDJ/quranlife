@@ -10,7 +10,7 @@ import 'package:quranlife/features/controller/prayer%20times%20controller/deteri
 import 'package:quranlife/features/controller/prayer%20times%20controller/times_page_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/language_controller.dart';
 import 'package:quranlife/features/controller/spalshview%20controller/splash_view_controller.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
+import 'package:quranlife/features/controller/animation_controllers/floating_animation_controller.dart';
 
 class CurrentPrayTime extends StatelessWidget {
   CurrentPrayTime({
@@ -31,6 +31,7 @@ class CurrentPrayTime extends StatelessWidget {
   final double elevation;
   final bool moreIconVisibility;
   final VoidCallback onpressed;
+
   final DeterminePrayersController prayerctrl = Get.find();
   final LocationController locationctrl = Get.find();
   final FetchPrayerFromDate fpfctrl = Get.find();
@@ -38,6 +39,7 @@ class CurrentPrayTime extends StatelessWidget {
   final SplashViewController initialctrl = Get.find();
   final GetResponseBody grbctrl = Get.find();
   final LanguageController langctrl = Get.find();
+  final FloatingAnimationController fltanimtion = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +66,10 @@ class CurrentPrayTime extends StatelessWidget {
                 elevation: 0,
                 child: Text(
                   "mawaqit".tr,
-                  style: TextStyle(color: morebuttoncolor, fontSize: 21),
+                  style: TextStyle(
+                    color: morebuttoncolor,
+                    fontSize: 21,
+                  ),
                 )),
           ),
           //card
@@ -291,20 +296,24 @@ class CurrentPrayTime extends StatelessWidget {
                 : Sizeconfig.screenheight! > 1010
                     ? Sizeconfig.screenheight! / 25
                     : Sizeconfig.screenheight! / 17,
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                overlayColor: const WidgetStatePropertyAll(Colors.transparent),
-                borderRadius: const BorderRadius.all(Radius.circular(12)),
-                onTap: () {
-                  timespagectrl.getcurrentpage();
-                  Get.toNamed("salattime");
-                },
-                child: Ink(
-                  child: Image.asset(
-                    "lib/core/assets/images/homeimages/masjid3d.png",
-                    height: Sizeconfig.screenheight! / 4,
-                    fit: BoxFit.contain,
+            child: fltanimtion.buildFloatingWidget(
+              shadowOffset: -25,
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  overlayColor:
+                      const WidgetStatePropertyAll(Colors.transparent),
+                  borderRadius: const BorderRadius.all(Radius.circular(12)),
+                  onTap: () {
+                    timespagectrl.getcurrentpage();
+                    Get.toNamed("salattime");
+                  },
+                  child: Ink(
+                    child: Image.asset(
+                      "lib/core/assets/images/homeimages/masjid3d.png",
+                      height: Sizeconfig.screenheight! / 4,
+                      fit: BoxFit.contain,
+                    ),
                   ),
                 ),
               ),

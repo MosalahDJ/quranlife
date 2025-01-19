@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
+import 'package:quranlife/features/controller/animation_controllers/floating_animation_controller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/location_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/language_controller.dart';
@@ -14,6 +15,7 @@ class CartCard extends StatelessWidget {
   final LocationController locationctrl = Get.find();
   final FetchPrayerFromDate fpfctrl = Get.find();
   final LanguageController langctrl = Get.find();
+  final FloatingAnimationController fltanimtion = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -60,26 +62,28 @@ class CartCard extends StatelessWidget {
           ),
           //masjid png image
           Positioned(
-            right: langctrl.language.value == "ar"
-                ? Sizeconfig.screenwidth! / 2
-                : Sizeconfig.screenwidth! / 40,
-            left: langctrl.language.value == "ar"
-                ? Sizeconfig.screenwidth! / 40
-                : Sizeconfig.screenwidth! / 2,
-            bottom: Sizeconfig.screenheight! < 768
-                ? Sizeconfig.screenheight! / 20
-                : Sizeconfig.screenheight! > 1010
-                    ? Sizeconfig.screenheight! / 250
-                    : Sizeconfig.screenheight! / 150,
-            child: Material(
-              color: Colors.transparent,
-              child: Image.asset(
-                "lib/core/assets/images/homeimages/masjid_map.png",
-                height: Sizeconfig.screenheight! / 4,
-                fit: BoxFit.contain,
-              ),
-            ),
-          ),
+              right: langctrl.language.value == "ar"
+                  ? Sizeconfig.screenwidth! / 2
+                  : Sizeconfig.screenwidth! / 40,
+              left: langctrl.language.value == "ar"
+                  ? Sizeconfig.screenwidth! / 40
+                  : Sizeconfig.screenwidth! / 2,
+              bottom: Sizeconfig.screenheight! < 768
+                  ? Sizeconfig.screenheight! / 20
+                  : Sizeconfig.screenheight! > 1010
+                      ? Sizeconfig.screenheight! / 250
+                      : Sizeconfig.screenheight! / 150,
+              child: fltanimtion.buildFloatingWidget(
+                shadowOffset: -55,
+                child: Material(
+                  color: Colors.transparent,
+                  child: Image.asset(
+                    "lib/core/assets/images/homeimages/masjid_map.png",
+                    height: Sizeconfig.screenheight! / 4,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              )),
 
           //button for going to cart
           Positioned(

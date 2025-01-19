@@ -33,7 +33,10 @@ class MainPage extends StatelessWidget {
                     icon: const Icon(
                       Icons.person_rounded,
                     ),
-                    title: Text('more'.tr),
+                    title: Text(
+                      'more'.tr,
+                      textAlign: TextAlign.center,
+                    ),
                     activeColor: kmaincolor4,
                     inactiveColor: Colors.white,
                   ),
@@ -41,7 +44,10 @@ class MainPage extends StatelessWidget {
                     icon: const Icon(
                       Icons.dashboard_rounded,
                     ),
-                    title: Text('categorie'.tr),
+                    title: Text(
+                      'category'.tr,
+                      textAlign: TextAlign.center,
+                    ),
                     activeColor: kmaincolor4,
                     inactiveColor: Colors.white,
                   ),
@@ -49,7 +55,10 @@ class MainPage extends StatelessWidget {
                     icon: const Icon(
                       FlutterIslamicIcons.mosque,
                     ),
-                    title: Text('home'.tr),
+                    title: Text(
+                      'home'.tr,
+                      textAlign: TextAlign.center,
+                    ),
                     activeColor: kmaincolor4,
                     inactiveColor: Colors.white,
                   ),
@@ -57,7 +66,10 @@ class MainPage extends StatelessWidget {
                     icon: const Icon(
                       FlutterIslamicIcons.tasbih3,
                     ),
-                    title: Text('adkar'.tr),
+                    title: Text(
+                      'adkar'.tr,
+                      textAlign: TextAlign.center,
+                    ),
                     activeColor: kmaincolor4,
                     inactiveColor: Colors.white,
                   ),

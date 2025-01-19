@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
 import 'package:quranlife/features/controller/quraan%20controller/quraan_controller.dart';
 import 'package:quranlife/features/model/qurandata.dart';
+import 'package:quranlife/features/view/home/quraan%20page/surah%20page/surah_page.dart';
 
 class Surahviewpage extends StatelessWidget {
   Surahviewpage({
@@ -44,31 +46,33 @@ class Surahviewpage extends StatelessWidget {
 
             //gridviewbuilder
             child: GridView.builder(
+                physics: const BouncingScrollPhysics(),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    childAspectRatio: 2,
+                    childAspectRatio: 2.5,
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10),
                 itemCount: quranctrl.surahs.length,
                 itemBuilder: (context, index) {
                   final surah = quranctrl.surahs[index];
+                  final ayahs = quranctrl.surahs[index].ayahs;
 
                   //surah name container
-                  // We replaced the Container with Material because it allows
-                  // the button's overlay color to appear in the area where
-                  // there is a gradient in the background.
-
-                  Material(
+                  return Material(
                     color: Colors.transparent,
                     child: InkWell(
                       borderRadius: const BorderRadius.all(Radius.circular(20)),
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(
+                          SurahPage(
+                            surahName: surah.name.tr,
+                            surahNumber: index,
+                            verses: ayahs,
+                          ),
+                        );
+                      },
 
-                      // It is preferable to use Ink with InkWell because it
-                      //separates the design from the logic and also provides a
-                      //better experience than using Container directly, as it is
-                      //specifically designed for this purpose.
-
+                      // It is preferable to use Ink with InkWell
                       child: Material(
                         elevation: 2,
                         borderRadius:
@@ -82,12 +86,23 @@ class Surahviewpage extends StatelessWidget {
                                 ? kmaincolor2dark.withOpacity(0.7)
                                 : Colors.white.withOpacity(0.7),
                           ),
-                          child: Container(
-                            padding: const EdgeInsets.all(08),
-                            height: Sizeconfig.screenheight! / 15,
-                            width: Sizeconfig.screenwidth! / 2.5,
-                            alignment: Alignment.center,
-                            child: Text(surah.name.tr),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 8.0, horizontal: 30),
+                            child: Row(
+                              textDirection: TextDirection.rtl,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  surah.name.tr,
+                                  style: const TextStyle(fontFamily: "Amiri"),
+                                ),
+                                surah.revelationType == "Medinan"
+                                    ? const Icon(
+                                        FlutterIslamicIcons.solidMinaret)
+                                    : const Icon(FlutterIslamicIcons.kaaba),
+                              ],
+                            ),
                           ),
                         ),
                       ),

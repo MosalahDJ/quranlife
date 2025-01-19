@@ -141,6 +141,9 @@ flutter:
           weight: 700
         - asset: lib/core/assets/fonts/Cairo-Light.ttf
           weight: 300
+    - family: Amiri
+      fonts:
+        - asset: lib/core/assets/fonts/Amiri-Regular.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:

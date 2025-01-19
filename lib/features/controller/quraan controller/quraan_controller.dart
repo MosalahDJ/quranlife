@@ -13,7 +13,8 @@ class QuraanController extends GetxController {
   }
 
   Future<List<Surah>> fetchQuranData() async {
-    String jsonString = await rootBundle.loadString('assets/quran.json');
+    String jsonString =
+        await rootBundle.loadString('lib/core/assets/json/quran.json');
     final List<dynamic> jsonList = json.decode(jsonString);
     return jsonList.map((json) => Surah.fromMap(json)).toList();
   }

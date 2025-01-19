@@ -47,7 +47,7 @@ class _ShimmerTextState extends State<ShimmerText>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(seconds: 2),
+      duration: const Duration(seconds: 3),
       vsync: this,
     )..repeat();
 
@@ -58,8 +58,8 @@ class _ShimmerTextState extends State<ShimmerText>
       _updateAnimation();
     });
 
-    // Repeat the animation every 5 seconds
-    Future.delayed(const Duration(seconds: 5), () {
+    // Repeat the animation every 20 seconds
+    Future.delayed(const Duration(seconds: 20), () {
       if (mounted) {
         _controller.repeat();
       }
