@@ -125,6 +125,9 @@ class Messages extends Translations {
           'maghrib': 'Maghrib',
           'isha': 'Isha',
 
+          //quraan page
+          'verses': "verses",
+
           'Fajr': 'Fajr',
           'Sunrise': 'Sunrise',
           'Dhuhr': 'Dhuhr',
@@ -379,6 +382,9 @@ class Messages extends Translations {
           'Maghrib': 'المغرب',
           'Isha': 'العشاء',
 
+          //quraan page
+          'verses': 'آيات',
+
           // Home Page
           'refresh_prayer_times': 'اسحب لتحديث أوقات الصلاة',
           'search_for_a_mosque': 'البحث عن مسجد',
@@ -630,6 +636,9 @@ class Messages extends Translations {
           'asr': 'Asr',
           'maghrib': 'Maghrib',
           'isha': 'Isha',
+
+          // Quran Page
+          'verses': 'versets',
 
           'Fajr': 'Fajr',
           'Sunrise': 'lv du soleil',

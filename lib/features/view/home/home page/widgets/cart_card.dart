@@ -22,7 +22,7 @@ class CartCard extends StatelessWidget {
     return SizedBox(
       //making stack widget responsive
       height: Sizeconfig.screenheight! < 768
-          ? Sizeconfig.screenheight! / 3.7
+          ? Sizeconfig.screenheight! / 3.5
           : Sizeconfig.screenheight! > 1024
               ? Sizeconfig.screenheight! / 5
               : Sizeconfig.screenheight! / 4.5,
@@ -140,7 +140,7 @@ class CartCard extends StatelessWidget {
                 ),
               )),
           Positioned(
-            top: 0,
+            top: 5,
             left: langctrl.language.value == "ar"
                 ? Sizeconfig.screenwidth! / 3
                 : 0,
@@ -157,7 +157,7 @@ class CartCard extends StatelessWidget {
 
           //morebutton
           Positioned(
-            top: 0,
+            top: 5,
             left: langctrl.language.value == "ar"
                 ? 0
                 : Sizeconfig.screenwidth! / 1.25,

@@ -46,7 +46,7 @@ class CurrentPrayTime extends StatelessWidget {
     return SizedBox(
       //making stack widget responsive
       height: Sizeconfig.screenheight! < 768
-          ? Sizeconfig.screenheight! / 3
+          ? Sizeconfig.screenheight! / 2.9
           : Sizeconfig.screenheight! > 1010
               ? Sizeconfig.screenheight! / 4
               : Sizeconfig.screenheight! / 3.5,
@@ -54,7 +54,7 @@ class CurrentPrayTime extends StatelessWidget {
         children: [
           //date text
           Positioned(
-            top: Sizeconfig.screenheight! / 200,
+            top: Sizeconfig.screenheight! / 150,
             left: langctrl.language.value == "ar"
                 ? Sizeconfig.screenwidth! / 1.6
                 : 0,
@@ -321,7 +321,7 @@ class CurrentPrayTime extends StatelessWidget {
           ),
           //morebutton
           Positioned(
-            top: 0,
+            top: Sizeconfig.screenheight! / 150,
             left: langctrl.language.value == "ar"
                 ? 0
                 : Sizeconfig.screenwidth! / 1.3,

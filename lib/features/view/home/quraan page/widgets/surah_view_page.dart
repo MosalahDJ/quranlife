@@ -64,9 +64,9 @@ class Surahviewpage extends StatelessWidget {
                       onTap: () {
                         Get.to(
                           SurahPage(
-                            surahName: surah.name.tr,
-                            surahNumber: index,
+                            surah: surah,
                             verses: ayahs,
+                            surahNumber: index,
                           ),
                         );
                       },
