@@ -53,7 +53,7 @@ class _SurahPageState extends State<SurahPage> {
           centerTitle: true,
           actions: [
             IconButton(
-              icon: Icon(Icons.translate),
+              icon: const Icon(Icons.translate),
               onPressed: () {
                 setState(() {});
               },

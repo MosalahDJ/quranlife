@@ -24,6 +24,7 @@ class SqlDb {
       // Run the migration according database versions
     }
 
+    // ignore: avoid_print
     print("-----------------onupgrade-----------------");
   }
 
@@ -44,6 +45,7 @@ class SqlDb {
     //       "duaa" TEXT,
     //       "translation" TEXT,
     //       )''');
+    // ignore: avoid_print
     print("-----------------created-----------------");
   }
 

@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/features/controller/Auth%20controller/textvalidatecontroller.dart';
 import 'package:quranlife/features/view/auth/login%20page/loginpage.dart';
-import 'package:quranlife/features/view/home/mainPage.dart';
+import 'package:quranlife/features/view/home/main_page.dart';
 
 class SignInController extends GetxController {
   final Txtvalcontroller txtvalctrl = Get.find();

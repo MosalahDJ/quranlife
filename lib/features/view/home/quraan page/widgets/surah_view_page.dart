@@ -5,7 +5,6 @@ import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
 import 'package:quranlife/features/controller/quraan%20controller/quraan_controller.dart';
-import 'package:quranlife/features/model/qurandata.dart';
 import 'package:quranlife/features/view/home/quraan%20page/surah%20page/surah_page.dart';
 
 class Surahviewpage extends StatelessWidget {
