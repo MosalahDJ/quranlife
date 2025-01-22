@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
-import 'package:quranlife/features/controller/quraan%20controller/quraan_controller.dart';
 import 'package:quranlife/features/model/qurandata.dart';
 
-final QuraanController quranctrl = Get.find();
-
 class SurahPage extends StatelessWidget {
-  SurahPage({required this.surahindex, super.key});
-
-  final int surahindex;
-
-  List<Surah> surah = quranctrl.surahs;
+  const SurahPage(
+      {required this.surah,
+      required this.verses,
+      required this.surahNumber,
+      super.key});
+  final Surah surah;
+  final List<Ayah> verses;
+  final int surahNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class SurahPage extends StatelessWidget {
         backgroundColor:
             Get.isDarkMode ? kmaincolor2dark : const Color(0xFFF0E9CD),
         title: Text(
-          surah[surahindex].name,
+          surah.name,
           style: const TextStyle(
             fontFamily: 'UthmanicHafs',
           ),
@@ -77,9 +77,9 @@ class SurahPage extends StatelessWidget {
                         const SizedBox(
                           height: 5,
                         ),
-                        _cardtext(surah[surahindex].name, 29),
+                        _cardtext(surah.name, 29),
                         _cardtext(
-                            '${surah[surahindex].revelationType.tr}, ${surah[surahindex].ayahs.length} ${"verses".tr}',
+                            '${surah.revelationType.tr}, ${surah.ayahs.length} ${"verses".tr}',
                             20),
                         const Divider(
                           endIndent: 40,
@@ -97,8 +97,9 @@ class SurahPage extends StatelessWidget {
                           ),
                         ),
                         Visibility(
-                          visible:
-                              surahindex == 8 || surahindex == 0 ? false : true,
+                          visible: surah.number == 9 || surah.number == 1
+                              ? false
+                              : true,
                           child: SizedBox(
                             height: Sizeconfig.screenheight! / 8,
                             width: Sizeconfig.screenwidth! / 1.2,
@@ -122,7 +123,7 @@ class SurahPage extends StatelessWidget {
           ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: surah[surahindex].ayahs.length,
+            itemCount: surah.ayahs.length,
             itemBuilder: (context, index) {
               return Column(
                 children: [
@@ -145,7 +146,7 @@ class SurahPage extends StatelessWidget {
                             radius: 22,
                             backgroundColor: kmaincolor4,
                             child: Text(
-                              "{${surah[surahindex].ayahs[index].numberInSurah}}",
+                              "{${surah.ayahs[index].numberInSurah}}",
                               style: const TextStyle(color: Colors.white),
                             ),
                           ),
@@ -171,7 +172,7 @@ class SurahPage extends StatelessWidget {
                   SizedBox(
                     width: Sizeconfig.screenwidth! / 1.16,
                     child: Text(
-                      surah[surahindex].ayahs[index].text,
+                      verses[index].text,
                       style: const TextStyle(
                           fontFamily: 'UthmanicHafs', fontSize: 34),
                       textAlign: TextAlign.start,

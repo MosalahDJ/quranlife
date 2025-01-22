@@ -54,6 +54,8 @@ class Surahviewpage extends StatelessWidget {
                 itemCount: quranctrl.surahs.length,
                 itemBuilder: (context, index) {
                   final surah = quranctrl.surahs[index];
+                  final ayahs = quranctrl.surahs[index].ayahs;
+
                   //surah name container
                   return Material(
                     color: Colors.transparent,
@@ -62,7 +64,9 @@ class Surahviewpage extends StatelessWidget {
                       onTap: () {
                         Get.to(
                           () => SurahPage(
-                            surahindex: index,
+                            surah: surah,
+                            verses: ayahs,
+                            surahNumber: index,
                           ),
                         );
                       },
@@ -95,7 +99,7 @@ class Surahviewpage extends StatelessWidget {
                                       color: Get.isDarkMode
                                           ? Colors.white
                                           : Colors.black,
-                                      fontSize: 17,
+                                      fontSize: 18,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 surah.revelationType == "Medinan"
