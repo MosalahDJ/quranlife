@@ -20,8 +20,7 @@ class QuraanController extends GetxController {
   }
 
   Future<void> loadQuranData() async {
-    final data = await fetchQuranData();
-    surahs = data;
+    surahs = await fetchQuranData();
     update();
   }
 }

@@ -127,6 +127,8 @@ class Messages extends Translations {
 
           //quraan page
           'verses': "verses",
+          'Meccan': 'Meccan',
+          'Medinan': 'Medinan',
 
           'Fajr': 'Fajr',
           'Sunrise': 'Sunrise',
@@ -383,7 +385,9 @@ class Messages extends Translations {
           'Isha': 'العشاء',
 
           //quraan page
-          'verses': 'آيات',
+          'verses': 'آية',
+          'Meccan': 'مكية',
+          'Medinan': 'مدنية',
 
           // Home Page
           'refresh_prayer_times': 'اسحب لتحديث أوقات الصلاة',
@@ -639,6 +643,8 @@ class Messages extends Translations {
 
           // Quran Page
           'verses': 'versets',
+          'Meccan': 'Meccan',
+          'Medinan': 'Medinan',
 
           'Fajr': 'Fajr',
           'Sunrise': 'lv du soleil',

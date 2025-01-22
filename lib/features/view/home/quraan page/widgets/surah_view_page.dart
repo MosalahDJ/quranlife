@@ -54,8 +54,6 @@ class Surahviewpage extends StatelessWidget {
                 itemCount: quranctrl.surahs.length,
                 itemBuilder: (context, index) {
                   final surah = quranctrl.surahs[index];
-                  final ayahs = quranctrl.surahs[index].ayahs;
-
                   //surah name container
                   return Material(
                     color: Colors.transparent,
@@ -63,10 +61,8 @@ class Surahviewpage extends StatelessWidget {
                       borderRadius: const BorderRadius.all(Radius.circular(20)),
                       onTap: () {
                         Get.to(
-                          SurahPage(
-                            surah: surah,
-                            verses: ayahs,
-                            surahNumber: index,
+                          () => SurahPage(
+                            surahindex: index,
                           ),
                         );
                       },
@@ -94,12 +90,27 @@ class Surahviewpage extends StatelessWidget {
                               children: [
                                 Text(
                                   surah.name.tr,
-                                  style: const TextStyle(fontFamily: "Amiri"),
+                                  style: TextStyle(
+                                      fontFamily: "Amiri",
+                                      color: Get.isDarkMode
+                                          ? Colors.white
+                                          : Colors.black,
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold),
                                 ),
                                 surah.revelationType == "Medinan"
-                                    ? const Icon(
-                                        FlutterIslamicIcons.solidMinaret)
-                                    : const Icon(FlutterIslamicIcons.kaaba),
+                                    ? Icon(
+                                        FlutterIslamicIcons.solidMinaret,
+                                        color: Get.isDarkMode
+                                            ? Colors.white
+                                            : Colors.black,
+                                      )
+                                    : Icon(
+                                        FlutterIslamicIcons.kaaba,
+                                        color: Get.isDarkMode
+                                            ? Colors.white
+                                            : Colors.black,
+                                      ),
                               ],
                             ),
                           ),
