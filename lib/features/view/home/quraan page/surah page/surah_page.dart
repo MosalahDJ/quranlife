@@ -4,6 +4,7 @@ import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/features/controller/quraan%20controller/quraan_controller.dart';
 import 'package:quranlife/features/model/qurandata.dart';
+import 'package:quranlife/features/view/home/quraan%20page/ayah%20search/ayah_search.dart';
 import 'package:quranlife/features/view/home/quraan%20page/saved%20ayahs/saved_ayahs.dart';
 
 class SurahPage extends StatelessWidget {
@@ -47,7 +48,10 @@ class SurahPage extends StatelessWidget {
             Padding(
                 padding: const EdgeInsets.only(right: 10),
                 child: IconButton(
-                    onPressed: () {}, icon: const Icon(Icons.search_rounded))),
+                    onPressed: () {
+                      Get.to(() => const AyahSearch());
+                    },
+                    icon: const Icon(Icons.search_rounded))),
           ],
         ),
         body: SingleChildScrollView(
