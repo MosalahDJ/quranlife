@@ -16,9 +16,6 @@ class SavedAyahs extends StatelessWidget {
           builder: (c) => ListView.builder(
               itemCount: quranctrl.savedayahsId.length,
               itemBuilder: (context, index) {
-                // int numberOfAya = int.parse(quranctrl.savedayahsId[index])
-                // surah.ayahs.numberInSurah
-
                 return Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Row(
@@ -36,9 +33,10 @@ class SavedAyahs extends StatelessWidget {
                           )),
                       Container(
                           color: Colors.blue,
-                          child: const Text(
-                            "",
-                            style: TextStyle(fontSize: 34, color: Colors.red),
+                          child: Text(
+                            "${int.parse(quranctrl.savedayahsId[index])}",
+                            style: const TextStyle(
+                                fontSize: 34, color: Colors.red),
                           )),
                     ],
                   ),
