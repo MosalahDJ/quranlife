@@ -35,8 +35,7 @@ class _SurahPageState extends State<SurahPage> {
   }
 
   void _scrollToAyah(int ayahNumber) {
-    final double estimatedAyahHeight = 150.0; // تقدير متوسط ارتفاع الآية
-    final double targetOffset = (ayahNumber - 1) * estimatedAyahHeight;
+    final double targetOffset = (ayahNumber - 1);
     _scrollController.animateTo(
       targetOffset,
       duration: const Duration(milliseconds: 500),
