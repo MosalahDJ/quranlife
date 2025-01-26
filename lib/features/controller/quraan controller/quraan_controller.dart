@@ -94,9 +94,8 @@ class QuraanController extends GetxController {
 
   void scrollToAyah(int index) {
     if (scrollController.hasClients) {
-      final double itemHeight = 150.0; // Approximate height of each ayah
       scrollController.animateTo(
-        index * itemHeight,
+        index.toDouble(),
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeInOut,
       );
