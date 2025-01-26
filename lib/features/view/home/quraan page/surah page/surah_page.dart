@@ -2,22 +2,47 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
-import 'package:quranlife/features/controller/quraan%20controller/quraan_controller.dart';
 import 'package:quranlife/features/model/qurandata.dart';
 import 'package:quranlife/features/view/home/quraan%20page/ayah%20search/ayah_search.dart';
 import 'package:quranlife/features/view/home/quraan%20page/saved%20ayahs/saved_ayahs.dart';
+import 'package:quranlife/features/view/home/quraan%20page/widgets/ayah_widget.dart';
 
-class SurahPage extends StatelessWidget {
-  SurahPage(
-      {required this.surah,
-      required this.verses,
-      required this.surahNumber,
-      super.key});
+class SurahPage extends StatefulWidget {
   final Surah surah;
-  final List<Ayah> verses;
-  final int surahNumber;
+  final int? initialAyahNumber;
 
-  final QuraanController quranctrl = Get.find();
+  const SurahPage({
+    required this.surah,
+    this.initialAyahNumber,
+    super.key,
+  });
+
+  @override
+  State<SurahPage> createState() => _SurahPageState();
+}
+
+class _SurahPageState extends State<SurahPage> {
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (widget.initialAyahNumber != null) {
+        _scrollToAyah(widget.initialAyahNumber!);
+      }
+    });
+  }
+
+  void _scrollToAyah(int ayahNumber) {
+    final double estimatedAyahHeight = 150.0; // تقدير متوسط ارتفاع الآية
+    final double targetOffset = (ayahNumber - 1) * estimatedAyahHeight;
+    _scrollController.animateTo(
+      targetOffset,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +56,7 @@ class SurahPage extends StatelessWidget {
           backgroundColor:
               Get.isDarkMode ? kmaincolor2dark : const Color(0xFFF0E9CD),
           title: Text(
-            surah.name,
+            widget.surah.name,
             style: const TextStyle(
               fontFamily: 'UthmanicHafs',
             ),
@@ -55,118 +80,36 @@ class SurahPage extends StatelessWidget {
           ],
         ),
         body: SingleChildScrollView(
-            child: Column(
-          children: [
-            const SizedBox(
-              height: 3,
-            ),
-            _surahCard(),
-            const SizedBox(
-              height: 6,
-            ),
-            ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: surah.ayahs.length,
-              itemBuilder: (context, index) {
-                return _ayahWidget(index);
-              },
-            ),
-          ],
-        )),
+          controller: _scrollController,
+          child: Column(
+            children: [
+              const SizedBox(height: 3),
+              _surahCard(),
+              const SizedBox(height: 6),
+              ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: widget.surah.ayahs.length,
+                itemBuilder: (context, index) {
+                  int surahNumber = widget.surah.number;
+                  String surahName = widget.surah.name;
+                  String ayahText = widget.surah.ayahs[index].text;
+                  int ayahNumber = widget.surah.ayahs[index].number;
+                  int ayahNumberInSurah =
+                      widget.surah.ayahs[index].numberInSurah;
+                  return AyahWidget(
+                      titlevisibility: false,
+                      surahNumber: surahNumber,
+                      ayahNumber: ayahNumber,
+                      ayahText: ayahText,
+                      surahName: surahName,
+                      ayahNumberInSurah: ayahNumberInSurah);
+                },
+              ),
+            ],
+          ),
+        ),
       ),
-    );
-  }
-
-  Column _ayahWidget(int index) {
-    return Column(
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(10)),
-            color: kmaincolor4.withOpacity(0.1),
-          ),
-          height: 50,
-          width: Sizeconfig.screenwidth! / 1.16,
-          child: Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Container(
-                      width: 50,
-                      height: 60,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          color: kmaincolor4,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(100))),
-                      child: Text(
-                        "{${surah.ayahs[index].numberInSurah}}",
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 18),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    _iconbuttons(Icons.play_circle_outline_rounded, () {}),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    GetBuilder<QuraanController>(
-                      builder: (c) => _iconbuttons(
-                          quranctrl.savedayahsId
-                                  .contains('${surah.ayahs[index].number}')
-                              ? Icons.bookmark_added_rounded
-                              : Icons.bookmark_outline_rounded, () {
-                        quranctrl.addAyahToAyahsId(surah.ayahs[index].number);
-                      }),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: 6,
-        ),
-        SizedBox(
-          width: Sizeconfig.screenwidth! / 1.16,
-          child: Text(
-            verses[index].text,
-            style: const TextStyle(fontFamily: 'UthmanicHafs', fontSize: 28),
-            textAlign: TextAlign.start,
-            textDirection: TextDirection.rtl,
-          ),
-        ),
-        const SizedBox(
-          height: 2,
-        ),
-        const Divider(
-          endIndent: 30,
-          indent: 30,
-          thickness: 0.5,
-        ),
-        const SizedBox(
-          height: 3,
-        ),
-      ],
     );
   }
 
@@ -205,9 +148,9 @@ class SurahPage extends StatelessWidget {
                   const SizedBox(
                     height: 5,
                   ),
-                  _cardtext(surah.name, 29),
+                  _cardtext(widget.surah.name, 29),
                   _cardtext(
-                      '${surah.revelationType.tr}, ${surah.ayahs.length} ${"verses".tr}',
+                      '${widget.surah.revelationType.tr}, ${widget.surah.ayahs.length} ${"verses".tr}',
                       20),
                   const Divider(
                     endIndent: 40,
@@ -226,7 +169,9 @@ class SurahPage extends StatelessWidget {
                   ),
                   Visibility(
                     visible:
-                        surah.number == 9 || surah.number == 1 ? false : true,
+                        widget.surah.number == 9 || widget.surah.number == 1
+                            ? false
+                            : true,
                     child: SizedBox(
                       height: Sizeconfig.screenheight! / 8,
                       width: Sizeconfig.screenwidth! / 1.2,
@@ -245,22 +190,6 @@ class SurahPage extends StatelessWidget {
       ),
     );
   }
-
-  InkWell _iconbuttons(IconData icon, VoidCallback onpressed) => InkWell(
-      onTap: onpressed,
-      child: Icon(
-        icon,
-        color: kmaincolor4,
-        weight: 2,
-        size: 30,
-        shadows: [
-          Shadow(
-            offset: const Offset(1, 1),
-            blurRadius: 2,
-            color: Colors.black26.withOpacity(0.1),
-          )
-        ],
-      ));
 
   Text _cardtext(String text, double size) {
     return Text(

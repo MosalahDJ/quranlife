@@ -54,7 +54,6 @@ class Surahviewpage extends StatelessWidget {
                 itemCount: quranctrl.surahs.length,
                 itemBuilder: (context, index) {
                   final surah = quranctrl.surahs[index];
-                  final ayahs = quranctrl.surahs[index].ayahs;
 
                   //surah name container
                   return Material(
@@ -65,8 +64,6 @@ class Surahviewpage extends StatelessWidget {
                         Get.to(
                           () => SurahPage(
                             surah: surah,
-                            verses: ayahs,
-                            surahNumber: index,
                           ),
                         );
                       },

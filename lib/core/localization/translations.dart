@@ -129,6 +129,8 @@ class Messages extends Translations {
           'verses': "verses",
           'Meccan': 'Meccan',
           'Medinan': 'Medinan',
+          'no_saved_ayahs': 'No saved verses',
+          'saved_ayahs': 'Saved verses',
 
           'Fajr': 'Fajr',
           'Sunrise': 'Sunrise',
@@ -388,6 +390,8 @@ class Messages extends Translations {
           'verses': 'آية',
           'Meccan': 'مكية',
           'Medinan': 'مدنية',
+          'no_saved_ayahs': 'لا توجد آيات المحفوظة',
+          'saved_ayahs': 'الآيات المحفوظة',
 
           // Home Page
           'refresh_prayer_times': 'اسحب لتحديث أوقات الصلاة',
@@ -645,6 +649,8 @@ class Messages extends Translations {
           'verses': 'versets',
           'Meccan': 'Meccan',
           'Medinan': 'Medinan',
+          'no_saved_ayahs': 'Aucun verset enregistré',
+          'saved_ayahs': 'verset enregistré',
 
           'Fajr': 'Fajr',
           'Sunrise': 'lv du soleil',
