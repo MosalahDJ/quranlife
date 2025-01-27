@@ -1,3 +1,5 @@
+import 'dart:math';
+
 class Surah {
   final int number;
   final String name;
@@ -21,6 +23,22 @@ class Surah {
       revelationType: map['revelationType'],
       ayahs: List<Ayah>.from(map['ayahs'].map((x) => Ayah.fromMap(x))),
     );
+  }
+
+  static const int versesPerChunk = 20;
+
+  List<List<Ayah>> getVerseChunks() {
+    List<List<Ayah>> chunks = [];
+    for (var i = 0; i < ayahs.length; i += versesPerChunk) {
+      chunks.add(
+        ayahs.sublist(i, min(i + versesPerChunk, ayahs.length)),
+      );
+    }
+    return chunks;
+  }
+
+  int getChunkIndexForVerse(int verseNumber) {
+    return (verseNumber - 1) ~/ versesPerChunk;
   }
 }
 

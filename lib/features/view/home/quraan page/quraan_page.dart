@@ -5,9 +5,9 @@ import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/features/view/home/quraan%20page/saved%20ayahs/saved_ayahs.dart';
-import 'package:quranlife/features/view/home/quraan%20page/widgets/ayah_view_page.dart';
-import 'package:quranlife/features/view/home/quraan%20page/widgets/juzua_view_page.dart';
-import 'package:quranlife/features/view/home/quraan%20page/widgets/surah_view_page.dart';
+import 'package:quranlife/features/view/home/quraan%20page/ayah_view_page.dart';
+import 'package:quranlife/features/view/home/quraan%20page/juzua_view_page.dart';
+import 'package:quranlife/features/view/home/quraan%20page/surah_view_page.dart';
 import 'package:quranlife/features/controller/Auth%20controller/signoutcontroller.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
 
