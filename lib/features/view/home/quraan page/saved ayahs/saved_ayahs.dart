@@ -56,8 +56,8 @@ class SavedAyahs extends StatelessWidget {
                       onTap: () {
                         Get.to(
                           () => SurahPage(
-                            surah: quranctrl.surahs[quranctrl.savedAyahs[index]
-                                ["surahNumber"]],
+                            surah: quranctrl.surahs[
+                                quranctrl.savedAyahs[index]["surahNumber"] - 1],
                             initialAyahNumber: quranctrl.savedAyahs[index]
                                 ["ayahNumberinsurah"],
                           ),

@@ -4,7 +4,6 @@ import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/features/model/qurandata.dart';
 import 'package:quranlife/features/view/home/quraan%20page/ayah%20search/ayah_search.dart';
-import 'package:quranlife/features/view/home/quraan%20page/saved%20ayahs/saved_ayahs.dart';
 import 'package:quranlife/features/view/home/quraan%20page/widgets/ayah_widget.dart';
 
 class SurahPage extends StatefulWidget {
@@ -22,25 +21,34 @@ class SurahPage extends StatefulWidget {
 }
 
 class _SurahPageState extends State<SurahPage> {
+  final Map<int, GlobalKey> _ayahKeys = {};
   final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
+    // Create GlobalKeys for each ayah
+    for (int i = 0; i < widget.surah.ayahs.length; i++) {
+      _ayahKeys[i] = GlobalKey();
+    }
+
+    // Scroll to initial ayah after build
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (widget.initialAyahNumber != null) {
-        _scrollToAyah(widget.initialAyahNumber!);
+        _scrollToAyah(widget.initialAyahNumber! - 1);
       }
     });
   }
 
-  void _scrollToAyah(int ayahNumber) {
-    final double targetOffset = (ayahNumber - 1);
-    _scrollController.animateTo(
-      targetOffset,
-      duration: const Duration(milliseconds: 500),
-      curve: Curves.easeInOut,
-    );
+  void _scrollToAyah(int index) {
+    if (_ayahKeys.containsKey(index)) {
+      Scrollable.ensureVisible(
+        _ayahKeys[index]!.currentContext!,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+        alignment: 0.1, // Align verse 20% from top
+      );
+    }
   }
 
   @override
@@ -66,50 +74,52 @@ class _SurahPageState extends State<SurahPage> {
                 padding: const EdgeInsets.only(right: 10),
                 child: IconButton(
                     onPressed: () {
-                      Get.to(() => SavedAyahs());
-                    },
-                    icon: const Icon(Icons.bookmarks))),
-            Padding(
-                padding: const EdgeInsets.only(right: 10),
-                child: IconButton(
-                    onPressed: () {
                       Get.to(() => const AyahSearch());
                     },
                     icon: const Icon(Icons.search_rounded))),
           ],
         ),
-        body: SingleChildScrollView(
-          controller: _scrollController,
-          child: Column(
-            children: [
-              const SizedBox(height: 3),
-              _surahCard(),
-              const SizedBox(height: 6),
-              ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: widget.surah.ayahs.length,
-                itemBuilder: (context, index) {
-                  int surahNumber = widget.surah.number;
-                  String surahName = widget.surah.name;
-                  String ayahText = widget.surah.ayahs[index].text;
-                  int ayahNumber = widget.surah.ayahs[index].number;
-                  int ayahNumberInSurah =
-                      widget.surah.ayahs[index].numberInSurah;
-                  return AyahWidget(
-                      titlevisibility: false,
-                      surahNumber: surahNumber,
-                      ayahNumber: ayahNumber,
-                      ayahText: ayahText,
-                      surahName: surahName,
-                      ayahNumberInSurah: ayahNumberInSurah);
-                },
+        body: Stack(
+          children: [
+            SingleChildScrollView(
+              controller: _scrollController,
+              child: Column(
+                children: [
+                  const SizedBox(height: 3),
+                  _surahCard(),
+                  const SizedBox(height: 6),
+                  ListView(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    children: List.generate(
+                      widget.surah.ayahs.length,
+                      (index) {
+                        final ayah = widget.surah.ayahs[index];
+                        return AyahWidget(
+                          key: _ayahKeys[index],
+                          titlevisibility: false,
+                          surahNumber: widget.surah.number,
+                          ayahNumber: ayah.number,
+                          ayahText: ayah.text,
+                          surahName: widget.surah.name,
+                          ayahNumberInSurah: ayah.numberInSurah,
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   Card _surahCard() {
