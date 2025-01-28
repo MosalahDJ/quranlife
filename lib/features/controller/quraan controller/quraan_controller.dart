@@ -11,12 +11,6 @@ class QuraanController extends GetxController {
   bool isayahsaved = false;
   static const String savedAyahsKey = 'saved_ayahs';
 
-  // Slider control variables
-  RxDouble currentSliderValue = 0.0.obs;
-  RxInt currentAyahIndex = 0.obs;
-  ScrollController scrollController = ScrollController();
-  Surah? currentSurah;
-
   @override
   void onInit() {
     super.onInit();
@@ -83,29 +77,5 @@ class QuraanController extends GetxController {
 
   bool ifAyahAlredySaved(int ayahNumber) {
     return savedAyahs.any((ayah) => ayah['ayahNumber'] == ayahNumber);
-  }
-
-  void updateSliderPosition(double position) {
-    currentSliderValue.value = position;
-    int ayahIndex = (position * currentSurah!.ayahs.length).round();
-    currentAyahIndex.value = ayahIndex.clamp(0, currentSurah!.ayahs.length - 1);
-    update();
-  }
-
-  void scrollToAyah(int index) {
-    if (scrollController.hasClients) {
-      scrollController.animateTo(
-        index.toDouble(),
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.easeInOut,
-      );
-    }
-  }
-
-  void initSurahControls(Surah surah) {
-    currentSurah = surah;
-    currentAyahIndex.value = 0;
-    currentSliderValue.value = 0;
-    update();
   }
 }

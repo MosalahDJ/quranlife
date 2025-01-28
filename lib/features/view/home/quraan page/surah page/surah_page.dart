@@ -42,11 +42,14 @@ class _SurahPageState extends State<SurahPage> {
 
   void _scrollToAyah(int index) {
     if (_ayahKeys.containsKey(index)) {
+      //we use Scrollable.ensureVisible in place of scrollController.animateTo
+      //for scrolling to real position of aya with its context
+      //we must use statefullwidget to use Scrollable
       Scrollable.ensureVisible(
         _ayahKeys[index]!.currentContext!,
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeInOut,
-        alignment: 0.1, // Align verse 20% from top
+        alignment: 0.1, // Align verse 10% from top
       );
     }
   }
@@ -56,8 +59,8 @@ class _SurahPageState extends State<SurahPage> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        backgroundColor:
-            Get.isDarkMode ? kmaincolor2dark : const Color(0xFFF0E9CD),
+        extendBodyBehindAppBar: true,
+        backgroundColor: Get.isDarkMode ? kmaincolor2dark : Colors.transparent,
         appBar: AppBar(
           scrolledUnderElevation: 0,
           backgroundColor:
@@ -68,7 +71,7 @@ class _SurahPageState extends State<SurahPage> {
               fontFamily: 'UthmanicHafs',
             ),
           ),
-          foregroundColor: kmaincolor4,
+          foregroundColor: const Color(0xFF280F01),
           actions: [
             Padding(
                 padding: const EdgeInsets.only(right: 10),
@@ -81,33 +84,47 @@ class _SurahPageState extends State<SurahPage> {
         ),
         body: Stack(
           children: [
-            SingleChildScrollView(
-              controller: _scrollController,
-              child: Column(
-                children: [
-                  const SizedBox(height: 3),
-                  _surahCard(),
-                  const SizedBox(height: 6),
-                  ListView(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    children: List.generate(
-                      widget.surah.ayahs.length,
-                      (index) {
-                        final ayah = widget.surah.ayahs[index];
-                        return AyahWidget(
-                          key: _ayahKeys[index],
-                          titlevisibility: false,
-                          surahNumber: widget.surah.number,
-                          ayahNumber: ayah.number,
-                          ayahText: ayah.text,
-                          surahName: widget.surah.name,
-                          ayahNumberInSurah: ayah.numberInSurah,
-                        );
-                      },
+            SizedBox(
+              height: Sizeconfig.screenheight,
+              width: Sizeconfig.screenwidth,
+              child: Image.asset(
+                "lib/core/assets/images/background_image/paper.jpg",
+                fit: BoxFit.cover,
+                opacity:
+                    AlwaysStoppedAnimation<double>(Get.isDarkMode ? 0.1 : 1),
+                height: Sizeconfig.screenheight,
+                width: Sizeconfig.screenwidth,
+              ),
+            ),
+            SafeArea(
+              child: SingleChildScrollView(
+                controller: _scrollController,
+                child: Column(
+                  children: [
+                    const SizedBox(height: 3),
+                    _surahCard(),
+                    const SizedBox(height: 10),
+                    ListView(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      children: List.generate(
+                        widget.surah.ayahs.length,
+                        (index) {
+                          final ayah = widget.surah.ayahs[index];
+                          return AyahWidget(
+                            key: _ayahKeys[index],
+                            titlevisibility: false,
+                            surahNumber: widget.surah.number,
+                            ayahNumber: ayah.number,
+                            ayahText: ayah.text,
+                            surahName: widget.surah.name,
+                            ayahNumberInSurah: ayah.numberInSurah,
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],
@@ -124,11 +141,11 @@ class _SurahPageState extends State<SurahPage> {
 
   Card _surahCard() {
     return Card(
-      elevation: 10,
+      elevation: 5,
       color: Colors.transparent,
       child: SizedBox(
         height: Sizeconfig.screenheight! / 2.2,
-        width: Sizeconfig.screenwidth! / 1.12,
+        width: Sizeconfig.screenwidth! / 1.05,
         child: Stack(
           children: [
             Positioned(
@@ -146,7 +163,7 @@ class _SurahPageState extends State<SurahPage> {
             ),
             Container(
               height: Sizeconfig.screenheight! / 2.2,
-              width: Sizeconfig.screenwidth! / 1.12,
+              width: Sizeconfig.screenwidth! / 1.05,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(20)),
                 color: kmaincolor4.withOpacity(0.6),
@@ -161,11 +178,12 @@ class _SurahPageState extends State<SurahPage> {
                   _cardtext(
                       '${widget.surah.revelationType.tr}, ${widget.surah.ayahs.length} ${"verses".tr}',
                       20),
-                  const Divider(
+                  Divider(
                     endIndent: 40,
                     indent: 40,
                     thickness: 1,
-                    color: Colors.white,
+                    color:
+                        Get.isDarkMode ? Colors.white : const Color(0xFF280F01),
                   ),
                   SizedBox(
                     height: Sizeconfig.screenheight! / 8,
@@ -173,7 +191,9 @@ class _SurahPageState extends State<SurahPage> {
                     child: Image.asset(
                       "lib/core/assets/images/background_image/isti3ada.png",
                       fit: BoxFit.contain,
-                      color: Colors.white,
+                      color: Get.isDarkMode
+                          ? Colors.white
+                          : const Color(0xFF280F01),
                     ),
                   ),
                   Visibility(
@@ -187,7 +207,9 @@ class _SurahPageState extends State<SurahPage> {
                       child: Image.asset(
                         "lib/core/assets/images/background_image/basmala.png",
                         fit: BoxFit.contain,
-                        color: Colors.white,
+                        color: Get.isDarkMode
+                            ? Colors.white
+                            : const Color(0xFF280F01),
                       ),
                     ),
                   ),
@@ -207,12 +229,12 @@ class _SurahPageState extends State<SurahPage> {
         fontFamily: 'UthmanicHafs',
         fontSize: size,
         height: 2,
-        color: Colors.white,
+        color: Get.isDarkMode ? Colors.white : const Color(0xFF280F01),
         shadows: [
           Shadow(
             offset: const Offset(1, 1),
             blurRadius: 2,
-            color: Colors.black.withOpacity(0.3),
+            color: const Color(0xFF280F01).withOpacity(0.3),
           )
         ],
       ),

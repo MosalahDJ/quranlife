@@ -30,79 +30,86 @@ class AyahWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(10)),
-            color: kmaincolor4.withOpacity(0.1),
-          ),
-          height: 50,
-          width: Sizeconfig.screenwidth! / 1.16,
-          child: Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Container(
-                      width: 50,
-                      height: 60,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          color: kmaincolor4,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(100))),
-                      child: Text(
-                        "{$ayahNumberInSurah}",
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 18),
+        Card(
+          elevation: 0,
+          color: Colors.transparent,
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+              color: kmaincolor4.withOpacity(0.2),
+            ),
+            height: 50,
+            width: Sizeconfig.screenwidth! / 1.07,
+            child: Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(
+                        width: 10,
                       ),
-                    ),
-                  ],
-                ),
-                Visibility(
-                    visible: titlevisibility,
-                    child: Center(
-                      child: Text(
-                        title ?? "",
-                        style: const TextStyle(
-                          fontFamily: 'UthmanicHafs',
-                          fontSize: 20,
+                      Container(
+                        width: 50,
+                        height: 60,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: kmaincolor4,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(100))),
+                        child: Text(
+                          "$ayahNumberInSurah",
+                          style: TextStyle(
+                              color: Get.isDarkMode
+                                  ? Colors.white
+                                  : const Color(0xFF280F01),
+                              fontSize: 18),
                         ),
                       ),
-                    )),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Visibility(
-                        visible: !titlevisibility,
-                        child: _iconbuttons(
-                            Icons.play_circle_outline_rounded, () {})),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    GetBuilder<QuraanController>(
-                      builder: (c) => _iconbuttons(
-                          quranctrl.ifAyahAlredySaved(ayahNumber)
-                              ? (icon ?? Icons.bookmark_added_rounded)
-                              : Icons.bookmark_outline_rounded, () {
-                        quranctrl.saveAyah(surahNumber, ayahNumber, ayahText,
-                            surahName, ayahNumberInSurah);
-                      }),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                  Visibility(
+                      visible: titlevisibility,
+                      child: Center(
+                        child: Text(
+                          title ?? "",
+                          style: const TextStyle(
+                            fontFamily: 'UthmanicHafs',
+                            fontSize: 20,
+                          ),
+                        ),
+                      )),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Visibility(
+                          visible: !titlevisibility,
+                          child: _iconbuttons(
+                              Icons.play_circle_outline_rounded, () {})),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      GetBuilder<QuraanController>(
+                        builder: (c) => _iconbuttons(
+                            quranctrl.ifAyahAlredySaved(ayahNumber)
+                                ? (icon ?? Icons.bookmark_added_rounded)
+                                : Icons.bookmark_outline_rounded, () {
+                          quranctrl.saveAyah(surahNumber, ayahNumber, ayahText,
+                              surahName, ayahNumberInSurah);
+                        }),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -112,7 +119,11 @@ class AyahWidget extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               ayahText,
-              style: const TextStyle(fontFamily: 'UthmanicHafs', fontSize: 28),
+              style: TextStyle(
+                  fontFamily: 'UthmanicHafs',
+                  fontSize: 28,
+                  color:
+                      Get.isDarkMode ? Colors.white : const Color(0xFF280F01)),
               textAlign: TextAlign.start,
               textDirection: TextDirection.rtl,
             ),
@@ -135,7 +146,7 @@ InkWell _iconbuttons(IconData icon, VoidCallback onpressed) => InkWell(
     onTap: onpressed,
     child: Icon(
       icon,
-      color: kmaincolor4,
+      color: Get.isDarkMode ? Colors.white : const Color(0xFF280F01),
       weight: 2,
       size: 30,
       shadows: [
