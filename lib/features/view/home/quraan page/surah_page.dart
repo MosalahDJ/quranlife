@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/features/model/qurandata.dart';
-import 'package:quranlife/features/view/home/quraan%20page/ayah%20search/ayah_search.dart';
 import 'package:quranlife/features/view/home/quraan%20page/widgets/ayah_widget.dart';
 
 class SurahPage extends StatefulWidget {
@@ -64,7 +63,7 @@ class _SurahPageState extends State<SurahPage> {
         appBar: AppBar(
           scrolledUnderElevation: 0,
           backgroundColor:
-              Get.isDarkMode ? kmaincolor2dark : const Color(0xFFF0E9CD),
+              Get.isDarkMode ? kmaincolor2dark : Colors.transparent,
           title: Text(
             widget.surah.name,
             style: const TextStyle(
@@ -72,15 +71,6 @@ class _SurahPageState extends State<SurahPage> {
             ),
           ),
           foregroundColor: const Color(0xFF280F01),
-          actions: [
-            Padding(
-                padding: const EdgeInsets.only(right: 10),
-                child: IconButton(
-                    onPressed: () {
-                      Get.to(() => const AyahSearch());
-                    },
-                    icon: const Icon(Icons.search_rounded))),
-          ],
         ),
         body: Stack(
           children: [
