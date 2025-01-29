@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
-import 'package:quranlife/features/controller/quraan%20controller/quraan_controller.dart';
 import 'package:quranlife/features/model/qurandata.dart';
 import 'package:quranlife/features/view/home/quraan%20page/widgets/ayah_widget.dart';
 
@@ -23,17 +22,16 @@ class SurahPage extends StatefulWidget {
 class _SurahPageState extends State<SurahPage> {
   final Map<int, GlobalKey> _ayahKeys = {};
   final ScrollController _scrollController = ScrollController();
-  final QuraanController _quranController = Get.find();
-  Surah? nextSurah;
 
   @override
   void initState() {
     super.initState();
-    _setupAyahKeys();
-    _setupScrollController();
-    nextSurah = _quranController.getNextSurah(widget.surah.number);
-    _quranController.resetSurahPageState();
+    // Create GlobalKeys for each ayah
+    for (int i = 0; i < widget.surah.ayahs.length; i++) {
+      _ayahKeys[i] = GlobalKey();
+    }
 
+    // Scroll to initial ayah after build
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (widget.initialAyahNumber != null) {
         _scrollToAyah(widget.initialAyahNumber! - 1);
@@ -41,29 +39,16 @@ class _SurahPageState extends State<SurahPage> {
     });
   }
 
-  void _setupScrollController() {
-    _scrollController.addListener(() {
-      _quranController.handleScroll(
-        _scrollController.position.pixels,
-        _scrollController.position.maxScrollExtent,
-        widget.surah.number,
-      );
-    });
-  }
-
-  void _setupAyahKeys() {
-    for (int i = 0; i < widget.surah.ayahs.length; i++) {
-      _ayahKeys[i] = GlobalKey();
-    }
-  }
-
   void _scrollToAyah(int index) {
     if (_ayahKeys.containsKey(index)) {
+      //we use Scrollable.ensureVisible in place of scrollController.animateTo
+      //for scrolling to real position of aya with its context
+      //we must use statefullwidget to use Scrollable
       Scrollable.ensureVisible(
         _ayahKeys[index]!.currentContext!,
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeInOut,
-        alignment: 0.1,
+        alignment: 0.1, // Align verse 10% from top
       );
     }
   }
@@ -78,7 +63,7 @@ class _SurahPageState extends State<SurahPage> {
         appBar: AppBar(
           scrolledUnderElevation: 0,
           backgroundColor:
-              Get.isDarkMode ? kmaincolor2dark : Colors.transparent,
+              Get.isDarkMode ? kmaincolor2dark : const Color(0xFFF0E9CD),
           title: Text(
             widget.surah.name,
             style: const TextStyle(
@@ -103,15 +88,31 @@ class _SurahPageState extends State<SurahPage> {
             ),
             SafeArea(
               child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
                 controller: _scrollController,
                 child: Column(
                   children: [
                     const SizedBox(height: 3),
                     _surahCard(),
                     const SizedBox(height: 10),
-                    _ayahsList(),
-                    if (nextSurah != null) _nextSurahIndicator(),
+                    ListView(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      children: List.generate(
+                        widget.surah.ayahs.length,
+                        (index) {
+                          final ayah = widget.surah.ayahs[index];
+                          return AyahWidget(
+                            key: _ayahKeys[index],
+                            titlevisibility: false,
+                            surahNumber: widget.surah.number,
+                            ayahNumber: ayah.number,
+                            ayahText: ayah.text,
+                            surahName: widget.surah.name,
+                            ayahNumberInSurah: ayah.numberInSurah,
+                          );
+                        },
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -122,73 +123,9 @@ class _SurahPageState extends State<SurahPage> {
     );
   }
 
-  Widget _ayahsList() {
-    return ListView(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      children: List.generate(
-        widget.surah.ayahs.length,
-        (index) {
-          final ayah = widget.surah.ayahs[index];
-          return AyahWidget(
-            key: _ayahKeys[index],
-            titlevisibility: false,
-            surahNumber: widget.surah.number,
-            ayahNumber: ayah.number,
-            ayahText: ayah.text,
-            surahName: widget.surah.name,
-            ayahNumberInSurah: ayah.numberInSurah,
-            ayahaudio: ayah.audio,
-          );
-        },
-      ),
-    );
-  }
-
-  Widget _nextSurahIndicator() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20.0),
-      child: Column(
-        children: [
-          Obx(() {
-            if (_quranController.showIndicator.value) {
-              return Column(
-                children: [
-                  SizedBox(
-                    height: 40,
-                    width: 40,
-                    child: CircularProgressIndicator(
-                      value: _quranController.isLoadingNextSurah.value
-                          ? null
-                          : _quranController.scrollProgress.value,
-                      backgroundColor: Colors.grey.withOpacity(0.3),
-                      color: Get.isDarkMode
-                          ? Colors.white
-                          : const Color(0xFF280F01),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                ],
-              );
-            }
-            return const SizedBox.shrink();
-          }),
-          Text(
-            nextSurah!.name,
-            style: const TextStyle(
-              fontFamily: 'UthmanicHafs',
-              fontSize: 16,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   @override
   void dispose() {
     _scrollController.dispose();
-    _quranController.resetSurahPageState();
     super.dispose();
   }
 

@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   animate_do: ^3.3.4
+  audioplayers: ^6.1.1
   awesome_dialog: ^3.2.1
   cupertino_icons: ^1.0.6
   curved_navigation_bar: ^1.0.6
@@ -119,7 +120,6 @@ flutter:
     - lib/core/assets/images/app_logo/
     - lib/core/assets/images/salat_icons/
     - lib/core/assets/json/quran.json
-
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -188,6 +188,8 @@ Widget _surahviewPage() {
 }
 
 Widget _juzuaviewPage() {
+  final QuraanController quranctrl = Get.find();
+
   return Stack(
     children: [
       //gradient background
@@ -203,55 +205,54 @@ Widget _juzuaviewPage() {
           width: Sizeconfig.screenwidth,
         ),
       ),
-      //front of page
-
       Positioned(
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 2),
-
-            //Listviewbuilder
             child: ListView.builder(
               itemCount: 30,
-              itemBuilder: (context, index) => Column(
-                children: [
-                  // We replaced the Container with Material because it allows
-                  // the button's overlay color to appear in the area where
-                  // there is a gradient in the background.
+              itemBuilder: (context, index) {
+                final juzNumber = index + 1;
+                final juzStart = quranctrl.juzData[juzNumber]!;
+                final surah = quranctrl.getSurahByNumber(juzStart[0]);
 
-                  Material(
-                    elevation: 2,
-                    borderRadius: const BorderRadius.all(Radius.circular(12)),
-                    color: Colors.transparent,
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(12),
-                      onTap: () {},
-
-                      // It is preferable to use Ink with InkWell because it
-                      //separates the design from the logic and also provides a
-                      //better experience than using Container directly, as it is
-                      //specifically designed for this purpose.
-
-                      child: Ink(
-                        decoration: BoxDecoration(
-                          color: Get.isDarkMode
-                              ? kmaincolor2dark.withOpacity(0.7)
-                              : Colors.white.withOpacity(0.7),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Container(
-                          height: Sizeconfig.screenheight! / 15,
-                          width: Sizeconfig.screenwidth! / 1.05,
-                          alignment: Alignment.center,
-                          padding: const EdgeInsets.all(8),
-                          child: Text("${"juz".tr} ${index + 1}"),
+                return Column(
+                  children: [
+                    Material(
+                      elevation: 2,
+                      borderRadius: const BorderRadius.all(Radius.circular(12)),
+                      color: Colors.transparent,
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(12),
+                        onTap: () {
+                          if (surah != null) {
+                            Get.to(() => SurahPage(
+                                  surah: surah,
+                                  initialAyahNumber: juzStart[1],
+                                ));
+                          }
+                        },
+                        child: Ink(
+                          decoration: BoxDecoration(
+                            color: Get.isDarkMode
+                                ? kmaincolor2dark.withOpacity(0.7)
+                                : Colors.white.withOpacity(0.7),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Container(
+                            height: Sizeconfig.screenheight! / 15,
+                            width: Sizeconfig.screenwidth! / 1.05,
+                            alignment: Alignment.center,
+                            padding: const EdgeInsets.all(8),
+                            child: Text("${"juz".tr} ${index + 1}"),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: Sizeconfig.screenheight! / 80),
-                ],
-              ),
+                    SizedBox(height: Sizeconfig.screenheight! / 80),
+                  ],
+                );
+              },
             ),
           ),
         ),

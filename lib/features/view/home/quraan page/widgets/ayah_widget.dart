@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/features/controller/quraan%20controller/quraan_controller.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class AyahWidget extends StatelessWidget {
   AyahWidget(
@@ -14,7 +15,8 @@ class AyahWidget extends StatelessWidget {
       required this.ayahNumberInSurah,
       this.icon,
       required this.titlevisibility,
-      this.title});
+      this.title,
+      this.ayahaudio});
 
   final int surahNumber;
   final int ayahNumber;
@@ -22,9 +24,11 @@ class AyahWidget extends StatelessWidget {
   final bool titlevisibility;
   final String surahName;
   final int ayahNumberInSurah;
-  final QuraanController quranctrl = Get.find();
   final IconData? icon;
   final String? title;
+  final String? ayahaudio;
+
+  final QuraanController quranctrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -89,8 +93,26 @@ class AyahWidget extends StatelessWidget {
                       ),
                       Visibility(
                           visible: !titlevisibility,
-                          child: _iconbuttons(
-                              Icons.play_circle_outline_rounded, () {})),
+                          child: Obx(() => _iconbuttons(
+                                  (quranctrl.playerState.value ==
+                                              PlayerState.playing &&
+                                          quranctrl.currentPlayingAyah.value ==
+                                              ayahNumber)
+                                      ? Icons.pause_circle_outline
+                                      : Icons.play_circle_outline_rounded,
+                                  () async {
+                                if (ayahaudio != null) {
+                                  if (quranctrl.playerState.value ==
+                                          PlayerState.playing &&
+                                      quranctrl.currentPlayingAyah.value ==
+                                          ayahNumber) {
+                                    await quranctrl.player.pause();
+                                  } else {
+                                    await quranctrl.playaudio(
+                                        ayahaudio!, ayahNumber);
+                                  }
+                                }
+                              }))),
                       const SizedBox(
                         width: 20,
                       ),
