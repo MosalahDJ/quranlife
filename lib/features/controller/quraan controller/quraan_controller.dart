@@ -232,7 +232,7 @@ class QuraanController extends GetxController {
         final nextSurah = await getNextSurahWithLoading(currentSurahNumber);
         if (nextSurah != null) {
           Get.off(
-            () => SurahPage(surah: nextSurah),
+            () => NextSurahPage(surah: nextSurah),
             preventDuplicates: false,
             transition: Transition.downToUp,
             duration: const Duration(milliseconds: 500),

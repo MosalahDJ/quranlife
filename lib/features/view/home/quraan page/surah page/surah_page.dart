@@ -5,21 +5,21 @@ import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/features/model/qurandata.dart';
 import 'package:quranlife/features/view/home/quraan%20page/widgets/ayah_widget.dart';
 
-class SurahPage extends StatefulWidget {
+class NextSurahPage extends StatefulWidget {
   final Surah surah;
   final int? initialAyahNumber;
 
-  const SurahPage({
+  const NextSurahPage({
     required this.surah,
     this.initialAyahNumber,
     super.key,
   });
 
   @override
-  State<SurahPage> createState() => _SurahPageState();
+  State<NextSurahPage> createState() => _SurahPageState();
 }
 
-class _SurahPageState extends State<SurahPage> {
+class _SurahPageState extends State<NextSurahPage> {
   final Map<int, GlobalKey> _ayahKeys = {};
   final ScrollController _scrollController = ScrollController();
 
@@ -70,7 +70,9 @@ class _SurahPageState extends State<SurahPage> {
               fontFamily: 'UthmanicHafs',
             ),
           ),
-          foregroundColor: const Color(0xFF280F01),
+          foregroundColor: Get.isDarkMode
+              ? const Color(0xFFE8D2C6)
+              : const Color(0xFF280F01),
         ),
         body: Stack(
           children: [

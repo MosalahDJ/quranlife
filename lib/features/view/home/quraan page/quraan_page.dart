@@ -153,12 +153,13 @@ Widget _surahviewPage() {
                               Text(
                                 surah.name.tr,
                                 style: TextStyle(
-                                    fontFamily: "Amiri",
-                                    color: Get.isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold),
+                                  fontFamily: "Amiri",
+                                  color: Get.isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               surah.revelationType == "Medinan"
                                   ? Icon(
