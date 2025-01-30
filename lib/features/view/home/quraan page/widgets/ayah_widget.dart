@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
+import 'package:quranlife/features/controller/quraan%20controller/audioplayer_controller.dart';
 import 'package:quranlife/features/controller/quraan%20controller/quraan_controller.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:quranlife/features/controller/quraan%20controller/saving_controller.dart';
 
 class AyahWidget extends StatelessWidget {
   AyahWidget(
@@ -29,6 +31,8 @@ class AyahWidget extends StatelessWidget {
   final String? ayahaudio;
 
   final QuraanController quranctrl = Get.find();
+  final AudioplayerController audioctrl = Get.find();
+  final SavingController savectrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -94,21 +98,21 @@ class AyahWidget extends StatelessWidget {
                       Visibility(
                           visible: !titlevisibility,
                           child: Obx(() => _iconbuttons(
-                                  (quranctrl.playerState.value ==
+                                  (audioctrl.playerState.value ==
                                               PlayerState.playing &&
-                                          quranctrl.currentPlayingAyah.value ==
+                                          audioctrl.currentPlayingAyah.value ==
                                               ayahNumber)
                                       ? Icons.pause_circle_outline
                                       : Icons.play_circle_outline_rounded,
                                   () async {
                                 if (ayahaudio != null) {
-                                  if (quranctrl.playerState.value ==
+                                  if (audioctrl.playerState.value ==
                                           PlayerState.playing &&
-                                      quranctrl.currentPlayingAyah.value ==
+                                      audioctrl.currentPlayingAyah.value ==
                                           ayahNumber) {
-                                    await quranctrl.player.pause();
+                                    await audioctrl.player.pause();
                                   } else {
-                                    await quranctrl.playaudio(
+                                    await audioctrl.playaudio(
                                         ayahaudio!, ayahNumber);
                                   }
                                 }
@@ -118,10 +122,10 @@ class AyahWidget extends StatelessWidget {
                       ),
                       GetBuilder<QuraanController>(
                         builder: (c) => _iconbuttons(
-                            quranctrl.ifAyahAlredySaved(ayahNumber)
+                            savectrl.ifAyahAlredySaved(ayahNumber)
                                 ? (icon ?? Icons.bookmark_added_rounded)
                                 : Icons.bookmark_outline_rounded, () {
-                          quranctrl.saveAyah(surahNumber, ayahNumber, ayahText,
+                          savectrl.saveAyah(surahNumber, ayahNumber, ayahText,
                               surahName, ayahNumberInSurah);
                         }),
                       ),
@@ -165,6 +169,7 @@ class AyahWidget extends StatelessWidget {
 }
 
 InkWell _iconbuttons(IconData icon, VoidCallback onpressed) => InkWell(
+    borderRadius: const BorderRadius.all(Radius.circular(200)),
     onTap: onpressed,
     child: Icon(
       icon,

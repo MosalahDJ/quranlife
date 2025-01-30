@@ -3,12 +3,14 @@ import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/features/controller/quraan%20controller/quraan_controller.dart';
+import 'package:quranlife/features/controller/quraan%20controller/saving_controller.dart';
 import 'package:quranlife/features/view/home/quraan%20page/surah_page.dart';
 import 'package:quranlife/features/view/home/quraan%20page/widgets/ayah_widget.dart';
 
 class SavedAyahs extends StatelessWidget {
   SavedAyahs({super.key});
   final QuraanController quranctrl = Get.find();
+  final SavingController savecetrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +50,7 @@ class SavedAyahs extends StatelessWidget {
               ),
             ),
             GetBuilder<QuraanController>(
-              builder: (c) => quranctrl.savedAyahs.isEmpty
+              builder: (c) => savecetrl.savedAyahs.isEmpty
                   ? SafeArea(
                       child: Center(
                         child: Column(
@@ -77,38 +79,41 @@ class SavedAyahs extends StatelessWidget {
                       ),
                     )
                   : SafeArea(
-                      child: ListView.builder(
-                        padding: const EdgeInsets.all(8),
-                        itemCount: quranctrl.savedAyahs.length,
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                            onTap: () {
-                              Get.to(
-                                () => SurahPage(
-                                  surah: quranctrl.surahs[quranctrl
-                                          .savedAyahs[index]["surahNumber"] -
-                                      1],
-                                  initialAyahNumber: quranctrl.savedAyahs[index]
-                                      ["ayahNumberinsurah"],
-                                ),
-                              );
-                            },
-                            child: AyahWidget(
-                              title: quranctrl.savedAyahs[index]["surahName"],
-                              titlevisibility: true,
-                              ayahNumber: quranctrl.savedAyahs[index]
-                                  ["ayahNumber"],
-                              ayahNumberInSurah: quranctrl.savedAyahs[index]
-                                  ["ayahNumberinsurah"],
-                              ayahText: quranctrl.savedAyahs[index]["ayahText"],
-                              surahName: quranctrl.savedAyahs[index]
-                                  ["surahName"],
-                              surahNumber: quranctrl.savedAyahs[index]
-                                  ["surahNumber"],
-                              icon: Icons.delete_outline_outlined,
-                            ),
-                          );
-                        },
+                      child: GetBuilder<SavingController>(
+                        builder: (c) => ListView.builder(
+                          padding: const EdgeInsets.all(8),
+                          itemCount: savecetrl.savedAyahs.length,
+                          itemBuilder: (context, index) {
+                            return InkWell(
+                              onTap: () {
+                                Get.to(
+                                  () => SurahPage(
+                                    surah: quranctrl.surahs[savecetrl
+                                            .savedAyahs[index]["surahNumber"] -
+                                        1],
+                                    initialAyahNumber: savecetrl
+                                        .savedAyahs[index]["ayahNumberinsurah"],
+                                  ),
+                                );
+                              },
+                              child: AyahWidget(
+                                title: savecetrl.savedAyahs[index]["surahName"],
+                                titlevisibility: true,
+                                ayahNumber: savecetrl.savedAyahs[index]
+                                    ["ayahNumber"],
+                                ayahNumberInSurah: savecetrl.savedAyahs[index]
+                                    ["ayahNumberinsurah"],
+                                ayahText: savecetrl.savedAyahs[index]
+                                    ["ayahText"],
+                                surahName: savecetrl.savedAyahs[index]
+                                    ["surahName"],
+                                surahNumber: savecetrl.savedAyahs[index]
+                                    ["surahNumber"],
+                                icon: Icons.delete_outline_outlined,
+                              ),
+                            );
+                          },
+                        ),
                       ),
                     ),
             ),

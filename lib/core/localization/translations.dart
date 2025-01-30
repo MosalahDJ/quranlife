@@ -131,7 +131,6 @@ class Messages extends Translations {
           'Medinan': 'Medinan',
           'no_saved_ayahs': 'No saved verses',
           'saved_ayahs': 'Saved verses',
-
           'Fajr': 'Fajr',
           'Sunrise': 'Sunrise',
           'Dhuhr': 'Dhuhr',
@@ -651,7 +650,6 @@ class Messages extends Translations {
           'Medinan': 'Medinan',
           'no_saved_ayahs': 'Aucun verset enregistré',
           'saved_ayahs': 'verset enregistré',
-
           'Fajr': 'Fajr',
           'Sunrise': 'lv du soleil',
           'Dhuhr': 'Dhuhr',
@@ -679,8 +677,6 @@ class Messages extends Translations {
           'mosque_finder_desc':
               'Vous cherchez une mosquée?\nnous vous aiderons à trouver la mosquée la plus proche.',
           'find_mosque': 'Trouver une Mosquée',
-          'profile_name': 'Mohamed salah',
-          'profile_email': 'mohamedsalah@gmail.com',
 
           // Hijri Calendar Page
           'hijri_calendar': 'Calendrier Hijri',

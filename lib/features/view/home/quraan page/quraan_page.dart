@@ -5,6 +5,7 @@ import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
+import 'package:quranlife/features/controller/quraan%20controller/juzua_controller.dart';
 import 'package:quranlife/features/controller/quraan%20controller/quraan_controller.dart';
 import 'package:quranlife/features/view/home/quraan%20page/saved_ayahs.dart';
 import 'package:quranlife/features/view/home/quraan%20page/surah_page.dart';
@@ -188,8 +189,13 @@ Widget _surahviewPage() {
   ]);
 }
 
+//________________________________________________________________________________________________
+//Juzuaviewpage
+//________________________________________________________________________________________________
+
 Widget _juzuaviewPage() {
   final QuraanController quranctrl = Get.find();
+  final JuzuaController juzuactrl = Get.find();
 
   return Stack(
     children: [
@@ -214,7 +220,7 @@ Widget _juzuaviewPage() {
               itemCount: 30,
               itemBuilder: (context, index) {
                 final juzNumber = index + 1;
-                final juzStart = quranctrl.juzData[juzNumber]!;
+                final juzStart = juzuactrl.juzData[juzNumber]!;
                 final surah = quranctrl.getSurahByNumber(juzStart[0]);
 
                 return Column(
@@ -261,6 +267,10 @@ Widget _juzuaviewPage() {
     ],
   );
 }
+
+//________________________________________________________________________________________________
+//ayahviewpage
+//________________________________________________________________________________________________
 
 Widget _ayahviewPage() {
   final MyHomeController homectrl = Get.find();
