@@ -309,8 +309,6 @@ Widget _juzuaviewPage() {
 //________________________________________________________________________________________________
 
 Widget _ayahviewPage() {
-  final MyHomeController homectrl = Get.find();
-
   return Stack(children: [
     //gradient background
     _backround(),
