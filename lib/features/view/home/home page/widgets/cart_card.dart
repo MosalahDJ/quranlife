@@ -23,7 +23,7 @@ class CartCard extends StatelessWidget {
       //making stack widget responsive
       height: Sizeconfig.screenheight! < 768
           ? (langctrl.language.value == "fr"
-              ? Sizeconfig.screenheight! / 3.10
+              ? Sizeconfig.screenheight! / 3
               : Sizeconfig.screenheight! / 3.5)
           : Sizeconfig.screenheight! > 1024
               ? (langctrl.language.value == "fr"
