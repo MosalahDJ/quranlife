@@ -107,7 +107,7 @@ class QuraanController extends GetxController {
       searchResults.clear();
       for (var surah in surahs) {
         for (var ayah in surah.ayahs) {
-          // Normalize ayah text for
+          // Normalize ayah text for comparison
           final normalizedAyahText = removeDiacritics(ayah.text.toLowerCase());
           final normalizedSurahName =
               removeDiacritics(surah.name.toLowerCase());
