@@ -22,10 +22,16 @@ class CartCard extends StatelessWidget {
     return SizedBox(
       //making stack widget responsive
       height: Sizeconfig.screenheight! < 768
-          ? Sizeconfig.screenheight! / 3.5
+          ? (langctrl.language.value == "fr"
+              ? Sizeconfig.screenheight! / 3
+              : Sizeconfig.screenheight! / 3.5)
           : Sizeconfig.screenheight! > 1024
-              ? Sizeconfig.screenheight! / 5
-              : Sizeconfig.screenheight! / 4.5,
+              ? (langctrl.language.value == "fr"
+                  ? Sizeconfig.screenheight! / 4.5
+                  : Sizeconfig.screenheight! / 5)
+              : (langctrl.language.value == "fr"
+                  ? Sizeconfig.screenheight! / 4
+                  : Sizeconfig.screenheight! / 4.5),
       child: Stack(
         children: [
           //card
@@ -147,7 +153,7 @@ class CartCard extends StatelessWidget {
             right: langctrl.language.value == "ar"
                 ? 0
                 : langctrl.language.value == "fr"
-                    ? Sizeconfig.screenwidth! / 9
+                    ? Sizeconfig.screenwidth! / 5
                     : Sizeconfig.screenwidth! / 4,
             child: Text("search_for_a_mosque".tr,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(

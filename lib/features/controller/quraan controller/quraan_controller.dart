@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'dart:convert';
@@ -82,5 +84,46 @@ class QuraanController extends GetxController {
         isLoadingNextSurah.value = false;
       }
     }
+  }
+
+  final searchQuery = ''.obs;
+  final searchResults = <Map<String, dynamic>>[].obs;
+  final isSearching = false.obs;
+  Timer? _debounceTimer;
+// Add utility function to remove Arabic diacritics
+  String removeDiacritics(String text) {
+    return text.replaceAll(RegExp(r'[\u064B-\u065F\u0670]'), '');
+  }
+
+  void searchQuran(String query) {
+    if (_debounceTimer?.isActive ?? false) _debounceTimer!.cancel();
+    _debounceTimer = Timer(const Duration(milliseconds: 500), () {
+      searchQuery.value = query;
+      isSearching.value = true;
+
+      // Normalize search query
+      final normalizedQuery = removeDiacritics(query.toLowerCase());
+
+      searchResults.clear();
+      for (var surah in surahs) {
+        for (var ayah in surah.ayahs) {
+          // Normalize ayah text for comparison
+          final normalizedAyahText = removeDiacritics(ayah.text.toLowerCase());
+          final normalizedSurahName =
+              removeDiacritics(surah.name.toLowerCase());
+
+          if (normalizedAyahText.contains(normalizedQuery) ||
+              normalizedSurahName.contains(normalizedQuery)) {
+            searchResults.add({
+              'surahName': surah.name,
+              'surahNumber': surah.number,
+              'ayahNumber': ayah.numberInSurah,
+              'ayahText': ayah.text, // Keep original text with diacritics
+            });
+          }
+        }
+      }
+      isSearching.value = false;
+    });
   }
 }

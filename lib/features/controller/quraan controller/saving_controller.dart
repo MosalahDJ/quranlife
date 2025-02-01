@@ -52,12 +52,6 @@ class SavingController extends GetxController {
     update();
   }
 
-  void removeSavedAyah(int index) {
-    savedAyahs.removeAt(index);
-    _saveToDisk();
-    update();
-  }
-
   bool ifAyahAlredySaved(int ayahNumber) {
     return savedAyahs.any((ayah) => ayah['ayahNumber'] == ayahNumber);
   }

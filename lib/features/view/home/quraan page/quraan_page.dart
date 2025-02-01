@@ -35,6 +35,7 @@ class QuraanPage extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 10),
                   child: IconButton(
                       onPressed: () {
+                        homectrl.unfocuskeyboardhome();
                         Get.to(() => SavedAyahs());
                       },
                       icon: const Icon(
@@ -48,6 +49,7 @@ class QuraanPage extends StatelessWidget {
                 labelColor: kmaincolor4,
                 indicatorColor: kmaincolor4,
                 dividerColor: kmaincolor,
+                onTap: (value) => homectrl.unfocuskeyboardhome(),
                 tabs: [
                   Tab(
                     icon: const Icon(FlutterIslamicIcons.quran),
@@ -75,19 +77,25 @@ class QuraanPage extends StatelessWidget {
   }
 }
 
-Widget _backround = Gradientbackground(
-  gradientcolor: [
-    kmaincolor,
-    Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
-  ],
-);
+Widget _backround() {
+  return GetBuilder<QuraanController>(
+      builder: (controller) => Gradientbackground(
+            gradientcolor: [
+              kmaincolor,
+              Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
+            ],
+          ));
+}
 
+//________________________________________________________________________________________________
+//surahviewpage
+//________________________________________________________________________________________________
 Widget _surahviewPage() {
   final QuraanController quranctrl = Get.find();
 
   return Stack(children: [
     //gradient background
-    _backround,
+    _backround(),
     SizedBox(
       height: Sizeconfig.screenheight,
       width: Sizeconfig.screenwidth,
@@ -200,7 +208,7 @@ Widget _juzuaviewPage() {
   return Stack(
     children: [
       //gradient background
-      _backround,
+      _backround(),
       SizedBox(
         height: Sizeconfig.screenheight,
         width: Sizeconfig.screenwidth,
@@ -217,10 +225,12 @@ Widget _juzuaviewPage() {
           child: Padding(
             padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 2),
             child: ListView.builder(
-              itemCount: 30,
+              physics: const BouncingScrollPhysics(),
+              itemCount: juzuactrl.juzData.length,
               itemBuilder: (context, index) {
                 final juzNumber = index + 1;
                 final juzStart = juzuactrl.juzData[juzNumber]!;
+                final ayahstart = juzStart[1];
                 final surah = quranctrl.getSurahByNumber(juzStart[0]);
 
                 return Column(
@@ -232,12 +242,10 @@ Widget _juzuaviewPage() {
                       child: InkWell(
                         borderRadius: BorderRadius.circular(12),
                         onTap: () {
-                          if (surah != null) {
-                            Get.to(() => SurahPage(
-                                  surah: surah,
-                                  initialAyahNumber: juzStart[1],
-                                ));
-                          }
+                          Get.to(() => SurahPage(
+                                surah: surah,
+                                initialAyahNumber: juzStart[1],
+                              ));
                         },
                         child: Ink(
                           decoration: BoxDecoration(
@@ -247,11 +255,39 @@ Widget _juzuaviewPage() {
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Container(
-                            height: Sizeconfig.screenheight! / 15,
+                            height: Sizeconfig.screenheight! / 13,
                             width: Sizeconfig.screenwidth! / 1.05,
                             alignment: Alignment.center,
                             padding: const EdgeInsets.all(8),
-                            child: Text("${"juz".tr} ${index + 1}"),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text(
+                                  textDirection: TextDirection.rtl,
+                                  "${"الآية"} $ayahstart",
+                                  style: const TextStyle(
+                                      fontFamily: "Amiri",
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  surah!.name,
+                                  textDirection: TextDirection.rtl,
+                                  style: const TextStyle(
+                                      fontFamily: "Amiri",
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  "${"الجزء"} $juzNumber",
+                                  textDirection: TextDirection.rtl,
+                                  style: const TextStyle(
+                                      fontFamily: "Amiri",
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -277,7 +313,7 @@ Widget _ayahviewPage() {
 
   return Stack(children: [
     //gradient background
-    _backround,
+    _backround(),
     SizedBox(
       height: Sizeconfig.screenheight,
       width: Sizeconfig.screenwidth,
@@ -297,37 +333,132 @@ Widget _ayahviewPage() {
             padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 2),
 
             //gridviewbuilder
-            child: ListView(
-              physics: const NeverScrollableScrollPhysics(),
-              children: [
-                Form(
-                    child: TextFormField(
-                  cursorColor: const Color.fromARGB(255, 229, 240, 219),
-                  focusNode: homectrl.searchfnode,
-                  style: const TextStyle(
-                      color: Color.fromARGB(255, 229, 240, 219),
-                      fontSize: 15,
-                      fontFamily: "Poppins-Black"),
-                  decoration: InputDecoration(
-                      border: const UnderlineInputBorder(),
-                      hintText: "search_verses".tr,
-                      hintStyle: const TextStyle(
-                          color: Color.fromARGB(255, 219, 239, 201),
-                          fontSize: 15)),
-                )),
-                SizedBox(
-                  height: Sizeconfig.screenheight! / 40,
-                ),
-                SizedBox(
-                  height: Sizeconfig.screenheight! / 1.6,
-                  child: ListView.builder(
-                    itemCount: 1,
-                    itemBuilder: (context, index) => const Text("data"),
-                  ),
-                )
-              ],
-            )),
+            child: _searchWidget()),
       ),
     ),
   ]);
+}
+
+Widget _searchWidget() {
+  final QuraanController quranctrl = Get.find();
+  final MyHomeController homectrl = Get.find();
+
+  return Container(
+    decoration: const BoxDecoration(color: Colors.transparent),
+    child: Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Get.isDarkMode ? Colors.black12 : Colors.white10,
+              borderRadius: BorderRadius.circular(15),
+              border: Border.all(
+                color: Get.isDarkMode ? Colors.white24 : Colors.black12,
+              ),
+            ),
+            child: TextField(
+              focusNode: homectrl.searchfnode,
+              textDirection: TextDirection.rtl,
+              textAlign: TextAlign.right,
+              onChanged: quranctrl.searchQuran,
+              style: TextStyle(
+                color: Get.isDarkMode ? Colors.white : Colors.black87,
+                fontFamily: 'UthmanicHafs',
+              ),
+              decoration: InputDecoration(
+                focusedBorder: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(15))),
+                enabledBorder: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(15))),
+                fillColor: Get.isDarkMode
+                    ? kmaincolor3dark.withOpacity(0.5)
+                    : Colors.white,
+                filled: true,
+                hintText: 'search'.tr,
+                hintStyle: TextStyle(
+                  color: Get.isDarkMode ? Colors.white70 : Colors.black54,
+                  fontFamily: 'UthmanicHafs',
+                ),
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: Get.isDarkMode ? Colors.white70 : Colors.black54,
+                ),
+                border: InputBorder.none,
+                contentPadding: const EdgeInsets.all(16),
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          child: Obx(
+            () => quranctrl.isSearching.value
+                ? const Center(
+                    child: CircularProgressIndicator(
+                      color: Color(0xFF280F01),
+                    ),
+                  )
+                : ListView.builder(
+                    padding: const EdgeInsets.all(16),
+                    itemCount: quranctrl.searchResults.length,
+                    itemBuilder: (context, index) {
+                      final result = quranctrl.searchResults[index];
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Get.isDarkMode
+                                ? Colors.black12
+                                : Colors.white.withOpacity(0.7),
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(
+                              color: Get.isDarkMode
+                                  ? Colors.white24
+                                  : Colors.black12,
+                            ),
+                          ),
+                          child: ListTile(
+                            contentPadding: const EdgeInsets.all(16),
+                            titleAlignment: ListTileTitleAlignment.center,
+                            title: Text(
+                              result['ayahText'],
+                              textAlign: TextAlign.right,
+                              textDirection: TextDirection.rtl,
+                              style: TextStyle(
+                                fontFamily: 'UthmanicHafs',
+                                fontSize: 18,
+                                color: Get.isDarkMode
+                                    ? Colors.white
+                                    : Colors.black87,
+                              ),
+                            ),
+                            subtitle: Padding(
+                              padding: const EdgeInsets.only(top: 8.0),
+                              child: Text(
+                                '${result['surahName']} - ${result['ayahNumber']}',
+                                textAlign: TextAlign.right,
+                                textDirection: TextDirection.rtl,
+                                style: TextStyle(
+                                  fontFamily: 'UthmanicHafs',
+                                  color: Get.isDarkMode
+                                      ? Colors.white70
+                                      : Colors.black54,
+                                ),
+                              ),
+                            ),
+                            onTap: () => Get.to(() => SurahPage(
+                                  surah: quranctrl
+                                      .getSurahByNumber(result['surahNumber'])!,
+                                  initialAyahNumber: result['ayahNumber'],
+                                )),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+          ),
+        ),
+      ],
+    ),
+  );
 }

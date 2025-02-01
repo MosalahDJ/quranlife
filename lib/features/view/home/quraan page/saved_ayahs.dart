@@ -49,7 +49,7 @@ class SavedAyahs extends StatelessWidget {
                 width: Sizeconfig.screenwidth,
               ),
             ),
-            GetBuilder<QuraanController>(
+            GetBuilder<SavingController>(
               builder: (c) => savecetrl.savedAyahs.isEmpty
                   ? SafeArea(
                       child: Center(
@@ -79,41 +79,38 @@ class SavedAyahs extends StatelessWidget {
                       ),
                     )
                   : SafeArea(
-                      child: GetBuilder<SavingController>(
-                        builder: (c) => ListView.builder(
-                          padding: const EdgeInsets.all(8),
-                          itemCount: savecetrl.savedAyahs.length,
-                          itemBuilder: (context, index) {
-                            return InkWell(
-                              onTap: () {
-                                Get.to(
-                                  () => SurahPage(
-                                    surah: quranctrl.surahs[savecetrl
-                                            .savedAyahs[index]["surahNumber"] -
-                                        1],
-                                    initialAyahNumber: savecetrl
-                                        .savedAyahs[index]["ayahNumberinsurah"],
-                                  ),
-                                );
-                              },
-                              child: AyahWidget(
-                                title: savecetrl.savedAyahs[index]["surahName"],
-                                titlevisibility: true,
-                                ayahNumber: savecetrl.savedAyahs[index]
-                                    ["ayahNumber"],
-                                ayahNumberInSurah: savecetrl.savedAyahs[index]
-                                    ["ayahNumberinsurah"],
-                                ayahText: savecetrl.savedAyahs[index]
-                                    ["ayahText"],
-                                surahName: savecetrl.savedAyahs[index]
-                                    ["surahName"],
-                                surahNumber: savecetrl.savedAyahs[index]
-                                    ["surahNumber"],
-                                icon: Icons.delete_outline_outlined,
-                              ),
-                            );
-                          },
-                        ),
+                      child: ListView.builder(
+                        padding: const EdgeInsets.all(8),
+                        itemCount: savecetrl.savedAyahs.length,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            onTap: () {
+                              Get.to(
+                                () => SurahPage(
+                                  surah: quranctrl.surahs[savecetrl
+                                          .savedAyahs[index]["surahNumber"] -
+                                      1],
+                                  initialAyahNumber: savecetrl.savedAyahs[index]
+                                      ["ayahNumberinsurah"],
+                                ),
+                              );
+                            },
+                            child: AyahWidget(
+                              title: savecetrl.savedAyahs[index]["surahName"],
+                              titlevisibility: true,
+                              ayahNumber: savecetrl.savedAyahs[index]
+                                  ["ayahNumber"],
+                              ayahNumberInSurah: savecetrl.savedAyahs[index]
+                                  ["ayahNumberinsurah"],
+                              ayahText: savecetrl.savedAyahs[index]["ayahText"],
+                              surahName: savecetrl.savedAyahs[index]
+                                  ["surahName"],
+                              surahNumber: savecetrl.savedAyahs[index]
+                                  ["surahNumber"],
+                              icon: Icons.delete_outline_outlined,
+                            ),
+                          );
+                        },
                       ),
                     ),
             ),

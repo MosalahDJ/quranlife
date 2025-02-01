@@ -80,7 +80,6 @@ class Messages extends Translations {
           'quran': 'Quran',
           'more': 'More',
           'hey_user': 'Hey, User',
-          'search': 'Search',
           'logout': 'Logout',
 
           //category items
@@ -124,6 +123,7 @@ class Messages extends Translations {
           'asr': 'Asr',
           'maghrib': 'Maghrib',
           'isha': 'Isha',
+          'search': "Search in the Holy Quran",
 
           //quraan page
           'verses': "verses",
@@ -335,7 +335,6 @@ class Messages extends Translations {
           'quran': 'القرآن',
           'more': 'أخرى',
           'hey_user': 'مرحباً',
-          'search': 'بحث',
           'logout': 'تسجيل خروج',
           //category items
           "teaching_prayer": "تعليم الصلاة",
@@ -384,6 +383,7 @@ class Messages extends Translations {
           'Asr': 'العصر',
           'Maghrib': 'المغرب',
           'Isha': 'العشاء',
+          'search': "بحث في القرآن الكريم",
 
           //quraan page
           'verses': 'آية',
@@ -412,8 +412,6 @@ class Messages extends Translations {
           'mosque_finder_desc':
               'تبحث عن مسجد؟\nسنساعدك في العثور على أقرب مسجد اليك.',
           'find_mosque': 'ابحث عن مسجد',
-          'profile_name': 'محمد صلاح',
-          'profile_email': 'mohamedsalah@gmail.com',
 
           // Hijri Calendar Page
           'hijri_calendar': 'التقويم الهجري',
@@ -599,7 +597,6 @@ class Messages extends Translations {
           'quran': 'Coran',
           'more': 'plus',
           'hey_user': 'Bonjour',
-          'search': 'Rechercher',
           'logout': 'Déconnexion',
 
           //category items
@@ -656,6 +653,7 @@ class Messages extends Translations {
           'Asr': 'Asr',
           'Maghrib': 'Maghrib',
           'Isha': 'Isha',
+          'search': "Recherche dans le Coran",
 
           // Home Page
           'refresh_prayer_times': 'Tirez pour actualiser les heures de prière',
