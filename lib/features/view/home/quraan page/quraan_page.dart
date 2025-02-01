@@ -435,7 +435,7 @@ Widget _searchWidget() {
                             subtitle: Padding(
                               padding: const EdgeInsets.only(top: 8.0),
                               child: Text(
-                                '${result['surahName']} -${result['ayahNumber']}',
+                                '${result['surahName']} - ${result['ayahNumber']}',
                                 textAlign: TextAlign.right,
                                 textDirection: TextDirection.rtl,
                                 style: TextStyle(
