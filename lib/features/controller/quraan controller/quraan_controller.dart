@@ -1,11 +1,12 @@
 import 'dart:async';
-
+import 'dart:math';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:quranlife/features/model/qurandata.dart';
 import 'package:quranlife/features/view/home/quraan%20page/surah_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // Controller class for managing Quran data and navigation using GetX state management
 class QuraanController extends GetxController {
@@ -14,9 +15,10 @@ class QuraanController extends GetxController {
 
   // Initialize controller and load Quran data
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
-    loadQuranData();
+    await loadQuranData();
+    loadAndUpdateDailyAyah();
   }
 
   // Fetch Quran data from JSON file
@@ -92,7 +94,7 @@ class QuraanController extends GetxController {
   Timer? _debounceTimer;
 // Add utility function to remove Arabic diacritics
   String removeDiacritics(String text) {
-    return text.replaceAll(RegExp(r'[\u064B-\u065F\u0670]'), '');
+    return text.replaceAll(RegExp(r'[\u064B-\u065F\u0670\u0671]'), '');
   }
 
   void searchQuran(String query) {
@@ -125,5 +127,56 @@ class QuraanController extends GetxController {
       }
       isSearching.value = false;
     });
+  }
+
+  final Random _random = Random();
+  final Rx<Map<String, dynamic>> dailyAyah = Rx<Map<String, dynamic>>({});
+  static const String lastupdatedkey = 'last_daily_ayah_update';
+  static const String dailyayahkey = 'daily_ayah';
+
+  int getRandomInRange(int min, int max) {
+    return min + _random.nextInt(max - min + 1);
+  }
+
+  Map<String, dynamic> getRandomAyah() {
+    // Get random surah
+    final randomSurahIndex = getRandomInRange(0, 113);
+    final randomSurah = surahs[randomSurahIndex];
+
+    // Get random ayah from that surah
+    final randomAyahIndex = getRandomInRange(0, randomSurah.ayahs.length - 1);
+    final randomAyah = randomSurah.ayahs[randomAyahIndex];
+
+    return {
+      'surahName': randomSurah.name,
+      'surahNumber': randomSurah.number,
+      'ayahNumber': randomAyah.numberInSurah,
+      'ayahText': randomAyah.text,
+    };
+  }
+
+  Future<void> loadAndUpdateDailyAyah() async {
+    final prefs = await SharedPreferences.getInstance();
+    final lastUpdate = prefs.getInt(lastupdatedkey) ?? 0;
+    final now = DateTime.now().millisecondsSinceEpoch;
+
+    // Check if 24 hours have passed
+    if (now - lastUpdate >= 24 * 60 * 60 * 1000) {
+      // Generate new daily ayah
+      dailyAyah.value = getRandomAyah();
+
+      // Save new ayah and update time
+      await prefs.setInt(lastupdatedkey, now);
+      await prefs.setString(dailyayahkey, json.encode(dailyAyah.value));
+    } else {
+      // Load existing daily ayah
+      final savedAyah = prefs.getString(dailyayahkey);
+      if (savedAyah != null) {
+        dailyAyah.value = json.decode(savedAyah);
+      } else {
+        dailyAyah.value = getRandomAyah();
+        await prefs.setString(dailyayahkey, json.encode(dailyAyah.value));
+      }
+    }
   }
 }

@@ -9,14 +9,16 @@ class Gradientbackground extends StatelessWidget {
   const Gradientbackground({
     super.key,
     required this.gradientcolor,
+    this.height,
   });
   final List<Color> gradientcolor;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
     return Positioned(
       top: 0,
-      height: Sizeconfig.screenheight! / 5,
+      height: height ?? Sizeconfig.screenheight! / 5,
       child: GetBuilder<MyHomeController>(
         builder: (_) => Container(
           height: Sizeconfig.screenheight! / 5,

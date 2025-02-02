@@ -39,12 +39,14 @@ class AyahWidget extends StatelessWidget {
     return Column(
       children: [
         Card(
-          elevation: 0,
+          elevation: 1,
           color: Colors.transparent,
           child: Container(
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(10)),
-              color: kmaincolor4.withOpacity(0.2),
+              color: Get.isDarkMode
+                  ? kmaincolor2dark.withOpacity(0.7)
+                  : Colors.white.withOpacity(0.7),
             ),
             height: 50,
             width: Sizeconfig.screenwidth! / 1.07,
@@ -64,15 +66,16 @@ class AyahWidget extends StatelessWidget {
                         height: 60,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                            color: kmaincolor4,
+                            color: Get.isDarkMode
+                                ? kmaincolor2dark.withOpacity(0.7)
+                                : Colors.white.withOpacity(0.7),
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(100))),
                         child: Text(
                           "$ayahNumberInSurah",
                           style: TextStyle(
-                              color: Get.isDarkMode
-                                  ? Colors.white
-                                  : const Color(0xFF280F01),
+                              color:
+                                  Get.isDarkMode ? Colors.white : Colors.black,
                               fontSize: 18),
                         ),
                       ),
@@ -83,9 +86,10 @@ class AyahWidget extends StatelessWidget {
                       child: Center(
                         child: Text(
                           title ?? "",
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontFamily: 'UthmanicHafs',
                             fontSize: 20,
+                            color: Get.isDarkMode ? Colors.white : Colors.black,
                           ),
                         ),
                       )),
@@ -161,7 +165,7 @@ class AyahWidget extends StatelessWidget {
           thickness: 0.5,
         ),
         const SizedBox(
-          height: 3,
+          height: 1,
         ),
       ],
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
+import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/features/controller/quraan%20controller/quraan_controller.dart';
 import 'package:quranlife/features/controller/quraan%20controller/saving_controller.dart';
 import 'package:quranlife/features/view/home/quraan%20page/surah_page.dart';
@@ -25,30 +26,37 @@ class SavedAyahs extends StatelessWidget {
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
-              color: Get.isDarkMode ? Colors.white : const Color(0xFF280F01),
+              color: Get.isDarkMode ? Colors.white : Colors.black,
             ),
           ),
           centerTitle: true,
           elevation: 0,
           scrolledUnderElevation: 0,
-          backgroundColor:
-              Get.isDarkMode ? kmaincolor2dark : Colors.transparent,
+          backgroundColor: Colors.transparent,
         ),
         body: Stack(
           children: [
             // Add paper background
-            SizedBox(
-              height: Sizeconfig.screenheight,
-              width: Sizeconfig.screenwidth,
-              child: Image.asset(
-                "lib/core/assets/images/background_image/paper.jpg",
-                fit: BoxFit.cover,
-                opacity:
-                    AlwaysStoppedAnimation<double>(Get.isDarkMode ? 0.1 : 1),
-                height: Sizeconfig.screenheight,
-                width: Sizeconfig.screenwidth,
-              ),
-            ),
+            Get.isDarkMode
+                ? Gradientbackground(
+                    height: Sizeconfig.screenheight,
+                    gradientcolor: [
+                      kmaincolor,
+                      kmaincolor3dark,
+                    ],
+                  )
+                : SizedBox(
+                    height: Sizeconfig.screenheight,
+                    width: Sizeconfig.screenwidth,
+                    child: Image.asset(
+                      "lib/core/assets/images/background_image/paper.jpg",
+                      fit: BoxFit.cover,
+                      opacity: AlwaysStoppedAnimation<double>(
+                          Get.isDarkMode ? 0.1 : 1),
+                      height: Sizeconfig.screenheight,
+                      width: Sizeconfig.screenwidth,
+                    ),
+                  ),
             GetBuilder<SavingController>(
               builder: (c) => savecetrl.savedAyahs.isEmpty
                   ? SafeArea(
@@ -59,9 +67,8 @@ class SavedAyahs extends StatelessWidget {
                             Icon(
                               Icons.bookmark_border,
                               size: 70,
-                              color: Get.isDarkMode
-                                  ? Colors.white
-                                  : const Color(0xFF280F01),
+                              color:
+                                  Get.isDarkMode ? Colors.white : Colors.black,
                             ),
                             const SizedBox(height: 16),
                             Text(
@@ -70,7 +77,7 @@ class SavedAyahs extends StatelessWidget {
                                 fontSize: 20,
                                 color: Get.isDarkMode
                                     ? Colors.white
-                                    : const Color(0xFF280F01),
+                                    : Colors.black,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),

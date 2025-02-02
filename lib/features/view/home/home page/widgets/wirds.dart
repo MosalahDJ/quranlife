@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
+import 'package:quranlife/features/controller/quraan%20controller/quraan_controller.dart';
 // import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
 
 class Wirds extends StatelessWidget {
-  const Wirds({super.key, required this.mycolor});
+  Wirds({super.key, required this.mycolor});
 
   final Color mycolor;
+  final QuraanController quranctrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +27,7 @@ class Wirds extends StatelessWidget {
 
             WirdCard(
               mycolor: mycolor,
-              text:
-                  "اللَّهُ لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ وَلَا يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ وَلاَ يَؤُودُهُ حِفْظُهُمَا وَهُوَ الْعَلِيُّ الْعَظِيمُ",
+              text: quranctrl.dailyAyah.value['ayahText'],
               cardtype: "quran_wird".tr,
             ),
 
