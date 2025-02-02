@@ -140,7 +140,7 @@ class QuraanController extends GetxController {
 
   Map<String, dynamic> getRandomAyah() {
     // Get random surah
-    final randomSurahIndex = getRandomInRange(0, 113);
+    final randomSurahIndex = getRandomInRange(0, surahs.length - 1);
     final randomSurah = surahs[randomSurahIndex];
 
     // Get random ayah from that surah

@@ -27,7 +27,9 @@ class Wirds extends StatelessWidget {
 
             WirdCard(
               mycolor: mycolor,
-              text: quranctrl.dailyAyah.value['ayahText'],
+              text: "\uFD3F ${quranctrl.dailyAyah.value['ayahText']} \uFD3E",
+              text2:
+                  "${quranctrl.dailyAyah.value['surahName']} - ${quranctrl.dailyAyah.value['ayahNumber']}",
               cardtype: "quran_wird".tr,
             ),
 
@@ -73,10 +75,12 @@ class WirdCard extends StatelessWidget {
     required this.cardtype,
     super.key,
     required this.mycolor,
+    this.text2,
   });
 
   final String cardtype;
   final String text;
+  final String? text2;
   final Color mycolor;
 
   @override
@@ -95,14 +99,31 @@ class WirdCard extends StatelessWidget {
             child: Container(
               margin: const EdgeInsets.all(10),
               width: Sizeconfig.screenwidth! / 1.05,
-              child: Text(
-                text,
-                softWrap: true,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Get.isDarkMode ? Colors.white : textcolor1,
-                ),
+              child: Column(
+                textDirection: TextDirection.rtl,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    textDirection: TextDirection.rtl,
+                    text,
+                    softWrap: true,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Get.isDarkMode ? Colors.white : textcolor1,
+                    ),
+                  ),
+                  Text(
+                    textDirection: TextDirection.rtl,
+                    text2 ?? "",
+                    softWrap: true,
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Get.isDarkMode ? Colors.white : textcolor1,
+                    ),
+                  )
+                ],
               ),
             )),
       ],
