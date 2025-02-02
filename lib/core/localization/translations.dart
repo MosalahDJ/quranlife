@@ -144,7 +144,7 @@ class Messages extends Translations {
           'daily_wird': 'Daily Wird',
           'quranlife': 'QuranLife',
           'category': 'Category',
-          'quran_wird': '   Quran Wird',
+          'quran_wird': '   Daily verse',
           'hadith_wird': '   Hadith Wird',
           'allah_names': '   Allah Names',
 
@@ -398,7 +398,7 @@ class Messages extends Translations {
           'daily_wird': 'الورد اليومي',
           'quranlife': 'قرآن لايف',
           'category': 'أقسام',
-          'quran_wird': 'ورد القرآن   ',
+          'quran_wird': 'الآية اليومية  ',
           'hadith_wird': 'ورد الحديث   ',
           'allah_names': 'أسماء الله   ',
 
@@ -661,7 +661,7 @@ class Messages extends Translations {
           'daily_wird': 'Wird Quotidien',
           'quranlife': 'QuranLife',
           'category': 'Catégories',
-          'quran_wird': '   Wird du Coran',
+          'quran_wird': '   Verset du Jour',
           'hadith_wird': '   Wird du Hadith',
           'allah_names': '   Noms d\'Allah',
 

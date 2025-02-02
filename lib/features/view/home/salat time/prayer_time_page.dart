@@ -61,7 +61,7 @@ class PrayerTimesPage extends StatelessWidget {
                         ),
                         child: const ShimmerText(
                           text:
-                              "إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا\nصَدَقَ اللهُ العَظِيم",
+                              "\uFD3F  إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا \uFD3E \nصَدَقَ اللهُ العَظِيم",
                           textalign: TextAlign.center,
                           textdirection: TextDirection.rtl,
                           begin: 2,
