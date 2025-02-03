@@ -88,7 +88,7 @@ class QuraanController extends GetxController {
     }
   }
 
-//test
+//hqkjhqskjqhjq
   final searchQuery = ''.obs;
   final searchResults = <Map<String, dynamic>>[].obs;
   final isSearching = false.obs;
