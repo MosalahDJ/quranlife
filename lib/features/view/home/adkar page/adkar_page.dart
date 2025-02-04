@@ -4,9 +4,10 @@ import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
-import 'package:quranlife/features/view/home/adkar%20page/widgets/adkarcategoryitem.dart';
+import 'package:quranlife/features/controller/adkar%20controller/adkar_categories.dart';
 import 'package:quranlife/features/controller/Auth%20controller/signoutcontroller.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
+import 'package:quranlife/features/view/home/adkar%20page/widgets/duaa_page.dart';
 
 class AdkarPage extends StatelessWidget {
   AdkarPage({super.key});
@@ -58,12 +59,13 @@ class AdkarPage extends StatelessWidget {
 }
 
 class AdkarCollections extends StatelessWidget {
-  const AdkarCollections({
+  AdkarCollections({
     super.key,
     required this.adkarcategorycolor,
   });
 
   final Color adkarcategorycolor;
+  final AdkarCategories _adkarctrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -76,18 +78,50 @@ class AdkarCollections extends StatelessWidget {
         mainAxisSpacing: 16,
         childAspectRatio: MediaQuery.of(context).size.width > 600 ? 1.2 : 0.95,
       ),
-      itemCount: 10,
+      itemCount: _adkarctrl.adkartype.length,
       itemBuilder: (context, index) => Hero(
         tag: 'adkar_category_$index',
         child: Material(
           borderRadius: BorderRadius.circular(12),
           color: Colors.transparent,
           elevation: 2,
-          child: AdkarCategoryItem(
-            adkarcategorycolor: adkarcategorycolor,
-          ),
+          child: GetBuilder<MyHomeController>(
+              builder: (_) => adkarcategorieitem(
+                  adkarcategorycolor, _adkarctrl.adkartype[index].name!)),
         ),
       ),
     );
   }
+}
+
+Widget adkarcategorieitem(Color adkarcategorycolor, String adkartype) {
+  return Material(
+    color: Colors.transparent,
+    child: InkWell(
+      borderRadius: const BorderRadius.all(Radius.circular(12)),
+      overlayColor: WidgetStatePropertyAll(kmaincolor4),
+      onTap: () => Get.to(() => DuaaPage()),
+      child: Ink(
+        decoration: BoxDecoration(
+          color: adkarcategorycolor,
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
+        ),
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              child: Image.asset(
+                "lib/core/assets/images/app_logo/pnglogo1.png",
+                alignment: Alignment.topCenter,
+              ),
+            ),
+            Text(
+              adkartype,
+              textAlign: TextAlign.center,
+            )
+          ],
+        ),
+      ),
+    ),
+  );
 }
