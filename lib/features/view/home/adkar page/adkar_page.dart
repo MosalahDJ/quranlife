@@ -20,7 +20,7 @@ class AdkarPage extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.transparent,
+        backgroundColor: const Color.fromRGBO(0, 0, 0, 0),
         centerTitle: true,
         title: ShimmerText(
             text: "daily_supplications".tr,
@@ -65,7 +65,7 @@ class AdkarCollections extends StatelessWidget {
   });
 
   final Color adkarcategorycolor;
-  final AdkarCategories _adkarctrl = Get.find();
+  final AdkarCategories _adkartypectrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +78,7 @@ class AdkarCollections extends StatelessWidget {
         mainAxisSpacing: 16,
         childAspectRatio: MediaQuery.of(context).size.width > 600 ? 1.2 : 0.95,
       ),
-      itemCount: _adkarctrl.adkartype.length,
+      itemCount: _adkartypectrl.adkartype.length,
       itemBuilder: (context, index) => Hero(
         tag: 'adkar_category_$index',
         child: Material(
@@ -87,20 +87,25 @@ class AdkarCollections extends StatelessWidget {
           elevation: 2,
           child: GetBuilder<MyHomeController>(
               builder: (_) => adkarcategorieitem(
-                  adkarcategorycolor, _adkarctrl.adkartype[index].name!)),
+                  adkarcategorycolor,
+                  _adkartypectrl.adkartype[index].name!,
+                  _adkartypectrl.adkartype[index].id!)),
         ),
       ),
     );
   }
 }
 
-Widget adkarcategorieitem(Color adkarcategorycolor, String adkartype) {
+Widget adkarcategorieitem(
+    Color adkarcategorycolor, String adkartype, int duaaID) {
   return Material(
     color: Colors.transparent,
     child: InkWell(
       borderRadius: const BorderRadius.all(Radius.circular(12)),
       overlayColor: WidgetStatePropertyAll(kmaincolor4),
-      onTap: () => Get.to(() => DuaaPage()),
+      onTap: () => Get.to(() => DuaaPage(
+            duaapageID: duaaID,
+          )),
       child: Ink(
         decoration: BoxDecoration(
           color: adkarcategorycolor,
