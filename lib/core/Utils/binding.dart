@@ -5,7 +5,7 @@ import 'package:quranlife/features/controller/Auth%20controller/passwordresset.d
 import 'package:quranlife/features/controller/Auth%20controller/signncontroller.dart';
 import 'package:quranlife/features/controller/Auth%20controller/signoutcontroller.dart';
 import 'package:quranlife/features/controller/Url%20Luncher%20Controller/url_luncher_controller.dart';
-import 'package:quranlife/features/controller/adkar%20controller/adkar_categories.dart';
+import 'package:quranlife/features/controller/adkar%20controller/adkar_categories_controller.dart';
 import 'package:quranlife/features/controller/adkar%20controller/adkar_controller.dart';
 import 'package:quranlife/features/controller/allah%20names%20controller/allah_names_controller.dart';
 import 'package:quranlife/features/controller/animation_controllers/floating_animation_controller.dart';
@@ -73,7 +73,7 @@ class Mybinding implements Bindings {
     Get.put<SavingController>(SavingController());
     Get.put<AudioplayerController>(AudioplayerController());
     //adkar injection
-    Get.put<AdkarCategories>(AdkarCategories());
+    Get.put<AdkarCategoriesController>(AdkarCategoriesController());
     Get.put<AdkarController>(AdkarController());
     //allah names injection
     Get.put<AllahNamesController>(AllahNamesController());

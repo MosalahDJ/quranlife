@@ -4,15 +4,11 @@ import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
-import 'package:quranlife/features/controller/adkar%20controller/adkar_categories.dart';
-import 'package:quranlife/features/controller/Auth%20controller/signoutcontroller.dart';
-import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
+import 'package:quranlife/features/controller/adkar%20controller/adkar_categories_controller.dart';
 import 'package:quranlife/features/view/home/adkar%20page/widgets/duaa_page.dart';
 
 class AdkarPage extends StatelessWidget {
-  AdkarPage({super.key});
-  final MyHomeController homectrl = Get.find();
-  final GoogleSignoutController signoutctrl = Get.find();
+  const AdkarPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +61,7 @@ class AdkarCollections extends StatelessWidget {
   });
 
   final Color adkarcategorycolor;
-  final AdkarCategories _adkartypectrl = Get.find();
+  final AdkarCategoriesController _adkartypectrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +81,7 @@ class AdkarCollections extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           color: Colors.transparent,
           elevation: 2,
-          child: GetBuilder<MyHomeController>(
+          child: GetBuilder<AdkarCategoriesController>(
               builder: (_) => adkarcategorieitem(
                   adkarcategorycolor,
                   _adkartypectrl.adkartype[index].name!,

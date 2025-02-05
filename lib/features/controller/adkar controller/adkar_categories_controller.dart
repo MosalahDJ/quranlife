@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/features/model/adkar_type_data.dart';
 
-class AdkarCategories extends GetxController {
+class AdkarCategoriesController extends GetxController {
   List<AdkarTypes> adkartype = [];
 
   // Initialize controller and load adkartype data
