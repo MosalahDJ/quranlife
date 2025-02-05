@@ -157,11 +157,9 @@ class DuaaPage extends StatelessWidget {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Icon(
+                                      const Icon(
                                         Icons.touch_app_rounded,
-                                        color: Get.isDarkMode
-                                            ? Colors.white
-                                            : Colors.black,
+                                        color: Colors.white,
                                         size: 22,
                                       ),
                                       const SizedBox(width: 12),
@@ -171,9 +169,7 @@ class DuaaPage extends StatelessWidget {
                                             .textTheme
                                             .titleMedium
                                             ?.copyWith(
-                                              color: Get.isDarkMode
-                                                  ? Colors.white
-                                                  : Colors.black,
+                                              color: Colors.white,
                                               fontWeight: FontWeight.bold,
                                               fontSize: 18,
                                             ),

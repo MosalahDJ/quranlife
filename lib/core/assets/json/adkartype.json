@@ -1,58 +1,58 @@
 [
     {
       "id": 1,
-      "name": "أذكار الصباح"
+      "name": "morning_athkar"
     },
     {
       "id": 2,
-      "name": "أذكار المساء"
+      "name": "evening_athkar"
     },
     {
       "id": 3,
-      "name": "أذكار الإستيقاظ من النوم"
+      "name": "waking_up_athkar"
     },
     {
       "id": 4,
-      "name": "أذكار قبل الوضوء"
+      "name": "pre_wudu_athkar"
     },
     {
       "id": 5,
-      "name": "أذكار النوم"
+      "name": "sleep_athkar"
     },
     {
       "id": 6,
-      "name": "أذكار الصلاة"
+      "name": "prayer_athkar"
     },
     {
       "id": 7,
-      "name": "أذكار الأذان"
+      "name": "adhan_athkar"
     },
     {
       "id": 8,
-      "name": "أذكار المسجد"
+      "name": "mosque_athkar"
     },
     {
       "id": 9,
-      "name": "أذكار المنزل"
+      "name": "home_athkar"
     },
     {
       "id": 10,
-      "name": "أذكار الخلاء"
+      "name": "bathroom_athkar"
     },
     {
       "id": 11,
-      "name": "أذكار الطعام"
+      "name": "food_athkar"
     },
     {
       "id": 12,
-      "name": "أذكار السفر"
+      "name": "travel_athkar"
     },
     {
       "id": 13,
-      "name": "أذكار بعد الصلاة"
+      "name": "post_prayer_athkar"
     },
     {
       "id": 14,
-      "name": "أذكار متفرقة أخرى"
+      "name": "misc_athkar"
     }
   ]

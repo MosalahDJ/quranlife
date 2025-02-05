@@ -72,7 +72,7 @@ class AdkarCollections extends StatelessWidget {
         crossAxisCount: 2,
         crossAxisSpacing: 16,
         mainAxisSpacing: 16,
-        childAspectRatio: 1,
+        childAspectRatio: 1.2,
       ),
       itemCount: _adkartypectrl.adkartype.length,
       itemBuilder: (context, index) => Hero(
@@ -91,7 +91,7 @@ class AdkarCollections extends StatelessWidget {
                       : _adkartypectrl.adkartype[index].id! == 2
                           ? "lib/core/assets/images/adkar_icons/evening.png"
                           : _adkartypectrl.adkartype[index].id! == 3
-                              ? "lib/core/assets/images/adkar_icons/getup.jpg"
+                              ? "lib/core/assets/images/adkar_icons/getup.png"
                               : _adkartypectrl.adkartype[index].id! == 4
                                   ? "lib/core/assets/images/adkar_icons/wudu.png"
                                   : _adkartypectrl.adkartype[index].id! == 5
@@ -110,13 +110,13 @@ class AdkarCollections extends StatelessWidget {
                                                               .adkartype[index]
                                                               .id! ==
                                                           9
-                                                      ? "lib/core/assets/images/adkar_icons/home.jpg"
+                                                      ? "lib/core/assets/images/adkar_icons/home.png"
                                                       : _adkartypectrl
                                                                   .adkartype[
                                                                       index]
                                                                   .id! ==
                                                               10
-                                                          ? "lib/core/assets/images/adkar_icons/bathroom.jpg"
+                                                          ? "lib/core/assets/images/adkar_icons/bathroom.png"
                                                           : _adkartypectrl
                                                                       .adkartype[
                                                                           index]
@@ -128,12 +128,12 @@ class AdkarCollections extends StatelessWidget {
                                                                               index]
                                                                           .id! ==
                                                                       12
-                                                                  ? "lib/core/assets/images/adkar_icons/travel.jpg"
+                                                                  ? "lib/core/assets/images/adkar_icons/travel.png"
                                                                   : _adkartypectrl
                                                                               .adkartype[index]
                                                                               .id! ==
                                                                           13
-                                                                      ? "lib/core/assets/images/adkar_icons/after_praying.jpg"
+                                                                      ? "lib/core/assets/images/adkar_icons/after_praying.png"
                                                                       : "lib/core/assets/images/adkar_icons/other.png")),
         ),
       ),
@@ -158,19 +158,23 @@ Widget adkarcategorieitem(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Container(
-              color: Colors.red,
-              height: Sizeconfig.screenheight! / 7,
-              width: Sizeconfig.screenwidth,
+            SizedBox(
+              height: Sizeconfig.screenheight! / 10,
+              width: Sizeconfig.screenwidth! / 4,
               child: Image.asset(
                 iconpath,
                 fit: BoxFit.contain,
-                alignment: Alignment.topCenter,
+                alignment: Alignment.center,
               ),
             ),
             Text(
-              adkartype,
+              adkartype.tr,
               textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 18,
+                  color: Get.isDarkMode
+                      ? const Color(0xFFFFF6D2)
+                      : const Color(0xFF030C02)),
             )
           ],
         ),
