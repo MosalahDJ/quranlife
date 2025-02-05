@@ -24,7 +24,7 @@ class DuaaPage extends StatelessWidget {
         title: Text(
           "الأدعية",
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: kmaincolor,
+                color: Get.isDarkMode ? Colors.white : Colors.black,
                 fontWeight: FontWeight.bold,
               ),
         ),
@@ -75,11 +75,13 @@ class DuaaPage extends StatelessWidget {
                             child: Column(
                               children: [
                                 // Islamic Decoration
-                                Image.asset(
-                                  'lib/core/assets/images/background_image/islamic_separator.png',
-                                  height: 24,
-                                  width: double.infinity,
-                                  color: kmaincolor.withOpacity(0.5),
+                                SizedBox(
+                                  height: Sizeconfig.screenheight! / 11,
+                                  width: Sizeconfig.screenwidth,
+                                  child: Image.asset(
+                                    'lib/core/assets/images/background_image/islamic_separator.png',
+                                    fit: BoxFit.fill,
+                                  ),
                                 ),
                                 const SizedBox(height: 20),
                                 // Duaa Text
@@ -108,7 +110,9 @@ class DuaaPage extends StatelessWidget {
                                   Container(
                                     padding: const EdgeInsets.all(12),
                                     decoration: BoxDecoration(
-                                      color: kmaincolor.withOpacity(0.05),
+                                      color: Get.isDarkMode
+                                          ? Colors.grey[400]
+                                          : kmaincolor.withOpacity(0.05),
                                       borderRadius: BorderRadius.circular(8),
                                     ),
                                     child: Text(
@@ -155,7 +159,9 @@ class DuaaPage extends StatelessWidget {
                                     children: [
                                       Icon(
                                         Icons.touch_app_rounded,
-                                        color: Theme.of(context).cardColor,
+                                        color: Get.isDarkMode
+                                            ? Colors.white
+                                            : Colors.black,
                                         size: 22,
                                       ),
                                       const SizedBox(width: 12),
@@ -165,8 +171,9 @@ class DuaaPage extends StatelessWidget {
                                             .textTheme
                                             .titleMedium
                                             ?.copyWith(
-                                              color:
-                                                  Theme.of(context).cardColor,
+                                              color: Get.isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
                                               fontWeight: FontWeight.bold,
                                               fontSize: 18,
                                             ),
@@ -189,36 +196,4 @@ class DuaaPage extends StatelessWidget {
       ),
     );
   }
-}
-
-class IslamicDecorationPainter extends CustomPainter {
-  final Color color;
-  IslamicDecorationPainter({required this.color});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2;
-
-    final path = Path()
-      ..moveTo(0, size.height / 2)
-      ..lineTo(size.width * 0.4, size.height / 2)
-      ..addArc(
-        Rect.fromCenter(
-          center: Offset(size.width / 2, size.height / 2),
-          width: size.width * 0.2,
-          height: size.height,
-        ),
-        0,
-        3.14,
-      )
-      ..lineTo(size.width, size.height / 2);
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
