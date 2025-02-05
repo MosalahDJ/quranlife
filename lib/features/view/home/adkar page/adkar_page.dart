@@ -68,11 +68,11 @@ class AdkarCollections extends StatelessWidget {
     return GridView.builder(
       physics: const BouncingScrollPhysics(),
       padding: EdgeInsets.zero,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         crossAxisSpacing: 16,
         mainAxisSpacing: 16,
-        childAspectRatio: MediaQuery.of(context).size.width > 600 ? 1.2 : 0.95,
+        childAspectRatio: 1,
       ),
       itemCount: _adkartypectrl.adkartype.length,
       itemBuilder: (context, index) => Hero(
@@ -85,7 +85,56 @@ class AdkarCollections extends StatelessWidget {
               builder: (_) => adkarcategorieitem(
                   adkarcategorycolor,
                   _adkartypectrl.adkartype[index].name!,
-                  _adkartypectrl.adkartype[index].id!)),
+                  _adkartypectrl.adkartype[index].id!,
+                  _adkartypectrl.adkartype[index].id! == 1
+                      ? "lib/core/assets/images/adkar_icons/morning.png"
+                      : _adkartypectrl.adkartype[index].id! == 2
+                          ? "lib/core/assets/images/adkar_icons/evening.png"
+                          : _adkartypectrl.adkartype[index].id! == 3
+                              ? "lib/core/assets/images/adkar_icons/getup.jpg"
+                              : _adkartypectrl.adkartype[index].id! == 4
+                                  ? "lib/core/assets/images/adkar_icons/wudu.png"
+                                  : _adkartypectrl.adkartype[index].id! == 5
+                                      ? "lib/core/assets/images/adkar_icons/sleeping.png"
+                                      : _adkartypectrl.adkartype[index].id! == 6
+                                          ? "lib/core/assets/images/adkar_icons/praying.png"
+                                          : _adkartypectrl
+                                                      .adkartype[index].id! ==
+                                                  7
+                                              ? "lib/core/assets/images/adkar_icons/adan.png"
+                                              : _adkartypectrl.adkartype[index]
+                                                          .id! ==
+                                                      8
+                                                  ? "lib/core/assets/images/adkar_icons/masjid.webp"
+                                                  : _adkartypectrl
+                                                              .adkartype[index]
+                                                              .id! ==
+                                                          9
+                                                      ? "lib/core/assets/images/adkar_icons/home.jpg"
+                                                      : _adkartypectrl
+                                                                  .adkartype[
+                                                                      index]
+                                                                  .id! ==
+                                                              10
+                                                          ? "lib/core/assets/images/adkar_icons/bathroom.jpg"
+                                                          : _adkartypectrl
+                                                                      .adkartype[
+                                                                          index]
+                                                                      .id! ==
+                                                                  11
+                                                              ? "lib/core/assets/images/adkar_icons/food.webp"
+                                                              : _adkartypectrl
+                                                                          .adkartype[
+                                                                              index]
+                                                                          .id! ==
+                                                                      12
+                                                                  ? "lib/core/assets/images/adkar_icons/travel.jpg"
+                                                                  : _adkartypectrl
+                                                                              .adkartype[index]
+                                                                              .id! ==
+                                                                          13
+                                                                      ? "lib/core/assets/images/adkar_icons/after_praying.jpg"
+                                                                      : "lib/core/assets/images/adkar_icons/other.png")),
         ),
       ),
     );
@@ -93,12 +142,11 @@ class AdkarCollections extends StatelessWidget {
 }
 
 Widget adkarcategorieitem(
-    Color adkarcategorycolor, String adkartype, int duaaID) {
+    Color adkarcategorycolor, String adkartype, int duaaID, String iconpath) {
   return Material(
     color: Colors.transparent,
     child: InkWell(
       borderRadius: const BorderRadius.all(Radius.circular(12)),
-      overlayColor: WidgetStatePropertyAll(kmaincolor4),
       onTap: () => Get.to(() => DuaaPage(
             duaapageID: duaaID,
           )),
@@ -108,11 +156,15 @@ Widget adkarcategorieitem(
           borderRadius: const BorderRadius.all(Radius.circular(12)),
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: 10),
+              color: Colors.red,
+              height: Sizeconfig.screenheight! / 7,
+              width: Sizeconfig.screenwidth,
               child: Image.asset(
-                "lib/core/assets/images/app_logo/pnglogo1.png",
+                iconpath,
+                fit: BoxFit.contain,
                 alignment: Alignment.topCenter,
               ),
             ),
