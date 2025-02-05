@@ -5,9 +5,10 @@ import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/features/controller/adkar%20controller/adkar_controller.dart';
 
 class DuaaPage extends StatelessWidget {
-  DuaaPage({super.key, required this.duaapageID});
+  DuaaPage({super.key, required this.duaapageID, required this.duaapagename});
 
   final int duaapageID;
+  final String duaapagename;
   final AdkarController _adkarctrl = Get.find();
 
   @override
@@ -22,7 +23,7 @@ class DuaaPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         centerTitle: true,
         title: Text(
-          "الأدعية",
+          duaapagename.tr,
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 color: Get.isDarkMode ? Colors.white : Colors.black,
                 fontWeight: FontWeight.bold,

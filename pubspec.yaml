@@ -37,6 +37,7 @@ dependencies:
   firebase_auth: ^5.0.0
   firebase_core: ^3.0.0
   firebase_messaging: ^15.1.5
+  fl_chart: ^0.62.0
   flashy_tab_bar2: ^0.0.10
   flutter:
     sdk: flutter
@@ -124,7 +125,6 @@ flutter:
     - lib/core/assets/json/adhkar.json
     - lib/core/assets/json/adkartype.json
     - lib/core/assets/json/names_of_allah.json
-
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

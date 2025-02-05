@@ -9,6 +9,7 @@ import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
+import 'package:quranlife/features/view/home/categories_page/statistics%20page/statistics_page.dart';
 
 class CategoriesPage extends StatelessWidget {
   const CategoriesPage({super.key});
@@ -84,7 +85,9 @@ class CategoriesPage extends StatelessWidget {
                                   'community'.tr,
                                 ),
                                 mycategory(
-                                  () {},
+                                  () {
+                                    Get.to(() => const StatisticsPage());
+                                  },
                                   Icons.analytics_rounded,
                                   'statistics'.tr,
                                 ),

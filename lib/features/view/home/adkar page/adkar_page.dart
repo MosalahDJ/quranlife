@@ -148,6 +148,7 @@ Widget adkarcategorieitem(
     child: InkWell(
       borderRadius: const BorderRadius.all(Radius.circular(12)),
       onTap: () => Get.to(() => DuaaPage(
+            duaapagename: adkartype,
             duaapageID: duaaID,
           )),
       child: Ink(
