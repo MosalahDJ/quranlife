@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:get/get.dart';
+import 'package:quranlife/features/controller/statistics%20controller/statistics_controller.dart';
+import 'package:quranlife/features/controller/adkar%20controller/adkar_categories_controller.dart';
 
 class StatisticsPage extends StatefulWidget {
   const StatisticsPage({super.key});
@@ -8,34 +11,62 @@ class StatisticsPage extends StatefulWidget {
   State<StatisticsPage> createState() => _StatisticsPageState();
 }
 
-class _StatisticsPageState extends State<StatisticsPage> {
+class _StatisticsPageState extends State<StatisticsPage>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  final StatisticsController statsController = Get.put(StatisticsController());
+  final AdkarCategoriesController adkarController = Get.find();
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1000),
+    )..forward();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Adkar Statistics'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: () => setState(() {}),
-          ),
-        ],
+        title: const Text("Adkar Statistics"),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              _buildStatisticsCard(
-                'Daily Progress',
-                '75%',
-                Colors.blue,
-                Icons.today,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Theme.of(context).primaryColor.withOpacity(0.1),
+              Colors.white,
+            ],
+          ),
+        ),
+        child: SafeArea(
+          child: CustomScrollView(
+            physics: const BouncingScrollPhysics(),
+            slivers: [
+              SliverPadding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                sliver: SliverList(
+                  delegate: SliverChildListDelegate([
+                    _buildStatisticsCard(),
+                    const SizedBox(height: 16),
+                    _buildWeeklyChart(),
+                    const SizedBox(height: 16),
+                    _buildTotalReadingsCard(),
+                    const SizedBox(height: 16), // Bottom padding
+                  ]),
+                ),
               ),
-              const SizedBox(height: 16),
-              _buildWeeklyChart(),
-              const SizedBox(height: 16),
-              _buildTotalReadingsCard(),
             ],
           ),
         ),
@@ -43,76 +74,229 @@ class _StatisticsPageState extends State<StatisticsPage> {
     );
   }
 
-  Widget _buildStatisticsCard(
-      String title, String value, Color color, IconData icon) {
-    return Card(
-      elevation: 4,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Row(
-          children: [
-            Icon(icon, size: 40, color: color),
-            const SizedBox(width: 16),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(title, style: Theme.of(context).textTheme.titleMedium),
-                Text(value, style: Theme.of(context).textTheme.headlineMedium),
-              ],
+  Widget _buildStatisticsCard() {
+    return AnimatedBuilder(
+      animation: _animationController,
+      builder: (context, child) {
+        return Transform.translate(
+          offset: Offset(0, 50 * (1 - _animationController.value)),
+          child: Opacity(
+            opacity: _animationController.value,
+            child: Card(
+              elevation: 8,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  gradient: LinearGradient(
+                    colors: [
+                      Theme.of(context).primaryColor,
+                      Theme.of(context).primaryColor.withOpacity(0.7),
+                    ],
+                  ),
+                ),
+                padding: const EdgeInsets.all(20),
+                child: Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: const Icon(Icons.today,
+                          size: 40, color: Colors.white),
+                    ),
+                    const SizedBox(width: 20),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Daily Progress',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            '75%',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium
+                                ?.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildWeeklyChart() {
+    return Card(
+      elevation: 8,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Adkar Distribution',
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
+            ),
+            const SizedBox(height: 20),
+            AspectRatio(
+              aspectRatio: 1.3,
+              child: GetBuilder<StatisticsController>(
+                builder: (controller) => PieChart(
+                  PieChartData(
+                    sectionsSpace: 2,
+                    centerSpaceRadius: 40,
+                    sections: _generatePieChartSections(controller),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            _buildLegend(),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildWeeklyChart() {
-    return SizedBox(
-      height: 200,
-      child: LineChart(
-        LineChartData(
-          gridData: const FlGridData(show: false),
-          titlesData: const FlTitlesData(show: false),
-          borderData: FlBorderData(show: false),
-          lineBarsData: [
-            LineChartBarData(
-              spots: [
-                const FlSpot(0, 3),
-                const FlSpot(1, 1),
-                const FlSpot(2, 4),
-                const FlSpot(3, 2),
-                const FlSpot(4, 5),
-                const FlSpot(5, 3),
-                const FlSpot(6, 4),
-              ],
-              isCurved: true,
-              color: Colors.blue,
-              barWidth: 3,
-              dotData: const FlDotData(show: false),
+  List<PieChartSectionData> _generatePieChartSections(
+      StatisticsController controller) {
+    final List<Color> colors = [
+      const Color(0xFF4CAF50),
+      const Color(0xFF2196F3),
+      const Color(0xFFFFC107),
+      const Color(0xFFFF5722),
+      // Add more colors as needed
+    ];
+
+    return adkarController.adkartype.asMap().entries.map((entry) {
+      final index = entry.key;
+      final adkar = entry.value;
+      final percentage = controller.getPercentage(adkar.id!);
+
+      return PieChartSectionData(
+        color: colors[index % colors.length],
+        value: percentage,
+        title: '${percentage.toStringAsFixed(1)}%',
+        radius: 100,
+        titleStyle: const TextStyle(color: Colors.white, fontSize: 14),
+      );
+    }).toList();
+  }
+
+  Widget _buildLegend() {
+    return GetBuilder<StatisticsController>(
+      builder: (controller) => Wrap(
+        spacing: 16,
+        runSpacing: 8,
+        children: adkarController.adkartype
+            .asMap()
+            .entries
+            .map(
+              (entry) => _buildLegendItem(
+                entry.value.name!.tr,
+                controller.adkarCounts[entry.value.id] ?? 0,
+                Theme.of(context).primaryColor,
+              ),
+            )
+            .toList(),
+      ),
+    );
+  }
+
+  Widget _buildLegendItem(String label, int count, Color color) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 12,
+            height: 12,
+            decoration: BoxDecoration(
+              color: color,
+              shape: BoxShape.circle,
             ),
-          ],
-        ),
+          ),
+          const SizedBox(width: 8),
+          Text(
+            '$label: $count',
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+        ],
       ),
     );
   }
 
   Widget _buildTotalReadingsCard() {
-    return Card(
-      elevation: 4,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Text(
-              'Total Readings',
-              style: Theme.of(context).textTheme.titleLarge,
+    return GetBuilder<StatisticsController>(
+      builder: (controller) => Card(
+        elevation: 8,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Theme.of(context).primaryColor.withOpacity(0.8),
+                Theme.of(context).primaryColor,
+              ],
             ),
-            const SizedBox(height: 16),
-            Text(
-              '1,234',
-              style: Theme.of(context).textTheme.displayMedium,
-            ),
-          ],
+          ),
+          child: Column(
+            children: [
+              Text(
+                'Total Readings',
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                    ),
+              ),
+              const SizedBox(height: 12),
+              Text(
+                '${controller.totalCount}',
+                style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+            ],
+          ),
         ),
       ),
     );
