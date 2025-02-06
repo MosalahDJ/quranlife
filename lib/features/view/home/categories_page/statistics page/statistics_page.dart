@@ -73,7 +73,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
         LineChartData(
           gridData: const FlGridData(show: false),
           titlesData: const FlTitlesData(show: false),
-          borderData: FlBorderData(show: true),
+          borderData: FlBorderData(show: false),
           lineBarsData: [
             LineChartBarData(
               spots: [
