@@ -166,11 +166,12 @@ class _DuaaPageState extends State<DuaaPage> {
                               child: InkWell(
                                 onTap: () {
                                   if (controller.filteredAdkar[i].count! > 0) {
-                                    // Fix: Assign the new value properly
                                     controller.filteredAdkar[i].count =
                                         controller.filteredAdkar[i].count! - 1;
-                                    statsController.incrementDuaaCount();
-                                    controller.update(); // Update UI
+                                    // استخدام اسم الصفحة مباشرة لإضافة العدد إلى القسم الصحيح
+                                    statsController
+                                        .incrementDuaaType(widget.duaapagename);
+                                    controller.update();
                                   }
                                 },
                                 borderRadius: const BorderRadius.vertical(

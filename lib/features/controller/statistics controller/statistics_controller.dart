@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 
 /// Controller responsible for managing user activity statistics and weekly data visualization
 ///
@@ -16,12 +17,34 @@ class StatisticsController extends GetxController {
   final RxInt totalVersesRead = 0.obs;
   final RxInt totalDuaaRead = 0.obs;
 
+  final RxMap<String, int> duaaTypeStats = <String, int>{
+    'أذكار الصباح': 0,
+    'أذكار المساء': 0,
+    'أذكار النوم': 0,
+    'أذكار الاستيقاظ': 0,
+    'أذكار الوضوء': 0,
+    'أذكار الصلاة': 0,
+    'أذكار الأذان': 0,
+    'أذكار المسجد': 0,
+    'أذكار المنزل': 0,
+    'أذكار الخلاء': 0,
+    'أذكار الطعام': 0,
+    'أذكار السفر': 0,
+    'أذكار بعد الصلاة': 0,
+    'أدعية متفرقة': 0,
+  }.obs;
+
+  static const String duaaTypeStatsKey = 'duaa_type_stats_key';
+
   @override
   void onInit() {
     super.onInit();
     markDayAsOpened();
     loadVersesCount();
     loadDuaaCount();
+    loadDuaaTypeStats();
+    // إزالة بيانات الاختبار
+    // addTestData();  // Remove this line
   }
 
   Future<void> loadVersesCount() async {
@@ -32,6 +55,15 @@ class StatisticsController extends GetxController {
   Future<void> loadDuaaCount() async {
     final prefs = await SharedPreferences.getInstance();
     totalDuaaRead.value = prefs.getInt(duaaCountKey) ?? 0;
+  }
+
+  Future<void> loadDuaaTypeStats() async {
+    final prefs = await SharedPreferences.getInstance();
+    final String? statsJson = prefs.getString(duaaTypeStatsKey);
+    if (statsJson != null) {
+      final Map<String, dynamic> stats = json.decode(statsJson);
+      duaaTypeStats.value = Map<String, int>.from(stats);
+    }
   }
 
   Future<void> incrementVersesCount() async {
@@ -46,6 +78,16 @@ class StatisticsController extends GetxController {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt(duaaCountKey, totalDuaaRead.value);
     update();
+  }
+
+  Future<void> incrementDuaaType(String type) async {
+    if (duaaTypeStats.containsKey(type)) {
+      duaaTypeStats[type] = (duaaTypeStats[type] ?? 0) + 1;
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(duaaTypeStatsKey, json.encode(duaaTypeStats));
+      await incrementDuaaCount();
+      update();
+    }
   }
 
   /// Records the current day as an app open day
@@ -147,6 +189,19 @@ class StatisticsController extends GetxController {
       return 'Today';
     }
     return days[date.weekday % 7];
+  }
+
+  // Add this method to test the pie chart
+  void addTestData() {
+    duaaTypeStats.value = {
+      'Morning': 5,
+      'Evening': 3,
+      'Sleep': 2,
+      'General': 4,
+    };
+    totalDuaaRead.value =
+        duaaTypeStats.values.fold(0, (sum, count) => sum + count);
+    update();
   }
 }
 
