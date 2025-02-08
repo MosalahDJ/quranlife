@@ -12,7 +12,6 @@ class StatisticsPage extends StatefulWidget {
 class _StatisticsPageState extends State<StatisticsPage>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
-  final StatisticsController statsController = Get.put(StatisticsController());
 
   @override
   void initState() {
@@ -230,6 +229,8 @@ class _StatisticsPageState extends State<StatisticsPage>
   }
 
   Widget _buildSummaryCards() {
+    final StatisticsController statctrl = Get.find();
+
     return Row(
       children: [
         Expanded(
@@ -263,13 +264,13 @@ class _StatisticsPageState extends State<StatisticsPage>
                           fontWeight: FontWeight.w600,
                         ),
                   ),
-                  Text(
-                    '150 verses', // Replace with actual count
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          color: Theme.of(context).primaryColor,
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
+                  Obx(() => Text(
+                        '${statctrl.totalVersesRead.value} verses',
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              color: Theme.of(context).primaryColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                      )),
                 ],
               ),
             ),

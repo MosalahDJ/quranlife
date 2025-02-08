@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// Controller responsible for managing user activity statistics and weekly data visualization
 ///
@@ -9,10 +10,26 @@ class StatisticsController extends GetxController {
   /// Stores the dates when the app was opened in the format 'YYYY-MM-DD'
   final Set<String> appOpenDates = {};
 
+  static const String versesCountKey = 'verses_count_key';
+  final RxInt totalVersesRead = 0.obs;
+
   @override
   void onInit() {
     super.onInit();
     markDayAsOpened();
+    loadVersesCount();
+  }
+
+  Future<void> loadVersesCount() async {
+    final prefs = await SharedPreferences.getInstance();
+    totalVersesRead.value = prefs.getInt(versesCountKey) ?? 0;
+  }
+
+  Future<void> incrementVersesCount() async {
+    totalVersesRead.value++;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(versesCountKey, totalVersesRead.value);
+    update();
   }
 
   /// Records the current day as an app open day

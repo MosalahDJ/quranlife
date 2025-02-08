@@ -30,6 +30,7 @@ import 'package:quranlife/features/controller/prayer%20times%20controller/deteri
 import 'package:quranlife/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:quranlife/features/controller/spalshview%20controller/splash_view_controller.dart';
 import 'package:quranlife/features/controller/notfication%20controller/work_manager_controller.dart';
+import 'package:quranlife/features/controller/statistics%20controller/statistics_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Mybinding implements Bindings {
@@ -69,6 +70,7 @@ class Mybinding implements Bindings {
     Get.put<FloatingAnimationController>(FloatingAnimationController());
     //quraan injection
     Get.put<QuraanController>(QuraanController());
+    Get.put<StatisticsController>(StatisticsController());
     Get.put<JuzuaController>(JuzuaController());
     Get.put<SavingController>(SavingController());
     Get.put<AudioplayerController>(AudioplayerController());
