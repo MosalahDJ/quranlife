@@ -98,130 +98,136 @@ class _StatisticsPageState extends State<StatisticsPage>
     final indicatorSize = cardWidth * 0.1; // 10% of card width
     const minIndicatorSize = 6.0; // Minimum size in pixels
 
-    return SizedBox(
-      height: cardHeight,
-      child: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        scrollDirection: Axis.horizontal,
-        child: GetBuilder<StatisticsController>(
-          builder: (controller) => Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4),
-            child: Row(
-              children: controller.weeklyStats
-                  .map((stats) => Container(
-                        width: cardWidth,
-                        margin: EdgeInsets.only(
-                          right: 8,
-                          left: stats.isToday ? 4 : 0,
-                        ),
-                        child: AnimatedBuilder(
-                          animation: _animationController,
-                          builder: (context, child) {
-                            return Transform.translate(
-                              offset: Offset(
-                                  50 * (1 - _animationController.value), 0),
-                              child: Opacity(
-                                opacity: _animationController.value,
-                                child: Card(
-                                  elevation: stats.isFutureDay ? 0 : 2,
-                                  shadowColor: Theme.of(context)
-                                      .primaryColor
-                                      .withOpacity(0.2),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Container(
-                                    decoration: BoxDecoration(
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: SizedBox(
+        height: cardHeight,
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          scrollDirection: Axis.horizontal,
+          child: GetBuilder<StatisticsController>(
+            builder: (controller) => Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4),
+              child: Row(
+                children: controller.weeklyStats
+                    .map((stats) => Container(
+                          width: cardWidth,
+                          margin: EdgeInsets.only(
+                            right: 8,
+                            left: stats.isToday ? 4 : 0,
+                          ),
+                          child: AnimatedBuilder(
+                            animation: _animationController,
+                            builder: (context, child) {
+                              return Transform.translate(
+                                offset: Offset(
+                                    50 * (1 - _animationController.value), 0),
+                                child: Opacity(
+                                  opacity: _animationController.value,
+                                  child: Card(
+                                    elevation: stats.isFutureDay ? 0 : 2,
+                                    shadowColor: Theme.of(context)
+                                        .primaryColor
+                                        .withOpacity(0.2),
+                                    shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10),
-                                      gradient: LinearGradient(
-                                        begin: Alignment.topLeft,
-                                        end: Alignment.bottomRight,
-                                        colors: stats.colors,
+                                    ),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        gradient: LinearGradient(
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                          colors: stats.colors,
+                                        ),
                                       ),
-                                    ),
-                                    padding: EdgeInsets.symmetric(
-                                      vertical: cardHeight *
-                                          0.12, // 12% of card height
-                                      horizontal:
-                                          cardWidth * 0.1, // 10% of card width
-                                    ),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        FittedBox(
-                                          fit: BoxFit.scaleDown,
-                                          child: Text(
-                                            '${stats.date.day}',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleMedium
-                                                ?.copyWith(
-                                                  color: stats.isFutureDay
-                                                      ? Colors.black45
-                                                      : Colors.black87,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                            height: cardHeight *
-                                                0.02), // 2% of card height
-                                        FittedBox(
-                                          fit: BoxFit.scaleDown,
-                                          child: Text(
-                                            controller.getDayName(stats.date),
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyMedium
-                                                ?.copyWith(
-                                                  color: stats.isFutureDay
-                                                      ? Colors.black45
-                                                      : Colors.black87,
-                                                  fontWeight: stats.isToday
-                                                      ? FontWeight.w600
-                                                      : FontWeight.w500,
-                                                ),
-                                          ),
-                                        ),
-                                        if (stats.isToday) ...[
-                                          SizedBox(height: cardHeight * 0.04),
-                                          Container(
-                                            width: indicatorSize.clamp(
-                                                minIndicatorSize, 8.0),
-                                            height: indicatorSize.clamp(
-                                                minIndicatorSize, 8.0),
-                                            margin: EdgeInsets.only(
-                                              top: cardHeight * 0.02,
-                                              bottom: cardHeight * 0.02,
-                                            ),
-                                            decoration: BoxDecoration(
-                                              color: Theme.of(context)
-                                                  .primaryColor,
-                                              shape: BoxShape.circle,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Theme.of(context)
-                                                      .primaryColor
-                                                      .withOpacity(0.3),
-                                                  blurRadius: 4,
-                                                  spreadRadius: 1,
-                                                ),
-                                              ],
+                                      padding: EdgeInsets.symmetric(
+                                        vertical: cardHeight *
+                                            0.12, // 12% of card height
+                                        horizontal: cardWidth *
+                                            0.1, // 10% of card width
+                                      ),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          FittedBox(
+                                            fit: BoxFit.scaleDown,
+                                            child: Text(
+                                              '${stats.date.day}',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleMedium
+                                                  ?.copyWith(
+                                                    color: stats.isFutureDay
+                                                        ? Colors.black45
+                                                        : Colors.black87,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
                                             ),
                                           ),
+                                          SizedBox(
+                                              height: cardHeight *
+                                                  0.02), // 2% of card height
+                                          FittedBox(
+                                            fit: BoxFit.scaleDown,
+                                            child: Text(
+                                              controller.getDayName(stats.date),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyMedium
+                                                  ?.copyWith(
+                                                    color: stats.isFutureDay
+                                                        ? Colors.black45
+                                                        : Colors.black87,
+                                                    fontWeight: stats.isToday
+                                                        ? FontWeight.w600
+                                                        : FontWeight.w500,
+                                                  ),
+                                            ),
+                                          ),
+                                          if (stats.isToday) ...[
+                                            SizedBox(height: cardHeight * 0.04),
+                                            Container(
+                                              width: indicatorSize.clamp(
+                                                  minIndicatorSize, 8.0),
+                                              height: indicatorSize.clamp(
+                                                  minIndicatorSize, 8.0),
+                                              margin: EdgeInsets.only(
+                                                top: cardHeight * 0.02,
+                                                bottom: cardHeight * 0.02,
+                                              ),
+                                              decoration: BoxDecoration(
+                                                color: Theme.of(context)
+                                                    .primaryColor,
+                                                shape: BoxShape.circle,
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Theme.of(context)
+                                                        .primaryColor
+                                                        .withOpacity(0.3),
+                                                    blurRadius: 4,
+                                                    spreadRadius: 1,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
                                         ],
-                                      ],
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            );
-                          },
-                        ),
-                      ))
-                  .toList(),
+                              );
+                            },
+                          ),
+                        ))
+                    .toList(),
+              ),
             ),
           ),
         ),
@@ -241,48 +247,34 @@ class _StatisticsPageState extends State<StatisticsPage>
             child: Container(
               padding: const EdgeInsets.all(16),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color:
-                              Theme.of(context).primaryColor.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(10),
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Icon(
+                      Icons.menu_book_rounded, // Quran icon
+                      color: Theme.of(context).primaryColor,
+                      size: 28,
+                    ),
+                  ),
+                  Text(
+                    'Quran',
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: Colors.black87,
+                          fontWeight: FontWeight.w600,
                         ),
-                        child: Icon(
-                          Icons.menu_book_rounded, // Quran icon
+                  ),
+                  Text(
+                    '150 verses', // Replace with actual count
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                           color: Theme.of(context).primaryColor,
-                          size: 28,
+                          fontWeight: FontWeight.bold,
                         ),
-                      ),
-                      const SizedBox(width: 12),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Quran',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium
-                                ?.copyWith(
-                                  color: Colors.black87,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                          ),
-                          Text(
-                            '150 verses', // Replace with actual count
-                            style:
-                                Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                      color: Theme.of(context).primaryColor,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                          ),
-                        ],
-                      ),
-                    ],
                   ),
                 ],
               ),
@@ -299,48 +291,34 @@ class _StatisticsPageState extends State<StatisticsPage>
             child: Container(
               padding: const EdgeInsets.all(16),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color:
-                              Theme.of(context).primaryColor.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(10),
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Icon(
+                      Icons.self_improvement_rounded, // Duaa icon
+                      color: Theme.of(context).primaryColor,
+                      size: 28,
+                    ),
+                  ),
+                  Text(
+                    'Duaa',
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: Colors.black87,
+                          fontWeight: FontWeight.w600,
                         ),
-                        child: Icon(
-                          Icons.self_improvement_rounded, // Duaa icon
+                  ),
+                  Text(
+                    '75 adhkar', // Replace with actual count
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                           color: Theme.of(context).primaryColor,
-                          size: 28,
+                          fontWeight: FontWeight.bold,
                         ),
-                      ),
-                      const SizedBox(width: 12),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Duaa',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium
-                                ?.copyWith(
-                                  color: Colors.black87,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                          ),
-                          Text(
-                            '75 adhkar', // Replace with actual count
-                            style:
-                                Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                      color: Theme.of(context).primaryColor,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                          ),
-                        ],
-                      ),
-                    ],
                   ),
                 ],
               ),
