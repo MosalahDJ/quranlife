@@ -58,7 +58,7 @@ class _StatisticsPageState extends State<StatisticsPage>
                     const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                 sliver: SliverList(
                   delegate: SliverChildListDelegate([
-                    _buildStatisticsCard(),
+                    _buildDailyStatsScroll(),
                     const SizedBox(height: 16),
                     _buildWeeklyChart(),
                     const SizedBox(height: 16),
@@ -74,78 +74,119 @@ class _StatisticsPageState extends State<StatisticsPage>
     );
   }
 
-  Widget _buildStatisticsCard() {
-    return AnimatedBuilder(
-      animation: _animationController,
-      builder: (context, child) {
-        return Transform.translate(
-          offset: Offset(0, 50 * (1 - _animationController.value)),
-          child: Opacity(
-            opacity: _animationController.value,
-            child: Card(
-              elevation: 8,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  gradient: LinearGradient(
-                    colors: [
-                      Theme.of(context).primaryColor,
-                      Theme.of(context).primaryColor.withOpacity(0.7),
-                    ],
-                  ),
-                ),
-                padding: const EdgeInsets.all(20),
-                child: Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: const Icon(Icons.today,
-                          size: 40, color: Colors.white),
-                    ),
-                    const SizedBox(width: 20),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Daily Progress',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium
-                                ?.copyWith(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500,
+  Widget _buildDailyStatsScroll() {
+    return SizedBox(
+      height: 120, // Reduced height
+      child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        child: GetBuilder<StatisticsController>(
+          builder: (controller) => Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4),
+            child: Row(
+              children: controller.weeklyStats
+                  .map((stats) => Container(
+                        width: 140, // Reduced width
+                        margin: EdgeInsets.only(
+                          right: 8, // Reduced margin
+                          left: stats.isToday ? 4 : 0,
+                        ),
+                        child: AnimatedBuilder(
+                          animation: _animationController,
+                          builder: (context, child) {
+                            return Transform.translate(
+                              offset: Offset(
+                                  50 * (1 - _animationController.value), 0),
+                              child: Opacity(
+                                opacity: _animationController.value,
+                                child: Card(
+                                  elevation: 4, // Reduced elevation
+                                  shadowColor:
+                                      stats.colors.first.withOpacity(0.3),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      gradient: LinearGradient(
+                                        begin: Alignment.topLeft,
+                                        end: Alignment.bottomRight,
+                                        colors: stats.colors,
+                                      ),
+                                    ),
+                                    padding: const EdgeInsets.all(12),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              controller.getDayName(stats.date),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyLarge
+                                                  ?.copyWith(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.w600,
+                                                    letterSpacing: 0.5,
+                                                  ),
+                                            ),
+                                            if (stats.isToday)
+                                              Container(
+                                                width: 6,
+                                                height: 6,
+                                                decoration: const BoxDecoration(
+                                                  color: Colors.white,
+                                                  shape: BoxShape.circle,
+                                                ),
+                                              ),
+                                          ],
+                                        ),
+                                        const Spacer(),
+                                        Text(
+                                          '${stats.completionPercentage}%',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleLarge
+                                              ?.copyWith(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                        ),
+                                        const SizedBox(height: 4),
+                                        ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(2),
+                                          child: LinearProgressIndicator(
+                                            value: stats.completionPercentage /
+                                                100,
+                                            backgroundColor:
+                                                Colors.white.withOpacity(0.2),
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              Colors.white.withOpacity(0.9),
+                                            ),
+                                            minHeight: 3,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            '75%',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineMedium
-                                ?.copyWith(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+                              ),
+                            );
+                          },
+                        ),
+                      ))
+                  .toList(),
             ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 
