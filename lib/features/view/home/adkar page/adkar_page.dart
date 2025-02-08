@@ -160,8 +160,8 @@ Widget adkarcategorieitem(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             SizedBox(
-              height: Sizeconfig.screenheight! / 10,
-              width: Sizeconfig.screenwidth! / 4,
+              height: Sizeconfig.screenheight! / 17,
+              width: Sizeconfig.screenwidth! / 7,
               child: Image.asset(
                 iconpath,
                 fit: BoxFit.contain,

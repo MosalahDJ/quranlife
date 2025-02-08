@@ -1,32 +1,38 @@
 class Adkar {
-  int? sectionId;
-  String? content;
+  final int? id;
+  final int? sectionId;
+  final String? content;
+  final String? description;
   int? count;
-  String? description;
-  String? reference;
+  int? originalCount; // Add this field
 
-  Adkar(
-      {this.sectionId,
-      this.content,
-      this.count,
-      this.description,
-      this.reference});
+  Adkar({
+    this.id,
+    this.sectionId,
+    this.content,
+    this.description,
+    this.count,
+  }) {
+    originalCount = count; // Store original count when creating instance
+  }
 
-  Adkar.fromJson(Map<String, dynamic> json) {
-    sectionId = json['section_id'];
-    content = json['content'];
-    count = json['count'];
-    description = json['description'];
-    reference = json['reference'];
+  factory Adkar.fromJson(Map<String, dynamic> json) {
+    return Adkar(
+      id: json['id'],
+      sectionId: json['section_id'],
+      content: json['content'],
+      description: json['description'],
+      count: json['count'],
+    );
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
     data['section_id'] = sectionId;
     data['content'] = content;
     data['count'] = count;
     data['description'] = description;
-    data['reference'] = reference;
     return data;
   }
 }

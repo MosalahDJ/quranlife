@@ -26,8 +26,8 @@ class MyHomeController extends GetxController {
 
   //pagecontroller
   PageController homepagecontroller = PageController();
-  PageController salawatPageController =
-      PageController(); // إضافة controller جديد
+  // PageController salawatPageController =
+  //     PageController(); // إضافة controller جديد
 
   int? currentPage;
   @override
@@ -43,18 +43,18 @@ class MyHomeController extends GetxController {
         update();
       });
     });
-    salawatPageController.addListener(() {
-      if (salawatPageController.hasClients) {
-        currentPage = salawatPageController.page?.toInt() ?? 0;
-        update();
-      }
-    });
+    // salawatPageController.addListener(() {
+    //   if (salawatPageController.hasClients) {
+    //     currentPage = salawatPageController.page?.toInt() ?? 0;
+    //     update();
+    //   }
+    // });
   }
 
   @override
   void onClose() {
     homepagecontroller.dispose();
-    salawatPageController.dispose(); // لا تنس dispose للـ controller الجديد
+    // salawatPageController.dispose(); // لا تنس dispose للـ controller الجديد
     super.onClose();
   }
 }

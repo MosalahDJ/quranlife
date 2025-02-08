@@ -11,13 +11,17 @@ class StatisticsController extends GetxController {
   final Set<String> appOpenDates = {};
 
   static const String versesCountKey = 'verses_count_key';
+  static const String duaaCountKey = 'duaa_count_key';
+
   final RxInt totalVersesRead = 0.obs;
+  final RxInt totalDuaaRead = 0.obs;
 
   @override
   void onInit() {
     super.onInit();
     markDayAsOpened();
     loadVersesCount();
+    loadDuaaCount();
   }
 
   Future<void> loadVersesCount() async {
@@ -25,10 +29,22 @@ class StatisticsController extends GetxController {
     totalVersesRead.value = prefs.getInt(versesCountKey) ?? 0;
   }
 
+  Future<void> loadDuaaCount() async {
+    final prefs = await SharedPreferences.getInstance();
+    totalDuaaRead.value = prefs.getInt(duaaCountKey) ?? 0;
+  }
+
   Future<void> incrementVersesCount() async {
     totalVersesRead.value++;
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt(versesCountKey, totalVersesRead.value);
+    update();
+  }
+
+  Future<void> incrementDuaaCount() async {
+    totalDuaaRead.value++;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(duaaCountKey, totalDuaaRead.value);
     update();
   }
 

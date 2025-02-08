@@ -24,6 +24,18 @@ class AdkarController extends GetxController {
   void filterAdkarBySection(int sectionId) {
     filteredAdkar.value =
         adkar.where((duaa) => duaa.sectionId == sectionId).toList();
+    // Store original count values when filtering
+    for (var duaa in filteredAdkar) {
+      duaa.originalCount = duaa.count;
+    }
+    update();
+  }
+
+  void resetDuaaCounts() {
+    for (var duaa in filteredAdkar) {
+      // Reset count to its original value from JSON
+      duaa.count = duaa.originalCount;
+    }
     update();
   }
 }

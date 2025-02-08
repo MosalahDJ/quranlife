@@ -308,13 +308,13 @@ class _StatisticsPageState extends State<StatisticsPage>
                           fontWeight: FontWeight.w600,
                         ),
                   ),
-                  Text(
-                    '75 adhkar', // Replace with actual count
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          color: Theme.of(context).primaryColor,
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
+                  Obx(() => Text(
+                        '${statctrl.totalDuaaRead.value} adhkar',
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              color: Theme.of(context).primaryColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                      )),
                 ],
               ),
             ),

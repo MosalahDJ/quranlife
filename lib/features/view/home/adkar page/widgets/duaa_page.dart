@@ -3,18 +3,34 @@ import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/features/controller/adkar%20controller/adkar_controller.dart';
+import 'package:quranlife/features/controller/statistics%20controller/statistics_controller.dart';
 
-class DuaaPage extends StatelessWidget {
-  DuaaPage({super.key, required this.duaapageID, required this.duaapagename});
+class DuaaPage extends StatefulWidget {
+  const DuaaPage(
+      {super.key, required this.duaapageID, required this.duaapagename});
 
   final int duaapageID;
   final String duaapagename;
+
+  @override
+  State<DuaaPage> createState() => _DuaaPageState();
+}
+
+class _DuaaPageState extends State<DuaaPage> {
   final AdkarController _adkarctrl = Get.find();
 
   @override
+  void dispose() {
+    _adkarctrl.resetDuaaCounts();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final statsController = Get.find<StatisticsController>();
+
     // Filter duaas when page is built
-    _adkarctrl.filterAdkarBySection(duaapageID);
+    _adkarctrl.filterAdkarBySection(widget.duaapageID);
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -23,7 +39,7 @@ class DuaaPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         centerTitle: true,
         title: Text(
-          duaapagename.tr,
+          widget.duaapagename.tr,
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 color: Get.isDarkMode ? Colors.white : Colors.black,
                 fontWeight: FontWeight.bold,
@@ -149,35 +165,50 @@ class DuaaPage extends StatelessWidget {
                               color: Colors.transparent,
                               child: InkWell(
                                 onTap: () {
-                                  // Add counter logic here
+                                  if (controller.filteredAdkar[i].count! > 0) {
+                                    // Fix: Assign the new value properly
+                                    controller.filteredAdkar[i].count =
+                                        controller.filteredAdkar[i].count! - 1;
+                                    statsController.incrementDuaaCount();
+                                    controller.update(); // Update UI
+                                  }
                                 },
                                 borderRadius: const BorderRadius.vertical(
                                   bottom: Radius.circular(15),
                                 ),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 16),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      const Icon(
-                                        Icons.touch_app_rounded,
-                                        color: Colors.white,
-                                        size: 22,
-                                      ),
-                                      const SizedBox(width: 12),
-                                      Text(
-                                        "${controller.filteredAdkar[i].count} ${"count".tr}",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleMedium
-                                            ?.copyWith(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 18,
-                                            ),
-                                      ),
-                                    ],
+                                child: Opacity(
+                                  opacity:
+                                      controller.filteredAdkar[i].count! > 0
+                                          ? 1.0
+                                          : 0.5,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          controller.filteredAdkar[i].count! > 0
+                                              ? Icons.touch_app_rounded
+                                              : Icons.check_circle_outline,
+                                          color: Colors.white,
+                                          size: 22,
+                                        ),
+                                        const SizedBox(width: 12),
+                                        Text(
+                                          "${controller.filteredAdkar[i].count} ${"count".tr}",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleMedium
+                                              ?.copyWith(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
