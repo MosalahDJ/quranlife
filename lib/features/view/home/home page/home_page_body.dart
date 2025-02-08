@@ -9,6 +9,7 @@ import 'package:quranlife/features/controller/prayer%20times%20controller/fetch_
 import 'package:quranlife/features/controller/settings%20controllers/language_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
 import 'package:quranlife/features/view/home/categories_page/categories_page.dart';
+import 'package:quranlife/features/view/home/categories_page/statistics%20page/statistics_page.dart';
 import 'package:quranlife/features/view/home/home%20page/widgets/salawat_pageview.dart';
 import 'package:quranlife/features/view/home/home%20page/widgets/cart_card.dart';
 import 'package:quranlife/features/view/home/home%20page/widgets/wirds.dart';
@@ -154,8 +155,9 @@ class HomePageBody extends StatelessWidget {
                                 mycategory(() {}, MdiIcons.robot, 'ai_bot'.tr),
                                 mycategory(() {}, Icons.people_alt_rounded,
                                     'community'.tr),
-                                mycategory(() {}, Icons.analytics_rounded,
-                                    'statistics'.tr),
+                                mycategory(() {
+                                  Get.to(() => const StatisticsPage());
+                                }, Icons.analytics_rounded, 'statistics'.tr),
                               ],
                             ),
                           ),
