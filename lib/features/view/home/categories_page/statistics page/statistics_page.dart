@@ -253,8 +253,9 @@ class _StatisticsPageState extends State<StatisticsPage>
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Icon(
-                          Icons.check_circle_outline,
+                          Icons.menu_book_rounded, // Quran icon
                           color: Theme.of(context).primaryColor,
+                          size: 28,
                         ),
                       ),
                       const SizedBox(width: 12),
@@ -262,22 +263,22 @@ class _StatisticsPageState extends State<StatisticsPage>
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Active Days',
+                            'Quran',
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium
                                 ?.copyWith(
                                   color: Colors.black87,
+                                  fontWeight: FontWeight.w600,
                                 ),
                           ),
                           Text(
-                            '5 days',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium
-                                ?.copyWith(
-                                  color: Colors.black54,
-                                ),
+                            '150 verses', // Replace with actual count
+                            style:
+                                Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                      color: Theme.of(context).primaryColor,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                           ),
                         ],
                       ),
@@ -305,12 +306,14 @@ class _StatisticsPageState extends State<StatisticsPage>
                       Container(
                         padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: Colors.red.withOpacity(0.1),
+                          color:
+                              Theme.of(context).primaryColor.withOpacity(0.1),
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: const Icon(
-                          Icons.calendar_today,
-                          color: Colors.red,
+                        child: Icon(
+                          Icons.self_improvement_rounded, // Duaa icon
+                          color: Theme.of(context).primaryColor,
+                          size: 28,
                         ),
                       ),
                       const SizedBox(width: 12),
@@ -318,22 +321,22 @@ class _StatisticsPageState extends State<StatisticsPage>
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Missed Days',
+                            'Duaa',
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium
                                 ?.copyWith(
                                   color: Colors.black87,
+                                  fontWeight: FontWeight.w600,
                                 ),
                           ),
                           Text(
-                            '2 days',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium
-                                ?.copyWith(
-                                  color: Colors.black54,
-                                ),
+                            '75 adhkar', // Replace with actual count
+                            style:
+                                Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                      color: Theme.of(context).primaryColor,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                           ),
                         ],
                       ),
