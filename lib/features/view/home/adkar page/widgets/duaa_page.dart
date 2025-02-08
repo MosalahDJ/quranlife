@@ -89,6 +89,7 @@ class DuaaPage extends StatelessWidget {
                                 Text(
                                   controller.filteredAdkar[i].content!,
                                   textAlign: TextAlign.center,
+                                  textDirection: TextDirection.rtl,
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyLarge
@@ -128,6 +129,7 @@ class DuaaPage extends StatelessWidget {
                                               fontSize: 16,
                                               fontFamily: "Cairo"),
                                       textAlign: TextAlign.center,
+                                      textDirection: TextDirection.rtl,
                                     ),
                                   ),
                                 ],

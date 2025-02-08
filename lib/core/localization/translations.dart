@@ -65,7 +65,7 @@ class Messages extends Translations {
           "bathroom_athkar": "Bathroom Supplications",
           "food_athkar": "Food Supplications",
           "travel_athkar": "Travel Supplications",
-          "post_prayer_athkar": "After Prayer Supplications",
+          "post_prayer_athkar": "After Praying Supplications",
           "misc_athkar": "Miscellaneous Supplications",
 
           // Splash Page
