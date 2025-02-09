@@ -165,14 +165,16 @@ class _DuaaPageState extends State<DuaaPage> {
                               color: Colors.transparent,
                               child: InkWell(
                                 onTap: () {
-                                  if (controller.filteredAdkar[i].count! > 0) {
+                                  setState(() {
                                     controller.filteredAdkar[i].count =
                                         controller.filteredAdkar[i].count! - 1;
-                                    // استخدام اسم الصفحة مباشرة لإضافة العدد إلى القسم الصحيح
-                                    statsController
-                                        .incrementDuaaType(widget.duaapagename);
-                                    controller.update();
-                                  }
+                                  });
+                                  // Increment the total duaas read counter
+                                  statsController.incrementTotalDuaasRead();
+                                  // Keep the category statistics
+                                  statsController
+                                      .incrementDuaaType(widget.duaapagename);
+                                  controller.update();
                                 },
                                 borderRadius: const BorderRadius.vertical(
                                   bottom: Radius.circular(15),

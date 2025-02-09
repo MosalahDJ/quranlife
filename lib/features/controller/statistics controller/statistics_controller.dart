@@ -5,9 +5,11 @@ import 'dart:convert';
 class StatisticsController extends GetxController {
   static const String versesCountKey = 'verses_count_key';
   static const String duaaCountKey = 'duaa_count_key';
+  static const String totalDuaasReadKey = 'total_duaas_read_key';
 
   final RxInt totalVersesRead = 0.obs;
   final RxInt totalDuaaRead = 0.obs;
+  final RxInt totalDuaasReadCount = 0.obs;
 
   final RxMap<String, int> duaaTypeStats = <String, int>{
     'أذكار الصباح': 0,
@@ -24,6 +26,7 @@ class StatisticsController extends GetxController {
     loadVersesCount();
     loadDuaaCount();
     loadDuaaTypeStats();
+    loadTotalDuaasRead();
   }
 
   Future<void> loadVersesCount() async {
@@ -43,6 +46,11 @@ class StatisticsController extends GetxController {
       final Map<String, dynamic> stats = json.decode(statsJson);
       duaaTypeStats.value = Map<String, int>.from(stats);
     }
+  }
+
+  Future<void> loadTotalDuaasRead() async {
+    final prefs = await SharedPreferences.getInstance();
+    totalDuaasReadCount.value = prefs.getInt(totalDuaasReadKey) ?? 0;
   }
 
   Future<void> incrementVersesCount() async {
@@ -67,5 +75,12 @@ class StatisticsController extends GetxController {
       await incrementDuaaCount();
       update();
     }
+  }
+
+  Future<void> incrementTotalDuaasRead() async {
+    totalDuaasReadCount.value++;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(totalDuaasReadKey, totalDuaasReadCount.value);
+    update();
   }
 }
