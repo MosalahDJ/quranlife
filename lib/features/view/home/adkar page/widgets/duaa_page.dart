@@ -172,8 +172,8 @@ class _DuaaPageState extends State<DuaaPage> {
                                               1;
                                     });
                                     // أولاً نقوم بتحديث إحصائيات القسم
-                                    statsController
-                                        .incrementDuaaType(widget.duaapagename);
+                                    // statsController
+                                    //     .incrementDuaaType(widget.duaapagename);
                                     // ثم نقوم بتحديث العداد الكلي
                                     statsController.incrementTotalDuaasRead();
                                     statsController.update();
