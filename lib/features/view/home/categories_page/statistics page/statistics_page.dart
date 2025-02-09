@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quranlife/core/Utils/constants.dart';
+import 'package:quranlife/core/Utils/size_config.dart';
+import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/features/controller/statistics%20controller/statistics_controller.dart';
 import 'package:fl_chart/fl_chart.dart';
 
@@ -32,56 +35,72 @@ class _StatisticsPageState extends State<StatisticsPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: const Text("Activity Statistics"),
+        centerTitle: true,
+        foregroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Theme.of(context).primaryColor.withOpacity(0.1),
-              Colors.white,
+      body: Stack(
+        children: [
+          Gradientbackground(
+            gradientcolor: [
+              kmaincolor,
+              Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
             ],
           ),
-        ),
-        child: SafeArea(
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 24),
-                  _buildSummaryCards(),
-                  const SizedBox(height: 24),
-                  _buildMainSummaryCard(),
-                  const SizedBox(height: 24), // Add bottom padding
-                ],
+          SizedBox(
+            height: Sizeconfig.screenheight,
+            width: Sizeconfig.screenwidth,
+            child: Image.asset(
+              "lib/core/assets/images/background_image/arch.jpg",
+              fit: BoxFit.cover,
+              opacity: const AlwaysStoppedAnimation<double>(0.2),
+              height: Sizeconfig.screenheight,
+              width: Sizeconfig.screenwidth,
+            ),
+          ),
+          SafeArea(
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 24),
+                    _buildSummaryCards(),
+                    const SizedBox(height: 24),
+                    _buildMainSummaryCard(),
+                    const SizedBox(height: 24),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }
 
   Widget _buildSummaryCards() {
-    final StatisticsController statctrl = Get.find<StatisticsController>();
+    final StatisticsController statctrl = Get.find();
+
     return Row(
       children: [
-        _countercard(
+        Obx(() => _countercard(
             icon: Icons.menu_book_rounded,
             title: 'Quran',
-            count: '${statctrl.totalVersesRead.value} verses'),
+            count: '${statctrl.totalVersesRead.value} verses')),
         const SizedBox(width: 16),
-        _countercard(
-            icon: Icons.self_improvement_rounded,
-            title: 'Duaa',
-            count: '${statctrl.totalDuaaRead.value} adhkar'),
+        Obx(
+          () => _countercard(
+              icon: Icons.self_improvement_rounded,
+              title: 'Duaa',
+              count: '${statctrl.totalDuaaRead.value} adhkar'),
+        ),
       ],
     );
   }
@@ -119,13 +138,13 @@ class _StatisticsPageState extends State<StatisticsPage>
                       fontWeight: FontWeight.w600,
                     ),
               ),
-              Obx(() => Text(
-                    count,
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          color: Theme.of(context).primaryColor,
-                          fontWeight: FontWeight.bold,
-                        ),
-                  )),
+              Text(
+                count,
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: Theme.of(context).primaryColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
             ],
           ),
         ),

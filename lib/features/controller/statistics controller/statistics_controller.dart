@@ -2,14 +2,7 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
-/// Controller responsible for managing user activity statistics and weekly data visualization
-///
-/// This controller tracks app opens per day and generates weekly statistics
-/// for displaying user engagement patterns.
 class StatisticsController extends GetxController {
-  /// Stores the dates when the app was opened in the format 'YYYY-MM-DD'
-  final Set<String> appOpenDates = {};
-
   static const String versesCountKey = 'verses_count_key';
   static const String duaaCountKey = 'duaa_count_key';
 
@@ -19,17 +12,7 @@ class StatisticsController extends GetxController {
   final RxMap<String, int> duaaTypeStats = <String, int>{
     'أذكار الصباح': 0,
     'أذكار المساء': 0,
-    'أذكار النوم': 0,
-    'أذكار الاستيقاظ': 0,
-    'أذكار الوضوء': 0,
-    'أذكار الصلاة': 0,
-    'أذكار الأذان': 0,
-    'أذكار المسجد': 0,
-    'أذكار المنزل': 0,
-    'أذكار الخلاء': 0,
-    'أذكار الطعام': 0,
-    'أذكار السفر': 0,
-    'أذكار بعد الصلاة': 0,
+    'أذكار أخرى': 0,
     'أدعية متفرقة': 0,
   }.obs;
 
