@@ -127,26 +127,26 @@ class _StatisticsPageState extends State<StatisticsPage>
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor.withOpacity(0.1),
+                color: Colors.grey[300],
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Icon(
                 icon,
-                color: Theme.of(context).primaryColor,
+                color: Get.isDarkMode ? kmaincolor4 : kmaincolor,
                 size: 28,
               ),
             ),
             Text(
               title,
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: Colors.black87,
+                    color: Get.isDarkMode ? Colors.white : Colors.black87,
                     fontWeight: FontWeight.w600,
                   ),
             ),
             Text(
               count,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: Theme.of(context).primaryColor,
+                    color: Get.isDarkMode ? kmaincolor4 : kmaincolor,
                     fontWeight: FontWeight.bold,
                   ),
             ),
