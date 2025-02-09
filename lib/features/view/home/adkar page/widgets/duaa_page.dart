@@ -165,16 +165,20 @@ class _DuaaPageState extends State<DuaaPage> {
                               color: Colors.transparent,
                               child: InkWell(
                                 onTap: () {
-                                  setState(() {
-                                    controller.filteredAdkar[i].count =
-                                        controller.filteredAdkar[i].count! - 1;
-                                  });
-                                  // Increment the total duaas read counter
-                                  statsController.incrementTotalDuaasRead();
-                                  // Keep the category statistics
-                                  statsController
-                                      .incrementDuaaType(widget.duaapagename);
-                                  controller.update();
+                                  if (controller.filteredAdkar[i].count! > 0) {
+                                    setState(() {
+                                      controller.filteredAdkar[i].count =
+                                          controller.filteredAdkar[i].count! -
+                                              1;
+                                    });
+                                    // أولاً نقوم بتحديث إحصائيات القسم
+                                    statsController
+                                        .incrementDuaaType(widget.duaapagename);
+                                    // ثم نقوم بتحديث العداد الكلي
+                                    statsController.incrementTotalDuaasRead();
+                                    statsController.update();
+                                    controller.update();
+                                  }
                                 },
                                 borderRadius: const BorderRadius.vertical(
                                   bottom: Radius.circular(15),

@@ -72,15 +72,16 @@ class StatisticsController extends GetxController {
       duaaTypeStats[type] = (duaaTypeStats[type] ?? 0) + 1;
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString(duaaTypeStatsKey, json.encode(duaaTypeStats));
-      await incrementDuaaCount();
       update();
     }
   }
 
   Future<void> incrementTotalDuaasRead() async {
     totalDuaasReadCount.value++;
+    totalDuaaRead.value++; // تحديث كلا العدادين
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt(totalDuaasReadKey, totalDuaasReadCount.value);
+    await prefs.setInt(duaaCountKey, totalDuaaRead.value);
     update();
   }
 }

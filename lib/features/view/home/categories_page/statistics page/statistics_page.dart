@@ -86,67 +86,69 @@ class _StatisticsPageState extends State<StatisticsPage>
   }
 
   Widget _buildSummaryCards() {
-    final StatisticsController statctrl = Get.find();
-
-    return Row(
-      children: [
-        Obx(() => _countercard(
-            icon: Icons.menu_book_rounded,
-            title: 'Quran',
-            count: '${statctrl.totalVersesRead.value} verses')),
-        const SizedBox(width: 16),
-        Obx(
-          () => _countercard(
+    return GetBuilder<StatisticsController>(
+      builder: (statctrl) => Row(
+        children: [
+          Expanded(
+            child: _countercard(
+              icon: Icons.menu_book_rounded,
+              title: 'Quran',
+              count: '${statctrl.totalVersesRead.value} verses',
+            ),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: _countercard(
               icon: Icons.self_improvement_rounded,
               title: 'Duaa',
-              count: '${statctrl.totalDuaaRead.value} adhkar'),
-        ),
-      ],
+              count: '${statctrl.totalDuaasReadCount.value} adhkar',
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   Widget _countercard(
       {required IconData icon, required String title, required String count}) {
-    return Expanded(
-      child: Card(
-        elevation: 4,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Icon(
-                  icon, // Duaa icon
-                  color: Theme.of(context).primaryColor,
-                  size: 28,
-                ),
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(10),
               ),
-              Text(
-                title,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w600,
-                    ),
+              child: Icon(
+                icon,
+                color: Theme.of(context).primaryColor,
+                size: 28,
               ),
-              Text(
-                count,
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: Theme.of(context).primaryColor,
-                      fontWeight: FontWeight.bold,
-                    ),
-              ),
-            ],
-          ),
+            ),
+            Text(
+              title,
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: Colors.black87,
+                    fontWeight: FontWeight.w600,
+                  ),
+            ),
+            Text(
+              count,
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: Theme.of(context).primaryColor,
+                    fontWeight: FontWeight.bold,
+                  ),
+            ),
+          ],
         ),
       ),
     );
