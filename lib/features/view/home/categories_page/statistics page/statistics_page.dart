@@ -55,8 +55,8 @@ class _StatisticsPageState extends State<StatisticsPage>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildWeeklyTitle(),
-                  _buildDailyStatsScroll(),
+                  // _buildWeeklyTitle(),
+                  // _buildDailyStatsScroll(),
                   const SizedBox(height: 24),
                   _buildSummaryCards(),
                   const SizedBox(height: 24),
@@ -236,98 +236,66 @@ class _StatisticsPageState extends State<StatisticsPage>
   }
 
   Widget _buildSummaryCards() {
-    final StatisticsController statctrl = Get.find();
-
+    final StatisticsController statctrl = Get.find<StatisticsController>();
     return Row(
       children: [
-        Expanded(
-          child: Card(
-            elevation: 4,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Icon(
-                      Icons.menu_book_rounded, // Quran icon
-                      color: Theme.of(context).primaryColor,
-                      size: 28,
-                    ),
-                  ),
-                  Text(
-                    'Quran',
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: Colors.black87,
-                          fontWeight: FontWeight.w600,
-                        ),
-                  ),
-                  Obx(() => Text(
-                        '${statctrl.totalVersesRead.value} verses',
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              color: Theme.of(context).primaryColor,
-                              fontWeight: FontWeight.bold,
-                            ),
-                      )),
-                ],
-              ),
-            ),
-          ),
-        ),
+        _countercard(
+            icon: Icons.menu_book_rounded,
+            title: 'Quran',
+            count: '${statctrl.totalVersesRead.value} verses'),
         const SizedBox(width: 16),
-        Expanded(
-          child: Card(
-            elevation: 4,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Icon(
-                      Icons.self_improvement_rounded, // Duaa icon
-                      color: Theme.of(context).primaryColor,
-                      size: 28,
-                    ),
-                  ),
-                  Text(
-                    'Duaa',
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: Colors.black87,
-                          fontWeight: FontWeight.w600,
-                        ),
-                  ),
-                  Obx(() => Text(
-                        '${statctrl.totalDuaaRead.value} adhkar',
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              color: Theme.of(context).primaryColor,
-                              fontWeight: FontWeight.bold,
-                            ),
-                      )),
-                ],
+        _countercard(
+            icon: Icons.self_improvement_rounded,
+            title: 'Duaa',
+            count: '${statctrl.totalDuaaRead.value} adhkar'),
+      ],
+    );
+  }
+
+  Widget _countercard(
+      {required IconData icon, required String title, required String count}) {
+    return Expanded(
+      child: Card(
+        elevation: 4,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColor.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Icon(
+                  icon, // Duaa icon
+                  color: Theme.of(context).primaryColor,
+                  size: 28,
+                ),
               ),
-            ),
+              Text(
+                title,
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w600,
+                    ),
+              ),
+              Obx(() => Text(
+                    count,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: Theme.of(context).primaryColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                  )),
+            ],
           ),
         ),
-      ],
+      ),
     );
   }
 
