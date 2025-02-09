@@ -271,6 +271,19 @@ class Messages extends Translations {
           'hijri_month_Shawwal': 'Shawwal',
           'hijri_month_Dhu al-Qi\'dah': 'Dhu al-Qidah',
           'hijri_month_Dhu al-Hijjah': 'Dhu al-Hijjah',
+
+          // Statistics Page
+          'activity_statistics': 'Activity Statistics',
+          'reading_distribution': 'Reading Distribution',
+          'overall_progress': 'Overall Progress',
+          'spiritual_journey': 'Your spiritual journey statistics',
+          'total_items_read': 'Total Items Read',
+          'daily_goal': 'of daily goal',
+          'no_data': 'No data available',
+          'of': 'of',
+          'duaa': 'Duaa',
+          'qoran': 'Quran',
+          'dikr': 'Dikr',
         },
         'ar': {
           // Authentication
@@ -545,6 +558,19 @@ class Messages extends Translations {
           'hijri_month_Shawwal': 'شوال',
           'hijri_month_Dhu al-Qi\'dah': 'ذو القعدة',
           'hijri_month_Dhu al-Hijjah': 'ذو الحجة',
+
+          // Statistics Page
+          'activity_statistics': 'إحصائيات النشاط',
+          'reading_distribution': 'توزيع القراءات',
+          'overall_progress': 'التقدم العام',
+          'spiritual_journey': 'إحصائيات رحلتك الروحانية',
+          'total_items_read': 'إجمالي العناصر المقروءة',
+          'daily_goal': 'من الهدف اليومي',
+          'no_data': 'لا توجد بيانات متاحة',
+          'of': 'من',
+          'duaa': 'الدعاء',
+          'qoran': 'القرآن',
+          'dikr': 'ذكر',
         },
         'fr': {
           // Authentication
@@ -815,6 +841,19 @@ class Messages extends Translations {
           'hijri_month_Shawwal': 'Chawwal',
           'hijri_month_Dhu al-Qi\'dah': 'Dhou al-Qida',
           'hijri_month_Dhu al-Hijjah': 'Dhou al-Hijja',
+
+          // Statistics Page
+          'activity_statistics': 'Statistiques d\'Activité',
+          'reading_distribution': 'Distribution des Lectures',
+          'overall_progress': 'Progrès Global',
+          'spiritual_journey': 'Statistiques de votre parcours spirituel',
+          'total_items_read': 'Total des Éléments Lus',
+          'daily_goal': 'de l\'objectif quotidien',
+          'no_data': 'Aucune donnée disponible',
+          'of': 'de',
+          'duaa': 'Duaa',
+          'qoran': 'Coran',
+          'dikr': 'Dikr',
         },
       };
 }

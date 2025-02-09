@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
@@ -37,7 +38,7 @@ class _StatisticsPageState extends State<StatisticsPage>
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: const Text("Activity Statistics"),
+        title: Text('activity_statistics'.tr),
         centerTitle: true,
         foregroundColor: Colors.white,
         backgroundColor: Colors.transparent,
@@ -93,17 +94,17 @@ class _StatisticsPageState extends State<StatisticsPage>
         children: [
           Expanded(
             child: _countercard(
-              icon: Icons.menu_book_rounded,
-              title: 'Quran',
-              count: '${statctrl.totalVersesRead.value} verses',
+              icon: FlutterIslamicIcons.solidQuran2,
+              title: 'qoran'.tr,
+              count: '${statctrl.totalVersesRead.value} ${"verses".tr}',
             ),
           ),
           const SizedBox(width: 16),
           Expanded(
             child: _countercard(
-              icon: Icons.self_improvement_rounded,
-              title: 'Duaa',
-              count: '${statctrl.totalDuaasReadCount.value} adhkar',
+              icon: FlutterIslamicIcons.solidPrayingPerson,
+              title: 'duaa'.tr,
+              count: '${statctrl.totalDuaasReadCount.value} ${"dikr".tr}',
             ),
           ),
         ],
@@ -115,10 +116,19 @@ class _StatisticsPageState extends State<StatisticsPage>
       {required IconData icon, required String title, required String count}) {
     return Card(
       elevation: 4,
+      color: Get.isDarkMode
+          ? kmaincolor2dark.withOpacity(0.7)
+          : Colors.white.withOpacity(0.7),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
       child: Container(
+        decoration: BoxDecoration(
+          color: Get.isDarkMode
+              ? kmaincolor2dark.withOpacity(0.7)
+              : Colors.white.withOpacity(0.7),
+          borderRadius: BorderRadius.circular(20),
+        ),
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -127,7 +137,7 @@ class _StatisticsPageState extends State<StatisticsPage>
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: Colors.grey[300],
+                color: Colors.grey[500],
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Icon(
@@ -160,13 +170,22 @@ class _StatisticsPageState extends State<StatisticsPage>
     final StatisticsController statctrl = Get.find();
 
     return Card(
-      elevation: 6,
+      elevation: 4,
+      color: Get.isDarkMode
+          ? kmaincolor2dark.withOpacity(0.7)
+          : Colors.white.withOpacity(0.7),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
       child: Container(
         width: double.infinity,
         padding: const EdgeInsets.all(24),
+        decoration: BoxDecoration(
+          color: Get.isDarkMode
+              ? kmaincolor2dark.withOpacity(0.7)
+              : Colors.white.withOpacity(0.7),
+          borderRadius: BorderRadius.circular(20),
+        ),
         child: Column(
           children: [
             Row(
@@ -174,12 +193,12 @@ class _StatisticsPageState extends State<StatisticsPage>
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor.withOpacity(0.1),
+                    color: Colors.grey[500],
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Icon(
                     Icons.star_rounded,
-                    color: Theme.of(context).primaryColor,
+                    color: kmaincolor4,
                     size: 32,
                   ),
                 ),
@@ -189,17 +208,21 @@ class _StatisticsPageState extends State<StatisticsPage>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Overall Progress',
+                        'overall_progress'.tr,
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              color: Colors.black87,
+                              color: Get.isDarkMode
+                                  ? Colors.white
+                                  : Colors.black87,
                               fontWeight: FontWeight.bold,
                             ),
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Your spiritual journey statistics',
+                        'spiritual_journey'.tr,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: Colors.black54,
+                              color: Get.isDarkMode
+                                  ? Colors.white
+                                  : Colors.black87,
                             ),
                       ),
                     ],
@@ -217,16 +240,18 @@ class _StatisticsPageState extends State<StatisticsPage>
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Total Items Read',
+                        'total_items_read'.tr,
                         style:
                             Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  color: Colors.black87,
+                                  color: Get.isDarkMode
+                                      ? Colors.white
+                                      : Colors.black87,
                                 ),
                       ),
                       Text(
-                        '$totalItems',
+                        '$totalItems ${"of".tr} 250',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              color: Theme.of(context).primaryColor,
+                              color: Get.isDarkMode ? kmaincolor4 : kmaincolor,
                               fontWeight: FontWeight.bold,
                             ),
                       ),
@@ -237,16 +262,16 @@ class _StatisticsPageState extends State<StatisticsPage>
                     value: totalItems / 250, // Assuming 250 is the goal
                     backgroundColor: Colors.grey.withOpacity(0.2),
                     valueColor: AlwaysStoppedAnimation<Color>(
-                      Theme.of(context).primaryColor,
+                      Get.isDarkMode ? kmaincolor4 : kmaincolor,
                     ),
                     borderRadius: BorderRadius.circular(10),
                     minHeight: 8,
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    '${(totalItems * 100 / 250).toStringAsFixed(1)}% of daily goal',
+                    '${(totalItems * 100 / 250).toStringAsFixed(1)}% ${'daily_goal'.tr}',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Colors.black54,
+                          color: Get.isDarkMode ? Colors.white : Colors.black87,
                         ),
                   ),
                 ],
@@ -260,16 +285,25 @@ class _StatisticsPageState extends State<StatisticsPage>
 
   Widget _buildPieChartSection() {
     final pieColors = [
-      const Color(0xFF01A6FF), // أزرق للقرآن
-      const Color(0xFF035B16), // أخضر للدعاء
+      kmaincolor3,
+      kmaincolor,
     ];
 
     return Card(
-      elevation: 6,
+      elevation: 4,
+      color: Get.isDarkMode
+          ? kmaincolor2dark.withOpacity(0.7)
+          : Colors.white.withOpacity(0.7),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
       child: Container(
+        decoration: BoxDecoration(
+          color: Get.isDarkMode
+              ? kmaincolor2dark.withOpacity(0.7)
+              : Colors.white.withOpacity(0.7),
+          borderRadius: BorderRadius.circular(20),
+        ),
         width: double.infinity,
         padding: const EdgeInsets.all(24),
         child: Column(
@@ -277,7 +311,7 @@ class _StatisticsPageState extends State<StatisticsPage>
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
-              'Reading Distribution',
+              'reading_distribution'.tr,
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -289,10 +323,10 @@ class _StatisticsPageState extends State<StatisticsPage>
                     controller.totalDuaasReadCount.value;
 
                 return total == 0
-                    ? const Center(
+                    ? Center(
                         child: Padding(
-                          padding: EdgeInsets.all(32.0),
-                          child: Text('No data available'),
+                          padding: const EdgeInsets.all(32.0),
+                          child: Text('no_data'.tr),
                         ),
                       )
                     : Column(
@@ -344,13 +378,13 @@ class _StatisticsPageState extends State<StatisticsPage>
                             children: [
                               _buildLegendItem(
                                 color: pieColors[0],
-                                title: 'Quran',
+                                title: 'qoran'.tr,
                                 value: controller.totalVersesRead.value,
                               ),
                               const SizedBox(height: 16),
                               _buildLegendItem(
                                 color: pieColors[1],
-                                title: 'Duaa',
+                                title: 'duaa'.tr,
                                 value: controller.totalDuaasReadCount.value,
                               ),
                             ],
@@ -370,36 +404,45 @@ class _StatisticsPageState extends State<StatisticsPage>
     required String title,
     required int value,
   }) {
-    return Row(
-      children: [
-        Container(
-          width: 16,
-          height: 16,
-          decoration: BoxDecoration(
-            color: color,
-            shape: BoxShape.circle,
+    return Container(
+      width: Sizeconfig.screenwidth! / 3.5,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: BoxDecoration(
+        color: Colors.grey[500],
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 16,
+            height: 16,
+            decoration: BoxDecoration(
+              color: color,
+              shape: BoxShape.circle,
+            ),
           ),
-        ),
-        const SizedBox(width: 8),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.w500,
-                  ),
-            ),
-            Text(
-              value.toString(),
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: color,
-                    fontWeight: FontWeight.bold,
-                  ),
-            ),
-          ],
-        ),
-      ],
+          const SizedBox(width: 8),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
+              ),
+              Text(
+                value.toString(),
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: color,
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
