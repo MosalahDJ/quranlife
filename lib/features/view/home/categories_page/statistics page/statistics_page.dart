@@ -259,14 +259,147 @@ class _StatisticsPageState extends State<StatisticsPage>
   }
 
   Widget _buildPieChartSection() {
+    final pieColors = [
+      const Color(0xFF01A6FF), // أزرق للقرآن
+      const Color(0xFF035B16), // أخضر للدعاء
+    ];
+
     return Card(
-        elevation: 6,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+      elevation: 6,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text(
+              'Reading Distribution',
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+            ),
+            const SizedBox(height: 24),
+            GetBuilder<StatisticsController>(
+              builder: (controller) {
+                final total = controller.totalVersesRead.value +
+                    controller.totalDuaasReadCount.value;
+
+                return total == 0
+                    ? const Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(32.0),
+                          child: Text('No data available'),
+                        ),
+                      )
+                    : Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const SizedBox(height: 24),
+                          SizedBox(
+                            height: Sizeconfig.screenheight! / 3.5,
+                            child: PieChart(
+                              PieChartData(
+                                sectionsSpace: 2,
+                                centerSpaceRadius: 40,
+                                sections: [
+                                  PieChartSectionData(
+                                    color: pieColors[0],
+                                    value: controller.totalVersesRead.value
+                                        .toDouble(),
+                                    title:
+                                        '${(controller.totalVersesRead.value / total * 100).round()}%',
+                                    radius: 80,
+                                    titleStyle: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  PieChartSectionData(
+                                    color: pieColors[1],
+                                    value: controller.totalDuaasReadCount.value
+                                        .toDouble(),
+                                    title:
+                                        '${(controller.totalDuaasReadCount.value / total * 100).round()}%',
+                                    radius: 80,
+                                    titleStyle: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 34,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              _buildLegendItem(
+                                color: pieColors[0],
+                                title: 'Quran',
+                                value: controller.totalVersesRead.value,
+                              ),
+                              const SizedBox(height: 16),
+                              _buildLegendItem(
+                                color: pieColors[1],
+                                title: 'Duaa',
+                                value: controller.totalDuaasReadCount.value,
+                              ),
+                            ],
+                          ),
+                        ],
+                      );
+              },
+            ),
+          ],
         ),
-        child: Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(24),
-        ));
+      ),
+    );
+  }
+
+  Widget _buildLegendItem({
+    required Color color,
+    required String title,
+    required int value,
+  }) {
+    return Row(
+      children: [
+        Container(
+          width: 16,
+          height: 16,
+          decoration: BoxDecoration(
+            color: color,
+            shape: BoxShape.circle,
+          ),
+        ),
+        const SizedBox(width: 8),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.w500,
+                  ),
+            ),
+            Text(
+              value.toString(),
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: color,
+                    fontWeight: FontWeight.bold,
+                  ),
+            ),
+          ],
+        ),
+      ],
+    );
   }
 }
