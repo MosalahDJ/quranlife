@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
+import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/features/controller/allah%20names%20controller/allah_names_controller.dart';
 import 'package:quranlife/features/controller/statistics%20controller/statistics_controller.dart';
 
@@ -23,12 +24,9 @@ class _AllahNamesState extends State<AllahNames> {
         elevation: 0,
         backgroundColor: Colors.transparent,
         centerTitle: true,
-        title: Text(
-          "allah names",
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: Get.isDarkMode ? Colors.white : Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
+        title: ShimmerText(
+          text: 'allah_names'.tr,
+          style: Theme.of(context).textTheme.headlineSmall,
         ),
       ),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
