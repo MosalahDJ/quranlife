@@ -1,0 +1,93 @@
+[
+    {
+      "id": 1,
+      "step": 1,
+      "titleen": "Intention (Niyyah)",
+      "titlear": "النية",
+      "titlefr": "Intention (Niyyah)",
+      "descriptionen": "Begin by intending in your heart to perform Ghusl to purify yourself from major impurity (e.g., janabah, menstruation, etc.).",
+      "descriptionar": "ابدأ بنية الغسل لتطهير نفسك من الحدث الأكبر (كالجنابة، الحيض، إلخ).",
+      "descriptionfr": "Commencez par l'intention dans votre cœur d'accomplir le Ghusl pour vous purifier d'une impureté majeure (ex: janaba, menstrues, etc.).",
+      "sourceen": "Hadith: 'Actions are judged by intentions.' (Sahih al-Bukhari)",
+      "sourcear": "الحديث: 'إنما الأعمال بالنيات.' (صحيح البخاري)",
+      "sourcefr": "Hadith : 'Les actions ne valent que par leurs intentions.' (Sahih al-Bukhari)"
+    },
+    {
+      "id": 2,
+      "step": 2,
+      "titleen": "Wash Hands and Private Parts",
+      "titlear": "غسل اليدين والفرج",
+      "titlefr": "Laver les mains et les parties intimes",
+      "descriptionen": "Wash your hands thoroughly, then clean the private parts and any physical impurities.",
+      "descriptionar": "اغسل يديك جيدًا، ثم نظف الفرج وأي أوساخ ظاهرة.",
+      "descriptionfr": "Lavez-vous soigneusement les mains, puis nettoyez les parties intimes et toute impureté physique.",
+      "sourceen": "Prophetic tradition: The Prophet (ﷺ) began Ghusl by washing his hands and private parts. (Sahih Muslim)",
+      "sourcear": "السنة النبوية: كان النبي (ﷺ) يبدأ الغسل بغسل يديه وفرجه. (صحيح مسلم)",
+      "sourcefr": "Tradition prophétique : Le Prophète (ﷺ) commençait le Ghusl en lavant ses mains et ses parties intimes. (Sahih Muslim)"
+    },
+    {
+      "id": 3,
+      "step": 3,
+      "titleen": "Perform Wudu",
+      "titlear": "الوضوء",
+      "titlefr": "Faire les ablutions (Wudu)",
+      "descriptionen": "Perform Wudu as you do for prayer, but delay washing the feet until the end of Ghusl.",
+      "descriptionar": "توضأ وضوءك للصلاة، لكن تأخير غسل القدمين لنهاية الغسل.",
+      "descriptionfr": "Accomplissez les ablutions comme pour la prière, mais retardez le lavage des pieds jusqu'à la fin du Ghusl.",
+      "sourceen": "Hadith: The Prophet (ﷺ) performed Wudu during Ghusl. (Sahih al-Bukhari)",
+      "sourcear": "الحديث: كان النبي (ﷺ) يتوضأ أثناء الغسل. (صحيح البخاري)",
+      "sourcefr": "Hadith : Le Prophète (ﷺ) faisait ses ablutions pendant le Ghusl. (Sahih al-Bukhari)"
+    },
+    {
+      "id": 4,
+      "step": 4,
+      "titleen": "Pour Water Over the Head",
+      "titlear": "إفاضة الماء على الرأس",
+      "titlefr": "Verser l'eau sur la tête",
+      "descriptionen": "Pour water over the head three times, ensuring it reaches the roots of the hair.",
+      "descriptionar": "أفيض الماء على الرأس ثلاث مرات، مع التأكد من وصوله إلى أصول الشعر.",
+      "descriptionfr": "Versez de l'eau sur la tête trois fois, en veillant à ce qu'elle atteigne les racines des cheveux.",
+      "sourceen": "Hadith: The Prophet (ﷺ) poured water over his head three times. (Sahih al-Bukhari)",
+      "sourcear": "الحديث: كان النبي (ﷺ) يفيض الماء على رأسه ثلاث مرات. (صحيح البخاري)",
+      "sourcefr": "Hadith : Le Prophète (ﷺ) versait de l'eau sur sa tête trois fois. (Sahih al-Bukhari)"
+    },
+    {
+      "id": 5,
+      "step": 5,
+      "titleen": "Wash the Entire Body",
+      "titlear": "غسل الجسم كاملًا",
+      "titlefr": "Laver tout le corps",
+      "descriptionen": "Wash the entire body starting from the right side, ensuring water reaches every part (skin, hair, and under nails).",
+      "descriptionar": "اغسل الجسم كاملًا بدءًا من الجانب الأيمن، مع التأكد من وصول الماء إلى كل جزء (البشرة، الشعر، وتحت الأظافر).",
+      "descriptionfr": "Lavez tout le corps en commençant par le côté droit, en veillant à ce que l'eau atteigne chaque partie (peau, cheveux, et sous les ongles).",
+      "sourceen": "Quran: 'If you are in a state of janabah, purify yourselves...' (Surah Al-Ma'idah, 5:6)",
+      "sourcear": "القرآن: 'وَإِن كُنتُمْ جُنُبًا فَاطَّهَّرُوا.' (سورة المائدة، 5:6)",
+      "sourcefr": "Coran : 'Si vous êtes en état d'impureté majeure, purifiez-vous...' (Sourate Al-Ma'idah, 5:6)"
+    },
+    {
+      "id": 6,
+      "step": 6,
+      "titleen": "Wash the Feet",
+      "titlear": "غسل القدمين",
+      "titlefr": "Laver les pieds",
+      "descriptionen": "Finally, wash both feet up to the ankles, ensuring water reaches between the toes.",
+      "descriptionar": "أخيرًا، اغسل القدمين حتى الكعبين مع وصول الماء بين الأصابع.",
+      "descriptionfr": "Enfin, lavez les deux pieds jusqu'aux chevilles en veillant à ce que l'eau atteigne entre les orteils.",
+      "sourceen": "Prophetic tradition: The Prophet (ﷺ) washed his feet at the end of Ghusl. (Sahih Muslim)",
+      "sourcear": "السنة النبوية: كان النبي (ﷺ) يغسل قدميه في نهاية الغسل. (صحيح مسلم)",
+      "sourcefr": "Tradition prophétique : Le Prophète (ﷺ) lavait ses pieds à la fin du Ghusl. (Sahih Muslim)"
+    },
+    {
+      "id": 7,
+      "step": 7,
+      "titleen": "Supplication (Dua)",
+      "titlear": "الدعاء",
+      "titlefr": "Invocation (Dua)",
+      "descriptionen": "After completing Ghusl, say: 'Ashhadu an la ilaha illallah wahdahu la sharika lah, wa ashhadu anna Muhammadan abduhu wa rasuluh.'",
+      "descriptionar": "بعد الانتهاء من الغسل قل: 'أشهد أن لا إله إلا الله وحده لا شريك له، وأشهد أن محمداً عبده ورسوله.'",
+      "descriptionfr": "Après avoir terminé le Ghusl, dites : 'J'atteste qu'il n'y a de divinité qu'Allah, Unique sans associé, et que Muhammad est Son serviteur et messager.'",
+      "sourceen": "Hadith: 'Whoever purifies themselves and says this dua, eight gates of Paradise will be opened for them.' (Sahih Muslim)",
+      "sourcear": "الحديث: 'من تطهر وقال هذا الدعاء، فُتحت له أبواب الجنة الثمانية.' (صحيح مسلم)",
+      "sourcefr": "Hadith : 'Celui qui se purifie et prononce cette invocation, les huit portes du Paradis lui seront ouvertes.' (Sahih Muslim)"
+    }
+  ]

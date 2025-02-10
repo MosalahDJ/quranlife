@@ -12,6 +12,7 @@ import 'package:quranlife/features/controller/settings%20controllers/theme_contr
 import 'package:quranlife/features/view/home/categories_page/names%20of%20allah/allah_names.dart';
 import 'package:quranlife/features/view/home/categories_page/statistics%20page/statistics_page.dart';
 import 'package:quranlife/features/view/home/categories_page/teaching%20prayer%20page/teachingprayer.dart';
+import 'package:quranlife/features/view/home/categories_page/wudu%20and%20ghusl%20page/wudu_and_ghusle.dart';
 
 class CategoriesPage extends StatelessWidget {
   const CategoriesPage({super.key});
@@ -101,7 +102,9 @@ class CategoriesPage extends StatelessWidget {
                                   'teaching_prayer'.tr,
                                 ),
                                 mycategory(
-                                  () {},
+                                  () {
+                                    Get.to(() => const WuduAndGhusle());
+                                  },
                                   FlutterIslamicIcons.wudhu,
                                   'wudu_ghusl'.tr,
                                 ),

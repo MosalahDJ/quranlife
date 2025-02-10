@@ -127,6 +127,8 @@ flutter:
     - lib/core/assets/json/adkartype.json
     - lib/core/assets/json/names_of_allah.json
     - lib/core/assets/json/teatchingprayer.json
+    - lib/core/assets/json/wudu.json
+    - lib/core/assets/json/ghusl.json
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

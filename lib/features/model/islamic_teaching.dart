@@ -1,4 +1,4 @@
-class Teatchingprayermodel {
+class IslamicTeachingModel {
   int? id;
   int? step;
   String? titleen;
@@ -11,7 +11,7 @@ class Teatchingprayermodel {
   String? sourcear;
   String? sourcefr;
 
-  Teatchingprayermodel(
+  IslamicTeachingModel(
       {this.id,
       this.step,
       this.titleen,
@@ -24,7 +24,7 @@ class Teatchingprayermodel {
       this.sourcear,
       this.sourcefr});
 
-  Teatchingprayermodel.fromJson(Map<String, dynamic> json) {
+  IslamicTeachingModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     step = json['step'];
     titleen = json['titleen'];

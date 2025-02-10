@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:quranlife/features/model/teatchingprayermodel.dart';
+import 'package:quranlife/features/model/islamic_teaching.dart';
 
 class TeachingPrayerController extends GetxController {
-  List<Teatchingprayermodel> teachingprayer = [];
+  List<IslamicTeachingModel> teachingprayer = [];
 
   // Initialize controller and load allahNames data
   @override
@@ -14,11 +14,11 @@ class TeachingPrayerController extends GetxController {
   }
 
   // Fetch TeachingPrayer data from JSON file
-  Future<List<Teatchingprayermodel>> fetchTeachingPrayerData() async {
+  Future<List<IslamicTeachingModel>> fetchTeachingPrayerData() async {
     String jsonString = await rootBundle
         .loadString('lib/core/assets/json/teatchingprayer.json');
     final List<dynamic> jsonList = json.decode(jsonString);
-    return jsonList.map((json) => Teatchingprayermodel.fromJson(json)).toList();
+    return jsonList.map((json) => IslamicTeachingModel.fromJson(json)).toList();
   }
 
   // Load Teachingprayer data and update UI
