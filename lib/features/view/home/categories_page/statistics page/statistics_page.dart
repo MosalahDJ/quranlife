@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
+import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/features/controller/statistics%20controller/statistics_controller.dart';
 import 'package:fl_chart/fl_chart.dart';
 
@@ -38,7 +39,10 @@ class _StatisticsPageState extends State<StatisticsPage>
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text('activity_statistics'.tr),
+        title: ShimmerText(
+          text: 'activity_statistics'.tr,
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
         centerTitle: true,
         foregroundColor: Colors.white,
         backgroundColor: Colors.transparent,
@@ -72,7 +76,27 @@ class _StatisticsPageState extends State<StatisticsPage>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 24),
+                    Text(
+                      'daily_progress'.tr,
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold,
+                        color: Get.isDarkMode ? Colors.white : Colors.black87,
+                      ),
+                    ),
+                    const SizedBox(height: 24),
                     _buildDailygoalCard(),
+                    const SizedBox(height: 24),
+                    Text(
+                      'overall_progress'.tr,
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold,
+                        color: Get.isDarkMode ? Colors.white : Colors.black87,
+                      ),
+                    ),
                     const SizedBox(height: 24),
                     _buildSummaryCards(),
                     const SizedBox(height: 24),
@@ -208,7 +232,7 @@ class _StatisticsPageState extends State<StatisticsPage>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'overall_progress'.tr,
+                        'daily_goal'.tr,
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                               color: Get.isDarkMode
                                   ? Colors.white
@@ -232,8 +256,8 @@ class _StatisticsPageState extends State<StatisticsPage>
             ),
             const SizedBox(height: 24),
             Obx(() {
-              final totalItems = statctrl.totalVersesRead.value +
-                  statctrl.totalDuaasReadCount.value;
+              final totalItems = statctrl.dailyVersesRead.value +
+                  statctrl.dailyDuaasRead.value;
               return Column(
                 children: [
                   Row(
@@ -269,7 +293,7 @@ class _StatisticsPageState extends State<StatisticsPage>
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    '${(totalItems * 100 / 250).toStringAsFixed(1)}% ${'daily_goal'.tr}',
+                    '${(totalItems * 100 / 250).toStringAsFixed(1)}% ${'from_daily_goal'.tr}',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: Get.isDarkMode ? Colors.white : Colors.black87,
                         ),
@@ -407,7 +431,7 @@ class _StatisticsPageState extends State<StatisticsPage>
     required String value,
   }) {
     return Container(
-      width: Sizeconfig.screenwidth! / 3.5,
+      width: Sizeconfig.screenwidth! / 2.7,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
         color: Colors.grey[500],
