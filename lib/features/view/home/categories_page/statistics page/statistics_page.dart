@@ -379,13 +379,15 @@ class _StatisticsPageState extends State<StatisticsPage>
                               _buildLegendItem(
                                 color: pieColors[0],
                                 title: 'qoran'.tr,
-                                value: controller.totalVersesRead.value,
+                                value:
+                                    "${controller.totalVersesRead.value} ${"verses".tr}",
                               ),
                               const SizedBox(height: 16),
                               _buildLegendItem(
                                 color: pieColors[1],
                                 title: 'duaa'.tr,
-                                value: controller.totalDuaasReadCount.value,
+                                value:
+                                    "${controller.totalDuaasReadCount.value} ${"dikr".tr}",
                               ),
                             ],
                           ),
@@ -402,7 +404,7 @@ class _StatisticsPageState extends State<StatisticsPage>
   Widget _buildLegendItem({
     required Color color,
     required String title,
-    required int value,
+    required String value,
   }) {
     return Container(
       width: Sizeconfig.screenwidth! / 3.5,
@@ -433,7 +435,7 @@ class _StatisticsPageState extends State<StatisticsPage>
                     ),
               ),
               Text(
-                value.toString(),
+                value,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: color,
                       fontWeight: FontWeight.bold,
