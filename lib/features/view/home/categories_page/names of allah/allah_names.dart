@@ -2,35 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
-import 'package:quranlife/features/controller/adkar%20controller/adkar_controller.dart';
+import 'package:quranlife/features/controller/allah%20names%20controller/allah_names_controller.dart';
 import 'package:quranlife/features/controller/statistics%20controller/statistics_controller.dart';
 
-class DuaaPage extends StatefulWidget {
-  const DuaaPage(
-      {super.key, required this.duaapageID, required this.duaapagename});
-
-  final int duaapageID;
-  final String duaapagename;
+class AllahNames extends StatefulWidget {
+  const AllahNames({super.key});
 
   @override
-  State<DuaaPage> createState() => _DuaaPageState();
+  State<AllahNames> createState() => _AllahNamesState();
 }
 
-class _DuaaPageState extends State<DuaaPage> {
-  final AdkarController _adkarctrl = Get.find();
-
-  @override
-  void dispose() {
-    _adkarctrl.resetDuaaCounts();
-    super.dispose();
-  }
-
+class _AllahNamesState extends State<AllahNames> {
   @override
   Widget build(BuildContext context) {
     final statsController = Get.find<StatisticsController>();
-
-    // Filter duaas when page is built
-    _adkarctrl.filterAdkarBySection(widget.duaapageID);
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -39,7 +24,7 @@ class _DuaaPageState extends State<DuaaPage> {
         backgroundColor: Colors.transparent,
         centerTitle: true,
         title: Text(
-          widget.duaapagename.tr,
+          "allah names",
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 color: Get.isDarkMode ? Colors.white : Colors.black,
                 fontWeight: FontWeight.bold,
@@ -60,13 +45,13 @@ class _DuaaPageState extends State<DuaaPage> {
             ),
           ),
           SafeArea(
-            child: GetBuilder<AdkarController>(
+            child: GetBuilder<AllahNamesController>(
               builder: (controller) => ListView.builder(
                 padding: EdgeInsets.symmetric(
                   horizontal: Sizeconfig.screenwidth! * 0.05,
                   vertical: 16,
                 ),
-                itemCount: controller.filteredAdkar.length,
+                itemCount: controller.allahNames.length,
                 itemBuilder: (context, i) => Padding(
                   padding: const EdgeInsets.only(bottom: 24),
                   child: LayoutBuilder(
@@ -103,7 +88,7 @@ class _DuaaPageState extends State<DuaaPage> {
                                 const SizedBox(height: 20),
                                 // Duaa Text
                                 Text(
-                                  controller.filteredAdkar[i].content!,
+                                  controller.allahNames[i].name!,
                                   textAlign: TextAlign.center,
                                   textDirection: TextDirection.rtl,
                                   style: Theme.of(context)
@@ -112,7 +97,7 @@ class _DuaaPageState extends State<DuaaPage> {
                                       ?.copyWith(
                                         fontFamily: "Amiri",
                                         height: 1.8,
-                                        fontSize: 25,
+                                        fontSize: 55,
                                         fontWeight: FontWeight.bold,
                                         color: Theme.of(context)
                                             .textTheme
@@ -122,8 +107,8 @@ class _DuaaPageState extends State<DuaaPage> {
                                       ),
                                 ),
                                 // Description if exists
-                                if (controller.filteredAdkar[i].description!
-                                    .isNotEmpty) ...[
+                                if (controller
+                                    .allahNames[i].text!.isNotEmpty) ...[
                                   const SizedBox(height: 16),
                                   Container(
                                     padding: const EdgeInsets.all(12),
@@ -134,7 +119,7 @@ class _DuaaPageState extends State<DuaaPage> {
                                       borderRadius: BorderRadius.circular(8),
                                     ),
                                     child: Text(
-                                      controller.filteredAdkar[i].description!,
+                                      controller.allahNames[i].text!,
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodySmall
@@ -165,11 +150,10 @@ class _DuaaPageState extends State<DuaaPage> {
                               color: Colors.transparent,
                               child: InkWell(
                                 onTap: () {
-                                  if (controller.filteredAdkar[i].count! > 0) {
+                                  if (controller.allahNames[i].count! > 0) {
                                     setState(() {
-                                      controller.filteredAdkar[i].count =
-                                          controller.filteredAdkar[i].count! -
-                                              1;
+                                      controller.allahNames[i].count =
+                                          controller.allahNames[i].count! - 1;
                                     });
                                     statsController.incrementTotalDuaasRead();
                                     statsController.update();
@@ -180,10 +164,9 @@ class _DuaaPageState extends State<DuaaPage> {
                                   bottom: Radius.circular(15),
                                 ),
                                 child: Opacity(
-                                  opacity:
-                                      controller.filteredAdkar[i].count! > 0
-                                          ? 1.0
-                                          : 0.5,
+                                  opacity: controller.allahNames[i].count! > 0
+                                      ? 1.0
+                                      : 0.5,
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 16),
@@ -192,7 +175,7 @@ class _DuaaPageState extends State<DuaaPage> {
                                           MainAxisAlignment.center,
                                       children: [
                                         Icon(
-                                          controller.filteredAdkar[i].count! > 0
+                                          controller.allahNames[i].count! > 0
                                               ? Icons.touch_app_rounded
                                               : Icons.check_circle_outline,
                                           color: Colors.white,
@@ -200,7 +183,7 @@ class _DuaaPageState extends State<DuaaPage> {
                                         ),
                                         const SizedBox(width: 12),
                                         Text(
-                                          "${controller.filteredAdkar[i].count} ${"count".tr}",
+                                          "${controller.allahNames[i].count} ${"count".tr}",
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleMedium
@@ -216,7 +199,7 @@ class _DuaaPageState extends State<DuaaPage> {
                                 ),
                               ),
                             ),
-                          ),
+                          )
                         ],
                       ),
                     ),

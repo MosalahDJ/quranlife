@@ -9,6 +9,7 @@ import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
+import 'package:quranlife/features/view/home/categories_page/names%20of%20allah/allah_names.dart';
 import 'package:quranlife/features/view/home/categories_page/statistics%20page/statistics_page.dart';
 
 class CategoriesPage extends StatelessWidget {
@@ -159,7 +160,9 @@ class CategoriesPage extends StatelessWidget {
                                   'islamic_calendar'.tr,
                                 ),
                                 mycategory(
-                                  () {},
+                                  () {
+                                    Get.to(() => const AllahNames());
+                                  },
                                   FlutterIslamicIcons.allah99,
                                   'asma_ul-husna'.tr,
                                 ),
