@@ -2,21 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
-import 'package:quranlife/core/widgets/shimmer_text.dart';
-import 'package:quranlife/features/controller/fetching%20data%20controller/allah_names_controller.dart';
+import 'package:quranlife/features/controller/adkar%20controller/adkar_controller.dart';
 import 'package:quranlife/features/controller/statistics%20controller/statistics_controller.dart';
 
-class AllahNames extends StatefulWidget {
-  const AllahNames({super.key});
+class DuaaPage extends StatefulWidget {
+  const DuaaPage(
+      {super.key, required this.duaapageID, required this.duaapagename});
+
+  final int duaapageID;
+  final String duaapagename;
 
   @override
-  State<AllahNames> createState() => _AllahNamesState();
+  State<DuaaPage> createState() => _DuaaPageState();
 }
 
-class _AllahNamesState extends State<AllahNames> {
+class _DuaaPageState extends State<DuaaPage> {
+  final AdkarController _adkarctrl = Get.find();
+
+  @override
+  void dispose() {
+    _adkarctrl.resetDuaaCounts();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final statsController = Get.find<StatisticsController>();
+
+    // Filter duaas when page is built
+    _adkarctrl.filterAdkarBySection(widget.duaapageID);
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -24,9 +38,12 @@ class _AllahNamesState extends State<AllahNames> {
         elevation: 0,
         backgroundColor: Colors.transparent,
         centerTitle: true,
-        title: ShimmerText(
-          text: 'allah_names'.tr,
-          style: Theme.of(context).textTheme.headlineSmall,
+        title: Text(
+          widget.duaapagename.tr,
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                color: Get.isDarkMode ? Colors.white : Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
         ),
       ),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -43,13 +60,13 @@ class _AllahNamesState extends State<AllahNames> {
             ),
           ),
           SafeArea(
-            child: GetBuilder<AllahNamesController>(
+            child: GetBuilder<AdkarController>(
               builder: (controller) => ListView.builder(
                 padding: EdgeInsets.symmetric(
                   horizontal: Sizeconfig.screenwidth! * 0.05,
                   vertical: 16,
                 ),
-                itemCount: controller.allahNames.length,
+                itemCount: controller.filteredAdkar.length,
                 itemBuilder: (context, i) => Padding(
                   padding: const EdgeInsets.only(bottom: 24),
                   child: LayoutBuilder(
@@ -86,7 +103,7 @@ class _AllahNamesState extends State<AllahNames> {
                                 const SizedBox(height: 20),
                                 // Duaa Text
                                 Text(
-                                  controller.allahNames[i].name!,
+                                  controller.filteredAdkar[i].content!,
                                   textAlign: TextAlign.center,
                                   textDirection: TextDirection.rtl,
                                   style: Theme.of(context)
@@ -95,7 +112,7 @@ class _AllahNamesState extends State<AllahNames> {
                                       ?.copyWith(
                                         fontFamily: "Amiri",
                                         height: 1.8,
-                                        fontSize: 55,
+                                        fontSize: 25,
                                         fontWeight: FontWeight.bold,
                                         color: Theme.of(context)
                                             .textTheme
@@ -105,8 +122,8 @@ class _AllahNamesState extends State<AllahNames> {
                                       ),
                                 ),
                                 // Description if exists
-                                if (controller
-                                    .allahNames[i].text!.isNotEmpty) ...[
+                                if (controller.filteredAdkar[i].description!
+                                    .isNotEmpty) ...[
                                   const SizedBox(height: 16),
                                   Container(
                                     padding: const EdgeInsets.all(12),
@@ -117,7 +134,7 @@ class _AllahNamesState extends State<AllahNames> {
                                       borderRadius: BorderRadius.circular(8),
                                     ),
                                     child: Text(
-                                      controller.allahNames[i].text!,
+                                      controller.filteredAdkar[i].description!,
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodySmall
@@ -148,10 +165,11 @@ class _AllahNamesState extends State<AllahNames> {
                               color: Colors.transparent,
                               child: InkWell(
                                 onTap: () {
-                                  if (controller.allahNames[i].count! > 0) {
+                                  if (controller.filteredAdkar[i].count! > 0) {
                                     setState(() {
-                                      controller.allahNames[i].count =
-                                          controller.allahNames[i].count! - 1;
+                                      controller.filteredAdkar[i].count =
+                                          controller.filteredAdkar[i].count! -
+                                              1;
                                     });
                                     statsController.incrementTotalDuaasRead();
                                     statsController.update();
@@ -162,9 +180,10 @@ class _AllahNamesState extends State<AllahNames> {
                                   bottom: Radius.circular(15),
                                 ),
                                 child: Opacity(
-                                  opacity: controller.allahNames[i].count! > 0
-                                      ? 1.0
-                                      : 0.5,
+                                  opacity:
+                                      controller.filteredAdkar[i].count! > 0
+                                          ? 1.0
+                                          : 0.5,
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 16),
@@ -173,7 +192,7 @@ class _AllahNamesState extends State<AllahNames> {
                                           MainAxisAlignment.center,
                                       children: [
                                         Icon(
-                                          controller.allahNames[i].count! > 0
+                                          controller.filteredAdkar[i].count! > 0
                                               ? Icons.touch_app_rounded
                                               : Icons.check_circle_outline,
                                           color: Colors.white,
@@ -181,7 +200,7 @@ class _AllahNamesState extends State<AllahNames> {
                                         ),
                                         const SizedBox(width: 12),
                                         Text(
-                                          "${controller.allahNames[i].count} ${"count".tr}",
+                                          "${controller.filteredAdkar[i].count} ${"count".tr}",
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleMedium
@@ -197,7 +216,7 @@ class _AllahNamesState extends State<AllahNames> {
                                 ),
                               ),
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),
