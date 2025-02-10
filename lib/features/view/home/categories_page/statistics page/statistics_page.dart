@@ -72,11 +72,11 @@ class _StatisticsPageState extends State<StatisticsPage>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 24),
-                    _buildSummaryCards(),
+                    _buildDailygoalCard(),
                     const SizedBox(height: 24),
                     _buildPieChartSection(),
                     const SizedBox(height: 24),
-                    _buildDailygoalCard(),
+                    _buildSummaryCards(),
                     const SizedBox(height: 24),
                   ],
                 ),
