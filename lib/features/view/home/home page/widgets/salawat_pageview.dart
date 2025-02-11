@@ -21,102 +21,115 @@ class SalawatPageview extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: Sizeconfig.screenheight! < 768
-          ? Sizeconfig.screenheight! / 2.7
+          ? Sizeconfig.screenheight! / 2.5
           : Sizeconfig.screenheight! > 1010
-              ? Sizeconfig.screenheight! / 4.3
-              : Sizeconfig.screenheight! / 3.4,
-      child: PageView(children: [
-        //salat time
-        CurrentPrayTime(
-          morebuttoncolor: morebuttoncolor,
-          moreIconVisibility: true,
-          onpressed: () {},
-          textcolor2: Get.isDarkMode ? Colors.white : Colors.black,
-          textcolor: Get.isDarkMode ? kmaincolor4 : kmaincolor,
-          elevation: 2,
-          color: Get.isDarkMode
-              ? kmaincolor2dark.withOpacity(0.5)
-              : Colors.white.withOpacity(0.7),
-        ),
-
-        //Salawattime
-        Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              ? Sizeconfig.screenheight! / 4.2
+              : Sizeconfig.screenheight! / 3.3,
+      child: PageView(
+          controller: homectrl.salawatPageController,
+          onPageChanged: (index) {
+            homectrl.salawatPage.value = index;
+          },
           children: [
-            Row(
+            //salat time
+            CurrentPrayTime(
+              morebuttoncolor: morebuttoncolor,
+              moreIconVisibility: true,
+              onpressed: () {},
+              textcolor2: Get.isDarkMode ? Colors.white : Colors.black,
+              textcolor: Get.isDarkMode ? kmaincolor4 : kmaincolor,
+              elevation: 2,
+              color: Get.isDarkMode
+                  ? kmaincolor2dark.withOpacity(0.5)
+                  : Colors.white.withOpacity(0.7),
+            ),
+
+            //Salawattime
+            Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  "  ${hijri.hDay} - ${'hijri_month_${hijri.longMonthName}'.tr} - ${hijri.hYear}",
-                  style: TextStyle(
-                    color: morebuttoncolor,
-                    fontSize: 18,
+                const SizedBox(
+                  height: 25,
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "  ${hijri.hDay} - ${'hijri_month_${hijri.longMonthName}'.tr} - ${hijri.hYear}",
+                      style: TextStyle(
+                        color: morebuttoncolor,
+                        fontSize: 18,
+                      ),
+                    ),
+                    IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.more_horiz,
+                          size: 30,
+                          color: morebuttoncolor,
+                        )),
+                  ],
+                ),
+                SizedBox(
+                  height: 200,
+                  child: Ink(
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Salwatpageview(
+                                icon:
+                                    "lib/core/assets/images/salat_icons/fajr.png",
+                                salatname: "fajr".tr,
+                                salattime: "Fajr",
+                              ),
+                              Salwatpageview(
+                                icon:
+                                    "lib/core/assets/images/salat_icons/fajr.png",
+                                salatname: "sunrise".tr,
+                                salattime: "Sunrise",
+                              ),
+                              Salwatpageview(
+                                icon:
+                                    "lib/core/assets/images/salat_icons/duhr.png",
+                                salatname: "dhuhr".tr,
+                                salattime: "Dhuhr",
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Salwatpageview(
+                                icon:
+                                    "lib/core/assets/images/salat_icons/ASR.png",
+                                salatname: "asr".tr,
+                                salattime: "Asr",
+                              ),
+                              Salwatpageview(
+                                icon:
+                                    "lib/core/assets/images/salat_icons/MAGHRIB.png",
+                                salatname: "maghrib".tr,
+                                salattime: "Maghrib",
+                              ),
+                              Salwatpageview(
+                                icon:
+                                    "lib/core/assets/images/salat_icons/ISHA.png",
+                                salatname: "isha".tr,
+                                salattime: "Isha",
+                              ),
+                            ],
+                          )
+                        ]),
                   ),
                 ),
-                IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.more_horiz,
-                      size: 30,
-                      color: morebuttoncolor,
-                    )),
               ],
             ),
-            SizedBox(
-              height: 200,
-              child: Ink(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Salwatpageview(
-                            icon: "lib/core/assets/images/salat_icons/fajr.png",
-                            salatname: "fajr".tr,
-                            salattime: "Fajr",
-                          ),
-                          Salwatpageview(
-                            icon: "lib/core/assets/images/salat_icons/fajr.png",
-                            salatname: "sunrise".tr,
-                            salattime: "Sunrise",
-                          ),
-                          Salwatpageview(
-                            icon: "lib/core/assets/images/salat_icons/duhr.png",
-                            salatname: "dhuhr".tr,
-                            salattime: "Dhuhr",
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Salwatpageview(
-                            icon: "lib/core/assets/images/salat_icons/ASR.png",
-                            salatname: "asr".tr,
-                            salattime: "Asr",
-                          ),
-                          Salwatpageview(
-                            icon:
-                                "lib/core/assets/images/salat_icons/MAGHRIB.png",
-                            salatname: "maghrib".tr,
-                            salattime: "Maghrib",
-                          ),
-                          Salwatpageview(
-                            icon: "lib/core/assets/images/salat_icons/ISHA.png",
-                            salatname: "isha".tr,
-                            salattime: "Isha",
-                          ),
-                        ],
-                      )
-                    ]),
-              ),
-            ),
-          ],
-        ),
-      ]),
+          ]),
     );
   }
 }

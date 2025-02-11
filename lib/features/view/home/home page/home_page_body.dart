@@ -5,6 +5,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
+import 'package:quranlife/features/controller/home%20controller/fade_animation_controller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:quranlife/features/controller/settings%20controllers/language_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
@@ -26,7 +27,7 @@ class HomePageBody extends StatelessWidget {
   final GoogleSignoutController signoutctrl = Get.find();
   final FetchPrayerFromDate fpfctrl = Get.find();
   final LanguageController langctrl = Get.find();
-
+  final FadeAnimationController fadectrl = Get.find();
   final double _sectionSpacing = 24.0;
   final double _contentPadding = 16.0;
 
@@ -70,14 +71,14 @@ class HomePageBody extends StatelessWidget {
                 return Future.delayed(
                   const Duration(milliseconds: 1500),
                   () {
-                    homectrl.rebuildKey.value = UniqueKey();
-                    homectrl.rebuildKey1.value = UniqueKey();
-                    homectrl.rebuildKey2.value = UniqueKey();
-                    homectrl.rebuildKey3.value = UniqueKey();
-                    homectrl.rebuildKey4.value = UniqueKey();
-                    homectrl.rebuildKey5.value = UniqueKey();
-                    homectrl.rebuildKey6.value = UniqueKey();
-                    homectrl.currentPage = 0;
+                    fadectrl.rebuildKey.value = UniqueKey();
+                    fadectrl.rebuildKey1.value = UniqueKey();
+                    fadectrl.rebuildKey2.value = UniqueKey();
+                    fadectrl.rebuildKey3.value = UniqueKey();
+                    fadectrl.rebuildKey4.value = UniqueKey();
+                    fadectrl.rebuildKey5.value = UniqueKey();
+                    fadectrl.rebuildKey6.value = UniqueKey();
+                    fadectrl.currentPage = 0;
                     homectrl.update();
                   },
                 );
@@ -91,7 +92,7 @@ class HomePageBody extends StatelessWidget {
                     children: [
                       // Prayer Times Section
                       FadeInLeft(
-                          key: homectrl.rebuildKey.value,
+                          key: fadectrl.rebuildKey.value,
                           duration: const Duration(
                             seconds: 1,
                           ),
@@ -102,19 +103,19 @@ class HomePageBody extends StatelessWidget {
                           )),
                       SizedBox(height: _sectionSpacing / 3),
                       FadeInLeft(
-                        key: homectrl.rebuildKey1.value,
+                        key: fadectrl.rebuildKey1.value,
                         duration: const Duration(
                           seconds: 1,
                         ),
                         animate: true,
                         child: Center(
-                          child: GetBuilder<MyHomeController>(
-                            builder: (c) => CustomIndicator(
+                          child: Obx(
+                            () => CustomIndicator(
                               dotscolor: Get.isDarkMode
                                   ? const Color(0xffFD9B63)
                                   : kmaincolor,
                               dotscount: 2,
-                              indposition: c.currentPage ?? 0,
+                              indposition: homectrl.salawatPage.value,
                             ),
                           ),
                         ),
@@ -123,7 +124,7 @@ class HomePageBody extends StatelessWidget {
 
                       // Categories Section
                       FadeInRight(
-                        key: homectrl.rebuildKey2.value,
+                        key: fadectrl.rebuildKey2.value,
                         duration: const Duration(
                           seconds: 1,
                         ),
@@ -135,7 +136,7 @@ class HomePageBody extends StatelessWidget {
                         ),
                       ),
                       FadeInRight(
-                        key: homectrl.rebuildKey3.value,
+                        key: fadectrl.rebuildKey3.value,
                         duration: const Duration(
                           seconds: 1,
                         ),
@@ -168,7 +169,7 @@ class HomePageBody extends StatelessWidget {
                       // Nearest Mosque Section
                       const SizedBox(height: 12),
                       FadeInLeft(
-                        key: homectrl.rebuildKey4.value,
+                        key: fadectrl.rebuildKey4.value,
                         duration: const Duration(
                           seconds: 1,
                         ),
@@ -184,7 +185,7 @@ class HomePageBody extends StatelessWidget {
 
                       // Daily Wird Section
                       FadeInRight(
-                        key: homectrl.rebuildKey5.value,
+                        key: fadectrl.rebuildKey5.value,
                         duration: const Duration(
                           seconds: 1,
                         ),
@@ -197,7 +198,7 @@ class HomePageBody extends StatelessWidget {
                       ),
                       const SizedBox(height: 12),
                       FadeInRight(
-                          key: homectrl.rebuildKey6.value,
+                          key: fadectrl.rebuildKey6.value,
                           duration: const Duration(
                             seconds: 1,
                           ),

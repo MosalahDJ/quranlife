@@ -12,6 +12,7 @@ import 'package:quranlife/features/controller/animation_controllers/floating_ani
 import 'package:quranlife/features/controller/fetching%20data%20controller/ghusl_controller.dart';
 import 'package:quranlife/features/controller/fetching%20data%20controller/teaching_prayer_controller.dart';
 import 'package:quranlife/features/controller/fetching%20data%20controller/wudu_controller.dart';
+import 'package:quranlife/features/controller/home%20controller/fade_animation_controller.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
 import 'package:quranlife/features/controller/Auth%20controller/textvalidatecontroller.dart';
 import 'package:quranlife/features/controller/notfication%20controller/sub%20controllers/adhan_noti_controller.dart';
@@ -70,6 +71,7 @@ class Mybinding implements Bindings {
     Get.put<ThemeController>(ThemeController(), permanent: true);
     //home injection
     Get.put<MyHomeController>(MyHomeController());
+    Get.put<FadeAnimationController>(FadeAnimationController());
     Get.put<FloatingAnimationController>(FloatingAnimationController());
     //quraan injection
     Get.put<QuraanController>(QuraanController());

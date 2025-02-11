@@ -15,8 +15,8 @@ class FloatingAnimationController extends GetxController
     )..repeat(reverse: true);
 
     animation = Tween<double>(
-      begin: -5.0,
-      end: 5.0,
+      begin: -7.0,
+      end: 7.0,
     ).animate(CurvedAnimation(
       parent: animationController,
       curve: Curves.easeInOut,
