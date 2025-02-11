@@ -130,6 +130,8 @@ flutter:
     - lib/core/assets/json/wudu.json
     - lib/core/assets/json/ghusl.json
     - lib/core/assets/json/sunanjumua.json
+    - lib/core/assets/json/quraanicsuplication.json
+    - lib/core/assets/json/seekingforgivnes.json
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

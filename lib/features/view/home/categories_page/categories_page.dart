@@ -11,6 +11,8 @@ import 'package:quranlife/features/controller/home%20controller/myhomecontroller
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
 import 'package:quranlife/features/view/home/categories_page/friday%20sunnah/friday_sunnah.dart';
 import 'package:quranlife/features/view/home/categories_page/names%20of%20allah/allah_names.dart';
+import 'package:quranlife/features/view/home/categories_page/quranic%20supplications/quranic_supplications.dart';
+import 'package:quranlife/features/view/home/categories_page/seeking%20forgivness/seeking_forgivnes.dart';
 import 'package:quranlife/features/view/home/categories_page/statistics%20page/statistics_page.dart';
 import 'package:quranlife/features/view/home/categories_page/teaching%20prayer%20page/teachingprayer.dart';
 import 'package:quranlife/features/view/home/categories_page/wudu%20and%20ghusl%20page/wudu_and_ghusle.dart';
@@ -142,7 +144,9 @@ class CategoriesPage extends StatelessWidget {
                                   'al-Hamd'.tr,
                                 ),
                                 mycategory(
-                                  () {},
+                                  () {
+                                    Get.to(() => const SeekingForgivnes());
+                                  },
                                   FlutterIslamicIcons.prayingPerson,
                                   'istighfar'.tr,
                                 ),
@@ -152,7 +156,9 @@ class CategoriesPage extends StatelessWidget {
                                   'islamic_ruqyah'.tr,
                                 ),
                                 mycategory(
-                                  () {},
+                                  () {
+                                    Get.to(() => const QuranicSupplications());
+                                  },
                                   Icons.favorite_rounded,
                                   'quranic_supplications'.tr,
                                 ),
