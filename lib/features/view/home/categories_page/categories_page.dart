@@ -11,6 +11,8 @@ import 'package:quranlife/features/controller/home%20controller/myhomecontroller
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
 import 'package:quranlife/features/view/home/categories_page/friday%20sunnah/friday_sunnah.dart';
 import 'package:quranlife/features/view/home/categories_page/names%20of%20allah/allah_names.dart';
+import 'package:quranlife/features/view/home/categories_page/praise/praise.dart';
+import 'package:quranlife/features/view/home/categories_page/prophets%20suplication/prophets_supplication.dart';
 import 'package:quranlife/features/view/home/categories_page/quranic%20supplications/quranic_supplications.dart';
 import 'package:quranlife/features/view/home/categories_page/seeking%20forgivness/seeking_forgivnes.dart';
 import 'package:quranlife/features/view/home/categories_page/statistics%20page/statistics_page.dart';
@@ -139,7 +141,9 @@ class CategoriesPage extends StatelessWidget {
                                   'hajj_umrah'.tr,
                                 ),
                                 mycategory(
-                                  () {},
+                                  () {
+                                    Get.to(() => const Praise());
+                                  },
                                   Icons.volunteer_activism_rounded,
                                   'al-Hamd'.tr,
                                 ),
@@ -163,7 +167,9 @@ class CategoriesPage extends StatelessWidget {
                                   'quranic_supplications'.tr,
                                 ),
                                 mycategory(
-                                  () {},
+                                  () {
+                                    Get.to(() => const ProphetsSupplication());
+                                  },
                                   MdiIcons.accountVoice,
                                   'prophets_supplications'.tr,
                                 ),

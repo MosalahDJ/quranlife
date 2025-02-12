@@ -10,6 +10,8 @@ import 'package:quranlife/features/controller/adkar%20controller/adkar_controlle
 import 'package:quranlife/features/controller/fetching%20data%20controller/allah_names_controller.dart';
 import 'package:quranlife/features/controller/animation_controllers/floating_animation_controller.dart';
 import 'package:quranlife/features/controller/fetching%20data%20controller/ghusl_controller.dart';
+import 'package:quranlife/features/controller/fetching%20data%20controller/praise_controller.dart';
+import 'package:quranlife/features/controller/fetching%20data%20controller/prophets_supplication_controller.dart';
 import 'package:quranlife/features/controller/fetching%20data%20controller/quraanic_supplication_controller.dart';
 import 'package:quranlife/features/controller/fetching%20data%20controller/seeking_forgivnes.dart';
 import 'package:quranlife/features/controller/fetching%20data%20controller/sunan_jumua_controller.dart';
@@ -94,6 +96,8 @@ class Mybinding implements Bindings {
     Get.put<QuraanicSupplicationController>(QuraanicSupplicationController());
     Get.put<QuraanicSupplicationController>(QuraanicSupplicationController());
     Get.put<SeekingForgivnesController>(SeekingForgivnesController());
+    Get.put<ProphetsSupplicationController>(ProphetsSupplicationController());
+    Get.put<PraiseController>(PraiseController());
     //complain injection
     Get.put<UrlLuncherAndSharingController>(UrlLuncherAndSharingController(),
         permanent: true);
