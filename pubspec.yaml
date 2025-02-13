@@ -134,6 +134,7 @@ flutter:
     - lib/core/assets/json/seekingforgivnes.json
     - lib/core/assets/json/prophets_supplication.json
     - lib/core/assets/json/praise.json
+    - lib/core/assets/json/ahadit.json
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -160,6 +160,7 @@ class Messages extends Translations {
           'category': 'Category',
           'quran_wird': '   Daily verse',
           'hadith_wird': '   Hadith Wird',
+          'hadith': "Hadith",
           'allah_names': '   Allah Names',
           'source': 'Source',
 
@@ -444,6 +445,7 @@ class Messages extends Translations {
           'category': 'أقسام',
           'quran_wird': 'الآية اليومية  ',
           'hadith_wird': 'ورد الحديث   ',
+          'hadith': "الحديث",
           'allah_names': 'أسماء الله   ',
           'source': 'المصدر',
 
@@ -737,6 +739,7 @@ class Messages extends Translations {
           'category': 'Catégories',
           'quran_wird': '   Verset du Jour',
           'hadith_wird': '   Wird du Hadith',
+          'hadith': "Hadith",
           'allah_names': '   Noms d\'Allah',
           'source': 'Source',
 
