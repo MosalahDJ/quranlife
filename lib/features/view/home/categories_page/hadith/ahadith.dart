@@ -7,14 +7,14 @@ import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/features/controller/ahadith%20controller/ahadith_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/language_controller.dart';
 
-class Hadith extends StatefulWidget {
-  const Hadith({super.key});
+class Ahadith extends StatefulWidget {
+  const Ahadith({super.key});
 
   @override
-  State<Hadith> createState() => _HadithState();
+  State<Ahadith> createState() => _AhadithState();
 }
 
-class _HadithState extends State<Hadith> {
+class _AhadithState extends State<Ahadith> {
   @override
   Widget build(BuildContext context) {
     final LanguageController langctrl = Get.find();
@@ -63,7 +63,9 @@ class _HadithState extends State<Hadith> {
                           child: LayoutBuilder(
                             builder: (context, constraints) => Container(
                               decoration: BoxDecoration(
-                                color: Theme.of(context).cardColor,
+                                color: Theme.of(context)
+                                    .cardColor
+                                    .withOpacity(0.7),
                                 borderRadius: BorderRadius.circular(15),
                                 boxShadow: [
                                   BoxShadow(
