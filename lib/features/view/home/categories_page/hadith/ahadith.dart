@@ -23,6 +23,7 @@ class _AhadithState extends State<Ahadith> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        foregroundColor: Colors.white,
         elevation: 0,
         backgroundColor: Colors.transparent,
         centerTitle: true,

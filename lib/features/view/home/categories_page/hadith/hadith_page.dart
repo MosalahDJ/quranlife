@@ -24,6 +24,7 @@ class _HadithPageState extends State<HadithPage> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        foregroundColor: Colors.white,
         elevation: 0,
         backgroundColor: Colors.transparent,
         centerTitle: true,

@@ -22,11 +22,12 @@ class _NamePageState extends State<NamePage> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        foregroundColor: Colors.white,
         elevation: 0,
         backgroundColor: Colors.transparent,
         centerTitle: true,
         title: ShimmerText(
-          text: "${"hadith".tr} ${widget.id}",
+          text: allahnamesctrl.allahNames[widget.id].name!,
           style: Theme.of(context).textTheme.headlineSmall,
         ),
       ),
@@ -50,99 +51,93 @@ class _NamePageState extends State<NamePage> {
             ),
           ),
           SafeArea(
-            child: Padding(
-              padding:
-                  const EdgeInsets.only(bottom: 0, left: 15, right: 15, top: 0),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 24),
-                      child: LayoutBuilder(
-                        builder: (context, constraints) => Container(
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).cardColor,
-                            borderRadius: BorderRadius.circular(15),
-                            boxShadow: [
-                              BoxShadow(
-                                color: kmaincolor.withOpacity(0.08),
-                                blurRadius: 15,
-                                offset: const Offset(0, 5),
-                                spreadRadius: 1,
-                              ),
-                            ],
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    bottom: 0, left: 15, right: 15, top: 0),
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 24),
+                  child: LayoutBuilder(
+                    builder: (context, constraints) => Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).cardColor,
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                          BoxShadow(
+                            color: kmaincolor.withOpacity(0.08),
+                            blurRadius: 15,
+                            offset: const Offset(0, 5),
+                            spreadRadius: 1,
                           ),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                // Duaa Content Container
-                                Container(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(24, 28, 24, 20),
-                                  child: Column(
-                                    children: [
-                                      // Islamic Decoration
-                                      SizedBox(
-                                        height: Sizeconfig.screenheight! / 11,
-                                        width: Sizeconfig.screenwidth,
-                                        child: Image.asset(
-                                          'lib/core/assets/images/background_image/islamic_separator.png',
-                                          fit: BoxFit.fill,
-                                        ),
-                                      ),
-                                      const SizedBox(height: 20),
-                                      // Duaa Text
-                                      Text(
-                                        allahnamesctrl
-                                            .allahNames[widget.id - 1].name!,
-                                        textAlign: TextAlign.center,
-                                        textDirection: TextDirection.rtl,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyLarge
-                                            ?.copyWith(
-                                              fontFamily: "Amiri",
-                                              height: 1.8,
-                                              fontSize: 24,
-                                              fontWeight: FontWeight.bold,
-                                              color: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyLarge
-                                                  ?.color
-                                                  ?.withOpacity(0.87),
-                                            ),
-                                      ),
-                                      Text(
-                                        allahnamesctrl
-                                            .allahNames[widget.id - 1].text!,
-                                        textAlign: TextAlign.center,
-                                        textDirection: TextDirection.rtl,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyLarge
-                                            ?.copyWith(
-                                              fontFamily: "Cairo",
-                                              height: 1.8,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
-                                              color: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyLarge
-                                                  ?.color
-                                                  ?.withOpacity(0.87),
-                                            ),
-                                      ),
-                                    ],
+                        ],
+                      ),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Container(
+                              padding:
+                                  const EdgeInsets.fromLTRB(24, 28, 24, 20),
+                              child: Column(
+                                children: [
+                                  // Islamic Decoration
+                                  SizedBox(
+                                    height: Sizeconfig.screenheight! / 11,
+                                    width: Sizeconfig.screenwidth,
+                                    child: Image.asset(
+                                      'lib/core/assets/images/background_image/islamic_separator.png',
+                                      fit: BoxFit.fill,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                  const SizedBox(height: 20),
+                                  Text(
+                                    allahnamesctrl.allahNames[widget.id].name!,
+                                    textAlign: TextAlign.center,
+                                    textDirection: TextDirection.rtl,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge
+                                        ?.copyWith(
+                                          fontFamily: "Amiri",
+                                          height: 1.8,
+                                          fontSize: 55,
+                                          fontWeight: FontWeight.bold,
+                                          color: Theme.of(context)
+                                              .textTheme
+                                              .bodyLarge
+                                              ?.color
+                                              ?.withOpacity(0.87),
+                                        ),
+                                  ),
+                                  //description
+                                  Text(
+                                    allahnamesctrl.allahNames[widget.id].text!,
+                                    textAlign: TextAlign.center,
+                                    textDirection: TextDirection.rtl,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge
+                                        ?.copyWith(
+                                          fontFamily: "Cairo",
+                                          height: 1.8,
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.bold,
+                                          color: Theme.of(context)
+                                              .textTheme
+                                              .bodyLarge
+                                              ?.color
+                                              ?.withOpacity(0.87),
+                                        ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
+                          ],
                         ),
                       ),
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),

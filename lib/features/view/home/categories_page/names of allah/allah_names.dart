@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
@@ -5,7 +6,7 @@ import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/features/controller/fetching%20data%20controller/allah_names_controller.dart';
-import 'package:quranlife/features/controller/statistics%20controller/statistics_controller.dart';
+import 'package:quranlife/features/view/home/categories_page/names%20of%20allah/name_page.dart';
 
 class AllahNames extends StatefulWidget {
   const AllahNames({super.key});
@@ -17,11 +18,12 @@ class AllahNames extends StatefulWidget {
 class _AllahNamesState extends State<AllahNames> {
   @override
   Widget build(BuildContext context) {
-    final statsController = Get.find<StatisticsController>();
+    final allahnamesctrl = Get.find<AllahNamesController>();
 
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        foregroundColor: Colors.white,
         elevation: 0,
         backgroundColor: Colors.transparent,
         centerTitle: true,
@@ -51,23 +53,29 @@ class _AllahNamesState extends State<AllahNames> {
             ),
           ),
           SafeArea(
-            child: GetBuilder<AllahNamesController>(
-              builder: (controller) => ListView.builder(
-                padding: EdgeInsets.symmetric(
-                  horizontal: Sizeconfig.screenwidth! * 0.05,
-                  vertical: 16,
-                ),
-                itemCount: controller.allahNames.length,
-                itemBuilder: (context, i) => Padding(
-                  padding: const EdgeInsets.only(bottom: 24),
-                  child: LayoutBuilder(
-                    builder: (context, constraints) => Container(
+            child: GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                crossAxisSpacing: 10,
+                childAspectRatio: 1.1,
+              ),
+              padding: EdgeInsets.symmetric(
+                horizontal: Sizeconfig.screenwidth! * 0.05,
+                vertical: 8,
+              ),
+              itemCount: allahnamesctrl.allahNames.length,
+              itemBuilder: (context, i) => Padding(
+                padding: const EdgeInsets.only(bottom: 12),
+                child: LayoutBuilder(
+                  builder: (context, constraints) => InkWell(
+                    onTap: () => Get.to(() => NamePage(id: i)),
+                    child: Container(
                       decoration: BoxDecoration(
-                        color: Theme.of(context).cardColor,
+                        color: Theme.of(context).cardColor.withOpacity(0.7),
                         borderRadius: BorderRadius.circular(15),
                         boxShadow: [
                           BoxShadow(
-                            color: kmaincolor.withOpacity(0.08),
+                            color: kmaincolor.withOpacity(0.5),
                             blurRadius: 15,
                             offset: const Offset(0, 5),
                             spreadRadius: 1,
@@ -76,136 +84,25 @@ class _AllahNamesState extends State<AllahNames> {
                       ),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          // Duaa Content Container
-                          Container(
-                            padding: const EdgeInsets.fromLTRB(24, 28, 24, 20),
-                            child: Column(
-                              children: [
-                                // Islamic Decoration
-                                SizedBox(
-                                  height: Sizeconfig.screenheight! / 11,
-                                  width: Sizeconfig.screenwidth,
-                                  child: Image.asset(
-                                    'lib/core/assets/images/background_image/islamic_separator.png',
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                                const SizedBox(height: 20),
-                                // Duaa Text
-                                Text(
-                                  controller.allahNames[i].name!,
-                                  textAlign: TextAlign.center,
-                                  textDirection: TextDirection.rtl,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyLarge
-                                      ?.copyWith(
-                                        fontFamily: "Amiri",
-                                        height: 1.8,
-                                        fontSize: 55,
-                                        fontWeight: FontWeight.bold,
-                                        color: Theme.of(context)
-                                            .textTheme
-                                            .bodyLarge
-                                            ?.color
-                                            ?.withOpacity(0.87),
-                                      ),
-                                ),
-                                // Description if exists
-                                if (controller
-                                    .allahNames[i].text!.isNotEmpty) ...[
-                                  const SizedBox(height: 16),
-                                  Container(
-                                    padding: const EdgeInsets.all(12),
-                                    decoration: BoxDecoration(
-                                      color: Get.isDarkMode
-                                          ? Colors.grey[400]
-                                          : kmaincolor.withOpacity(0.05),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    child: Text(
-                                      controller.allahNames[i].text!,
-                                      style: Theme.of(context)
+                          Text(
+                            allahnamesctrl.allahNames[i].name!,
+                            textAlign: TextAlign.center,
+                            textDirection: TextDirection.rtl,
+                            style:
+                                Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                      fontFamily: "Amiri",
+                                      height: 1.8,
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold,
+                                      color: Theme.of(context)
                                           .textTheme
-                                          .bodySmall
-                                          ?.copyWith(
-                                              height: 1.6,
-                                              color: kmaincolor,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 16,
-                                              fontFamily: "Cairo"),
-                                      textAlign: TextAlign.center,
-                                      textDirection: TextDirection.rtl,
+                                          .bodyLarge
+                                          ?.color
+                                          ?.withOpacity(0.87),
                                     ),
-                                  ),
-                                ],
-                              ],
-                            ),
                           ),
-                          // Counter Button
-                          Container(
-                            height: 56,
-                            decoration: BoxDecoration(
-                              color: kmaincolor,
-                              borderRadius: const BorderRadius.vertical(
-                                bottom: Radius.circular(15),
-                              ),
-                            ),
-                            child: Material(
-                              color: Colors.transparent,
-                              child: InkWell(
-                                onTap: () {
-                                  if (controller.allahNames[i].count! > 0) {
-                                    setState(() {
-                                      controller.allahNames[i].count =
-                                          controller.allahNames[i].count! - 1;
-                                    });
-                                    statsController.incrementTotalDuaasRead();
-                                    statsController.update();
-                                    controller.update();
-                                  }
-                                },
-                                borderRadius: const BorderRadius.vertical(
-                                  bottom: Radius.circular(15),
-                                ),
-                                child: Opacity(
-                                  opacity: controller.allahNames[i].count! > 0
-                                      ? 1.0
-                                      : 0.5,
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          controller.allahNames[i].count! > 0
-                                              ? Icons.touch_app_rounded
-                                              : Icons.check_circle_outline,
-                                          color: Colors.white,
-                                          size: 22,
-                                        ),
-                                        const SizedBox(width: 12),
-                                        Text(
-                                          "${controller.allahNames[i].count} ${"count".tr}",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleMedium
-                                              ?.copyWith(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 18,
-                                              ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
                         ],
                       ),
                     ),
