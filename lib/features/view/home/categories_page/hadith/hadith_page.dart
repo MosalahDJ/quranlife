@@ -4,11 +4,12 @@ import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
-import 'package:quranlife/features/controller/fetching%20data%20controller/quraanic_supplication_controller.dart';
+import 'package:quranlife/features/controller/ahadith%20controller/ahadith_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/language_controller.dart';
 
 class HadithPage extends StatefulWidget {
-  const HadithPage({super.key});
+  const HadithPage({super.key, required this.id});
+  final int id;
 
   @override
   State<HadithPage> createState() => _HadithPageState();
@@ -26,7 +27,7 @@ class _HadithPageState extends State<HadithPage> {
         backgroundColor: Colors.transparent,
         centerTitle: true,
         title: ShimmerText(
-          text: 'quranic_supplications'.tr,
+          text: "${"hadith".tr} ${widget.id}",
           style: Theme.of(context).textTheme.headlineSmall,
         ),
       ),
@@ -51,163 +52,219 @@ class _HadithPageState extends State<HadithPage> {
             ),
           ),
           SafeArea(
-            child: GetBuilder<QuraanicSupplicationController>(
-              builder: (controller) => ListView.builder(
-                padding: EdgeInsets.symmetric(
-                  horizontal: Sizeconfig.screenwidth! * 0.05,
-                  vertical: 16,
-                ),
-                itemCount: controller.quraanicSupplication.length,
-                itemBuilder: (context, i) => Padding(
-                  padding: const EdgeInsets.only(bottom: 24),
-                  child: LayoutBuilder(
-                    builder: (context, constraints) => Container(
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).cardColor,
-                        borderRadius: BorderRadius.circular(15),
-                        boxShadow: [
-                          BoxShadow(
-                            color: kmaincolor.withOpacity(0.08),
-                            blurRadius: 15,
-                            offset: const Offset(0, 5),
-                            spreadRadius: 1,
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          // Duaa Content Container
-                          Container(
-                            padding: const EdgeInsets.fromLTRB(24, 28, 24, 20),
-                            child: Column(
-                              children: [
-                                // Islamic Decoration
-                                SizedBox(
-                                  height: Sizeconfig.screenheight! / 11,
-                                  width: Sizeconfig.screenwidth,
-                                  child: Image.asset(
-                                    'lib/core/assets/images/background_image/islamic_separator.png',
-                                    fit: BoxFit.fill,
-                                  ),
+            child: GetBuilder<AhadithController>(
+              builder: (controller) => Padding(
+                padding: const EdgeInsets.only(bottom: 24),
+                child: LayoutBuilder(
+                  builder: (context, constraints) => Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).cardColor,
+                      borderRadius: BorderRadius.circular(15),
+                      boxShadow: [
+                        BoxShadow(
+                          color: kmaincolor.withOpacity(0.08),
+                          blurRadius: 15,
+                          offset: const Offset(0, 5),
+                          spreadRadius: 1,
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        // Duaa Content Container
+                        Container(
+                          padding: const EdgeInsets.fromLTRB(24, 28, 24, 20),
+                          child: Column(
+                            children: [
+                              // Islamic Decoration
+                              SizedBox(
+                                height: Sizeconfig.screenheight! / 11,
+                                width: Sizeconfig.screenwidth,
+                                child: Image.asset(
+                                  'lib/core/assets/images/background_image/islamic_separator.png',
+                                  fit: BoxFit.fill,
                                 ),
-                                const SizedBox(height: 20),
-                                // Duaa Text
-                                Text(
+                              ),
+                              const SizedBox(height: 20),
+                              // Duaa Text
+                              Text(
+                                langctrl.language.value == "ar"
+                                    ? controller.ahadith[widget.id - 1].titleAr!
+                                    : langctrl.language.value == "fr"
+                                        ? controller
+                                            .ahadith[widget.id - 1].textFr!
+                                        : controller
+                                            .ahadith[widget.id - 1].titleEn!,
+                                textAlign: TextAlign.center,
+                                textDirection: TextDirection.rtl,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge
+                                    ?.copyWith(
+                                      fontFamily: "Amiri",
+                                      height: 1.8,
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold,
+                                      color: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge
+                                          ?.color
+                                          ?.withOpacity(0.87),
+                                    ),
+                              ),
+                              // Description if exists
+                              const SizedBox(height: 16),
+                              Container(
+                                padding: const EdgeInsets.all(12),
+                                decoration: BoxDecoration(
+                                  color: Get.isDarkMode
+                                      ? Colors.grey[400]
+                                      : kmaincolor.withOpacity(0.05),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Text(
                                   langctrl.language.value == "ar"
                                       ? controller
-                                          .quraanicSupplication[i].titlear!
+                                          .ahadith[widget.id - 1].textAr!
                                       : langctrl.language.value == "fr"
                                           ? controller
-                                              .quraanicSupplication[i].titlefr!
+                                              .ahadith[widget.id - 1].textFr!
                                           : controller
-                                              .quraanicSupplication[i].titleen!,
-                                  textAlign: TextAlign.center,
-                                  textDirection: TextDirection.rtl,
+                                              .ahadith[widget.id - 1].textEn!,
                                   style: Theme.of(context)
                                       .textTheme
-                                      .bodyLarge
+                                      .bodySmall
                                       ?.copyWith(
-                                        fontFamily: "Amiri",
-                                        height: 1.8,
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.bold,
-                                        color: Theme.of(context)
-                                            .textTheme
-                                            .bodyLarge
-                                            ?.color
-                                            ?.withOpacity(0.87),
-                                      ),
+                                          height: 1.6,
+                                          color: kmaincolor,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                          fontFamily: "Cairo"),
+                                  textAlign: TextAlign.center,
+                                  textDirection: TextDirection.rtl,
                                 ),
-                                // Description if exists
-                                const SizedBox(height: 16),
-                                Container(
-                                  padding: const EdgeInsets.all(12),
-                                  decoration: BoxDecoration(
-                                    color: Get.isDarkMode
-                                        ? Colors.grey[400]
-                                        : kmaincolor.withOpacity(0.05),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Text(
-                                    langctrl.language.value == "ar"
-                                        ? controller.quraanicSupplication[i]
-                                            .descriptionar!
-                                        : langctrl.language.value == "fr"
-                                            ? controller.quraanicSupplication[i]
-                                                .descriptionfr!
-                                            : controller.quraanicSupplication[i]
-                                                .descriptionen!,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall
-                                        ?.copyWith(
-                                            height: 1.6,
-                                            color: kmaincolor,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16,
-                                            fontFamily: "Cairo"),
-                                    textAlign: TextAlign.center,
-                                    textDirection: TextDirection.rtl,
-                                  ),
+                              ),
+                              // Description if exists
+                              const SizedBox(height: 16),
+                              Container(
+                                padding: const EdgeInsets.all(12),
+                                decoration: BoxDecoration(
+                                  color: Get.isDarkMode
+                                      ? Colors.grey[400]
+                                      : kmaincolor.withOpacity(0.05),
+                                  borderRadius: BorderRadius.circular(8),
                                 ),
-                                // source
-                                const SizedBox(height: 16),
-                                Container(
-                                  padding: const EdgeInsets.all(12),
-                                  decoration: BoxDecoration(
-                                    color: Get.isDarkMode
-                                        ? Colors.grey[400]
-                                        : kmaincolor.withOpacity(0.05),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                        "${"source".tr}:",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall
-                                            ?.copyWith(
-                                                height: 1.6,
-                                                color: kmaincolor,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 18,
-                                                fontFamily: "Cairo"),
-                                        textAlign: TextAlign.center,
-                                        textDirection: TextDirection.rtl,
-                                      ),
-                                      Text(
-                                        langctrl.language.value == "ar"
-                                            ? controller.quraanicSupplication[i]
-                                                .sourcear!
-                                            : langctrl.language.value == "fr"
-                                                ? controller
-                                                    .quraanicSupplication[i]
-                                                    .sourcefr!
-                                                : controller
-                                                    .quraanicSupplication[i]
-                                                    .sourceen!,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall
-                                            ?.copyWith(
-                                                height: 1.6,
-                                                color: kmaincolor,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 16,
-                                                fontFamily: "Cairo"),
-                                        textAlign: TextAlign.center,
-                                        textDirection: TextDirection.rtl,
-                                      ),
-                                    ],
-                                  ),
+                                child: Text(
+                                  langctrl.language.value == "ar"
+                                      ? controller
+                                          .ahadith[widget.id - 1].narratorAr!
+                                      : langctrl.language.value == "fr"
+                                          ? controller.ahadith[widget.id - 1]
+                                              .narratorFr!
+                                          : controller.ahadith[widget.id - 1]
+                                              .narratorEn!,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall
+                                      ?.copyWith(
+                                          height: 1.6,
+                                          color: kmaincolor,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                          fontFamily: "Cairo"),
+                                  textAlign: TextAlign.center,
+                                  textDirection: TextDirection.rtl,
                                 ),
-                              ],
-                            ),
+                              ),
+                              // Description if exists
+                              const SizedBox(height: 16),
+                              Container(
+                                padding: const EdgeInsets.all(12),
+                                decoration: BoxDecoration(
+                                  color: Get.isDarkMode
+                                      ? Colors.grey[400]
+                                      : kmaincolor.withOpacity(0.05),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Text(
+                                  langctrl.language.value == "ar"
+                                      ? controller
+                                          .ahadith[widget.id - 1].explanationAr!
+                                      : langctrl.language.value == "fr"
+                                          ? controller.ahadith[widget.id - 1]
+                                              .explanationFr!
+                                          : controller.ahadith[widget.id - 1]
+                                              .explanationEn!,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall
+                                      ?.copyWith(
+                                          height: 1.6,
+                                          color: kmaincolor,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                          fontFamily: "Cairo"),
+                                  textAlign: TextAlign.center,
+                                  textDirection: TextDirection.rtl,
+                                ),
+                              ),
+                              // source
+                              const SizedBox(height: 16),
+                              Container(
+                                padding: const EdgeInsets.all(12),
+                                decoration: BoxDecoration(
+                                  color: Get.isDarkMode
+                                      ? Colors.grey[400]
+                                      : kmaincolor.withOpacity(0.05),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      "${"source".tr}:",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall
+                                          ?.copyWith(
+                                              height: 1.6,
+                                              color: kmaincolor,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18,
+                                              fontFamily: "Cairo"),
+                                      textAlign: TextAlign.center,
+                                      textDirection: TextDirection.rtl,
+                                    ),
+                                    Text(
+                                      langctrl.language.value == "ar"
+                                          ? controller
+                                              .ahadith[widget.id - 1].sourceAr!
+                                          : langctrl.language.value == "fr"
+                                              ? controller
+                                                  .ahadith[widget.id - 1]
+                                                  .sourceFr!
+                                              : controller
+                                                  .ahadith[widget.id - 1]
+                                                  .sourceEn!,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall
+                                          ?.copyWith(
+                                              height: 1.6,
+                                              color: kmaincolor,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16,
+                                              fontFamily: "Cairo"),
+                                      textAlign: TextAlign.center,
+                                      textDirection: TextDirection.rtl,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
