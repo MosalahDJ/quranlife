@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
+import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/features/controller/fetching%20data%20controller/prophets_supplication_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/language_controller.dart';
@@ -32,6 +33,13 @@ class _ProphetsSupplicationState extends State<ProphetsSupplication> {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Stack(
         children: [
+          Gradientbackground(
+            height: Sizeconfig.screenheight! / 2.5,
+            gradientcolor: [
+              kmaincolor,
+              Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
+            ],
+          ),
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(

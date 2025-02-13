@@ -28,6 +28,7 @@ class HijriCalender extends StatelessWidget {
         children: [
           //gradient background
           Gradientbackground(
+            height: Sizeconfig.screenheight! / 2.5,
             gradientcolor: [
               kmaincolor,
               Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
