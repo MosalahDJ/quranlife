@@ -77,11 +77,11 @@ class _HadithState extends State<Hadith> {
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Text(
                                       "${"hadith".tr} ${controller.ahadith[i].id}",
-                                      textAlign: TextAlign.start,
+                                      textAlign: TextAlign.center,
                                       textDirection: TextDirection.rtl,
                                       style: Theme.of(context)
                                           .textTheme
@@ -125,25 +125,6 @@ class _HadithState extends State<Hadith> {
                                         textAlign: TextAlign.center,
                                         textDirection: TextDirection.rtl,
                                       ),
-                                    ),
-                                    Text(
-                                      controller.ahadith[i].titleAr!,
-                                      textAlign: TextAlign.center,
-                                      textDirection: TextDirection.rtl,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyLarge
-                                          ?.copyWith(
-                                            fontFamily: "Amiri",
-                                            height: 1.8,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                            color: Theme.of(context)
-                                                .textTheme
-                                                .bodyLarge
-                                                ?.color
-                                                ?.withOpacity(0.87),
-                                          ),
                                     ),
                                   ],
                                 ),
