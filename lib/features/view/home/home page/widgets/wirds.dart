@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
+import 'package:quranlife/features/controller/ahadith%20controller/ahadith_controller.dart';
+import 'package:quranlife/features/controller/fetching%20data%20controller/allah_names_controller.dart';
 import 'package:quranlife/features/controller/quraan%20controller/quraan_controller.dart';
 // import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
 
@@ -10,6 +12,8 @@ class Wirds extends StatelessWidget {
 
   final Color mycolor;
   final QuraanController quranctrl = Get.find();
+  final AllahNamesController allahnamesctrl = Get.find();
+  final AhadithController hadithctrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +45,10 @@ class Wirds extends StatelessWidget {
 
             WirdCard(
               mycolor: mycolor,
-              text:
-                  "حَدَّثَنَا مُحَمَّدُ بْنُ العَلاَءِ، قَالَ: حَدَّثَنَا أَبُو أُسَامَةَ، عَنْ بُرَيْدٍ، عَنْ أَبِي بُرْدَةَ، عَنْ أَبِي مُوسَى الأشعري رضي الله تعالى عنه قَالَ: سُئِلَ النَّبِيُّ ﷺ عَنْ أَشْيَاءَ كَرِهَهَا، فَلَمَّا أُكْثِرَ عَلَيْهِ غَضِبَ، ثُمَّ قَالَ لِلنَّاسِ: سَلُونِي عَمَّا شِئْتُمْ قَالَ رَجُلٌ: مَنْ أَبِي؟ قَالَ: أَبُوكَ حُذَافَةُ فَقَامَ آخَرُ فَقَالَ: مَنْ أَبِي يَا رَسُولَ اللَّهِ؟ فَقَالَ: أَبُوكَ سَالِمٌ مَوْلَى شَيْبَةَ فَلَمَّا رَأَى عُمَرُ مَا فِي وجْهِهِ قَالَ: يَا رَسُولَ اللَّهِ، إِنَّا نَتُوبُ إِلَى اللَّهِ .",
+              text: hadithctrl.dailyHadith.value["Hadithnarator"],
               cardtype: "hadith_wird".tr,
+              text2:
+                  "${hadithctrl.dailyHadith.value["Hadithtext"]} \n${hadithctrl.dailyHadith.value["Hadithsource"]}",
             ),
             SizedBox(
               height: Sizeconfig.screenheight! / 100,
@@ -53,9 +58,9 @@ class Wirds extends StatelessWidget {
 
             WirdCard(
               mycolor: mycolor,
-              text:
-                  "الباسط :يقتر على من يشاء ويوسع على من يشاء على حسب ما يرى من المصلحة لعباده.",
+              text: allahnamesctrl.dailyname.value["name"],
               cardtype: "allah_names".tr,
+              text2: allahnamesctrl.dailyname.value["nameText"],
             ),
             SizedBox(
               height: Sizeconfig.screenheight! / 100,
@@ -85,48 +90,59 @@ class WirdCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          textAlign: TextAlign.start,
-          cardtype,
-          style: TextStyle(
-              fontSize: 20, color: Get.isDarkMode ? kmaincolor4 : kmaincolor),
-        ),
-        Card(
-            color: mycolor,
-            child: Container(
-              margin: const EdgeInsets.all(10),
-              width: Sizeconfig.screenwidth! / 1.05,
-              child: Column(
-                textDirection: TextDirection.rtl,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    textDirection: TextDirection.rtl,
-                    text,
-                    softWrap: true,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Get.isDarkMode ? Colors.white : textcolor1,
-                    ),
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Text(
+        textAlign: TextAlign.start,
+        cardtype,
+        style: TextStyle(
+            fontSize: 20, color: Get.isDarkMode ? kmaincolor4 : kmaincolor),
+      ),
+      Card(
+        color: mycolor,
+        child: SingleChildScrollView(
+          child: Column(children: [
+            Padding(
+              padding: const EdgeInsets.all(24),
+              child: LayoutBuilder(
+                builder: (context, constraints) => SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Text(
+                        text,
+                        textAlign: TextAlign.center,
+                        textDirection: TextDirection.rtl,
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              fontFamily: "Amiri",
+                              height: 1.8,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge
+                                  ?.color
+                                  ?.withOpacity(0.87),
+                            ),
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        text2 ?? "",
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            height: 1.6,
+                            color: kmaincolor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            fontFamily: "Amiri"),
+                        textAlign: TextAlign.center,
+                        textDirection: TextDirection.rtl,
+                      ),
+                    ],
                   ),
-                  Text(
-                    textDirection: TextDirection.rtl,
-                    text2 ?? "",
-                    softWrap: true,
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Get.isDarkMode ? Colors.white : textcolor1,
-                    ),
-                  )
-                ],
+                ),
               ),
-            )),
-      ],
-    );
+            )
+          ]),
+        ),
+      ),
+    ]);
   }
 }

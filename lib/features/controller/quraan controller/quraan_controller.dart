@@ -129,6 +129,7 @@ class QuraanController extends GetxController {
     });
   }
 
+//daily Ayah
   final Random _random = Random();
   final Rx<Map<String, dynamic>> dailyAyah = Rx<Map<String, dynamic>>({});
   static const String lastupdatedkey = 'last_daily_ayah_update';
