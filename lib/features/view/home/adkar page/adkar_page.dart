@@ -172,7 +172,7 @@ Widget adkarcategorieitem(
               adkartype.tr,
               textAlign: TextAlign.center,
               style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 13,
                   color: Get.isDarkMode
                       ? const Color(0xFFFFF6D2)
                       : const Color(0xFF030C02)),

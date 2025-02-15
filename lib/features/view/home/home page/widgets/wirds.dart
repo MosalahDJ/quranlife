@@ -33,9 +33,10 @@ class Wirds extends StatelessWidget {
               mycolor: mycolor,
               text: "\uFD3F ${quranctrl.dailyAyah.value['ayahText']} \uFD3E",
               text2:
-                  "${quranctrl.dailyAyah.value['surahName']} - ${quranctrl.dailyAyah.value['ayahNumber']}",
+                  "${quranctrl.dailyAyah.value['surahName']} - ${quranctrl.dailyAyah.value['ayahNumber']} - ",
               cardtype: "quran_wird".tr,
               fontfamily1: "Amiri",
+              fontfamily2: "Amiri",
             ),
 
             SizedBox(
