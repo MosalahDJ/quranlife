@@ -119,7 +119,7 @@ class CategoriesPage extends StatelessWidget {
                                 ),
                                 mycategory(
                                   () {
-                                    Get.to(() => const QiblaDirection());
+                                    Get.to(() => QiblaDirection());
                                   },
                                   FlutterIslamicIcons.qibla,
                                   'qibla_direction'.tr,
