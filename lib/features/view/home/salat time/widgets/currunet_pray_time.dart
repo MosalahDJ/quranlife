@@ -54,7 +54,11 @@ class CurrentPrayTime extends StatelessWidget {
         children: [
           //date text
           Positioned(
-            top: Sizeconfig.screenheight! / 20,
+            top: Sizeconfig.screenheight! < 768
+                ? Sizeconfig.screenheight! / 20
+                : Sizeconfig.screenheight! > 1010
+                    ? Sizeconfig.screenheight! / 40
+                    : Sizeconfig.screenheight! / 30,
             left: langctrl.language.value == "ar"
                 ? Sizeconfig.screenwidth! / 1.6
                 : 0,
@@ -291,12 +295,12 @@ class CurrentPrayTime extends StatelessWidget {
                 : Sizeconfig.screenwidth! / 50,
             left: langctrl.language.value == "ar"
                 ? Sizeconfig.screenwidth! / 50
-                : Sizeconfig.screenwidth! / 2.4,
+                : Sizeconfig.screenwidth! / 2.2,
             bottom: Sizeconfig.screenheight! < 768
-                ? Sizeconfig.screenheight! / 9
+                ? Sizeconfig.screenheight! / 12
                 : Sizeconfig.screenheight! > 1010
-                    ? Sizeconfig.screenheight! / 25
-                    : Sizeconfig.screenheight! / 17,
+                    ? Sizeconfig.screenheight! / 30
+                    : Sizeconfig.screenheight! / 20,
             child: fltanimtion.buildFloatingWidget(
               shadowOffset: -25,
               child: Material(
@@ -322,7 +326,11 @@ class CurrentPrayTime extends StatelessWidget {
           ),
           //morebutton
           Positioned(
-            top: Sizeconfig.screenheight! / 27,
+            top: Sizeconfig.screenheight! < 768
+                ? Sizeconfig.screenheight! / 25
+                : Sizeconfig.screenheight! > 1010
+                    ? Sizeconfig.screenheight! / 45
+                    : Sizeconfig.screenheight! / 35,
             left: langctrl.language.value == "ar"
                 ? 0
                 : Sizeconfig.screenwidth! / 1.3,
