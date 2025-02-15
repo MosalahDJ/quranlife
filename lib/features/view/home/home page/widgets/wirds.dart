@@ -35,6 +35,7 @@ class Wirds extends StatelessWidget {
               text2:
                   "${quranctrl.dailyAyah.value['surahName']} - ${quranctrl.dailyAyah.value['ayahNumber']}",
               cardtype: "quran_wird".tr,
+              fontfamily1: "Amiri",
             ),
 
             SizedBox(
@@ -49,6 +50,7 @@ class Wirds extends StatelessWidget {
               cardtype: "hadith_wird".tr,
               text2: "${hadithctrl.dailyHadith.value["Hadithtext"]}",
               text3: "${hadithctrl.dailyHadith.value["Hadithsource"]}",
+              fontfamily2: "Amiri",
             ),
             SizedBox(
               height: Sizeconfig.screenheight! / 100,
@@ -60,6 +62,7 @@ class Wirds extends StatelessWidget {
               cardtype: "allah_names".tr,
               text2: allahnamesctrl.dailyname.value["nameText"],
               titlesize: 36,
+              fontfamily1: "Amiri",
             ),
             SizedBox(
               height: Sizeconfig.screenheight! / 100,
@@ -82,6 +85,9 @@ class WirdCard extends StatelessWidget {
     this.text3,
     required this.mycolor,
     this.titlesize,
+    this.fontfamily1,
+    this.fontfamily2,
+    this.fontfamily3,
   });
 
   final String cardtype;
@@ -90,6 +96,9 @@ class WirdCard extends StatelessWidget {
   final String? text3;
   final Color mycolor;
   final double? titlesize;
+  final String? fontfamily1;
+  final String? fontfamily2;
+  final String? fontfamily3;
 
   @override
   Widget build(BuildContext context) {
@@ -118,7 +127,7 @@ class WirdCard extends StatelessWidget {
                         textAlign: TextAlign.center,
                         textDirection: TextDirection.rtl,
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              fontFamily: "Amiri",
+                              fontFamily: fontfamily1 ?? "Cairo",
                               height: 1.8,
                               fontSize: titlesize ?? 20,
                               fontWeight: FontWeight.bold,
@@ -143,7 +152,7 @@ class WirdCard extends StatelessWidget {
                                           : kmaincolor,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20,
-                                      fontFamily: "Amiri"),
+                                      fontFamily: fontfamily2 ?? "Cairo"),
                               textAlign: TextAlign.center,
                               textDirection: TextDirection.rtl,
                             )
@@ -164,7 +173,7 @@ class WirdCard extends StatelessWidget {
                                           : Colors.black,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20,
-                                      fontFamily: "Amiri"),
+                                      fontFamily: fontfamily3 ?? "Cairo"),
                               textAlign: TextAlign.center,
                               textDirection: TextDirection.rtl,
                             )
