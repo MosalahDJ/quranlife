@@ -163,6 +163,7 @@ Widget adkarcategorieitem(
               height: Sizeconfig.screenheight! / 17,
               width: Sizeconfig.screenwidth! / 7,
               child: Image.asset(
+                opacity: const AlwaysStoppedAnimation<double>(0.7),
                 iconpath,
                 fit: BoxFit.contain,
                 alignment: Alignment.center,
