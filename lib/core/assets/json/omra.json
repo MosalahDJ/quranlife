@@ -1,0 +1,93 @@
+[
+    {
+      "id": 1,
+      "step": 1,
+      "titlear": "النية والإحرام",
+      "titleen": "Intention and Ihram",
+      "titlefr": "L'intention et l'Ihram",
+      "descriptionar": "الاغتسال ولبس ملابس الإحرام (إزار ورداء للرجال) والتلبية قائلاً: لَبَّيْكَ اللَّهُمَّ عُمْرَةً",
+      "descriptionen": "Take a ritual bath, wear Ihram garments (two white unsewn pieces for men), and make the intention saying: 'Labbayk Allahumma Umrah'",
+      "descriptionFr": "Prendre un bain rituel, porter les vêtements d'Ihram (deux pièces blanches non cousues pour les hommes) et faire l'intention en disant : 'Labbayk Allahumma Umrah'",
+      "sourcear": "صحيح البخاري ومسلم، وكتب السنن",
+      "sourceen": "Sahih Bukhari, Muslim, and Sunan collections",
+      "sourcefr": "Sahih Bukhari, Muslim, et les recueils de Sunan"
+    },
+    {
+      "id": 2,
+      "step": 2,
+      "titlear": "التلبية",
+      "titleen": "Talbiyah",
+      "titlefr": "Talbiyah",
+      "descriptionar": "لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لاَ شَرِيكَ لَكَ لَبَّيْكَ، إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ، لاَ شَرِيكَ لَكَ",
+      "descriptionen": "Labbayk Allahumma Labbayk, Labbayka la sharika laka Labbayk, Innal hamda wan-ni'mata laka wal mulk, La sharika lak",
+      "descriptionFr": "Me voici ô Allah, me voici. Me voici, Tu n'as pas d'associé, me voici. Certes la louange, les bienfaits et la royauté T'appartiennent. Tu n'as pas d'associé",
+      "sourcear": "متفق عليه من حديث ابن عمر رضي الله عنهما",
+      "sourceen": "Agreed upon from the hadith of Ibn Umar (RA)",
+      "sourcefr": "Rapporté unanimement d'après Ibn Omar (qu'Allah l'agrée)"
+    },
+    {
+      "id": 3,
+      "step": 3,
+      "titlear": "دخول المسجد الحرام",
+      "titleen": "Entering Masjid Al-Haram",
+      "titlefr": "Entrée dans la Mosquée Sacrée",
+      "descriptionar": "بِسْمِ اللهِ وَالصَّلاَةُ وَالسَّلاَمُ عَلَى رَسُولِ اللهِ، اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ",
+      "descriptionen": "Bismillah wassalatu wassalamu ala Rasulillah, Allahumma aftah li abwaba rahmatik",
+      "descriptionFr": "Au nom d'Allah, que la prière et la paix soient sur le Messager d'Allah. Ô Allah, ouvre-moi les portes de Ta miséricorde",
+      "sourcear": "سنن أبي داود والترمذي",
+      "sourceen": "Sunan Abu Dawud and Tirmidhi",
+      "sourcefr": "Sunan Abou Dawoud et Tirmidhi"
+    },
+    {
+      "id": 4,
+      "step": 4,
+      "titlear": "الطواف",
+      "titleen": "Tawaf",
+      "titlefr": "Tawaf",
+      "descriptionar": "بدء الطواف من الحجر الأسود مع التكبير. الطواف سبعة أشواط حول الكعبة. يقول في الطواف: رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+      "descriptionen": "Start Tawaf from the Black Stone with Takbeer. Perform seven circuits around the Kaaba. Say during Tawaf: Rabbana atina fid-dunya hasanatan wa fil akhirati hasanatan waqina adhaban-nar",
+      "descriptionFr": "Commencer le Tawaf depuis la Pierre Noire avec le Takbeer. Effectuer sept tours autour de la Kaaba. Dire pendant le Tawaf : Notre Seigneur, accorde-nous le bien ici-bas et dans l'au-delà et préserve-nous du châtiment du Feu",
+      "sourcear": "صحيح البخاري ومسلم",
+      "sourceen": "Sahih Bukhari and Muslim",
+      "sourcefr": "Sahih Bukhari et Muslim"
+    },
+    {
+      "id": 5,
+      "step": 5,
+      "titlear": "صلاة ركعتين خلف مقام إبراهيم",
+      "titleen": "Two Rakah Prayer behind Maqam Ibrahim",
+      "titlefr": "Prière de deux unités derrière Maqam Ibrahim",
+      "descriptionar": "يصلي ركعتين خلف مقام إبراهيم إن أمكن، يقرأ في الأولى الفاتحة و﴿قُلْ يَا أَيُّهَا الْكَافِرُونَ﴾ وفي الثانية الفاتحة و﴿قُلْ هُوَ اللَّهُ أَحَدٌ﴾",
+      "descriptionen": "Pray two rakah behind Maqam Ibrahim if possible, reciting Surah Al-Fatihah and Al-Kafirun in first rakah, and Al-Fatihah and Al-Ikhlas in second rakah",
+      "descriptionFr": "Prier deux unités derrière la Station d'Ibrahim si possible, en récitant la Fatiha et Al-Kafiroun dans la première unité, et la Fatiha et Al-Ikhlas dans la deuxième",
+      "sourcear": "صحيح البخاري ومسلم",
+      "sourceen": "Sahih Bukhari and Muslim",
+      "sourcefr": "Sahih Bukhari et Muslim"
+    },
+    {
+      "id": 6,
+      "step": 6,
+      "titlear": "السعي بين الصفا والمروة",
+      "titleen": "Sa'i between Safa and Marwa",
+      "titlefr": "Sa'i entre Safa et Marwa",
+      "descriptionar": "يبدأ بالصفا ويقول: ﴿إِنَّ الصَّفَا وَالْمَرْوَةَ مِن شَعَائِرِ اللَّهِ﴾ أَبْدَأُ بِمَا بَدَأَ اللَّهُ بِهِ. سبعة أشواط من الصفا إلى المروة",
+      "descriptionen": "Start at Safa saying: 'Innas-Safa wal Marwata min Sha'airillah' (Indeed, Safa and Marwa are among the symbols of Allah). Complete seven rounds between Safa and Marwa",
+      "descriptionFr": "Commencer à Safa en disant : 'As-Safa et Al-Marwa font partie des rites d'Allah'. Accomplir sept allers-retours entre Safa et Marwa",
+      "sourcear": "صحيح البخاري ومسلم",
+      "sourceen": "Sahih Bukhari and Muslim",
+      "sourcefr": "Sahih Bukhari et Muslim"
+    },
+    {
+      "id": 7,
+      "step": 7,
+      "titlear": "الحلق أو التقصير",
+      "titleen": "Shaving or Trimming the Hair",
+      "titlefr": "Raser ou raccourcir les cheveux",
+      "descriptionar": "حلق الشعر أو تقصيره للرجال، والتقصير للنساء",
+      "descriptionen": "Men should either shave their head completely or trim their hair, while women should only trim the length of a fingertip",
+      "descriptionFr": "Les hommes doivent soit raser complètement leur tête soit raccourcir leurs cheveux, tandis que les femmes ne doivent que raccourcir d'une phalange",
+      "sourcear": "صحيح البخاري ومسلم",
+      "sourceen": "Sahih Bukhari and Muslim",
+      "sourcefr": "Sahih Bukhari et Muslim"
+    }
+  ]

@@ -65,6 +65,7 @@ dependencies:
   url_launcher: ^6.3.1
   visibility_detector: ^0.4.0+2
   workmanager: ^0.5.2
+  flutter_compass: ^0.8.0
 
 dev_dependencies:
   flutter_launcher_icons: ^0.14.1
@@ -136,6 +137,8 @@ flutter:
     - lib/core/assets/json/praise.json
     - lib/core/assets/json/ahadit.json
     - lib/core/assets/json/islamicruqya.json
+    - lib/core/assets/json/haj.json
+    - lib/core/assets/json/omra.json
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

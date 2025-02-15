@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
@@ -5,7 +6,6 @@ import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/features/controller/ahadith%20controller/ahadith_controller.dart';
 import 'package:quranlife/features/controller/fetching%20data%20controller/allah_names_controller.dart';
 import 'package:quranlife/features/controller/quraan%20controller/quraan_controller.dart';
-// import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
 
 class Wirds extends StatelessWidget {
   Wirds({super.key, required this.mycolor});
@@ -47,20 +47,19 @@ class Wirds extends StatelessWidget {
               mycolor: mycolor,
               text: hadithctrl.dailyHadith.value["Hadithnarator"],
               cardtype: "hadith_wird".tr,
-              text2:
-                  "${hadithctrl.dailyHadith.value["Hadithtext"]} \n${hadithctrl.dailyHadith.value["Hadithsource"]}",
+              text2: "${hadithctrl.dailyHadith.value["Hadithtext"]}",
+              text3: "${hadithctrl.dailyHadith.value["Hadithsource"]}",
             ),
             SizedBox(
               height: Sizeconfig.screenheight! / 100,
             ),
-
             //ism allah of the day
-
             WirdCard(
               mycolor: mycolor,
               text: allahnamesctrl.dailyname.value["name"],
               cardtype: "allah_names".tr,
               text2: allahnamesctrl.dailyname.value["nameText"],
+              titlesize: 36,
             ),
             SizedBox(
               height: Sizeconfig.screenheight! / 100,
@@ -76,17 +75,21 @@ class Wirds extends StatelessWidget {
 
 class WirdCard extends StatelessWidget {
   const WirdCard({
-    required this.text,
-    required this.cardtype,
     super.key,
-    required this.mycolor,
+    required this.cardtype,
+    required this.text,
     this.text2,
+    this.text3,
+    required this.mycolor,
+    this.titlesize,
   });
 
   final String cardtype;
   final String text;
   final String? text2;
+  final String? text3;
   final Color mycolor;
+  final double? titlesize;
 
   @override
   Widget build(BuildContext context) {
@@ -107,6 +110,9 @@ class WirdCard extends StatelessWidget {
                 builder: (context, constraints) => SingleChildScrollView(
                   child: Column(
                     children: [
+                      SizedBox(
+                        width: Sizeconfig.screenwidth,
+                      ),
                       Text(
                         text,
                         textAlign: TextAlign.center,
@@ -114,7 +120,7 @@ class WirdCard extends StatelessWidget {
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                               fontFamily: "Amiri",
                               height: 1.8,
-                              fontSize: 20,
+                              fontSize: titlesize ?? 20,
                               fontWeight: FontWeight.bold,
                               color: Theme.of(context)
                                   .textTheme
@@ -124,17 +130,45 @@ class WirdCard extends StatelessWidget {
                             ),
                       ),
                       const SizedBox(height: 16),
-                      Text(
-                        text2 ?? "",
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            height: 1.6,
-                            color: kmaincolor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            fontFamily: "Amiri"),
-                        textAlign: TextAlign.center,
-                        textDirection: TextDirection.rtl,
-                      ),
+                      text2 != null
+                          ? Text(
+                              text2!,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall
+                                  ?.copyWith(
+                                      height: 1.6,
+                                      color: Get.isDarkMode
+                                          ? kmaincolor4
+                                          : kmaincolor,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                      fontFamily: "Amiri"),
+                              textAlign: TextAlign.center,
+                              textDirection: TextDirection.rtl,
+                            )
+                          : const SizedBox(),
+                      text3 != null
+                          ? const SizedBox(height: 16)
+                          : const SizedBox(),
+                      text3 != null
+                          ? Text(
+                              text3!,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall
+                                  ?.copyWith(
+                                      height: 1.6,
+                                      color: Get.isDarkMode
+                                          ? Colors.white
+                                          : Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                      fontFamily: "Amiri"),
+                              textAlign: TextAlign.center,
+                              textDirection: TextDirection.rtl,
+                            )
+                          : const SizedBox(),
                     ],
                   ),
                 ),

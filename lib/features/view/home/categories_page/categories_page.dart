@@ -11,10 +11,12 @@ import 'package:quranlife/features/controller/home%20controller/myhomecontroller
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
 import 'package:quranlife/features/view/home/categories_page/friday%20sunnah/friday_sunnah.dart';
 import 'package:quranlife/features/view/home/categories_page/hadith/ahadith.dart';
+import 'package:quranlife/features/view/home/categories_page/haj%20and%20omra/haj_and_omra_page.dart';
 import 'package:quranlife/features/view/home/categories_page/islamic%20ruqyah/islamicruqya.dart';
 import 'package:quranlife/features/view/home/categories_page/names%20of%20allah/allah_names.dart';
 import 'package:quranlife/features/view/home/categories_page/praise/praise.dart';
 import 'package:quranlife/features/view/home/categories_page/prophets%20suplication/prophets_supplication.dart';
+import 'package:quranlife/features/view/home/categories_page/qibla%20direction%20page/qibla_direction.dart';
 import 'package:quranlife/features/view/home/categories_page/quranic%20supplications/quranic_supplications.dart';
 import 'package:quranlife/features/view/home/categories_page/seeking%20forgivness/seeking_forgivnes.dart';
 import 'package:quranlife/features/view/home/categories_page/statistics%20page/statistics_page.dart';
@@ -116,7 +118,9 @@ class CategoriesPage extends StatelessWidget {
                                   'wudu_ghusl'.tr,
                                 ),
                                 mycategory(
-                                  () {},
+                                  () {
+                                    Get.to(() => const QiblaDirection());
+                                  },
                                   FlutterIslamicIcons.qibla,
                                   'qibla_direction'.tr,
                                 ),
@@ -140,7 +144,9 @@ class CategoriesPage extends StatelessWidget {
                                   'al-arba\'in_nawawiyyah'.tr,
                                 ),
                                 mycategory(
-                                  () {},
+                                  () {
+                                    Get.to(() => const Hajandomrapage());
+                                  },
                                   FlutterIslamicIcons.kaaba,
                                   'hajj_umrah'.tr,
                                 ),

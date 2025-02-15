@@ -99,6 +99,10 @@ class Messages extends Translations {
           //category items
           "teaching_prayer": "Teaching Prayer",
           "wudu_ghusl": "Wudu And Ghusl",
+          "wudu": "Wudu",
+          "ghusl": "Ghusl",
+          'wuduguid': 'Wudu Guidelines',
+          'ghuslguid': 'Ghusl Guidelines',
           "qibla_direction": "Qibla Direction",
           "electronic_tasbih": "Electronic Tasbih",
           "friday_sunnahs": "Friday Sunnahs",
@@ -115,6 +119,10 @@ class Messages extends Translations {
           "statistics": "Statistics",
           'islamic_calendar': 'Islamic Calendar',
           'hajj_umrah': 'Hajj and Umrah',
+          'haj': 'Haj',
+          'hajguid': 'Hajj Guidelines',
+          'omraguid': 'Umrah Guidelines',
+          'omarah': 'Umrah',
           'zakat': 'Zakat',
 
           // Prayer Times
@@ -384,6 +392,10 @@ class Messages extends Translations {
           //category items
           "teaching_prayer": "تعليم الصلاة",
           "wudu_ghusl": "الوضوء والغسل",
+          "wudu": "الوضوء",
+          "ghusl": "الغسل",
+          'wuduguid': 'دليل الوضوء',
+          'ghuslguid': 'دليل الغسل',
           "qibla_direction": "اتجاه القبلة",
           "electronic_tasbih": "المسبحة الإلكترونية",
           "friday_sunnahs": "سنن الجمعة",
@@ -400,6 +412,10 @@ class Messages extends Translations {
           "statistics": "إحصائيات",
           'islamic_calendar': 'التقويم الإسلامي',
           'hajj_umrah': 'الحج والعمرة',
+          'haj': 'الحج',
+          'hajguid': 'دليل الحج',
+          'omraguid': 'دليل العمرة',
+          'omarah': 'العمرة',
           'zakat': 'الزكاة',
 
           // Prayer Times
@@ -678,6 +694,10 @@ class Messages extends Translations {
           //category items
           "teaching_prayer": "Apprentissage de la Prière",
           "wudu_ghusl": "Wudu et Ghusl",
+          "wudu": "Wudu",
+          "ghusl": "Ghusl",
+          'wuduguid': 'Wudu Guidelines',
+          'ghuslguid': 'Ghusl Guidelines',
           "qibla_direction": "Direction de la Qibla",
           "electronic_tasbih": "Tasbih Électronique",
           "friday_sunnahs": "Sounnahs du Vendredi",
@@ -694,6 +714,10 @@ class Messages extends Translations {
           "statistics": "Statistiques",
           'islamic_calendar': 'Calendrier Islamique',
           'hajj_umrah': 'Hajj et Omra',
+          'haj': 'Haj',
+          'hajguid': 'Guide du Hajj',
+          'omraguid': 'Guide de l\'Omra',
+          'omarah': 'Umrah',
           'zakat': 'Zakat',
 
           // Prayer Times

@@ -4,17 +4,17 @@ import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
-import 'package:quranlife/features/view/home/categories_page/wudu%20and%20ghusl%20page/ghusl.dart';
-import 'package:quranlife/features/view/home/categories_page/wudu%20and%20ghusl%20page/wudu.dart';
+import 'package:quranlife/features/view/home/categories_page/haj%20and%20omra/haj_Page.dart';
+import 'package:quranlife/features/view/home/categories_page/haj%20and%20omra/omra_page.dart';
 
-class WuduAndGhusle extends StatefulWidget {
-  const WuduAndGhusle({super.key});
+class Hajandomrapage extends StatefulWidget {
+  const Hajandomrapage({super.key});
 
   @override
-  State<WuduAndGhusle> createState() => _WuduAndGhusleState();
+  State<Hajandomrapage> createState() => _HajandomrapageState();
 }
 
-class _WuduAndGhusleState extends State<WuduAndGhusle> {
+class _HajandomrapageState extends State<Hajandomrapage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +25,7 @@ class _WuduAndGhusleState extends State<WuduAndGhusle> {
         backgroundColor: Colors.transparent,
         centerTitle: true,
         title: ShimmerText(
-          text: "wudu_ghusl".tr,
+          text: "hajj_umrah".tr,
           style: Theme.of(context).textTheme.headlineSmall,
         ),
       ),
@@ -57,13 +57,13 @@ class _WuduAndGhusleState extends State<WuduAndGhusle> {
                   ),
                   children: [
                 cardwidget(
-                    title: "wudu".tr,
-                    subtitle: "wuduguid".tr,
-                    ontap: () => Get.to(() => const Wudu())),
+                    title: "hajj".tr,
+                    subtitle: "hajguid".tr,
+                    ontap: () => Get.to(() => const HajPage())),
                 cardwidget(
-                    title: "ghusl".tr,
-                    subtitle: "ghuslguid".tr,
-                    ontap: () => Get.to(() => const Ghusl())),
+                    title: "umrah".tr,
+                    subtitle: "omraguid".tr,
+                    ontap: () => Get.to(() => const OmraPage())),
               ])),
         ],
       ),
@@ -103,7 +103,7 @@ Widget cardwidget(
                   textAlign: TextAlign.center,
                   textDirection: TextDirection.rtl,
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        fontFamily: "Cairo",
+                        fontFamily: "Amiri",
                         height: 1.8,
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
