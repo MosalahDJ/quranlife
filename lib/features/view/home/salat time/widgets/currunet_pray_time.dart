@@ -57,8 +57,8 @@ class CurrentPrayTime extends StatelessWidget {
             top: Sizeconfig.screenheight! < 768
                 ? Sizeconfig.screenheight! / 20
                 : Sizeconfig.screenheight! > 1010
-                    ? Sizeconfig.screenheight! / 40
-                    : Sizeconfig.screenheight! / 30,
+                    ? Sizeconfig.screenheight! / 55
+                    : Sizeconfig.screenheight! / 40,
             left: langctrl.language.value == "ar"
                 ? Sizeconfig.screenwidth! / 1.6
                 : 0,
@@ -329,8 +329,8 @@ class CurrentPrayTime extends StatelessWidget {
             top: Sizeconfig.screenheight! < 768
                 ? Sizeconfig.screenheight! / 25
                 : Sizeconfig.screenheight! > 1010
-                    ? Sizeconfig.screenheight! / 45
-                    : Sizeconfig.screenheight! / 35,
+                    ? Sizeconfig.screenheight! / 60
+                    : Sizeconfig.screenheight! / 45,
             left: langctrl.language.value == "ar"
                 ? 0
                 : Sizeconfig.screenwidth! / 1.3,
