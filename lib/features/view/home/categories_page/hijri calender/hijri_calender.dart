@@ -15,7 +15,10 @@ class HijriCalender extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        foregroundColor: Colors.white,
         elevation: 0,
         scrolledUnderElevation: 0,
         centerTitle: true,
@@ -35,104 +38,142 @@ class HijriCalender extends StatelessWidget {
             ],
           ),
 
-          SizedBox(
-            height: Sizeconfig.screenheight,
-            width: Sizeconfig.screenwidth,
-            child: Image.asset(
-              "lib/core/assets/images/background_image/islamic_patern_portrait.jpg",
-              fit: BoxFit.cover,
-              opacity: const AlwaysStoppedAnimation<double>(0.1),
-              height: Sizeconfig.screenheight,
-              width: Sizeconfig.screenwidth,
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(
+                    'lib/core/assets/images/background_image/arch.jpg'),
+                opacity: 0.2,
+                repeat: ImageRepeat.repeat,
+              ),
             ),
           ),
-          SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SizedBox(
-                    height: Sizeconfig.screenheight! / 100,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: SizedBox(
-                      width: Sizeconfig.screenwidth,
-                      child: Text(
-                        "${hijri.hDay} - ${hijri.shortMonthName} - ${hijri.hYear} Hijri",
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          color: Get.isDarkMode
-                              ? kmaincolor4
-                              : Colors.white.withOpacity(0.8),
-                          fontSize: 18,
+          SafeArea(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(
+                      height: Sizeconfig.screenheight! / 100,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: SizedBox(
+                        width: Sizeconfig.screenwidth,
+                        child: Text(
+                          "${hijri.hDay} - ${hijri.shortMonthName} - ${hijri.hYear} Hijri",
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                            color: Get.isDarkMode
+                                ? kmaincolor4
+                                : Colors.white.withOpacity(0.8),
+                            fontSize: 18,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: Sizeconfig.screenheight! / 60,
-                  ),
-                  Card(
-                    elevation: 0.1,
-                    color: Get.isDarkMode
-                        ? kmaincolor2dark.withOpacity(0.5)
-                        : Colors.white.withOpacity(0.5),
-                    child: SizedBox(
-                        height: Sizeconfig.screenheight! / 1.5,
-                        child: IslamicHijriCalendar(
-                          defaultBackColor: Colors.transparent,
-                          isHijriView: true,
-                          highlightBorder: Colors.white.withOpacity(0.8),
-                          highlightTextColor:
-                              Get.isDarkMode ? kmaincolor4 : kmaincolor,
-                          defaultTextColor:
-                              Get.isDarkMode ? Colors.white : Colors.black,
-                          defaultBorder:
-                              Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
-                          adjustmentValue: 0,
-                          isDisablePreviousNextMonthDates: true,
-                        )),
-                  ),
-                  SizedBox(
-                    height: Sizeconfig.screenheight! / 60,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: SizedBox(
-                      width: Sizeconfig.screenwidth,
-                      child: Text(
-                        'important_notes'.tr,
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          color: Get.isDarkMode ? kmaincolor4 : kmaincolor,
-                          fontSize: 18,
-                        ),
-                      ),
+                    SizedBox(
+                      height: Sizeconfig.screenheight! / 60,
                     ),
-                  ),
-                  SizedBox(
-                    height: Sizeconfig.screenheight! / 60,
-                  ),
-                  noticeText('note_yearly_shift'.tr),
-                  SizedBox(
-                    height: Sizeconfig.screenheight! / 60,
-                  ),
-                  noticeText('note_ramadan'.tr),
-                  SizedBox(
-                    height: Sizeconfig.screenheight! / 60,
-                  ),
-                  noticeText('note_association'.tr),
-                  SizedBox(
-                    height: Sizeconfig.screenheight! / 60,
-                  ),
-                  noticeText('note_guidelines'.tr),
-                  SizedBox(
-                    height: Sizeconfig.screenheight! / 60,
-                  ),
-                ],
+                    Card(
+                      elevation: 0.1,
+                      color: Get.isDarkMode
+                          ? kmaincolor2dark.withOpacity(0.5)
+                          : Colors.white.withOpacity(0.5),
+                      child: SizedBox(
+                          height: Sizeconfig.screenheight! / 1.5,
+                          child: IslamicHijriCalendar(
+                            defaultBackColor: Colors.transparent,
+                            isHijriView: true,
+                            highlightBorder: Colors.white.withOpacity(0.8),
+                            highlightTextColor:
+                                Get.isDarkMode ? kmaincolor4 : kmaincolor,
+                            defaultTextColor:
+                                Get.isDarkMode ? Colors.white : Colors.black,
+                            defaultBorder: Colors.white.withOpacity(0.5),
+                            adjustmentValue: 0,
+                            isDisablePreviousNextMonthDates: true,
+                          )),
+                    ),
+                    SizedBox(
+                      height: Sizeconfig.screenheight! / 60,
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.only(bottom: 24),
+                        child: LayoutBuilder(
+                          builder: (context, constraints) => Container(
+                            decoration: BoxDecoration(
+                              color:
+                                  Theme.of(context).cardColor.withOpacity(0.5),
+                              borderRadius: BorderRadius.circular(15),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: kmaincolor.withOpacity(0.08),
+                                  blurRadius: 15,
+                                  offset: const Offset(0, 5),
+                                  spreadRadius: 1,
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  SizedBox(
+                                    height: Sizeconfig.screenheight! / 60,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0),
+                                    child: SizedBox(
+                                      width: Sizeconfig.screenwidth,
+                                      child: Text(
+                                        'important_notes'.tr,
+                                        textAlign: TextAlign.start,
+                                        style: TextStyle(
+                                          color: Get.isDarkMode
+                                              ? kmaincolor4
+                                              : kmaincolor,
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  // Duaa Content Container
+                                  Container(
+                                    padding: const EdgeInsets.fromLTRB(
+                                        24, 0, 24, 10),
+                                    child: Column(
+                                      children: [
+                                        SizedBox(
+                                          height: Sizeconfig.screenheight! / 50,
+                                        ),
+                                        noticeText('note_yearly_shift'.tr),
+                                        SizedBox(
+                                          height: Sizeconfig.screenheight! / 50,
+                                        ),
+                                        noticeText('note_ramadan'.tr),
+                                        SizedBox(
+                                          height: Sizeconfig.screenheight! / 50,
+                                        ),
+                                        noticeText('note_association'.tr),
+                                        SizedBox(
+                                          height: Sizeconfig.screenheight! / 50,
+                                        ),
+                                        noticeText('note_guidelines'.tr),
+                                        SizedBox(
+                                          height: Sizeconfig.screenheight! / 50,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ]),
+                          ),
+                        ))
+                  ],
+                ),
               ),
             ),
           ),
