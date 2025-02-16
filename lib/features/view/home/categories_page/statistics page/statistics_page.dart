@@ -432,6 +432,7 @@ class _StatisticsPageState extends State<StatisticsPage>
   }) {
     return Container(
       width: Sizeconfig.screenwidth! / 2.7,
+      height: 90,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
         color: Colors.grey[500],
@@ -448,29 +449,33 @@ class _StatisticsPageState extends State<StatisticsPage>
             ),
           ),
           const SizedBox(width: 8),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                maxLines: 2,
-                softWrap: true,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    ),
-              ),
-              Text(
-                overflow: TextOverflow.ellipsis,
-                softWrap: true,
-                maxLines: 2,
-                value,
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: color,
-                      fontWeight: FontWeight.bold,
-                    ),
-              ),
-            ],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  title,
+                  maxLines: 2,
+                  softWrap: true,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87,
+                      ),
+                ),
+                Text(
+                  value,
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: true,
+                  maxLines: 2,
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: color,
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
