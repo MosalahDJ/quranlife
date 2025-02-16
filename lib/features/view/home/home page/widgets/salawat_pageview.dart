@@ -22,8 +22,6 @@ class SalawatPageview extends StatelessWidget {
     return SizedBox(
       height: Sizeconfig.screenheight! < 768
           ? Sizeconfig.screenheight! / 2.5
-          : Sizeconfig.screenheight! > 1010
-              ? Sizeconfig.screenheight! / 4.2
               : Sizeconfig.screenheight! / 3.3,
       child: PageView(
           controller: homectrl.salawatPageController,

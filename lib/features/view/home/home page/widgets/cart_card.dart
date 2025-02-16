@@ -25,13 +25,9 @@ class CartCard extends StatelessWidget {
           ? (langctrl.language.value == "fr"
               ? Sizeconfig.screenheight! / 3
               : Sizeconfig.screenheight! / 3.5)
-          : Sizeconfig.screenheight! > 1024
-              ? (langctrl.language.value == "fr"
-                  ? Sizeconfig.screenheight! / 4.5
-                  : Sizeconfig.screenheight! / 5)
               : (langctrl.language.value == "fr"
-                  ? Sizeconfig.screenheight! / 4
-                  : Sizeconfig.screenheight! / 4.5),
+                  ? Sizeconfig.screenheight! / 3.7
+                  : Sizeconfig.screenheight! / 4),
       child: Stack(
         children: [
           //card
@@ -76,8 +72,6 @@ class CartCard extends StatelessWidget {
                   : Sizeconfig.screenwidth! / 2,
               bottom: Sizeconfig.screenheight! < 768
                   ? Sizeconfig.screenheight! / 20
-                  : Sizeconfig.screenheight! > 1010
-                      ? Sizeconfig.screenheight! / 250
                       : Sizeconfig.screenheight! / 150,
               child: fltanimtion.buildFloatingWidget(
                 shadowOffset: -55,
@@ -108,8 +102,6 @@ class CartCard extends StatelessWidget {
                   child: SizedBox(
                     height: Sizeconfig.screenheight! < 768
                         ? Sizeconfig.screenheight! / 15
-                        : Sizeconfig.screenheight! > 1010
-                            ? Sizeconfig.screenheight! / 30
                             : Sizeconfig.screenheight! / 20,
                     width: Sizeconfig.screenwidth! / 2.5,
                     child: Padding(
@@ -119,8 +111,6 @@ class CartCard extends StatelessWidget {
                           SizedBox(
                             height: Sizeconfig.screenheight! < 768
                                 ? Sizeconfig.screenheight! / 15
-                                : Sizeconfig.screenheight! > 1010
-                                    ? Sizeconfig.screenheight! / 30
                                     : Sizeconfig.screenheight! / 20,
                             width: Sizeconfig.screenwidth! / 3.5,
                             child: Center(

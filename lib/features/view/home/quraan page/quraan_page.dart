@@ -263,8 +263,8 @@ Widget _juzuaviewPage() {
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 Text(
+                                  "${"الجزء"} $juzNumber",
                                   textDirection: TextDirection.rtl,
-                                  "${"الآية"} $ayahstart",
                                   style: const TextStyle(
                                       fontFamily: "Amiri",
                                       fontSize: 18,
@@ -279,8 +279,8 @@ Widget _juzuaviewPage() {
                                       fontWeight: FontWeight.bold),
                                 ),
                                 Text(
-                                  "${"الجزء"} $juzNumber",
                                   textDirection: TextDirection.rtl,
+                                  "${"الآية"} $ayahstart",
                                   style: const TextStyle(
                                       fontFamily: "Amiri",
                                       fontSize: 18,

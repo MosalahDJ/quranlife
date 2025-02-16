@@ -81,9 +81,9 @@ class PrayerTimesPage extends StatelessWidget {
                     SizedBox(height: Sizeconfig.screenheight! * 0.03),
 
                     // Current Prayer Time Card
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: CurrentPrayTime(
+
+
+                       CurrentPrayTime(
                         morebuttoncolor: Colors.white,
                         onpressed: () {},
                         moreIconVisibility: false,
@@ -92,7 +92,7 @@ class PrayerTimesPage extends StatelessWidget {
                         elevation: 2,
                         color: Colors.black.withOpacity(0.5),
                       ),
-                    ),
+
 
                     SizedBox(height: Sizeconfig.screenheight! * 0.03),
 

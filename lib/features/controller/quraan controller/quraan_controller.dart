@@ -113,9 +113,7 @@ class QuraanController extends GetxController {
           final normalizedAyahText = removeDiacritics(ayah.text.toLowerCase());
           final normalizedSurahName =
               removeDiacritics(surah.name.toLowerCase());
-
-          if (normalizedAyahText.contains(normalizedQuery) ||
-              normalizedSurahName.contains(normalizedQuery)) {
+          if (normalizedAyahText.contains(normalizedQuery)) {
             searchResults.add({
               'surahName': surah.name,
               'surahNumber': surah.number,
@@ -123,6 +121,7 @@ class QuraanController extends GetxController {
               'ayahText': ayah.text, // Keep original text with diacritics
             });
           }
+
         }
       }
       isSearching.value = false;
