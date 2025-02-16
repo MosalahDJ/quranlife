@@ -18,6 +18,7 @@ class Messages extends Translations {
           'please_enter_email': 'Please enter your email address',
           'please_enter_password': 'Please enter your password',
           'leave_login': 'Do you want to exit the sign-in process?',
+          'leave_app': 'Do you want to exit QuranLife?',
           'log_out': 'Log Out',
 
           // Registration
@@ -312,6 +313,7 @@ class Messages extends Translations {
           'please_enter_email': 'الرجاء إدخال البريد الإلكتروني',
           'please_enter_password': 'الرجاء إدخال كلمة المرور',
           'leave_login': 'هل تريد الخروج من عملية تسجيل الدخول؟',
+          'leave_app': 'هل تريد الخروج من تطبيق قرآن لايف؟',
           'log_out': 'تسجيل الخروج',
 
           // Sign Up Page
@@ -611,6 +613,7 @@ class Messages extends Translations {
           'please_enter_email': 'Veuillez saisir votre adresse e-mail',
           'please_enter_password': 'Veuillez saisir votre mot de passe',
           'leave_login': 'Voulez-vous quitter le processus de connexion ?',
+          'leave_app': 'Voulez-vous quitter l\'application Quran Life ?',
           'log_out': 'Déconnexion',
 
           // Sign Up Page

@@ -453,12 +453,17 @@ class _StatisticsPageState extends State<StatisticsPage>
             children: [
               Text(
                 title,
+                maxLines: 2,
+                softWrap: true,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
                     ),
               ),
               Text(
+                overflow: TextOverflow.ellipsis,
+                softWrap: true,
+                maxLines: 2,
                 value,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: color,

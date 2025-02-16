@@ -58,7 +58,7 @@ class CurrentPrayTime extends StatelessWidget {
                 ? Sizeconfig.screenheight! / 20
                 : Sizeconfig.screenheight! > 1010
                     ? Sizeconfig.screenheight! / 55
-                    : Sizeconfig.screenheight! / 40,
+                    : Sizeconfig.screenheight! / 70,
             left: langctrl.language.value == "ar"
                 ? Sizeconfig.screenwidth! / 1.6
                 : 0,
@@ -327,15 +327,15 @@ class CurrentPrayTime extends StatelessWidget {
           //morebutton
           Positioned(
             top: Sizeconfig.screenheight! < 768
-                ? Sizeconfig.screenheight! / 25
+                ? Sizeconfig.screenheight! / 27
                 : Sizeconfig.screenheight! > 1010
                     ? Sizeconfig.screenheight! / 60
-                    : Sizeconfig.screenheight! / 45,
+                    : Sizeconfig.screenheight! / 180,
             left: langctrl.language.value == "ar"
                 ? 0
-                : Sizeconfig.screenwidth! / 1.3,
+                : Sizeconfig.screenwidth! / 1.26,
             right: langctrl.language.value == "ar"
-                ? Sizeconfig.screenwidth! / 1.3
+                ? Sizeconfig.screenwidth! / 1.26
                 : 0,
             child: Card(
                 color: Colors.transparent,

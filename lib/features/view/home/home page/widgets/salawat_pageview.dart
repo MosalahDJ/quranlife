@@ -50,7 +50,7 @@ class SalawatPageview extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const SizedBox(
-                  height: 25,
+                  height: 5,
                 ),
                 Row(
                   mainAxisSize: MainAxisSize.max,
