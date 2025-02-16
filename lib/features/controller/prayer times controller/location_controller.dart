@@ -33,7 +33,8 @@ class LocationController extends GetxController {
       // check if location services are enabled.
       serviceEnabled = await Geolocator.isLocationServiceEnabled();
       if (!serviceEnabled) {
-        print("Geolocator ERR 1 : Location services are disabled");
+        Get.snackbar("permission denied",
+            "we can't find your location without enabling Location services,turn it on or try later");
       }
 
       // check if location permission are enabled.

@@ -25,9 +25,9 @@ class CartCard extends StatelessWidget {
           ? (langctrl.language.value == "fr"
               ? Sizeconfig.screenheight! / 3
               : Sizeconfig.screenheight! / 3.5)
-              : (langctrl.language.value == "fr"
-                  ? Sizeconfig.screenheight! / 3.7
-                  : Sizeconfig.screenheight! / 4),
+          : (langctrl.language.value == "fr"
+              ? Sizeconfig.screenheight! / 3.7
+              : Sizeconfig.screenheight! / 4),
       child: Stack(
         children: [
           //card
@@ -72,7 +72,7 @@ class CartCard extends StatelessWidget {
                   : Sizeconfig.screenwidth! / 2,
               bottom: Sizeconfig.screenheight! < 768
                   ? Sizeconfig.screenheight! / 20
-                      : Sizeconfig.screenheight! / 150,
+                  : Sizeconfig.screenheight! / 150,
               child: fltanimtion.buildFloatingWidget(
                 shadowOffset: -55,
                 child: Material(
@@ -102,7 +102,7 @@ class CartCard extends StatelessWidget {
                   child: SizedBox(
                     height: Sizeconfig.screenheight! < 768
                         ? Sizeconfig.screenheight! / 15
-                            : Sizeconfig.screenheight! / 20,
+                        : Sizeconfig.screenheight! / 20,
                     width: Sizeconfig.screenwidth! / 2.5,
                     child: Padding(
                       padding: const EdgeInsets.only(left: 8.0),
@@ -111,7 +111,7 @@ class CartCard extends StatelessWidget {
                           SizedBox(
                             height: Sizeconfig.screenheight! < 768
                                 ? Sizeconfig.screenheight! / 15
-                                    : Sizeconfig.screenheight! / 20,
+                                : Sizeconfig.screenheight! / 20,
                             width: Sizeconfig.screenwidth! / 3.5,
                             child: Center(
                               child: Text(
@@ -153,7 +153,7 @@ class CartCard extends StatelessWidget {
 
           //morebutton
           Positioned(
-            top: 5,
+            top: 3,
             left: langctrl.language.value == "ar"
                 ? 0
                 : Sizeconfig.screenwidth! / 1.25,

@@ -34,10 +34,10 @@ class QiblaDirection extends StatelessWidget {
             if (controller.direction.value != null &&
                 controller.qiblaDirection.value != null) {
               return Transform.rotate(
-                angle: ((controller.direction.value! +
+                angle: ((controller.direction.value! -
                         controller.qiblaDirection.value!) *
-                    (math.pi / 180) *
-                    -1),
+                    (math.pi /
+                        180)), // Removed the -1 multiplier and changed + to -
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
@@ -64,8 +64,12 @@ class QiblaDirection extends StatelessWidget {
                 controller.direction.value != null
                     ? '${controller.direction.value!.toStringAsFixed(1)}°'
                     : 'Calculating...',
-                style: const TextStyle(
-                  color: Colors.white,
+                style: TextStyle(
+                  color: controller.direction.value != null
+                      ? controller.isPointingToQibla()
+                          ? Colors.green // Correct direction
+                          : Colors.red // Wrong direction
+                      : Colors.white, // Default color while calculating
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),

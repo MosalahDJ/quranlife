@@ -21,8 +21,12 @@ class QiblaCompassController extends GetxController {
 
   Future<void> _checkLocationPermission() async {
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+
+    // check if location services are enabled.
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      return Future.error('Location services are disabled.');
+      Get.snackbar("permission denied",
+          "we can't find your location without enabling Location services,turn it on or try later");
     }
 
     LocationPermission permission = await Geolocator.checkPermission();
@@ -60,5 +64,15 @@ class QiblaCompassController extends GetxController {
 
     double qibla = math.atan2(y, x) * (180 / math.pi);
     qiblaDirection.value = qibla;
+  }
+
+  bool isPointingToQibla() {
+    if (direction.value == null || qiblaDirection.value == null) return false;
+
+    // Calculate the difference between current direction and Qibla direction
+    double diff = (direction.value! - qiblaDirection.value!).abs() % 360;
+
+    // Consider it correct if within 10 degrees of accuracy
+    return diff <= 10 || diff >= 350;
   }
 }
