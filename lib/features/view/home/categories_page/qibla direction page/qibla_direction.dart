@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
@@ -27,6 +28,7 @@ class QiblaDirection extends StatelessWidget {
           text: 'Qibla Direction'.tr,
           style: Theme.of(context).textTheme.headlineSmall,
         ),
+        systemOverlayStyle: SystemUiOverlayStyle.light,
       ),
       body: Stack(
         children: [
@@ -43,89 +45,221 @@ class QiblaDirection extends StatelessWidget {
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(
-                    'lib/core/assets/images/background_image/arch.jpg'),
+                    'lib/core/assets/images/background_image/paper.jpg'),
                 opacity: 0.2,
                 repeat: ImageRepeat.repeat,
               ),
             ),
           ),
           SafeArea(
-            child: SizedBox(
-              width: Sizeconfig.screenwidth,
-              height: Sizeconfig.screenheight,
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text(
-                      'Point the top of your phone towards Qibla',
-                      style: TextStyle(
-                        color: Get.isDarkMode ? Colors.white : Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 50),
-                    Image.asset(
-                        "lib/core/assets/images/background_image/meeca2.png"),
-                    const SizedBox(height: 50),
-                    Obx(() {
-                      if (controller.direction.value != null &&
-                          controller.qiblaDirection.value != null) {
-                        return Transform.rotate(
-                          angle: ((controller.direction.value! -
-                                  controller.qiblaDirection.value!) *
-                              (math.pi /
-                                  180)), // Removed the -1 multiplier and changed + to -
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              Image.asset(
-                                'lib/core/assets/images/background_image/qibla_comppas.png',
-                                width: 300,
-                                height: 300,
-                              ),
-                              const Icon(
-                                Icons.arrow_upward,
-                                color: Color(0xFFF9B091),
-                                size: 50,
-                              ),
-                            ],
-                          ),
-                        );
-                      }
-                      return Image.asset(
-                        'lib/core/assets/images/background_image/qibla_comppas.png',
-                        width: 300,
-                        height: 300,
-                      );
-                    }),
-                    const SizedBox(height: 50),
-                    Obx(() => Text(
-                          controller.direction.value != null
-                              ? '${controller.direction.value!.toStringAsFixed(1)}°'
-                              : 'Calculating...',
-                          style: TextStyle(
-                            color: controller.direction.value != null
-                                ? controller.isPointingToQibla()
-                                    ? Colors.green // Correct direction
-                                    : Colors.red // Wrong direction
-                                : Get.isDarkMode
-                                    ? Colors.white
-                                    : Colors
-                                        .black, // Default color while calculating
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        )),
-                  ],
-                ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 20),
+                  _buildInstructionCard(),
+                  const SizedBox(height: 30),
+                  _buildKaabaImage(),
+                  const SizedBox(height: 40),
+                  _buildCompass(),
+                  const SizedBox(height: 30),
+                  _buildDirectionInfo(),
+                ],
               ),
             ),
           ),
         ],
       ),
     );
+  }
+
+  Widget _buildInstructionCard() {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Get.isDarkMode ? Colors.black26 : Colors.white.withOpacity(0.9),
+        borderRadius: BorderRadius.circular(15),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 10,
+            offset: const Offset(0, 5),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Icon(
+            FlutterIslamicIcons.kaaba,
+            color: kmaincolor,
+            size: 24,
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              'Point the top of your phone towards Qibla',
+              style: TextStyle(
+                color: Get.isDarkMode ? Colors.white : Colors.black87,
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildKaabaImage() {
+    return Container(
+      height: 150,
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image:
+              AssetImage("lib/core/assets/images/background_image/meecan.png"),
+          fit: BoxFit.contain,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCompass() {
+    return Stack(
+      children: [
+        SizedBox(
+          width: Sizeconfig.screenwidth,
+          height: Sizeconfig.screenheight! / 2,
+          child: Image.asset(
+            'lib/core/assets/images/background_image/qibla_compass.png',
+            width: 300,
+            height: 300,
+          ),
+        ),
+        Obx(() {
+          if (controller.direction.value == null) {
+            // return _buildLoadingCompass();
+          }
+          return TweenAnimationBuilder(
+            tween: Tween<double>(
+              begin: 0,
+              end: ((controller.direction.value! -
+                      controller.qiblaDirection.value!) *
+                  (math.pi / 180)),
+            ),
+            duration: const Duration(milliseconds: 500),
+            builder: (context, double value, child) {
+              return Transform.rotate(
+                angle: value,
+                child: Container(
+                  width: 300,
+                  height: 300,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: kmaincolor.withOpacity(0.2),
+                        blurRadius: 20,
+                        spreadRadius: 5,
+                      ),
+                    ],
+                  ),
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Image.asset(
+                        'lib/core/assets/images/background_image/arrw.png',
+                        width: 300,
+                        height: 300,
+                      ),
+                      // AnimatedContainer(
+                      //   duration: const Duration(milliseconds: 300),
+                      //   child: Icon(
+                      //     Icons.arrow_upward,
+                      //     color: controller.isPointingToQibla()
+                      //         ? Colors.green
+                      //         : const Color(0xFFF9B091),
+                      //     size: 50,
+                      //   ),
+                      // ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+        }),
+      ],
+    );
+  }
+
+  // Widget _buildLoadingCompass() {
+  //   return SizedBox(
+  //     width: 300,
+  //     height: 300,
+  //     child: Stack(
+  //       alignment: Alignment.center,
+  //       children: [
+  //         Image.asset(
+  //           'lib/core/assets/images/background_image/qibla_compass.png',
+  //           width: 300,
+  //           height: 300,
+  //         ),
+  //         CircularProgressIndicator(
+  //           valueColor: AlwaysStoppedAnimation<Color>(kmaincolor),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
+
+  Widget _buildDirectionInfo() {
+    return Obx(() {
+      final direction = controller.direction.value;
+      return AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        decoration: BoxDecoration(
+          color: direction != null
+              ? controller.isPointingToQibla()
+                  ? Colors.green.withOpacity(0.2)
+                  : Colors.red.withOpacity(0.2)
+              : Colors.grey.withOpacity(0.2),
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              direction != null
+                  ? controller.isPointingToQibla()
+                      ? Icons.check_circle
+                      : Icons.info
+                  : Icons.sync,
+              color: direction != null
+                  ? controller.isPointingToQibla()
+                      ? Colors.green
+                      : Colors.red
+                  : Colors.grey,
+            ),
+            const SizedBox(width: 8),
+            Text(
+              direction != null
+                  ? '${direction.toStringAsFixed(1)}°'
+                  : 'Calibrating...',
+              style: TextStyle(
+                color: direction != null
+                    ? controller.isPointingToQibla()
+                        ? Colors.green
+                        : Colors.red
+                    : Colors.grey,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      );
+    });
   }
 }

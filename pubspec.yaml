@@ -118,7 +118,6 @@ flutter:
     - lib/core/assets/images/on_boarding_image/
     - lib/core/assets/images/login_images/
     - lib/core/assets/images/homeimages/
-    - lib/core/assets/images/refferal_image/
     - lib/core/assets/images/background_image/
     - lib/core/assets/images/app_logo/
     - lib/core/assets/images/salat_icons/
