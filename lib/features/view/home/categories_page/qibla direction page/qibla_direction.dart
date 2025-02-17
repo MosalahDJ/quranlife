@@ -70,7 +70,7 @@ class QiblaDirection extends StatelessWidget {
       height: 80,
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("lib/core/assets/images/compass page/meecan.png"),
+          image: AssetImage("lib/core/assets/images/compass/meecan.png"),
           fit: BoxFit.contain,
         ),
       ),
@@ -102,7 +102,7 @@ class QiblaDirection extends StatelessWidget {
                   return Transform.rotate(
                     angle: value,
                     child: Image.asset(
-                      'lib/core/assets/images/compass page/arrw.png',
+                      'lib/core/assets/images/compass/arrw.png',
                       width: 300,
                       height: 350,
                       fit: BoxFit.contain,
@@ -113,7 +113,7 @@ class QiblaDirection extends StatelessWidget {
             }),
             // Static compass background
             Image.asset(
-              'lib/core/assets/images/compass page/qibla_compass.png',
+              'lib/core/assets/images/compass/qibla_compass.png',
               width: 300,
               height: 350,
               fit: BoxFit.contain,
@@ -199,10 +199,11 @@ class QiblaDirection extends StatelessWidget {
                       ? true
                       : false
                   : false,
-              child: const Text(
-                "أنت في اتجاه القبلة",
+              child: Text(
+                'in_direction'.tr,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
+                  fontSize: 20,
                   color: Colors.green,
                 ),
               ))
@@ -230,7 +231,7 @@ class QiblaDirection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'lib/core/assets/images/compass page/calibrating_image.png',
+              'lib/core/assets/images/compass/calibrating_image.png',
               width: 100,
               height: 50,
               alignment: Alignment.center,

@@ -129,7 +129,7 @@ class Messages extends Translations {
           //compass page
           'move_phone_figure8':
               'To obtain the precise Qibla direction, move your phone in a figure 8 pattern to calibrate the compass before use.',
-
+          'in_direction': 'You are facing the Qibla.',
           // Prayer Times
           'prayer_times': 'Prayer Times',
           'mawaqit': 'Schedule',
@@ -427,6 +427,7 @@ class Messages extends Translations {
           //compass page
           'move_phone_figure8':
               'للحصول على اتجاه القبلة بدقة، حرّك هاتفك بحركة تشكّل الرقم 8 لمعايرة البوصلة قبل الاستعمال.',
+          'in_direction': '.أنت في اتجاه القبلة',
 
           // Prayer Times
           'prayer_times': 'مواقيت الصلاة',
@@ -733,6 +734,7 @@ class Messages extends Translations {
           //compass page
           'move_phone_figure8':
               "Pour obtenir la direction de la Qibla avec précision, déplacez votre téléphone en formant le chiffre 8 pour calibrer la boussole avant utilisation.",
+          'in_direction': 'ous êtes face à la Qibla.',
           // Prayer Times
           'prayer_times': 'Horaires des prières',
           'mawaqit': 'prières',
