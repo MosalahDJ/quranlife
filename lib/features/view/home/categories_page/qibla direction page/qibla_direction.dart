@@ -179,7 +179,7 @@ class QiblaDirection extends StatelessWidget {
                 Text(
                   direction != null
                       ? '${direction.toStringAsFixed(1)}°'
-                      : 'Calibrating...',
+                      : 'calibrating'.tr,
                   style: TextStyle(
                     color: direction != null
                         ? controller.isPointingToQibla()
@@ -203,7 +203,7 @@ class QiblaDirection extends StatelessWidget {
                 'in_direction'.tr,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
-                  fontSize: 20,
+                  fontSize: 15,
                   color: Colors.green,
                 ),
               ))
