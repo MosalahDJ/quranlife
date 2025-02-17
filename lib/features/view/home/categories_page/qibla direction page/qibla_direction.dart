@@ -55,6 +55,9 @@ class QiblaDirection extends StatelessWidget {
                     _buildCompass(),
                     const SizedBox(height: 20),
                     _buildDirectionInfo(),
+                    const SizedBox(height: 20),
+                    _buildCalibrationOverlay(),
+                    const SizedBox(height: 20),
                   ],
                 ),
               ),
@@ -245,6 +248,70 @@ class QiblaDirection extends StatelessWidget {
                 ),
               ))
         ],
+      );
+    });
+  }
+
+  Widget _buildCalibrationOverlay() {
+    return Obx(() {
+      if (!controller.isCalibrating.value) return const SizedBox.shrink();
+
+      return Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color:
+              Get.isDarkMode ? Colors.black26 : Colors.white.withOpacity(0.9),
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 10,
+              offset: const Offset(0, 5),
+            ),
+          ],
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(height: 10),
+              Image.asset(
+                'lib/core/assets/images/background_image/calibrating_image.png',
+                width: 100,
+                height: 50,
+                alignment: Alignment.center,
+              ),
+              const SizedBox(height: 10),
+              Text(
+                'calibrate_compass'.tr,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                'move_phone_figure8'.tr,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Colors.black87,
+                  fontSize: 16,
+                ),
+              ),
+              const SizedBox(height: 20),
+              Visibility(
+                  visible:
+                      controller.isCalibrating.value == true ? true : false,
+                  child: const Text("تمت المعايرة")),
+              ElevatedButton(
+                  onPressed: () {
+                    controller.checkCalibration();
+                  },
+                  child: const Text("معايرة"))
+            ],
+          ),
+        ),
       );
     });
   }

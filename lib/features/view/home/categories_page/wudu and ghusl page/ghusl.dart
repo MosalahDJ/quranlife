@@ -28,7 +28,7 @@ class _GhuslState extends State<Ghusl> {
         backgroundColor: Colors.transparent,
         centerTitle: true,
         title: ShimmerText(
-          text: 'omarah'.tr,
+          text: 'ghusl'.tr,
           style: Theme.of(context).textTheme.headlineSmall,
         ),
       ),
@@ -48,7 +48,6 @@ class _GhuslState extends State<Ghusl> {
                 image: AssetImage(
                     'lib/core/assets/images/background_image/arch.jpg'),
                 opacity: 0.2,
-                repeat: ImageRepeat.repeat,
               ),
             ),
           ),

@@ -126,6 +126,11 @@ class Messages extends Translations {
           'omarah': 'Umrah',
           'zakat': 'Zakat',
 
+          //compass page
+          'calibrate_compass': 'Calibrate Compass',
+          'move_phone_figure8':
+              'Move your phone in a figure-8 pattern to calibrate the compass',
+
           // Prayer Times
           'prayer_times': 'Prayer Times',
           'mawaqit': 'Schedule',
@@ -419,6 +424,10 @@ class Messages extends Translations {
           'omraguid': 'دليل العمرة',
           'omarah': 'العمرة',
           'zakat': 'الزكاة',
+
+          //compass page
+          'calibrate_compass': 'معايرة البوصلة',
+          'move_phone_figure8': 'حرك هاتفك على شكل رقم 8 لمعايرة البوصلة',
 
           // Prayer Times
           'prayer_times': 'مواقيت الصلاة',
@@ -722,7 +731,10 @@ class Messages extends Translations {
           'omraguid': 'Guide de l\'Omra',
           'omarah': 'Umrah',
           'zakat': 'Zakat',
-
+          //compass page
+          'calibrate_compass': "calibrer la boussole",
+          'move_phone_figure8':
+              "Déplacez votre téléphone dans un schéma de 8 pour calibrer la boussole",
           // Prayer Times
           'prayer_times': 'Horaires des prières',
           'mawaqit': 'prières',
