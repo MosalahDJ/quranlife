@@ -47,14 +47,14 @@ class CurrentPrayTime extends StatelessWidget {
       //making stack widget responsive
       height: Sizeconfig.screenheight! < 768
           ? Sizeconfig.screenheight! / 2.5
-              : Sizeconfig.screenheight! / 3.4,
+          : Sizeconfig.screenheight! / 3.4,
       child: Stack(
         children: [
           //date text
           Positioned(
             top: Sizeconfig.screenheight! < 768
-                ? Sizeconfig.screenheight! / 20
-                    : Sizeconfig.screenheight! / 70,
+                ? Sizeconfig.screenheight! / 30
+                : Sizeconfig.screenheight! / 70,
             left: langctrl.language.value == "ar"
                 ? Sizeconfig.screenwidth! / 1.6
                 : 0,
@@ -187,7 +187,7 @@ class CurrentPrayTime extends StatelessWidget {
           Positioned(
               bottom: Sizeconfig.screenheight! < 768
                   ? Sizeconfig.screenheight! / 50
-                      : Sizeconfig.screenheight! / 100,
+                  : Sizeconfig.screenheight! / 100,
               right: langctrl.language.value == "ar"
                   ? Sizeconfig.screenwidth! / 2.4
                   : Sizeconfig.screenwidth! / 40,
@@ -224,7 +224,7 @@ class CurrentPrayTime extends StatelessWidget {
                   child: SizedBox(
                     height: Sizeconfig.screenheight! < 768
                         ? Sizeconfig.screenheight! / 11
-                            : Sizeconfig.screenheight! / 20,
+                        : Sizeconfig.screenheight! / 20,
                     width: Sizeconfig.screenwidth! / 2.5,
                     child: Padding(
                       padding: const EdgeInsets.only(left: 8.0),
@@ -234,7 +234,7 @@ class CurrentPrayTime extends StatelessWidget {
                           SizedBox(
                             height: Sizeconfig.screenheight! < 768
                                 ? Sizeconfig.screenheight! / 11
-                                    : Sizeconfig.screenheight! / 20,
+                                : Sizeconfig.screenheight! / 20,
                             width: Sizeconfig.screenwidth! / 3.5,
                             child: initialctrl.isLoading.value == true
                                 ? Center(
@@ -287,8 +287,8 @@ class CurrentPrayTime extends StatelessWidget {
                 ? Sizeconfig.screenwidth! / 50
                 : Sizeconfig.screenwidth! / 2.2,
             bottom: Sizeconfig.screenheight! < 768
-                    ? Sizeconfig.screenheight! / 30
-                    : Sizeconfig.screenheight! / 20,
+                ? Sizeconfig.screenheight! / 10
+                : Sizeconfig.screenheight! / 20,
             child: fltanimtion.buildFloatingWidget(
               shadowOffset: -25,
               child: Material(
@@ -315,8 +315,8 @@ class CurrentPrayTime extends StatelessWidget {
           //morebutton
           Positioned(
             top: Sizeconfig.screenheight! < 768
-                ? Sizeconfig.screenheight! / 27
-                    : Sizeconfig.screenheight! / 180,
+                ? Sizeconfig.screenheight! / 50
+                : Sizeconfig.screenheight! / 180,
             left: langctrl.language.value == "ar"
                 ? 0
                 : Sizeconfig.screenwidth! / 1.26,
