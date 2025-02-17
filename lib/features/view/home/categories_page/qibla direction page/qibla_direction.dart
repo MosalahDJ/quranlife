@@ -54,18 +54,20 @@ class QiblaDirection extends StatelessWidget {
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 20),
-                  _buildInstructionCard(),
-                  const SizedBox(height: 30),
-                  _buildKaabaImage(),
-                  const SizedBox(height: 40),
-                  _buildCompass(),
-                  const SizedBox(height: 30),
-                  _buildDirectionInfo(),
-                ],
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 20),
+                    _buildInstructionCard(),
+                    const SizedBox(height: 30),
+                    _buildKaabaImage(),
+                    const SizedBox(height: 40),
+                    _buildCompass(),
+                    const SizedBox(height: 30),
+                    _buildDirectionInfo(),
+                  ],
+                ),
               ),
             ),
           ),
@@ -125,93 +127,71 @@ class QiblaDirection extends StatelessWidget {
   }
 
   Widget _buildCompass() {
-    return Stack(
-      children: [
-        SizedBox(
-          width: Sizeconfig.screenwidth,
-          height: Sizeconfig.screenheight! / 2,
-          child: Image.asset(
-            'lib/core/assets/images/background_image/qibla_compass.png',
-            width: 300,
-            height: 300,
-          ),
-        ),
-        Obx(() {
-          if (controller.direction.value == null) {
-            // return _buildLoadingCompass();
-          }
-          return TweenAnimationBuilder(
-            tween: Tween<double>(
-              begin: 0,
-              end: ((controller.direction.value! -
-                      controller.qiblaDirection.value!) *
-                  (math.pi / 180)),
-            ),
-            duration: const Duration(milliseconds: 500),
-            builder: (context, double value, child) {
-              return Transform.rotate(
-                angle: value,
-                child: Container(
-                  width: 300,
-                  height: 300,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: kmaincolor.withOpacity(0.2),
-                        blurRadius: 20,
-                        spreadRadius: 5,
-                      ),
-                    ],
-                  ),
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image.asset(
-                        'lib/core/assets/images/background_image/arrw.png',
-                        width: 300,
-                        height: 300,
-                      ),
-                      // AnimatedContainer(
-                      //   duration: const Duration(milliseconds: 300),
-                      //   child: Icon(
-                      //     Icons.arrow_upward,
-                      //     color: controller.isPointingToQibla()
-                      //         ? Colors.green
-                      //         : const Color(0xFFF9B091),
-                      //     size: 50,
-                      //   ),
-                      // ),
-                    ],
-                  ),
+    return Center(
+      child: SizedBox(
+        width: 500,
+        height: 500,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            // Rotating arrow
+            Obx(() {
+              if (controller.direction.value == null) {
+                return _buildLoadingCompass();
+              }
+              return TweenAnimationBuilder(
+                tween: Tween<double>(
+                  begin: 0,
+                  end: ((controller.direction.value! -
+                          controller.qiblaDirection.value!) *
+                      (math.pi / 180)),
                 ),
+                duration: const Duration(milliseconds: 500),
+                builder: (context, double value, child) {
+                  return Transform.rotate(
+                    angle: value,
+                    child: Image.asset(
+                      'lib/core/assets/images/background_image/arrw.png',
+                      width: 500,
+                      height: 500,
+                      fit: BoxFit.contain,
+                    ),
+                  );
+                },
               );
-            },
-          );
-        }),
-      ],
+            }),
+            // Static compass background
+            Image.asset(
+              'lib/core/assets/images/background_image/qibla_compass.png',
+              width: 450,
+              height: 450,
+              fit: BoxFit.contain,
+            ),
+          ],
+        ),
+      ),
     );
   }
 
-  // Widget _buildLoadingCompass() {
-  //   return SizedBox(
-  //     width: 300,
-  //     height: 300,
-  //     child: Stack(
-  //       alignment: Alignment.center,
-  //       children: [
-  //         Image.asset(
-  //           'lib/core/assets/images/background_image/qibla_compass.png',
-  //           width: 300,
-  //           height: 300,
-  //         ),
-  //         CircularProgressIndicator(
-  //           valueColor: AlwaysStoppedAnimation<Color>(kmaincolor),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
+  Widget _buildLoadingCompass() {
+    return Center(
+      child: Container(
+        width: 50,
+        height: 50,
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.8),
+          shape: BoxShape.circle,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: CircularProgressIndicator(
+            strokeWidth: 3,
+            valueColor: AlwaysStoppedAnimation<Color>(kmaincolor),
+          ),
+        ),
+      ),
+    );
+  }
 
   Widget _buildDirectionInfo() {
     return Obx(() {
