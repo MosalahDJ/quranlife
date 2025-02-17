@@ -18,12 +18,13 @@ class QiblaDirection extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        foregroundColor: Colors.white,
+        foregroundColor: Colors.black,
         elevation: 0,
         scrolledUnderElevation: 0,
         centerTitle: true,
         title: ShimmerText(
-          text: 'Qibla Direction'.tr,
+          textcolor: Colors.black,
+          text: 'qibla_direction'.tr,
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         systemOverlayStyle: SystemUiOverlayStyle.light,
@@ -184,49 +185,66 @@ class QiblaDirection extends StatelessWidget {
   Widget _buildDirectionInfo() {
     return Obx(() {
       final direction = controller.direction.value;
-      return AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        decoration: BoxDecoration(
-          color: direction != null
-              ? controller.isPointingToQibla()
-                  ? Colors.green.withOpacity(0.2)
-                  : Colors.red.withOpacity(0.2)
-              : Colors.grey.withOpacity(0.2),
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              direction != null
-                  ? controller.isPointingToQibla()
-                      ? Icons.check_circle
-                      : Icons.info
-                  : Icons.sync,
+      return Column(
+        children: [
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            decoration: BoxDecoration(
               color: direction != null
                   ? controller.isPointingToQibla()
-                      ? Colors.green
-                      : Colors.red
-                  : Colors.grey,
+                      ? Colors.green.withOpacity(0.2)
+                      : Colors.red.withOpacity(0.2)
+                  : Colors.grey.withOpacity(0.2),
+              borderRadius: BorderRadius.circular(15),
             ),
-            const SizedBox(width: 8),
-            Text(
-              direction != null
-                  ? '${direction.toStringAsFixed(1)}°'
-                  : 'Calibrating...',
-              style: TextStyle(
-                color: direction != null
-                    ? controller.isPointingToQibla()
-                        ? Colors.green
-                        : Colors.red
-                    : Colors.grey,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  direction != null
+                      ? controller.isPointingToQibla()
+                          ? Icons.check_circle
+                          : Icons.info
+                      : Icons.sync,
+                  color: direction != null
+                      ? controller.isPointingToQibla()
+                          ? Colors.green
+                          : Colors.red
+                      : Colors.grey,
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  direction != null
+                      ? '${direction.toStringAsFixed(1)}°'
+                      : 'Calibrating...',
+                  style: TextStyle(
+                    color: direction != null
+                        ? controller.isPointingToQibla()
+                            ? Colors.green
+                            : Colors.red
+                        : Colors.grey,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+          Visibility(
+              visible: direction != null
+                  ? controller.isPointingToQibla()
+                      ? true
+                      : false
+                  : false,
+              child: const Text(
+                "أنت في اتجاه القبلة",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.green,
+                ),
+              ))
+        ],
       );
     });
   }

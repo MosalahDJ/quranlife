@@ -11,6 +11,7 @@ class ShimmerText extends StatefulWidget {
   final double? begin;
   final double? end;
   final Color? color;
+  final Color? textcolor;
 
   const ShimmerText({
     super.key,
@@ -21,6 +22,7 @@ class ShimmerText extends StatefulWidget {
     this.begin,
     this.end,
     this.color,
+    this.textcolor,
   });
 
   @override
@@ -80,9 +82,9 @@ class _ShimmerTextState extends State<ShimmerText>
           begin: Alignment(_animation.value - 1, 0),
           end: Alignment(_animation.value, 0),
           colors: [
-            Colors.white,
+            widget.textcolor ?? Colors.white,
             widget.color ?? kmaincolor4,
-            Colors.white,
+            widget.textcolor ?? Colors.white,
           ],
           stops: const [0.0, 0.5, 1.0],
         ).createShader(bounds);
