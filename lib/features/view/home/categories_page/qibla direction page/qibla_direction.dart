@@ -4,8 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
-import 'package:quranlife/core/Utils/size_config.dart';
-import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/features/controller/qibla%20compass%20controller/qibla_compass_controller.dart';
 
@@ -32,21 +30,11 @@ class QiblaDirection extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          //gradient background
-          Gradientbackground(
-            height: Sizeconfig.screenheight! / 2.5,
-            gradientcolor: [
-              kmaincolor,
-              Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
-            ],
-          ),
-
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(
                     'lib/core/assets/images/background_image/paper.jpg'),
-                opacity: 0.2,
                 repeat: ImageRepeat.repeat,
               ),
             ),
@@ -60,11 +48,11 @@ class QiblaDirection extends StatelessWidget {
                   children: [
                     const SizedBox(height: 20),
                     _buildInstructionCard(),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 20),
                     _buildKaabaImage(),
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 20),
                     _buildCompass(),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 20),
                     _buildDirectionInfo(),
                   ],
                 ),
@@ -115,7 +103,7 @@ class QiblaDirection extends StatelessWidget {
 
   Widget _buildKaabaImage() {
     return Container(
-      height: 150,
+      height: 80,
       decoration: const BoxDecoration(
         image: DecorationImage(
           image:
@@ -129,8 +117,8 @@ class QiblaDirection extends StatelessWidget {
   Widget _buildCompass() {
     return Center(
       child: SizedBox(
-        width: 500,
-        height: 500,
+        width: 300,
+        height: 350,
         child: Stack(
           alignment: Alignment.center,
           children: [
@@ -152,8 +140,8 @@ class QiblaDirection extends StatelessWidget {
                     angle: value,
                     child: Image.asset(
                       'lib/core/assets/images/background_image/arrw.png',
-                      width: 500,
-                      height: 500,
+                      width: 300,
+                      height: 350,
                       fit: BoxFit.contain,
                     ),
                   );
@@ -163,8 +151,8 @@ class QiblaDirection extends StatelessWidget {
             // Static compass background
             Image.asset(
               'lib/core/assets/images/background_image/qibla_compass.png',
-              width: 450,
-              height: 450,
+              width: 300,
+              height: 350,
               fit: BoxFit.contain,
             ),
           ],
