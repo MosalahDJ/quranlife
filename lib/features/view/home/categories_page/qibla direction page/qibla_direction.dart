@@ -1,7 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
@@ -34,10 +33,10 @@ class QiblaDirection extends StatelessWidget {
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage(
-                    'lib/core/assets/images/background_image/paper.jpg'),
-                repeat: ImageRepeat.repeat,
-              ),
+                  image: AssetImage(
+                      'lib/core/assets/images/background_image/paper.jpg'),
+                  // repeat: ImageRepeat.repeat,
+                  fit: BoxFit.fill),
             ),
           ),
           SafeArea(
@@ -48,7 +47,7 @@ class QiblaDirection extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const SizedBox(height: 20),
-                    _buildInstructionCard(),
+                    _buildCalibrationOverlay(),
                     const SizedBox(height: 20),
                     _buildKaabaImage(),
                     const SizedBox(height: 20),
@@ -56,47 +55,8 @@ class QiblaDirection extends StatelessWidget {
                     const SizedBox(height: 20),
                     _buildDirectionInfo(),
                     const SizedBox(height: 20),
-                    _buildCalibrationOverlay(),
-                    const SizedBox(height: 20),
                   ],
                 ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildInstructionCard() {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Get.isDarkMode ? Colors.black26 : Colors.white.withOpacity(0.9),
-        borderRadius: BorderRadius.circular(15),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 10,
-            offset: const Offset(0, 5),
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          Icon(
-            FlutterIslamicIcons.kaaba,
-            color: kmaincolor,
-            size: 24,
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Text(
-              'Point the top of your phone towards Qibla',
-              style: TextStyle(
-                color: Get.isDarkMode ? Colors.white : Colors.black87,
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
               ),
             ),
           ),
@@ -110,8 +70,7 @@ class QiblaDirection extends StatelessWidget {
       height: 80,
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image:
-              AssetImage("lib/core/assets/images/background_image/meecan.png"),
+          image: AssetImage("lib/core/assets/images/compass page/meecan.png"),
           fit: BoxFit.contain,
         ),
       ),
@@ -143,7 +102,7 @@ class QiblaDirection extends StatelessWidget {
                   return Transform.rotate(
                     angle: value,
                     child: Image.asset(
-                      'lib/core/assets/images/background_image/arrw.png',
+                      'lib/core/assets/images/compass page/arrw.png',
                       width: 300,
                       height: 350,
                       fit: BoxFit.contain,
@@ -154,7 +113,7 @@ class QiblaDirection extends StatelessWidget {
             }),
             // Static compass background
             Image.asset(
-              'lib/core/assets/images/background_image/qibla_compass.png',
+              'lib/core/assets/images/compass page/qibla_compass.png',
               width: 300,
               height: 350,
               fit: BoxFit.contain,
@@ -253,66 +212,41 @@ class QiblaDirection extends StatelessWidget {
   }
 
   Widget _buildCalibrationOverlay() {
-    return Obx(() {
-      if (!controller.isCalibrating.value) return const SizedBox.shrink();
-
-      return Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color:
-              Get.isDarkMode ? Colors.black26 : Colors.white.withOpacity(0.9),
-          borderRadius: BorderRadius.circular(15),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 10,
-              offset: const Offset(0, 5),
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Get.isDarkMode ? Colors.black26 : Colors.white.withOpacity(0.5),
+        borderRadius: BorderRadius.circular(15),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 10,
+            offset: const Offset(0, 5),
+          ),
+        ],
+      ),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'lib/core/assets/images/compass page/calibrating_image.png',
+              width: 100,
+              height: 50,
+              alignment: Alignment.center,
+            ),
+            const SizedBox(height: 10),
+            Text(
+              'move_phone_figure8'.tr,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: Colors.black87,
+                fontSize: 16,
+              ),
             ),
           ],
         ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(height: 10),
-              Image.asset(
-                'lib/core/assets/images/background_image/calibrating_image.png',
-                width: 100,
-                height: 50,
-                alignment: Alignment.center,
-              ),
-              const SizedBox(height: 10),
-              Text(
-                'calibrate_compass'.tr,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 10),
-              Text(
-                'move_phone_figure8'.tr,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.black87,
-                  fontSize: 16,
-                ),
-              ),
-              const SizedBox(height: 20),
-              Visibility(
-                  visible:
-                      controller.isCalibrating.value == true ? true : false,
-                  child: const Text("تمت المعايرة")),
-              ElevatedButton(
-                  onPressed: () {
-                    controller.checkCalibration();
-                  },
-                  child: const Text("معايرة"))
-            ],
-          ),
-        ),
-      );
-    });
+      ),
+    );
   }
 }

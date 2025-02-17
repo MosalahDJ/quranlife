@@ -1,5 +1,4 @@
 import 'dart:math' as math;
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_compass/flutter_compass.dart';
 import 'package:geolocator/geolocator.dart';
@@ -75,28 +74,5 @@ class QiblaCompassController extends GetxController {
 
     // Consider it correct if within 10 degrees of accuracy
     return diff <= 10 || diff >= 350;
-  }
-
-  //compass calibration
-  final RxBool isCalibrating = true.obs;
-  final RxDouble calibrationAccuracy = 0.0.obs;
-  final double minAccuracy = 5.0;
-  final double maxAccuracy = 15.0;
-
-  void checkCalibration() {
-    // Calculate accuracy using absolute value for better precision
-    calibrationAccuracy.value = (direction.value! % 360).abs();
-
-    // Add stability check
-    if (calibrationAccuracy.value > minAccuracy &&
-        calibrationAccuracy.value < maxAccuracy) {
-      isCalibrating.value = false;
-      Get.snackbar(
-        'Calibration Complete'.tr,
-        'Compass is ready to use'.tr,
-        backgroundColor: Colors.green,
-        colorText: Colors.white,
-      );
-    }
   }
 }

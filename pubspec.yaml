@@ -122,6 +122,7 @@ flutter:
     - lib/core/assets/images/app_logo/
     - lib/core/assets/images/salat_icons/
     - lib/core/assets/images/adkar_icons/
+    - lib/core/assets/images/compass
     - lib/core/assets/json/quran.json
     - lib/core/assets/json/adhkar.json
     - lib/core/assets/json/adkartype.json
