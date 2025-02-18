@@ -4,8 +4,8 @@ import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
-import 'package:quranlife/features/view/home/categories_page/wudu%20and%20ghusl%20page/ghusl.dart';
-import 'package:quranlife/features/view/home/categories_page/wudu%20and%20ghusl%20page/wudu.dart';
+import 'package:quranlife/features/view/home/categories/categories_pages/wudu%20and%20ghusl%20page/ghusl.dart';
+import 'package:quranlife/features/view/home/categories/categories_pages/wudu%20and%20ghusl%20page/wudu.dart';
 
 class WuduAndGhusle extends StatefulWidget {
   const WuduAndGhusle({super.key});

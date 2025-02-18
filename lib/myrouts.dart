@@ -7,7 +7,7 @@ import 'package:quranlife/features/view/home/profile/More%20page/more%20items%20
 import 'package:quranlife/features/view/home/profile/More%20page/more%20items%20pages/Referal%20Page/referal_page.dart';
 import 'package:quranlife/features/view/home/profile/More%20page/more%20items%20pages/settings%20page/setting_page.dart';
 import 'package:quranlife/features/view/home/adkar%20page/adkar_page.dart';
-import 'package:quranlife/features/view/home/categories_page/hijri%20calender/hijri_calender.dart';
+import 'package:quranlife/features/view/home/categories/categories_pages/hijri_calender.dart';
 import 'package:quranlife/features/view/home/main_page.dart';
 import 'package:quranlife/features/view/home/mytestpage.dart';
 import 'package:quranlife/features/view/home/quraan%20page/quraan_page.dart';

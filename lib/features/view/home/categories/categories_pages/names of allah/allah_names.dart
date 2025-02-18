@@ -5,7 +5,7 @@ import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/features/controller/fetching%20data%20controller/allah_names_controller.dart';
-import 'package:quranlife/features/view/home/categories_page/names%20of%20allah/name_page.dart';
+import 'package:quranlife/features/view/home/categories/categories_pages/names%20of%20allah/name_page.dart';
 
 class AllahNames extends StatefulWidget {
   const AllahNames({super.key});

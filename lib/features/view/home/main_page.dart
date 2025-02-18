@@ -3,7 +3,7 @@ import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/features/view/home/adkar%20page/adkar_page.dart';
-import 'package:quranlife/features/view/home/categories_page/categories_page.dart';
+import 'package:quranlife/features/view/home/categories/categories_page.dart';
 import 'package:quranlife/features/view/home/quraan%20page/quraan_page.dart';
 import 'package:quranlife/features/view/home/home%20page/home_page_body.dart';
 import 'package:quranlife/features/view/home/profile/profile_page.dart';

@@ -10,7 +10,7 @@ import 'package:quranlife/features/controller/home%20controller/fade_animation_c
 import 'package:quranlife/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:quranlife/features/controller/settings%20controllers/language_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
-import 'package:quranlife/features/view/home/categories_page/statistics%20page/statistics_page.dart';
+import 'package:quranlife/features/view/home/categories/categories_pages/statistics_page.dart';
 import 'package:quranlife/features/view/home/home%20page/widgets/salawat_pageview.dart';
 import 'package:quranlife/features/view/home/home%20page/widgets/cart_card.dart';
 import 'package:quranlife/features/view/home/home%20page/widgets/wirds.dart';

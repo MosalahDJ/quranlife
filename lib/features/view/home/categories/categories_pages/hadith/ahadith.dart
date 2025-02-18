@@ -6,7 +6,7 @@ import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/features/controller/ahadith%20controller/ahadith_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/language_controller.dart';
-import 'package:quranlife/features/view/home/categories_page/hadith/hadith_page.dart';
+import 'package:quranlife/features/view/home/categories/categories_pages/hadith/hadith_page.dart';
 
 class Ahadith extends StatefulWidget {
   const Ahadith({super.key});
