@@ -41,6 +41,7 @@ dependencies:
   flashy_tab_bar2: ^0.0.10
   flutter:
     sdk: flutter
+  flutter_compass: ^0.8.0
   flutter_dotenv: ^5.2.1
   flutter_islamic_icons: ^1.0.2
   flutter_local_notifications: ^18.0.1
@@ -60,12 +61,12 @@ dependencies:
   restart_app: ^1.3.2
   share_plus: ^10.1.3
   shared_preferences: ^2.2.2
+  skeletonizer: ^1.4.3
   sqflite: ^2.4.1
   timezone: ^0.10.0
   url_launcher: ^6.3.1
   visibility_detector: ^0.4.0+2
   workmanager: ^0.5.2
-  flutter_compass: ^0.8.0
 
 dev_dependencies:
   flutter_launcher_icons: ^0.14.1
@@ -139,7 +140,6 @@ flutter:
     - lib/core/assets/json/islamicruqya.json
     - lib/core/assets/json/haj.json
     - lib/core/assets/json/omra.json
-
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

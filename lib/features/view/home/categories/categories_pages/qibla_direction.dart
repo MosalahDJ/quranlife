@@ -2,10 +2,9 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
-import 'package:quranlife/features/controller/animation_controllers/floating_animation_controller.dart';
 import 'package:quranlife/features/controller/qibla%20compass%20controller/qibla_compass_controller.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class QiblaDirection extends StatelessWidget {
   QiblaDirection({super.key});
@@ -39,46 +38,136 @@ class QiblaDirection extends StatelessWidget {
                   fit: BoxFit.fill),
             ),
           ),
-          SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: 5),
-                    _buildCalibrationOverlay(),
-                    const SizedBox(height: 20),
-                    _buildKaabaImage(),
-                    _buildCompass(),
-                    const SizedBox(height: 5),
-                    _buildDirectionInfo(),
-                    const SizedBox(height: 10),
-                  ],
-                ),
-              ),
-            ),
-          ),
+          Obx(() {
+            if (controller.isLoading.value) {
+              return _buildSkeletonLayout();
+            }
+            return GetBuilder<QiblaCompassController>(
+              builder: (controller) {
+                if (!controller.hasLocationPermission ||
+                    !controller.isLocationEnabled) {
+                  return _buildLocationPermissionRequest();
+                }
+                return SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const SizedBox(height: 5),
+                          _buildCalibrationOverlay(),
+                          const SizedBox(height: 20),
+                          _buildKaabaImage(),
+                          _buildCompass(),
+                          const SizedBox(height: 5),
+                          _buildDirectionInfo(),
+                          const SizedBox(height: 10),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+            );
+          }),
         ],
       ),
     );
   }
 
-  Widget _buildKaabaImage() {
-    final FloatingAnimationController fltanimtion = Get.find();
-
-    return fltanimtion.buildFloatingWidget(
-        shadowWidth: 70,
-        shadowOffset: 0,
-        child: Container(
-          height: 80,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("lib/core/assets/images/compass/meecan.png"),
-              fit: BoxFit.contain,
+  Widget _buildSkeletonLayout() {
+    return Skeletonizer(
+        enabled: true,
+        containersColor: const Color(0xFFE0E0E0).withOpacity(0.5),
+        ignoreContainers: false,
+        effect: ShimmerEffect(
+          baseColor: const Color(0xFFE0E0E0).withOpacity(0.5),
+          highlightColor: const Color(0xFFF5F5F5).withOpacity(0.8),
+          duration: const Duration(milliseconds: 1500),
+        ),
+        justifyMultiLineText: true,
+        ignorePointers: true,
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 20),
+                _buildCalibrationOverlay(),
+                const SizedBox(height: 20),
+                Image.asset(
+                  'lib/core/assets/images/compass/qibla_compass.png',
+                ),
+                const SizedBox(height: 20),
+                _buildDirectionInfo(),
+                const SizedBox(height: 20),
+              ],
             ),
           ),
         ));
+  }
+
+  Widget _buildLocationPermissionRequest() {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.location_disabled,
+              size: 64,
+              color: Colors.grey[600],
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'location_permission_required'.tr,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'enable_location_description'.tr,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.grey[600],
+              ),
+            ),
+            const SizedBox(height: 24),
+            ElevatedButton(
+              onPressed: () async {
+                await controller.retryInitialization();
+              },
+              child: Text('retry_permission'.tr),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildKaabaImage() {
+    return Container(
+      height: 80,
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 10,
+            offset: const Offset(0, 10),
+          ),
+        ],
+      ),
+      child: Image.asset(
+        "lib/core/assets/images/compass/meecan.png",
+        fit: BoxFit.contain,
+      ),
+    );
   }
 
   Widget _buildCompass() {
@@ -89,10 +178,15 @@ class QiblaDirection extends StatelessWidget {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            // Rotating arrow
             Obx(() {
-              if (controller.direction.value == null) {
-                return _buildLoadingCompass();
+              if (controller.direction.value == null ||
+                  controller.qiblaDirection.value == null) {
+                return Image.asset(
+                  'lib/core/assets/images/compass/arrw.png',
+                  width: 300,
+                  height: 350,
+                  fit: BoxFit.contain,
+                );
               }
               return TweenAnimationBuilder(
                 tween: Tween<double>(
@@ -115,34 +209,13 @@ class QiblaDirection extends StatelessWidget {
                 },
               );
             }),
-            // Static compass background
             Image.asset(
               'lib/core/assets/images/compass/qibla_compass.png',
               width: 300,
               height: 350,
               fit: BoxFit.contain,
-            ),
+            )
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildLoadingCompass() {
-    return Center(
-      child: Container(
-        width: 50,
-        height: 50,
-        decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.8),
-          shape: BoxShape.circle,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: CircularProgressIndicator(
-            strokeWidth: 3,
-            valueColor: AlwaysStoppedAnimation<Color>(kmaincolor),
-          ),
         ),
       ),
     );
@@ -198,19 +271,16 @@ class QiblaDirection extends StatelessWidget {
             ),
           ),
           Visibility(
-              visible: direction != null
-                  ? controller.isPointingToQibla()
-                      ? true
-                      : false
-                  : false,
-              child: Text(
-                'in_direction'.tr,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 15,
-                  color: Colors.green,
-                ),
-              ))
+            visible: direction != null ? controller.isPointingToQibla() : false,
+            child: Text(
+              'in_direction'.tr,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 15,
+                color: Colors.green,
+              ),
+            ),
+          ),
         ],
       );
     });

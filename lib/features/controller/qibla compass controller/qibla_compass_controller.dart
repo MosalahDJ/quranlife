@@ -6,6 +6,9 @@ import 'package:geolocator/geolocator.dart';
 class QiblaCompassController extends GetxController {
   final Rx<double?> direction = Rx<double?>(null);
   final Rx<double?> qiblaDirection = Rx<double?>(null);
+  final RxBool isLoading = true.obs;
+  bool hasLocationPermission = false;
+  bool isLocationEnabled = false;
 
   @override
   void onInit() {
@@ -14,56 +17,99 @@ class QiblaCompassController extends GetxController {
   }
 
   Future<void> _initializeQibla() async {
-    await _checkLocationPermission();
-    await _calculateQiblaDirection();
-    _startCompassListener();
+    isLoading.value = true;
+    await checkLocationPermission();
+    if (hasLocationPermission && isLocationEnabled) {
+      await calculateQiblaDirection();
+      startCompassListener();
+    }
+    isLoading.value = false;
   }
 
-  Future<void> _checkLocationPermission() async {
-    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+  Future<void> retryInitialization() async {
+    isLoading.value = true;
+    update();
 
-    // check if location services are enabled.
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      Get.snackbar("permission denied",
-          "we can't find your location without enabling Location services,turn it on or try later");
+    await checkLocationPermission();
+    if (hasLocationPermission && isLocationEnabled) {
+      await calculateQiblaDirection();
+      startCompassListener();
     }
 
-    LocationPermission permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
+    isLoading.value = false;
+    update();
+  }
+
+  Future<void> checkLocationPermission() async {
+    try {
+      // Check and request location permission
+      LocationPermission permission = await Geolocator.checkPermission();
       if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
+        permission = await Geolocator.requestPermission();
       }
+
+      hasLocationPermission = permission != LocationPermission.denied &&
+          permission != LocationPermission.deniedForever;
+
+      // Check if location services are enabled
+      isLocationEnabled = await Geolocator.isLocationServiceEnabled();
+      if (!isLocationEnabled) {
+        Get.snackbar(
+          "location_disabled".tr,
+          "location_services_required".tr,
+        );
+        update();
+        return;
+      }
+
+      if (hasLocationPermission && isLocationEnabled) {
+        await calculateQiblaDirection();
+        startCompassListener();
+      }
+
+      update();
+    } catch (e) {
+      hasLocationPermission = false;
+      update();
     }
   }
 
-  void _startCompassListener() {
-    FlutterCompass.events!.listen((event) {
-      direction.value = event.heading;
-    });
+  void startCompassListener() {
+    try {
+      FlutterCompass.events!.listen((event) {
+        direction.value = event.heading;
+      });
+    } catch (e) {
+      // ignore: avoid_print
+      print(e);
+    }
   }
 
-  Future<void> _calculateQiblaDirection() async {
-    final Position position = await Geolocator.getCurrentPosition();
+  Future<void> calculateQiblaDirection() async {
+    try {
+      final Position position = await Geolocator.getCurrentPosition();
 
-    // Mecca coordinates
-    const double meccaLat = 21.4225;
-    const double meccaLong = 39.8262;
+      // Mecca coordinates
+      const double meccaLat = 21.4225;
+      const double meccaLong = 39.8262;
 
-    final double userLat = position.latitude;
-    final double userLong = position.longitude;
+      final double userLat = position.latitude;
+      final double userLong = position.longitude;
 
-    // Calculate Qibla direction
-    double longDiff = meccaLong - userLong;
-    double y = math.sin(longDiff * (math.pi / 180));
-    double x = math.cos(userLat * (math.pi / 180)) *
-            math.tan(meccaLat * (math.pi / 180)) -
-        math.sin(userLat * (math.pi / 180)) *
-            math.cos(longDiff * (math.pi / 180));
+      // Calculate Qibla direction
+      double longDiff = meccaLong - userLong;
+      double y = math.sin(longDiff * (math.pi / 180));
+      double x = math.cos(userLat * (math.pi / 180)) *
+              math.tan(meccaLat * (math.pi / 180)) -
+          math.sin(userLat * (math.pi / 180)) *
+              math.cos(longDiff * (math.pi / 180));
 
-    double qibla = math.atan2(y, x) * (180 / math.pi);
-    qiblaDirection.value = qibla;
+      double qibla = math.atan2(y, x) * (180 / math.pi);
+      qiblaDirection.value = qibla;
+    } catch (e) {
+      // ignore: avoid_print
+      print(e);
+    }
   }
 
   bool isPointingToQibla() {

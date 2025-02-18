@@ -131,6 +131,12 @@ class Messages extends Translations {
               'To obtain the precise Qibla direction, move your phone in a figure 8 pattern to calibrate the compass before use.',
           'in_direction': 'You are facing the Qibla.',
           'calibrating': 'Calibrating...',
+          "location_disabled": "Location is disabled",
+          "location_services_required": "Location services required",
+          "location_permission_required": "Location permission required",
+          "enable_location_description":
+              "Please enable location services to determine the Qibla direction",
+          "retry_permission": "Retry Permission",
 
           // Prayer Times
           'prayer_times': 'Prayer Times',
@@ -431,6 +437,12 @@ class Messages extends Translations {
               'للحصول على اتجاه القبلة بدقة، حرّك هاتفك بحركة تشكّل الرقم 8 لمعايرة البوصلة قبل الاستعمال.',
           'in_direction': '.أنت في اتجاه القبلة',
           'calibrating': 'معايرة ...',
+          "location_disabled": "خدمة الموقع معطلة",
+          "location_services_required": "خدمات الموقع مطلوبة",
+          "location_permission_required": "إذن الوصول للموقع مطلوب",
+          "enable_location_description":
+              "يرجى تفعيل خدمة الموقع لتحديد اتجاه القبلة",
+          "retry_permission": "إعادة محاولة",
 
           // Prayer Times
           'prayer_times': 'مواقيت الصلاة',
@@ -739,6 +751,14 @@ class Messages extends Translations {
               "Pour obtenir la direction de la Qibla avec précision, déplacez votre téléphone en formant le chiffre 8 pour calibrer la boussole avant utilisation.",
           'in_direction': 'ous êtes face à la Qibla.',
           'calibrating': 'Calibrage en cours',
+
+          "location_disabled": "La localisation est désactivée",
+          "location_services_required": "Services de localisation requis",
+          "location_permission_required": "Permission de localisation requise",
+          "enable_location_description":
+              "Veuillez activer les services de localisation pour déterminer la direction de la Qibla",
+          "retry_permission": "Réessayer l'autorisation",
+
           // Prayer Times
           'prayer_times': 'Horaires des prières',
           'mawaqit': 'prières',

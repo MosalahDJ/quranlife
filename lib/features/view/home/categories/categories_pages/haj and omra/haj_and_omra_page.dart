@@ -4,7 +4,7 @@ import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
-import 'package:quranlife/features/view/home/categories_page/haj%20and%20omra/haj_Page.dart';
+import 'package:quranlife/features/view/home/categories/categories_pages/haj%20and%20omra/haj_page.dart';
 import 'package:quranlife/features/view/home/categories/categories_pages/haj%20and%20omra/omra_page.dart';
 
 class Hajandomrapage extends StatefulWidget {
