@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
+import 'package:quranlife/core/Utils/size_config.dart';
+import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/features/controller/animation_controllers/floating_animation_controller.dart';
 import 'package:quranlife/features/controller/qibla%20compass%20controller/qibla_compass_controller.dart';
@@ -36,7 +38,6 @@ class QiblaDirection extends StatelessWidget {
               image: DecorationImage(
                   image: AssetImage(
                       'lib/core/assets/images/background_image/paper.jpg'),
-                  // repeat: ImageRepeat.repeat,
                   fit: BoxFit.fill),
             ),
           ),
@@ -49,10 +50,9 @@ class QiblaDirection extends StatelessWidget {
                   children: [
                     const SizedBox(height: 5),
                     _buildCalibrationOverlay(),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 15),
                     _buildKaabaImage(),
                     _buildCompass(),
-                    const SizedBox(height: 10),
                     _buildDirectionInfo(),
                     const SizedBox(height: 10),
                   ],
@@ -221,7 +221,7 @@ class QiblaDirection extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Get.isDarkMode ? Colors.black26 : Colors.white.withOpacity(0.5),
+        color: Colors.white.withOpacity(0.5),
         borderRadius: BorderRadius.circular(15),
         boxShadow: [
           BoxShadow(
