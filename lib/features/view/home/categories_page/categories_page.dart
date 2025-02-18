@@ -9,6 +9,7 @@ import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
+import 'package:quranlife/features/view/home/categories_page/electronic%20tassbih/tasbih.dart';
 import 'package:quranlife/features/view/home/categories_page/friday%20sunnah/friday_sunnah.dart';
 import 'package:quranlife/features/view/home/categories_page/hadith/ahadith.dart';
 import 'package:quranlife/features/view/home/categories_page/haj%20and%20omra/haj_and_omra_page.dart';
@@ -125,7 +126,9 @@ class CategoriesPage extends StatelessWidget {
                                   'qibla_direction'.tr,
                                 ),
                                 mycategory(
-                                  () {},
+                                  () {
+                                    Get.to(() => const Tasbih());
+                                  },
                                   FlutterIslamicIcons.tasbihHand,
                                   'electronic_tasbih'.tr,
                                 ),
