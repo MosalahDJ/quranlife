@@ -127,7 +127,7 @@ class CategoriesPage extends StatelessWidget {
                                 ),
                                 mycategory(
                                   () {
-                                    Get.to(() => const Tasbih());
+                                    Get.to(() => Tasbih());
                                   },
                                   FlutterIslamicIcons.tasbihHand,
                                   'electronic_tasbih'.tr,
