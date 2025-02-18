@@ -48,9 +48,10 @@ class QiblaDirection extends StatelessWidget {
                   children: [
                     const SizedBox(height: 5),
                     _buildCalibrationOverlay(),
-                    const SizedBox(height: 15),
+                    const SizedBox(height: 20),
                     _buildKaabaImage(),
                     _buildCompass(),
+                    const SizedBox(height: 5),
                     _buildDirectionInfo(),
                     const SizedBox(height: 10),
                   ],
