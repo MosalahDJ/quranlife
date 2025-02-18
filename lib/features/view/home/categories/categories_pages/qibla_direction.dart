@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
+import 'package:quranlife/core/widgets/skeletonizer.dart';
 import 'package:quranlife/features/controller/qibla%20compass%20controller/qibla_compass_controller.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -77,36 +78,26 @@ class QiblaDirection extends StatelessWidget {
   }
 
   Widget _buildSkeletonLayout() {
-    return Skeletonizer(
-        enabled: true,
-        containersColor: const Color(0xFFE0E0E0).withOpacity(0.5),
-        ignoreContainers: false,
-        effect: ShimmerEffect(
-          baseColor: const Color(0xFFE0E0E0).withOpacity(0.5),
-          highlightColor: const Color(0xFFF5F5F5).withOpacity(0.8),
-          duration: const Duration(milliseconds: 1500),
-        ),
-        justifyMultiLineText: true,
-        ignorePointers: true,
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(height: 20),
-                _buildCalibrationOverlay(),
-                const SizedBox(height: 20),
-                Image.asset(
-                  'lib/core/assets/images/compass/qibla_compass.png',
-                ),
-                const SizedBox(height: 20),
-                _buildDirectionInfo(),
-                const SizedBox(height: 20),
-              ],
+    return Myskeletonizer(
+        skeletonizerWidget: SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SizedBox(height: 20),
+            _buildCalibrationOverlay(),
+            const SizedBox(height: 20),
+            Image.asset(
+              'lib/core/assets/images/compass/qibla_compass.png',
             ),
-          ),
-        ));
+            const SizedBox(height: 20),
+            _buildDirectionInfo(),
+            const SizedBox(height: 20),
+          ],
+        ),
+      ),
+    ));
   }
 
   Widget _buildLocationPermissionRequest() {
