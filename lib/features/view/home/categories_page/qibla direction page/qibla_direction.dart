@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
+import 'package:quranlife/features/controller/animation_controllers/floating_animation_controller.dart';
 import 'package:quranlife/features/controller/qibla%20compass%20controller/qibla_compass_controller.dart';
 
 class QiblaDirection extends StatelessWidget {
@@ -66,15 +67,20 @@ class QiblaDirection extends StatelessWidget {
   }
 
   Widget _buildKaabaImage() {
-    return Container(
-      height: 80,
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage("lib/core/assets/images/compass/meecan.png"),
-          fit: BoxFit.contain,
-        ),
-      ),
-    );
+    final FloatingAnimationController fltanimtion = Get.find();
+
+    return fltanimtion.buildFloatingWidget(
+        shadowWidth: 70,
+        shadowOffset: 0,
+        child: Container(
+          height: 80,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("lib/core/assets/images/compass/meecan.png"),
+              fit: BoxFit.contain,
+            ),
+          ),
+        ));
   }
 
   Widget _buildCompass() {
