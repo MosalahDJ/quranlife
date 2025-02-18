@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_compass/flutter_compass.dart';
 import 'package:geolocator/geolocator.dart';
@@ -54,10 +55,8 @@ class QiblaCompassController extends GetxController {
       // Check if location services are enabled
       isLocationEnabled = await Geolocator.isLocationServiceEnabled();
       if (!isLocationEnabled) {
-        Get.snackbar(
-          "location_disabled".tr,
-          "location_services_required".tr,
-        );
+        Get.snackbar("location_disabled".tr, "location_services_required".tr,
+            colorText: Colors.black87);
         update();
         return;
       }

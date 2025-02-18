@@ -2,6 +2,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/core/widgets/skeletonizer.dart';
 import 'package:quranlife/features/controller/qibla%20compass%20controller/qibla_compass_controller.dart';
@@ -107,30 +108,35 @@ class QiblaDirection extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
+            const Icon(
               Icons.location_disabled,
               size: 64,
-              color: Colors.grey[600],
+              color: Colors.black87,
             ),
             const SizedBox(height: 16),
             Text(
               'location_permission_required'.tr,
               textAlign: TextAlign.center,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
+                color: Colors.grey[600],
               ),
             ),
             const SizedBox(height: 8),
             Text(
               'enable_location_description'.tr,
               textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.grey[600],
+              style: const TextStyle(
+                color: Colors.black87,
               ),
             ),
             const SizedBox(height: 24),
             ElevatedButton(
+              style: ButtonStyle(
+                  foregroundColor: WidgetStatePropertyAll(kmaincolor4),
+                  textStyle: WidgetStatePropertyAll(TextStyle(
+                      color: kmaincolor4, fontWeight: FontWeight.bold))),
               onPressed: () async {
                 await controller.retryInitialization();
               },
