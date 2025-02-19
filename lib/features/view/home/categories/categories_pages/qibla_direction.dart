@@ -6,7 +6,6 @@ import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/core/widgets/skeletonizer.dart';
 import 'package:quranlife/features/controller/qibla%20compass%20controller/qibla_compass_controller.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 class QiblaDirection extends StatelessWidget {
   QiblaDirection({super.key});
@@ -79,45 +78,35 @@ class QiblaDirection extends StatelessWidget {
   }
 
   Widget _buildSkeletonLayout() {
-    return Column(
-      children: [
-        const SizedBox(height: 20),
-        Myskeletonizer(
-            skeletonizerWidget: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _buildCalibrationOverlay(),
-              ],
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(height: 20),
+            Myskeletonizer(
+                skeletonizerWidget: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: _buildCalibrationOverlay(),
+            )),
+            const SizedBox(height: 20),
+            _buildKaabaImage(),
+            const SizedBox(height: 20),
+            Image.asset(
+              'lib/core/assets/images/compass/qibla_compass.png',
+              width: 300,
+              height: 300,
+              fit: BoxFit.fill,
             ),
-          ),
-        )),
-        const SizedBox(height: 20),
-        _buildKaabaImage(),
-        const SizedBox(height: 20),
-        Image.asset(
-          'lib/core/assets/images/compass/qibla_compass.png',
-          width: 300,
-          height: 350,
-          fit: BoxFit.contain,
+            const SizedBox(height: 20),
+            Myskeletonizer(
+                skeletonizerWidget: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: _buildDirectionInfo(),
+            )),
+            const SizedBox(height: 20),
+          ],
         ),
-        const SizedBox(height: 20),
-        Myskeletonizer(
-            skeletonizerWidget: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _buildDirectionInfo(),
-              ],
-            ),
-          ),
-        )),
-        const SizedBox(height: 20),
-      ],
+      ),
     );
   }
 
@@ -333,7 +322,16 @@ class QiblaDirection extends StatelessWidget {
               textAlign: TextAlign.center,
               style: const TextStyle(
                 color: Colors.black87,
-                fontSize: 16,
+                fontSize: 13,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              'magnetic'.tr,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: Colors.black87,
+                fontSize: 13,
               ),
             ),
           ],

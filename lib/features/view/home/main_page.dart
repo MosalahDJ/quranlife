@@ -36,6 +36,7 @@ class MainPage extends StatelessWidget {
                     title: Text(
                       'more'.tr,
                       textAlign: TextAlign.center,
+                      style: const TextStyle(fontSize: 12),
                     ),
                     activeColor: kmaincolor4,
                     inactiveColor: Colors.white,
@@ -47,6 +48,7 @@ class MainPage extends StatelessWidget {
                     title: Text(
                       'category'.tr,
                       textAlign: TextAlign.center,
+                      style: const TextStyle(fontSize: 12),
                     ),
                     activeColor: kmaincolor4,
                     inactiveColor: Colors.white,
@@ -58,6 +60,7 @@ class MainPage extends StatelessWidget {
                     title: Text(
                       'home'.tr,
                       textAlign: TextAlign.center,
+                      style: const TextStyle(fontSize: 12),
                     ),
                     activeColor: kmaincolor4,
                     inactiveColor: Colors.white,
@@ -68,6 +71,7 @@ class MainPage extends StatelessWidget {
                     ),
                     title: Text(
                       'adkar'.tr,
+                      style: const TextStyle(fontSize: 12),
                       textAlign: TextAlign.center,
                     ),
                     activeColor: kmaincolor4,
@@ -77,7 +81,9 @@ class MainPage extends StatelessWidget {
                     icon: const Icon(
                       FlutterIslamicIcons.solidQuran2,
                     ),
-                    title: Text('quran'.tr),
+                    title: Text('quran'.tr,
+                        style: const TextStyle(fontSize: 12),
+                        textAlign: TextAlign.center),
                     activeColor: kmaincolor4,
                     inactiveColor: Colors.white,
                   ),

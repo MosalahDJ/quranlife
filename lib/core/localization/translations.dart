@@ -137,6 +137,8 @@ class Messages extends Translations {
           "enable_location_description":
               "Please enable location services to determine the Qibla direction",
           "retry_permission": "Retry Permission",
+          'magnetic':'Keep away from metals and magnetic devices to ensure accurate Qibla direction.',
+
 
           // Prayer Times
           'prayer_times': 'Prayer Times',
@@ -443,6 +445,8 @@ class Messages extends Translations {
           "enable_location_description":
               "يرجى تفعيل خدمة الموقع لتحديد اتجاه القبلة",
           "retry_permission": "إعادة محاولة",
+          'magnetic':'ابتعد عن المعادن والأجهزة المغناطيسية لضمان دقة اتجاه القبلة.',
+
 
           // Prayer Times
           'prayer_times': 'مواقيت الصلاة',
@@ -758,6 +762,7 @@ class Messages extends Translations {
           "enable_location_description":
               "Veuillez activer les services de localisation pour déterminer la direction de la Qibla",
           "retry_permission": "Réessayer l'autorisation",
+          'magnetic':'Éloignez-vous des métaux et appareils magnétiques pour assurer la précision de la direction de la Qibla.',
 
           // Prayer Times
           'prayer_times': 'Horaires des prières',

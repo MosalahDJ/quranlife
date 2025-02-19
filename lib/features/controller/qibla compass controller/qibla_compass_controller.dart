@@ -8,6 +8,8 @@ class QiblaCompassController extends GetxController {
   final Rx<double?> direction = Rx<double?>(null);
   final Rx<double?> qiblaDirection = Rx<double?>(null);
   final RxBool isLoading = true.obs;
+  final RxBool isCompassReliable = true.obs;
+  final RxString compassErrorMessage = ''.obs;
   bool hasLocationPermission = false;
   bool isLocationEnabled = false;
 
@@ -75,12 +77,42 @@ class QiblaCompassController extends GetxController {
 
   void startCompassListener() {
     try {
+      // التحقق من توفر البوصلة
+      if (FlutterCompass.events == null) {
+        compassErrorMessage.value = "compass_not_available".tr;
+        isCompassReliable.value = false;
+        update();
+        return;
+      }
+
       FlutterCompass.events!.listen((event) {
+        // التحقق من موثوقية البوصلة
+        if (event.heading == null) {
+          compassErrorMessage.value = "compass_reading_unavailable".tr;
+          isCompassReliable.value = false;
+          update();
+          return;
+        }
+
         direction.value = event.heading;
+
+        // التحقق من دقة البوصلة إذا كانت متوفرة
+        if (event.accuracy != null) {
+          if (event.accuracy! <= 2) {
+            isCompassReliable.value = false;
+            compassErrorMessage.value = "compass_unreliable".tr;
+          } else {
+            isCompassReliable.value = true;
+            compassErrorMessage.value = '';
+          }
+        }
+
+        update();
       });
     } catch (e) {
-      // ignore: avoid_print
-      print(e);
+      compassErrorMessage.value = "compass_error".tr;
+      isCompassReliable.value = false;
+      update();
     }
   }
 
@@ -106,7 +138,6 @@ class QiblaCompassController extends GetxController {
       double qibla = math.atan2(y, x) * (180 / math.pi);
       qiblaDirection.value = qibla;
     } catch (e) {
-      // ignore: avoid_print
       print(e);
     }
   }
@@ -119,5 +150,17 @@ class QiblaCompassController extends GetxController {
 
     // Consider it correct if within 10 degrees of accuracy
     return diff <= 10 || diff >= 350;
+  }
+
+  // طريقة لإعادة معايرة البوصلة
+  void recalibrateCompass() {
+    Get.snackbar(
+      "calibrate_compass".tr,
+      "calibration_instructions".tr,
+      duration: const Duration(seconds: 5),
+      backgroundColor: Colors.amber.withOpacity(0.7),
+      colorText: Colors.black87,
+      snackPosition: SnackPosition.BOTTOM,
+    );
   }
 }
