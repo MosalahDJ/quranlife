@@ -79,26 +79,46 @@ class QiblaDirection extends StatelessWidget {
   }
 
   Widget _buildSkeletonLayout() {
-    return Myskeletonizer(
-        skeletonizerWidget: SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(height: 20),
-            _buildCalibrationOverlay(),
-            const SizedBox(height: 20),
-            Image.asset(
-              'lib/core/assets/images/compass/qibla_compass.png',
+    return Column(
+      children: [
+        const SizedBox(height: 20),
+        Myskeletonizer(
+            skeletonizerWidget: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _buildCalibrationOverlay(),
+              ],
             ),
-            const SizedBox(height: 20),
-            _buildDirectionInfo(),
-            const SizedBox(height: 20),
-          ],
+          ),
+        )),
+        const SizedBox(height: 20),
+        _buildKaabaImage(),
+        const SizedBox(height: 20),
+        Image.asset(
+          'lib/core/assets/images/compass/qibla_compass.png',
+          width: 300,
+          height: 350,
+          fit: BoxFit.contain,
         ),
-      ),
-    ));
+        const SizedBox(height: 20),
+        Myskeletonizer(
+            skeletonizerWidget: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _buildDirectionInfo(),
+              ],
+            ),
+          ),
+        )),
+        const SizedBox(height: 20),
+      ],
+    );
   }
 
   Widget _buildLocationPermissionRequest() {
