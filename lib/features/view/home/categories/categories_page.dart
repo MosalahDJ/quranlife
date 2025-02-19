@@ -23,7 +23,7 @@ import 'package:quranlife/features/view/home/categories/categories_pages/seeking
 import 'package:quranlife/features/view/home/categories/categories_pages/statistics_page.dart';
 import 'package:quranlife/features/view/home/categories/categories_pages/teachingprayer.dart';
 import 'package:quranlife/features/view/home/categories/categories_pages/wudu%20and%20ghusl%20page/wudu_and_ghusle.dart';
-import 'package:quranlife/features/view/home/categories/categories_pages/zakatPage.dart';
+import 'package:quranlife/features/view/home/categories/categories_pages/zakat_page.dart';
 
 class CategoriesPage extends StatelessWidget {
   const CategoriesPage({super.key});
