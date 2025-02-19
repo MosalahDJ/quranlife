@@ -23,6 +23,7 @@ import 'package:quranlife/features/view/home/categories/categories_pages/seeking
 import 'package:quranlife/features/view/home/categories/categories_pages/statistics_page.dart';
 import 'package:quranlife/features/view/home/categories/categories_pages/teachingprayer.dart';
 import 'package:quranlife/features/view/home/categories/categories_pages/wudu%20and%20ghusl%20page/wudu_and_ghusle.dart';
+import 'package:quranlife/features/view/home/categories/categories_pages/zakatPage.dart';
 
 class CategoriesPage extends StatelessWidget {
   const CategoriesPage({super.key});
@@ -203,7 +204,9 @@ class CategoriesPage extends StatelessWidget {
                                   'asma_ul-husna'.tr,
                                 ),
                                 mycategory(
-                                  () {},
+                                  () {
+                                    Get.to(() => const Zakatpage());
+                                  },
                                   FlutterIslamicIcons.solidZakat,
                                   'zakat'.tr,
                                 ),
