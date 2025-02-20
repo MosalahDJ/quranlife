@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 
 class TasbihController extends GetxController with GetTickerProviderStateMixin {
   final counter = 0.obs;
-  final targetCount = 33.obs;
+  RxInt targetCount = 33.obs;
   late AnimationController animationController;
 
   @override
@@ -43,8 +43,6 @@ class TasbihController extends GetxController with GetTickerProviderStateMixin {
     "الحمد الله",
     "الله أكبر",
   ];
-
-  int? maxcountvalue ;
 
   List<int> maxcount = [
     33,
