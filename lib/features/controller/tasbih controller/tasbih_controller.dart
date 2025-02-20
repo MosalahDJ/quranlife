@@ -28,6 +28,7 @@ class TasbihController extends GetxController with GetTickerProviderStateMixin {
       duration: const Duration(milliseconds: 500),
       vsync: this,
     );
+    checkVibrationSupport();
   }
 
   @override
@@ -43,18 +44,54 @@ class TasbihController extends GetxController with GetTickerProviderStateMixin {
 
   final RxBool isVibrationEnabled = true.obs;
 
+  // void toggleVibration() {
+  //   isVibrationEnabled.value = !isVibrationEnabled.value;
+  //   update();
+  // }
+
+  // void incrementCounter() {
+  //   if (counter.value < targetCount.value) {
+  //     if (isVibrationEnabled.value) {
+  //       HapticFeedback.lightImpact();
+  //     }
+  //     counter.value++;
+  //     animationController.forward(from: 0.0);
+  //   }
+  // }
+
+   // تعديل دالة التبديل
   void toggleVibration() {
     isVibrationEnabled.value = !isVibrationEnabled.value;
+    // اختبار الاهتزاز عند التبديل
+    if (isVibrationEnabled.value) {
+      HapticFeedback.heavyImpact();
+    }
     update();
   }
 
+  // تعديل دالة زيادة العداد
   void incrementCounter() {
     if (counter.value < targetCount.value) {
-      if (isVibrationEnabled.value) {
-        HapticFeedback.lightImpact();
+      try {
+        if (isVibrationEnabled.value) {
+          // استخدام نوع مختلف من الاهتزاز
+          HapticFeedback.selectionClick();
+        }
+        counter.value++;
+        animationController.forward(from: 0.0);
+      } catch (e) {
+        print('Vibration error: $e');
       }
-      counter.value++;
-      animationController.forward(from: 0.0);
     }
   }
+
+  // إضافة دالة للتحقق من دعم الاهتزاز
+  Future<void> checkVibrationSupport() async {
+    try {
+      await HapticFeedback.vibrate();
+    } catch (e) {
+      print('Device might not support vibration: $e');
+    }
+  }
+
 }
