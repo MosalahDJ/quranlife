@@ -59,9 +59,9 @@ class Tasbih extends StatelessWidget {
                     child: Container(
                       width: Sizeconfig.screenwidth,
                       decoration: BoxDecoration(
-                          color: kmaincolor3dark,
+                          color: kmaincolor3dark.withOpacity(0.8),
                           borderRadius: const BorderRadius.vertical(
-                              top: Radius.circular(40))),
+                              top: Radius.circular(60))),
                       child: SingleChildScrollView(
                         physics: const NeverScrollableScrollPhysics(),
                         child: Column(
@@ -75,9 +75,15 @@ class Tasbih extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                _buildTextbutton(text: "33"),
-                                _buildIconbutton(icon: Icons.vibration),
-                                _buildIconbutton(icon: Icons.refresh_rounded),
+                                _buildMaxCountbutton(),
+                                _buildIconbutton(
+                                  icon: Icons.vibration,
+                                  onpressed: () {},
+                                ),
+                                _buildIconbutton(
+                                  icon: Icons.refresh_rounded,
+                                  onpressed: () {},
+                                ),
                               ],
                             ),
                             SizedBox(height: Sizeconfig.screenheight! / 18),
@@ -117,7 +123,7 @@ class Tasbih extends StatelessWidget {
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
+                    color: const Color(0xFF00100C).withOpacity(0.2),
                     spreadRadius: 5,
                     blurRadius: 10,
                     offset: const Offset(0, 3),
@@ -147,49 +153,67 @@ class Tasbih extends StatelessWidget {
 
   Widget _buildTasbihText() {
     return SizedBox(
-      height: Sizeconfig.screenheight! / 5,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          GetBuilder<TasbihController>(
-            builder: (c) => Text(
-              controller.tasbivalue,
-              style: const TextStyle(
-                color: Colors.black,
-                fontSize: 34,
-                fontFamily: 'Amiri',
+      height: Sizeconfig.screenheight! / 3,
+      child: Center(
+        child: Container(
+          padding: const EdgeInsets.all(16.0),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12.0),
+            boxShadow: [
+              BoxShadow(
+                color: const Color(0xFF00100C).withOpacity(0.1),
+                blurRadius: 10,
+                offset: const Offset(0, 5),
               ),
-            ),
-          ),
-          DropdownButton(
-            value: controller.tasbivalue,
-            icon: const Icon(
-              Icons.arrow_drop_down_circle,
-              size: 30,
-              color: Colors.black,
-            ),
-            items: [
-              DropdownMenuItem(
-                  value: controller.tasbihtext[0],
-                  child: Text(controller.tasbihtext[0])),
-              DropdownMenuItem(
-                  value: controller.tasbihtext[1],
-                  child: Text(controller.tasbihtext[1])),
-              DropdownMenuItem(
-                  value: controller.tasbihtext[2],
-                  child: Text(controller.tasbihtext[2])),
             ],
-            onChanged: (value) {
-              controller.tasbivalue = value!;
-              controller.update();
+          ),
+          child: GetBuilder<TasbihController>(
+            builder: (controller) {
+              return DropdownButton<String>(
+                dropdownColor: Colors.white,
+                value: controller.tasbihvalue ??
+                    controller.tasbihtext[0], // القيمة الحالية
+                borderRadius: BorderRadius.circular(12.0),
+                underline: Container(), // إزالة الخط السفلي
+                icon: const Icon(
+                  Icons.arrow_drop_down_circle,
+                  size: 30,
+                  color: Color(0xFF00100C),
+                ),
+                style: const TextStyle(
+                  color: Color(0xFF00100C),
+                  fontSize: 34,
+                  fontFamily: 'Amiri',
+                  fontWeight: FontWeight.bold,
+                ),
+                items: controller.tasbihtext.map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(
+                      value,
+                      style: const TextStyle(
+                        color: Color(0xFF00100C),
+                        fontSize: 18,
+                        fontFamily: 'Amiri',
+                      ),
+                    ),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  controller.tasbihvalue = value!; // تحديث القيمة
+                  controller.update();
+                },
+              );
             },
           ),
-        ],
+        ),
       ),
     );
   }
 
-  Widget _buildIconbutton({required IconData icon}) {
+  Widget _buildIconbutton(
+      {required IconData icon, required VoidCallback onpressed}) {
     return Container(
         padding: const EdgeInsets.all(5),
         decoration: BoxDecoration(
@@ -200,7 +224,7 @@ class Tasbih extends StatelessWidget {
                 width: 1,
                 style: BorderStyle.solid)),
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: onpressed,
           style: ButtonStyle(
             fixedSize:
                 WidgetStatePropertyAll(Size(Sizeconfig.screenwidth! / 4, 40)),
@@ -208,34 +232,94 @@ class Tasbih extends StatelessWidget {
           ),
           child: Icon(
             icon,
-            color: kmaincolor3dark,
+            color: const Color(0xFF00100C),
           ),
         ));
   }
 
-  Widget _buildTextbutton({required String text}) {
+  Widget _buildMaxCountbutton() {
     return Container(
-        padding: const EdgeInsets.all(5),
+      padding: const EdgeInsets.all(5),
+      decoration: BoxDecoration(
+          color: Colors.transparent,
+          borderRadius: const BorderRadius.all(Radius.circular(30)),
+          border: Border.all(
+              color: Colors.white.withOpacity(0.3),
+              width: 1,
+              style: BorderStyle.solid)),
+      child: Container(
+        alignment: Alignment.center,
+        height: 40,
+        width: Sizeconfig.screenwidth! / 4,
         decoration: BoxDecoration(
-            color: Colors.transparent,
-            borderRadius: const BorderRadius.all(Radius.circular(30)),
-            border: Border.all(
-                color: Colors.white.withOpacity(0.3),
-                width: 1,
-                style: BorderStyle.solid)),
-        child: ElevatedButton(
-          onPressed: () {},
-          style: ButtonStyle(
-            fixedSize:
-                WidgetStatePropertyAll(Size(Sizeconfig.screenwidth! / 4, 40)),
-            backgroundColor: WidgetStatePropertyAll(kmaincolor3),
-          ),
-          child: Text(
-            text,
-            style: TextStyle(color: kmaincolor3dark),
-          ),
-        ));
+            color: kmaincolor3,
+            borderRadius: const BorderRadius.all(Radius.circular(50))),
+        child: GetBuilder<TasbihController>(
+          builder: (controller) {
+            return DropdownButton<int>(
+              dropdownColor: kmaincolor3,
+              value: controller.maxcountvalue ??
+                  controller.maxcount[0], // القيمة الحالية
+              borderRadius: BorderRadius.circular(12.0),
+              underline: Container(), // إزالة الخط السفلي
+              icon: const Icon(
+                Icons.arrow_drop_up_outlined,
+                size: 30,
+                color: Color(0xFF00100C),
+              ),
+              style: const TextStyle(
+                color: Color(0xFF00100C),
+                fontSize: 34,
+                fontFamily: 'Amiri',
+                fontWeight: FontWeight.bold,
+              ),
+              items: controller.maxcount.map((int value) {
+                return DropdownMenuItem<int>(
+                  value: value,
+                  child: Text(
+                    "$value",
+                    style: const TextStyle(
+                      color: Color(0xFF00100C),
+                      fontSize: 18,
+                      fontFamily: 'Amiri',
+                    ),
+                  ),
+                );
+              }).toList(),
+              onChanged: (value) {
+                controller.maxcountvalue = value!; // تحديث القيمة
+                controller.update();
+              },
+            );
+          },
+        ),
+      ),
+    );
   }
+
+  // Widget _buildTextbutton({required String text}) {
+  //   return Container(
+  //       padding: const EdgeInsets.all(5),
+  //       decoration: BoxDecoration(
+  //           color: Colors.transparent,
+  //           borderRadius: const BorderRadius.all(Radius.circular(30)),
+  //           border: Border.all(
+  //               color: Colors.white.withOpacity(0.3),
+  //               width: 1,
+  //               style: BorderStyle.solid)),
+  //       child: ElevatedButton(
+  //         onPressed: () {},
+  //         style: ButtonStyle(
+  //           fixedSize:
+  //               WidgetStatePropertyAll(Size(Sizeconfig.screenwidth! / 4, 40)),
+  //           backgroundColor: WidgetStatePropertyAll(kmaincolor3),
+  //         ),
+  //         child: Text(
+  //           text,
+  //           style: TextStyle(color: Color(0xFF00100C)),
+  //         ),
+  //       ));
+  // }
 
   Widget _buildCounter() {
     return Container(
@@ -251,8 +335,8 @@ class Tasbih extends StatelessWidget {
         onPressed: controller.resetCounter,
         label: Obx(() => Text(
               '${controller.counter} of ${controller.targetCount}',
-              style: TextStyle(
-                color: kmaincolor3dark,
+              style: const TextStyle(
+                color: Color(0xFF00100C),
                 fontSize: 35,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Amiri',

@@ -36,11 +36,20 @@ class TasbihController extends GetxController with GetTickerProviderStateMixin {
     counter.value = 0;
   }
 
+  String? tasbihvalue ;
+
   List<String> tasbihtext = [
     "سبحان الله",
     "الحمد الله",
     "الله أكبر",
   ];
 
-  String tasbivalue = "";
+  int? maxcountvalue ;
+
+  List<int> maxcount = [
+    33,
+    66,
+   99,
+   100,
+  ];
 }
