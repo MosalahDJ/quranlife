@@ -161,15 +161,15 @@ class Tasbih extends StatelessWidget {
                   ),
                 ],
               ),
-              child: const Column(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
                     'اظغط للعد',
                     style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 40,
+                      color: kmaincolor4,
+                      fontSize: 25,
                       fontFamily: 'Amiri',
                     ),
                   ),
