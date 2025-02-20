@@ -5,7 +5,21 @@ import 'package:flutter/services.dart';
 class TasbihController extends GetxController with GetTickerProviderStateMixin {
   final counter = 0.obs;
   RxInt targetCount = 33.obs;
+  List<int> maxcount = [
+    33,
+    66,
+    99,
+    100,
+  ];
   late AnimationController animationController;
+  String? tasbihvalue;
+  List<String> tasbihtext = [
+    "سبحان الله",
+    "الحمد الله",
+    "الله أكبر",
+    "سبحان الله و بحمده",
+    "سبحان الله العضيم",
+  ];
 
   @override
   void onInit() {
@@ -22,34 +36,25 @@ class TasbihController extends GetxController with GetTickerProviderStateMixin {
     super.onClose();
   }
 
-  void incrementCounter() {
-    if (counter.value < targetCount.value) {
-      HapticFeedback.lightImpact();
-      counter.value++;
-      counter.value == targetCount.value ? counter.value = 0 : null;
-      animationController.forward(from: 0.0);
-    }
-  }
-
   void resetCounter() {
     HapticFeedback.mediumImpact();
     counter.value = 0;
   }
 
-  String? tasbihvalue;
+  final RxBool isVibrationEnabled = true.obs;
 
-  List<String> tasbihtext = [
-    "سبحان الله",
-    "الحمد الله",
-    "الله أكبر",
-    "سبحان الله و بحمده",
-    "سبحان الله العضيم",
-  ];
+  void toggleVibration() {
+    isVibrationEnabled.value = !isVibrationEnabled.value;
+    update();
+  }
 
-  List<int> maxcount = [
-    33,
-    66,
-    99,
-    100,
-  ];
+  void incrementCounter() {
+    if (counter.value < targetCount.value) {
+      if (isVibrationEnabled.value) {
+        HapticFeedback.lightImpact();
+      }
+      counter.value++;
+      animationController.forward(from: 0.0);
+    }
+  }
 }

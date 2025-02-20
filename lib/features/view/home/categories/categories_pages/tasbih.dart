@@ -117,14 +117,8 @@ class Tasbih extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         _buildMaxCountButton(),
-        _buildIconButton(
-          icon: Icons.vibration,
-          onPressed: () {},
-        ),
-        _buildIconButton(
-          icon: Icons.refresh_rounded,
-          onPressed: controller.resetCounter,
-        ),
+        _buildVibrationButton(),
+        _buildIconButton(),
       ],
     );
   }
@@ -190,7 +184,7 @@ class Tasbih extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(16.0),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: kmaincolor3,
             borderRadius: BorderRadius.circular(12.0),
             boxShadow: [
               BoxShadow(
@@ -203,13 +197,13 @@ class Tasbih extends StatelessWidget {
           child: GetBuilder<TasbihController>(
             builder: (controller) {
               return DropdownButton<String>(
-                dropdownColor: Colors.white,
+                dropdownColor: kmaincolor3,
                 value: controller.tasbihvalue ?? controller.tasbihtext[0],
                 borderRadius: BorderRadius.circular(12.0),
                 underline: Container(),
                 icon: const Icon(
-                  Icons.arrow_drop_down_circle,
-                  size: 30,
+                  Icons.arrow_drop_down,
+                  size: 25,
                   color: Color(0xFF00100C),
                 ),
                 style: const TextStyle(
@@ -233,6 +227,7 @@ class Tasbih extends StatelessWidget {
                 }).toList(),
                 onChanged: (value) {
                   controller.tasbihvalue = value!;
+                  controller.resetCounter();
                   controller.update();
                 },
               );
@@ -244,10 +239,7 @@ class Tasbih extends StatelessWidget {
   }
 
   // Icon button with container border
-  Widget _buildIconButton({
-    required IconData icon,
-    required VoidCallback onPressed,
-  }) {
+  Widget _buildIconButton() {
     return Container(
       padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
@@ -260,15 +252,50 @@ class Tasbih extends StatelessWidget {
         ),
       ),
       child: ElevatedButton(
-        onPressed: onPressed,
+        onPressed: controller.resetCounter,
         style: ButtonStyle(
           fixedSize:
-              WidgetStatePropertyAll(Size(Sizeconfig.screenwidth! / 4, 40)),
+              WidgetStatePropertyAll(Size(Sizeconfig.screenwidth! / 5, 40)),
           backgroundColor: WidgetStatePropertyAll(kmaincolor3),
         ),
-        child: Icon(
-          icon,
-          color: const Color(0xFF00100C),
+        child: const Icon(
+          Icons.refresh_rounded,
+          color: Color(0xFF00100C),
+        ),
+      ),
+    );
+  }
+
+// Icon button with container border
+  Widget _buildVibrationButton() {
+    return Container(
+      padding: const EdgeInsets.all(5),
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+        borderRadius: const BorderRadius.all(Radius.circular(30)),
+        border: Border.all(
+          color: Colors.white.withOpacity(0.3),
+          width: 1,
+          style: BorderStyle.solid,
+        ),
+      ),
+      child: GetBuilder<TasbihController>(
+        builder: (c) => ElevatedButton(
+          onPressed: () {
+            controller.toggleVibration();
+          },
+          style: ButtonStyle(
+            fixedSize:
+                WidgetStatePropertyAll(Size(Sizeconfig.screenwidth! / 5, 40)),
+            backgroundColor: WidgetStatePropertyAll(
+                controller.isVibrationEnabled.value
+                    ? kmaincolor3
+                    : Colors.grey.shade400),
+          ),
+          child: const Icon(
+            Icons.vibration,
+            color: Color(0xFF00100C),
+          ),
         ),
       ),
     );
@@ -290,7 +317,7 @@ class Tasbih extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         height: 40,
-        width: Sizeconfig.screenwidth! / 4,
+        width: Sizeconfig.screenwidth! / 5,
         decoration: BoxDecoration(
           color: kmaincolor3,
           borderRadius: const BorderRadius.all(Radius.circular(50)),
