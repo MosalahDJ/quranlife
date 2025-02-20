@@ -26,6 +26,7 @@ class TasbihController extends GetxController with GetTickerProviderStateMixin {
     if (counter.value < targetCount.value) {
       HapticFeedback.lightImpact();
       counter.value++;
+      counter.value == targetCount.value ? counter.value = 0 : null;
       animationController.forward(from: 0.0);
     }
   }
@@ -34,4 +35,12 @@ class TasbihController extends GetxController with GetTickerProviderStateMixin {
     HapticFeedback.mediumImpact();
     counter.value = 0;
   }
+
+  List<String> tasbihtext = [
+    "سبحان الله",
+    "الحمد الله",
+    "الله أكبر",
+  ];
+
+  String tasbivalue = "";
 }
