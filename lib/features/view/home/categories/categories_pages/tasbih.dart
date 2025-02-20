@@ -118,7 +118,7 @@ class Tasbih extends StatelessWidget {
       children: [
         _buildMaxCountButton(),
         _buildVibrationButton(),
-        _buildIconButton(),
+        _buildResetButton(),
       ],
     );
   }
@@ -239,7 +239,7 @@ class Tasbih extends StatelessWidget {
   }
 
   // Icon button with container border
-  Widget _buildIconButton() {
+  Widget _buildResetButton() {
     return Container(
       padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
@@ -279,25 +279,28 @@ class Tasbih extends StatelessWidget {
           style: BorderStyle.solid,
         ),
       ),
-      child: GetBuilder<TasbihController>(
-        builder: (c) => ElevatedButton(
-          onPressed: () {
-            controller.toggleVibration();
-          },
-          style: ButtonStyle(
-            fixedSize:
-                WidgetStatePropertyAll(Size(Sizeconfig.screenwidth! / 5, 40)),
-            backgroundColor: WidgetStatePropertyAll(
+      child: Obx(() => ElevatedButton(
+            onPressed: controller.toggleVibration,
+            style: ButtonStyle(
+              fixedSize: WidgetStateProperty.all(
+                Size(Sizeconfig.screenwidth! / 5, 40),
+              ),
+              backgroundColor: WidgetStateProperty.all(
                 controller.isVibrationEnabled.value
                     ? kmaincolor3
-                    : Colors.grey.shade400),
-          ),
-          child: const Icon(
-            Icons.vibration,
-            color: Color(0xFF00100C),
-          ),
-        ),
-      ),
+                    : Colors.grey.shade400,
+              ),
+              elevation: WidgetStateProperty.all(
+                controller.isVibrationEnabled.value ? 4 : 0,
+              ),
+            ),
+            child: Icon(
+              Icons.vibration,
+              color: controller.isVibrationEnabled.value
+                  ? const Color(0xFF00100C)
+                  : Colors.grey.shade700,
+            ),
+          )),
     );
   }
 

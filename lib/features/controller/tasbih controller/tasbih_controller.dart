@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart';
+import 'package:vibration/vibration.dart';
 
 class TasbihController extends GetxController with GetTickerProviderStateMixin {
   final counter = 0.obs;
@@ -28,64 +29,50 @@ class TasbihController extends GetxController with GetTickerProviderStateMixin {
       duration: const Duration(milliseconds: 500),
       vsync: this,
     );
-    checkVibrationSupport();
+    _checkVibrationSupport();
   }
 
   @override
   void onClose() {
+    Vibration.cancel();
     animationController.dispose();
     super.onClose();
   }
 
   void resetCounter() {
-    HapticFeedback.mediumImpact();
+    if (isVibrationEnabled.value) {
+      Vibration.vibrate(duration: 100, amplitude: 192);
+    }
     counter.value = 0;
   }
 
   final RxBool isVibrationEnabled = true.obs;
 
-  // void toggleVibration() {
-  //   isVibrationEnabled.value = !isVibrationEnabled.value;
-  //   update();
-  // }
+  Future<void> _checkVibrationSupport() async {
+    bool? hasVibrator = await Vibration.hasVibrator();
+    if (hasVibrator != true) {
+      isVibrationEnabled.value = false;
+    }
+  }
 
-  // void incrementCounter() {
-  //   if (counter.value < targetCount.value) {
-  //     if (isVibrationEnabled.value) {
-  //       HapticFeedback.lightImpact();
-  //     }
-  //     counter.value++;
-  //     animationController.forward(from: 0.0);
-  //   }
-  // }
-
-   // تعديل دالة التبديل
   void toggleVibration() {
     isVibrationEnabled.value = !isVibrationEnabled.value;
-    // اختبار الاهتزاز عند التبديل
     if (isVibrationEnabled.value) {
-      HapticFeedback.heavyImpact();
+      Vibration.vibrate(duration: 75, amplitude: 128);
     }
     update();
   }
 
-  // تعديل دالة زيادة العداد
   void incrementCounter() {
     if (counter.value < targetCount.value) {
-      try {
-        if (isVibrationEnabled.value) {
-          // استخدام نوع مختلف من الاهتزاز
-          HapticFeedback.selectionClick();
-        }
-        counter.value++;
-        animationController.forward(from: 0.0);
-      } catch (e) {
-        print('Vibration error: $e');
+      if (isVibrationEnabled.value) {
+        Vibration.vibrate(duration: 50, amplitude: 128);
       }
+      counter.value++;
+      animationController.forward(from: 0.0);
     }
   }
 
-  // إضافة دالة للتحقق من دعم الاهتزاز
   Future<void> checkVibrationSupport() async {
     try {
       await HapticFeedback.vibrate();
@@ -93,5 +80,4 @@ class TasbihController extends GetxController with GetTickerProviderStateMixin {
       print('Device might not support vibration: $e');
     }
   }
-
 }
