@@ -137,8 +137,17 @@ class Messages extends Translations {
           "enable_location_description":
               "Please enable location services to determine the Qibla direction",
           "retry_permission": "Retry Permission",
-          'magnetic':'Keep away from metals and magnetic devices to ensure accurate Qibla direction.',
+          'magnetic':
+              'Keep away from metals and magnetic devices to ensure accurate Qibla direction.',
 
+          //tasbihpage
+          'sur': 'out of',
+          'press': 'Press to count',
+          'tasbih1': "Glory be to God",
+          'tasbih2': "Praise be to God",
+          'tasbih3': "Allah is the Greatest",
+          'tasbih4': "Glory be to God and praise Him",
+          'tasbih5': "Glory be to God, the Almighty",
 
           // Prayer Times
           'prayer_times': 'Prayer Times',
@@ -445,8 +454,17 @@ class Messages extends Translations {
           "enable_location_description":
               "يرجى تفعيل خدمة الموقع لتحديد اتجاه القبلة",
           "retry_permission": "إعادة محاولة",
-          'magnetic':'ابتعد عن المعادن والأجهزة المغناطيسية لضمان دقة اتجاه القبلة.',
+          'magnetic':
+              'ابتعد عن المعادن والأجهزة المغناطيسية لضمان دقة اتجاه القبلة.',
 
+//tasbihpage
+          'sur': 'من',
+          'press': 'اظغط للعد',
+          'tasbih1': "سبحان الله",
+          'tasbih2': "الحمد الله",
+          'tasbih3': "الله أكبر",
+          'tasbih4': "سبحان الله و بحمده",
+          'tasbih5': "سبحان الله العضيم",
 
           // Prayer Times
           'prayer_times': 'مواقيت الصلاة',
@@ -762,7 +780,17 @@ class Messages extends Translations {
           "enable_location_description":
               "Veuillez activer les services de localisation pour déterminer la direction de la Qibla",
           "retry_permission": "Réessayer l'autorisation",
-          'magnetic':'Éloignez-vous des métaux et appareils magnétiques pour assurer la précision de la direction de la Qibla.',
+          'magnetic':
+              'Éloignez-vous des métaux et appareils magnétiques pour assurer la précision de la direction de la Qibla.',
+
+//tasbihpage
+          'sur': 'sur',
+          'press': 'Appuyez pour compter',
+          'tasbih1': "Gloire à Dieu",
+          'tasbih2': "Louange à Dieu",
+          'tasbih3': "Allah est le Plus Grand",
+          'tasbih4': "Gloire à Dieu et louange à Lui",
+          'tasbih5': "Gloire à Dieu, le Tout-Puissant",
 
           // Prayer Times
           'prayer_times': 'Horaires des prières',

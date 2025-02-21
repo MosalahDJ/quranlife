@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter/services.dart';
 import 'package:vibration/vibration.dart';
 
 class TasbihController extends GetxController with GetTickerProviderStateMixin {
@@ -15,11 +14,11 @@ class TasbihController extends GetxController with GetTickerProviderStateMixin {
   late AnimationController animationController;
   String? tasbihvalue;
   List<String> tasbihtext = [
-    "سبحان الله",
-    "الحمد الله",
-    "الله أكبر",
-    "سبحان الله و بحمده",
-    "سبحان الله العضيم",
+    'tasbih1'.tr,
+    'tasbih2'.tr,
+    'tasbih3'.tr,
+    'tasbih4'.tr,
+    'tasbih5'.tr,
   ];
 
   @override
@@ -41,7 +40,7 @@ class TasbihController extends GetxController with GetTickerProviderStateMixin {
 
   void resetCounter() {
     if (isVibrationEnabled.value) {
-      Vibration.vibrate(duration: 100, amplitude: 192);
+      Vibration.vibrate(duration: 75, amplitude: 128);
     }
     counter.value = 0;
   }
@@ -66,19 +65,10 @@ class TasbihController extends GetxController with GetTickerProviderStateMixin {
   void incrementCounter() {
     if (counter.value < targetCount.value) {
       if (isVibrationEnabled.value) {
-        Vibration.vibrate(duration: 50, amplitude: 128);
+        Vibration.vibrate(duration: 30, amplitude: 100);
       }
       counter.value++;
-      counter.value > targetCount.value ? targetCount.value = 0 : null;
       animationController.forward(from: 0.0);
-    }
-  }
-
-  Future<void> checkVibrationSupport() async {
-    try {
-      await HapticFeedback.vibrate();
-    } catch (e) {
-      print('Device might not support vibration: $e');
     }
   }
 }
