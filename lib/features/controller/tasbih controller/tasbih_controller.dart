@@ -69,6 +69,7 @@ class TasbihController extends GetxController with GetTickerProviderStateMixin {
         Vibration.vibrate(duration: 50, amplitude: 128);
       }
       counter.value++;
+      counter.value > targetCount.value ? targetCount.value = 0 : null;
       animationController.forward(from: 0.0);
     }
   }
