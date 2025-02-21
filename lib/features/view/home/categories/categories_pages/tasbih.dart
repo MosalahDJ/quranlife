@@ -56,16 +56,18 @@ class Tasbih extends StatelessWidget {
         SafeArea(
           child: SizedBox(
             width: Sizeconfig.screenwidth,
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                const SizedBox(height: 15),
-                _buildTasbihText(),
-                const SizedBox(height: 15),
-                _buildBottomContainer(),
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  const SizedBox(height: 15),
+                  _buildTasbihText(),
+                  const SizedBox(height: 15),
+                  _buildBottomContainer(),
+                ],
+              ),
             ),
           ),
         ),
@@ -88,27 +90,25 @@ class Tasbih extends StatelessWidget {
 
   // Bottom container with rounded top corners
   Widget _buildBottomContainer() {
-    return Expanded(
-      child: Container(
-        width: Sizeconfig.screenwidth,
-        decoration: BoxDecoration(
-          color: kmaincolor3dark.withOpacity(0.8),
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(60)),
-        ),
-        child: SingleChildScrollView(
-          physics: const NeverScrollableScrollPhysics(),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              SizedBox(height: Sizeconfig.screenheight! / 18),
-              _buildCounter(),
-              SizedBox(height: Sizeconfig.screenheight! / 18),
-              _buildTasbihBead(),
-              SizedBox(height: Sizeconfig.screenheight! / 18),
-              _buildControlButtons(),
-              SizedBox(height: Sizeconfig.screenheight! / 18),
-            ],
-          ),
+    return Container(
+      width: Sizeconfig.screenwidth,
+      decoration: BoxDecoration(
+        color: kmaincolor3dark.withOpacity(0.8),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(60)),
+      ),
+      child: SingleChildScrollView(
+        physics: const NeverScrollableScrollPhysics(),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(height: Sizeconfig.screenheight! / 18),
+            _buildCounter(),
+            SizedBox(height: Sizeconfig.screenheight! / 18),
+            _buildTasbihBead(),
+            SizedBox(height: Sizeconfig.screenheight! / 18),
+            _buildControlButtons(),
+            SizedBox(height: Sizeconfig.screenheight! / 18),
+          ],
         ),
       ),
     );
@@ -137,91 +137,88 @@ class Tasbih extends StatelessWidget {
         animation: controller.animationController,
         builder: (context, child) {
           return Transform.scale(
-            scale: 1.0 - (controller.animationController.value * 0.1),
-            child: Transform.rotate(
-              angle: controller.animationController.value * 2 * math.pi,
-              child: Container(
-                width: 180,
-                height: 180,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: textcolor3,
-                  boxShadow: [
-                    BoxShadow(
-                      color: kmaincolor3dark.withOpacity(0.3),
-                      spreadRadius: 5,
-                      blurRadius: 15,
-                      offset: const Offset(0, 5),
-                    ),
-                    BoxShadow(
-                      color: Colors.white.withOpacity(0.3),
-                      spreadRadius: -2,
-                      blurRadius: 15,
-                      offset: const Offset(-5, -5),
-                    ),
-                  ],
-                ),
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    // Inner circle decoration
-                    Container(
-                      width: 150,
-                      height: 150,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            Colors.white.withOpacity(0.2),
-                            Colors.transparent,
-                          ],
-                        ),
-                        border: Border.all(
-                          color: Colors.white.withOpacity(0.2),
-                          width: 2,
-                        ),
-                      ),
-                    ),
-                    // Text and icon content
-                    Container(
-                      alignment: Alignment.center,
-                      width: 140,
-                      height: 140,
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'press'.tr,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 22,
-                              fontFamily: 'Amiri',
-                              fontWeight: FontWeight.bold,
-                              shadows: [
-                                Shadow(
-                                  color: Colors.black.withOpacity(0.5),
-                                  offset: const Offset(1, 1),
-                                  blurRadius: 3,
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          Icon(
-                            Icons.touch_app_rounded,
-                            color: Colors.white.withOpacity(0.9),
-                            size: 24,
-                          ),
+            scale: 1 - (controller.animationController.value * 0.05),
+            child: Container(
+              width: 180,
+              height: 180,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: textcolor3,
+                boxShadow: [
+                  BoxShadow(
+                    color: kmaincolor3dark.withOpacity(0.3),
+                    spreadRadius: 5,
+                    blurRadius: 15,
+                    offset: const Offset(0, 5),
+                  ),
+                  BoxShadow(
+                    color: Colors.white.withOpacity(0.3),
+                    spreadRadius: -2,
+                    blurRadius: 15,
+                    offset: const Offset(-5, -5),
+                  ),
+                ],
+              ),
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  // Inner circle decoration
+                  Container(
+                    width: 150,
+                    height: 150,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          Colors.white.withOpacity(0.2),
+                          Colors.transparent,
                         ],
                       ),
+                      border: Border.all(
+                        color: Colors.white.withOpacity(0.2),
+                        width: 2,
+                      ),
                     ),
-                  ],
-                ),
+                  ),
+                  // Text and icon content
+                  Container(
+                    alignment: Alignment.center,
+                    width: 140,
+                    height: 140,
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'press'.tr,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 22,
+                            fontFamily: 'Amiri',
+                            fontWeight: FontWeight.bold,
+                            shadows: [
+                              Shadow(
+                                color: Colors.black.withOpacity(0.5),
+                                offset: const Offset(1, 1),
+                                blurRadius: 3,
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Icon(
+                          Icons.touch_app_rounded,
+                          color: Colors.white.withOpacity(0.9),
+                          size: 24,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
           );
