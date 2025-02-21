@@ -7,7 +7,6 @@ import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/features/controller/statistics%20controller/statistics_controller.dart';
 import 'package:quranlife/features/controller/tasbih%20controller/tasbih_controller.dart';
-import 'dart:math' as math;
 
 class Tasbih extends StatelessWidget {
   Tasbih({super.key});
