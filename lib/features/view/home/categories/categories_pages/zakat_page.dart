@@ -13,7 +13,7 @@ class ZakatPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Zakat Calculator'),
+        title: const Text('Money Zakat Calculator'),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -23,15 +23,15 @@ class ZakatPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                _buildZakatTypesList(),
-                const SizedBox(height: 20),
                 _buildInputForm(),
                 const SizedBox(height: 20),
                 _buildCalculateButton(),
                 const SizedBox(height: 20),
                 _buildResultCard(),
                 const SizedBox(height: 20),
-                _buildInfoSection(),
+                _buildNisabInfo(),
+                const SizedBox(height: 20),
+                _buildOtherTypesInfo(),
               ],
             ),
           ),
@@ -40,92 +40,28 @@ class ZakatPage extends StatelessWidget {
     );
   }
 
-  Widget _buildZakatTypesList() {
-    return SizedBox(
-      height: 100,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: _controller.zakatTypes.length,
-        itemBuilder: (context, index) => _buildZakatTypeItem(context, index),
-      ),
-    );
-  }
-
-  Widget _buildZakatTypeItem(BuildContext context, int index) {
-    return Obx(() => GestureDetector(
-          onTap: () {
-            _controller.updateSelectedIndex(index);
-            _amountController.clear();
-          },
-          child: Container(
-            width: 100,
-            margin: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: _controller.selectedIndex.value == index
-                  ? Theme.of(context).primaryColor
-                  : Colors.grey[200],
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.2),
-                  spreadRadius: 1,
-                  blurRadius: 4,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  _controller.zakatTypes[index]['icon'],
-                  color: _controller.selectedIndex.value == index
-                      ? Colors.white
-                      : Colors.black,
-                  size: 28,
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  _controller.zakatTypes[index]['title'],
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: _controller.selectedIndex.value == index
-                        ? Colors.white
-                        : Colors.black,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ));
-  }
-
   Widget _buildInputForm() {
     return Form(
       key: _formKey,
-      child: Obx(() => TextFormField(
-            controller: _amountController,
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              labelText: _controller.zakatTypes[_controller.selectedIndex.value]
-                  ['hint'],
-              border: const OutlineInputBorder(),
-              prefixIcon: const Icon(Icons.calculate),
-              filled: true,
-              fillColor: Colors.grey[50],
-            ),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter a value';
-              }
-              if (double.tryParse(value) == null) {
-                return 'Please enter a valid number';
-              }
-              return null;
-            },
-          )),
+      child: TextFormField(
+        controller: _amountController,
+        keyboardType: TextInputType.number,
+        decoration: const InputDecoration(
+          labelText: 'Enter your total money amount',
+          border: OutlineInputBorder(),
+          prefixIcon: Icon(Icons.attach_money),
+          filled: true,
+        ),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter an amount';
+          }
+          if (double.tryParse(value) == null) {
+            return 'Please enter a valid number';
+          }
+          return null;
+        },
+      ),
     );
   }
 
@@ -136,15 +72,12 @@ class ZakatPage extends StatelessWidget {
           _controller.calculateZakat(_amountController.text);
         }
       },
-      style: ElevatedButton.styleFrom(
-        padding: const EdgeInsets.all(16),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
+      child: const Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Text(
+          'Calculate Zakat',
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
-      ),
-      child: const Text(
-        'Calculate Zakat',
-        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
       ),
     );
   }
@@ -154,19 +87,13 @@ class ZakatPage extends StatelessWidget {
       if (_controller.calculatedZakat.value != null) {
         return Card(
           elevation: 4,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
                 const Text(
                   'Your Zakat Amount',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 12),
                 Text(
@@ -179,11 +106,8 @@ class ZakatPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Type: ${_controller.zakatTypes[_controller.selectedIndex.value]['title']}',
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey,
-                  ),
+                  'Rate: ${_controller.zakatRate}%',
+                  style: const TextStyle(fontSize: 14, color: Colors.grey),
                 ),
               ],
             ),
@@ -194,31 +118,57 @@ class ZakatPage extends StatelessWidget {
     });
   }
 
-  Widget _buildInfoSection() {
+  Widget _buildNisabInfo() {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Nisab Information',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 8),
+            Obx(() => Text(
+              'Current Nisab: \$${_controller.currentNisabValue.toStringAsFixed(2)}',
+              style: const TextStyle(fontSize: 16, color: Colors.green),
+            )),
+            const SizedBox(height: 8),
+            const Text(
+              '• Nisab is the minimum amount for Zakat obligation\n'
+              '• Equal to 85 grams of gold value\n'
+              '• Zakat rate is 2.5% of total wealth\n'
+              '• Applies to money held for one lunar year',
+              style: TextStyle(fontSize: 14),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildOtherTypesInfo() {
     return const Card(
-      elevation: 2,
       child: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Important Notes:',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
+              'Other Types of Zakat',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 8),
             Text(
-              '• Zakat is mandatory when wealth exceeds Nisab\n'
-              '• The general rate is 2.5% of the total wealth\n'
-              '• Zakat year (Hawl) is based on lunar calendar\n'
-              '• Different types of wealth have different calculations\n'
-              '• Consult with a scholar for specific cases',
+              '1. Business Assets (2.5%)\n'
+              '2. Agriculture (5-10%)\n'
+              '3. Livestock (varies by type and number)\n'
+              '4. Mining & Treasures (20%)\n'
+              '5. Stocks & Investments (2.5%)\n\n'
+              'Please consult with a scholar for detailed guidance on these types.',
               style: TextStyle(fontSize: 14),
             ),
-            SizedBox(height: 16),
           ],
         ),
       ),
