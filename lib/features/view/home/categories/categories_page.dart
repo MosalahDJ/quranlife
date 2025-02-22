@@ -205,7 +205,7 @@ class CategoriesPage extends StatelessWidget {
                                 ),
                                 mycategory(
                                   () {
-                                    Get.to(() => const Zakatpage());
+                                    Get.to(() => ZakatPage());
                                   },
                                   FlutterIslamicIcons.solidZakat,
                                   'zakat'.tr,
