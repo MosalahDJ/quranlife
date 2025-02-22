@@ -138,7 +138,7 @@ class QiblaCompassController extends GetxController {
       double qibla = math.atan2(y, x) * (180 / math.pi);
       qiblaDirection.value = qibla;
     } catch (e) {
-      print(e);
+      // print(e);
     }
   }
 
