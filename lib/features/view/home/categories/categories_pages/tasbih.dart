@@ -53,13 +53,14 @@ class Tasbih extends StatelessWidget {
         _buildBackgroundPattern(),
         // Main content
         SafeArea(
+          bottom: false,
           child: SizedBox(
             width: Sizeconfig.screenwidth,
             child: SingleChildScrollView(
               child: Column(
-                mainAxisSize: MainAxisSize.max,
+                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const SizedBox(height: 15),
                   _buildTasbihText(),
@@ -98,14 +99,21 @@ class Tasbih extends StatelessWidget {
       child: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             SizedBox(height: Sizeconfig.screenheight! / 18),
-            _buildCounter(),
-            SizedBox(height: Sizeconfig.screenheight! / 18),
-            _buildTasbihBead(),
-            SizedBox(height: Sizeconfig.screenheight! / 18),
-            _buildControlButtons(),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _buildCounter(),
+                SizedBox(height: Sizeconfig.screenheight! / 18),
+                _buildTasbihBead(),
+                SizedBox(height: Sizeconfig.screenheight! / 18),
+                _buildControlButtons(),
+              ],
+            ),
             SizedBox(height: Sizeconfig.screenheight! / 18),
           ],
         ),
@@ -231,7 +239,7 @@ class Tasbih extends StatelessWidget {
     return Center(
       child: Container(
         width: Sizeconfig.screenwidth! * 0.9,
-        height: Sizeconfig.screenheight! / 6,
+        height: Sizeconfig.screenheight! / 5,
         margin: const EdgeInsets.symmetric(vertical: 16.0),
         constraints: BoxConstraints(
           minHeight: Sizeconfig.screenheight! / 8,
