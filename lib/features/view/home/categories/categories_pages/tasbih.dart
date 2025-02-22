@@ -138,6 +138,7 @@ class Tasbih extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         controller.incrementCounter();
+        statctrl.incrementTotalDuaasRead();
         HapticFeedback.mediumImpact();
       },
       child: AnimatedBuilder(
