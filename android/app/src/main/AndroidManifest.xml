@@ -13,6 +13,8 @@
         android:label="QuranLife"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
+    <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyBasdaN7vygYJDhRWfzJzA0rcCcf9RhimM"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

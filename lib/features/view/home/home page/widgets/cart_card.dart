@@ -5,6 +5,7 @@ import 'package:quranlife/features/controller/animation_controllers/floating_ani
 import 'package:quranlife/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/location_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/language_controller.dart';
+import 'package:quranlife/features/view/home/map%20page/map_page.dart';
 
 class CartCard extends StatelessWidget {
   CartCard({super.key, required this.color, required this.elevation});
@@ -74,7 +75,7 @@ class CartCard extends StatelessWidget {
                   ? Sizeconfig.screenheight! / 20
                   : Sizeconfig.screenheight! / 150,
               child: fltanimtion.buildFloatingWidget(
-                shadowOffset: -30,
+                shadowOffset: -60,
                 shadowHeight: 30,
                 shadowWidth: langctrl.language.value == "ar"
                     ? (Sizeconfig.screenwidth! / 2.4) -
@@ -104,7 +105,9 @@ class CartCard extends StatelessWidget {
                 color: Colors.transparent,
                 child: InkWell(
                   borderRadius: const BorderRadius.all(Radius.circular(11)),
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(() => const MapSample());
+                  },
                   child: SizedBox(
                     height: Sizeconfig.screenheight! < 768
                         ? Sizeconfig.screenheight! / 15
