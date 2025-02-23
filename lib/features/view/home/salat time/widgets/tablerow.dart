@@ -16,7 +16,10 @@ final TimesPageController timespagectrl = Get.find();
 class SalawatTableRow {
   //rows of the table
   TableRow myrow(
-      String salatname, String salattime, RxBool salatvolum, String day) {
+      {required String salatname,
+      required String salattime,
+      required RxBool salatvolum,
+      required String day}) {
     return TableRow(
       children: [
         Obx(
@@ -132,50 +135,50 @@ class SalawatTableRow {
   List<TableRow> mytablerows(int i) {
     return [
       myrow(
-          "fajr".tr,
-          "Fajr",
-          adhanctrl.fajrvolum,
-          fpfctrl.getDateByIndex(i) != null
+          salatname: "fajr".tr,
+          salattime: "Fajr",
+          salatvolum: adhanctrl.fajrvolum,
+          day: fpfctrl.getDateByIndex(i) != null
               ? fpfctrl.getDateByIndex(i)!
               : timespagectrl.formatDate(fpfctrl.currentDate)),
       myspace(),
       myrow(
-          "sunrise".tr,
-          "Sunrise",
-          adhanctrl.sunrizevolum,
-          fpfctrl.getDateByIndex(i) != null
+          salatname: "sunrise".tr,
+          salattime: "Sunrise",
+          salatvolum: adhanctrl.fajrvolum,
+          day: fpfctrl.getDateByIndex(i) != null
               ? fpfctrl.getDateByIndex(i)!
               : timespagectrl.formatDate(fpfctrl.currentDate)),
       myspace(),
       myrow(
-          "dhuhr".tr,
-          "Dhuhr",
-          adhanctrl.duhrvolum,
-          fpfctrl.getDateByIndex(i) != null
+          salatname: "dhuhr".tr,
+          salattime: "Dhuhr",
+          salatvolum: adhanctrl.fajrvolum,
+          day: fpfctrl.getDateByIndex(i) != null
               ? fpfctrl.getDateByIndex(i)!
               : timespagectrl.formatDate(fpfctrl.currentDate)),
       myspace(),
       myrow(
-          "asr".tr,
-          "Asr",
-          adhanctrl.asrvolum,
-          fpfctrl.getDateByIndex(i) != null
+          salatname: "asr".tr,
+          salattime: "Asr",
+          salatvolum: adhanctrl.fajrvolum,
+          day: fpfctrl.getDateByIndex(i) != null
               ? fpfctrl.getDateByIndex(i)!
               : timespagectrl.formatDate(fpfctrl.currentDate)),
       myspace(),
       myrow(
-          "maghrib".tr,
-          "Maghrib",
-          adhanctrl.maghribvolum,
-          fpfctrl.getDateByIndex(i) != null
+          salatname: "maghrib".tr,
+          salattime: "Maghrib",
+          salatvolum: adhanctrl.fajrvolum,
+          day: fpfctrl.getDateByIndex(i) != null
               ? fpfctrl.getDateByIndex(i)!
               : timespagectrl.formatDate(fpfctrl.currentDate)),
       myspace(),
       myrow(
-          "isha".tr,
-          "Isha",
-          adhanctrl.ishavolum,
-          fpfctrl.getDateByIndex(i) != null
+          salatname: "isha".tr,
+          salattime: "Isha",
+          salatvolum: adhanctrl.fajrvolum,
+          day: fpfctrl.getDateByIndex(i) != null
               ? fpfctrl.getDateByIndex(i)!
               : timespagectrl.formatDate(fpfctrl.currentDate)),
     ];
