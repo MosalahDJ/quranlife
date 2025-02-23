@@ -106,7 +106,6 @@ class Mybinding implements Bindings {
     Get.put<IslamicruqyaController>(IslamicruqyaController());
     Get.put<OmraController>(OmraController());
     Get.put<HajController>(HajController());
-
     //complain injection
     Get.put<UrlLuncherAndSharingController>(UrlLuncherAndSharingController(),
         permanent: true);
