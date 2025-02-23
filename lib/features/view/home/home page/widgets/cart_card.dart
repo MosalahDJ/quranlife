@@ -74,7 +74,13 @@ class CartCard extends StatelessWidget {
                   ? Sizeconfig.screenheight! / 20
                   : Sizeconfig.screenheight! / 150,
               child: fltanimtion.buildFloatingWidget(
-                shadowOffset: -55,
+                shadowOffset: -30,
+                shadowHeight: 30,
+                shadowWidth: langctrl.language.value == "ar"
+                    ? (Sizeconfig.screenwidth! / 2.4) -
+                        (Sizeconfig.screenwidth! / 50)
+                    : (Sizeconfig.screenwidth! / 2.2) -
+                        (Sizeconfig.screenwidth! / 50),
                 child: Material(
                   color: Colors.transparent,
                   child: Image.asset(

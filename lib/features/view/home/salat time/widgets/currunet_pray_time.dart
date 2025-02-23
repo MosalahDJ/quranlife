@@ -290,6 +290,12 @@ class CurrentPrayTime extends StatelessWidget {
                 ? Sizeconfig.screenheight! / 10
                 : Sizeconfig.screenheight! / 20,
             child: fltanimtion.buildFloatingWidget(
+              shadowHeight: 30,
+              shadowWidth: langctrl.language.value == "ar"
+                  ? (Sizeconfig.screenwidth! / 2.4) -
+                      (Sizeconfig.screenwidth! / 50)
+                  : (Sizeconfig.screenwidth! / 2.2) -
+                      (Sizeconfig.screenwidth! / 50),
               shadowOffset: -25,
               child: Material(
                 color: Colors.transparent,
