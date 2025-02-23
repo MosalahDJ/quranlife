@@ -5,14 +5,12 @@ import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/features/controller/fcm%20controllers/fcm_controller.dart';
 import 'package:quranlife/features/controller/notfication%20controller/sub%20controllers/adhan_noti_controller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/deterimine_prayers_controller.dart';
-// import 'package:quranlife/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/times_page_controller.dart';
 
 final DeterminePrayersController prayerctrl = Get.find();
 final FCMController notictrl = Get.find();
 final AdhanNotiController adhanctrl = Get.find();
 final DeterminePrayersController dpcctrl = Get.find();
-// final FetchPrayerFromDate fpfctrl = Get.find();
 final TimesPageController timespagectrl = Get.find();
 
 class SalawatTableRow {
@@ -43,7 +41,7 @@ class SalawatTableRow {
         Obx(() => Row(
               children: [
                 Text(
-                  fpfctrl.prayersdays[day][salattime] ?? "-",
+                  "    ${fpfctrl.prayersdays[day][salattime]}",
                   style: TextStyle(
                       fontSize: 18,
 

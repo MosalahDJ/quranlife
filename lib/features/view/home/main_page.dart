@@ -95,7 +95,7 @@ class MainPage extends StatelessWidget {
             index: homectrl.selected,
             children: [
               ProfilePage(),
-              const CategoriesPage(),
+              CategoriesPage(),
               HomePageBody(),
               const AdkarPage(),
               QuraanPage(),

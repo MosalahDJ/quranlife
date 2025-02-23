@@ -8,6 +8,7 @@ import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
+import 'package:quranlife/features/controller/prayer%20times%20controller/times_page_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
 import 'package:quranlife/features/view/home/categories/categories_pages/tasbih.dart';
 import 'package:quranlife/features/view/home/categories/categories_pages/friday_sunnah.dart';
@@ -23,10 +24,11 @@ import 'package:quranlife/features/view/home/categories/categories_pages/seeking
 import 'package:quranlife/features/view/home/categories/categories_pages/statistics_page.dart';
 import 'package:quranlife/features/view/home/categories/categories_pages/teachingprayer.dart';
 import 'package:quranlife/features/view/home/categories/categories_pages/wudu%20and%20ghusl%20page/wudu_and_ghusle.dart';
-import 'package:quranlife/features/view/home/categories/categories_pages/zakat_page.dart';
+import 'package:quranlife/features/view/home/salat%20time/prayer_time_page.dart';
 
 class CategoriesPage extends StatelessWidget {
-  const CategoriesPage({super.key});
+  CategoriesPage({super.key});
+  final TimesPageController timespagectrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -205,10 +207,11 @@ class CategoriesPage extends StatelessWidget {
                                 ),
                                 mycategory(
                                   () {
-                                    Get.to(() => ZakatPage());
+                                    timespagectrl.getcurrentpage();
+                                    Get.toNamed("salattime");
                                   },
-                                  FlutterIslamicIcons.solidZakat,
-                                  'zakat'.tr,
+                                  Icons.access_time_filled_sharp,
+                                  'mawaqit'.tr,
                                 ),
                               ],
                             )),
