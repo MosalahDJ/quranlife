@@ -65,11 +65,11 @@ class CartCard extends StatelessWidget {
           //masjid png image
           Positioned(
               right: langctrl.language.value == "ar"
-                  ? Sizeconfig.screenwidth! / 2
-                  : Sizeconfig.screenwidth! / 40,
+                  ? Sizeconfig.screenwidth! / 2.4
+                  : Sizeconfig.screenwidth! / 50,
               left: langctrl.language.value == "ar"
-                  ? Sizeconfig.screenwidth! / 40
-                  : Sizeconfig.screenwidth! / 2,
+                  ? Sizeconfig.screenwidth! / 50
+                  : Sizeconfig.screenwidth! / 2.2,
               bottom: Sizeconfig.screenheight! < 768
                   ? Sizeconfig.screenheight! / 20
                   : Sizeconfig.screenheight! / 150,
