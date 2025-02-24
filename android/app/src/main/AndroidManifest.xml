@@ -14,7 +14,7 @@
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
     <meta-data android:name="com.google.android.geo.API_KEY"
-               android:value="AIzaSyBasdaN7vygYJDhRWfzJzA0rcCcf9RhimM"/>
+               android:value=dotenv.env['google_map_api_key']!/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
