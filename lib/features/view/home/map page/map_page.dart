@@ -1,6 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:async';
+import 'dart:io';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -180,53 +182,126 @@ class MapSampleState extends State<MapSample> {
   }
 
   Future<void> getDirections(LatLng destination) async {
-    if (_currentPosition == null) return;
+    if (_currentPosition == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('الرجاء الانتظار حتى يتم تحديد موقعك'),
+          duration: Duration(seconds: 2),
+        ),
+      );
+      return;
+    }
 
-    final origin =
-        LatLng(_currentPosition!.latitude, _currentPosition!.longitude);
-    final url =
-        Uri.parse('https://maps.googleapis.com/maps/api/directions/json?'
-            'origin=${origin.latitude},${origin.longitude}'
-            '&destination=${destination.latitude},${destination.longitude}'
-            '&key=$apiKey');
+    setState(() {
+      _isLoading = true; // إضافة مؤشر التحميل
+    });
 
     try {
-      final response = await http.get(url);
+      final origin =
+          LatLng(_currentPosition!.latitude, _currentPosition!.longitude);
+
+      // تحديث الماركرز
+      setState(() {
+        markers.clear();
+        markers.addAll({
+          Marker(
+            markerId: const MarkerId('origin'),
+            position: origin,
+            icon:
+                BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+          ),
+          Marker(
+            markerId: const MarkerId('destination'),
+            position: destination,
+            icon:
+                BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+          ),
+        });
+      });
+
+      // جلب المسار من Google Directions API
+      final url =
+          Uri.parse('https://maps.googleapis.com/maps/api/directions/json?'
+              'origin=${origin.latitude},${origin.longitude}'
+              '&destination=${destination.latitude},${destination.longitude}'
+              '&mode=driving' // تحديد وضع القيادة
+              '&key=$apiKey');
+
+      final response = await http.get(url).timeout(
+        const Duration(seconds: 10), // إضافة timeout
+        onTimeout: () {
+          throw TimeoutException('فشل الاتصال بالخادم');
+        },
+      );
+
+      if (response.statusCode != 200) {
+        throw HttpException('فشل في الاتصال بالخادم: ${response.statusCode}');
+      }
+
       final data = json.decode(response.body);
 
-      if (data['status'] == 'OK') {
-        PolylinePoints polylinePoints = PolylinePoints();
-        List<PointLatLng> result = polylinePoints
-            .decodePolyline(data['routes'][0]['overview_polyline']['points']);
-
-        List<LatLng> polylineCoordinates = [];
-        for (var point in result) {
-          polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-        }
-
-        setState(() {
-          polylines.clear();
-          polylines.add(
-            Polyline(
-              polylineId: const PolylineId('route'),
-              color: Colors.blue,
-              points: polylineCoordinates,
-              width: 5,
-            ),
-          );
-
-          markers.clear();
-          markers.add(
-            Marker(
-              markerId: const MarkerId('destination'),
-              position: destination,
-              icon: BitmapDescriptor.defaultMarker,
-            ),
-          );
-        });
+      if (data['status'] != 'OK') {
+        throw Exception('فشل في جلب المسار: ${data['status']}');
       }
+
+      // تحويل المسار إلى إحداثيات
+      PolylinePoints polylinePoints = PolylinePoints();
+      List<PointLatLng> result = polylinePoints
+          .decodePolyline(data['routes'][0]['overview_polyline']['points']);
+
+      if (result.isEmpty) {
+        throw Exception('لم يتم العثور على مسار');
+      }
+
+      List<LatLng> polylineCoordinates = result
+          .map((point) => LatLng(point.latitude, point.longitude))
+          .toList();
+
+      // تحديث المسار على الخريطة
+      setState(() {
+        polylines.clear();
+        polylines.add(
+          Polyline(
+            polylineId: const PolylineId('route'),
+            color: Colors.blue,
+            points: polylineCoordinates,
+            width: 5,
+            patterns: [
+              PatternItem.dash(20), // إضافة نمط متقطع للمسار
+              PatternItem.gap(5),
+            ],
+          ),
+        );
+      });
+
+      // تحريك الكاميرا لتظهر المسار كاملاً
+      final GoogleMapController controller = await _controller.future;
+      final bounds = LatLngBounds(
+        southwest: LatLng(
+          min(origin.latitude, destination.latitude),
+          min(origin.longitude, destination.longitude),
+        ),
+        northeast: LatLng(
+          max(origin.latitude, destination.latitude),
+          max(origin.longitude, destination.longitude),
+        ),
+      );
+
+      controller.animateCamera(
+        CameraUpdate.newLatLngBounds(bounds, 100),
+      );
     } catch (e) {
       print('Error getting directions: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('حدث خطأ: ${e.toString()}'),
+          duration: const Duration(seconds: 3),
+        ),
+      );
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
