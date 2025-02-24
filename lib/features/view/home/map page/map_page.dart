@@ -2,12 +2,12 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 
 class MapSample extends StatefulWidget {
   const MapSample({super.key});
@@ -24,7 +24,7 @@ class MapSampleState extends State<MapSample> {
   Set<Marker> markers = {};
   Set<Polyline> polylines = {};
   LatLng? destinationLocation;
-    final String apiKey = 'YOUR_GOOGLE_MAPS_API_KEY';
+  final String apiKey = dotenv.env['google_map_api_key']!;
 
   String mapStyle = '''
   [
@@ -182,13 +182,13 @@ class MapSampleState extends State<MapSample> {
   Future<void> getDirections(LatLng destination) async {
     if (_currentPosition == null) return;
 
-    final origin = LatLng(_currentPosition!.latitude, _currentPosition!.longitude);
-    final url = Uri.parse(
-      'https://maps.googleapis.com/maps/api/directions/json?'
-      'origin=${origin.latitude},${origin.longitude}'
-      '&destination=${destination.latitude},${destination.longitude}'
-      '&key=$apiKey'
-    );
+    final origin =
+        LatLng(_currentPosition!.latitude, _currentPosition!.longitude);
+    final url =
+        Uri.parse('https://maps.googleapis.com/maps/api/directions/json?'
+            'origin=${origin.latitude},${origin.longitude}'
+            '&destination=${destination.latitude},${destination.longitude}'
+            '&key=$apiKey');
 
     try {
       final response = await http.get(url);
@@ -196,9 +196,8 @@ class MapSampleState extends State<MapSample> {
 
       if (data['status'] == 'OK') {
         PolylinePoints polylinePoints = PolylinePoints();
-        List<PointLatLng> result = polylinePoints.decodePolyline(
-          data['routes'][0]['overview_polyline']['points']
-        );
+        List<PointLatLng> result = polylinePoints
+            .decodePolyline(data['routes'][0]['overview_polyline']['points']);
 
         List<LatLng> polylineCoordinates = [];
         for (var point in result) {
@@ -252,6 +251,15 @@ class MapSampleState extends State<MapSample> {
             },
             myLocationButtonEnabled: false,
             myLocationEnabled: true,
+            markers: markers,
+            polylines: polylines,
+            onTap: (LatLng location) {
+              destinationLocation = location;
+              getDirections(location);
+              print("___________________________________________");
+              print("tapped");
+              print("___________________________________________");
+            },
           ),
           if (_isLoading)
             Container(
