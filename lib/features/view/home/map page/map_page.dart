@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -15,6 +17,26 @@ class MapSampleState extends State<MapSample> {
       Completer<GoogleMapController>();
   Position? _currentPosition;
   bool _isLoading = false;
+  String mapStyle = '''
+  [
+    {
+      "featureType": "poi",
+      "stylers": [
+        {
+          "visibility": "off"
+        }
+      ]
+    },
+    {
+      "featureType": "poi.place_of_worship",
+      "stylers": [
+        {
+          "visibility": "on"
+        }
+      ]
+    }
+  ]
+  ''';
 
   @override
   void initState() {
@@ -24,7 +46,7 @@ class MapSampleState extends State<MapSample> {
 
   Future<void> _getCurrentLocation() async {
     setState(() {
-      _isLoading = true; // بداية التحميل
+      _isLoading = true;
     });
 
     bool serviceEnabled;
@@ -137,13 +159,13 @@ class MapSampleState extends State<MapSample> {
         CameraUpdate.newCameraPosition(
           CameraPosition(
             target: LatLng(position.latitude, position.longitude),
-            zoom: 14.4746,
+            zoom: 17,
           ),
         ),
       );
     } finally {
       setState(() {
-        _isLoading = false; // نهاية التحميل
+        _isLoading = false;
       });
     }
   }
@@ -151,9 +173,11 @@ class MapSampleState extends State<MapSample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: Stack(
         children: [
           GoogleMap(
+            style: mapStyle,
             mapType: MapType.normal,
             initialCameraPosition: CameraPosition(
               target: _currentPosition != null
@@ -165,8 +189,8 @@ class MapSampleState extends State<MapSample> {
             onMapCreated: (GoogleMapController controller) {
               _controller.complete(controller);
             },
+            myLocationButtonEnabled: false,
             myLocationEnabled: true,
-            myLocationButtonEnabled: true,
           ),
           if (_isLoading)
             Container(
@@ -197,8 +221,7 @@ class MapSampleState extends State<MapSample> {
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed:
-            _isLoading ? null : _getCurrentLocation, // تعطيل الزر أثناء التحميل
+        onPressed: _isLoading ? null : _getCurrentLocation,
         label: const Text('موقعي الحالي'),
         icon: const Icon(Icons.location_searching),
       ),

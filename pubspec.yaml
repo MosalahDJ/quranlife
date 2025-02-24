@@ -43,6 +43,7 @@ dependencies:
     sdk: flutter
   flutter_compass: ^0.8.0
   flutter_dotenv: ^5.2.1
+  flutter_google_maps_webservices: ^1.1.1
   flutter_islamic_icons: ^1.0.2
   flutter_local_notifications: ^18.0.1
   flutter_timezone: ^3.0.1
