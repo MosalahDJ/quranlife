@@ -4,6 +4,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
 
 class MapSample extends StatefulWidget {
   const MapSample({super.key});
@@ -17,6 +21,11 @@ class MapSampleState extends State<MapSample> {
       Completer<GoogleMapController>();
   Position? _currentPosition;
   bool _isLoading = false;
+  Set<Marker> markers = {};
+  Set<Polyline> polylines = {};
+  LatLng? destinationLocation;
+    final String apiKey = 'YOUR_GOOGLE_MAPS_API_KEY';
+
   String mapStyle = '''
   [
     {
@@ -167,6 +176,58 @@ class MapSampleState extends State<MapSample> {
       setState(() {
         _isLoading = false;
       });
+    }
+  }
+
+  Future<void> getDirections(LatLng destination) async {
+    if (_currentPosition == null) return;
+
+    final origin = LatLng(_currentPosition!.latitude, _currentPosition!.longitude);
+    final url = Uri.parse(
+      'https://maps.googleapis.com/maps/api/directions/json?'
+      'origin=${origin.latitude},${origin.longitude}'
+      '&destination=${destination.latitude},${destination.longitude}'
+      '&key=$apiKey'
+    );
+
+    try {
+      final response = await http.get(url);
+      final data = json.decode(response.body);
+
+      if (data['status'] == 'OK') {
+        PolylinePoints polylinePoints = PolylinePoints();
+        List<PointLatLng> result = polylinePoints.decodePolyline(
+          data['routes'][0]['overview_polyline']['points']
+        );
+
+        List<LatLng> polylineCoordinates = [];
+        for (var point in result) {
+          polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+        }
+
+        setState(() {
+          polylines.clear();
+          polylines.add(
+            Polyline(
+              polylineId: const PolylineId('route'),
+              color: Colors.blue,
+              points: polylineCoordinates,
+              width: 5,
+            ),
+          );
+
+          markers.clear();
+          markers.add(
+            Marker(
+              markerId: const MarkerId('destination'),
+              position: destination,
+              icon: BitmapDescriptor.defaultMarker,
+            ),
+          );
+        });
+      }
+    } catch (e) {
+      print('Error getting directions: $e');
     }
   }
 

@@ -46,6 +46,7 @@ dependencies:
   flutter_google_maps_webservices: ^1.1.1
   flutter_islamic_icons: ^1.0.2
   flutter_local_notifications: ^18.0.1
+  flutter_polyline_points: ^2.1.0
   flutter_timezone: ^3.0.1
   font_awesome_flutter: ^10.8.0
   geocoding: ^3.0.0
