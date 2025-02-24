@@ -1,10 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:async';
-import 'dart:io';
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
@@ -70,24 +69,24 @@ class MapSampleState extends State<MapSample> {
         barrierDismissible: false,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text('خدمة تحديد الموقع غير مفعلة'),
-            content: const Text('يرجى تفعيل GPS للحصول على موقعك الحالي'),
+            title: Text('location_service_disabled'.tr),
+            content: Text('enable_gps_message'.tr),
             actions: <Widget>[
               TextButton(
-                child: const Text('إلغاء'),
+                child: Text('cancel'.tr),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               ),
               TextButton(
-                child: const Text('فتح الإعدادات'),
+                child: Text('open_settings'.tr),
                 onPressed: () async {
                   Navigator.of(context).pop();
                   await Geolocator.openLocationSettings();
                 },
               ),
               TextButton(
-                child: const Text('إعادة المحاولة'),
+                child: Text('retry'.tr),
                 onPressed: () {
                   Navigator.of(context).pop();
                   _getCurrentLocation();
@@ -108,17 +107,17 @@ class MapSampleState extends State<MapSample> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: const Text('تم رفض الإذن'),
-              content: const Text('لا يمكن الوصول إلى موقعك بدون إذن'),
+              title: Text('permission_denied'.tr),
+              content: Text('location_permission_required'.tr),
               actions: <Widget>[
                 TextButton(
-                  child: const Text('حسناً'),
+                  child: Text('ok'.tr),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
                 ),
                 TextButton(
-                  child: const Text('إعادة المحاولة'),
+                  child: Text('retry'.tr),
                   onPressed: () {
                     Navigator.of(context).pop();
                     _getCurrentLocation();
@@ -137,17 +136,17 @@ class MapSampleState extends State<MapSample> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text('تم رفض الإذن بشكل دائم'),
-            content: const Text('يرجى تفعيل إذن الموقع من إعدادات التطبيق'),
+            title: Text('permission_denied_permanently'.tr),
+            content: Text('enable_permission_settings'.tr),
             actions: <Widget>[
               TextButton(
-                child: const Text('إلغاء'),
+                child: Text('cancel'.tr),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               ),
               TextButton(
-                child: const Text('فتح الإعدادات'),
+                child: Text('open_settings'.tr),
                 onPressed: () async {
                   Navigator.of(context).pop();
                   await Geolocator.openAppSettings();
@@ -182,126 +181,86 @@ class MapSampleState extends State<MapSample> {
   }
 
   Future<void> getDirections(LatLng destination) async {
-    if (_currentPosition == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('الرجاء الانتظار حتى يتم تحديد موقعك'),
-          duration: Duration(seconds: 2),
-        ),
-      );
-      return;
-    }
+    if (_currentPosition == null) return;
 
     setState(() {
-      _isLoading = true; // إضافة مؤشر التحميل
+      // Add destination marker immediately
+      markers.clear();
+      markers.addAll({
+        // Add current location marker
+        Marker(
+          markerId: const MarkerId('origin'),
+          position:
+              LatLng(_currentPosition!.latitude, _currentPosition!.longitude),
+          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+        ),
+        // Add destination marker
+        Marker(
+          markerId: const MarkerId('destination'),
+          position: destination,
+          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+        ),
+      });
     });
 
     try {
       final origin =
           LatLng(_currentPosition!.latitude, _currentPosition!.longitude);
-
-      // تحديث الماركرز
-      setState(() {
-        markers.clear();
-        markers.addAll({
-          Marker(
-            markerId: const MarkerId('origin'),
-            position: origin,
-            icon:
-                BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
-          ),
-          Marker(
-            markerId: const MarkerId('destination'),
-            position: destination,
-            icon:
-                BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
-          ),
-        });
-      });
-
-      // جلب المسار من Google Directions API
       final url =
           Uri.parse('https://maps.googleapis.com/maps/api/directions/json?'
               'origin=${origin.latitude},${origin.longitude}'
               '&destination=${destination.latitude},${destination.longitude}'
-              '&mode=driving' // تحديد وضع القيادة
               '&key=$apiKey');
 
-      final response = await http.get(url).timeout(
-        const Duration(seconds: 10), // إضافة timeout
-        onTimeout: () {
-          throw TimeoutException('فشل الاتصال بالخادم');
-        },
-      );
-
-      if (response.statusCode != 200) {
-        throw HttpException('فشل في الاتصال بالخادم: ${response.statusCode}');
-      }
-
+      final response = await http.get(url);
       final data = json.decode(response.body);
 
-      if (data['status'] != 'OK') {
-        throw Exception('فشل في جلب المسار: ${data['status']}');
-      }
+      if (data['status'] == 'OK') {
+        PolylinePoints polylinePoints = PolylinePoints();
+        List<PointLatLng> result = polylinePoints
+            .decodePolyline(data['routes'][0]['overview_polyline']['points']);
 
-      // تحويل المسار إلى إحداثيات
-      PolylinePoints polylinePoints = PolylinePoints();
-      List<PointLatLng> result = polylinePoints
-          .decodePolyline(data['routes'][0]['overview_polyline']['points']);
+        List<LatLng> polylineCoordinates = [];
+        for (var point in result) {
+          polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+        }
 
-      if (result.isEmpty) {
-        throw Exception('لم يتم العثور على مسار');
-      }
+        setState(() {
+          polylines.clear();
+          polylines.add(
+            Polyline(
+              polylineId: const PolylineId('route'),
+              color: Colors.blue,
+              points: polylineCoordinates,
+              width: 5,
+            ),
+          );
+        });
 
-      List<LatLng> polylineCoordinates = result
-          .map((point) => LatLng(point.latitude, point.longitude))
-          .toList();
-
-      // تحديث المسار على الخريطة
-      setState(() {
-        polylines.clear();
-        polylines.add(
-          Polyline(
-            polylineId: const PolylineId('route'),
-            color: Colors.blue,
-            points: polylineCoordinates,
-            width: 5,
-            patterns: [
-              PatternItem.dash(20), // إضافة نمط متقطع للمسار
-              PatternItem.gap(5),
-            ],
+        // Animate camera to show both points
+        final GoogleMapController controller = await _controller.future;
+        final bounds = LatLngBounds(
+          southwest: LatLng(
+            origin.latitude < destination.latitude
+                ? origin.latitude
+                : destination.latitude,
+            origin.longitude < destination.longitude
+                ? origin.longitude
+                : destination.longitude,
+          ),
+          northeast: LatLng(
+            origin.latitude > destination.latitude
+                ? origin.latitude
+                : destination.latitude,
+            origin.longitude > destination.longitude
+                ? origin.longitude
+                : destination.longitude,
           ),
         );
-      });
-
-      // تحريك الكاميرا لتظهر المسار كاملاً
-      final GoogleMapController controller = await _controller.future;
-      final bounds = LatLngBounds(
-        southwest: LatLng(
-          min(origin.latitude, destination.latitude),
-          min(origin.longitude, destination.longitude),
-        ),
-        northeast: LatLng(
-          max(origin.latitude, destination.latitude),
-          max(origin.longitude, destination.longitude),
-        ),
-      );
-
-      controller.animateCamera(
-        CameraUpdate.newLatLngBounds(bounds, 100),
-      );
+        controller.animateCamera(CameraUpdate.newLatLngBounds(bounds, 100));
+      }
     } catch (e) {
-      print('Error getting directions: $e');
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('حدث خطأ: ${e.toString()}'),
-          duration: const Duration(seconds: 3),
-        ),
-      );
-    } finally {
-      setState(() {
-        _isLoading = false;
-      });
+      // print('Error getting directions: $e');
     }
   }
 
@@ -331,9 +290,6 @@ class MapSampleState extends State<MapSample> {
             onTap: (LatLng location) {
               destinationLocation = location;
               getDirections(location);
-              print("___________________________________________");
-              print("tapped");
-              print("___________________________________________");
             },
           ),
           if (_isLoading)
@@ -346,14 +302,14 @@ class MapSampleState extends State<MapSample> {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Column(
+                child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    CircularProgressIndicator(),
-                    SizedBox(height: 16),
+                    const CircularProgressIndicator(),
+                    const SizedBox(height: 16),
                     Text(
-                      'جاري البحث عن موقعك...',
-                      style: TextStyle(
+                      'searching_location'.tr,
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
@@ -366,7 +322,7 @@ class MapSampleState extends State<MapSample> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _isLoading ? null : _getCurrentLocation,
-        label: const Text('موقعي الحالي'),
+        label: Text('my_current_location'.tr),
         icon: const Icon(Icons.location_searching),
       ),
     );

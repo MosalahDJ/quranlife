@@ -149,6 +149,22 @@ class Messages extends Translations {
           'tasbih4': "Glory be to God and praise Him",
           'tasbih5': "Glory be to God, the Almighty",
 
+          //map
+          'location_service_disabled': "Location Service Disabled",
+          'enable_gps_message':
+              "Please enable GPS to get your current location",
+          'cancel': "Cancel",
+          'open_settings': "Open Settings",
+          'retry': "Retry",
+          'permission_denied': "Permission Denied",
+          // 'location_permission_required': "Cannot access your location without permission",
+          'ok': "OK",
+          'permission_denied_permanently': "Permission Permanently Denied",
+          'enable_permission_settings':
+              "Please enable location permission from app settings",
+          'searching_location': "Searching for your location...",
+          'my_current_location': "My Current Location",
+
           // Prayer Times
           'prayer_times': 'Prayer Times',
           'mawaqit': 'Schedule',
@@ -465,6 +481,20 @@ class Messages extends Translations {
           'tasbih3': "الله أكبر",
           'tasbih4': "سبحان الله و بحمده",
           'tasbih5': "سبحان الله العضيم",
+
+          //map
+          'location_service_disabled': "خدمة تحديد الموقع غير مفعلة",
+          'enable_gps_message': "يرجى تفعيل GPS للحصول على موقعك الحالي",
+          'cancel': "إلغاء",
+          'open_settings': "فتح الإعدادات",
+          'retry': "إعادة المحاولة",
+          'permission_denied': "تم رفض الإذن",
+          'ok': "حسناً",
+          'permission_denied_permanently': "تم رفض الإذن بشكل دائم",
+          'enable_permission_settings':
+              "يرجى تفعيل إذن الموقع من إعدادات التطبيق",
+          'searching_location': "جاري البحث عن موقعك...",
+          'my_current_location': "موقعي الحالي",
 
           // Prayer Times
           'prayer_times': 'مواقيت الصلاة',
@@ -791,6 +821,21 @@ class Messages extends Translations {
           'tasbih3': "Allah est le Plus Grand",
           'tasbih4': "Gloire à Dieu et louange à Lui",
           'tasbih5': "Gloire à Dieu, le Tout-Puissant",
+
+          //map
+          'location_service_disabled': "Service de Localisation Désactivé",
+          'enable_gps_message':
+              "Veuillez activer le GPS pour obtenir votre position actuelle",
+          'cancel': "Annuler",
+          'open_settings': "Ouvrir les Paramètres",
+          'retry': "Réessayer",
+          'permission_denied': "Permission Refusée",
+          'ok': "OK",
+          'permission_denied_permanently': "Permission Refusée Définitivement",
+          'enable_permission_settings':
+              "Veuillez activer la permission de localisation dans les paramètres",
+          'searching_location': "Recherche de votre position...",
+          'my_current_location': "Ma Position Actuelle",
 
           // Prayer Times
           'prayer_times': 'Horaires des prières',
