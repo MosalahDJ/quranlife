@@ -47,6 +47,7 @@ android {
         versionCode = flutterVersionCode.toInteger()
         versionName = flutterVersionName
         multiDexEnabled true
+        manifestPlaceholders = [MAPS_API_KEY: localProperties['MAPS_API_KEY']]
     }
 
     packagingOptions {
