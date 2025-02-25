@@ -8,8 +8,8 @@ import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/features/controller/settings%20controllers/language_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
 
-class DisplayTheme extends StatelessWidget {
-  const DisplayTheme({super.key});
+class DisplayThemePage extends StatelessWidget {
+  const DisplayThemePage({super.key});
 
   @override
   Widget build(BuildContext context) {

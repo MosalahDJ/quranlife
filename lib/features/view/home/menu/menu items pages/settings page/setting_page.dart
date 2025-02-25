@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
+import 'package:quranlife/features/view/home/menu/menu%20items%20pages/settings%20page/widgets/display_theme.dart';
+import 'package:quranlife/features/view/home/menu/menu%20items%20pages/settings%20page/widgets/language_page.dart';
+import 'package:quranlife/features/view/home/menu/menu%20items%20pages/settings%20page/widgets/notification.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
@@ -31,33 +34,33 @@ class SettingPage extends StatelessWidget {
             _buildSettingsCategory(
               icon: Icons.person_outline,
               title: 'account_settings'.tr,
-              onTap: () => Get.toNamed('/account-settings'),
+              onTap: () {},
               description: 'account_settings_desc'.tr,
             ),
             _buildSettingsCategory(
               icon: Icons.palette_outlined,
               title: 'appearance'.tr,
-              onTap: () => Get.toNamed('/appearance-settings'),
+              onTap: () => Get.to(() => const DisplayThemePage()),
               description: 'appearance_desc'.tr,
             ),
             _buildSectionHeader(context, 'app_settings'.tr),
             _buildSettingsCategory(
               icon: Icons.notifications_outlined,
               title: 'notifications'.tr,
-              onTap: () => Get.toNamed('/notification-settings'),
+              onTap: () => Get.to(() => NotificationSettings()),
               description: 'notifications_desc'.tr,
             ),
             _buildSettingsCategory(
               icon: Icons.language_outlined,
               title: 'language'.tr,
-              onTap: () => Get.toNamed('/language-settings'),
+              onTap: () => Get.to(() => const LanguagePage()),
               description: 'language_desc'.tr,
             ),
             _buildSectionHeader(context, 'support'.tr),
             _buildSettingsCategory(
               icon: Icons.help_outline,
               title: 'help_support'.tr,
-              onTap: () => Get.toNamed('/help-support'),
+              onTap: () => Get.toNamed('/help'),
               description: 'help_support_desc'.tr,
             ),
           ],
