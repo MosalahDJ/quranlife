@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
-import 'package:quranlife/features/view/home/profile/widgets/profile_page_body.dart';
+import 'package:quranlife/features/view/home/menu/menu_page_body.dart';
 
 class ProfilePage extends StatelessWidget {
   ProfilePage({super.key});
@@ -14,6 +14,6 @@ class ProfilePage extends StatelessWidget {
           scrolledUnderElevation: 0,
           toolbarHeight: 0,
         ),
-        body: ProfilePageBody());
+        body: MenuPageBody());
   }
 }

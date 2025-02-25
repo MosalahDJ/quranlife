@@ -5,8 +5,8 @@ import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/features/controller/Auth%20controller/logincontroller.dart';
 
-class ProfilePageBody extends StatelessWidget {
-  ProfilePageBody({super.key});
+class MenuPageBody extends StatelessWidget {
+  MenuPageBody({super.key});
   final LogInController logctrl = Get.find();
 
   @override
