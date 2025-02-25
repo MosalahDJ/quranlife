@@ -279,6 +279,20 @@ class Messages extends Translations {
           'adhan_notifications': 'Prayer Time Notifications',
           'adhkar_notifications': 'Daily Supplications Notifications',
           'quran_notifications': 'Quran Reading Reminders',
+          //
+          'general_settings': "General Settings",
+          'account_settings': "Account Settings",
+          'account_settings_desc':
+              "Manage your account and personal information",
+          'appearance': "Appearance",
+          'appearance_desc': "Customize app appearance",
+          'app_settings': "App Settings",
+          'notifications_desc': "Manage app alerts and notifications",
+          'language': "Language",
+          'language_desc': "Change app language",
+          'support': "Support",
+          'help_support': "Help & Support",
+          'help_support_desc': "Get help and contact us",
 
           // Languages
           'arabic': 'Arabic',
@@ -609,6 +623,19 @@ class Messages extends Translations {
           'adhan_notifications': 'تنبيهات مواقيت الصلاة',
           'adhkar_notifications': 'تنبيهات الأذكار اليومية',
           'quran_notifications': 'تذكير بقراءة القرآن',
+//
+          'general_settings': "الإعدادات العامة",
+          'account_settings': "إعدادات الحساب",
+          'account_settings_desc': "إدارة حسابك الشخصي والمعلومات",
+          'appearance': "المظهر",
+          'appearance_desc': "تخصيص مظهر التطبيق",
+          'app_settings': "إعدادات التطبيق",
+          'notifications_desc': "إدارة تنبيهات وإشعارات التطبيق",
+          'language': "اللغة",
+          'language_desc': "تغيير لغة التطبيق",
+          'support': "الدعم",
+          'help_support': "المساعدة والدعم",
+          'help_support_desc': "احصل على المساعدة وتواصل معنا",
 
           // Languages
           'arabic': 'العربية',
@@ -953,6 +980,20 @@ class Messages extends Translations {
           'adhkar_notifications':
               'Notifications des Supplications quotidiennes',
           'quran_notifications': 'Rappels de lecture du Coran',
+          //
+          'general_settings': "Paramètres Généraux",
+          'account_settings': "Paramètres du Compte",
+          'account_settings_desc':
+              "Gérer votre compte et vos informations personnelles",
+          'appearance': "Apparence",
+          'appearance_desc': "Personnaliser l'apparence de l'application",
+          'app_settings': "Paramètres de l'Application",
+          'notifications_desc': "Gérer les alertes et notifications",
+          'language': "Langue",
+          'language_desc': "Changer la langue de l'application",
+          'support': "Support",
+          'help_support': "Aide & Support",
+          'help_support_desc': "Obtenir de l'aide et nous contacter",
 
           // Languages
           'arabic': 'arabe',
