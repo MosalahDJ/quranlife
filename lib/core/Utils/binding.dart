@@ -24,6 +24,7 @@ import 'package:quranlife/features/controller/fetching%20data%20controller/wudu_
 import 'package:quranlife/features/controller/home%20controller/fade_animation_controller.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
 import 'package:quranlife/features/controller/Auth%20controller/textvalidatecontroller.dart';
+import 'package:quranlife/features/controller/map%20controller/map_controller.dart';
 import 'package:quranlife/features/controller/notfication%20controller/sub%20controllers/adhan_noti_controller.dart';
 import 'package:quranlife/features/controller/notfication%20controller/sub%20controllers/adhkar_noti_controller.dart';
 import 'package:quranlife/features/controller/notfication%20controller/notification_initializition.dart';
@@ -93,6 +94,7 @@ class Mybinding implements Bindings {
     Get.put<AdkarController>(AdkarController());
     //categories pages injection
     Get.put<AllahNamesController>(AllahNamesController());
+    Get.put<MapController>(MapController());
     Get.put<TeachingPrayerController>(TeachingPrayerController());
     Get.put<WuduController>(WuduController());
     Get.put<GhuslController>(GhuslController());
