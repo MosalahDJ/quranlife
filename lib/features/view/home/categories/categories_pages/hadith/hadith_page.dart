@@ -202,7 +202,7 @@ class _HadithPageState extends State<HadithPage> {
                                         child: Column(
                                           children: [
                                             Text(
-                                              "${"source".tr}:",
+                                              "source".tr,
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .bodySmall
