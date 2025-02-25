@@ -96,6 +96,7 @@ class Messages extends Translations {
           'more': 'More',
           'hey_user': 'Hey, User',
           'logout': 'Logout',
+          'menu': 'Menu',
 
           //category items
           "teaching_prayer": "Teaching Prayer",
@@ -430,6 +431,8 @@ class Messages extends Translations {
           'more': 'أخرى',
           'hey_user': 'مرحباً',
           'logout': 'تسجيل خروج',
+          'menu': 'القائمة',
+
           //category items
           "teaching_prayer": "تعليم الصلاة",
           "wudu_ghusl": "الوضوء والغسل",
@@ -769,6 +772,7 @@ class Messages extends Translations {
           'more': 'plus',
           'hey_user': 'Bonjour',
           'logout': 'Déconnexion',
+          'menu': 'Menu',
 
           //category items
           "teaching_prayer": "Apprentissage de la Prière",

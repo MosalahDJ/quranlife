@@ -281,11 +281,11 @@ class CurrentPrayTime extends StatelessWidget {
           //masjid png image
           Positioned(
             right: langctrl.language.value == "ar"
-                ? Sizeconfig.screenwidth! / 2.4
+                ? Sizeconfig.screenwidth! / 2.3
                 : Sizeconfig.screenwidth! / 50,
             left: langctrl.language.value == "ar"
                 ? Sizeconfig.screenwidth! / 50
-                : Sizeconfig.screenwidth! / 2.2,
+                : Sizeconfig.screenwidth! / 2.3,
             bottom: Sizeconfig.screenheight! < 768
                 ? Sizeconfig.screenheight! / 10
                 : Sizeconfig.screenheight! / 30,

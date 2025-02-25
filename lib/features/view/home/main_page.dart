@@ -31,10 +31,10 @@ class MainPage extends StatelessWidget {
                 items: [
                   FlashyTabBarItem(
                     icon: const Icon(
-                      Icons.person_rounded,
+                      Icons.menu_rounded,
                     ),
                     title: Text(
-                      'more'.tr,
+                      'menu'.tr,
                       textAlign: TextAlign.center,
                       style: const TextStyle(fontSize: 12),
                     ),
