@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/features/view/home/adkar%20page/adkar_page.dart';
 import 'package:quranlife/features/view/home/categories/categories_page.dart';
+import 'package:quranlife/features/view/home/menu/menu_page.dart';
 import 'package:quranlife/features/view/home/quraan%20page/quraan_page.dart';
 import 'package:quranlife/features/view/home/home%20page/home_page_body.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
@@ -93,7 +94,7 @@ class MainPage extends StatelessWidget {
           return IndexedStack(
             index: homectrl.selected,
             children: [
-              MainPage(),
+              MenuPage(),
               CategoriesPage(),
               HomePageBody(),
               const AdkarPage(),

@@ -8,8 +8,8 @@ import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/features/controller/settings%20controllers/language_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
 
-class DisplayTheme extends StatelessWidget {
-  const DisplayTheme({super.key});
+class LanguagePage extends StatelessWidget {
+  const LanguagePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,27 +35,31 @@ class DisplayTheme extends StatelessWidget {
             ],
           ),
           SafeArea(
-            child: Settingtype(title: "theme_mode".tr, listwidget: [
-              _buildThemeOption(AppTheme.system, 'system_theme'.tr),
-              _buildThemeOption(AppTheme.light, 'light_theme'.tr),
-              _buildThemeOption(AppTheme.dark, 'dark_theme'.tr),
-            ]),
+            child: Settingtype(
+              title: "Language",
+              listwidget: [
+                _buildLanguageOption('ar', 'arabic'.tr),
+                _buildLanguageOption('en', 'english'.tr),
+                _buildLanguageOption('fr', 'french'.tr),
+              ],
+            ),
           )
         ]));
   }
 }
 
-Widget _buildThemeOption(AppTheme theme, String title) {
+Widget _buildLanguageOption(String lang, String title) {
   final ThemeController themctrl = Get.find();
   final LanguageController langCtrl = Get.find();
-  return Obx(() => RadioListTile<AppTheme>(
+  return Obx(() => RadioListTile<String>(
         title: Text(title),
-        value: theme,
-        groupValue: themctrl.selectedTheme.value,
+        value: lang,
+        groupValue: langCtrl.language.value,
         onChanged: (value) {
-          themctrl.changeTheme(value!);
-          Get.updateLocale(Locale(langCtrl.language.value));
-          themctrl.initializeTheme();
+          langCtrl.changeLanguage(value!);
+          Get.updateLocale(Locale(value));
+          // Force theme refresh when language changes
+          themctrl.changeTheme(themctrl.selectedTheme.value);
         },
         activeColor: Get.isDarkMode ? kmaincolor4 : kmaincolor,
         controlAffinity: ListTileControlAffinity.trailing,
