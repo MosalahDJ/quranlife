@@ -3,20 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-import 'package:http/http.dart' as http;
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MapController extends GetxController {
-  final Completer<GoogleMapController> mapController =
+  Completer<GoogleMapController> mapController =
       Completer<GoogleMapController>();
   final Rx<Position?> currentPosition = Rx<Position?>(null);
   final RxBool isLoading = false.obs;
   final RxSet<Marker> markers = <Marker>{}.obs;
-  final RxSet<Polyline> polylines = <Polyline>{}.obs;
-  final Rx<LatLng?> destinationLocation = Rx<LatLng?>(null);
-  final String apiKey = dotenv.env['google_map_api_key']!;
+  GoogleMapController? _controller;
+  bool _disposed = false;
+
+  static const String latkey = 'last_known_latitude';
+  static const String lngkey = 'last_known_longitude';
+  static const String timestampkey = 'location_timestamp';
+  static const int maxcaxhage = 30 * 60 * 1000; // 30 minutes in milliseconds
 
   final String mapStyle = '''
   [
@@ -30,6 +31,16 @@ class MapController extends GetxController {
     },
     {
       "featureType": "poi.place_of_worship",
+      "elementType": "geometry",
+      "stylers": [
+        {
+          "visibility": "on"
+        }
+      ]
+    },
+    {
+      "featureType": "poi.place_of_worship",
+      "elementType": "labels",
       "stylers": [
         {
           "visibility": "on"
@@ -45,126 +56,158 @@ class MapController extends GetxController {
     getCurrentLocation();
   }
 
-  Future<bool> checkLocationPermission() async {
-    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      return false;
-    }
+  @override
+  void onClose() {
+    _disposed = true;
+    _controller?.dispose();
+    super.onClose();
+  }
 
-    LocationPermission permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return false;
-      }
+  void onMapCreated(GoogleMapController controller) {
+    if (!_disposed && !mapController.isCompleted) {
+      _controller = controller;
+      mapController.complete(controller);
+      // controller.setMapStyle(mapStyle);
     }
-
-    if (permission == LocationPermission.deniedForever) {
-      return false;
-    }
-
-    return true;
   }
 
   Future<void> getCurrentLocation() async {
-    isLoading.value = true;
+    if (_disposed) return;
 
+    isLoading.value = true;
     try {
-      if (!await checkLocationPermission()) {
+      // التحقق من الموقع المخزن مؤقتاً
+      final prefs = await SharedPreferences.getInstance();
+      final cachedLat = prefs.getDouble(latkey);
+      final cachedLng = prefs.getDouble(lngkey);
+      final timestamp = prefs.getInt(timestampkey) ?? 0;
+      final now = DateTime.now().millisecondsSinceEpoch;
+
+      // استخدام الموقع المخزن إذا كان حديثاً
+      if (cachedLat != null &&
+          cachedLng != null &&
+          (now - timestamp) < maxcaxhage) {
+        await _updateMapLocation(LatLng(cachedLat, cachedLng));
+        isLoading.value = false;
+        return;
+      }
+
+      // التحقق من إذن الموقع
+      bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+      if (!serviceEnabled) {
+        await Get.dialog(
+          AlertDialog(
+            title: Text('location_service_disabled'.tr),
+            content: Text('enable_gps_message'.tr),
+            actions: [
+              TextButton(
+                child: Text('cancel'.tr),
+                onPressed: () => Get.back(),
+              ),
+              TextButton(
+                child: Text('open_settings'.tr),
+                onPressed: () async {
+                  await Geolocator.openLocationSettings();
+                  Get.back();
+                },
+              ),
+            ],
+          ),
+        );
+        isLoading.value = false;
+        return;
+      }
+
+      LocationPermission permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+        if (permission == LocationPermission.denied) {
+          Get.snackbar(
+            'permission_denied'.tr,
+            'location_permission_required'.tr,
+            snackPosition: SnackPosition.BOTTOM,
+          );
+          isLoading.value = false;
+          return;
+        }
+      }
+
+      if (permission == LocationPermission.deniedForever) {
+        await Get.dialog(
+          AlertDialog(
+            title: Text('permission_denied_permanently'.tr),
+            content: Text('enable_permission_settings'.tr),
+            actions: [
+              TextButton(
+                child: Text('ok'.tr),
+                onPressed: () => Get.back(),
+              ),
+              TextButton(
+                child: Text('open_settings'.tr),
+                onPressed: () async {
+                  await Geolocator.openAppSettings();
+                  Get.back();
+                },
+              ),
+            ],
+          ),
+        );
+        isLoading.value = false;
         return;
       }
 
       Position position = await Geolocator.getCurrentPosition();
       currentPosition.value = position;
 
-      final GoogleMapController controller = await mapController.future;
-      controller.animateCamera(
-        CameraUpdate.newCameraPosition(
-          CameraPosition(
-            target: LatLng(position.latitude, position.longitude),
-            zoom: 17,
-          ),
-        ),
-      );
+      // تخزين الموقع الجديد
+      await prefs.setDouble(latkey, position.latitude);
+      await prefs.setDouble(lngkey, position.longitude);
+      await prefs.setInt(timestampkey, now);
+
+      await _updateMapLocation(LatLng(position.latitude, position.longitude));
+    } catch (e) {
+      print('Error getting location: $e');
     } finally {
-      isLoading.value = false;
+      if (!_disposed) {
+        isLoading.value = false;
+      }
     }
   }
 
-  Future<void> getDirections(LatLng destination) async {
-    if (currentPosition.value == null) return;
+  Future<void> _updateMapLocation(LatLng location) async {
+    if (!_disposed && _controller != null) {
+      try {
+        await _controller!.animateCamera(
+          CameraUpdate.newCameraPosition(
+            CameraPosition(
+              target: location,
+              zoom: 17,
+            ),
+          ),
+        );
+      } catch (e) {
+        print('Error animating camera: $e');
+        _controller = null;
+        mapController = Completer<GoogleMapController>();
+      }
+    }
+  }
 
-    // Update markers
+  void onTapMap(LatLng location) {
     markers.clear();
-    markers.addAll({
+    markers.add(
       Marker(
-        markerId: const MarkerId('origin'),
-        position: LatLng(
-            currentPosition.value!.latitude, currentPosition.value!.longitude),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
-      ),
-      Marker(
-        markerId: const MarkerId('destination'),
-        position: destination,
+        markerId: const MarkerId('selected_location'),
+        position: location,
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
       ),
-    });
-
-    try {
-      final origin = LatLng(
-          currentPosition.value!.latitude, currentPosition.value!.longitude);
-      final url = Uri.parse(
-          'https://maps.googleapis.com/maps/api/directions/json?origin=${origin.latitude},${origin.longitude}&destination=${destination.latitude},${destination.longitude}&key=$apiKey');
-
-      final response = await http.get(url);
-      final data = json.decode(response.body);
-
-      if (data['status'] == 'OK') {
-        await _processDirectionsResponse(data, origin, destination);
-      }
-    } catch (e) {
-      // Handle error
-    }
+    );
   }
 
-  Future<void> _processDirectionsResponse(
-      Map<String, dynamic> data, LatLng origin, LatLng destination) async {
-    PolylinePoints polylinePoints = PolylinePoints();
-    List<PointLatLng> result = polylinePoints
-        .decodePolyline(data['routes'][0]['overview_polyline']['points']);
-
-    List<LatLng> polylineCoordinates =
-        result.map((point) => LatLng(point.latitude, point.longitude)).toList();
-
-    polylines.clear();
-    polylines.add(
-      Polyline(
-        polylineId: const PolylineId('route'),
-        color: Colors.blue,
-        points: polylineCoordinates,
-        width: 5,
-      ),
-    );
-
-    final GoogleMapController controller = await mapController.future;
-    final bounds = LatLngBounds(
-      southwest: LatLng(
-        origin.latitude < destination.latitude
-            ? origin.latitude
-            : destination.latitude,
-        origin.longitude < destination.longitude
-            ? origin.longitude
-            : destination.longitude,
-      ),
-      northeast: LatLng(
-        origin.latitude > destination.latitude
-            ? origin.latitude
-            : destination.latitude,
-        origin.longitude > destination.longitude
-            ? origin.longitude
-            : destination.longitude,
-      ),
-    );
-    controller.animateCamera(CameraUpdate.newLatLngBounds(bounds, 100));
+  Future<void> clearLocationCache() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(latkey);
+    await prefs.remove(lngkey);
+    await prefs.remove(timestampkey);
   }
 }

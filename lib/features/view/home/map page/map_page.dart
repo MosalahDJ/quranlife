@@ -12,53 +12,43 @@ class MapSample extends GetView<MapController> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: Stack(
         children: [
-          Obx(() => GoogleMap(
-                style: controller.mapStyle,
-                mapType: MapType.normal,
-                initialCameraPosition: CameraPosition(
-                  target: controller.currentPosition.value != null
-                      ? LatLng(
-                          controller.currentPosition.value!.latitude,
-                          controller.currentPosition.value!.longitude,
-                        )
-                      : const LatLng(0, 0),
-                  zoom: 14.4746,
-                ),
-                onMapCreated: (GoogleMapController mapController) {
-                  controller.mapController.complete(mapController);
-                },
-                myLocationButtonEnabled: false,
-                myLocationEnabled: true,
-                markers: controller.markers,
-                polylines: controller.polylines,
-                onTap: (LatLng location) {
-                  controller.destinationLocation.value = location;
-                  controller.getDirections(location);
-                },
-              )),
+          GetBuilder<MapController>(
+            builder: (controller) => GoogleMap(
+              style: controller.mapStyle,
+              mapType: MapType.normal,
+              initialCameraPosition: const CameraPosition(
+                target: LatLng(10, 10),
+                zoom: 17,
+              ),
+              onMapCreated: controller.onMapCreated,
+              myLocationButtonEnabled: false,
+              myLocationEnabled: true,
+              markers: controller.markers,
+              onTap: controller.onTapMap,
+            ),
+          ),
           Obx(() => controller.isLoading.value
               ? Container(
-                  alignment: Alignment.center,
                   color: Colors.black.withOpacity(0.5),
-                  child: Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const CircularProgressIndicator(),
-                        const SizedBox(height: 16),
-                        Text(
-                          'searching_location'.tr,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                  child: Center(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 24.0, vertical: 16.0),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const CircularProgressIndicator(),
+                          const SizedBox(height: 16.0),
+                          Text(
+                            'searching_location'.tr,
+                            style: const TextStyle(fontSize: 16.0),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 )
