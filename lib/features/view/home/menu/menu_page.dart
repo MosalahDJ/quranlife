@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
 import 'package:quranlife/features/view/home/menu/menu_page_body.dart';
 
-class ProfilePage extends StatelessWidget {
-  ProfilePage({super.key});
+class MenuPage extends StatelessWidget {
+  MenuPage({super.key});
   final MyHomeController homectrl = Get.find();
 
   @override
