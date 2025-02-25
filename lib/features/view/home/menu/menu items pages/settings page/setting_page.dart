@@ -5,7 +5,7 @@ import 'package:quranlife/core/widgets/settings_type.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
 
 class SettingPage extends StatelessWidget {
-  SettingPage({super.key});
+  const SettingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
