@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
-import 'package:quranlife/core/widgets/settings_type.dart';
-import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
+import 'package:quranlife/core/widgets/shimmer_text.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
@@ -10,39 +9,134 @@ class SettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //Settings appbar
       appBar: AppBar(
-        scrolledUnderElevation: 0,
+        foregroundColor: Colors.white,
+        backgroundColor: kmaincolor,
         elevation: 0,
         centerTitle: true,
-        title: Text(
-          'settings'.tr,
-          style: const TextStyle(color: Colors.white),
+        title: ShimmerText(
+          text: 'settings'.tr,
+          style: const TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
         ),
-        backgroundColor: kmaincolor,
       ),
-
-      //Settings body
-      body: GetBuilder<ThemeController>(
-        builder: (c) => Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(children: [
-            //themedata list tile
-            Settingtype(title: "theme_mode".tr, listwidget: const []),
-            // Add language settings section
-            Settingtype(
-              title: "Language".tr,
-              listwidget: const [],
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildSectionHeader(context, 'general_settings'.tr),
+            _buildSettingsCategory(
+              icon: Icons.person_outline,
+              title: 'account_settings'.tr,
+              onTap: () => Get.toNamed('/account-settings'),
+              description: 'account_settings_desc'.tr,
             ),
-            Settingtype(
+            _buildSettingsCategory(
+              icon: Icons.palette_outlined,
+              title: 'appearance'.tr,
+              onTap: () => Get.toNamed('/appearance-settings'),
+              description: 'appearance_desc'.tr,
+            ),
+            _buildSectionHeader(context, 'app_settings'.tr),
+            _buildSettingsCategory(
+              icon: Icons.notifications_outlined,
               title: 'notifications'.tr,
-              listwidget: const [],
+              onTap: () => Get.toNamed('/notification-settings'),
+              description: 'notifications_desc'.tr,
             ),
-          ]),
+            _buildSettingsCategory(
+              icon: Icons.language_outlined,
+              title: 'language'.tr,
+              onTap: () => Get.toNamed('/language-settings'),
+              description: 'language_desc'.tr,
+            ),
+            _buildSectionHeader(context, 'support'.tr),
+            _buildSettingsCategory(
+              icon: Icons.help_outline,
+              title: 'help_support'.tr,
+              onTap: () => Get.toNamed('/help-support'),
+              description: 'help_support_desc'.tr,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSectionHeader(BuildContext context, String title) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(24, 24, 24, 8),
+      child: Text(
+        title,
+        style: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+          color: kmaincolor.withOpacity(0.8),
+          letterSpacing: 0.5,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSettingsCategory({
+    required IconData icon,
+    required String title,
+    required String description,
+    required VoidCallback onTap,
+  }) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: kmaincolor.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Icon(icon, color: kmaincolor, size: 24),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xFF2C3E50),
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      description,
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: Colors.grey[600],
+                        height: 1.3,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Icon(
+                Icons.chevron_right_rounded,
+                size: 24,
+                color: Colors.grey[400],
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
-
-//Settings List Tile
