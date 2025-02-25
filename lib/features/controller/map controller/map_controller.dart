@@ -16,8 +16,6 @@ class MapController extends GetxController {
 
   static const String latkey = 'last_known_latitude';
   static const String lngkey = 'last_known_longitude';
-  static const String timestampkey = 'location_timestamp';
-  static const int maxcaxhage = 30 * 60 * 1000; // 30 minutes in milliseconds
 
   final String mapStyle = '''
   [
@@ -53,13 +51,18 @@ class MapController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    getCurrentLocation();
+    if (_controller == null) {
+      mapController = Completer<GoogleMapController>();
+      _disposed = false;
+    }
   }
 
   @override
   void onClose() {
     _disposed = true;
     _controller?.dispose();
+    clearLocationCache();
+    _controller = null;
     super.onClose();
   }
 
@@ -67,32 +70,16 @@ class MapController extends GetxController {
     if (!_disposed && !mapController.isCompleted) {
       _controller = controller;
       mapController.complete(controller);
-      // controller.setMapStyle(mapStyle);
+      controller.setMapStyle(mapStyle);
+      getCurrentLocation();
     }
   }
 
   Future<void> getCurrentLocation() async {
-    if (_disposed) return;
+    if (_disposed || _controller == null) return;
 
     isLoading.value = true;
     try {
-      // التحقق من الموقع المخزن مؤقتاً
-      final prefs = await SharedPreferences.getInstance();
-      final cachedLat = prefs.getDouble(latkey);
-      final cachedLng = prefs.getDouble(lngkey);
-      final timestamp = prefs.getInt(timestampkey) ?? 0;
-      final now = DateTime.now().millisecondsSinceEpoch;
-
-      // استخدام الموقع المخزن إذا كان حديثاً
-      if (cachedLat != null &&
-          cachedLng != null &&
-          (now - timestamp) < maxcaxhage) {
-        await _updateMapLocation(LatLng(cachedLat, cachedLng));
-        isLoading.value = false;
-        return;
-      }
-
-      // التحقق من إذن الموقع
       bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
       if (!serviceEnabled) {
         await Get.dialog(
@@ -159,12 +146,18 @@ class MapController extends GetxController {
       Position position = await Geolocator.getCurrentPosition();
       currentPosition.value = position;
 
-      // تخزين الموقع الجديد
+      final prefs = await SharedPreferences.getInstance();
       await prefs.setDouble(latkey, position.latitude);
       await prefs.setDouble(lngkey, position.longitude);
-      await prefs.setInt(timestampkey, now);
 
-      await _updateMapLocation(LatLng(position.latitude, position.longitude));
+      await _controller!.animateCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(
+            target: LatLng(position.latitude, position.longitude),
+            zoom: 17,
+          ),
+        ),
+      );
     } catch (e) {
       print('Error getting location: $e');
     } finally {
@@ -173,41 +166,9 @@ class MapController extends GetxController {
       }
     }
   }
-
-  Future<void> _updateMapLocation(LatLng location) async {
-    if (!_disposed && _controller != null) {
-      try {
-        await _controller!.animateCamera(
-          CameraUpdate.newCameraPosition(
-            CameraPosition(
-              target: location,
-              zoom: 17,
-            ),
-          ),
-        );
-      } catch (e) {
-        print('Error animating camera: $e');
-        _controller = null;
-        mapController = Completer<GoogleMapController>();
-      }
-    }
-  }
-
-  void onTapMap(LatLng location) {
-    markers.clear();
-    markers.add(
-      Marker(
-        markerId: const MarkerId('selected_location'),
-        position: location,
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
-      ),
-    );
-  }
-
   Future<void> clearLocationCache() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(latkey);
     await prefs.remove(lngkey);
-    await prefs.remove(timestampkey);
   }
 }

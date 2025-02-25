@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/features/controller/map%20controller/map_controller.dart';
 
 class MapSample extends GetView<MapController> {
@@ -17,14 +18,13 @@ class MapSample extends GetView<MapController> {
               style: controller.mapStyle,
               mapType: MapType.normal,
               initialCameraPosition: const CameraPosition(
-                target: LatLng(10, 10),
-                zoom: 17,
+                target: LatLng(35, 6),
+                zoom: 0,
               ),
               onMapCreated: controller.onMapCreated,
               myLocationButtonEnabled: false,
               myLocationEnabled: true,
               markers: controller.markers,
-              onTap: controller.onTapMap,
             ),
           ),
           Obx(() => controller.isLoading.value
@@ -56,10 +56,15 @@ class MapSample extends GetView<MapController> {
         ],
       ),
       floatingActionButton: Obx(() => FloatingActionButton.extended(
+            backgroundColor: Get.isDarkMode ? kmaincolor : kmaincolor3,
+            foregroundColor: Get.isDarkMode ? kmaincolor4 : kmaincolor,
             onPressed: controller.isLoading.value
                 ? null
                 : controller.getCurrentLocation,
-            label: Text('my_current_location'.tr),
+            label: Text(
+              'my_current_location'.tr,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
             icon: const Icon(Icons.location_searching),
           )),
     );
