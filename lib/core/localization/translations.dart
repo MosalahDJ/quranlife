@@ -38,6 +38,13 @@ class Messages extends Translations {
           'leave_registration': 'Do you want to exit the registration process?',
           'registration': 'Registration',
 
+          'guest_login': 'Guest Login',
+          'guest_login_warning': 'Limited Features Access',
+          'guest_login_message':
+              'As a guest user, you will have limited access to app features. Would you like to continue?',
+          'continue_guest': 'Continue as Guest',
+          'cancel': 'Cancel',
+
           // Validation
           'field_required': 'This field is required',
           'valid_email': 'Please enter a valid email address',
@@ -154,7 +161,6 @@ class Messages extends Translations {
           'location_service_disabled': "Location Service Disabled",
           'enable_gps_message':
               "Please enable GPS to get your current location",
-          'cancel': "Cancel",
           'open_settings': "Open Settings",
           'retry': "Retry",
           'permission_denied': "Permission Denied",
@@ -405,6 +411,13 @@ class Messages extends Translations {
           'leave_registration': 'هل تريد مغادرة عملية التسجيل؟',
           'registration': 'التسجيل',
 
+          'guest_login': 'تسجيل الدخول كضيف',
+          'guest_login_warning': 'وصول محدود للميزات',
+          'guest_login_message':
+              'كمستخدم ضيف، سيكون لديك وصول محدود لميزات التطبيق. هل تريد المتابعة؟',
+          'continue_guest': 'المتابعة كضيف',
+          'cancel': 'إلغاء',
+
           // Validation Messages
           'field_required': 'مطلوب',
           'valid_email': 'يرجى إدخال بريد إلكتروني صحيح',
@@ -520,7 +533,6 @@ class Messages extends Translations {
           //map
           'location_service_disabled': "خدمة تحديد الموقع غير مفعلة",
           'enable_gps_message': "يرجى تفعيل GPS للحصول على موقعك الحالي",
-          'cancel': "إلغاء",
           'open_settings': "فتح الإعدادات",
           'retry': "إعادة المحاولة",
           'permission_denied': "تم رفض الإذن",
@@ -774,6 +786,13 @@ class Messages extends Translations {
               'Voulez-vous quitter le processus d\'inscription?',
           'registration': 'Inscription',
 
+          'guest_login': 'Connexion Invité',
+          'guest_login_warning': 'Accès Limité aux Fonctionnalités',
+          'guest_login_message':
+              'En tant qu\'utilisateur invité, vous aurez un accès limité aux fonctionnalités de l\'application. Voulez-vous continuer ?',
+          'continue_guest': 'Continuer en tant qu\'invité',
+          'cancel': 'Annuler',
+
           // Validation Messages
           'field_required': 'requis',
           'valid_email': 'Veuillez entrer une adresse e-mail valide',
@@ -891,7 +910,6 @@ class Messages extends Translations {
           'location_service_disabled': "Service de Localisation Désactivé",
           'enable_gps_message':
               "Veuillez activer le GPS pour obtenir votre position actuelle",
-          'cancel': "Annuler",
           'open_settings': "Ouvrir les Paramètres",
           'retry': "Réessayer",
           'permission_denied': "Permission Refusée",

@@ -46,16 +46,6 @@ class LoginPage extends StatelessWidget {
         appBar: AppBar(
           elevation: 0,
           scrolledUnderElevation: 0,
-          actions: [
-            IconButton(
-                onPressed: () {
-                  Get.offAllNamed("home");
-                },
-                icon: Icon(
-                  Icons.gite_outlined,
-                  color: Theme.of(context).iconTheme.color,
-                ))
-          ],
           title: Text(
             "login".tr,
             style: Theme.of(context).textTheme.headlineSmall,

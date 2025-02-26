@@ -5,12 +5,12 @@ import 'package:quranlife/features/controller/settings%20controllers/theme_contr
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LanguageController extends GetxController {
-  final language = 'en'.obs;
+  final language = 'ar'.obs;
   final SharedPreferences prefs;
   ThemeController themeController = Get.find();
 
   LanguageController(this.prefs) {
-    language.value = prefs.getString('language') ?? 'en';
+    language.value = prefs.getString('language') ?? 'ar';
   }
 
   void changeLanguage(String lng) async {

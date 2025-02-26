@@ -218,19 +218,14 @@ class LoginBody extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           _buildSocialButton(
-                            "lib/core/assets/images/login_images/google.png",
-                            () => googlectrl.signInWithGoogle(context),
-                          ),
+                              "lib/core/assets/images/login_images/google.png",
+                              () => googlectrl.signInWithGoogle(context),
+                              Colors.transparent),
                           const SizedBox(width: 30),
                           _buildSocialButton(
-                            "lib/core/assets/images/login_images/Facebookm.png",
-                            () {},
-                          ),
-                          const SizedBox(width: 30),
-                          _buildSocialButton(
-                            "lib/core/assets/images/login_images/Xm.png",
-                            () {},
-                          ),
+                              "lib/core/assets/images/login_images/Guest.png",
+                              () => _showGuestLoginDialog(context),
+                              Colors.white),
                         ],
                       ),
                       SizedBox(height: Sizeconfig.screenheight! * 0.03),
@@ -273,9 +268,11 @@ class LoginBody extends StatelessWidget {
     );
   }
 
-  Widget _buildSocialButton(String imagePath, VoidCallback onPressed) {
+  Widget _buildSocialButton(
+      String imagePath, VoidCallback onPressed, Color? color) {
     return Container(
       decoration: BoxDecoration(
+        color: color,
         border: Border.all(color: Colors.grey.withOpacity(0.2)),
         borderRadius: BorderRadius.circular(12),
       ),
@@ -290,4 +287,59 @@ class LoginBody extends StatelessWidget {
       ),
     );
   }
+}
+
+// Add this new method to the LoginBody class
+void _showGuestLoginDialog(BuildContext context) {
+  Get.dialog(
+    AlertDialog(
+      title: Text(
+        'guest_login_warning'.tr,
+        style: TextStyle(
+          color: Get.isDarkMode ? kmaincolor4 : kmaincolor,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      content: Text(
+        'guest_login_message'.tr,
+        style: TextStyle(
+          color: Get.isDarkMode ? Colors.white70 : Colors.black87,
+        ),
+      ),
+      backgroundColor: Get.isDarkMode ? Colors.grey[900] : Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Get.back(),
+          child: Text(
+            'cancel'.tr,
+            style: TextStyle(
+              color: Get.isDarkMode ? Colors.white70 : Colors.grey[600],
+            ),
+          ),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            Get.offAllNamed("home");
+            // Example: loginctrl.loginAsGuest();
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Get.isDarkMode ? kmaincolor4 : kmaincolor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+          child: Text(
+            'continue_guest'.tr,
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
 }

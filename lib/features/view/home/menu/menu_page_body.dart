@@ -61,7 +61,7 @@ class MenuPageBody extends StatelessWidget {
           CircleAvatar(
             backgroundColor: Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
             backgroundImage: const AssetImage(
-              "lib/core/assets/images/background_image/islamic_patern_portrait.jpg",
+              "lib/core/assets/images/profile_picture/man_picture.png",
             ),
             radius: 40,
           ),
@@ -159,9 +159,9 @@ class MenuPageBody extends StatelessWidget {
                 title,
                 style: TextStyle(
                   fontSize: 16,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.bold,
                   color: Get.isDarkMode
-                      ? const Color.fromARGB(255, 207, 165, 118)
+                      ? const Color.fromARGB(255, 237, 231, 223)
                       : const Color(0xFF2C3E50),
                 ),
               ),

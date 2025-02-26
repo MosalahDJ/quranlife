@@ -31,10 +31,32 @@ class MainPage extends StatelessWidget {
                 items: [
                   FlashyTabBarItem(
                     icon: const Icon(
-                      Icons.menu_rounded,
+                      FlutterIslamicIcons.solidQuran2,
+                    ),
+                    title: Text('quran'.tr,
+                        style: const TextStyle(fontSize: 12),
+                        textAlign: TextAlign.center),
+                    activeColor: kmaincolor4,
+                    inactiveColor: Colors.white,
+                  ),
+                  FlashyTabBarItem(
+                    icon: const Icon(
+                      FlutterIslamicIcons.tasbih3,
                     ),
                     title: Text(
-                      'menu'.tr,
+                      'adkar'.tr,
+                      style: const TextStyle(fontSize: 12),
+                      textAlign: TextAlign.center,
+                    ),
+                    activeColor: kmaincolor4,
+                    inactiveColor: Colors.white,
+                  ),
+                  FlashyTabBarItem(
+                    icon: const Icon(
+                      FlutterIslamicIcons.mosque,
+                    ),
+                    title: Text(
+                      'home'.tr,
                       textAlign: TextAlign.center,
                       style: const TextStyle(fontSize: 12),
                     ),
@@ -55,35 +77,13 @@ class MainPage extends StatelessWidget {
                   ),
                   FlashyTabBarItem(
                     icon: const Icon(
-                      FlutterIslamicIcons.mosque,
+                      Icons.menu_rounded,
                     ),
                     title: Text(
-                      'home'.tr,
+                      'menu'.tr,
                       textAlign: TextAlign.center,
                       style: const TextStyle(fontSize: 12),
                     ),
-                    activeColor: kmaincolor4,
-                    inactiveColor: Colors.white,
-                  ),
-                  FlashyTabBarItem(
-                    icon: const Icon(
-                      FlutterIslamicIcons.tasbih3,
-                    ),
-                    title: Text(
-                      'adkar'.tr,
-                      style: const TextStyle(fontSize: 12),
-                      textAlign: TextAlign.center,
-                    ),
-                    activeColor: kmaincolor4,
-                    inactiveColor: Colors.white,
-                  ),
-                  FlashyTabBarItem(
-                    icon: const Icon(
-                      FlutterIslamicIcons.solidQuran2,
-                    ),
-                    title: Text('quran'.tr,
-                        style: const TextStyle(fontSize: 12),
-                        textAlign: TextAlign.center),
                     activeColor: kmaincolor4,
                     inactiveColor: Colors.white,
                   ),
@@ -94,11 +94,11 @@ class MainPage extends StatelessWidget {
           return IndexedStack(
             index: homectrl.selected,
             children: [
-              MenuPage(),
-              CategoriesPage(),
-              HomePageBody(),
-              const AdkarPage(),
               QuraanPage(),
+              const AdkarPage(),
+              HomePageBody(),
+              CategoriesPage(),
+              MenuPage(),
             ],
           );
         },

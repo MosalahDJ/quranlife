@@ -49,7 +49,6 @@ class ComplainPage extends StatelessWidget {
                   const SizedBox(height: 20),
                   // Header Section
                   _buildHeaderSection(),
-
                   // Main Contact Options
                   Padding(
                     padding: const EdgeInsets.all(16.0),
