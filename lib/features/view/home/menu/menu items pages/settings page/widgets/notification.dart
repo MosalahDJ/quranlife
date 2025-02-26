@@ -4,7 +4,6 @@ import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/features/controller/notfication%20controller/work_manager_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
-import 'package:quranlife/features/view/home/menu/menu%20items%20pages/settings%20page/setting_page.dart';
 
 class NotificationSettings extends StatelessWidget {
   NotificationSettings({super.key});
@@ -12,61 +11,49 @@ class NotificationSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
-      onPopInvokedWithResult: (didPop, result) async {
-        if (!didPop) {
-          Get.off(() => const SettingPage());
-        }
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          foregroundColor: Colors.white,
-          backgroundColor: kmaincolor,
-          elevation: 0,
-          centerTitle: true,
-          leading: IconButton(
-            onPressed: () => Get.off(() => const SettingPage()),
-            icon: const Icon(Icons.arrow_back, color: Colors.white),
-          ),
-          title: ShimmerText(
-            text: 'notifications'.tr,
-            style: const TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
+    return Scaffold(
+      appBar: AppBar(
+        foregroundColor: Colors.white,
+        backgroundColor: kmaincolor,
+        elevation: 0,
+        centerTitle: true,
+        title: ShimmerText(
+          text: 'notifications'.tr,
+          style: const TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
           ),
         ),
-        body: GetBuilder<WorkManagerController>(
-          builder: (controller) => SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildSectionHeader(context, 'notification_settings'.tr),
-                _buildNotificationOption(
-                  context,
-                  NotificationType.adhan,
-                  'adhan_notifications'.tr,
-                  'adhan_notifications_desc'.tr,
-                  Icons.access_time_rounded,
-                ),
-                _buildNotificationOption(
-                  context,
-                  NotificationType.adhkar,
-                  'adhkar_notifications'.tr,
-                  'adhkar_notifications_desc'.tr,
-                  Icons.favorite_rounded,
-                ),
-                _buildNotificationOption(
-                  context,
-                  NotificationType.quraan,
-                  'quran_notifications'.tr,
-                  'quran_notifications_desc'.tr,
-                  Icons.book_rounded,
-                ),
-              ],
-            ),
+      ),
+      body: GetBuilder<WorkManagerController>(
+        builder: (controller) => SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildSectionHeader(context, 'notification_settings'.tr),
+              _buildNotificationOption(
+                context,
+                NotificationType.adhan,
+                'adhan_notifications'.tr,
+                'adhan_notifications_desc'.tr,
+                Icons.access_time_rounded,
+              ),
+              _buildNotificationOption(
+                context,
+                NotificationType.adhkar,
+                'adhkar_notifications'.tr,
+                'adhkar_notifications_desc'.tr,
+                Icons.favorite_rounded,
+              ),
+              _buildNotificationOption(
+                context,
+                NotificationType.quraan,
+                'quran_notifications'.tr,
+                'quran_notifications_desc'.tr,
+                Icons.book_rounded,
+              ),
+            ],
           ),
         ),
       ),

@@ -4,53 +4,40 @@ import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/features/controller/settings%20controllers/language_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
-import 'package:quranlife/features/view/home/menu/menu%20items%20pages/settings%20page/setting_page.dart';
 
 class LanguagePage extends StatelessWidget {
   const LanguagePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
-      onPopInvokedWithResult: (didPop, result) async {
-        if (!didPop) {
-          Get.off(() => const SettingPage());
-        }
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          foregroundColor: Colors.white,
-          backgroundColor: kmaincolor,
-          elevation: 0,
-          centerTitle: true,
-          leading: IconButton(
-            onPressed: () => Get.off(() => const SettingPage()),
-            icon: const Icon(Icons.arrow_back, color: Colors.white),
-          ),
-          title: ShimmerText(
-            text: 'language'.tr,
-            style: const TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
+    return Scaffold(
+      appBar: AppBar(
+        foregroundColor: Colors.white,
+        backgroundColor: kmaincolor,
+        elevation: 0,
+        centerTitle: true,
+        title: ShimmerText(
+          text: 'language'.tr,
+          style: const TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
           ),
         ),
-        body: GetBuilder<LanguageController>(
-          builder: (c) => SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildSectionHeader(context, 'select_language'.tr),
-                _buildLanguageOption(
-                    context, 'ar', 'arabic'.tr, 'arabic_desc'.tr),
-                _buildLanguageOption(
-                    context, 'en', 'english'.tr, 'english_desc'.tr),
-                _buildLanguageOption(
-                    context, 'fr', 'french'.tr, 'french_desc'.tr),
-              ],
-            ),
+      ),
+      body: GetBuilder<LanguageController>(
+        builder: (c) => SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildSectionHeader(context, 'select_language'.tr),
+              _buildLanguageOption(
+                  context, 'ar', 'arabic'.tr, 'arabic_desc'.tr),
+              _buildLanguageOption(
+                  context, 'en', 'english'.tr, 'english_desc'.tr),
+              _buildLanguageOption(
+                  context, 'fr', 'french'.tr, 'french_desc'.tr),
+            ],
           ),
         ),
       ),

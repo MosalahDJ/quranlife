@@ -4,30 +4,18 @@ import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/features/controller/settings%20controllers/language_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
-import 'package:quranlife/features/view/home/menu/menu%20items%20pages/settings%20page/setting_page.dart';
 
 class DisplayThemePage extends StatelessWidget {
   const DisplayThemePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
-      onPopInvokedWithResult: (didPop, result) async {
-        if (!didPop) {
-          Get.off(() => const SettingPage());
-        }
-      },
-      child: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           foregroundColor: Colors.white,
           backgroundColor: kmaincolor,
           elevation: 0,
           centerTitle: true,
-          leading: IconButton(
-            onPressed: () => Get.off(() => const SettingPage()),
-            icon: const Icon(Icons.arrow_back, color: Colors.white),
-          ),
           title: ShimmerText(
             text: 'appearance'.tr,
             style: const TextStyle(
@@ -51,9 +39,7 @@ class DisplayThemePage extends StatelessWidget {
                           'dark_theme_desc'.tr),
                     ],
                   ),
-                )),
-      ),
-    );
+                )));
   }
 
   Widget _buildSectionHeader(BuildContext context, String title) {
