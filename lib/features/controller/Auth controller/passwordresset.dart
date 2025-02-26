@@ -18,17 +18,17 @@ class PasswordresetController extends GetxController {
           snackStyle: SnackStyle.FLOATING,
           borderRadius: 20,
           barBlur: 10,
-          titleText: const Text(
-            "Invalid Email",
-            style: TextStyle(
+          titleText: Text(
+            'invalid_email_title'.tr,
+            style: const TextStyle(
               fontSize: 20,
               color: Colors.white,
             ),
             textAlign: TextAlign.center,
           ),
-          messageText: const Text(
-            "please add your email first",
-            style: TextStyle(
+          messageText: Text(
+            'enter_email_first'.tr,
+            style: const TextStyle(
               fontSize: 15,
               color: Colors.white,
             ),
@@ -42,17 +42,18 @@ class PasswordresetController extends GetxController {
           context: context,
           alignment: Alignment.center,
           animType: AnimType.scale,
-          title: "Password Reset",
+          title: 'password_reset'.tr,
           // desc: "Password Reset",
           dialogType: DialogType.success,
           body: Text(
-            "we sent a reset password link to ${loginctrl.emailcontroller.text}",
+            "${'reset_link_sent'.tr} ${loginctrl.emailcontroller.text}",
             textAlign: TextAlign.center,
           ),
         ).show();
       }
     } on FirebaseAuthException catch (e) {
-      AwesomeDialog(context: context, title: "Eorror", body: Text(e.message!));
+      AwesomeDialog(
+          context: context, title: 'error'.tr, body: Text(e.message!));
     }
   }
 }
