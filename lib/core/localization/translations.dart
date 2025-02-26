@@ -21,6 +21,15 @@ class Messages extends Translations {
           'leave_app': 'Do you want to exit QuranLife?',
           'log_out': 'Log Out',
 
+          'verify_internet': 'Verify your internet connection',
+          'google_signin_error': 'Error signing in with Google',
+          'error': 'Error',
+          'verify_email_title': 'Verify your email',
+          'verify_email_desc': 'You need to verify your email first!',
+          'wrong_credentials': 'Password or email is wrong',
+          'signout_error': 'Error signing out',
+          'general_error': 'An error occurred while signing out',
+
           // Registration
           'create_account': 'Create Your Account',
           'fill_form': 'Please complete the form below',
@@ -393,6 +402,14 @@ class Messages extends Translations {
           'leave_login': 'هل تريد الخروج من عملية تسجيل الدخول؟',
           'leave_app': 'هل تريد الخروج من تطبيق قرآن لايف؟',
           'log_out': 'تسجيل الخروج',
+          'verify_internet': 'تحقق من اتصالك بالإنترنت',
+          'google_signin_error': 'خطأ في تسجيل الدخول باستخدام جوجل',
+          'error': 'خطأ',
+          'verify_email_title': 'تحقق من بريدك الإلكتروني',
+          'verify_email_desc': 'تحتاج إلى تأكيد بريدك الإلكتروني أولاً!',
+          'wrong_credentials': 'كلمة المرور أو البريد الإلكتروني غير صحيح',
+          'signout_error': 'خطأ في تسجيل الخروج',
+          'general_error': 'حدث خطأ أثناء تسجيل الخروج',
 
           // Sign Up Page
           'create_account': 'إنشاء حسابك',
@@ -767,6 +784,14 @@ class Messages extends Translations {
           'leave_login': 'Voulez-vous quitter le processus de connexion ?',
           'leave_app': 'Voulez-vous quitter l\'application Quran Life ?',
           'log_out': 'Déconnexion',
+          'verify_internet': 'Vérifiez votre connexion Internet',
+          'google_signin_error': 'Erreur de connexion avec Google',
+          'error': 'Erreur',
+          'verify_email_title': 'Vérifiez votre email',
+          'verify_email_desc': 'Vous devez d\'abord vérifier votre email !',
+          'wrong_credentials': 'Mot de passe ou email incorrect',
+          'signout_error': 'Erreur lors de la déconnexion',
+          'general_error': 'Une erreur s\'est produite lors de la déconnexion',
 
           // Sign Up Page
           'create_account': 'Créez votre compte',

@@ -24,19 +24,19 @@ class LogInController extends GetxController {
       } else {
         AwesomeDialog(
                 context: context,
-                desc: "you need to verify your email first.!",
-                title: "verify your email ")
+                desc: 'verify_email_desc'.tr,
+                title: 'verify_email_title'.tr)
             .show();
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'invalid-credential') {
         AwesomeDialog(
                 context: context,
-                title: "Error",
-                desc: "password or email is wrong")
+                title: 'error'.tr,
+                desc: 'wrong_credentials'.tr)
             .show();
       } else {
-        AwesomeDialog(context: context, title: "Error", desc: e.code).show();
+        AwesomeDialog(context: context, title: 'error'.tr, desc: e.code).show();
       }
     } catch (e) {
       // ignore: avoid_print
@@ -55,12 +55,12 @@ class LogInController extends GetxController {
     } on FirebaseAuthException catch (e) {
       AwesomeDialog(
         context: context,
-        body: Text(e.message ?? "Error signing out"),
+        body: Text("${'signout_error'.tr} \n$e.message"),
       ).show();
     } catch (e) {
       AwesomeDialog(
         context: context,
-        body: const Text("An error occurred while signing out"),
+        body: Text('general_error'.tr),
       ).show();
     }
   }

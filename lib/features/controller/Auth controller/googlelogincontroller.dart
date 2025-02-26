@@ -35,10 +35,10 @@ class GoogleLogInController extends GetxController {
           "PlatformException(network_error, com.google.android.gms.common.api.ApiException: 7: , null, null)") {
         AwesomeDialog(
                 context: context,
-                body: const Text("Verify your internet conection"))
+                body: Text("verify_internet".tr))
             .show();
       } else {
-        AwesomeDialog(context: context, body: Text("$e")).show();
+        AwesomeDialog(context: context, body: Text("${"google_signin_error".tr} :$e")).show();
       }
     }
   }
