@@ -40,7 +40,7 @@ class SettingPage extends StatelessWidget {
             _buildSettingsCategory(
               icon: Icons.palette_outlined,
               title: 'appearance'.tr,
-              onTap: () => Get.to(() => const DisplayThemePage()),
+              onTap: () => Get.off(() => const DisplayThemePage()),
               description: 'appearance_desc'.tr,
             ),
             _buildSectionHeader(context, 'app_settings'.tr),
@@ -77,7 +77,9 @@ class SettingPage extends StatelessWidget {
         style: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w600,
-          color: kmaincolor.withOpacity(0.8),
+          color: Get.isDarkMode
+              ? kmaincolor4.withOpacity(0.8)
+              : kmaincolor.withOpacity(0.8),
           letterSpacing: 0.5,
         ),
       ),
@@ -101,10 +103,13 @@ class SettingPage extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: kmaincolor.withOpacity(0.1),
+                  color: Get.isDarkMode
+                      ? kmaincolor4.withOpacity(0.1)
+                      : kmaincolor.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Icon(icon, color: kmaincolor, size: 24),
+                child: Icon(icon,
+                    color: Get.isDarkMode ? kmaincolor4 : kmaincolor, size: 24),
               ),
               const SizedBox(width: 16),
               Expanded(
@@ -113,10 +118,12 @@ class SettingPage extends StatelessWidget {
                   children: [
                     Text(
                       title,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
-                        color: Color(0xFF2C3E50),
+                        color: Get.isDarkMode
+                            ? const Color.fromARGB(255, 207, 165, 118)
+                            : const Color(0xFF2C3E50),
                       ),
                     ),
                     const SizedBox(height: 4),
@@ -124,7 +131,9 @@ class SettingPage extends StatelessWidget {
                       description,
                       style: TextStyle(
                         fontSize: 13,
-                        color: Colors.grey[600],
+                        color: Get.isDarkMode
+                            ? Colors.grey[300]
+                            : Colors.grey[600],
                         height: 1.3,
                       ),
                     ),
@@ -134,7 +143,7 @@ class SettingPage extends StatelessWidget {
               Icon(
                 Icons.chevron_right_rounded,
                 size: 24,
-                color: Colors.grey[400],
+                color: Colors.grey[500],
               ),
             ],
           ),

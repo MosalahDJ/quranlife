@@ -158,7 +158,6 @@ class Messages extends Translations {
           'open_settings': "Open Settings",
           'retry': "Retry",
           'permission_denied': "Permission Denied",
-          // 'location_permission_required': "Cannot access your location without permission",
           'ok': "OK",
           'permission_denied_permanently': "Permission Permanently Denied",
           'enable_permission_settings':
@@ -293,6 +292,12 @@ class Messages extends Translations {
           'support': "Support",
           'help_support': "Help & Support",
           'help_support_desc': "Get help and contact us",
+          // Theme Page Translations
+          'system_theme_desc': 'Automatically match system theme',
+          'light_theme_desc': 'Light colors for daytime use',
+          'dark_theme_desc': 'Dark colors for comfortable night viewing',
+          'theme_updated': 'Theme Updated',
+          'theme_applied': 'New theme has been applied',
 
           // Languages
           'arabic': 'Arabic',
@@ -636,7 +641,11 @@ class Messages extends Translations {
           'support': "الدعم",
           'help_support': "المساعدة والدعم",
           'help_support_desc': "احصل على المساعدة وتواصل معنا",
-
+          'system_theme_desc': 'مطابقة سمة النظام تلقائياً',
+          'light_theme_desc': 'ألوان فاتحة للاستخدام النهاري',
+          'dark_theme_desc': 'ألوان داكنة لعرض مريح ليلاً',
+          'theme_updated': 'تم تحديث السمة',
+          'theme_applied': 'تم تطبيق السمة الجديدة',
           // Languages
           'arabic': 'العربية',
           'english': 'الإنجليزية',
@@ -994,6 +1003,13 @@ class Messages extends Translations {
           'support': "Support",
           'help_support': "Aide & Support",
           'help_support_desc': "Obtenir de l'aide et nous contacter",
+          // Theme Page Translations
+          'system_theme_desc': 'Correspond automatiquement au thème du système',
+          'light_theme_desc': 'Couleurs claires pour une utilisation diurne',
+          'dark_theme_desc':
+              'Couleurs sombres pour un affichage confortable la nuit',
+          'theme_updated': 'Thème mis à jour',
+          'theme_applied': 'Le nouveau thème a été appliqué',
 
           // Languages
           'arabic': 'arabe',

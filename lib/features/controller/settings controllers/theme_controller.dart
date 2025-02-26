@@ -12,6 +12,8 @@ enum AppTheme {
 class ThemeController extends GetxController {
   var selectedTheme = AppTheme.system.obs;
   late SharedPreferences prefs;
+  // Add RxBool for dark mode state tracking
+  final RxBool isDarkModeRx = false.obs;
 
   @override
   void onInit() async {
@@ -19,25 +21,31 @@ class ThemeController extends GetxController {
     await initializeTheme();
   }
 
-  // initialize app theme
+  // Initialize app theme
   Future<void> initializeTheme() async {
     prefs = await SharedPreferences.getInstance();
-    //getting AppTheme.values from SHPF
+    // Getting AppTheme.values from SharedPreferences
     String? savedTheme = prefs.getString('theme');
-    //if it not null selectedTheme = savedTheme
+    // If it's not null, set selectedTheme = savedTheme
     if (savedTheme != null) {
-      Get.updateLocale(Locale(prefs.getString('language') ?? 'en'));
       selectedTheme.value = AppTheme.values.firstWhere(
         (e) => e.toString() == savedTheme,
-        // if it null use AppTheme.system as value
+        // If it's null, use AppTheme.system as value
         orElse: () => AppTheme.system,
       );
     }
 
+    // Set initial dark mode state
+    _updateDarkModeState();
+    
+    // Apply theme
     _applyTheme();
+    
+    // Add this: force update of all GetX managed widgets
+    update();
   }
 
-  //getting the value of currentTheme in initale entry
+  // Get the value of currentTheme on initial entry
   ThemeData get currentTheme {
     if (selectedTheme.value == AppTheme.system) {
       return Get.isPlatformDarkMode ? Themes().darkmode : Themes().lightmode;
@@ -46,19 +54,58 @@ class ThemeController extends GetxController {
         ? Themes().lightmode
         : Themes().darkmode;
   }
-
-  //func for changing the theme and save it in Shpf then aply it I use it in
-  //setting page for changing manually
-  void changeTheme(AppTheme theme) async {
-    selectedTheme.value = theme;
-    await prefs.setString('theme', theme.toString());
-    _applyTheme();
-    // Force update to rebuild with new font
-    Get.forceAppUpdate();
+  
+  // Get current ThemeMode
+  ThemeMode get currentThemeMode {
+    switch (selectedTheme.value) {
+      case AppTheme.light:
+        return ThemeMode.light;
+      case AppTheme.dark:
+        return ThemeMode.dark;
+      case AppTheme.system:
+      default:
+        return ThemeMode.system;
+    }
   }
 
-  //helper func for applying the theme
+  // Function for checking if we're in dark mode
+  bool get isDarkMode => isDarkModeRx.value;
+
+  // Update our dark mode tracking state
+  void _updateDarkModeState() {
+    final newDarkModeState = (selectedTheme.value == AppTheme.dark) || 
+                            (selectedTheme.value == AppTheme.system && Get.isPlatformDarkMode);
+    
+    // Only update if it changed to avoid unnecessary rebuilds
+    if (isDarkModeRx.value != newDarkModeState) {
+      isDarkModeRx.value = newDarkModeState;
+    }
+  }
+
+  // Function for changing the theme and saving it in SharedPreferences
+  // Used in setting page for manual changes
+  void changeTheme(AppTheme theme) async {
+    // Update selected theme
+    selectedTheme.value = theme;
+    await prefs.setString('theme', theme.toString());
+    
+    // Update dark mode state
+    _updateDarkModeState();
+    
+    // Apply theme
+    _applyTheme();
+    
+    // Force update to rebuild with new theme
+    Get.forceAppUpdate();
+    
+    // Explicitly notify all widgets
+    update();
+  }
+
+  // Helper function for applying the theme
   void _applyTheme() {
+    // Set both theme data and theme mode
     Get.changeTheme(currentTheme);
+    Get.changeThemeMode(currentThemeMode);
   }
 }
