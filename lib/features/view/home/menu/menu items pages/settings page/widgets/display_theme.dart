@@ -170,7 +170,7 @@ class DisplayThemePage extends StatelessWidget {
       backgroundColor:
           themeCtrl.isDarkMode ? Colors.grey[800] : Colors.grey[200],
       colorText: themeCtrl.isDarkMode ? Colors.white : Colors.black,
-      duration: const Duration(seconds: 1),
+      duration: const Duration(seconds: 3),
     );
   }
 
