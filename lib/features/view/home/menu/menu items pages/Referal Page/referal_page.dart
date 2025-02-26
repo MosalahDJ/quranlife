@@ -134,7 +134,7 @@ class RefferalPage extends StatelessWidget {
                       color: Get.isDarkMode ? kmaincolor4 : kmaincolor),
                   onPressed: () {
                     Clipboard.setData(const ClipboardData(
-                        text: "https://quranlife.app/refer/user123"));
+                        text: "https://quranlife.app/refer/username"));
                     Get.snackbar(
                       'Success',
                       'Link copied to clipboard',
