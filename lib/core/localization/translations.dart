@@ -33,12 +33,15 @@ class Messages extends Translations {
           'password_reset': 'Password Reset',
           'reset_link_sent': 'We sent a reset password link to {}',
           'email_verification': 'Email Verification',
-          'verification_sent': 'We sent an Email verification to your email. Please verify your email first then click \'Email verified\'',
+          'verification_sent':
+              'We sent an Email verification to your email. Please verify your email first then click \'Email verified\'',
           'email_verified': 'Email verified',
           'verify_email': 'Verify your email',
-          'verify_email_message': 'Please verify your email first to access your account',
+          'verify_email_message':
+              'Please verify your email first to access your account',
           'weak_password': 'The password provided is too weak.',
-          'email_exists': 'An account already exists for this email. Please login instead.',
+          'email_exists':
+              'An account already exists for this email. Please login instead.',
           'registration_error': 'Registration error: {}',
 
           // Registration
@@ -422,12 +425,15 @@ class Messages extends Translations {
           'signout_error': 'خطأ في تسجيل الخروج',
           'general_error': 'حدث خطأ أثناء تسجيل الخروج',
           'email_verification': 'التحقق من البريد الإلكتروني',
-          'verification_sent': 'لقد أرسلنا رسالة تحقق إلى بريدك الإلكتروني. يرجى التحقق من بريدك الإلكتروني أولاً ثم انقر على \'تم التحقق من البريد\'',
+          'verification_sent':
+              'لقد أرسلنا رسالة تحقق إلى بريدك الإلكتروني. يرجى التحقق من بريدك الإلكتروني أولاً ثم انقر على \'تم التحقق من البريد\'',
           'email_verified': 'تم التحقق من البريد',
           'verify_email': 'تحقق من بريدك الإلكتروني',
-          'verify_email_message': 'يرجى التحقق من بريدك الإلكتروني أولاً للوصول إلى حسابك',
+          'verify_email_message':
+              'يرجى التحقق من بريدك الإلكتروني أولاً للوصول إلى حسابك',
           'weak_password': 'كلمة المرور المقدمة ضعيفة جداً.',
-          'email_exists': 'يوجد حساب مسجل بهذا البريد الإلكتروني. يرجى تسجيل الدخول بدلاً من ذلك.',
+          'email_exists':
+              'يوجد حساب مسجل بهذا البريد الإلكتروني. يرجى تسجيل الدخول بدلاً من ذلك.',
           'registration_error': 'خطأ في التسجيل: {}',
 
           // Sign Up Page
@@ -817,12 +823,15 @@ class Messages extends Translations {
           'reset_link_sent':
               'Nous avons envoyé un lien de réinitialisation à {}',
           'email_verification': 'Vérification de l\'email',
-          'verification_sent': 'Nous avons envoyé un email de vérification à votre adresse. Veuillez vérifier votre email puis cliquez sur \'Email vérifié\'',
+          'verification_sent':
+              'Nous avons envoyé un email de vérification à votre adresse. Veuillez vérifier votre email puis cliquez sur \'Email vérifié\'',
           'email_verified': 'Email vérifié',
           'verify_email': 'Vérifiez votre email',
-          'verify_email_message': 'Veuillez vérifier votre email pour accéder à votre compte',
+          'verify_email_message':
+              'Veuillez vérifier votre email pour accéder à votre compte',
           'weak_password': 'Le mot de passe fourni est trop faible.',
-          'email_exists': 'Un compte existe déjà pour cet email. Veuillez vous connecter.',
+          'email_exists':
+              'Un compte existe déjà pour cet email. Veuillez vous connecter.',
           'registration_error': 'Erreur d\'inscription: {}',
 
           // Sign Up Page
