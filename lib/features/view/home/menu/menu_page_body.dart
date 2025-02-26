@@ -25,7 +25,7 @@ class MenuPageBody extends StatelessWidget {
           child: Image.asset(
             "lib/core/assets/images/background_image/arch.jpg",
             fit: BoxFit.cover,
-            opacity: const AlwaysStoppedAnimation<double>(0.2),
+            opacity: const AlwaysStoppedAnimation<double>(0.1),
             height: Sizeconfig.screenheight,
             width: Sizeconfig.screenwidth,
           ),
@@ -87,16 +87,26 @@ class MenuPageBody extends StatelessWidget {
   Widget _buildMainMenuSection(BuildContext context) {
     return Column(
       children: [
-        _buildMenuItem(
-            context, 'home'.tr, Icons.home_outlined, () => Get.toNamed("home")),
-        _buildMenuItem(context, 'my_quran'.tr, Icons.book_outlined,
-            () => Get.toNamed("quraan")),
-        _buildMenuItem(context, 'bookmarks'.tr, Icons.bookmark_border,
-            () => Get.toNamed("adkar")),
-        _buildMenuItem(context, 'about_us'.tr, Icons.info_outline,
-            () => Get.toNamed("aboutus")),
-        _buildMenuItem(context, 'refferal'.tr, Icons.share_outlined,
-            () => Get.toNamed("refferal")),
+        _buildSettingsCategory(
+            icon: Icons.home_outlined,
+            onTap: () => Get.toNamed("home"),
+            title: 'home'.tr),
+        _buildSettingsCategory(
+            icon: Icons.book_outlined,
+            onTap: () => Get.toNamed("quraan"),
+            title: 'my_quran'.tr),
+        _buildSettingsCategory(
+            icon: Icons.bookmark_border,
+            onTap: () => Get.toNamed("adkar"),
+            title: 'bookmarks'.tr),
+        _buildSettingsCategory(
+            icon: Icons.info_outline,
+            onTap: () => Get.toNamed("aboutus"),
+            title: 'about_us'.tr),
+        _buildSettingsCategory(
+            icon: Icons.share_outlined,
+            onTap: () => Get.toNamed("refferal"),
+            title: 'refferal'.tr),
       ],
     );
   }
@@ -104,44 +114,83 @@ class MenuPageBody extends StatelessWidget {
   Widget _buildSettingsSection(BuildContext context) {
     return Column(
       children: [
-        _buildMenuItem(context, 'settings'.tr, Icons.settings_outlined,
-            () => Get.toNamed("settings")),
-        _buildMenuItem(context, 'help_feedback'.tr, Icons.help_outline,
-            () => Get.toNamed("help")),
-        _buildMenuItem(context, 'log_out'.tr, Icons.logout_outlined,
-            () => logctrl.signOut(context)),
+        _buildSettingsCategory(
+            icon: Icons.settings_outlined,
+            onTap: () => Get.toNamed("settings"),
+            title: 'settings'.tr),
+        _buildSettingsCategory(
+            icon: Icons.help_outline,
+            onTap: () => Get.toNamed("help"),
+            title: 'help_feedback'.tr),
+        _buildSettingsCategory(
+            icon: Icons.logout_outlined,
+            onTap: () => logctrl.signOut(context),
+            title: 'log_out'.tr),
       ],
     );
   }
 
-  Widget _buildMenuItem(
-      BuildContext context, String title, IconData icon, ontap) {
-    return ListTile(
-      leading:
-          Icon(icon, color: Get.isDarkMode ? Colors.white70 : Colors.black87),
-      title: Text(
-        title,
-        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-              color: Get.isDarkMode ? Colors.white70 : Colors.black87,
-            ),
+  Widget _buildSettingsCategory({
+    required IconData icon,
+    required String title,
+    required VoidCallback onTap,
+  }) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Get.isDarkMode
+                      ? kmaincolor4.withOpacity(0.2)
+                      : kmaincolor.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Icon(icon,
+                    color: Get.isDarkMode ? kmaincolor4 : kmaincolor, size: 24),
+              ),
+              const SizedBox(width: 16),
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: Get.isDarkMode
+                      ? const Color.fromARGB(255, 207, 165, 118)
+                      : const Color(0xFF2C3E50),
+                ),
+              ),
+              const Spacer(),
+              Icon(
+                Icons.chevron_right_rounded,
+                size: 24,
+                color: Colors.grey[700],
+              ),
+            ],
+          ),
+        ),
       ),
-      onTap: ontap,
     );
   }
+}
 
-  Widget _buildBottomSection(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Divider(),
-          Text('app_version'.tr,
-              style: TextStyle(
-                  fontSize: 10,
-                  color: Get.isDarkMode ? Colors.white : Colors.black)),
-        ],
-      ),
-    );
-  }
+Widget _buildBottomSection(BuildContext context) {
+  return Container(
+    padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const Divider(),
+        Text('app_version'.tr,
+            style: TextStyle(
+                fontSize: 10,
+                color: Get.isDarkMode ? Colors.white : Colors.black)),
+      ],
+    ),
+  );
 }
