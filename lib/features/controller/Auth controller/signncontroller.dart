@@ -84,10 +84,9 @@ class SignInController extends GetxController {
       dismissOnBackKeyPress: false,
       dismissOnTouchOutside: false,
       context: context,
-      title: "Email verification",
-      body: const Text(
-          "We sent an Email verification to your email. Please verify your email first then click 'Email verified'"),
-      btnOkText: "Email verified",
+      title: 'email_verification'.tr,
+      body: Text('verification_sent'.tr),
+      btnOkText: 'email_verified'.tr,
       btnOkOnPress: () => _handleEmailVerificationResponse(),
     ).show();
   }
@@ -109,14 +108,14 @@ class SignInController extends GetxController {
       backgroundColor: kmaincolor,
       snackPosition: SnackPosition.TOP,
       barBlur: 10,
-      titleText: const Text(
-        "Verify your email",
-        style: TextStyle(fontSize: 20, color: Colors.white),
+      titleText: Text(
+        'verify_email'.tr,
+        style: const TextStyle(fontSize: 20, color: Colors.white),
         textAlign: TextAlign.center,
       ),
-      messageText: const Text(
-        "Please verify your email first to access your account",
-        style: TextStyle(fontSize: 15, color: Colors.white),
+      messageText: Text(
+        'verify_email_message'.tr,
+        style: const TextStyle(fontSize: 15, color: Colors.white),
       ),
     ).show();
   }
@@ -124,15 +123,14 @@ class SignInController extends GetxController {
   // Handle Firebase authentication errors
   void _handleFirebaseAuthError(FirebaseAuthException e, BuildContext context) {
     String errorMessage = switch (e.code) {
-      'weak-password' => "The password provided is too weak.",
-      'email-already-in-use' =>
-        "An account already exists for this email. Please login instead.",
-      _ => "Registration error: ${e.code}"
+      'weak-password' => 'weak_password'.tr,
+      'email-already-in-use' => 'email_exists'.tr,
+      _ => "${'registration_error'.tr}: \n${e.code}"
     };
 
     AwesomeDialog(
       context: context,
-      title: "Error",
+      title: 'error'.tr,
       body: Text(errorMessage),
     ).show();
   }
