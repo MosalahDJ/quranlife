@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
+import 'package:quranlife/core/widgets/gradient_background.dart';
+import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/features/controller/Url%20Luncher%20Controller/url_luncher_controller.dart';
 
 class RefferalPage extends StatelessWidget {
@@ -12,45 +14,52 @@ class RefferalPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        foregroundColor: Colors.white,
-        backgroundColor: kmaincolor,
-        title: Text('referral_page'.tr,
-            style: const TextStyle(color: Colors.white)),
-        centerTitle: true,
-        elevation: 0,
-      ),
-      body: Container(
-        height: Sizeconfig.screenheight,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: const AssetImage(
-              "lib/core/assets/images/background_image/islamic_patern.jpg",
-            ),
-            opacity: 0.1,
-            fit: BoxFit.cover,
-            colorFilter: ColorFilter.mode(
-              Get.isDarkMode ? Colors.black54 : Colors.white54,
-              BlendMode.dstATop,
-            ),
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          centerTitle: true,
+          title: ShimmerText(
+            text: 'referral_page'.tr,
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
         ),
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                _buildRewardCard(context),
-                const SizedBox(height: 20),
-                _buildReferralLinkCard(context),
-                const SizedBox(height: 20),
-                _buildSocialSharingSection(context),
-              ],
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        body: Stack(children: [
+          Gradientbackground(
+            height: Sizeconfig.screenheight! / 2.5,
+            gradientcolor: [
+              kmaincolor,
+              Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
+            ],
+          ),
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(
+                    'lib/core/assets/images/background_image/arch.jpg'),
+                opacity: 0.2,
+                repeat: ImageRepeat.repeat,
+              ),
             ),
           ),
-        ),
-      ),
-    );
+          SafeArea(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    _buildRewardCard(context),
+                    const SizedBox(height: 20),
+                    _buildReferralLinkCard(context),
+                    const SizedBox(height: 20),
+                    _buildSocialSharingSection(context),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ]));
   }
 
   Widget _buildRewardCard(BuildContext context) {
@@ -198,6 +207,7 @@ class RefferalPage extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Image.asset(
+                          fit: BoxFit.contain,
                           "lib/core/assets/images/login_images/share.png",
                           color: Colors.white,
                           height: 40,
