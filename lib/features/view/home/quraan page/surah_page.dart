@@ -293,7 +293,7 @@ class _SurahPageState extends State<SurahPage> {
         children: [
           Text(
             textAlign: TextAlign.center,
-            "استمر في التمرير للانتقال الى:\n${nextSurah!.name}",
+            "استمر في التمرير للانتقال الى\n${nextSurah!.name}",
             style: const TextStyle(
               fontFamily: 'UthmanicHafs',
               fontSize: 16,

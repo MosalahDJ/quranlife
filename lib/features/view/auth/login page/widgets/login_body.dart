@@ -4,6 +4,7 @@ import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/information_form.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
+import 'package:quranlife/features/controller/Auth%20controller/authstatecontroller.dart';
 import 'package:quranlife/features/view/auth/signin%20page/signin_page.dart';
 import 'package:quranlife/features/controller/Auth%20controller/logincontroller.dart';
 import 'package:quranlife/features/controller/Auth%20controller/googlelogincontroller.dart';
@@ -291,6 +292,8 @@ class LoginBody extends StatelessWidget {
 
 // Add this new method to the LoginBody class
 void _showGuestLoginDialog(BuildContext context) {
+  final AuthStateController authnctrl = Get.find();
+
   Get.dialog(
     AlertDialog(
       title: Text(
@@ -322,8 +325,7 @@ void _showGuestLoginDialog(BuildContext context) {
         ),
         ElevatedButton(
           onPressed: () {
-            Get.offAllNamed("home");
-            // Example: loginctrl.loginAsGuest();
+            authnctrl.signInAnonymously();
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: Get.isDarkMode ? kmaincolor4 : kmaincolor,
