@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
-import 'package:quranlife/core/Utils/size_config.dart';
-import 'package:quranlife/core/widgets/gradient_background.dart';
-import 'package:quranlife/core/widgets/settings_type.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/features/controller/notfication%20controller/work_manager_controller.dart';
+import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
+import 'package:quranlife/features/view/home/menu/menu%20items%20pages/settings%20page/setting_page.dart';
 
 class NotificationSettings extends StatelessWidget {
   NotificationSettings({super.key});
@@ -13,71 +12,172 @@ class NotificationSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        foregroundColor: Colors.white,
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        centerTitle: true,
-        title: ShimmerText(
-          text: 'islamic_ruqyah'.tr,
-          style: Theme.of(context).textTheme.headlineSmall,
-        ),
-      ),
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: Stack(
-        children: [
-          Gradientbackground(
-            height: Sizeconfig.screenheight! / 2.5,
-            gradientcolor: [
-              kmaincolor,
-              Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
-            ],
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) async {
+        if (!didPop) {
+          Get.off(() => const SettingPage());
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          foregroundColor: Colors.white,
+          backgroundColor: kmaincolor,
+          elevation: 0,
+          centerTitle: true,
+          leading: IconButton(
+            onPressed: () => Get.off(() => const SettingPage()),
+            icon: const Icon(Icons.arrow_back, color: Colors.white),
           ),
-          SafeArea(
-            child: Settingtype(
-              title: 'notifications'.tr,
-              listwidget: [
-                //adhan
-                Obx(() => SwitchListTile(
-                    title: Text('adhan_notifications'.tr,
-                        style: const TextStyle(fontSize: 15)),
-                    value: wkmctrl.adhansubscribition.value,
-                    onChanged: (val) {
-                      wkmctrl.adhansubscribition.value =
-                          !wkmctrl.adhansubscribition.value;
-                      wkmctrl.onChangeSubscription(NotificationType.adhan, val);
-                    })),
-                //adkhar
-                Obx(() => SwitchListTile(
-                    title: Text('adhkar_notifications'.tr,
-                        style: const TextStyle(fontSize: 15)),
-                    value: wkmctrl.adhkarsubscribition.value,
-                    onChanged: (val) {
-                      wkmctrl.adhkarsubscribition.value =
-                          !wkmctrl.adhkarsubscribition.value;
-                      wkmctrl.onChangeSubscription(
-                          NotificationType.adhkar, val);
-                    })),
-                //quraan
-                Obx(
-                  () => SwitchListTile(
-                    title: Text('quran_notifications'.tr,
-                        style: const TextStyle(fontSize: 15)),
-                    value: wkmctrl.quraansubscribition.value,
-                    onChanged: (val) {
-                      wkmctrl.quraansubscribition.value =
-                          !wkmctrl.quraansubscribition.value;
-                      wkmctrl.onChangeSubscription(
-                          NotificationType.quraan, val);
-                    },
-                  ),
+          title: ShimmerText(
+            text: 'notifications'.tr,
+            style: const TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+        ),
+        body: GetBuilder<WorkManagerController>(
+          builder: (controller) => SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildSectionHeader(context, 'notification_settings'.tr),
+                _buildNotificationOption(
+                  context,
+                  NotificationType.adhan,
+                  'adhan_notifications'.tr,
+                  'adhan_notifications_desc'.tr,
+                  Icons.access_time_rounded,
+                ),
+                _buildNotificationOption(
+                  context,
+                  NotificationType.adhkar,
+                  'adhkar_notifications'.tr,
+                  'adhkar_notifications_desc'.tr,
+                  Icons.favorite_rounded,
+                ),
+                _buildNotificationOption(
+                  context,
+                  NotificationType.quraan,
+                  'quran_notifications'.tr,
+                  'quran_notifications_desc'.tr,
+                  Icons.book_rounded,
                 ),
               ],
             ),
           ),
-        ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSectionHeader(BuildContext context, String title) {
+    final ThemeController themeCtrl = Get.find();
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(24, 24, 24, 8),
+      child: Text(
+        title,
+        style: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+          color: themeCtrl.isDarkMode
+              ? kmaincolor4.withOpacity(0.8)
+              : kmaincolor.withOpacity(0.8),
+          letterSpacing: 0.5,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNotificationOption(
+    BuildContext context,
+    NotificationType type,
+    String title,
+    String description,
+    IconData icon,
+  ) {
+    final ThemeController themeCtrl = Get.find();
+
+    bool getValue() {
+      switch (type) {
+        case NotificationType.adhan:
+          return wkmctrl.adhansubscribition.value;
+        case NotificationType.adhkar:
+          return wkmctrl.adhkarsubscribition.value;
+        case NotificationType.quraan:
+          return wkmctrl.quraansubscribition.value;
+      }
+    }
+
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: () {
+          final bool newValue = !getValue();
+          wkmctrl.onChangeSubscription(type, newValue);
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: themeCtrl.isDarkMode
+                      ? kmaincolor4.withOpacity(0.1)
+                      : kmaincolor.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Icon(
+                  icon,
+                  color: themeCtrl.isDarkMode ? kmaincolor4 : kmaincolor,
+                  size: 24,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: themeCtrl.isDarkMode
+                            ? const Color.fromARGB(255, 207, 165, 118)
+                            : const Color(0xFF2C3E50),
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      description,
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: themeCtrl.isDarkMode
+                            ? Colors.grey[300]
+                            : Colors.grey[600],
+                        height: 1.3,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Obx(
+                () => Switch(
+                  value: getValue(),
+                  onChanged: (value) {
+                    wkmctrl.onChangeSubscription(type, value);
+                  },
+                  activeColor: themeCtrl.isDarkMode ? kmaincolor4 : kmaincolor,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

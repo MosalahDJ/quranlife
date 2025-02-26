@@ -274,10 +274,6 @@ class Messages extends Translations {
           'system_theme': 'System Default',
           'light_theme': 'Light Mode',
           'dark_theme': 'Dark Mode',
-          'notifications': 'Notifications',
-          'adhan_notifications': 'Prayer Time Notifications',
-          'adhkar_notifications': 'Daily Supplications Notifications',
-          'quran_notifications': 'Quran Reading Reminders',
           //
           'general_settings': "General Settings",
           'account_settings': "Account Settings",
@@ -310,6 +306,16 @@ class Messages extends Translations {
           'arabic_desc': 'Arabic language and interface',
           'english_desc': 'English language and interface',
           'french_desc': 'French language and interface',
+          // Notification page Translations
+          'notifications': 'Notifications',
+          'notification_settings': 'Notification Settings',
+          'adhan_notifications': 'Prayer Times Notifications',
+          'adhan_notifications_desc': 'Get notified for daily prayer times',
+          'adhkar_notifications': 'Daily Dhikr Notifications',
+          'adhkar_notifications_desc':
+              'Receive reminders for morning and evening adhkar',
+          'quran_notifications': 'Quran Reminders',
+          'quran_notifications_desc': 'Daily reminders to read Quran',
 
           // New Translations
           'who_am_i': 'Who Am I?',
@@ -631,10 +637,6 @@ class Messages extends Translations {
           'system_theme': 'النمط الافتراضي للنظام',
           'light_theme': 'النمط الفاتح',
           'dark_theme': 'النمط الداكن',
-          'notifications': 'الإشعارات',
-          'adhan_notifications': 'تنبيهات مواقيت الصلاة',
-          'adhkar_notifications': 'تنبيهات الأذكار اليومية',
-          'quran_notifications': 'تذكير بقراءة القرآن',
 //
           'general_settings': "الإعدادات العامة",
           'account_settings': "إعدادات الحساب",
@@ -664,6 +666,15 @@ class Messages extends Translations {
           'arabic_desc': 'اللغة والواجهة العربية',
           'english_desc': 'اللغة والواجهة الإنجليزية',
           'french_desc': 'اللغة والواجهة الفرنسية',
+          // Notification page Translations
+          'notifications': 'الإشعارات',
+          'notification_settings': 'إعدادات الإشعارات',
+          'adhan_notifications': 'إشعارات أوقات الصلاة',
+          'adhan_notifications_desc': 'تنبيهات لمواقيت الصلوات اليومية',
+          'adhkar_notifications': 'إشعارات الأذكار',
+          'adhkar_notifications_desc': 'تذكير بأذكار الصباح والمساء',
+          'quran_notifications': 'تذكير القرآن',
+          'quran_notifications_desc': 'تذكير يومي لقراءة القرآن',
 
           // New Translations
           'who_am_i': 'من أنا؟',
@@ -998,12 +1009,6 @@ class Messages extends Translations {
           'system_theme': 'Thème système',
           'light_theme': 'Mode clair',
           'dark_theme': 'Mode sombre',
-          'notifications': 'Notifications',
-          'adhan_notifications': 'Notifications des heures de prière',
-          'adhkar_notifications':
-              'Notifications des Supplications quotidiennes',
-          'quran_notifications': 'Rappels de lecture du Coran',
-          //
           'general_settings': "Paramètres Généraux",
           'account_settings': "Paramètres du Compte",
           'account_settings_desc':
@@ -1024,7 +1029,7 @@ class Messages extends Translations {
               'Couleurs sombres pour un affichage confortable la nuit',
           'theme_updated': 'Thème mis à jour',
           'theme_applied': 'Le nouveau thème a été appliqué',
-          // languige page Translations
+          // language page Translations
           'select_language': 'Sélectionner la langue',
           'language_updated': 'Langue mise à jour',
           'language_applied': 'La nouvelle langue a été appliquée',
@@ -1035,6 +1040,17 @@ class Messages extends Translations {
           'arabic_desc': 'Langue et interface en arabe',
           'english_desc': 'Langue et interface en anglais',
           'french_desc': 'Langue et interface en français',
+          // Notification page Translations
+          'notifications': 'Notifications',
+          'notification_settings': 'Paramètres des notifications',
+          'adhan_notifications': 'Notifications des prières',
+          'adhan_notifications_desc':
+              'Recevoir les horaires des prières quotidiennes',
+          'adhkar_notifications': 'Notifications des invocations',
+          'adhkar_notifications_desc':
+              'Rappels pour les invocations du matin et du soir',
+          'quran_notifications': 'Rappels du Coran',
+          'quran_notifications_desc': 'Rappels quotidiens pour lire le Coran',
 
           // New Translations
           'who_am_i': 'Qui suis-je?',
