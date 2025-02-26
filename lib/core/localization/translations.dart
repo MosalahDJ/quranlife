@@ -29,6 +29,10 @@ class Messages extends Translations {
           'wrong_credentials': 'Password or email is wrong',
           'signout_error': 'Error signing out',
           'general_error': 'An error occurred while signing out',
+          'invalid_email_title': 'Invalid Email',
+          'enter_email_first': 'Please add your email first',
+          'password_reset': 'Password Reset',
+          'reset_link_sent': 'We sent a reset password link to {}',
 
           // Registration
           'create_account': 'Create Your Account',
@@ -792,6 +796,11 @@ class Messages extends Translations {
           'wrong_credentials': 'Mot de passe ou email incorrect',
           'signout_error': 'Erreur lors de la déconnexion',
           'general_error': 'Une erreur s\'est produite lors de la déconnexion',
+          'invalid_email_title': 'Email invalide',
+          'enter_email_first': 'Veuillez d\'abord ajouter votre email',
+          'password_reset': 'Réinitialisation du mot de passe',
+          'reset_link_sent':
+              'Nous avons envoyé un lien de réinitialisation à {}',
 
           // Sign Up Page
           'create_account': 'Créez votre compte',
