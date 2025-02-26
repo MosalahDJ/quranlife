@@ -49,7 +49,7 @@ class ComplainPage extends StatelessWidget {
                   const SizedBox(height: 20),
                   // Header Section
                   _buildHeaderSection(),
-                        
+
                   // Main Contact Options
                   Padding(
                     padding: const EdgeInsets.all(16.0),
@@ -64,8 +64,8 @@ class ComplainPage extends StatelessWidget {
                           title: 'telegram'.tr,
                           icon: Icons.telegram,
                           color: const Color.fromARGB(255, 34, 158, 225),
-                          onTap: () => urllunchctrl
-                              .launchurl('https://t.me/0655663020'),
+                          onTap: () =>
+                              urllunchctrl.launchurl('https://t.me/0655663020'),
                         ),
                         _buildContactOption(
                           title: 'email'.tr,
@@ -81,14 +81,15 @@ class ComplainPage extends StatelessWidget {
                     margin: const EdgeInsets.all(16),
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: Get.isDarkMode ? kmaincolordark : Colors.white,
+                      color: Get.isDarkMode
+                          ? kmaincolordark.withOpacity(0.7)
+                          : Colors.white.withOpacity(0.7),
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Column(
                       children: [
                         ListTile(
-                          leading:
-                              Icon(Icons.location_on, color: kmaincolor),
+                          leading: Icon(Icons.location_on, color: kmaincolor),
                           title: Text('address'.tr),
                           subtitle: Text('address_details'.tr),
                         ),
@@ -104,6 +105,13 @@ class ComplainPage extends StatelessWidget {
 
   Widget _buildHeaderSection() {
     return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        color: Get.isDarkMode
+            ? kmaincolordark.withOpacity(0.7)
+            : Colors.white.withOpacity(0.7),
+      ),
+      margin: const EdgeInsets.all(15),
       padding: const EdgeInsets.all(20),
       child: Column(
         children: [
@@ -140,7 +148,9 @@ class ComplainPage extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       child: Material(
-        color: Get.isDarkMode ? kmaincolordark : Colors.white,
+        color: Get.isDarkMode
+            ? kmaincolordark.withOpacity(0.7)
+            : Colors.white.withOpacity(0.7),
         borderRadius: BorderRadius.circular(15),
         child: InkWell(
           onTap: onTap,
