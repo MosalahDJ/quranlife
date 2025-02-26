@@ -298,11 +298,18 @@ class Messages extends Translations {
           'dark_theme_desc': 'Dark colors for comfortable night viewing',
           'theme_updated': 'Theme Updated',
           'theme_applied': 'New theme has been applied',
+          // languige page Translations
 
-          // Languages
+          'select_language': 'Select Language',
+          'language_updated': 'Language Updated',
+          'language_applied': 'New language has been applied',
+          'language_settings': 'Language Settings',
           'arabic': 'Arabic',
           'english': 'English',
           'french': 'French',
+          'arabic_desc': 'Arabic language and interface',
+          'english_desc': 'English language and interface',
+          'french_desc': 'French language and interface',
 
           // New Translations
           'who_am_i': 'Who Am I?',
@@ -646,10 +653,17 @@ class Messages extends Translations {
           'dark_theme_desc': 'ألوان داكنة لعرض مريح ليلاً',
           'theme_updated': 'تم تحديث السمة',
           'theme_applied': 'تم تطبيق السمة الجديدة',
-          // Languages
+          // languige page Translations
+          'select_language': 'اختر اللغة',
+          'language_updated': 'تم تحديث اللغة',
+          'language_applied': 'تم تطبيق اللغة الجديدة',
+          'language_settings': 'إعدادات اللغة',
           'arabic': 'العربية',
           'english': 'الإنجليزية',
           'french': 'الفرنسية',
+          'arabic_desc': 'اللغة والواجهة العربية',
+          'english_desc': 'اللغة والواجهة الإنجليزية',
+          'french_desc': 'اللغة والواجهة الفرنسية',
 
           // New Translations
           'who_am_i': 'من أنا؟',
@@ -1010,11 +1024,17 @@ class Messages extends Translations {
               'Couleurs sombres pour un affichage confortable la nuit',
           'theme_updated': 'Thème mis à jour',
           'theme_applied': 'Le nouveau thème a été appliqué',
-
-          // Languages
-          'arabic': 'arabe',
-          'english': 'anglais',
-          'french': 'français',
+          // languige page Translations
+          'select_language': 'Sélectionner la langue',
+          'language_updated': 'Langue mise à jour',
+          'language_applied': 'La nouvelle langue a été appliquée',
+          'language_settings': 'Paramètres de langue',
+          'arabic': 'Arabe',
+          'english': 'Anglais',
+          'french': 'Français',
+          'arabic_desc': 'Langue et interface en arabe',
+          'english_desc': 'Langue et interface en anglais',
+          'french_desc': 'Langue et interface en français',
 
           // New Translations
           'who_am_i': 'Qui suis-je?',
