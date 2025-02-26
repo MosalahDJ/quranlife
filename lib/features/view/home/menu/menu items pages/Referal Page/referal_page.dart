@@ -209,7 +209,6 @@ class RefferalPage extends StatelessWidget {
                         child: Image.asset(
                           fit: BoxFit.contain,
                           "lib/core/assets/images/login_images/share.png",
-                          color: Colors.white,
                           height: 40,
                           width: 40,
                         ),
