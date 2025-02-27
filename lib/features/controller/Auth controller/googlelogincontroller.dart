@@ -14,8 +14,8 @@ class GoogleLogInController extends GetxController {
     if (user != null) {
       await _firestore.collection('users').doc(user.email).set({
         'uid': user.uid,
-        'email': user.email,
         'displayName': user.displayName,
+        'email': user.email,
         'firstName': 'firstName'.tr,
         'lastName': 'lastName'.tr,
         'photoURL': user.photoURL,
