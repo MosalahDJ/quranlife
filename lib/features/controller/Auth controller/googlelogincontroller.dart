@@ -12,7 +12,7 @@ class GoogleLogInController extends GetxController {
   Future<void> _saveUserDataToFirestore(UserCredential userCredential) async {
     final user = userCredential.user;
     if (user != null) {
-      await _firestore.collection('users').doc(user.email).set({
+      await _firestore.collection('users').doc(user.uid).set({
         'uid': user.uid,
         'displayName': user.displayName,
         'email': user.email,
@@ -20,8 +20,6 @@ class GoogleLogInController extends GetxController {
         'lastName': 'lastName'.tr,
         'photoURL': user.photoURL,
         'gender': 'gender'.tr,
-        'number': 'number'.tr,
-        'password': 'password'.tr,
         'lastLogin': FieldValue.serverTimestamp(),
         'createdAt': FieldValue.serverTimestamp(),
       }, SetOptions(merge: true));
@@ -30,40 +28,65 @@ class GoogleLogInController extends GetxController {
 
   Future signInWithGoogle(context) async {
     try {
+      // Set default locale
+      await FirebaseAuth.instance
+          .setLanguageCode(Get.locale?.languageCode ?? 'en');
+
+      // Configure Google Sign In with web client ID
+      final GoogleSignIn googleSignIn = GoogleSignIn(
+        clientId: dotenv.env['GOOGLE_CLIENT_ID'],
+        scopes: ['email', 'profile'],
+      );
+
       // Trigger the authentication flow
-      final GoogleSignInAccount? googleUser =
-          await GoogleSignIn(clientId: dotenv.env['GOOGLE_CLIENT_ID']).signIn();
+      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
       if (googleUser == null) {
         return;
       }
 
-      // Obtain the auth details from the request
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
+      // Add error handling for authentication
+      try {
+        final GoogleSignInAuthentication googleAuth =
+            await googleUser.authentication;
 
-      // Create a new credential
-      final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
-      // Once signed in, return the UserCredential
-      final userCredential =
-          await FirebaseAuth.instance.signInWithCredential(credential);
+        final credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
 
-      // Save user data to Firestore
-      await _saveUserDataToFirestore(userCredential);
+        // Sign in to Firebase
+        final userCredential =
+            await FirebaseAuth.instance.signInWithCredential(credential);
 
-      Get.offAllNamed("home");
+        // Save user data to Firestore
+        await _saveUserDataToFirestore(userCredential);
+
+        Get.offAllNamed("home");
+      } catch (authError) {
+        await googleSignIn.signOut(); // Clean up on auth error
+        rethrow;
+      }
     } on FirebaseAuthException catch (e) {
-      AwesomeDialog(context: context, body: Text("${e.message}")).show();
+      AwesomeDialog(
+              context: context,
+              title: "Authentication Error",
+              body: Text(e.message ?? "Authentication failed"),
+              dialogType: DialogType.error)
+          .show();
     } catch (e) {
-      if (e ==
-          "PlatformException(network_error, com.google.android.gms.common.api.ApiException: 7: , null, null)") {
-        AwesomeDialog(context: context, body: Text("verify_internet".tr))
+      if (e.toString().contains("network_error")) {
+        AwesomeDialog(
+                context: context,
+                title: "Network Error",
+                body: Text("verify_internet".tr),
+                dialogType: DialogType.error)
             .show();
       } else {
         AwesomeDialog(
-                context: context, body: Text("${"google_signin_error".tr} :$e"))
+                context: context,
+                title: "Error",
+                body: Text("google_signin_error".tr),
+                dialogType: DialogType.error)
             .show();
       }
     }

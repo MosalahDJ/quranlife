@@ -19,7 +19,6 @@ class SignInController extends GetxController {
   final TextEditingController password = TextEditingController();
   final TextEditingController password2 = TextEditingController();
   final TextEditingController gendre = TextEditingController();
-  final TextEditingController number = TextEditingController();
 
   // Focus Nodes
   final FocusNode emailfnodesign = FocusNode();
@@ -27,7 +26,7 @@ class SignInController extends GetxController {
   final FocusNode passwordfnodesign2 = FocusNode();
   final FocusNode namefnode = FocusNode();
   final FocusNode lastnamefnode = FocusNode();
-  final FocusNode numberfnode = FocusNode();
+  final FocusNode gendrefnode = FocusNode();
 
   // State variables
   bool isLoading = false;
@@ -51,12 +50,11 @@ class SignInController extends GetxController {
     passwordfnodesign.unfocus();
     passwordfnodesign2.unfocus();
     namefnode.unfocus();
-    numberfnode.unfocus();
   }
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   Future<void> _saveUserDataToFirestore(User user) async {
-    await _firestore.collection('users').doc(user.email).set({
+    await _firestore.collection('users').doc(user.uid).set({
       'uid': user.uid,
       'email': user.email,
       'displayName': '${name.text} ${lastname.text}',
@@ -64,8 +62,6 @@ class SignInController extends GetxController {
       'lastName': lastname.text,
       'photoURL': user.photoURL,
       'gendre': gendre.text,
-      'number': number.text,
-      'password': password.text,
       'createdAt': FieldValue.serverTimestamp(),
       'lastLogin': FieldValue.serverTimestamp(),
     }, SetOptions(merge: true));
@@ -171,7 +167,6 @@ class SignInController extends GetxController {
     passwordfnodesign.dispose();
     passwordfnodesign2.dispose();
     namefnode.dispose();
-    numberfnode.dispose();
 
     super.onClose();
   }

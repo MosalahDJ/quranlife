@@ -114,11 +114,11 @@ class MenuPageBody extends StatelessWidget {
         }
 
         final userData = snapshot.data?.data() as Map<String, dynamic>?;
-        final String displayName =
-            userData?['displayName'] ?? 'anonymous_user'.tr;
+        final String displayName = userData?['displayName'] ?? "";
         final String email = currentUser?.email ?? 'no_email'.tr;
         final String gender = userData?['gender'] ?? 'male';
         final String? photoURL = currentUser?.photoURL;
+        final bool isAnonymous = currentUser?.isAnonymous ?? true;
 
         return Padding(
           padding: const EdgeInsets.only(top: 20),
@@ -137,9 +137,7 @@ class MenuPageBody extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               Text(
-                displayName == 'anonymous_user'
-                    ? 'anonymous_user'.tr
-                    : displayName,
+                isAnonymous ? 'anonymous_user'.tr : displayName,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: Get.isDarkMode ? Colors.white70 : Colors.black),

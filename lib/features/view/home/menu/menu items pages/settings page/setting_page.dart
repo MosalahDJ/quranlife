@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/features/view/home/menu/menu%20items%20pages/settings%20page/widgets/display_theme.dart';
+import 'package:quranlife/features/view/home/menu/menu%20items%20pages/settings%20page/widgets/edit_profile_page.dart';
 import 'package:quranlife/features/view/home/menu/menu%20items%20pages/settings%20page/widgets/language_page.dart';
 import 'package:quranlife/features/view/home/menu/menu%20items%20pages/settings%20page/widgets/notification.dart';
 
@@ -34,7 +35,9 @@ class SettingPage extends StatelessWidget {
             _buildSettingsCategory(
               icon: Icons.person_outline,
               title: 'account_settings'.tr,
-              onTap: () {},
+              onTap: () {
+                Get.to(() => EditProfilePage());
+              },
               description: 'account_settings_desc'.tr,
             ),
             _buildSettingsCategory(

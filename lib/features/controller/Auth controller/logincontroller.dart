@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -43,42 +44,42 @@ class LogInController extends GetxController {
       print(e);
     }
   }
-Future<void> signOut(BuildContext context) async {
-  try {
-    final User? currentUser = FirebaseAuth.instance.currentUser;
-    
-    if (currentUser != null) {
-      if (currentUser.isAnonymous) {
-        // Delete anonymous user account before signing out
-        await currentUser.delete();
-      } else {
-        // Sign out from Google if user signed in with Google
-        final GoogleSignIn googleSignIn = GoogleSignIn();
-        if (await googleSignIn.isSignedIn()) {
-          await googleSignIn.signOut();
+
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  Future<void> signOut(BuildContext context) async {
+    try {
+      final User? currentUser = FirebaseAuth.instance.currentUser;
+
+      if (currentUser != null) {
+        if (currentUser.isAnonymous) {
+          // First delete the Firestore document
+          try {
+            await _firestore.collection('users').doc(currentUser.uid).delete();
+          } catch (firestoreError) {
+            debugPrint('Error deleting Firestore document: $firestoreError');
+          }
+
+          // Then delete anonymous user account
+          await currentUser.delete();
+        } else {
+          // Sign out from Google if user signed in with Google
+          final GoogleSignIn googleSignIn = GoogleSignIn();
+          if (await googleSignIn.isSignedIn()) {
+            await googleSignIn.signOut();
+          }
         }
+
+        // Sign out from Firebase
+        await FirebaseAuth.instance.signOut();
       }
-      
-      // Sign out from Firebase
-      await FirebaseAuth.instance.signOut();
+
+      // Navigate to login page
+      Get.offAllNamed("login");
+    } on FirebaseAuthException catch (e) {
+      // ...existing error handling code...
     }
-    
-    // Navigate to login page
-    Get.offAllNamed("login");
-  } on FirebaseAuthException catch (e) {
-    AwesomeDialog(
-      context: context,
-      title: 'error'.tr,
-      body: Text("${'signout_error'.tr} \n${e.message}"),
-    ).show();
-  } catch (e) {
-    AwesomeDialog(
-      context: context,
-      title: 'error'.tr,
-      body: Text('general_error'.tr),
-    ).show();
   }
-}
+
   bool visibility = false;
   visibilityfunc() {
     visibility = !visibility;

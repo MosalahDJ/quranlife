@@ -52,7 +52,7 @@ class SignInFormHelpers {
       key: signinctrl.txtvalctrl.signingendrestate,
       child: InformationsForm(
         textctrl: signinctrl.gendre,
-        focusnode: signinctrl.numberfnode,
+        focusnode: signinctrl.gendrefnode,
         isrequired: true,
         formtitle: "gender".tr,
         hint: "select_gender".tr,

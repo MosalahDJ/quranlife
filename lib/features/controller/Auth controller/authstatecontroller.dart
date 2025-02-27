@@ -18,6 +18,7 @@ class AuthStateController extends GetxController {
       }
     });
   }
+
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<void> _saveAnonymousUserDataToFirestore(User user) async {
@@ -30,8 +31,6 @@ class AuthStateController extends GetxController {
       'lastName': 'lastName',
       'photoURL': 'photoURL',
       'gender': 'gender',
-      'number': 'number',
-      'password': 'password',
       'createdAt': FieldValue.serverTimestamp(),
       'lastLogin': FieldValue.serverTimestamp(),
     }, SetOptions(merge: true));
@@ -44,7 +43,6 @@ class AuthStateController extends GetxController {
 
       // Save anonymous user data to Firestore
       await _saveAnonymousUserDataToFirestore(userCredential.user!);
-      print("تم تسجيل الدخول كمجهول: ${userCredential.user?.uid}");
       Get.offAllNamed("home");
       return userCredential.user;
     } catch (e) {

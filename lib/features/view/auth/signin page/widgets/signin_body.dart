@@ -128,18 +128,6 @@ class SigneinPageBody extends StatelessWidget {
                         ),
                         const SizedBox(height: 20),
 
-                        //phonenumber field
-                        signInFormHelpers.buildFormField(
-                          context,
-                          title: "number".tr,
-                          hint: "enter_number".tr,
-                          controller: signinctrl.number,
-                          focusNode: signinctrl.namefnode,
-                          formKey: txtvalctrl.signinemailstate,
-                          keyboardType: TextInputType.number,
-                        ),
-                        const SizedBox(height: 20),
-
                         // Password fields
                         GetBuilder<SignInController>(
                           builder: (c) => signInFormHelpers.buildPasswordField(
