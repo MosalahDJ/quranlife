@@ -60,6 +60,8 @@ class Messages extends Translations {
           'create_account_button': 'Create Account',
           'leave_registration': 'Do you want to exit the registration process?',
           'registration': 'Registration',
+          'anonymous_user': 'Anonymous User',
+          'no_email': 'No Email',
 
           'guest_login': 'Guest Login',
           'guest_login_warning': 'Limited Features Access',
@@ -452,6 +454,8 @@ class Messages extends Translations {
           'create_account_button': 'إنشاء حساب',
           'leave_registration': 'هل تريد مغادرة عملية التسجيل؟',
           'registration': 'التسجيل',
+          'anonymous_user': 'مستخدم مجهول',
+          'no_email': 'لا يوجد بريد إلكتروني',
 
           'guest_login': 'تسجيل الدخول كضيف',
           'guest_login_warning': 'وصول محدود للميزات',
@@ -851,6 +855,8 @@ class Messages extends Translations {
           'leave_registration':
               'Voulez-vous quitter le processus d\'inscription?',
           'registration': 'Inscription',
+          'anonymous_user': 'Utilisateur anonyme',
+          'no_email': 'Pas d\'email',
 
           'guest_login': 'Connexion Invité',
           'guest_login_warning': 'Accès Limité aux Fonctionnalités',

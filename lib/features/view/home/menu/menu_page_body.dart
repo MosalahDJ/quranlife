@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
+import 'package:quranlife/core/widgets/skeletonizer.dart';
 import 'package:quranlife/features/controller/Auth%20controller/logincontroller.dart';
 
 class MenuPageBody extends StatelessWidget {
@@ -14,47 +15,94 @@ class MenuPageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Gradientbackground(
-          gradientcolor: [
-            kmaincolor,
-            Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
-          ],
-        ),
-        SizedBox(
-          height: Sizeconfig.screenheight,
-          width: Sizeconfig.screenwidth,
-          child: Image.asset(
-            "lib/core/assets/images/background_image/arch.jpg",
-            fit: BoxFit.cover,
-            opacity: const AlwaysStoppedAnimation<double>(0.1),
+    return GetBuilder<LogInController>(
+      builder: (c) => Stack(
+        children: [
+          Gradientbackground(
+            gradientcolor: [
+              kmaincolor,
+              Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
+            ],
+          ),
+          SizedBox(
             height: Sizeconfig.screenheight,
             width: Sizeconfig.screenwidth,
+            child: Image.asset(
+              "lib/core/assets/images/background_image/arch.jpg",
+              fit: BoxFit.cover,
+              opacity: const AlwaysStoppedAnimation<double>(0.1),
+              height: Sizeconfig.screenheight,
+              width: Sizeconfig.screenwidth,
+            ),
           ),
-        ),
-        Column(
-          children: [
-            _buildProfileHeader(context),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    _buildMainMenuSection(context),
-                    const Divider(thickness: 0.5),
-                    _buildSettingsSection(context),
-                  ],
+          Column(
+            children: [
+              _buildProfileHeader(context),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      _buildMainMenuSection(context),
+                      const Divider(thickness: 0.5),
+                      _buildSettingsSection(context),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            _buildBottomSection(context),
-          ],
-        ),
-      ],
+              _buildBottomSection(context),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
-// Replace existing _buildProfileHeader with:
+  Widget _buildSkeletonLayout(BuildContext context) {
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(height: 20),
+            Myskeletonizer(
+                skeletonizerWidget: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: Column(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor:
+                          Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
+                      backgroundImage: const AssetImage(
+                          "lib/core/assets/images/profile_picture/woman_picture.png"),
+                      radius: 40,
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      'anonymous_user'.tr,
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color:
+                              Get.isDarkMode ? Colors.white70 : Colors.black),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'no_email',
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            color:
+                                Get.isDarkMode ? Colors.white70 : Colors.black,
+                          ),
+                    ),
+                  ],
+                ),
+              ),
+            )),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildProfileHeader(BuildContext context) {
     final User? currentUser = FirebaseAuth.instance.currentUser;
 
@@ -62,12 +110,13 @@ class MenuPageBody extends StatelessWidget {
       future: _firestore.collection('users').doc(currentUser?.uid).get(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+          return _buildSkeletonLayout(context);
         }
 
         final userData = snapshot.data?.data() as Map<String, dynamic>?;
-        final String displayName = userData?['displayName'] ?? 'Guest User';
-        final String email = currentUser?.email ?? 'No Email';
+        final String displayName =
+            userData?['displayName'] ?? 'anonymous_user'.tr;
+        final String email = currentUser?.email ?? 'no_email'.tr;
         final String gender = userData?['gender'] ?? 'male';
         final String? photoURL = currentUser?.photoURL;
 
@@ -88,14 +137,16 @@ class MenuPageBody extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               Text(
-                displayName,
+                displayName == 'anonymous_user'
+                    ? 'anonymous_user'.tr
+                    : displayName,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: Get.isDarkMode ? Colors.white70 : Colors.black),
               ),
               const SizedBox(height: 4),
               Text(
-                email,
+                email == 'no_email' ? 'no_email'.tr : email,
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: Get.isDarkMode ? Colors.white70 : Colors.black,
                     ),
@@ -192,7 +243,7 @@ class MenuPageBody extends StatelessWidget {
               Icon(
                 Icons.chevron_right_rounded,
                 size: 24,
-                color: Colors.grey[700],
+                color: Get.isDarkMode ? Colors.white70 : Colors.grey[700],
               ),
             ],
           ),
@@ -200,20 +251,20 @@ class MenuPageBody extends StatelessWidget {
       ),
     );
   }
-}
 
-Widget _buildBottomSection(BuildContext context) {
-  return Container(
-    padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const Divider(),
-        Text('app_version'.tr,
-            style: TextStyle(
-                fontSize: 10,
-                color: Get.isDarkMode ? Colors.white : Colors.black)),
-      ],
-    ),
-  );
+  Widget _buildBottomSection(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Divider(),
+          Text('app_version'.tr,
+              style: TextStyle(
+                  fontSize: 10,
+                  color: Get.isDarkMode ? Colors.white70 : Colors.black87)),
+        ],
+      ),
+    );
+  }
 }
