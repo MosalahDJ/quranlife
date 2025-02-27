@@ -4,7 +4,6 @@ import 'package:quranlife/features/controller/Auth%20controller/googlelogincontr
 import 'package:quranlife/features/controller/Auth%20controller/logincontroller.dart';
 import 'package:quranlife/features/controller/Auth%20controller/passwordresset.dart';
 import 'package:quranlife/features/controller/Auth%20controller/signncontroller.dart';
-import 'package:quranlife/features/controller/Auth%20controller/signoutcontroller.dart';
 import 'package:quranlife/features/controller/Url%20Luncher%20Controller/url_luncher_controller.dart';
 import 'package:quranlife/features/controller/adkar%20controller/adkar_categories_controller.dart';
 import 'package:quranlife/features/controller/adkar%20controller/adkar_controller.dart';
@@ -68,7 +67,6 @@ class Mybinding implements Bindings {
     Get.put<SignInController>(SignInController());
     Get.put<LogInController>(LogInController());
     Get.put<GoogleLogInController>(GoogleLogInController());
-    Get.put<GoogleSignoutController>(GoogleSignoutController());
     Get.put<PasswordresetController>(PasswordresetController());
     //fcm injection
     Get.put<AccesToken>(AccesToken());

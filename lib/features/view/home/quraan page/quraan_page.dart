@@ -9,14 +9,12 @@ import 'package:quranlife/features/controller/quraan%20controller/juzua_controll
 import 'package:quranlife/features/controller/quraan%20controller/quraan_controller.dart';
 import 'package:quranlife/features/view/home/quraan%20page/saved_ayahs.dart';
 import 'package:quranlife/features/view/home/quraan%20page/surah_page.dart';
-import 'package:quranlife/features/controller/Auth%20controller/signoutcontroller.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
 
 class QuraanPage extends StatelessWidget {
   QuraanPage({super.key});
 
   final MyHomeController homectrl = Get.find();
-  final GoogleSignoutController signoutctrl = Get.find();
 
   @override
   Widget build(BuildContext context) {

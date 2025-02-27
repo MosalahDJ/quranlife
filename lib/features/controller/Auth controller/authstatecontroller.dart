@@ -2,6 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthStateController extends GetxController {
   @override
@@ -16,6 +17,11 @@ class AuthStateController extends GetxController {
             "=========================user signed in in the app==================================== ");
       }
     });
+  }
+  GoogleSignIn googlesignin = GoogleSignIn();
+
+  Future googlesignout() async {
+    await googlesignin.signOut();
   }
 
   Future<User?> signInAnonymously() async {

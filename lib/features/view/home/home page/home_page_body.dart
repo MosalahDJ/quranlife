@@ -15,7 +15,6 @@ import 'package:quranlife/features/view/home/home%20page/widgets/salawat_pagevie
 import 'package:quranlife/features/view/home/home%20page/widgets/cart_card.dart';
 import 'package:quranlife/features/view/home/home%20page/widgets/wirds.dart';
 import 'package:quranlife/core/widgets/cusstom_indicator.dart';
-import 'package:quranlife/features/controller/Auth%20controller/signoutcontroller.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
 
@@ -24,7 +23,6 @@ class HomePageBody extends StatelessWidget {
     super.key,
   });
   final MyHomeController homectrl = Get.find();
-  final GoogleSignoutController signoutctrl = Get.find();
   final FetchPrayerFromDate fpfctrl = Get.find();
   final LanguageController langctrl = Get.find();
   final FadeAnimationController fadectrl = Get.find();

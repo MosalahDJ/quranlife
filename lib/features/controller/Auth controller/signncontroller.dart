@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,6 +19,7 @@ class SignInController extends GetxController {
   final TextEditingController password = TextEditingController();
   final TextEditingController password2 = TextEditingController();
   final TextEditingController gendre = TextEditingController();
+  final TextEditingController number = TextEditingController();
 
   // Focus Nodes
   final FocusNode emailfnodesign = FocusNode();
@@ -52,6 +54,23 @@ class SignInController extends GetxController {
     numberfnode.unfocus();
   }
 
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  Future<void> _saveUserDataToFirestore(User user) async {
+    await _firestore.collection('users').doc(user.email).set({
+      'uid': user.uid,
+      'email': user.email,
+      'displayName': '${name.text} ${lastname.text}',
+      'firstName': name.text,
+      'lastName': lastname.text,
+      'photoURL': user.photoURL,
+      'gendre': gendre.text,
+      'number': number.text,
+      'password': password.text,
+      'createdAt': FieldValue.serverTimestamp(),
+      'lastLogin': FieldValue.serverTimestamp(),
+    }, SetOptions(merge: true));
+  }
+
   // Sign in process
   Future<void> signin(BuildContext context) async {
     try {
@@ -60,10 +79,14 @@ class SignInController extends GetxController {
       update();
 
       // Create user account with Firebase
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailcontroller.text,
         password: password.text,
       );
+
+      // Save user data to Firestore
+      await _saveUserDataToFirestore(userCredential.user!);
 
       // Send email verification
       await _sendEmailVerification(context);
