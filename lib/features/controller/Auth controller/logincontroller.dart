@@ -12,10 +12,12 @@ import 'package:google_sign_in/google_sign_in.dart';
 class LogInController extends GetxController {
   final TextEditingController emailcontroller = TextEditingController();
   final TextEditingController passwordcontroller = TextEditingController();
+  final RxBool isLoading = false.obs;
   GlobalKey mykey = GlobalKey();
 
   Future login(BuildContext context) async {
     try {
+      isLoading.value = true;
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailcontroller.text,
         password: passwordcontroller.text,
@@ -42,6 +44,8 @@ class LogInController extends GetxController {
     } catch (e) {
       // ignore: avoid_print
       print(e);
+    } finally {
+      isLoading.value = false;
     }
   }
 
@@ -80,7 +84,7 @@ class LogInController extends GetxController {
     }
   }
 
-  bool visibility = false;
+  bool visibility = true;
   visibilityfunc() {
     visibility = !visibility;
     update();

@@ -67,13 +67,57 @@ class SignInController extends GetxController {
     }, SetOptions(merge: true));
   }
 
-  // Sign in process
   Future<void> signin(BuildContext context) async {
     try {
-      // Start loading state
       isLoading = true;
       update();
 
+      // Check if email exists in Authentication
+      var methods = await FirebaseAuth.instance
+          .fetchSignInMethodsForEmail(emailcontroller.text);
+
+      if (methods.isNotEmpty) {
+        // If email exists, try to delete both Auth and Firestore data
+        try {
+          // Get users collection reference
+          var userDocs = await _firestore
+              .collection('users')
+              .where('email', isEqualTo: emailcontroller.text)
+              .get();
+
+          // Delete Firestore documents if they exist
+          for (var doc in userDocs.docs) {
+            await doc.reference.delete();
+          }
+
+          // Show success message
+          AwesomeDialog(
+            context: context,
+            dialogType: DialogType.info,
+            title: 'info'.tr,
+            body: Text('old_account_deleted'.tr),
+            btnOkOnPress: () async {
+              // Proceed with new account creation
+              await _createNewAccount(context);
+            },
+          ).show();
+        } catch (e) {
+          debugPrint('Error cleaning up old account: $e');
+          rethrow;
+        }
+      } else {
+        // If email doesn't exist, create new account directly
+        await _createNewAccount(context);
+      }
+    } finally {
+      isLoading = false;
+      update();
+    }
+  }
+
+// New method to handle account creation
+  Future<void> _createNewAccount(BuildContext context) async {
+    try {
       // Create user account with Firebase
       UserCredential userCredential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -88,9 +132,6 @@ class SignInController extends GetxController {
       await _sendEmailVerification(context);
     } on FirebaseAuthException catch (e) {
       _handleFirebaseAuthError(e, context);
-    } finally {
-      isLoading = false;
-      update();
     }
   }
 

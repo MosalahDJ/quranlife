@@ -116,7 +116,7 @@ class MenuPageBody extends StatelessWidget {
         final userData = snapshot.data?.data() as Map<String, dynamic>?;
         final String displayName = userData?['displayName'] ?? "";
         final String email = currentUser?.email ?? 'no_email'.tr;
-        final String gender = userData?['gender'] ?? 'male';
+        final String gender = userData?['gendre'] ?? 'male';
         final String? photoURL = currentUser?.photoURL;
         final bool isAnonymous = currentUser?.isAnonymous ?? true;
 
@@ -129,7 +129,7 @@ class MenuPageBody extends StatelessWidget {
                 backgroundImage: photoURL != null
                     ? NetworkImage(photoURL) as ImageProvider
                     : AssetImage(
-                        gender.toLowerCase() == 'female'
+                        gender == 'Female'
                             ? "lib/core/assets/images/profile_picture/woman_picture.png"
                             : "lib/core/assets/images/profile_picture/man_picture.png",
                       ),

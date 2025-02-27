@@ -4,21 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
-class AuthStateController extends GetxController {
-  @override
-  void onInit() {
-    super.onInit();
-    FirebaseAuth.instance.authStateChanges().listen((User? user) {
-      if (user == null) {
-        print(
-            "============================user signed out =============================");
-      } else {
-        print(
-            "=========================user signed in in the app==================================== ");
-      }
-    });
-  }
-
+class AnonymouslysignIn extends GetxController {
+  final RxBool isLoading = false.obs;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<void> _saveAnonymousUserDataToFirestore(User user) async {
@@ -38,6 +25,7 @@ class AuthStateController extends GetxController {
 
   Future<User?> signInAnonymously() async {
     try {
+      isLoading.value = true;
       UserCredential userCredential =
           await FirebaseAuth.instance.signInAnonymously();
 
@@ -48,6 +36,8 @@ class AuthStateController extends GetxController {
     } catch (e) {
       print("خطأ أثناء تسجيل الدخول: $e");
       return null;
+    } finally {
+      isLoading.value = false;
     }
   }
 }

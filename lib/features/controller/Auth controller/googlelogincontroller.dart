@@ -8,6 +8,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class GoogleLogInController extends GetxController {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final RxBool isLoading = false.obs;
 
   Future<void> _saveUserDataToFirestore(UserCredential userCredential) async {
     final user = userCredential.user;
@@ -28,6 +29,7 @@ class GoogleLogInController extends GetxController {
 
   Future signInWithGoogle(context) async {
     try {
+      isLoading.value = true;
       // Set default locale
       await FirebaseAuth.instance
           .setLanguageCode(Get.locale?.languageCode ?? 'en');
@@ -89,6 +91,8 @@ class GoogleLogInController extends GetxController {
                 dialogType: DialogType.error)
             .show();
       }
+    } finally {
+      isLoading.value = false;
     }
   }
 }

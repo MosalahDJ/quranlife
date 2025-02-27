@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:quranlife/features/controller/Auth%20controller/authstatecontroller.dart';
+import 'package:quranlife/features/controller/Auth%20controller/anonymous_sign_in.dart';
 import 'package:quranlife/features/controller/Auth%20controller/googlelogincontroller.dart';
 import 'package:quranlife/features/controller/Auth%20controller/logincontroller.dart';
 import 'package:quranlife/features/controller/Auth%20controller/passwordresset.dart';
@@ -57,7 +57,7 @@ class Mybinding implements Bindings {
     Get.put<DeterminePrayersController>(DeterminePrayersController(),
         permanent: true);
     Get.put<TimesPageController>(TimesPageController(), permanent: true);
-    Get.put<AuthStateController>(AuthStateController());
+    Get.put<AnonymouslysignIn>(AnonymouslysignIn());
     Get.put<SplashViewController>(SplashViewController());
     // LanguageController
     final prefs = await SharedPreferences.getInstance();

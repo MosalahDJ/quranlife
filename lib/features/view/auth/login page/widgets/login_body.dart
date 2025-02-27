@@ -4,7 +4,7 @@ import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/information_form.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
-import 'package:quranlife/features/controller/Auth%20controller/authstatecontroller.dart';
+import 'package:quranlife/features/controller/Auth%20controller/anonymous_sign_in.dart';
 import 'package:quranlife/features/view/auth/signin%20page/signin_page.dart';
 import 'package:quranlife/features/controller/Auth%20controller/logincontroller.dart';
 import 'package:quranlife/features/controller/Auth%20controller/googlelogincontroller.dart';
@@ -18,6 +18,7 @@ class LoginBody extends StatelessWidget {
   final GoogleLogInController googlectrl = Get.find();
   final Txtvalcontroller txtvalctrl = Get.find();
   final PasswordresetController passreset = Get.find();
+  final AnonymouslysignIn authCtrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -168,16 +169,23 @@ class LoginBody extends StatelessWidget {
                                 loginctrl.login(context);
                               }
                             },
-                            child: Text(
-                              "login".tr,
-                              style: const TextStyle(
-                                fontSize: 16,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                              ),
+                            child: Obx(
+                              () => loginctrl.isLoading.value
+                                  ? CircularProgressIndicator(
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                      Get.isDarkMode ? kmaincolor : kmaincolor4,
+                                    ))
+                                  : Text(
+                                      "login".tr,
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
                             ),
                           ),
-                        ),
+                        )
                       ],
                     ),
                   ),
@@ -218,15 +226,27 @@ class LoginBody extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          _buildSocialButton(
-                              "lib/core/assets/images/login_images/google.png",
-                              () => googlectrl.signInWithGoogle(context),
-                              Colors.transparent),
+                          Obx(() => googlectrl.isLoading.value
+                              ? CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                  Get.isDarkMode ? kmaincolor4 : kmaincolor,
+                                ))
+                              : _buildSocialButton(
+                                  "lib/core/assets/images/login_images/google.png",
+                                  () => googlectrl.signInWithGoogle(context),
+                                  Colors.transparent)),
                           const SizedBox(width: 30),
-                          _buildSocialButton(
-                              "lib/core/assets/images/login_images/Guest.png",
-                              () => _showGuestLoginDialog(context),
-                              Colors.white),
+                          Obx(
+                            () => authCtrl.isLoading.value
+                                ? CircularProgressIndicator(
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                    Get.isDarkMode ? kmaincolor4 : kmaincolor,
+                                  ))
+                                : _buildSocialButton(
+                                    "lib/core/assets/images/login_images/Guest.png",
+                                    () => _showGuestLoginDialog(context),
+                                    Colors.white),
+                          ),
                         ],
                       ),
                       SizedBox(height: Sizeconfig.screenheight! * 0.03),
@@ -292,7 +312,7 @@ class LoginBody extends StatelessWidget {
 
 // Add this new method to the LoginBody class
 void _showGuestLoginDialog(BuildContext context) {
-  final AuthStateController authnctrl = Get.find();
+  final AnonymouslysignIn authnctrl = Get.find();
 
   Get.dialog(
     AlertDialog(
