@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
@@ -8,6 +10,7 @@ import 'package:quranlife/features/controller/Auth%20controller/logincontroller.
 class MenuPageBody extends StatelessWidget {
   MenuPageBody({super.key});
   final LogInController logctrl = Get.find();
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -51,36 +54,56 @@ class MenuPageBody extends StatelessWidget {
     );
   }
 
+// Replace existing _buildProfileHeader with:
   Widget _buildProfileHeader(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 20,
-      ),
-      child: Column(
-        children: [
-          CircleAvatar(
-            backgroundColor: Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
-            backgroundImage: const AssetImage(
-              "lib/core/assets/images/profile_picture/man_picture.png",
-            ),
-            radius: 40,
+    final User? currentUser = FirebaseAuth.instance.currentUser;
+
+    return FutureBuilder<DocumentSnapshot>(
+      future: _firestore.collection('users').doc(currentUser?.uid).get(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        final userData = snapshot.data?.data() as Map<String, dynamic>?;
+        final String displayName = userData?['displayName'] ?? 'Guest User';
+        final String email = currentUser?.email ?? 'No Email';
+        final String gender = userData?['gender'] ?? 'male';
+        final String? photoURL = currentUser?.photoURL;
+
+        return Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: Column(
+            children: [
+              CircleAvatar(
+                backgroundColor: Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
+                backgroundImage: photoURL != null
+                    ? NetworkImage(photoURL) as ImageProvider
+                    : AssetImage(
+                        gender.toLowerCase() == 'female'
+                            ? "lib/core/assets/images/profile_picture/woman_picture.png"
+                            : "lib/core/assets/images/profile_picture/man_picture.png",
+                      ),
+                radius: 40,
+              ),
+              const SizedBox(height: 12),
+              Text(
+                displayName,
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: Get.isDarkMode ? Colors.white70 : Colors.black),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                email,
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: Get.isDarkMode ? Colors.white70 : Colors.black,
+                    ),
+              ),
+            ],
           ),
-          const SizedBox(height: 12),
-          Text(
-            "Mohamed Salah",
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: Get.isDarkMode ? Colors.white70 : Colors.black),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            "mohamedsalah@gmail.com",
-            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  color: Get.isDarkMode ? Colors.white70 : Colors.black,
-                ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 

@@ -17,16 +17,24 @@ class SplashViewController extends GetxController
   final TimesPageController timespagectrl = Get.find();
   final GetResponseBody responsectrl = Get.find();
   RxBool isLoading = true.obs;
+  void tonextpage() {
+    Future.delayed(const Duration(seconds: 2), () {
+      final User? currentUser = FirebaseAuth.instance.currentUser;
 
-  tonextpage() {
-    Future.delayed(
-        const Duration(seconds: 2),
-        () => Get.offNamed(
-              FirebaseAuth.instance.currentUser != null &&
-                      FirebaseAuth.instance.currentUser!.emailVerified
-                  ? "onboarding"
-                  : "onboarding",
-            ));
+      if (currentUser == null) {
+        // User is not logged in
+        Get.offAllNamed("onboarding");
+      } else if (currentUser.isAnonymous) {
+        // Anonymous user
+        Get.offAllNamed("home");
+      } else if (currentUser.emailVerified) {
+        // Verified email user
+        Get.offAllNamed("home");
+      } else {
+        // Unverified email user
+        Get.offAllNamed("login");
+      }
+    });
   }
 
   @override

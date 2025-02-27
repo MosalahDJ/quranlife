@@ -43,28 +43,42 @@ class LogInController extends GetxController {
       print(e);
     }
   }
-
-  Future<void> signOut(BuildContext context) async {
-    try {
+Future<void> signOut(BuildContext context) async {
+  try {
+    final User? currentUser = FirebaseAuth.instance.currentUser;
+    
+    if (currentUser != null) {
+      if (currentUser.isAnonymous) {
+        // Delete anonymous user account before signing out
+        await currentUser.delete();
+      } else {
+        // Sign out from Google if user signed in with Google
+        final GoogleSignIn googleSignIn = GoogleSignIn();
+        if (await googleSignIn.isSignedIn()) {
+          await googleSignIn.signOut();
+        }
+      }
+      
       // Sign out from Firebase
       await FirebaseAuth.instance.signOut();
-      // Sign out from Google
-      await GoogleSignIn().signOut();
-      // Navigate to login page
-      Get.offAllNamed("login");
-    } on FirebaseAuthException catch (e) {
-      AwesomeDialog(
-        context: context,
-        body: Text("${'signout_error'.tr} \n$e.message"),
-      ).show();
-    } catch (e) {
-      AwesomeDialog(
-        context: context,
-        body: Text('general_error'.tr),
-      ).show();
     }
+    
+    // Navigate to login page
+    Get.offAllNamed("login");
+  } on FirebaseAuthException catch (e) {
+    AwesomeDialog(
+      context: context,
+      title: 'error'.tr,
+      body: Text("${'signout_error'.tr} \n${e.message}"),
+    ).show();
+  } catch (e) {
+    AwesomeDialog(
+      context: context,
+      title: 'error'.tr,
+      body: Text('general_error'.tr),
+    ).show();
   }
-
+}
   bool visibility = false;
   visibilityfunc() {
     visibility = !visibility;

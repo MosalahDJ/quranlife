@@ -3,7 +3,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthStateController extends GetxController {
   @override
@@ -19,13 +18,6 @@ class AuthStateController extends GetxController {
       }
     });
   }
-
-  GoogleSignIn googlesignin = GoogleSignIn();
-
-  Future googlesignout() async {
-    await googlesignin.signOut();
-  }
-
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<void> _saveAnonymousUserDataToFirestore(User user) async {
