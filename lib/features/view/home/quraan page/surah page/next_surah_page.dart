@@ -104,6 +104,8 @@ class _SurahPageState extends State<NextSurahPage> {
                         (index) {
                           final ayah = widget.surah.ayahs[index];
                           return AyahWidget(
+                            savedvisibility: true,
+                            favoritevisibility: true,
                             key: _ayahKeys[index],
                             titlevisibility: false,
                             surahNumber: widget.surah.number,

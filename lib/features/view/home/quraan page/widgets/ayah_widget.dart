@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/features/controller/quraan%20controller/audioplayer_controller.dart';
+import 'package:quranlife/features/controller/quraan%20controller/favorite_controller.dart';
 import 'package:quranlife/features/controller/quraan%20controller/quraan_controller.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:quranlife/features/controller/quraan%20controller/saving_controller.dart';
@@ -20,12 +21,14 @@ class AyahWidget extends StatelessWidget {
       this.icon,
       required this.titlevisibility,
       this.title,
-      this.ayahaudio});
+      this.ayahaudio, required this.savedvisibility, required this.favoritevisibility,  });
 
   final int surahNumber;
   final int ayahNumber;
   final String ayahText;
   final bool titlevisibility;
+  final bool savedvisibility;
+  final bool favoritevisibility;
   final String surahName;
   final int ayahNumberInSurah;
   final IconData? icon;
@@ -35,6 +38,8 @@ class AyahWidget extends StatelessWidget {
   final QuraanController quranctrl = Get.find();
   final AudioplayerController audioctrl = Get.find();
   final SavingController savectrl = Get.find();
+  final FavoriteController favoritectrl = Get.find();
+
   final statsController = Get.find<StatisticsController>();
   final Key visibilityKey = UniqueKey();
 
@@ -139,17 +144,41 @@ class AyahWidget extends StatelessWidget {
                         const SizedBox(
                           width: 20,
                         ),
-                        GetBuilder<QuraanController>(
-                          builder: (c) => _iconbuttons(
-                              savectrl.ifAyahAlredySaved(ayahNumber)
-                                  ? (icon ?? Icons.bookmark_added_rounded)
-                                  : Icons.bookmark_outline_rounded, () {
-                            savectrl.saveAyah(surahNumber, ayahNumber, ayahText,
-                                surahName, ayahNumberInSurah);
-                          }),
+                        Visibility(
+                          visible: savedvisibility,
+                          child: GetBuilder<QuraanController>(
+                            builder: (c) => _iconbuttons(
+                                savectrl.ifAyahAlredySaved(ayahNumber)
+                                    ? (icon ?? Icons.bookmark_added_rounded)
+                                    : Icons.bookmark_outline_rounded, () {
+                              savectrl.saveAyah(surahNumber, ayahNumber, ayahText,
+                                  surahName, ayahNumberInSurah);
+                            }),
+                          ),
                         ),
-                        const SizedBox(
-                          width: 10,
+                        Visibility(
+                          visible: savedvisibility,
+                          child: const SizedBox(
+                            width: 10,
+                          ),
+                        ),
+                        Visibility(
+                          visible: favoritevisibility,
+                          child: GetBuilder<FavoriteController>(
+                            builder: (c) => _iconbuttons(
+                                favoritectrl.ifAyahAlredyfavorite(ayahNumber)
+                                    ? (icon ?? Icons.favorite)
+                                    : Icons.favorite_border, () {
+                              favoritectrl.favoriteAyah(surahNumber, ayahNumber,
+                                  ayahText, surahName, ayahNumberInSurah);
+                            }),
+                          ),
+                        ),
+                        Visibility(
+                          visible: favoritevisibility,
+                          child: const SizedBox(
+                            width: 10,
+                          ),
                         ),
                       ],
                     ),

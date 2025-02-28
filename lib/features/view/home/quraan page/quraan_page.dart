@@ -7,6 +7,7 @@ import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/features/controller/quraan%20controller/juzua_controller.dart';
 import 'package:quranlife/features/controller/quraan%20controller/quraan_controller.dart';
+import 'package:quranlife/features/view/home/quraan%20page/favorite.dart';
 import 'package:quranlife/features/view/home/quraan%20page/saved_ayahs.dart';
 import 'package:quranlife/features/view/home/quraan%20page/surah_page.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
@@ -39,6 +40,17 @@ class QuraanPage extends StatelessWidget {
                       icon: const Icon(
                         Icons.bookmarks,
                         color: Colors.white,
+                      ))),
+              Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: IconButton(
+                      onPressed: () {
+                        homectrl.unfocuskeyboardhome();
+                        Get.to(() => Favorite());
+                      },
+                      icon: const Icon(
+                        Icons.favorite,
+                        color: Colors.red,
                       ))),
             ],
             //TabBar

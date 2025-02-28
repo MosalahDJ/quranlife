@@ -33,6 +33,7 @@ import 'package:quranlife/features/controller/prayer%20times%20controller/get_re
 import 'package:quranlife/features/controller/prayer%20times%20controller/location_controller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/times_page_controller.dart';
 import 'package:quranlife/features/controller/quraan%20controller/audioplayer_controller.dart';
+import 'package:quranlife/features/controller/quraan%20controller/favorite_controller.dart';
 import 'package:quranlife/features/controller/quraan%20controller/juzua_controller.dart';
 import 'package:quranlife/features/controller/quraan%20controller/quraan_controller.dart';
 import 'package:quranlife/features/controller/quraan%20controller/saving_controller.dart';
@@ -88,6 +89,7 @@ class Mybinding implements Bindings {
     Get.put<StatisticsController>(StatisticsController());
     Get.put<JuzuaController>(JuzuaController());
     Get.put<SavingController>(SavingController());
+    Get.put<FavoriteController>(FavoriteController());
     Get.put<AudioplayerController>(AudioplayerController());
     //adkar injection
     Get.put<AdkarCategoriesController>(AdkarCategoriesController());

@@ -9,7 +9,6 @@ import 'package:quranlife/features/view/home/menu/menu%20items%20pages/Referal%2
 import 'package:quranlife/features/view/home/menu/menu%20items%20pages/about_us%20page/about_us_page.dart';
 import 'package:quranlife/features/view/home/menu/menu%20items%20pages/complain%20page/complain_page.dart';
 import 'package:quranlife/features/view/home/menu/menu%20items%20pages/settings%20page/setting_page.dart';
-import 'package:quranlife/features/view/home/mytestpage.dart';
 import 'package:quranlife/features/view/home/quraan%20page/quraan_page.dart';
 import 'package:quranlife/features/view/home/salat%20time/prayer_time_page.dart';
 import 'package:quranlife/features/view/home/salat%20time/widgets/tablerow.dart';
@@ -22,10 +21,6 @@ class Myrouts {
       GetPage(
         name: "/splashview",
         page: () => const SplashView(),
-      ),
-      GetPage(
-        name: "/test",
-        page: () => const Mytestpage(),
       ),
       GetPage(
           name: "/onboarding",
@@ -53,7 +48,7 @@ class Myrouts {
       ),
       GetPage(
         name: "/settings",
-        page: () => SettingPage(),
+        page: () => const SettingPage(),
       ),
       GetPage(
         name: "/quraan",

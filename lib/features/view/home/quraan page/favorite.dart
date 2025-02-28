@@ -3,15 +3,15 @@ import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
+import 'package:quranlife/features/controller/quraan%20controller/favorite_controller.dart';
 import 'package:quranlife/features/controller/quraan%20controller/quraan_controller.dart';
-import 'package:quranlife/features/controller/quraan%20controller/saving_controller.dart';
 import 'package:quranlife/features/view/home/quraan%20page/surah_page.dart';
 import 'package:quranlife/features/view/home/quraan%20page/widgets/ayah_widget.dart';
 
-class SavedAyahs extends StatelessWidget {
-  SavedAyahs({super.key});
+class Favorite extends StatelessWidget {
+  Favorite({super.key});
   final QuraanController quranctrl = Get.find();
-  final SavingController savecetrl = Get.find();
+  final FavoriteController favoritectrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class SavedAyahs extends StatelessWidget {
         backgroundColor: Get.isDarkMode ? kmaincolor2dark : Colors.transparent,
         appBar: AppBar(
           title: Text(
-            'saved_ayahs'.tr,
+            'favorite'.tr,
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
@@ -57,8 +57,8 @@ class SavedAyahs extends StatelessWidget {
                       width: Sizeconfig.screenwidth,
                     ),
                   ),
-            GetBuilder<SavingController>(
-              builder: (c) => savecetrl.savedAyahs.isEmpty
+            GetBuilder<FavoriteController>(
+              builder: (c) => favoritectrl.favoriteAyahs.isEmpty
                   ? SafeArea(
                       child: Center(
                         child: Column(
@@ -72,7 +72,7 @@ class SavedAyahs extends StatelessWidget {
                             ),
                             const SizedBox(height: 16),
                             Text(
-                              'no_saved_ayahs'.tr,
+                              'no_favorite_ayahs'.tr,
                               style: TextStyle(
                                 fontSize: 20,
                                 color: Get.isDarkMode
@@ -88,35 +88,38 @@ class SavedAyahs extends StatelessWidget {
                   : SafeArea(
                       child: ListView.builder(
                         padding: const EdgeInsets.all(8),
-                        itemCount: savecetrl.savedAyahs.length,
+                        itemCount: favoritectrl.favoriteAyahs.length,
                         itemBuilder: (context, index) {
                           return InkWell(
                             onTap: () {
                               Get.to(
                                 () => SurahPage(
-                                  surah: quranctrl.surahs[savecetrl
-                                          .savedAyahs[index]["surahNumber"] -
+                                  surah: quranctrl.surahs[favoritectrl
+                                          .favoriteAyahs[index]["surahNumber"] -
                                       1],
-                                  initialAyahNumber: savecetrl.savedAyahs[index]
-                                      ["ayahNumberinsurah"],
+                                  initialAyahNumber:
+                                      favoritectrl.favoriteAyahs[index]
+                                          ["ayahNumberinsurah"],
                                 ),
                               );
                             },
                             child: AyahWidget(
-                              savedvisibility: true,
-                              favoritevisibility: false,
-                              title: savecetrl.savedAyahs[index]["surahName"],
-                              titlevisibility: true,
-                              ayahNumber: savecetrl.savedAyahs[index]
-                                  ["ayahNumber"],
-                              ayahNumberInSurah: savecetrl.savedAyahs[index]
-                                  ["ayahNumberinsurah"],
-                              ayahText: savecetrl.savedAyahs[index]["ayahText"],
-                              surahName: savecetrl.savedAyahs[index]
+                              savedvisibility: false,
+                              favoritevisibility: true,
+                              title: favoritectrl.favoriteAyahs[index]
                                   ["surahName"],
-                              surahNumber: savecetrl.savedAyahs[index]
+                              titlevisibility: true,
+                              ayahNumber: favoritectrl.favoriteAyahs[index]
+                                  ["ayahNumber"],
+                              ayahNumberInSurah: favoritectrl
+                                  .favoriteAyahs[index]["ayahNumberinsurah"],
+                              ayahText: favoritectrl.favoriteAyahs[index]
+                                  ["ayahText"],
+                              surahName: favoritectrl.favoriteAyahs[index]
+                                  ["surahName"],
+                              surahNumber: favoritectrl.favoriteAyahs[index]
                                   ["surahNumber"],
-                              icon: Icons.delete_outline_outlined,
+                              icon: Icons.favorite,
                             ),
                           );
                         },

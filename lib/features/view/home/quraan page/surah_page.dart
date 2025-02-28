@@ -271,6 +271,8 @@ class _SurahPageState extends State<SurahPage> {
           final ayah = widget.surah.ayahs[index];
           return GetBuilder<SavingController>(
             builder: (c) => AyahWidget(
+              savedvisibility: true,
+              favoritevisibility: true,
               key: _ayahKeys[index],
               titlevisibility: false,
               surahNumber: widget.surah.number,

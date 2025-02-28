@@ -7,6 +7,8 @@ import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/core/widgets/skeletonizer.dart';
 import 'package:quranlife/features/controller/Auth%20controller/logincontroller.dart';
+import 'package:quranlife/features/view/home/quraan%20page/favorite.dart';
+import 'package:quranlife/features/view/home/quraan%20page/saved_ayahs.dart';
 
 class MenuPageBody extends StatelessWidget {
   MenuPageBody({super.key});
@@ -167,16 +169,16 @@ class MenuPageBody extends StatelessWidget {
             title: 'home'.tr),
         _buildSettingsCategory(
             icon: Icons.book_outlined,
-            onTap: () => Get.toNamed("quraan"),
+            onTap: () => Get.to(() => SavedAyahs()),
             title: 'my_quran'.tr),
         _buildSettingsCategory(
-            icon: Icons.bookmark_border,
-            onTap: () => Get.toNamed("adkar"),
+            icon: Icons.favorite,
+            onTap: () => Get.to(() => Favorite()),
             title: 'bookmarks'.tr),
-        _buildSettingsCategory(
-            icon: Icons.info_outline,
-            onTap: () => Get.toNamed("aboutus"),
-            title: 'about_us'.tr),
+        // _buildSettingsCategory(
+        //     icon: Icons.info_outline,
+        //     onTap: () => Get.toNamed("aboutus"),
+        //     title: 'about_us'.tr),
         _buildSettingsCategory(
             icon: Icons.share_outlined,
             onTap: () => Get.toNamed("refferal"),
