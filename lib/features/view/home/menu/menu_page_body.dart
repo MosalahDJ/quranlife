@@ -129,9 +129,11 @@ class MenuPageBody extends StatelessWidget {
                 backgroundImage: photoURL != null
                     ? NetworkImage(photoURL) as ImageProvider
                     : AssetImage(
-                        gender == 'Female'
-                            ? "lib/core/assets/images/profile_picture/woman_picture.png"
-                            : "lib/core/assets/images/profile_picture/man_picture.png",
+                        isAnonymous
+                            ? "lib/core/assets/images/login_images/Guest.png"
+                            : gender == 'Female'
+                                ? "lib/core/assets/images/profile_picture/woman_picture.png"
+                                : "lib/core/assets/images/profile_picture/man_picture.png",
                       ),
                 radius: 40,
               ),

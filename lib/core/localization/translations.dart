@@ -35,7 +35,7 @@ class Messages extends Translations {
           'email_verification': 'Email Verification',
           'verification_sent':
               'We sent an Email verification to your email. Please verify your email first then click \'Email verified\'',
-          'email_verified': 'Email verified',
+          'email_verified': 'Email verified? Please sign in.',
           'verify_email': 'Verify your email',
           'verify_email_message':
               'Please verify your email first to access your account',
@@ -429,7 +429,7 @@ class Messages extends Translations {
           'email_verification': 'التحقق من البريد الإلكتروني',
           'verification_sent':
               'لقد أرسلنا رسالة تحقق إلى بريدك الإلكتروني. يرجى التحقق من بريدك الإلكتروني أولاً ثم انقر على \'تم التحقق من البريد\'',
-          'email_verified': 'تم التحقق من البريد',
+          'email_verified': '.تم التحقق من البريد؟ يرجى تسجيل الدخول',
           'verify_email': 'تحقق من بريدك الإلكتروني',
           'verify_email_message':
               'يرجى التحقق من بريدك الإلكتروني أولاً للوصول إلى حسابك',
@@ -829,7 +829,7 @@ class Messages extends Translations {
           'email_verification': 'Vérification de l\'email',
           'verification_sent':
               'Nous avons envoyé un email de vérification à votre adresse. Veuillez vérifier votre email puis cliquez sur \'Email vérifié\'',
-          'email_verified': 'Email vérifié',
+          'email_verified': 'Email vérifié? Veuillez vous connecter.',
           'verify_email': 'Vérifiez votre email',
           'verify_email_message':
               'Veuillez vérifier votre email pour accéder à votre compte',
