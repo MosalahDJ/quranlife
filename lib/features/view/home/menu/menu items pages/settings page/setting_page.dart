@@ -43,7 +43,7 @@ class SettingPage extends StatelessWidget {
             _buildSettingsCategory(
               icon: Icons.palette_outlined,
               title: 'appearance'.tr,
-              onTap: () => Get.off(() => const DisplayThemePage()),
+              onTap: () => Get.to(() => const DisplayThemePage()),
               description: 'appearance_desc'.tr,
             ),
             _buildSectionHeader(context, 'app_settings'.tr),
