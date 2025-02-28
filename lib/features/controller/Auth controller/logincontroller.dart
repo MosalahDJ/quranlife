@@ -80,7 +80,7 @@ class LogInController extends GetxController {
       // Navigate to login page
       Get.offAllNamed("login");
     } on FirebaseAuthException catch (e) {
-      // ...existing error handling code...
+      AwesomeDialog(context: context, title: 'error'.tr, desc: e.code).show();
     }
   }
 
