@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/core/widgets/skeletonizer.dart';
 import 'package:quranlife/features/controller/Auth%20controller/logincontroller.dart';
+import 'package:quranlife/features/controller/home%20controller/fade_animation_controller.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
 import 'package:quranlife/features/view/home/quraan%20page/favorite.dart';
@@ -16,6 +18,7 @@ class MenuPageBody extends StatelessWidget {
   MenuPageBody({super.key});
   final LogInController logctrl = Get.find();
   final MyHomeController homectrl = Get.find();
+  final FadeAnimationController fadectrl = Get.find();
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
@@ -41,22 +44,24 @@ class MenuPageBody extends StatelessWidget {
               width: Sizeconfig.screenwidth,
             ),
           ),
-          Column(
-            children: [
-              _buildProfileHeader(context),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      _buildMainMenuSection(context),
-                      const Divider(thickness: 0.5),
-                      _buildSettingsSection(context),
-                    ],
+          FadeInUp(
+            child: Column(
+              children: [
+                _buildProfileHeader(context),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        _buildMainMenuSection(context),
+                        const Divider(thickness: 0.5),
+                        _buildSettingsSection(context),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              _buildBottomSection(context),
-            ],
+                _buildBottomSection(context),
+              ],
+            ),
           ),
         ],
       ),
@@ -181,7 +186,7 @@ class MenuPageBody extends StatelessWidget {
         _buildSettingsCategory(
             icon: Icons.favorite,
             onTap: () => Get.to(() => Favorite()),
-            title: 'bookmarks'.tr),
+            title: 'favorite'.tr),
         // _buildSettingsCategory(
         //     icon: Icons.info_outline,
         //     onTap: () => Get.toNamed("aboutus"),

@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
@@ -5,10 +6,12 @@ import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/features/controller/adkar%20controller/adkar_categories_controller.dart';
+import 'package:quranlife/features/controller/home%20controller/fade_animation_controller.dart';
 import 'package:quranlife/features/view/home/adkar%20page/widgets/duaa_page.dart';
 
 class AdkarPage extends StatelessWidget {
-  const AdkarPage({super.key});
+  AdkarPage({super.key});
+  final FadeAnimationController fadectrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +44,12 @@ class AdkarPage extends StatelessWidget {
             child: Padding(
               padding:
                   const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 2.0),
-              child: AdkarCollections(
-                adkarcategorycolor: Get.isDarkMode
-                    ? kmaincolor2dark.withOpacity(0.7)
-                    : Colors.white.withOpacity(0.7),
+              child: FadeInUp(
+                child: AdkarCollections(
+                  adkarcategorycolor: Get.isDarkMode
+                      ? kmaincolor2dark.withOpacity(0.7)
+                      : Colors.white.withOpacity(0.7),
+                ),
               ),
             ),
           ),

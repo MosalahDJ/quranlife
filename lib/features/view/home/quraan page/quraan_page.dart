@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import 'package:get/get.dart';
@@ -5,6 +6,7 @@ import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
+import 'package:quranlife/features/controller/home%20controller/fade_animation_controller.dart';
 import 'package:quranlife/features/controller/quraan%20controller/juzua_controller.dart';
 import 'package:quranlife/features/controller/quraan%20controller/quraan_controller.dart';
 import 'package:quranlife/features/view/home/quraan%20page/favorite.dart';
@@ -16,6 +18,7 @@ class QuraanPage extends StatelessWidget {
   QuraanPage({super.key});
 
   final MyHomeController homectrl = Get.find();
+  final FadeAnimationController fadectrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -125,82 +128,89 @@ Widget _surahviewPage() {
           padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 2),
 
           //gridviewbuilder
-          child: GridView.builder(
-              physics: const BouncingScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 2.5,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10),
-              itemCount: quranctrl.surahs.length,
-              itemBuilder: (context, index) {
-                final surah = quranctrl.surahs[index];
+          child: FadeIn(
+            duration: const Duration(
+              seconds: 1,
+            ),
+            animate: true,
+            child: GridView.builder(
+                physics: const BouncingScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 2.5,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10),
+                itemCount: quranctrl.surahs.length,
+                itemBuilder: (context, index) {
+                  final surah = quranctrl.surahs[index];
 
-                //surah name container
-                return Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    borderRadius: const BorderRadius.all(Radius.circular(20)),
-                    onTap: () {
-                      Get.to(
-                        () => SurahPage(
-                          surah: surah,
-                        ),
-                      );
-                    },
+                  //surah name container
+                  return Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      borderRadius: const BorderRadius.all(Radius.circular(20)),
+                      onTap: () {
+                        Get.to(
+                          () => SurahPage(
+                            surah: surah,
+                          ),
+                        );
+                      },
 
-                    // It is preferable to use Ink with InkWell
-                    child: Material(
-                      elevation: 2,
-                      borderRadius: const BorderRadius.all(Radius.circular(12)),
-                      color: Colors.transparent,
-                      child: Ink(
-                        decoration: BoxDecoration(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(12)),
-                          color: Get.isDarkMode
-                              ? kmaincolor2dark.withOpacity(0.7)
-                              : Colors.white.withOpacity(0.7),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 8.0, horizontal: 30),
-                          child: Row(
-                            textDirection: TextDirection.rtl,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                surah.name.tr,
-                                style: TextStyle(
-                                  fontFamily: "Amiri",
-                                  color: Get.isDarkMode
-                                      ? Colors.white
-                                      : Colors.black,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
+                      // It is preferable to use Ink with InkWell
+                      child: Material(
+                        elevation: 2,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(12)),
+                        color: Colors.transparent,
+                        child: Ink(
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(12)),
+                            color: Get.isDarkMode
+                                ? kmaincolor2dark.withOpacity(0.7)
+                                : Colors.white.withOpacity(0.7),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 8.0, horizontal: 30),
+                            child: Row(
+                              textDirection: TextDirection.rtl,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  surah.name.tr,
+                                  style: TextStyle(
+                                    fontFamily: "Amiri",
+                                    color: Get.isDarkMode
+                                        ? Colors.white
+                                        : Colors.black,
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                              surah.revelationType == "Medinan"
-                                  ? Icon(
-                                      FlutterIslamicIcons.solidMinaret,
-                                      color: Get.isDarkMode
-                                          ? Colors.white
-                                          : Colors.black,
-                                    )
-                                  : Icon(
-                                      FlutterIslamicIcons.kaaba,
-                                      color: Get.isDarkMode
-                                          ? Colors.white
-                                          : Colors.black,
-                                    ),
-                            ],
+                                surah.revelationType == "Medinan"
+                                    ? Icon(
+                                        FlutterIslamicIcons.solidMinaret,
+                                        color: Get.isDarkMode
+                                            ? Colors.white
+                                            : Colors.black,
+                                      )
+                                    : Icon(
+                                        FlutterIslamicIcons.kaaba,
+                                        color: Get.isDarkMode
+                                            ? Colors.white
+                                            : Colors.black,
+                                      ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                );
-              }),
+                  );
+                }),
+          ),
         ),
       ),
     ),
@@ -232,80 +242,88 @@ Widget _juzuaviewPage() {
       ),
       Positioned(
         child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 2),
-            child: ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              itemCount: juzuactrl.juzData.length,
-              itemBuilder: (context, index) {
-                final juzNumber = index + 1;
-                final juzStart = juzuactrl.juzData[juzNumber]!;
-                final ayahstart = juzStart[1];
-                final surah = quranctrl.getSurahByNumber(juzStart[0]);
+          child: FadeIn(
+            duration: const Duration(
+              seconds: 1,
+            ),
+            animate: true,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 2),
+              child: ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                itemCount: juzuactrl.juzData.length,
+                itemBuilder: (context, index) {
+                  final juzNumber = index + 1;
+                  final juzStart = juzuactrl.juzData[juzNumber]!;
+                  final ayahstart = juzStart[1];
+                  final surah = quranctrl.getSurahByNumber(juzStart[0]);
 
-                return Column(
-                  children: [
-                    Material(
-                      elevation: 2,
-                      borderRadius: const BorderRadius.all(Radius.circular(12)),
-                      color: Colors.transparent,
-                      child: InkWell(
-                        borderRadius: BorderRadius.circular(12),
-                        onTap: () {
-                          Get.to(() => SurahPage(
-                                surah: surah,
-                                initialAyahNumber: juzStart[1],
-                              ));
-                        },
-                        child: Ink(
-                          decoration: BoxDecoration(
-                            color: Get.isDarkMode
-                                ? kmaincolor2dark.withOpacity(0.7)
-                                : Colors.white.withOpacity(0.7),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Container(
-                            height: Sizeconfig.screenheight! / 13,
-                            width: Sizeconfig.screenwidth! / 1.05,
-                            alignment: Alignment.center,
-                            padding: const EdgeInsets.all(8),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Text(
-                                  "${"الجزء"} $juzNumber",
-                                  textDirection: TextDirection.rtl,
-                                  style: const TextStyle(
-                                      fontFamily: "Amiri",
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  surah!.name,
-                                  textDirection: TextDirection.rtl,
-                                  style: const TextStyle(
-                                      fontFamily: "Amiri",
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  textDirection: TextDirection.rtl,
-                                  "${"الآية"} $ayahstart",
-                                  style: const TextStyle(
-                                      fontFamily: "Amiri",
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
+                  return Column(
+                    children: [
+                      Material(
+                        elevation: 2,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(12)),
+                        color: Colors.transparent,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(12),
+                          onTap: () {
+                            Get.to(() => SurahPage(
+                                  surah: surah,
+                                  initialAyahNumber: juzStart[1],
+                                ));
+                          },
+                          child: Ink(
+                            decoration: BoxDecoration(
+                              color: Get.isDarkMode
+                                  ? kmaincolor2dark.withOpacity(0.7)
+                                  : Colors.white.withOpacity(0.7),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Container(
+                              height: Sizeconfig.screenheight! / 13,
+                              width: Sizeconfig.screenwidth! / 1.05,
+                              alignment: Alignment.center,
+                              padding: const EdgeInsets.all(8),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Text(
+                                    "${"الجزء"} $juzNumber",
+                                    textDirection: TextDirection.rtl,
+                                    style: const TextStyle(
+                                        fontFamily: "Amiri",
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    surah!.name,
+                                    textDirection: TextDirection.rtl,
+                                    style: const TextStyle(
+                                        fontFamily: "Amiri",
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    textDirection: TextDirection.rtl,
+                                    "${"الآية"} $ayahstart",
+                                    style: const TextStyle(
+                                        fontFamily: "Amiri",
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: Sizeconfig.screenheight! / 80),
-                  ],
-                );
-              },
+                      SizedBox(height: Sizeconfig.screenheight! / 80),
+                    ],
+                  );
+                },
+              ),
             ),
           ),
         ),
@@ -337,11 +355,17 @@ Widget _ayahviewPage() {
 
     Positioned(
       child: SafeArea(
-        child: Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 2),
+        child: FadeIn(
+          duration: const Duration(
+            seconds: 1,
+          ),
+          animate: true,
+          child: Padding(
+              padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 2),
 
-            //gridviewbuilder
-            child: _searchWidget()),
+              //gridviewbuilder
+              child: _searchWidget()),
+        ),
       ),
     ),
   ]);

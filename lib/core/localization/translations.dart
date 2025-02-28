@@ -299,7 +299,6 @@ class Messages extends Translations {
 
           // Drawer Menu
           'my_quran': 'My Quran',
-          'bookmarks': 'Bookmarks',
           'about_us': 'About Us',
           'settings': 'Settings',
           'help_feedback': 'Help & Feedback',
@@ -693,7 +692,6 @@ class Messages extends Translations {
 
           // Drawer Menu
           'my_quran': 'قرآني',
-          'bookmarks': 'المفضلة',
           'about_us': 'من نحن',
           'settings': 'الإعدادات',
           'help_feedback': 'المساعدة والتعليقات',
@@ -1102,7 +1100,6 @@ class Messages extends Translations {
 
           // Drawer Menu
           'my_quran': 'Mon Coran',
-          'bookmarks': 'Favoris',
           'about_us': 'À Propos de Nous',
           'settings': 'Paramètres',
           'help_feedback': 'Aide et Commentaires',

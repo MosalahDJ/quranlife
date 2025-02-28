@@ -56,7 +56,7 @@ class Myrouts {
       ),
       GetPage(
         name: "/adkar",
-        page: () => const AdkarPage(),
+        page: () => AdkarPage(),
       ),
       GetPage(
         name: "/aboutus",

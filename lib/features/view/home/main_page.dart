@@ -97,7 +97,7 @@ class MainPage extends StatelessWidget {
               MenuPage(),
               CategoriesPage(),
               HomePageBody(),
-              const AdkarPage(),
+              AdkarPage(),
               QuraanPage(),
             ],
           );

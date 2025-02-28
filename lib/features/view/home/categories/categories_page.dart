@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -7,6 +8,7 @@ import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
+import 'package:quranlife/features/controller/home%20controller/fade_animation_controller.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/times_page_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
@@ -28,6 +30,7 @@ import 'package:quranlife/features/view/home/categories/categories_pages/wudu%20
 class CategoriesPage extends StatelessWidget {
   CategoriesPage({super.key});
   final TimesPageController timespagectrl = Get.find();
+  final FadeAnimationController fadectrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -81,138 +84,142 @@ class CategoriesPage extends StatelessWidget {
                       height: Sizeconfig.screenheight! / 80,
                     ),
                     GetBuilder<ThemeController>(
-                        builder: (controller) => GridView.count(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              crossAxisCount: 3,
-                              mainAxisSpacing: 10,
-                              crossAxisSpacing: 10,
-                              childAspectRatio: 1,
-                              children: [
-                                mycategory(
-                                  () {},
-                                  MdiIcons.robot,
-                                  'ai_bot'.tr,
-                                ),
-                                mycategory(
-                                  () {},
-                                  Icons.people_alt_rounded,
-                                  'community'.tr,
-                                ),
-                                mycategory(
-                                  () {
-                                    Get.to(() => const StatisticsPage());
-                                  },
-                                  Icons.analytics_rounded,
-                                  'statistics'.tr,
-                                ),
-                                mycategory(
-                                  () {
-                                    Get.to(() => const Teachingprayer());
-                                  },
-                                  FlutterIslamicIcons.kowtow,
-                                  'teaching_prayer'.tr,
-                                ),
-                                mycategory(
-                                  () {
-                                    Get.to(() => const WuduAndGhusle());
-                                  },
-                                  FlutterIslamicIcons.wudhu,
-                                  'wudu_ghusl'.tr,
-                                ),
-                                mycategory(
-                                  () {
-                                    Get.to(() => QiblaDirection());
-                                  },
-                                  FlutterIslamicIcons.qibla,
-                                  'qibla_direction'.tr,
-                                ),
-                                mycategory(
-                                  () {
-                                    Get.to(() => Tasbih());
-                                  },
-                                  FlutterIslamicIcons.tasbihHand,
-                                  'electronic_tasbih'.tr,
-                                ),
-                                mycategory(
-                                  () {
-                                    Get.to(() => const FridaySunnah());
-                                  },
-                                  FlutterIslamicIcons.community,
-                                  'friday_sunnahs'.tr,
-                                ),
-                                mycategory(
-                                  () {
-                                    Get.to(() => const Ahadith());
-                                  },
-                                  FlutterIslamicIcons.quran,
-                                  'al-arba\'in_nawawiyyah'.tr,
-                                ),
-                                mycategory(
-                                  () {
-                                    Get.to(() => const Hajandomrapage());
-                                  },
-                                  FlutterIslamicIcons.kaaba,
-                                  'hajj_umrah'.tr,
-                                ),
-                                mycategory(
-                                  () {
-                                    Get.to(() => const Praise());
-                                  },
-                                  Icons.volunteer_activism_rounded,
-                                  'al-Hamd'.tr,
-                                ),
-                                mycategory(
-                                  () {
-                                    Get.to(() => const SeekingForgivnes());
-                                  },
-                                  FlutterIslamicIcons.prayingPerson,
-                                  'istighfar'.tr,
-                                ),
-                                mycategory(
-                                  () {
-                                    Get.to(() => const Islamicruqya());
-                                  },
-                                  FontAwesomeIcons.bookQuran,
-                                  'islamic_ruqyah'.tr,
-                                ),
-                                mycategory(
-                                  () {
-                                    Get.to(() => const QuranicSupplications());
-                                  },
-                                  Icons.favorite_rounded,
-                                  'quranic_supplications'.tr,
-                                ),
-                                mycategory(
-                                  () {
-                                    Get.to(() => const ProphetsSupplication());
-                                  },
-                                  MdiIcons.accountVoice,
-                                  'prophets_supplications'.tr,
-                                ),
-                                mycategory(
-                                  () {
-                                    Get.toNamed("hijri");
-                                  },
-                                  FlutterIslamicIcons.calendar,
-                                  'islamic_calendar'.tr,
-                                ),
-                                mycategory(
-                                  () {
-                                    Get.to(() => const AllahNames());
-                                  },
-                                  FlutterIslamicIcons.allah99,
-                                  'asma_ul-husna'.tr,
-                                ),
-                                mycategory(
-                                  () {
-                                    timespagectrl.getcurrentpage();
-                                    Get.toNamed("salattime");
-                                  },
-                                  Icons.access_time_filled_sharp,
-                                  'mawaqit'.tr,
-                                ),
-                              ],
+                        builder: (controller) => FadeInUp(
+                              child: GridView.count(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                crossAxisCount: 3,
+                                mainAxisSpacing: 10,
+                                crossAxisSpacing: 10,
+                                childAspectRatio: 1,
+                                children: [
+                                  mycategory(
+                                    () {},
+                                    MdiIcons.robot,
+                                    'ai_bot'.tr,
+                                  ),
+                                  mycategory(
+                                    () {},
+                                    Icons.people_alt_rounded,
+                                    'community'.tr,
+                                  ),
+                                  mycategory(
+                                    () {
+                                      Get.to(() => const StatisticsPage());
+                                    },
+                                    Icons.analytics_rounded,
+                                    'statistics'.tr,
+                                  ),
+                                  mycategory(
+                                    () {
+                                      Get.to(() => const Teachingprayer());
+                                    },
+                                    FlutterIslamicIcons.kowtow,
+                                    'teaching_prayer'.tr,
+                                  ),
+                                  mycategory(
+                                    () {
+                                      Get.to(() => const WuduAndGhusle());
+                                    },
+                                    FlutterIslamicIcons.wudhu,
+                                    'wudu_ghusl'.tr,
+                                  ),
+                                  mycategory(
+                                    () {
+                                      Get.to(() => QiblaDirection());
+                                    },
+                                    FlutterIslamicIcons.qibla,
+                                    'qibla_direction'.tr,
+                                  ),
+                                  mycategory(
+                                    () {
+                                      Get.to(() => Tasbih());
+                                    },
+                                    FlutterIslamicIcons.tasbihHand,
+                                    'electronic_tasbih'.tr,
+                                  ),
+                                  mycategory(
+                                    () {
+                                      Get.to(() => const FridaySunnah());
+                                    },
+                                    FlutterIslamicIcons.community,
+                                    'friday_sunnahs'.tr,
+                                  ),
+                                  mycategory(
+                                    () {
+                                      Get.to(() => const Ahadith());
+                                    },
+                                    FlutterIslamicIcons.quran,
+                                    'al-arba\'in_nawawiyyah'.tr,
+                                  ),
+                                  mycategory(
+                                    () {
+                                      Get.to(() => const Hajandomrapage());
+                                    },
+                                    FlutterIslamicIcons.kaaba,
+                                    'hajj_umrah'.tr,
+                                  ),
+                                  mycategory(
+                                    () {
+                                      Get.to(() => const Praise());
+                                    },
+                                    Icons.volunteer_activism_rounded,
+                                    'al-Hamd'.tr,
+                                  ),
+                                  mycategory(
+                                    () {
+                                      Get.to(() => const SeekingForgivnes());
+                                    },
+                                    FlutterIslamicIcons.prayingPerson,
+                                    'istighfar'.tr,
+                                  ),
+                                  mycategory(
+                                    () {
+                                      Get.to(() => const Islamicruqya());
+                                    },
+                                    FontAwesomeIcons.bookQuran,
+                                    'islamic_ruqyah'.tr,
+                                  ),
+                                  mycategory(
+                                    () {
+                                      Get.to(
+                                          () => const QuranicSupplications());
+                                    },
+                                    Icons.favorite_rounded,
+                                    'quranic_supplications'.tr,
+                                  ),
+                                  mycategory(
+                                    () {
+                                      Get.to(
+                                          () => const ProphetsSupplication());
+                                    },
+                                    MdiIcons.accountVoice,
+                                    'prophets_supplications'.tr,
+                                  ),
+                                  mycategory(
+                                    () {
+                                      Get.toNamed("hijri");
+                                    },
+                                    FlutterIslamicIcons.calendar,
+                                    'islamic_calendar'.tr,
+                                  ),
+                                  mycategory(
+                                    () {
+                                      Get.to(() => const AllahNames());
+                                    },
+                                    FlutterIslamicIcons.allah99,
+                                    'asma_ul-husna'.tr,
+                                  ),
+                                  mycategory(
+                                    () {
+                                      timespagectrl.getcurrentpage();
+                                      Get.toNamed("salattime");
+                                    },
+                                    Icons.access_time_filled_sharp,
+                                    'mawaqit'.tr,
+                                  ),
+                                ],
+                              ),
                             )),
                     SizedBox(
                       width: Sizeconfig.screenwidth,
