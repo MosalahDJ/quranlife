@@ -216,7 +216,13 @@ class Messages extends Translations {
           'asr': 'Asr',
           'maghrib': 'Maghrib',
           'isha': 'Isha',
-          'search': "Search in the Holy Quran",
+
+          'Fajr': 'Fajr',
+          'Sunrise': 'Sunrise',
+          'Dhuhr': 'Dhuhr',
+          'Asr': 'Asr',
+          'Maghrib': 'Maghrib',
+          'Isha': 'Isha',
 
           //quraan page
           'verses': "verses",
@@ -224,12 +230,11 @@ class Messages extends Translations {
           'Medinan': 'Medinan',
           'no_saved_ayahs': 'No saved verses',
           'saved_ayahs': 'Saved verses',
-          'Fajr': 'Fajr',
-          'Sunrise': 'Sunrise',
-          'Dhuhr': 'Dhuhr',
-          'Asr': 'Asr',
-          'Maghrib': 'Maghrib',
-          'Isha': 'Isha',
+          'search': "Search in the Holy Quran",
+
+          // Favorite Page translations
+          'favorite': 'Favorites',
+          'no_favorite_ayahs': 'No favorite verses yet',
 
           // Home Page
           'refresh_prayer_times': 'Pull to refresh prayer times',
@@ -615,7 +620,6 @@ class Messages extends Translations {
           'Asr': 'العصر',
           'Maghrib': 'المغرب',
           'Isha': 'العشاء',
-          'search': "بحث في القرآن الكريم",
 
           //quraan page
           'verses': 'آية',
@@ -623,6 +627,11 @@ class Messages extends Translations {
           'Medinan': 'مدنية',
           'no_saved_ayahs': 'لا توجد آيات المحفوظة',
           'saved_ayahs': 'الآيات المحفوظة',
+          'search': "بحث في القرآن الكريم",
+
+          // Favorite Page translations
+          'favorite': 'المفضلة',
+          'no_favorite_ayahs': 'لا توجد آيات مفضلة بعد',
 
           // Home Page
           'refresh_prayer_times': 'اسحب لتحديث أوقات الصلاة',
@@ -1013,19 +1022,24 @@ class Messages extends Translations {
           'maghrib': 'Maghrib',
           'isha': 'Isha',
 
-          // Quran Page
-          'verses': 'versets',
-          'Meccan': 'Meccan',
-          'Medinan': 'Medinan',
-          'no_saved_ayahs': 'Aucun verset enregistré',
-          'saved_ayahs': 'verset enregistré',
           'Fajr': 'Fajr',
           'Sunrise': 'lv du soleil',
           'Dhuhr': 'Dhuhr',
           'Asr': 'Asr',
           'Maghrib': 'Maghrib',
           'Isha': 'Isha',
+
+          // Quran Page
+          'verses': 'versets',
+          'Meccan': 'Meccan',
+          'Medinan': 'Medinan',
+          'no_saved_ayahs': 'Aucun verset enregistré',
+          'saved_ayahs': 'verset enregistré',
           'search': "Recherche dans le Coran",
+
+          // Favorite Page translations
+          'favorite': 'Favoris',
+          'no_favorite_ayahs': 'Pas encore de versets favoris',
 
           // Home Page
           'refresh_prayer_times': 'Tirez pour actualiser les heures de prière',

@@ -7,17 +7,21 @@ import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/core/widgets/skeletonizer.dart';
 import 'package:quranlife/features/controller/Auth%20controller/logincontroller.dart';
+import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
+import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
 import 'package:quranlife/features/view/home/quraan%20page/favorite.dart';
 import 'package:quranlife/features/view/home/quraan%20page/saved_ayahs.dart';
 
 class MenuPageBody extends StatelessWidget {
   MenuPageBody({super.key});
   final LogInController logctrl = Get.find();
+  final MyHomeController homectrl = Get.find();
+
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<LogInController>(
+    return GetBuilder<ThemeController>(
       builder: (c) => Stack(
         children: [
           Gradientbackground(
@@ -165,7 +169,10 @@ class MenuPageBody extends StatelessWidget {
       children: [
         _buildSettingsCategory(
             icon: Icons.home_outlined,
-            onTap: () => Get.toNamed("home"),
+            onTap: () {
+              homectrl.selected = 2;
+              homectrl.update();
+            },
             title: 'home'.tr),
         _buildSettingsCategory(
             icon: Icons.book_outlined,
@@ -211,43 +218,46 @@ class MenuPageBody extends StatelessWidget {
     required String title,
     required VoidCallback onTap,
   }) {
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: onTap,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: Get.isDarkMode
-                      ? kmaincolor4.withOpacity(0.2)
-                      : kmaincolor.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(10),
+    return GetBuilder<ThemeController>(
+      builder: (c) => Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Get.isDarkMode
+                        ? kmaincolor4.withOpacity(0.2)
+                        : kmaincolor.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Icon(icon,
+                      color: Get.isDarkMode ? kmaincolor4 : kmaincolor,
+                      size: 24),
                 ),
-                child: Icon(icon,
-                    color: Get.isDarkMode ? kmaincolor4 : kmaincolor, size: 24),
-              ),
-              const SizedBox(width: 16),
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Get.isDarkMode
-                      ? const Color.fromARGB(255, 237, 231, 223)
-                      : const Color(0xFF2C3E50),
+                const SizedBox(width: 16),
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Get.isDarkMode
+                        ? const Color.fromARGB(255, 237, 231, 223)
+                        : const Color(0xFF2C3E50),
+                  ),
                 ),
-              ),
-              const Spacer(),
-              Icon(
-                Icons.chevron_right_rounded,
-                size: 24,
-                color: Get.isDarkMode ? Colors.white70 : Colors.grey[700],
-              ),
-            ],
+                const Spacer(),
+                Icon(
+                  Icons.chevron_right_rounded,
+                  size: 24,
+                  color: Get.isDarkMode ? Colors.white70 : Colors.grey[700],
+                ),
+              ],
+            ),
           ),
         ),
       ),

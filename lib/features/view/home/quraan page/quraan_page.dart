@@ -50,7 +50,7 @@ class QuraanPage extends StatelessWidget {
                       },
                       icon: const Icon(
                         Icons.favorite,
-                        color: Colors.red,
+                        color: Colors.white,
                       ))),
             ],
             //TabBar
