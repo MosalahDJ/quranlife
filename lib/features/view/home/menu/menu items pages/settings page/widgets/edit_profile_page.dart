@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
@@ -11,7 +12,9 @@ class EditProfilePage extends StatelessWidget {
 
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
+  final TextEditingController changpassemailController =
+      TextEditingController();
+
   final ThemeController themeCtrl = Get.find();
   final LogInController logCtrl = Get.find();
   final PasswordresetController passCtrl = Get.find();
@@ -56,14 +59,6 @@ class EditProfilePage extends StatelessWidget {
                 label: 'last_name'.tr,
                 hint: 'enter_last_name'.tr,
               ),
-              _buildTextInput(
-                context: context,
-                controller: emailController,
-                icon: Icons.email_outlined,
-                label: 'email'.tr,
-                hint: 'enter_email'.tr,
-                keyboardType: TextInputType.emailAddress,
-              ),
               _buildGenderSelection(context),
               _buildSectionHeader(context, 'password'.tr),
               _buildChangePasswordButton(context),
@@ -105,7 +100,33 @@ class EditProfilePage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: TextButton.icon(
           onPressed: () {
-            passCtrl.resetpassword(context);
+            AwesomeDialog(
+              context: context,
+              dialogType: DialogType.info,
+              animType: AnimType.scale,
+              title: 'reset_password'.tr,
+              desc: 'reset_password_desc'.tr,
+              body: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: TextField(
+                  controller: changpassemailController,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: InputDecoration(
+                    hintText: 'enter_email'.tr,
+                    prefixIcon: Icon(Icons.email_outlined, color: accentColor),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+              ),
+              btnCancelText: 'cancel'.tr,
+              btnOkText: 'send'.tr,
+              btnCancelOnPress: () {},
+              btnOkOnPress: () {
+                passCtrl.resetpassword(context, changpassemailController);
+              },
+            ).show();
           },
           icon: Icon(Icons.lock_outline, color: accentColor),
           label: Text(
@@ -321,7 +342,6 @@ class EditProfilePage extends StatelessWidget {
                   context: context,
                   firstName: firstNameController.text,
                   lastName: lastNameController.text,
-                  email: emailController.text,
                   isMale: isMale.value);
             },
             style: ElevatedButton.styleFrom(

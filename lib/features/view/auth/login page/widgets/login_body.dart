@@ -133,7 +133,8 @@ class LoginBody extends StatelessWidget {
                           child: TextButton(
                             onPressed: () {
                               loginctrl.unfocuskeyboardlogin();
-                              passreset.resetpassword(context);
+                              passreset.resetpassword(
+                                  context, loginctrl.emailcontroller.text);
                             },
                             child: Text(
                               "forgot_password".tr,

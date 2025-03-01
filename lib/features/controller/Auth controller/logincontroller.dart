@@ -101,14 +101,11 @@ class LogInController extends GetxController {
     required BuildContext context,
     required String firstName,
     required String lastName,
-    required String email,
     required bool isMale,
   }) async {
     try {
       // Validate required fields
-      if (firstName.trim().isEmpty ||
-          lastName.trim().isEmpty ||
-          email.trim().isEmpty) {
+      if (firstName.trim().isEmpty || lastName.trim().isEmpty) {
         AwesomeDialog(
           context: context,
           title: 'error'.tr,
@@ -118,20 +115,9 @@ class LogInController extends GetxController {
         return;
       }
 
-      // Validate email format
-      if (!GetUtils.isEmail(email)) {
-        AwesomeDialog(
-          context: context,
-          title: 'error'.tr,
-          desc: 'invalid_email'.tr,
-          dialogType: DialogType.error,
-        ).show();
-        return;
-      }
-
       // Check if user is logged in
       final User? currentUser = FirebaseAuth.instance.currentUser;
-      if (currentUser == null) {
+      if (currentUser == null || currentUser.isAnonymous == true) {
         throw Exception('No user logged in');
       }
 
@@ -149,24 +135,12 @@ class LogInController extends GetxController {
 
       // Start loading state
       isLoading.value = true;
-      // Update email if changed
-      if (email != currentUser.email) {
-        await currentUser.verifyBeforeUpdateEmail(email);
-        // Note: This will send a verification email to the new address
-        // The email won't be updated until the user verifies it
-        AwesomeDialog(
-          context: context,
-          title: 'verify_email'.tr,
-          desc: 'verify_new_email_sent'.tr,
-          dialogType: DialogType.info,
-        ).show();
-      }
 
       // Update user profile in Firestore
       await _firestore.collection('users').doc(currentUser.uid).update({
         'firstName': firstName,
         'lastName': lastName,
-        'email': email,
+        'email': currentUser.email,
         'gender': isMale ? 'male' : 'female',
         'updatedAt': FieldValue.serverTimestamp(),
         'uid': currentUser.uid,
@@ -194,7 +168,7 @@ class LogInController extends GetxController {
         default:
           errorMessage = e.message ?? 'unknown_error'.tr;
       }
-
+      print(e);
       AwesomeDialog(
         context: context,
         title: 'error'.tr,

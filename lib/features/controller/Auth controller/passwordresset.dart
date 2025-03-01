@@ -8,9 +8,9 @@ import 'package:quranlife/features/controller/Auth%20controller/logincontroller.
 class PasswordresetController extends GetxController {
   final LogInController loginctrl = Get.find();
 
-  resetpassword(context) async {
+  resetpassword(context, emailtext) async {
     try {
-      if (loginctrl.emailcontroller.text == "") {
+      if (emailtext == "") {
         GetSnackBar(
           duration: const Duration(seconds: 10),
           backgroundColor: kmaincolor,
@@ -36,8 +36,7 @@ class PasswordresetController extends GetxController {
           ),
         ).show();
       } else {
-        await FirebaseAuth.instance
-            .sendPasswordResetEmail(email: loginctrl.emailcontroller.text);
+        await FirebaseAuth.instance.sendPasswordResetEmail(email: emailtext);
         AwesomeDialog(
           context: context,
           alignment: Alignment.center,
@@ -46,7 +45,7 @@ class PasswordresetController extends GetxController {
           // desc: "Password Reset",
           dialogType: DialogType.success,
           body: Text(
-            "${'reset_link_sent'.tr} ${loginctrl.emailcontroller.text}",
+            "${'reset_link_sent'.tr} $emailtext",
             textAlign: TextAlign.center,
           ),
         ).show();
