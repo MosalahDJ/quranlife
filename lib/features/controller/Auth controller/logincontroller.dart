@@ -97,6 +97,101 @@ class LogInController extends GetxController {
     }
   }
 
+  Future<void> updateUserProfile({
+    required BuildContext context,
+    required String firstName,
+    required String lastName,
+    required String email,
+    required bool isMale,
+  }) async {
+    try {
+      // Check if user is logged in
+      final User? currentUser = FirebaseAuth.instance.currentUser;
+      if (currentUser == null) {
+        throw Exception('No user logged in');
+      }
+
+      // Check internet connectivity
+      final connectivityResult = await Connectivity().checkConnectivity();
+      if (connectivityResult.contains(ConnectivityResult.none) ) {
+        AwesomeDialog(
+          context: context,
+          title: 'no_internet'.tr,
+          desc: 'check_internet_connection'.tr,
+          dialogType: DialogType.error,
+        ).show();
+        return;
+      }
+
+      // Start loading state
+      isLoading.value = true;
+
+      // Update email if changed
+      if (email != currentUser.email) {
+        await currentUser.verifyBeforeUpdateEmail(email);
+        // Note: This will send a verification email to the new address
+        // The email won't be updated until the user verifies it
+        AwesomeDialog(
+          context: context,
+          title: 'verify_email'.tr,
+          desc: 'verify_new_email_sent'.tr,
+          dialogType: DialogType.info,
+        ).show();
+      }
+
+      // Update user profile in Firestore
+      await _firestore.collection('users').doc(currentUser.uid).update({
+        'firstName': firstName,
+        'lastName': lastName,
+        'email': email,
+        'gender': isMale ? 'male' : 'female',
+        'updatedAt': FieldValue.serverTimestamp(),
+        'uid': currentUser.uid,
+      'displayName': '$firstName $lastName',
+      'createdAt': FieldValue.serverTimestamp(),
+      'lastLogin': FieldValue.serverTimestamp(),
+      });
+
+      // Show success message
+      AwesomeDialog(
+        context: context,
+        title: 'success'.tr,
+        desc: 'profile_updated_successfully'.tr,
+        dialogType: DialogType.success,
+      ).show();
+
+    } on FirebaseAuthException catch (e) {
+      String errorMessage;
+      switch (e.code) {
+        case 'requires-recent-login':
+          errorMessage = 'please_login_again'.tr;
+          break;
+        case 'email-already-in-use':
+          errorMessage = 'email_already_exists'.tr;
+          break;
+        default:
+          errorMessage = e.message ?? 'unknown_error'.tr;
+      }
+      
+      AwesomeDialog(
+        context: context,
+        title: 'error'.tr,
+        desc: errorMessage,
+        dialogType: DialogType.error,
+      ).show();
+
+    } catch (e) {
+      AwesomeDialog(
+        context: context,
+        title: 'error'.tr,
+        desc: 'unknown_error'.tr,
+        dialogType: DialogType.error,
+      ).show();
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
   bool visibility = true;
   visibilityfunc() {
     visibility = !visibility;

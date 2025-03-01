@@ -43,6 +43,16 @@ class Messages extends Translations {
           'email_exists':
               'An account already exists for this email. Please login instead.',
           'registration_error': 'Registration error: {}',
+          'no_internet': 'No Internet Connection',
+          'internet_required_for_signout':
+              'Internet connection is required to sign out',
+          "profile_updated_successfully": "Profile updated successfully",
+          "please_login_again": "Please login again to update your email",
+          "email_already_exists": "This email is already in use",
+          "unknown_error": "An unknown error occurred",
+          "check_internet_connection": "Please check your internet connection",
+          "verify_new_email_sent": "Verification link sent to new email",
+          "success": "Success",
 
           // Registration
           'create_account': 'Create Your Account',
@@ -351,6 +361,11 @@ class Messages extends Translations {
               'Receive reminders for morning and evening adhkar',
           'quran_notifications': 'Quran Reminders',
           'quran_notifications_desc': 'Daily reminders to read Quran',
+          "edit_profile": "Edit Profile",
+          "personal_info": "Personal Information",
+          "change_password": "Change Password",
+          "save_changes": "Save Changes",
+          "profile_updated": "Profile updated successfully",
 
           // New Translations
           'who_am_i': 'Who Am I?',
@@ -441,6 +456,18 @@ class Messages extends Translations {
           'email_exists':
               'يوجد حساب مسجل بهذا البريد الإلكتروني. يرجى تسجيل الدخول بدلاً من ذلك.',
           'registration_error': 'خطأ في التسجيل: {}',
+          'no_internet': 'لا يوجد اتصال بالإنترنت',
+          'internet_required_for_signout':
+              'يجب توفر اتصال بالإنترنت لتسجيل الخروج',
+          "profile_updated_successfully": "تم تحديث الملف الشخصي بنجاح",
+          "please_login_again":
+              "الرجاء تسجيل الدخول مرة أخرى لتحديث البريد الإلكتروني",
+          "email_already_exists": "هذا البريد الإلكتروني مستخدم بالفعل",
+          "unknown_error": "حدث خطأ غير معروف",
+          "check_internet_connection": "يرجى التحقق من اتصال الإنترنت",
+          "verify_new_email_sent":
+              "تم إرسال رابط التحقق إلى البريد الإلكتروني الجديد",
+          "success": "نجاح",
 
           // Sign Up Page
           'create_account': 'إنشاء حسابك',
@@ -740,7 +767,12 @@ class Messages extends Translations {
           'adhkar_notifications_desc': 'تذكير بأذكار الصباح والمساء',
           'quran_notifications': 'تذكير القرآن',
           'quran_notifications_desc': 'تذكير يومي لقراءة القرآن',
-
+          //profile page Translations
+          "edit_profile": "تعديل الملف الشخصي",
+          "personal_info": "المعلومات الشخصية",
+          "change_password": "تغيير كلمة المرور",
+          "save_changes": "حفظ التغييرات",
+          "profile_updated": "تم تحديث الملف الشخصي بنجاح",
           // New Translations
           'who_am_i': 'من أنا؟',
           'developer_name': 'جحال محمد صلاح',
@@ -844,6 +876,19 @@ class Messages extends Translations {
           'email_exists':
               'Un compte existe déjà pour cet email. Veuillez vous connecter.',
           'registration_error': 'Erreur d\'inscription: {}',
+          'no_internet': 'Pas de Connexion Internet',
+          'internet_required_for_signout':
+              'Une connexion Internet est requise pour se déconnecter',
+          "profile_updated_successfully": "Profil mis à jour avec succès",
+          "please_login_again":
+              "Veuillez vous reconnecter pour mettre à jour votre email",
+          "email_already_exists": "Cet email est déjà utilisé",
+          "unknown_error": "Une erreur inconnue s'est produite",
+          "check_internet_connection":
+              "Veuillez vérifier votre connexion Internet",
+          "verify_new_email_sent":
+              "Lien de vérification envoyé au nouvel email",
+          "success": "Succès",
 
           // Sign Up Page
           'create_account': 'Créez votre compte',
@@ -1152,7 +1197,12 @@ class Messages extends Translations {
               'Rappels pour les invocations du matin et du soir',
           'quran_notifications': 'Rappels du Coran',
           'quran_notifications_desc': 'Rappels quotidiens pour lire le Coran',
-
+          //profile page Translations
+          "edit_profile": "Modifier le profil",
+          "personal_info": "Informations personnelles",
+          "change_password": "Changer le mot de passe",
+          "save_changes": "Enregistrer les modifications",
+          "profile_updated": "Profil mis à jour avec succès",
           // New Translations
           'who_am_i': 'Qui suis-je?',
           'developer_name': 'Djehel Mohamed Salah',

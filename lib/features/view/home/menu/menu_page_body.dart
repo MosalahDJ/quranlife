@@ -19,18 +19,18 @@ class MenuPageBody extends StatelessWidget {
   final LogInController logctrl = Get.find();
   final MyHomeController homectrl = Get.find();
   final FadeAnimationController fadectrl = Get.find();
-
+  final ThemeController themeCtrl = Get.find();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ThemeController>(
-      builder: (c) => Stack(
+      builder: (themeController) => Stack(
         children: [
           Gradientbackground(
             gradientcolor: [
               kmaincolor,
-              Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
+              themeController.isDarkMode ? kmaincolor3dark : kmaincolor3,
             ],
           ),
           SizedBox(
@@ -69,46 +69,57 @@ class MenuPageBody extends StatelessWidget {
   }
 
   Widget _buildSkeletonLayout(BuildContext context) {
-    return SafeArea(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(height: 20),
-            Myskeletonizer(
+    return GetBuilder<ThemeController>(
+      builder: (themeController) => SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(height: 20),
+              Myskeletonizer(
                 skeletonizerWidget: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: Column(
-                  children: [
-                    CircleAvatar(
-                      backgroundColor:
-                          Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
-                      backgroundImage: const AssetImage(
-                          "lib/core/assets/images/profile_picture/woman_picture.png"),
-                      radius: 40,
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: Column(
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: themeController.isDarkMode
+                              ? kmaincolor3dark
+                              : kmaincolor3,
+                          backgroundImage: const AssetImage(
+                              "lib/core/assets/images/profile_picture/woman_picture.png"),
+                          radius: 40,
+                        ),
+                        const SizedBox(height: 12),
+                        Text(
+                          'anonymous_user'.tr,
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleLarge
+                              ?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: themeController.isDarkMode
+                                    ? Colors.white70
+                                    : Colors.black,
+                              ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          'no_email',
+                          style:
+                              Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                    color: themeController.isDarkMode
+                                        ? Colors.white70
+                                        : Colors.black,
+                                  ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 12),
-                    Text(
-                      'anonymous_user'.tr,
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color:
-                              Get.isDarkMode ? Colors.white70 : Colors.black),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      'no_email',
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            color:
-                                Get.isDarkMode ? Colors.white70 : Colors.black,
-                          ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
-            )),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -131,38 +142,46 @@ class MenuPageBody extends StatelessWidget {
         final String? photoURL = currentUser?.photoURL;
         final bool isAnonymous = currentUser?.isAnonymous ?? true;
 
-        return Padding(
-          padding: const EdgeInsets.only(top: 20),
-          child: Column(
-            children: [
-              CircleAvatar(
-                backgroundColor: Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
-                backgroundImage: photoURL != null
-                    ? NetworkImage(photoURL) as ImageProvider
-                    : AssetImage(
-                        isAnonymous
-                            ? "lib/core/assets/images/login_images/Guest.png"
-                            : gender == 'Female'
-                                ? "lib/core/assets/images/profile_picture/woman_picture.png"
-                                : "lib/core/assets/images/profile_picture/man_picture.png",
+        return GetBuilder<ThemeController>(
+          builder: (themeController) => Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: Column(
+              children: [
+                CircleAvatar(
+                  backgroundColor: themeController.isDarkMode
+                      ? kmaincolor3dark
+                      : kmaincolor3,
+                  backgroundImage: photoURL != null
+                      ? NetworkImage(photoURL) as ImageProvider
+                      : AssetImage(
+                          isAnonymous
+                              ? "lib/core/assets/images/login_images/Guest.png"
+                              : gender == 'Female'
+                                  ? "lib/core/assets/images/profile_picture/woman_picture.png"
+                                  : "lib/core/assets/images/profile_picture/man_picture.png",
+                        ),
+                  radius: 40,
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  isAnonymous ? 'anonymous_user'.tr : displayName,
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: themeController.isDarkMode
+                          ? Colors.white70
+                          : Colors.black),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  email == 'no_email' ? 'no_email'.tr : email,
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: themeController.isDarkMode
+                            ? Colors.white70
+                            : Colors.black,
                       ),
-                radius: 40,
-              ),
-              const SizedBox(height: 12),
-              Text(
-                isAnonymous ? 'anonymous_user'.tr : displayName,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: Get.isDarkMode ? Colors.white70 : Colors.black),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                email == 'no_email' ? 'no_email'.tr : email,
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: Get.isDarkMode ? Colors.white70 : Colors.black,
-                    ),
-              ),
-            ],
+                ),
+              ],
+            ),
           ),
         );
       },
@@ -170,51 +189,55 @@ class MenuPageBody extends StatelessWidget {
   }
 
   Widget _buildMainMenuSection(BuildContext context) {
-    return Column(
-      children: [
-        _buildSettingsCategory(
-            icon: Icons.home_outlined,
-            onTap: () {
-              homectrl.selected = 2;
-              homectrl.update();
-            },
-            title: 'home'.tr),
-        _buildSettingsCategory(
-            icon: Icons.book_outlined,
-            onTap: () => Get.to(() => SavedAyahs()),
-            title: 'my_quran'.tr),
-        _buildSettingsCategory(
-            icon: Icons.favorite,
-            onTap: () => Get.to(() => Favorite()),
-            title: 'favorite'.tr),
-        // _buildSettingsCategory(
-        //     icon: Icons.info_outline,
-        //     onTap: () => Get.toNamed("aboutus"),
-        //     title: 'about_us'.tr),
-        _buildSettingsCategory(
-            icon: Icons.share_outlined,
-            onTap: () => Get.toNamed("refferal"),
-            title: 'refferal'.tr),
-      ],
+    return GetBuilder<ThemeController>(
+      builder: (themeController) => Column(
+        children: [
+          _buildSettingsCategory(
+              icon: Icons.home_outlined,
+              onTap: () {
+                homectrl.selected = 2;
+                homectrl.update();
+              },
+              title: 'home'.tr),
+          _buildSettingsCategory(
+              icon: Icons.book_outlined,
+              onTap: () => Get.to(() => SavedAyahs()),
+              title: 'my_quran'.tr),
+          _buildSettingsCategory(
+              icon: Icons.favorite,
+              onTap: () => Get.to(() => Favorite()),
+              title: 'favorite'.tr),
+          // _buildSettingsCategory(
+          //     icon: Icons.info_outline,
+          //     onTap: () => Get.toNamed("aboutus"),
+          //     title: 'about_us'.tr),
+          _buildSettingsCategory(
+              icon: Icons.share_outlined,
+              onTap: () => Get.toNamed("refferal"),
+              title: 'refferal'.tr),
+        ],
+      ),
     );
   }
 
   Widget _buildSettingsSection(BuildContext context) {
-    return Column(
-      children: [
-        _buildSettingsCategory(
-            icon: Icons.settings_outlined,
-            onTap: () => Get.toNamed("settings"),
-            title: 'settings'.tr),
-        _buildSettingsCategory(
-            icon: Icons.help_outline,
-            onTap: () => Get.toNamed("help"),
-            title: 'help_feedback'.tr),
-        _buildSettingsCategory(
-            icon: Icons.logout_outlined,
-            onTap: () => logctrl.signOut(context),
-            title: 'log_out'.tr),
-      ],
+    return GetBuilder<ThemeController>(
+      builder: (themeController) => Column(
+        children: [
+          _buildSettingsCategory(
+              icon: Icons.settings_outlined,
+              onTap: () => Get.toNamed("settings"),
+              title: 'settings'.tr),
+          _buildSettingsCategory(
+              icon: Icons.help_outline,
+              onTap: () => Get.toNamed("help"),
+              title: 'help_feedback'.tr),
+          _buildSettingsCategory(
+              icon: Icons.logout_outlined,
+              onTap: () => logctrl.signOut(context),
+              title: 'log_out'.tr),
+        ],
+      ),
     );
   }
 
@@ -224,7 +247,7 @@ class MenuPageBody extends StatelessWidget {
     required VoidCallback onTap,
   }) {
     return GetBuilder<ThemeController>(
-      builder: (c) => Material(
+      builder: (themeController) => Material(
         color: Colors.transparent,
         child: InkWell(
           onTap: onTap,
@@ -235,13 +258,15 @@ class MenuPageBody extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: Get.isDarkMode
+                    color: themeController.isDarkMode
                         ? kmaincolor4.withOpacity(0.2)
                         : kmaincolor.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Icon(icon,
-                      color: Get.isDarkMode ? kmaincolor4 : kmaincolor,
+                      color: themeController.isDarkMode
+                          ? kmaincolor4
+                          : kmaincolor,
                       size: 24),
                 ),
                 const SizedBox(width: 16),
@@ -250,7 +275,7 @@ class MenuPageBody extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: Get.isDarkMode
+                    color: themeController.isDarkMode
                         ? const Color.fromARGB(255, 237, 231, 223)
                         : const Color(0xFF2C3E50),
                   ),
@@ -259,7 +284,9 @@ class MenuPageBody extends StatelessWidget {
                 Icon(
                   Icons.chevron_right_rounded,
                   size: 24,
-                  color: Get.isDarkMode ? Colors.white70 : Colors.grey[700],
+                  color: themeController.isDarkMode
+                      ? Colors.white70
+                      : Colors.grey[700],
                 ),
               ],
             ),
@@ -270,17 +297,21 @@ class MenuPageBody extends StatelessWidget {
   }
 
   Widget _buildBottomSection(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Divider(),
-          Text('app_version'.tr,
-              style: TextStyle(
-                  fontSize: 10,
-                  color: Get.isDarkMode ? Colors.white70 : Colors.black87)),
-        ],
+    return GetBuilder<ThemeController>(
+      builder: (themeController) => Container(
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Divider(),
+            Text('app_version'.tr,
+                style: TextStyle(
+                    fontSize: 10,
+                    color: themeController.isDarkMode
+                        ? Colors.white70
+                        : Colors.black87)),
+          ],
+        ),
       ),
     );
   }

@@ -12,7 +12,7 @@ enum AppTheme {
 class ThemeController extends GetxController {
   var selectedTheme = AppTheme.system.obs;
   late SharedPreferences prefs;
-  // Add RxBool for dark mode state tracking
+  // استخدام RxBool لتتبع حالة الوضع المظلم
   final RxBool isDarkModeRx = false.obs;
 
   @override
@@ -21,31 +21,31 @@ class ThemeController extends GetxController {
     await initializeTheme();
   }
 
-  // Initialize app theme
+  // تهيئة سمة التطبيق
   Future<void> initializeTheme() async {
     prefs = await SharedPreferences.getInstance();
-    // Getting AppTheme.values from SharedPreferences
+    // قراءة AppTheme.values من SharedPreferences
     String? savedTheme = prefs.getString('theme');
-    // If it's not null, set selectedTheme = savedTheme
+    // إذا لم تكن فارغة، قم بتعيين selectedTheme = savedTheme
     if (savedTheme != null) {
       selectedTheme.value = AppTheme.values.firstWhere(
         (e) => e.toString() == savedTheme,
-        // If it's null, use AppTheme.system as value
+        // إذا كانت فارغة، استخدم AppTheme.system كقيمة
         orElse: () => AppTheme.system,
       );
     }
 
-    // Set initial dark mode state
+    // تعيين حالة الوضع المظلم الأولية
     _updateDarkModeState();
     
-    // Apply theme
+    // تطبيق السمة
     _applyTheme();
     
-    // Add this: force update of all GetX managed widgets
+    // إضافة هذا: تحديث إجباري لجميع الواجهات المدارة بواسطة GetX
     update();
   }
 
-  // Get the value of currentTheme on initial entry
+  // الحصول على قيمة currentTheme عند البدء
   ThemeData get currentTheme {
     if (selectedTheme.value == AppTheme.system) {
       return Get.isPlatformDarkMode ? Themes().darkmode : Themes().lightmode;
@@ -55,7 +55,7 @@ class ThemeController extends GetxController {
         : Themes().darkmode;
   }
   
-  // Get current ThemeMode
+  // الحصول على ThemeMode الحالي
   ThemeMode get currentThemeMode {
     switch (selectedTheme.value) {
       case AppTheme.light:
@@ -68,43 +68,41 @@ class ThemeController extends GetxController {
     }
   }
 
-  // Function for checking if we're in dark mode
+  // دالة للتحقق مما إذا كنا في الوضع المظلم
   bool get isDarkMode => isDarkModeRx.value;
 
-  // Update our dark mode tracking state
+  // تحديث حالة تتبع الوضع المظلم
   void _updateDarkModeState() {
     final newDarkModeState = (selectedTheme.value == AppTheme.dark) || 
-                            (selectedTheme.value == AppTheme.system && Get.isPlatformDarkMode);
+                           (selectedTheme.value == AppTheme.system && Get.isPlatformDarkMode);
     
-    // Only update if it changed to avoid unnecessary rebuilds
+    // تحديث فقط إذا تغيرت القيمة لتجنب إعادة البناء غير الضرورية
     if (isDarkModeRx.value != newDarkModeState) {
       isDarkModeRx.value = newDarkModeState;
     }
   }
 
-  // Function for changing the theme and saving it in SharedPreferences
-  // Used in setting page for manual changes
+  // دالة لتغيير السمة وحفظها في SharedPreferences
+  // تستخدم في صفحة الإعدادات للتغيير اليدوي
   void changeTheme(AppTheme theme) async {
-    // Update selected theme
+    // تحديث السمة المحددة
     selectedTheme.value = theme;
     await prefs.setString('theme', theme.toString());
     
-    // Update dark mode state
+    // تحديث حالة الوضع المظلم
     _updateDarkModeState();
     
-    // Apply theme
+    // تطبيق السمة
     _applyTheme();
     
-    // Force update to rebuild with new theme
-    Get.forceAppUpdate();
-    
-    // Explicitly notify all widgets
+    // تحديث إجباري لإعادة بناء التطبيق مع السمة الجديدة
     update();
+    Get.forceAppUpdate();
   }
 
-  // Helper function for applying the theme
+  // دالة مساعدة لتطبيق السمة
   void _applyTheme() {
-    // Set both theme data and theme mode
+    // تعيين كل من بيانات السمة ووضع السمة
     Get.changeTheme(currentTheme);
     Get.changeThemeMode(currentThemeMode);
   }

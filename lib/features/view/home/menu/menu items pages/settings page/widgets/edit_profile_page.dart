@@ -2,80 +2,132 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
+import 'package:quranlife/features/controller/Auth%20controller/logincontroller.dart';
+import 'package:quranlife/features/controller/Auth%20controller/passwordresset.dart';
+import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
 
 class EditProfilePage extends StatelessWidget {
   EditProfilePage({super.key});
 
-  final TextEditingController nameController = TextEditingController();
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
+  final ThemeController themeCtrl = Get.find();
+  final LogInController logCtrl = Get.find();
+  final PasswordresetController passCtrl = Get.find();
+
+  final RxBool isMale = true.obs;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        foregroundColor: Colors.white,
-        backgroundColor: kmaincolor,
-        elevation: 0,
-        centerTitle: true,
-        title: ShimmerText(
-          text: 'edit_profile'.tr,
-          style: const TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
+    return GetBuilder<ThemeController>(builder: (themeController) {
+      return Scaffold(
+        appBar: AppBar(
+          foregroundColor: Colors.white,
+          backgroundColor: kmaincolor,
+          elevation: 0,
+          centerTitle: true,
+          title: ShimmerText(
+            text: 'edit_profile'.tr,
+            style: const TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
           ),
         ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildSectionHeader(context, 'personal_info'.tr),
-            _buildTextInput(
-              context: context,
-              controller: nameController,
-              icon: Icons.person_outline,
-              label: 'full_name'.tr,
-              hint: 'enter_name'.tr,
-            ),
-            _buildTextInput(
-              context: context,
-              controller: emailController,
-              icon: Icons.email_outlined,
-              label: 'email'.tr,
-              hint: 'enter_email'.tr,
-              keyboardType: TextInputType.emailAddress,
-            ),
-            _buildTextInput(
-              context: context,
-              controller: phoneController,
-              icon: Icons.phone_outlined,
-              label: 'phone'.tr,
-              hint: 'enter_phone'.tr,
-              keyboardType: TextInputType.phone,
-            ),
-            _buildGenderSelection(context),
-            _buildSaveButton(context),
-          ],
+        body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildSectionHeader(context, 'personal_info'.tr),
+              _buildTextInput(
+                context: context,
+                controller: firstNameController,
+                icon: Icons.person_outline,
+                label: 'first_name'.tr,
+                hint: 'enter_first_name'.tr,
+              ),
+              _buildTextInput(
+                context: context,
+                controller: lastNameController,
+                icon: Icons.person_outline,
+                label: 'last_name'.tr,
+                hint: 'enter_last_name'.tr,
+              ),
+              _buildTextInput(
+                context: context,
+                controller: emailController,
+                icon: Icons.email_outlined,
+                label: 'email'.tr,
+                hint: 'enter_email'.tr,
+                keyboardType: TextInputType.emailAddress,
+              ),
+              _buildGenderSelection(context),
+              _buildSectionHeader(context, 'password'.tr),
+              _buildChangePasswordButton(context),
+              _buildSaveButton(context),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 
   Widget _buildSectionHeader(BuildContext context, String title) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(24, 16, 24, 8),
-      child: Text(
-        title,
-        style: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-          color: kmaincolor.withOpacity(0.8),
-          letterSpacing: 0.5,
+    return GetBuilder<ThemeController>(builder: (themeController) {
+      return Padding(
+        padding: const EdgeInsets.fromLTRB(24, 24, 24, 8),
+        child: Text(
+          title,
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+            color: themeController.isDarkMode
+                ? kmaincolor4.withOpacity(0.8)
+                : kmaincolor.withOpacity(0.8),
+            letterSpacing: 0.5,
+          ),
         ),
-      ),
-    );
+      );
+    });
+  }
+
+// Add this method to the EditProfilePage class
+  Widget _buildChangePasswordButton(BuildContext context) {
+    return GetBuilder<ThemeController>(builder: (themeController) {
+      final accentColor = themeController.isDarkMode ? kmaincolor4 : kmaincolor;
+      final textColor =
+          themeController.isDarkMode ? Colors.grey[300] : Colors.grey[700];
+
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        child: TextButton.icon(
+          onPressed: () {
+            passCtrl.resetpassword(context);
+          },
+          icon: Icon(Icons.lock_outline, color: accentColor),
+          label: Text(
+            'change_password'.tr,
+            style: TextStyle(
+              color: textColor,
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          style: TextButton.styleFrom(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            backgroundColor: themeController.isDarkMode
+                ? Colors.grey[800]
+                : Colors.grey[100],
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+        ),
+      );
+    });
   }
 
   Widget _buildTextInput({
@@ -86,145 +138,222 @@ class EditProfilePage extends StatelessWidget {
     required String hint,
     TextInputType? keyboardType,
   }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            label,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: Colors.grey,
-            ),
-          ),
-          const SizedBox(height: 8),
-          TextField(
-            controller: controller,
-            keyboardType: keyboardType,
-            decoration: InputDecoration(
-              prefixIcon: Icon(icon, color: kmaincolor),
-              hintText: hint,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(color: kmaincolor.withOpacity(0.3)),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(color: kmaincolor.withOpacity(0.3)),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(color: kmaincolor),
+    return GetBuilder<ThemeController>(builder: (themeController) {
+      final accentColor = themeController.isDarkMode ? kmaincolor4 : kmaincolor;
+      final labelColor =
+          themeController.isDarkMode ? Colors.grey[300] : Colors.grey[600];
+      final fillColor =
+          themeController.isDarkMode ? Colors.grey[800] : Colors.grey[50];
+      final borderColor = themeController.isDarkMode
+          ? kmaincolor4.withOpacity(0.3)
+          : kmaincolor.withOpacity(0.3);
+      final hintColor =
+          themeController.isDarkMode ? Colors.grey[500] : Colors.grey[400];
+      final textColor = themeController.isDarkMode
+          ? const Color.fromARGB(255, 207, 165, 118)
+          : const Color(0xFF2C3E50);
+
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: labelColor,
               ),
             ),
-          ),
-        ],
-      ),
-    );
+            const SizedBox(height: 8),
+            TextField(
+              controller: controller,
+              keyboardType: keyboardType,
+              style: TextStyle(
+                color: textColor,
+              ),
+              decoration: InputDecoration(
+                prefixIcon: Icon(icon, color: accentColor),
+                hintText: hint,
+                hintStyle: TextStyle(color: hintColor),
+                filled: true,
+                fillColor: fillColor,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(color: borderColor),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(color: borderColor),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(color: accentColor),
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    });
   }
 
   Widget _buildGenderSelection(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'gender'.tr,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: Colors.grey,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              Expanded(
-                child: _buildGenderOption(
-                  context,
-                  Icons.male,
-                  'male'.tr,
-                  true,
-                ),
+    return GetBuilder<ThemeController>(builder: (themeController) {
+      final labelColor =
+          themeController.isDarkMode ? Colors.grey[300] : Colors.grey[600];
+
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'gender'.tr,
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: labelColor,
               ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: _buildGenderOption(
-                  context,
-                  Icons.female,
-                  'female'.tr,
-                  false,
+            ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Expanded(
+                  child: Obx(() => _buildGenderOption(
+                        context,
+                        Icons.male,
+                        'male'.tr,
+                        isMale.value,
+                        () => isMale.value = true,
+                      )),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Obx(() => _buildGenderOption(
+                        context,
+                        Icons.female,
+                        'female'.tr,
+                        !isMale.value,
+                        () => isMale.value = false,
+                      )),
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+    });
+  }
+
+  Widget _buildGenderOption(BuildContext context, IconData icon, String label,
+      bool isSelected, VoidCallback onTap) {
+    return GetBuilder<ThemeController>(builder: (themeController) {
+      final accentColor = themeController.isDarkMode ? kmaincolor4 : kmaincolor;
+      final borderColor = isSelected
+          ? accentColor
+          : (themeController.isDarkMode
+              ? Colors.grey.withOpacity(0.5)
+              : Colors.grey.withOpacity(0.3));
+      final bgColor = isSelected
+          ? (themeController.isDarkMode
+              ? kmaincolor4.withOpacity(0.1)
+              : kmaincolor.withOpacity(0.1))
+          : (themeController.isDarkMode
+              ? Colors.grey[800]
+              : Colors.transparent);
+      final textColor = isSelected
+          ? (themeController.isDarkMode
+              ? const Color.fromARGB(255, 207, 165, 118)
+              : kmaincolor)
+          : (themeController.isDarkMode ? Colors.grey[300] : Colors.grey[600]);
+
+      return InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(10),
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          decoration: BoxDecoration(
+            border: Border.all(color: borderColor),
+            borderRadius: BorderRadius.circular(10),
+            color: bgColor,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(icon, color: textColor),
+              const SizedBox(width: 8),
+              Text(
+                label,
+                style: TextStyle(
+                  color: textColor,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
             ],
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildGenderOption(
-      BuildContext context, IconData icon, String label, bool isSelected) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 12),
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: isSelected ? kmaincolor : Colors.grey.withOpacity(0.3),
         ),
-        borderRadius: BorderRadius.circular(10),
-        color: isSelected ? kmaincolor.withOpacity(0.1) : Colors.transparent,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon,
-              color: isSelected ? kmaincolor : Colors.grey.withOpacity(0.7)),
-          const SizedBox(width: 8),
-          Text(
-            label,
-            style: TextStyle(
-              color: isSelected ? kmaincolor : Colors.grey.withOpacity(0.7),
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ],
-      ),
-    );
+      );
+    });
   }
 
   Widget _buildSaveButton(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: ElevatedButton(
-        onPressed: () {
-          // Implement save functionality
-          Get.snackbar(
-            'success'.tr,
-            'profile_updated'.tr,
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: kmaincolor,
-            colorText: Colors.white,
-          );
-        },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: kmaincolor,
-          minimumSize: const Size(double.infinity, 50),
-          shape: RoundedRectangleBorder(
+    return GetBuilder<ThemeController>(builder: (themeController) {
+      final accentColor = themeController.isDarkMode ? kmaincolor4 : kmaincolor;
+
+      return Padding(
+        padding: const EdgeInsets.all(20),
+        child: Container(
+          decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                color: accentColor.withOpacity(0.3),
+                blurRadius: 5,
+                offset: const Offset(0, 3),
+              ),
+            ],
+          ),
+          child: ElevatedButton(
+            onPressed: () {
+              logCtrl.updateUserProfile(
+                  context: context,
+                  firstName: firstNameController.text,
+                  lastName: lastNameController.text,
+                  email: emailController.text,
+                  isMale: isMale.value);
+              Get.snackbar(
+                'success'.tr,
+                'profile_updated'.tr,
+                snackPosition: SnackPosition.BOTTOM,
+                backgroundColor: accentColor,
+                colorText: Colors.white,
+                margin: const EdgeInsets.all(10),
+                borderRadius: 10,
+                duration: const Duration(seconds: 2),
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: accentColor,
+              foregroundColor: Colors.white,
+              minimumSize: const Size(double.infinity, 52),
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            child: Text(
+              'save_changes'.tr,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
           ),
         ),
-        child: Text(
-          'save_changes'.tr,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-      ),
-    );
+      );
+    });
   }
 }
