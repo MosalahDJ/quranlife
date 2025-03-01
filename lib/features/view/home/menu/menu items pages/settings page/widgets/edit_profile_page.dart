@@ -124,7 +124,7 @@ class EditProfilePage extends StatelessWidget {
               btnOkText: 'send'.tr,
               btnCancelOnPress: () {},
               btnOkOnPress: () {
-                passCtrl.resetpassword(context, changpassemailController);
+                passCtrl.resetpassword(context, changpassemailController.text);
               },
             ).show();
           },
@@ -322,7 +322,6 @@ class EditProfilePage extends StatelessWidget {
   Widget _buildSaveButton(BuildContext context) {
     return GetBuilder<ThemeController>(builder: (themeController) {
       final accentColor = themeController.isDarkMode ? kmaincolor4 : kmaincolor;
-
       return Padding(
         padding: const EdgeInsets.all(20),
         child: Container(

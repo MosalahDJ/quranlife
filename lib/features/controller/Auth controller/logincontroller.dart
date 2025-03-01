@@ -117,7 +117,7 @@ class LogInController extends GetxController {
 
       // Check if user is logged in
       final User? currentUser = FirebaseAuth.instance.currentUser;
-      if (currentUser == null || currentUser.isAnonymous == true) {
+      if (currentUser == null) {
         throw Exception('No user logged in');
       }
 
@@ -128,6 +128,16 @@ class LogInController extends GetxController {
           context: context,
           title: 'no_internet'.tr,
           desc: 'check_internet_connection'.tr,
+          dialogType: DialogType.error,
+        ).show();
+        return;
+      }
+
+      if (currentUser.isAnonymous) {
+        AwesomeDialog(
+          context: context,
+          title: 'anonymous_user'.tr,
+          desc: 'guest_login_warning'.tr,
           dialogType: DialogType.error,
         ).show();
         return;

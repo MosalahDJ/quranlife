@@ -7,9 +7,19 @@ import 'package:quranlife/features/controller/Auth%20controller/logincontroller.
 
 class PasswordresetController extends GetxController {
   final LogInController loginctrl = Get.find();
+  final User? currentUser = FirebaseAuth.instance.currentUser;
 
   resetpassword(context, emailtext) async {
     try {
+      if (currentUser != null && currentUser!.isAnonymous) {
+        AwesomeDialog(
+          context: context,
+          title: 'anonymous_user'.tr,
+          desc: 'guest_login_warning'.tr,
+          dialogType: DialogType.error,
+        ).show();
+        return;
+      }
       if (emailtext == "") {
         GetSnackBar(
           duration: const Duration(seconds: 10),
