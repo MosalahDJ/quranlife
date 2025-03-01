@@ -86,7 +86,7 @@ class SalawatTableRow {
                                 DateTime.now(),
                               )),
                   child: Text(
-                    "  -${dpcctrl.timeUntilNext.value}",
+                    "    -${dpcctrl.timeUntilNext.value}",
                     style: TextStyle(
                         fontSize: 16,
                         color: salattime == prayerctrl.currentPrayer.value

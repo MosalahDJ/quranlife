@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
+import 'package:quranlife/features/view/home/menu/menu%20items%20pages/settings%20page/widgets/notification.dart';
 import 'package:quranlife/features/view/home/salat%20time/widgets/currunet_pray_time.dart';
 import 'package:quranlife/features/view/home/salat%20time/widgets/prayer_times_table.dart';
 
@@ -27,7 +28,9 @@ class PrayerTimesPage extends StatelessWidget {
             ),
             actions: [
               IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(NotificationSettings());
+                  },
                   icon: const Icon(
                     Icons.settings_applications_outlined,
                     color: Colors.white,
