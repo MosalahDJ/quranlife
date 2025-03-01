@@ -70,7 +70,6 @@ class MapController extends GetxController {
     if (!_disposed && !mapController.isCompleted) {
       _controller = controller;
       mapController.complete(controller);
-      controller.setMapStyle(mapStyle);
       getCurrentLocation();
     }
   }
@@ -159,7 +158,7 @@ class MapController extends GetxController {
         ),
       );
     } catch (e) {
-      print('Error getting location: $e');
+      // print('Error getting location: $e');
     } finally {
       if (!_disposed) {
         isLoading.value = false;

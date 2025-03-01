@@ -2,6 +2,7 @@
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -51,6 +52,18 @@ class LogInController extends GetxController {
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   Future<void> signOut(BuildContext context) async {
+    // Check internet connectivity first
+    final connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult.contains(ConnectivityResult.none)) {
+      // No internet connection, show dialog
+      AwesomeDialog(
+        context: context,
+        title: 'no_internet'.tr,
+        desc: 'internet_required_for_signout'.tr,
+        dialogType: DialogType.warning,
+      ).show();
+      return;
+    }
     try {
       final User? currentUser = FirebaseAuth.instance.currentUser;
 

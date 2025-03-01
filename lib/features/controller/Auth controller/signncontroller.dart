@@ -72,43 +72,40 @@ class SignInController extends GetxController {
       isLoading = true;
       update();
 
-      // Check if email exists in Authentication
-      var methods = await FirebaseAuth.instance
-          .fetchSignInMethodsForEmail(emailcontroller.text);
+      // Get user documents with matching email
+      var userDocs = await _firestore
+          .collection('users')
+          .where('email', isEqualTo: emailcontroller.text)
+          .get();
 
-      if (methods.isNotEmpty) {
-        // If email exists, try to delete both Auth and Firestore data
-        try {
-          // Get users collection reference
-          var userDocs = await _firestore
-              .collection('users')
-              .where('email', isEqualTo: emailcontroller.text)
-              .get();
-
-          // Delete Firestore documents if they exist
-          for (var doc in userDocs.docs) {
-            await doc.reference.delete();
-          }
-
-          // Show success message
-          AwesomeDialog(
-            context: context,
-            dialogType: DialogType.info,
-            title: 'info'.tr,
-            body: Text('old_account_deleted'.tr),
-            btnOkOnPress: () async {
-              // Proceed with new account creation
-              await _createNewAccount(context);
-            },
-          ).show();
-        } catch (e) {
-          debugPrint('Error cleaning up old account: $e');
-          rethrow;
-        }
+      if (userDocs.docs.isNotEmpty) {
+        // If user exists in Firestore, show dialog and handle cleanup
+        AwesomeDialog(
+          context: context,
+          dialogType: DialogType.info,
+          title: 'info'.tr,
+          body: Text('old_account_deleted'.tr),
+          btnOkOnPress: () async {
+            // Delete existing Firestore documents
+            for (var doc in userDocs.docs) {
+              await doc.reference.delete();
+            }
+            // Proceed with new account creation
+            await _createNewAccount(context);
+          },
+        ).show();
       } else {
-        // If email doesn't exist, create new account directly
+        // If no existing user found, create new account directly
         await _createNewAccount(context);
       }
+    } catch (e) {
+      debugPrint('Error in signin: $e');
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.error,
+        title: 'error'.tr,
+        body: Text('registration_error'.tr),
+      ).show();
     } finally {
       isLoading = false;
       update();

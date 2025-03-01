@@ -65,7 +65,7 @@ class Favorite extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(
-                              Icons.bookmark_border,
+                              Icons.favorite_border,
                               size: 70,
                               color:
                                   Get.isDarkMode ? Colors.white : Colors.black,
