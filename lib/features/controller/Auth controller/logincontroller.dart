@@ -105,6 +105,30 @@ class LogInController extends GetxController {
     required bool isMale,
   }) async {
     try {
+      // Validate required fields
+      if (firstName.trim().isEmpty ||
+          lastName.trim().isEmpty ||
+          email.trim().isEmpty) {
+        AwesomeDialog(
+          context: context,
+          title: 'error'.tr,
+          desc: 'all_fields_required'.tr,
+          dialogType: DialogType.error,
+        ).show();
+        return;
+      }
+
+      // Validate email format
+      if (!GetUtils.isEmail(email)) {
+        AwesomeDialog(
+          context: context,
+          title: 'error'.tr,
+          desc: 'invalid_email'.tr,
+          dialogType: DialogType.error,
+        ).show();
+        return;
+      }
+
       // Check if user is logged in
       final User? currentUser = FirebaseAuth.instance.currentUser;
       if (currentUser == null) {
@@ -113,7 +137,7 @@ class LogInController extends GetxController {
 
       // Check internet connectivity
       final connectivityResult = await Connectivity().checkConnectivity();
-      if (connectivityResult.contains(ConnectivityResult.none) ) {
+      if (connectivityResult.contains(ConnectivityResult.none)) {
         AwesomeDialog(
           context: context,
           title: 'no_internet'.tr,
@@ -125,7 +149,6 @@ class LogInController extends GetxController {
 
       // Start loading state
       isLoading.value = true;
-
       // Update email if changed
       if (email != currentUser.email) {
         await currentUser.verifyBeforeUpdateEmail(email);
@@ -147,9 +170,9 @@ class LogInController extends GetxController {
         'gender': isMale ? 'male' : 'female',
         'updatedAt': FieldValue.serverTimestamp(),
         'uid': currentUser.uid,
-      'displayName': '$firstName $lastName',
-      'createdAt': FieldValue.serverTimestamp(),
-      'lastLogin': FieldValue.serverTimestamp(),
+        'displayName': '$firstName $lastName',
+        'createdAt': FieldValue.serverTimestamp(),
+        'lastLogin': FieldValue.serverTimestamp(),
       });
 
       // Show success message
@@ -159,7 +182,6 @@ class LogInController extends GetxController {
         desc: 'profile_updated_successfully'.tr,
         dialogType: DialogType.success,
       ).show();
-
     } on FirebaseAuthException catch (e) {
       String errorMessage;
       switch (e.code) {
@@ -172,14 +194,13 @@ class LogInController extends GetxController {
         default:
           errorMessage = e.message ?? 'unknown_error'.tr;
       }
-      
+
       AwesomeDialog(
         context: context,
         title: 'error'.tr,
         desc: errorMessage,
         dialogType: DialogType.error,
       ).show();
-
     } catch (e) {
       AwesomeDialog(
         context: context,

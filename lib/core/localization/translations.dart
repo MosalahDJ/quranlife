@@ -366,6 +366,7 @@ class Messages extends Translations {
           "change_password": "Change Password",
           "save_changes": "Save Changes",
           "profile_updated": "Profile updated successfully",
+          "all_fields_required": "All fields are required",
 
           // New Translations
           'who_am_i': 'Who Am I?',
@@ -773,6 +774,7 @@ class Messages extends Translations {
           "change_password": "تغيير كلمة المرور",
           "save_changes": "حفظ التغييرات",
           "profile_updated": "تم تحديث الملف الشخصي بنجاح",
+          "all_fields_required": "جميع الحقول مطلوبة",
           // New Translations
           'who_am_i': 'من أنا؟',
           'developer_name': 'جحال محمد صلاح',
@@ -1203,6 +1205,7 @@ class Messages extends Translations {
           "change_password": "Changer le mot de passe",
           "save_changes": "Enregistrer les modifications",
           "profile_updated": "Profil mis à jour avec succès",
+          "all_fields_required": "Tous les champs sont obligatoires",
           // New Translations
           'who_am_i': 'Qui suis-je?',
           'developer_name': 'Djehel Mohamed Salah',

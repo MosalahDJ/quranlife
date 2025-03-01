@@ -323,16 +323,6 @@ class EditProfilePage extends StatelessWidget {
                   lastName: lastNameController.text,
                   email: emailController.text,
                   isMale: isMale.value);
-              Get.snackbar(
-                'success'.tr,
-                'profile_updated'.tr,
-                snackPosition: SnackPosition.BOTTOM,
-                backgroundColor: accentColor,
-                colorText: Colors.white,
-                margin: const EdgeInsets.all(10),
-                borderRadius: 10,
-                duration: const Duration(seconds: 2),
-              );
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: accentColor,
