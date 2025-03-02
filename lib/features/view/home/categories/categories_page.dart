@@ -12,6 +12,7 @@ import 'package:quranlife/features/controller/home%20controller/fade_animation_c
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/times_page_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
+import 'package:quranlife/features/view/home/categories/categories_pages/messaging_page.dart';
 import 'package:quranlife/features/view/home/categories/categories_pages/tasbih.dart';
 import 'package:quranlife/features/view/home/categories/categories_pages/friday_sunnah.dart';
 import 'package:quranlife/features/view/home/categories/categories_pages/hadith/ahadith.dart';
@@ -99,7 +100,9 @@ class CategoriesPage extends StatelessWidget {
                                     'ai_bot'.tr,
                                   ),
                                   mycategory(
-                                    () {},
+                                    () {
+                                      Get.to(() => const MessagingPage());
+                                    },
                                     Icons.people_alt_rounded,
                                     'community'.tr,
                                   ),
