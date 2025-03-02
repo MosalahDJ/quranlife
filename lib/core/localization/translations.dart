@@ -88,6 +88,12 @@ class Messages extends Translations {
               'As a guest user, you will have limited access to app features. Would you like to continue?',
           'continue_guest': 'Continue as Guest',
           'cancel': 'Cancel',
+          'account_banned': 'Account Banned',
+          'violation_rules':
+              'Your account has been banned for violating app rules.',
+          'contact_support_if_error':
+              'If you think this is an error, contact support',
+          'ok': 'OK',
 
           // Validation
           'field_required': 'This field is required',
@@ -208,7 +214,6 @@ class Messages extends Translations {
           'open_settings': "Open Settings",
           'retry': "Retry",
           'permission_denied': "Permission Denied",
-          'ok': "OK",
           'permission_denied_permanently': "Permission Permanently Denied",
           'enable_permission_settings':
               "Please enable location permission from app settings",
@@ -513,6 +518,11 @@ class Messages extends Translations {
               'كمستخدم ضيف، سيكون لديك وصول محدود لميزات التطبيق. هل تريد المتابعة؟',
           'continue_guest': 'المتابعة كضيف',
           'cancel': 'إلغاء',
+          'account_banned': 'الحساب محظور',
+          'violation_rules': 'تم حظر حسابك لمخالفة قواعد التطبيق',
+          'contact_support_if_error':
+              'إذا كنت تعتقد أن هناك خطأ، تواصل مع الدعم',
+          'ok': 'حسناً',
 
           // Validation Messages
           'field_required': 'مطلوب',
@@ -632,7 +642,6 @@ class Messages extends Translations {
           'open_settings': "فتح الإعدادات",
           'retry': "إعادة المحاولة",
           'permission_denied': "تم رفض الإذن",
-          'ok': "حسناً",
           'permission_denied_permanently': "تم رفض الإذن بشكل دائم",
           'enable_permission_settings':
               "يرجى تفعيل إذن الموقع من إعدادات التطبيق",
@@ -945,6 +954,12 @@ class Messages extends Translations {
               'En tant qu\'utilisateur invité, vous aurez un accès limité aux fonctionnalités de l\'application. Voulez-vous continuer ?',
           'continue_guest': 'Continuer en tant qu\'invité',
           'cancel': 'Annuler',
+          'account_banned': 'Compte Banni',
+          'violation_rules':
+              'Votre compte a été banni pour violation des règles de l\'application.',
+          'contact_support_if_error':
+              'Si vous pensez qu\'il s\'agit d\'une erreur, contactez le support',
+          'ok': 'OK',
 
           // Validation Messages
           'field_required': 'requis',
@@ -1066,7 +1081,6 @@ class Messages extends Translations {
           'open_settings': "Ouvrir les Paramètres",
           'retry': "Réessayer",
           'permission_denied': "Permission Refusée",
-          'ok': "OK",
           'permission_denied_permanently': "Permission Refusée Définitivement",
           'enable_permission_settings':
               "Veuillez activer la permission de localisation dans les paramètres",
