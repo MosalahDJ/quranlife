@@ -47,7 +47,8 @@ class _MessagingPageState extends State<MessagingPage> {
                   itemCount: snapshot.data!.docs.length,
                   itemBuilder: (context, index) {
                     var message = snapshot.data!.docs[index];
-                    bool isCurrentUser = message['senderId'] == currentUser?.uid;
+                    bool isCurrentUser =
+                        message['senderId'] == currentUser?.uid;
 
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 5),
@@ -109,9 +110,8 @@ class _MessagingPageState extends State<MessagingPage> {
       backgroundImage: message['senderPhotoUrl'] != null
           ? NetworkImage(message['senderPhotoUrl'])
           : null,
-      child: message['senderPhotoUrl'] == null
-          ? const Icon(Icons.person)
-          : null,
+      child:
+          message['senderPhotoUrl'] == null ? const Icon(Icons.person) : null,
     );
   }
 
@@ -134,7 +134,7 @@ class _MessagingPageState extends State<MessagingPage> {
             child: TextField(
               controller: _messageController,
               decoration: InputDecoration(
-                hintText: 'اكتب رسالتك هنا...',
+                hintText: 'اكتب رسالتك...',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(25),
                   borderSide: BorderSide.none,
