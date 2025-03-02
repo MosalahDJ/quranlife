@@ -16,6 +16,7 @@ class LoginBody extends StatelessWidget {
   LoginBody({super.key});
   final LogInController loginctrl = Get.find();
   final GoogleLogInController googlectrl = Get.find();
+
   final Txtvalcontroller txtvalctrl = Get.find();
   final PasswordresetController passreset = Get.find();
   final AnonymouslysignIn authCtrl = Get.find();

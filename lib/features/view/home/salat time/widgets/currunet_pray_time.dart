@@ -10,7 +10,7 @@ import 'package:quranlife/features/controller/prayer%20times%20controller/deteri
 import 'package:quranlife/features/controller/prayer%20times%20controller/times_page_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/language_controller.dart';
 import 'package:quranlife/features/controller/spalshview%20controller/splash_view_controller.dart';
-import 'package:quranlife/features/controller/animation_controllers/floating_animation_controller.dart';
+import 'package:quranlife/features/controller/floating_animation_controllers/floating_animation_controller.dart';
 
 class CurrentPrayTime extends StatelessWidget {
   CurrentPrayTime({

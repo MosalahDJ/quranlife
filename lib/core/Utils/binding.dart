@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:quranlife/features/controller/Auth%20controller/anonymous_sign_in.dart';
+import 'package:quranlife/features/controller/Auth%20controller/delet_account.dart';
 import 'package:quranlife/features/controller/Auth%20controller/googlelogincontroller.dart';
 import 'package:quranlife/features/controller/Auth%20controller/logincontroller.dart';
 import 'package:quranlife/features/controller/Auth%20controller/passwordresset.dart';
@@ -9,7 +10,7 @@ import 'package:quranlife/features/controller/adkar%20controller/adkar_categorie
 import 'package:quranlife/features/controller/adkar%20controller/adkar_controller.dart';
 import 'package:quranlife/features/controller/ahadith%20controller/ahadith_controller.dart';
 import 'package:quranlife/features/controller/fetching%20data%20controller/allah_names_controller.dart';
-import 'package:quranlife/features/controller/animation_controllers/floating_animation_controller.dart';
+import 'package:quranlife/features/controller/floating_animation_controllers/floating_animation_controller.dart';
 import 'package:quranlife/features/controller/fetching%20data%20controller/ghusl_controller.dart';
 import 'package:quranlife/features/controller/fetching%20data%20controller/haj_controller.dart';
 import 'package:quranlife/features/controller/fetching%20data%20controller/islamic_ruqya_controller.dart';
@@ -68,6 +69,7 @@ class Mybinding implements Bindings {
     Get.put<SignInController>(SignInController());
     Get.put<LogInController>(LogInController());
     Get.put<GoogleLogInController>(GoogleLogInController());
+    Get.put<DeletAccount>(DeletAccount());
     Get.put<PasswordresetController>(PasswordresetController());
     //fcm injection
     Get.put<AccesToken>(AccesToken());

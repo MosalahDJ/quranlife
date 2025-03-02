@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
+import 'package:quranlife/features/controller/Auth%20controller/delet_account.dart';
 import 'package:quranlife/features/controller/Auth%20controller/logincontroller.dart';
 import 'package:quranlife/features/controller/Auth%20controller/passwordresset.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
@@ -63,6 +64,7 @@ class EditProfilePage extends StatelessWidget {
               _buildSectionHeader(context, 'password'.tr),
               _buildChangePasswordButton(context),
               _buildSaveButton(context),
+              _buildDeleteAccountButton(context),
             ],
           ),
         ),
@@ -83,6 +85,43 @@ class EditProfilePage extends StatelessWidget {
                 ? kmaincolor4.withOpacity(0.8)
                 : kmaincolor.withOpacity(0.8),
             letterSpacing: 0.5,
+          ),
+        ),
+      );
+    });
+  }
+
+  // Add this method to the EditProfilePage class
+  Widget _buildDeleteAccountButton(BuildContext context) {
+    final DeletAccount deletAccount = Get.find();
+
+    return GetBuilder<ThemeController>(builder: (themeController) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        child: TextButton.icon(
+          onPressed: () {
+            deletAccount.deleteUserAccount(context);
+          },
+          icon: Icon(
+            Icons.delete_forever,
+            color: Colors.red.shade600,
+          ),
+          label: Text(
+            'delete_account'.tr,
+            style: TextStyle(
+              color: Colors.red.shade600,
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          style: TextButton.styleFrom(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            backgroundColor: themeController.isDarkMode
+                ? Colors.red.shade900.withOpacity(0.2)
+                : Colors.red.shade50,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
           ),
         ),
       );

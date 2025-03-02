@@ -72,6 +72,15 @@ class Messages extends Translations {
           'registration': 'Registration',
           'anonymous_user': 'Anonymous User',
           'no_email': 'No Email',
+          //delet acount
+          "delete_account": "Delete Account",
+          "delete_account_confirmation":
+              "Are you sure you want to delete your account? This action cannot be undone",
+          "delete": "Delete",
+          "account_deleted_successfully": "Account deleted successfully",
+          "please_login_again_to_delete":
+              "Please login again to delete your account",
+          "no_user_logged_in": "No user logged in",
 
           'guest_login': 'Guest Login',
           'guest_login_warning': 'Limited Features Access',
@@ -488,6 +497,15 @@ class Messages extends Translations {
           'registration': 'التسجيل',
           'anonymous_user': 'مستخدم مجهول',
           'no_email': 'لا يوجد بريد إلكتروني',
+          //delet account
+          "delete_account": "حذف الحساب",
+          "delete_account_confirmation":
+              "هل أنت متأكد من حذف حسابك؟ هذا الإجراء لا يمكن التراجع عنه",
+          "delete": "حذف",
+          "account_deleted_successfully": "تم حذف الحساب بنجاح",
+          "please_login_again_to_delete":
+              "الرجاء إعادة تسجيل الدخول لحذف حسابك",
+          "no_user_logged_in": "لم يتم تسجيل الدخول",
 
           'guest_login': 'تسجيل الدخول كضيف',
           'guest_login_warning': 'وصول محدود للميزات',
@@ -911,6 +929,15 @@ class Messages extends Translations {
           'registration': 'Inscription',
           'anonymous_user': 'Utilisateur anonyme',
           'no_email': 'Pas d\'email',
+          //delete account
+          "delete_account": "Supprimer le compte",
+          "delete_account_confirmation":
+              "Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible",
+          "delete": "Supprimer",
+          "account_deleted_successfully": "Compte supprimé avec succès",
+          "please_login_again_to_delete":
+              "Veuillez vous reconnecter pour supprimer votre compte",
+          "no_user_logged_in": "Aucun utilisateur connecté",
 
           'guest_login': 'Connexion Invité',
           'guest_login_warning': 'Accès Limité aux Fonctionnalités',
