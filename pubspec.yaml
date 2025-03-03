@@ -43,6 +43,7 @@ dependencies:
   flashy_tab_bar2: ^0.0.10
   flutter:
     sdk: flutter
+  flutter_chat_bubble: ^2.0.2
   flutter_compass: ^0.8.0
   flutter_dotenv: ^5.2.1
   flutter_google_maps_webservices: ^1.1.1

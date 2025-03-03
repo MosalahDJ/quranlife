@@ -10,6 +10,7 @@ import 'package:quranlife/features/controller/home%20controller/fade_animation_c
 import 'package:quranlife/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:quranlife/features/controller/settings%20controllers/language_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
+import 'package:quranlife/features/view/home/categories/categories_pages/ai_bot_page.dart';
 import 'package:quranlife/features/view/home/categories/categories_pages/messaging_page.dart';
 import 'package:quranlife/features/view/home/categories/categories_pages/statistics_page.dart';
 import 'package:quranlife/features/view/home/home%20page/widgets/salawat_pageview.dart';
@@ -183,8 +184,9 @@ class HomePageBody extends StatelessWidget {
                                   crossAxisSpacing: 10,
                                   childAspectRatio: 1,
                                   children: [
-                                    mycategory(
-                                        () {}, MdiIcons.robot, 'ai_bot'.tr),
+                                    mycategory(() {
+                                      Get.to(() => const AiBotPage());
+                                    }, MdiIcons.robot, 'ai_bot'.tr),
                                     mycategory(() {
                                       Get.to(() => const MessagingPage());
                                     }, Icons.people_alt_rounded,
