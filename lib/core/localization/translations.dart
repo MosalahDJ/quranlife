@@ -278,6 +278,13 @@ class Messages extends Translations {
           'hadith': "Hadith",
           'allah_names': '   Allah Names',
           'source': 'Source',
+          'share_app': 'Share App',
+          'share_app_message':
+              'Would you like to share this app with your friends?',
+          'share': 'Share',
+          'share_app_text':
+              'Try the amazing QuranLife app! \nDownload it now from: [APP_LINK]',
+          'check_this_app': 'QuranLife App',
 
           // Quran Page
           'holy_quran': 'The Holy Qur\'an',
@@ -712,6 +719,12 @@ class Messages extends Translations {
           'hadith': "الحديث",
           'allah_names': 'أسماء الله   ',
           'source': 'المصدر',
+          'share_app': 'مشاركة التطبيق',
+          'share_app_message': 'هل تريد مشاركة التطبيق مع أصدقائك؟',
+          'share': 'مشاركة',
+          'share_app_text':
+              'جرب تطبيق QuranLife الرائع! \nحمله الآن من: [رابط التطبيق]',
+          'check_this_app': 'تطبيق QuranLife',
 
           // Quran Page
           'holy_quran': 'القرآن الكريم',
@@ -1159,6 +1172,13 @@ class Messages extends Translations {
           'hadith': "Hadith",
           'allah_names': '   Noms d\'Allah',
           'source': 'Source',
+          'share_app': 'Partager l\'application',
+          'share_app_message':
+              'Voulez-vous partager cette application avec vos amis ?',
+          'share': 'Partager',
+          'share_app_text':
+              'Essayez l\'application QuranLife ! \nTéléchargez-la maintenant sur : [LIEN_APP]',
+          'check_this_app': 'Application QuranLife',
 
           // Quran Page
           'holy_quran': 'Le Saint Coran',
