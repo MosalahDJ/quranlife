@@ -17,7 +17,10 @@ class GoogleLogInController extends GetxController {
         'uid': user.uid,
         'displayName': user.displayName,
         'email': user.email,
+        'firstName': 'firstName'.tr,
+        'lastName': 'lastName'.tr,
         'photoURL': user.photoURL,
+        'gender': 'gender'.tr,
         'lastLogin': FieldValue.serverTimestamp(),
         'createdAt': FieldValue.serverTimestamp(),
       }, SetOptions(merge: true));
