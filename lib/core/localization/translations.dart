@@ -313,7 +313,6 @@ class Messages extends Translations {
 
           // Referral Page
           'referral_page': 'Referral Page',
-          'share_app': 'Share QuranLife',
           'share_description':
               'Share the QuranLife app with your friends. Help them connect with the Quran, track prayer times, and strengthen their faith through daily Islamic guidance. Enjoy multiple features with a smooth and beneficial experience.',
           'your_referral_link': 'Your Referral Link:',
@@ -750,7 +749,6 @@ class Messages extends Translations {
 
           // Referral Page
           'referral_page': 'صفحة الإحالة',
-          'share_app': 'شارك قرآن لايف',
           'share_description':
               'شارك تطبيق قرآن لايف مع أصدقائك .ساعدهم على التواصل مع القرآن، متابعة أوقات الصلاة، وتعزيز إيمانهم من خلال التوجيهات الإسلامية اليومية. استمتع بميزات متعددة بتجربة سلسة ومفيدة',
           'your_referral_link': 'رابط الإحالة الخاص بك:',
@@ -1205,7 +1203,6 @@ class Messages extends Translations {
 
           // Referral Page
           'referral_page': 'Page de Parrainage',
-          'share_app': 'Partagez QuranLife',
           'share_description':
               'Partagez l\'application QuranLife avec vos amis. Aidez-les à se connecter au Coran, à suivre les heures de prière et à renforcer leur foi grâce à des conseils islamiques quotidiens. Profitez de fonctionnalités multiples avec une expérience fluide et utile.',
           'your_referral_link': 'Votre Lien de Parrainage:',
