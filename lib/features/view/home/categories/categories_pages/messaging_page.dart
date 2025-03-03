@@ -169,7 +169,6 @@ class _MessagingPageState extends State<MessagingPage> {
         children: [
           Expanded(
             child: TextField(
-              
               style: TextStyle(
                 color: Colors.black.withOpacity(0.8),
                 fontSize: 16,
@@ -196,9 +195,8 @@ class _MessagingPageState extends State<MessagingPage> {
             radius: 25,
             backgroundColor: Get.isDarkMode ? kmaincolor4 : kmaincolor,
             child: IconButton(
-              icon: const Icon(Icons.send, color: Colors.white),
-              onPressed: _sendMessage,
-            ),
+                icon: const Icon(Icons.send, color: Colors.white),
+                onPressed: _sendMessage),
           ),
         ],
       ),

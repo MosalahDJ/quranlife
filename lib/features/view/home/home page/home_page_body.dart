@@ -1,3 +1,5 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -185,9 +187,17 @@ class HomePageBody extends StatelessWidget {
                                   childAspectRatio: 1,
                                   children: [
                                     mycategory(() {
+                                      if (_isanonymous(context)) {
+                                        return;
+                                      }
+
                                       Get.to(() => const AiBotPage());
                                     }, MdiIcons.robot, 'ai_bot'.tr),
                                     mycategory(() {
+                                      if (_isanonymous(context)) {
+                                        return;
+                                      }
+
                                       Get.to(() => const MessagingPage());
                                     }, Icons.people_alt_rounded,
                                         'community'.tr),
@@ -252,6 +262,21 @@ class HomePageBody extends StatelessWidget {
             ],
           ),
         ));
+  }
+
+  bool _isanonymous(context) {
+    final User? currentUser = FirebaseAuth.instance.currentUser;
+
+    if (currentUser == null || currentUser.isAnonymous) {
+      AwesomeDialog(
+        context: context,
+        title: 'anonymous_user'.tr,
+        desc: 'guest_login_warning'.tr,
+        dialogType: DialogType.error,
+      ).show();
+      return true;
+    }
+    return false;
   }
 
   Widget _buildSectionHeader(

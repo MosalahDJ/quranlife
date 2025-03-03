@@ -1,3 +1,5 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
@@ -108,6 +110,10 @@ class CartCard extends StatelessWidget {
                 child: InkWell(
                   borderRadius: const BorderRadius.all(Radius.circular(11)),
                   onTap: () {
+                    if (_isanonymous(context)) {
+                      return;
+                    }
+
                     Get.to(() => const MapSample());
                   },
                   child: SizedBox(
@@ -186,4 +192,19 @@ class CartCard extends StatelessWidget {
       ),
     );
   }
+}
+
+bool _isanonymous(context) {
+  final User? currentUser = FirebaseAuth.instance.currentUser;
+
+  if (currentUser == null || currentUser.isAnonymous) {
+    AwesomeDialog(
+      context: context,
+      title: 'anonymous_user'.tr,
+      desc: 'guest_login_warning'.tr,
+      dialogType: DialogType.error,
+    ).show();
+    return true;
+  }
+  return false;
 }

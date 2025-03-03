@@ -355,14 +355,21 @@ void _showGuestLoginDialog(BuildContext context) {
               borderRadius: BorderRadius.circular(8),
             ),
           ),
-          child: Text(
-            'continue_guest'.tr,
-            style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w600,
-            ),
+          child: Obx(
+            () => authnctrl.isLoading.value
+                ? CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                    Get.isDarkMode ? Colors.white : kmaincolor,
+                  ))
+                : Text(
+                    'continue_guest'.tr,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
           ),
-        ),
+        )
       ],
     ),
   );

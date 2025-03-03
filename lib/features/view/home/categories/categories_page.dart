@@ -1,4 +1,6 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -97,6 +99,9 @@ class CategoriesPage extends StatelessWidget {
                                 children: [
                                   mycategory(
                                     () {
+                                      if (_isanonymous(context)) {
+                                        return;
+                                      }
                                       Get.to(() => const AiBotPage());
                                     },
                                     MdiIcons.robot,
@@ -104,6 +109,9 @@ class CategoriesPage extends StatelessWidget {
                                   ),
                                   mycategory(
                                     () {
+                                      if (_isanonymous(context)) {
+                                        return;
+                                      }
                                       Get.to(() => const MessagingPage());
                                     },
                                     Icons.people_alt_rounded,
@@ -132,6 +140,10 @@ class CategoriesPage extends StatelessWidget {
                                   ),
                                   mycategory(
                                     () {
+                                      if (_isanonymous(context)) {
+                                        return;
+                                      }
+
                                       Get.to(() => QiblaDirection());
                                     },
                                     FlutterIslamicIcons.qibla,
@@ -240,6 +252,21 @@ class CategoriesPage extends StatelessWidget {
       ),
     );
   }
+}
+
+bool _isanonymous(context) {
+  final User? currentUser = FirebaseAuth.instance.currentUser;
+
+  if (currentUser == null || currentUser.isAnonymous) {
+    AwesomeDialog(
+      context: context,
+      title: 'anonymous_user'.tr,
+      desc: 'guest_login_warning'.tr,
+      dialogType: DialogType.error,
+    ).show();
+    return true;
+  }
+  return false;
 }
 
 Widget mycategory(
