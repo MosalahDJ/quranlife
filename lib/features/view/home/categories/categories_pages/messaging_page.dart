@@ -169,6 +169,11 @@ class _MessagingPageState extends State<MessagingPage> {
         children: [
           Expanded(
             child: TextField(
+              
+              style: TextStyle(
+                color: Colors.black.withOpacity(0.8),
+                fontSize: 16,
+              ),
               controller: _messageController,
               decoration: InputDecoration(
                 hintText: 'write_message'.tr,

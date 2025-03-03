@@ -22,7 +22,7 @@ class SalawatPageview extends StatelessWidget {
     return SizedBox(
       height: Sizeconfig.screenheight! < 768
           ? Sizeconfig.screenheight! / 2.5
-              : Sizeconfig.screenheight! / 3.3,
+          : Sizeconfig.screenheight! / 3.3,
       child: PageView(
           controller: homectrl.salawatPageController,
           onPageChanged: (index) {
@@ -33,7 +33,9 @@ class SalawatPageview extends StatelessWidget {
             CurrentPrayTime(
               morebuttoncolor: morebuttoncolor,
               moreIconVisibility: true,
-              onpressed: () {},
+              onpressed: () {
+                homectrl.showShareDialog(context);
+              },
               textcolor2: Get.isDarkMode ? Colors.white : Colors.black,
               textcolor: Get.isDarkMode ? kmaincolor4 : kmaincolor,
               elevation: 2,
@@ -62,7 +64,9 @@ class SalawatPageview extends StatelessWidget {
                       ),
                     ),
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          homectrl.showShareDialog(context);
+                        },
                         icon: Icon(
                           Icons.more_horiz,
                           size: 30,
