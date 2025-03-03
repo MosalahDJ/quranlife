@@ -71,8 +71,4 @@ class AIChatService extends GetxController {
     checkModelStatus();
   }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
 }
