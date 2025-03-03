@@ -1079,7 +1079,7 @@ class Messages extends Translations {
           'magnetic':
               'Éloignez-vous des métaux et appareils magnétiques pour assurer la précision de la direction de la Qibla.',
 
-//tasbihpage
+          //tasbihpage
           'sur': 'sur',
           'press': 'Appuyez pour compter',
           'tasbih1': "Gloire à Dieu",
