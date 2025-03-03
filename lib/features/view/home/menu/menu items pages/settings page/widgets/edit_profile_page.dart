@@ -2,6 +2,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
+import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/features/controller/Auth%20controller/delet_account.dart';
 import 'package:quranlife/features/controller/Auth%20controller/logincontroller.dart';
@@ -61,9 +62,10 @@ class EditProfilePage extends StatelessWidget {
                 hint: 'enter_last_name'.tr,
               ),
               _buildGenderSelection(context),
+              _buildSaveButton(context),
               _buildSectionHeader(context, 'password'.tr),
               _buildChangePasswordButton(context),
-              _buildSaveButton(context),
+              _buildSectionHeader(context, 'delete_account'.tr),
               _buildDeleteAccountButton(context),
             ],
           ),
@@ -110,11 +112,13 @@ class EditProfilePage extends StatelessWidget {
             'delete_account'.tr,
             style: TextStyle(
               color: Colors.red.shade600,
-              fontSize: 14,
+              fontSize: 16,
               fontWeight: FontWeight.w500,
             ),
           ),
           style: TextButton.styleFrom(
+            fixedSize:
+                Size(Sizeconfig.screenwidth!, Sizeconfig.screenheight! / 15),
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             backgroundColor: themeController.isDarkMode
                 ? Colors.red.shade900.withOpacity(0.2)
