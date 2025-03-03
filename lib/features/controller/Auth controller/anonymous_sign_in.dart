@@ -14,10 +14,6 @@ class AnonymouslysignIn extends GetxController {
       'isAnonymous': true,
       'displayName': 'anonymous_user',
       'email': 'no_email',
-      'firstName': 'firstName',
-      'lastName': 'lastName',
-      'photoURL': 'photoURL',
-      'gender': 'gender',
       'createdAt': FieldValue.serverTimestamp(),
       'lastLogin': FieldValue.serverTimestamp(),
     }, SetOptions(merge: true));
