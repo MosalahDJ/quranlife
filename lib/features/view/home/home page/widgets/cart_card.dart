@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/features/controller/floating_animation_controllers/floating_animation_controller.dart';
+import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/location_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/language_controller.dart';
@@ -16,6 +17,7 @@ class CartCard extends StatelessWidget {
   final LocationController locationctrl = Get.find();
   final FetchPrayerFromDate fpfctrl = Get.find();
   final LanguageController langctrl = Get.find();
+  final MyHomeController homectrl = Get.find();
   final FloatingAnimationController fltanimtion = Get.find();
 
   @override
@@ -171,7 +173,9 @@ class CartCard extends StatelessWidget {
                 : 0,
             child: IconButton(
                 alignment: Alignment.center,
-                onPressed: () {},
+                onPressed: () {
+                  homectrl.showShareDialog(context);
+                },
                 icon: Icon(
                   Icons.more_horiz,
                   size: 30,

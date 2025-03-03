@@ -159,7 +159,10 @@ class HomePageBody extends StatelessWidget {
                             child: _buildSectionHeader(
                               context,
                               "category".tr,
-                              () {},
+                              () {
+                                homectrl.selected = 1;
+                                homectrl.update();
+                              },
                             ),
                           ),
                           FadeInRight(
@@ -289,12 +292,7 @@ class HomePageBody extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 child: IconButton(
                   alignment: Alignment.center,
-                  onPressed: title == "category".tr
-                      ? () {
-                          homectrl.selected = 1;
-                          homectrl.update();
-                        }
-                      : moreIconOnpressed,
+                  onPressed: moreIconOnpressed,
                   icon: Icon(
                     Icons.more_horiz,
                     size: 30,
