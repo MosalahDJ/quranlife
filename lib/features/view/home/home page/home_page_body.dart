@@ -227,7 +227,9 @@ class HomePageBody extends StatelessWidget {
                             child: _buildSectionHeader(
                               context,
                               "daily_wird".tr,
-                              () {},
+                              () {
+                                homectrl.showShareDialog(context);
+                              },
                             ),
                           ),
                           const SizedBox(height: 12),
@@ -252,8 +254,6 @@ class HomePageBody extends StatelessWidget {
 
   Widget _buildSectionHeader(
       BuildContext context, String title, VoidCallback moreIconOnpressed) {
-    final MyHomeController homectrl = Get.find();
-
     return Material(
       color: Colors.transparent,
       child: SizedBox(
