@@ -207,6 +207,13 @@ class Messages extends Translations {
           'tasbih4': "Glory be to God and praise Him",
           'tasbih5': "Glory be to God, the Almighty",
 
+          //messages page
+          'messages': 'Messages',
+          'write_message': 'Write your message...',
+          'error_occurred': 'An error occurred',
+          'user': 'User',
+          'send_failed': 'Failed to send message',
+
           //map
           'location_service_disabled': "Location Service Disabled",
           'enable_gps_message':
@@ -627,7 +634,7 @@ class Messages extends Translations {
           'magnetic':
               'ابتعد عن المعادن والأجهزة المغناطيسية لضمان دقة اتجاه القبلة.',
 
-//tasbihpage
+          //tasbihpage
           'sur': 'من',
           'press': 'اظغط للعد',
           'tasbih1': "سبحان الله",
@@ -635,6 +642,13 @@ class Messages extends Translations {
           'tasbih3': "الله أكبر",
           'tasbih4': "سبحان الله و بحمده",
           'tasbih5': "سبحان الله العضيم",
+
+          //messages page
+          'messages': 'الرسائل',
+          'write_message': 'اكتب رسالتك...',
+          'error_occurred': 'حدث خطأ ما',
+          'user': 'مستخدم',
+          'send_failed': 'فشل في إرسال الرسالة',
 
           //map
           'location_service_disabled': "خدمة تحديد الموقع غير مفعلة",
@@ -1074,6 +1088,13 @@ class Messages extends Translations {
           'tasbih4': "Gloire à Dieu et louange à Lui",
           'tasbih5': "Gloire à Dieu, le Tout-Puissant",
 
+          //messages page
+          'messages': 'Messages',
+          'write_message': 'Écrivez votre message...',
+          'error_occurred': 'Une erreur est survenue',
+          'user': 'Utilisateur',
+          'send_failed': 'Échec de l\'envoi du message',
+
           //map
           'location_service_disabled': "Service de Localisation Désactivé",
           'enable_gps_message':
@@ -1183,7 +1204,7 @@ class Messages extends Translations {
           'telegram': 'Telegram',
           'send_email': 'envoyer un email',
           'address': 'Adresse',
-          'address_details': '123 Rue Principale, Nom de la Ville',
+          'address_details': 'Constantine, Algeria',
           'working_hours': 'Heures d\'ouverture',
 
           // Drawer Menu

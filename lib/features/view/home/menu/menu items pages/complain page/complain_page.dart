@@ -5,6 +5,7 @@ import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
 import 'package:quranlife/features/controller/Url%20Luncher%20Controller/url_luncher_controller.dart';
+import 'package:quranlife/features/view/home/categories/categories_pages/messaging_page.dart';
 
 class ComplainPage extends StatelessWidget {
   ComplainPage({super.key});
@@ -57,7 +58,7 @@ class ComplainPage extends StatelessWidget {
                         _buildContactOption(
                           title: 'direct_message'.tr,
                           icon: Icons.message_rounded,
-                          onTap: () => _showMessageDialog(context),
+                          onTap: () => Get.to(() => const MessagingPage()),
                         ),
                         _buildContactOption(
                           title: 'telegram'.tr,
