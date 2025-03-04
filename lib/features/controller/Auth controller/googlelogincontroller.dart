@@ -13,17 +13,35 @@ class GoogleLogInController extends GetxController {
   Future<void> _saveUserDataToFirestore(UserCredential userCredential) async {
     final user = userCredential.user;
     if (user != null) {
-      await _firestore.collection('users').doc(user.uid).set({
-        'uid': user.uid,
-        'displayName': user.displayName,
-        'email': user.email,
-        'firstName': 'firstName'.tr,
-        'lastName': 'lastName'.tr,
-        'photoURL': user.photoURL,
-        'gender': 'gender'.tr,
-        'lastLogin': FieldValue.serverTimestamp(),
-        'createdAt': FieldValue.serverTimestamp(),
-      }, SetOptions(merge: true));
+      // Check if user with this email already exists
+      final querySnapshot = await _firestore
+          .collection('users')
+          .where('email', isEqualTo: user.email)
+          .get();
+
+      if (querySnapshot.docs.isEmpty) {
+        // No existing user found, create new record
+        await _firestore.collection('users').doc(user.uid).set({
+          'uid': user.uid,
+          'displayName': user.displayName,
+          'email': user.email,
+          'firstName': 'firstName'.tr,
+          'lastName': 'lastName'.tr,
+          'photoURL': user.photoURL,
+          'gender': 'gender'.tr,
+          'lastLogin': FieldValue.serverTimestamp(),
+          'createdAt': FieldValue.serverTimestamp(),
+        }, SetOptions(merge: true));
+      } else {
+        // Update existing user's lastLogin and link it to new UID if needed
+        final existingDoc = querySnapshot.docs.first;
+        await _firestore.collection('users').doc(existingDoc.id).update({
+          'lastLogin': FieldValue.serverTimestamp(),
+          'uid': user.uid, // Update with new UID
+          'displayName': user.displayName,
+          'photoURL': user.photoURL,
+        });
+      }
     }
   }
 
