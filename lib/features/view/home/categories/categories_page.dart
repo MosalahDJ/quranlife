@@ -102,7 +102,7 @@ class CategoriesPage extends StatelessWidget {
                                       if (_isanonymous(context)) {
                                         return;
                                       }
-                                      Get.to(() => const AiBotPage());
+                                      Get.to(() => AiBotPage());
                                     },
                                     MdiIcons.robot,
                                     'ai_bot'.tr,

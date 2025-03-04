@@ -1,43 +1,94 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
-class AIChatService extends GetxController {
-  static final String _apiKey = dotenv.env['HUGGINGFACE_API_KEY']!;
-  static const String _modelUrl =
-      "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct";
+class Message {
+  final String content;
+  final bool isUser;
+  Message(this.content, this.isUser);
+}
+
+class AiChatController extends GetxController {
+  static final String _apiKey = dotenv.env['OPENROUTER_API_KEY']!;
+  static const String _modelUrl = "https://openrouter.ai/api/v1";
+
+  final messageController = TextEditingController();
+  final scrollController = ScrollController();
+  final RxList<Message> messages = <Message>[].obs;
   final RxBool isLoading = false.obs;
   final RxString errorMessage = ''.obs;
 
-  static Future<String> sendMessage(String message) async {
+  void scrollToBottom() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (scrollController.hasClients) {
+        scrollController.animateTo(
+          scrollController.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
+      }
+    });
+  }
+
+  Future<void> sendMessage() async {
+    if (messageController.text.trim().isEmpty) return;
+
+    final userMessage = messageController.text;
+    messages.add(Message(userMessage, true));
+    isLoading.value = true;
+
+    messageController.clear();
+    scrollToBottom();
+
+    try {
+      final response = await chatWithAI(userMessage);
+      messages.add(Message(response, false));
+    } catch (e) {
+      messages.add(Message("عذراً، حدث خطأ في الاتصال", false));
+    } finally {
+      isLoading.value = false;
+      scrollToBottom();
+    }
+  }
+
+  String cleanText(String text) {
+    return text
+        .replaceAll(r'\n', '\n') // تحويل نص السطر الجديد إلى سطر جديد فعلي
+        .replaceAll(RegExp(r'<s>\[INST\].*?\[/INST\]'), '')
+        .replaceAll(RegExp(r'[\u200B-\u200D\uFEFF]'), '')
+        .trim();
+  }
+
+  Future<String> chatWithAI(String userMessage) async {
     try {
       final response = await http.post(
-        Uri.parse(_modelUrl),
+        Uri.parse("https://openrouter.ai/api/v1/chat/completions"),
         headers: {
-          'Authorization': 'Bearer $_apiKey',
-          'Content-Type': 'application/json',
+          "Authorization": "Bearer $_apiKey",
+          "Content-Type": "application/json; charset=UTF-8",
+          "HTTP-Accept": "application/json",
         },
         body: jsonEncode({
-          "inputs": """<s>[INST] $message [/INST]""",
-          "parameters": {
-            "max_length": 1000,
-            "temperature": 0.7,
-            "top_p": 0.95,
-            "repetition_penalty": 1.15,
-            "do_sample": true,
-            "num_return_sequences": 1
-          }
+          "model": "deepseek/deepseek-r1:free",
+          "messages": [
+            {
+              "role": "system",
+              "content":
+                  "You are a helpful assistant. Please respond in Arabic language only."
+            },
+            {"role": "user", "content": userMessage}
+          ],
+          "temperature": 0.7,
+          "max_tokens": 500
         }),
       );
 
       if (response.statusCode == 200) {
-        var data = jsonDecode(response.body);
-        String generatedText = data[0]['generated_text'];
-        // Remove the original prompt from the response
-        generatedText = generatedText
-            .replaceAll("""<s>[INST] $message [/INST]""", '').trim();
-        return generatedText;
+        final data = jsonDecode(utf8.decode(response.bodyBytes));
+        String generatedText = data["choices"][0]["message"]["content"];
+        return cleanText(generatedText); // استخدام دالة التنظيف الجديدة
       } else if (response.statusCode == 503) {
         return "النموذج قيد التحميل، يرجى المحاولة مرة أخرى بعد قليل.";
       } else {
@@ -71,4 +122,10 @@ class AIChatService extends GetxController {
     checkModelStatus();
   }
 
+  @override
+  void onClose() {
+    messageController.dispose();
+    scrollController.dispose();
+    super.onClose();
+  }
 }

@@ -191,7 +191,7 @@ class HomePageBody extends StatelessWidget {
                                         return;
                                       }
 
-                                      Get.to(() => const AiBotPage());
+                                      Get.to(() => AiBotPage());
                                     }, MdiIcons.robot, 'ai_bot'.tr),
                                     mycategory(() {
                                       if (_isanonymous(context)) {
