@@ -31,7 +31,7 @@ class Messages extends Translations {
           'invalid_email_title': 'Invalid Email',
           'enter_email_first': 'Please add your email first',
           'password_reset': 'Password Reset',
-          'reset_link_sent': 'We sent a reset password link to {}',
+          'reset_link_sent': 'We sent a reset password link to your email',
           'email_verification': 'Email Verification',
           'verification_sent':
               'We sent an Email verification to your email. Please verify your email first then click \'Email verified\'',
@@ -482,6 +482,12 @@ class Messages extends Translations {
           'wrong_credentials': 'كلمة المرور أو البريد الإلكتروني غير صحيح',
           'signout_error': 'خطأ في تسجيل الخروج',
           'general_error': 'حدث خطأ أثناء تسجيل الخروج',
+          'invalid_email_title': 'بريد إلكتروني غير صالح',
+          'enter_email_first': 'الرجاء إضافة بريدك الإلكتروني أولاً',
+          'password_reset': 'إعادة تعيين كلمة المرور',
+          'reset_link_sent':
+              'لقد أرسلنا رابط إعادة التعيين إلى بريدك الإلكتروني',
+
           'email_verification': 'التحقق من البريد الإلكتروني',
           'verification_sent':
               'لقد أرسلنا رسالة تحقق إلى بريدك الإلكتروني. يرجى التحقق من بريدك الإلكتروني أولاً ثم انقر على \'تم التحقق من البريد\'',
@@ -492,7 +498,7 @@ class Messages extends Translations {
           'weak_password': 'كلمة المرور المقدمة ضعيفة جداً.',
           'email_exists':
               'يوجد حساب مسجل بهذا البريد الإلكتروني. يرجى تسجيل الدخول بدلاً من ذلك.',
-          'registration_error': 'خطأ في التسجيل: {}',
+          'registration_error': 'خطأ في التسجيل',
           'no_internet': 'لا يوجد اتصال بالإنترنت',
           'internet_required_for_signout':
               'يجب توفر اتصال بالإنترنت لتسجيل الخروج',
@@ -937,7 +943,7 @@ class Messages extends Translations {
           'enter_email_first': 'Veuillez d\'abord ajouter votre email',
           'password_reset': 'Réinitialisation du mot de passe',
           'reset_link_sent':
-              'Nous avons envoyé un lien de réinitialisation à {}',
+              'Nous avons envoyé un lien de réinitialisation à votre adresse e-mail',
           'email_verification': 'Vérification de l\'email',
           'verification_sent':
               'Nous avons envoyé un email de vérification à votre adresse. Veuillez vérifier votre email puis cliquez sur \'Email vérifié\'',

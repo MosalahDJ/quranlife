@@ -179,6 +179,8 @@ class SignInController extends GetxController {
 
   // Handle Firebase authentication errors
   void _handleFirebaseAuthError(FirebaseAuthException e, BuildContext context) {
+    print(e);
+
     String errorMessage = switch (e.code) {
       'weak-password' => 'weak_password'.tr,
       'email-already-in-use' => 'email_exists'.tr,

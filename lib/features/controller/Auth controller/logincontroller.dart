@@ -178,7 +178,6 @@ class LogInController extends GetxController {
         default:
           errorMessage = e.message ?? 'unknown_error'.tr;
       }
-      print(e);
       AwesomeDialog(
         context: context,
         title: 'error'.tr,
