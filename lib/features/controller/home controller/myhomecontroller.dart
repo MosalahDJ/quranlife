@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/features/controller/Url%20Luncher%20Controller/url_luncher_controller.dart';
+import 'package:quranlife/features/controller/settings%20controllers/language_controller.dart';
+import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
 
 class MyHomeController extends GetxController {
   int selected = 2;
@@ -23,10 +25,21 @@ class MyHomeController extends GetxController {
   PageController salawatPageController = PageController();
 
   final RxInt salawatPage = 0.obs;
+  final ThemeController themctrl = Get.find();
+  final LanguageController langctrl = Get.find();
+
+  void applyLanguageChange(
+      ThemeController themeCtrl, LanguageController langCtrl, String newLang) {
+    langCtrl.changeLanguage(newLang);
+    Get.updateLocale(Locale(newLang));
+    themeCtrl.changeTheme(themeCtrl.selectedTheme.value);
+  }
 
   @override
   void onInit() {
     super.onInit();
+    applyLanguageChange(themctrl, langctrl, langctrl.language.value);
+
     salawatPageController.addListener(() {
       if (salawatPageController.hasClients) {
         salawatPage.value = salawatPageController.page?.toInt() ?? 0;
@@ -35,34 +48,34 @@ class MyHomeController extends GetxController {
   }
 
   void showShareDialog(BuildContext context) {
-  final UrlLuncherAndSharingController urllunchctrl = Get.find();
+    final UrlLuncherAndSharingController urllunchctrl = Get.find();
 
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text('share_app'.tr),
-        content: Text('share_app_message'.tr),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('cancel'.tr),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              urllunchctrl.shareWithAnyApp();
-            },
-            style: TextButton.styleFrom(
-              foregroundColor: Get.isDarkMode ? kmaincolor4 : kmaincolor,
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('share_app'.tr),
+          content: Text('share_app_message'.tr),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('cancel'.tr),
             ),
-            child: Text('share'.tr),
-          ),
-        ],
-      );
-    },
-  );
-}
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                urllunchctrl.shareWithAnyApp();
+              },
+              style: TextButton.styleFrom(
+                foregroundColor: Get.isDarkMode ? kmaincolor4 : kmaincolor,
+              ),
+              child: Text('share'.tr),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   void onClose() {

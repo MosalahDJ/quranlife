@@ -157,3 +157,10 @@ class LanguagePage extends StatelessWidget {
     );
   }
 }
+
+void applyLanguageChange(
+      ThemeController themeCtrl, LanguageController langCtrl, String newLang) {
+    langCtrl.changeLanguage(newLang);
+    Get.updateLocale(Locale(newLang));
+    themeCtrl.changeTheme(themeCtrl.selectedTheme.value);
+  }

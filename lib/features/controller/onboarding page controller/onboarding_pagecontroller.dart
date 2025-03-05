@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quranlife/features/controller/settings%20controllers/language_controller.dart';
+import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
 // import 'package:quranlife/features/controller/notification%20controller/fcm_controller.dart';
 
 class OnboardingPagecontroller extends GetxController {
   PageController pagecontroller = PageController();
   // final FCMController notictrl = Get.find();
+  final ThemeController themctrl = Get.find();
+  final LanguageController langctrl = Get.find();
+
+  void applyLanguageChange(
+      ThemeController themeCtrl, LanguageController langCtrl, String newLang) {
+    langCtrl.changeLanguage(newLang);
+    Get.updateLocale(Locale(newLang));
+    themeCtrl.changeTheme(themeCtrl.selectedTheme.value);
+  }
 
   int? currentPage;
   @override
@@ -19,6 +30,7 @@ class OnboardingPagecontroller extends GetxController {
         update();
       });
     });
+    applyLanguageChange(themctrl, langctrl, langctrl.language.value);
     // ignore: unnecessary_null_comparison
     // if (notictrl.adhansubscribition == null) {
     //   Get.defaultDialog(
