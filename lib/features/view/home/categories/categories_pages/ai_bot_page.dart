@@ -5,6 +5,7 @@ import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
+import 'package:quranlife/core/widgets/skeletonizer.dart';
 import '../../../../../features/controller/ai chat controller/ai_chat_controller.dart';
 
 class AiBotPage extends StatelessWidget {
@@ -94,10 +95,7 @@ class AiBotPage extends StatelessWidget {
                   ),
                 ),
                 Obx(() => controller.isLoading.value
-                    ? const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: CircularProgressIndicator(),
-                      )
+                    ? _buildSkeletonLayout(context)
                     : const SizedBox.shrink()),
                 Obx(() => controller.errorMessage.value.isNotEmpty
                     ? Padding(
@@ -114,6 +112,44 @@ class AiBotPage extends StatelessWidget {
           )
         ]));
   }
+}
+
+Widget _buildSkeletonLayout(context) {
+  return SafeArea(
+    child: SingleChildScrollView(
+      child: Column(
+        children: [
+          const SizedBox(height: 20),
+          Myskeletonizer(
+              skeletonizerWidget: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: ChatBubble(
+                clipper: ChatBubbleClipper6(type: BubbleType.receiverBubble),
+                alignment: Alignment.centerLeft,
+                margin: const EdgeInsets.only(top: 8),
+                backGroundColor: Colors.grey[300],
+                child: Container(
+                  constraints: BoxConstraints(
+                    maxWidth: MediaQuery.of(context).size.width * 0.7,
+                  ),
+                  child: const Text(
+                    "texttexttexttexttexttexttexttexttexttexttexttexttexttexttetexttexttexttexttexttexttextextextexttext",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                    ),
+                    textDirection: TextDirection.rtl,
+                  ),
+                ),
+              ),
+            ),
+          )),
+        ],
+      ),
+    ),
+  );
 }
 
 Widget _buildMessageInput() {
