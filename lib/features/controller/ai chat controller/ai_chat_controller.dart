@@ -88,7 +88,7 @@ class AiChatController extends GetxController {
       if (response.statusCode == 200) {
         final data = jsonDecode(utf8.decode(response.bodyBytes));
         String generatedText = data["choices"][0]["message"]["content"];
-        return cleanText(generatedText); // استخدام دالة التنظيف الجديدة
+        return cleanText(generatedText); 
       } else if (response.statusCode == 503) {
         return "model_loading".tr;
       } else {
