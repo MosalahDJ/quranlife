@@ -1,120 +1,163 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
 import 'package:get/get.dart';
+import 'package:quranlife/core/Utils/constants.dart';
+import 'package:quranlife/core/Utils/size_config.dart';
+import 'package:quranlife/core/widgets/gradient_background.dart';
+import 'package:quranlife/core/widgets/shimmer_text.dart';
 import '../../../../../features/controller/ai chat controller/ai_chat_controller.dart';
 
 class AiBotPage extends StatelessWidget {
-  final AiChatController controller = Get.put(AiChatController());
+  final AiChatController controller = Get.find();
 
   AiBotPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('المساعد الذكي',
-            style: TextStyle(fontWeight: FontWeight.bold)),
-        centerTitle: true,
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              child: Obx(() => ListView.builder(
-                    controller: controller.scrollController,
-                    itemCount: controller.messages.length,
-                    itemBuilder: (context, index) {
-                      final message = controller.messages[index];
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: 16),
-                        child: ChatBubble(
-                          clipper: message.isUser
-                              ? ChatBubbleClipper6(type: BubbleType.sendBubble)
-                              : ChatBubbleClipper6(
-                                  type: BubbleType.receiverBubble),
-                          alignment: message.isUser
-                              ? Alignment.centerRight
-                              : Alignment.centerLeft,
-                          margin: const EdgeInsets.only(top: 8),
-                          backGroundColor:
-                              message.isUser ? Colors.blue : Colors.grey[300],
-                          child: Container(
-                            constraints: BoxConstraints(
-                              maxWidth: MediaQuery.of(context).size.width * 0.7,
-                            ),
-                            child: Text(
-                              message.content,
-                              style: TextStyle(
-                                color: message.isUser
-                                    ? Colors.white
-                                    : Colors.black,
-                                fontSize: 16,
-                              ),
-                              textDirection: TextDirection.rtl,
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  )),
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          elevation: 0,
+          scrolledUnderElevation: 0,
+          backgroundColor: Colors.transparent,
+          centerTitle: true,
+          title: ShimmerText(
+            text: 'ai_bot'.tr,
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
+        ),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        body: Stack(children: [
+          Gradientbackground(
+            height: Sizeconfig.screenheight! / 2.5,
+            gradientcolor: [
+              kmaincolor,
+              Get.isDarkMode ? kmaincolor3dark : kmaincolor3,
+            ],
+          ),
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(
+                    'lib/core/assets/images/background_image/arch.jpg'),
+                opacity: 0.1,
+                repeat: ImageRepeat.repeat,
+              ),
             ),
           ),
-          Obx(() => controller.isLoading.value
-              ? const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: CircularProgressIndicator(),
-                )
-              : const SizedBox.shrink()),
-          Obx(() => controller.errorMessage.value.isNotEmpty
-              ? Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    controller.errorMessage.value,
-                    style: const TextStyle(color: Colors.red),
-                  ),
-                )
-              : const SizedBox.shrink()),
-          Container(
-            padding: const EdgeInsets.all(8.0),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 1,
-                  blurRadius: 5,
-                  offset: const Offset(0, -1),
-                ),
-              ],
-            ),
-            child: Row(
+          SafeArea(
+            child: Column(
               children: [
                 Expanded(
-                  child: TextField(
-                    controller: controller.messageController,
-                    decoration: const InputDecoration(
-                      hintText: 'اكتب رسالتك هنا...',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(25.0)),
-                      ),
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    ),
-                    textDirection: TextDirection.rtl,
-                    onSubmitted: (_) => controller.sendMessage(),
+                  child: Container(
+                    padding: const EdgeInsets.all(16),
+                    child: Obx(() => ListView.builder(
+                          controller: controller.scrollController,
+                          itemCount: controller.messages.length,
+                          itemBuilder: (context, index) {
+                            final message = controller.messages[index];
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 16),
+                              child: ChatBubble(
+                                clipper: message.isUser
+                                    ? ChatBubbleClipper6(
+                                        type: BubbleType.sendBubble)
+                                    : ChatBubbleClipper6(
+                                        type: BubbleType.receiverBubble),
+                                alignment: message.isUser
+                                    ? Alignment.centerRight
+                                    : Alignment.centerLeft,
+                                margin: const EdgeInsets.only(top: 8),
+                                backGroundColor: message.isUser
+                                    ? Colors.blue
+                                    : Colors.grey[300],
+                                child: Container(
+                                  constraints: BoxConstraints(
+                                    maxWidth:
+                                        MediaQuery.of(context).size.width * 0.7,
+                                  ),
+                                  child: Text(
+                                    message.content,
+                                    style: TextStyle(
+                                      color: message.isUser
+                                          ? Colors.white
+                                          : Colors.black,
+                                      fontSize: 16,
+                                    ),
+                                    textDirection: TextDirection.rtl,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        )),
                   ),
                 ),
-                const SizedBox(width: 8),
-                FloatingActionButton(
-                  onPressed: controller.sendMessage,
-                  child: const Icon(Icons.send),
-                ),
+                Obx(() => controller.isLoading.value
+                    ? const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: CircularProgressIndicator(),
+                      )
+                    : const SizedBox.shrink()),
+                Obx(() => controller.errorMessage.value.isNotEmpty
+                    ? Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          controller.errorMessage.value,
+                          style: const TextStyle(color: Colors.red),
+                        ),
+                      )
+                    : const SizedBox.shrink()),
+                _buildMessageInput(),
               ],
             ),
-          ),
-        ],
-      ),
-    );
+          )
+        ]));
   }
+}
+
+Widget _buildMessageInput() {
+  final AiChatController controller = Get.find();
+
+  return Container(
+    padding: const EdgeInsets.all(8),
+    decoration: const BoxDecoration(
+      color: Colors.transparent,
+    ),
+    child: Row(
+      children: [
+        Expanded(
+          child: TextField(
+            style: TextStyle(
+              color: Colors.black.withOpacity(0.8),
+              fontSize: 16,
+            ),
+            controller: controller.messageController,
+            decoration: InputDecoration(
+              hintText: 'write_message'.tr,
+              hintStyle: TextStyle(
+                color: Colors.black.withOpacity(0.5),
+                fontSize: 14,
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(25),
+                borderSide: BorderSide.none,
+              ),
+              filled: true,
+              fillColor: Colors.grey[200],
+              contentPadding: const EdgeInsets.all(10),
+            ),
+          ),
+        ),
+        const SizedBox(width: 8),
+        CircleAvatar(
+          radius: 25,
+          backgroundColor: Get.isDarkMode ? kmaincolor4 : kmaincolor,
+          child: IconButton(
+              icon: const Icon(Icons.send, color: Colors.white),
+              onPressed: controller.sendMessage),
+        ),
+      ],
+    ),
+  );
 }

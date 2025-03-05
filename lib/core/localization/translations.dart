@@ -174,7 +174,6 @@ class Messages extends Translations {
           "prophets_supplications": "Prophets' Supplications",
           "asma_ul-husna": "Names of Allah",
           "community": "Community",
-          "ai_bot": "AI Bot",
           "statistics": "Statistics",
           'islamic_calendar': 'Islamic Calendar',
           'hajj_umrah': 'Hajj and Umrah',
@@ -213,6 +212,16 @@ class Messages extends Translations {
           'error_occurred': 'An error occurred',
           'user': 'User',
           'send_failed': 'Failed to send message',
+          //ai bot page
+          'ai_bot': 'AI Assistant',
+          'loading': 'Loading...',
+          'error_connection': 'Connection Error',
+          'try_again': 'Try Again',
+          'send': 'Send',
+          'model_loading': 'Model is loading, please try again in a moment',
+          'connection_error': 'Sorry, a connection error occurred',
+          'model_unavailable': 'Model is currently unavailable',
+          'server_error': 'Server connection error',
 
           //map
           'location_service_disabled': "Location Service Disabled",
@@ -616,7 +625,6 @@ class Messages extends Translations {
           "prophets_supplications": "أدعية الأنبياء",
           "asma_ul-husna": "أسماء الله الحسنى",
           "community": "المجتمع",
-          "ai_bot": "AI Bot",
           "statistics": "إحصائيات",
           'islamic_calendar': 'التقويم الإسلامي',
           'hajj_umrah': 'الحج والعمرة',
@@ -655,6 +663,17 @@ class Messages extends Translations {
           'error_occurred': 'حدث خطأ ما',
           'user': 'مستخدم',
           'send_failed': 'فشل في إرسال الرسالة',
+          //ai bot page
+          'ai_bot': 'المساعد الذكي',
+          'loading': 'جاري التحميل...',
+          'error_connection': 'خطأ في الاتصال',
+          'try_again': 'حاول مرة أخرى',
+          'send': 'إرسال',
+          'model_loading':
+              'النموذج قيد التحميل، يرجى المحاولة مرة أخرى بعد قليل',
+          'connection_error': 'عذراً، حدث خطأ في الاتصال',
+          'model_unavailable': 'النموذج غير متاح حالياً',
+          'server_error': 'خطأ في الاتصال بالخادم',
 
           //map
           'location_service_disabled': "خدمة تحديد الموقع غير مفعلة",
@@ -1066,7 +1085,6 @@ class Messages extends Translations {
           "prophets_supplications": "Supplications des Prophètes",
           "asma_ul-husna": "Noms d'Allah",
           "community": "Communauté",
-          "ai_bot": "AI Bot",
           "statistics": "Statistiques",
           'islamic_calendar': 'Calendrier Islamique',
           'hajj_umrah': 'Hajj et Omra',
@@ -1105,6 +1123,17 @@ class Messages extends Translations {
           'error_occurred': 'Une erreur est survenue',
           'user': 'Utilisateur',
           'send_failed': 'Échec de l\'envoi du message',
+          //ai bot page
+          'ai_bot': 'Assistant IA',
+          'loading': 'Chargement...',
+          'error_connection': 'Erreur de Connexion',
+          'try_again': 'Réessayer',
+          'send': 'Envoyer',
+          'model_loading':
+              'Le modèle est en cours de chargement, veuillez réessayer dans un instant',
+          'connection_error': 'Désolé, une erreur de connexion s\'est produite',
+          'model_unavailable': 'Le modèle n\'est pas disponible actuellement',
+          'server_error': 'Erreur de connexion au serveur',
 
           //map
           'location_service_disabled': "Service de Localisation Désactivé",

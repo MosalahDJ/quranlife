@@ -46,7 +46,7 @@ class AiChatController extends GetxController {
       final response = await chatWithAI(userMessage);
       messages.add(Message(response, false));
     } catch (e) {
-      messages.add(Message("عذراً، حدث خطأ في الاتصال", false));
+      messages.add(Message("error_connection".tr, false));
     } finally {
       isLoading.value = false;
       scrollToBottom();
@@ -90,12 +90,12 @@ class AiChatController extends GetxController {
         String generatedText = data["choices"][0]["message"]["content"];
         return cleanText(generatedText); // استخدام دالة التنظيف الجديدة
       } else if (response.statusCode == 503) {
-        return "النموذج قيد التحميل، يرجى المحاولة مرة أخرى بعد قليل.";
+        return "model_loading".tr;
       } else {
-        return "عذراً، حدث خطأ في الاتصال (${response.statusCode})";
+        return "${'connection_error'.tr} (${response.statusCode})";
       }
     } catch (e) {
-      return "حدث خطأ غير متوقع: $e";
+      return "${'connection_error'.tr} $e";
     }
   }
 
@@ -109,10 +109,10 @@ class AiChatController extends GetxController {
       );
 
       if (response.statusCode != 200) {
-        errorMessage.value = 'النموذج غير متاح حالياً';
+        errorMessage.value = 'model_unavailable'.tr;
       }
     } catch (e) {
-      errorMessage.value = 'خطأ في الاتصال بالخادم';
+      errorMessage.value = 'server_error'.tr;
     }
   }
 

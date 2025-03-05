@@ -9,6 +9,7 @@ import 'package:quranlife/features/controller/Url%20Luncher%20Controller/url_lun
 import 'package:quranlife/features/controller/adkar%20controller/adkar_categories_controller.dart';
 import 'package:quranlife/features/controller/adkar%20controller/adkar_controller.dart';
 import 'package:quranlife/features/controller/ahadith%20controller/ahadith_controller.dart';
+import 'package:quranlife/features/controller/ai%20chat%20controller/ai_chat_controller.dart';
 import 'package:quranlife/features/controller/fetching%20data%20controller/allah_names_controller.dart';
 import 'package:quranlife/features/controller/floating_animation_controllers/floating_animation_controller.dart';
 import 'package:quranlife/features/controller/fetching%20data%20controller/ghusl_controller.dart';
@@ -84,6 +85,7 @@ class Mybinding implements Bindings {
     Get.put<ThemeController>(ThemeController(), permanent: true);
     //home injection
     Get.put<MyHomeController>(MyHomeController());
+    Get.put<AiChatController>(AiChatController());
     Get.put<FadeAnimationController>(FadeAnimationController());
     Get.put<FloatingAnimationController>(FloatingAnimationController());
     //quraan injection
