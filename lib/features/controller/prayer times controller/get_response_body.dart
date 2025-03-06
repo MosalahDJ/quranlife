@@ -42,7 +42,7 @@ class GetResponseBody extends GetxController {
 
   void _updateDates() {
     mycurrentdate = DateTime.now();
-    endDate = mycurrentdate.add(const Duration(days: 180));
+    endDate = mycurrentdate.add(const Duration(days: 30));
   }
 
   late SharedPreferences prefs;

@@ -6,11 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/features/controller/Auth%20controller/textvalidatecontroller.dart';
+import 'package:quranlife/features/controller/Auth%20controller/user_state_controller.dart';
 import 'package:quranlife/features/view/auth/login%20page/loginpage.dart';
 import 'package:quranlife/features/view/home/main_page.dart';
 
 class SignInController extends GetxController {
   final Txtvalcontroller txtvalctrl = Get.find();
+  final _userstatectrl =
+      Get.put<UserStateController>(UserStateController(), permanent: true);
 
   // Text Controllers
   final TextEditingController name = TextEditingController();
@@ -124,6 +127,7 @@ class SignInController extends GetxController {
 
       // Save user data to Firestore
       await _saveUserDataToFirestore(userCredential.user!);
+      await _userstatectrl.saveUserState(UserState.emailSignInUser);
 
       // Send email verification
       await _sendEmailVerification(context);

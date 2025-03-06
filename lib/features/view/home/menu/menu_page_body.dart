@@ -7,6 +7,7 @@ import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/core/widgets/skeletonizer.dart';
+import 'package:quranlife/features/controller/Auth%20controller/delet_account.dart';
 import 'package:quranlife/features/controller/Auth%20controller/logincontroller.dart';
 import 'package:quranlife/features/controller/home%20controller/fade_animation_controller.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
@@ -93,15 +94,13 @@ class MenuPageBody extends StatelessWidget {
                         const SizedBox(height: 12),
                         Text(
                           'anonymous_user'.tr,
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleLarge
-                              ?.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: themeController.isDarkMode
-                                    ? Colors.white70
-                                    : Colors.black,
-                              ),
+                          style:
+                              Theme.of(context).textTheme.titleLarge?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    color: themeController.isDarkMode
+                                        ? Colors.white70
+                                        : Colors.black,
+                                  ),
                         ),
                         const SizedBox(height: 4),
                         Text(
@@ -234,7 +233,12 @@ class MenuPageBody extends StatelessWidget {
               title: 'help_feedback'.tr),
           _buildSettingsCategory(
               icon: Icons.logout_outlined,
-              onTap: () => logctrl.signOut(context),
+              onTap: () {
+                final DeletAccount deletAccount = Get.find();
+                FirebaseAuth.instance.currentUser!.isAnonymous
+                    ? deletAccount.anonymousSignout(context)
+                    : logctrl.signOut(context);
+              },
               title: 'log_out'.tr),
         ],
       ),
@@ -264,9 +268,8 @@ class MenuPageBody extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Icon(icon,
-                      color: themeController.isDarkMode
-                          ? kmaincolor4
-                          : kmaincolor,
+                      color:
+                          themeController.isDarkMode ? kmaincolor4 : kmaincolor,
                       size: 24),
                 ),
                 const SizedBox(width: 16),

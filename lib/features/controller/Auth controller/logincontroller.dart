@@ -9,12 +9,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:quranlife/features/controller/Auth%20controller/user_state_controller.dart';
 
 class LogInController extends GetxController {
   final TextEditingController emailcontroller = TextEditingController();
   final TextEditingController passwordcontroller = TextEditingController();
   final RxBool isLoading = false.obs;
   GlobalKey mykey = GlobalKey();
+  final _userstatectrl =
+      Get.put<UserStateController>(UserStateController(), permanent: true);
 
   Future login(BuildContext context) async {
     try {
@@ -24,6 +27,7 @@ class LogInController extends GetxController {
         password: passwordcontroller.text,
       );
       if (FirebaseAuth.instance.currentUser!.emailVerified) {
+        await _userstatectrl.saveUserState(UserState.emailSignInUser);
         Get.offAllNamed("home");
       } else {
         AwesomeDialog(
@@ -78,16 +82,20 @@ class LogInController extends GetxController {
 
           // Then delete anonymous user account
           await currentUser.delete();
+          await _userstatectrl.saveUserState(UserState.noUser);
         } else {
           // Sign out from Google if user signed in with Google
           final GoogleSignIn googleSignIn = GoogleSignIn();
           if (await googleSignIn.isSignedIn()) {
             await googleSignIn.signOut();
+        await _userstatectrl.saveUserState(UserState.noUser);
+
           }
         }
 
         // Sign out from Firebase
         await FirebaseAuth.instance.signOut();
+        await _userstatectrl.saveUserState(UserState.noUser);
       }
 
       // Navigate to login page

@@ -5,10 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:quranlife/features/controller/Auth%20controller/user_state_controller.dart';
 
 class GoogleLogInController extends GetxController {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final RxBool isLoading = false.obs;
+  final _userstatectrl =
+      Get.put<UserStateController>(UserStateController(), permanent: true);
 
   Future<void> _saveUserDataToFirestore(UserCredential userCredential) async {
     final user = userCredential.user;
@@ -80,6 +83,7 @@ class GoogleLogInController extends GetxController {
 
         // Save user data to Firestore
         await _saveUserDataToFirestore(userCredential);
+        await _userstatectrl.saveUserState(UserState.googleSignInUser);
 
         Get.offAllNamed("home");
       } catch (authError) {

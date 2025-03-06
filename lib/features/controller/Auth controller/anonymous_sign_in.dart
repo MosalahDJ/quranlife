@@ -3,10 +3,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:quranlife/features/controller/Auth%20controller/user_state_controller.dart';
 
 class AnonymouslysignIn extends GetxController {
   final RxBool isLoading = false.obs;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final _userstatectrl =
+      Get.put<UserStateController>(UserStateController(), permanent: true);
 
   Future<void> _saveAnonymousUserDataToFirestore(User user) async {
     await _firestore.collection('users').doc(user.uid).set({
@@ -31,6 +34,7 @@ class AnonymouslysignIn extends GetxController {
 
       // Save anonymous user data to Firestore
       await _saveAnonymousUserDataToFirestore(userCredential.user!);
+      await _userstatectrl.saveUserState(UserState.anonymousUser);
       Get.offAllNamed("home");
       return userCredential.user;
     } catch (e) {

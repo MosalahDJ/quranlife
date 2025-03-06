@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:quranlife/features/controller/Auth%20controller/user_state_controller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/deterimine_prayers_controller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/get_response_body.dart';
@@ -19,27 +21,47 @@ class SplashViewController extends GetxController
   final DeterminePrayersController prayerctrl = Get.find();
   final TimesPageController timespagectrl = Get.find();
   final GetResponseBody responsectrl = Get.find();
+  final _userstatectrl =
+      Get.put<UserStateController>(UserStateController(), permanent: true);
 
   RxBool isLoading = true.obs;
   void tonextpage() {
-    Future.delayed(const Duration(seconds: 2), () async {
-      final bool userExists = await _checkIfUserExists();
-      final User? currentUser = FirebaseAuth.instance.currentUser;
+    Future.delayed(
+      const Duration(seconds: 2),
+      () async {
+        final bool userExists = await _checkIfUserExists();
+        final User? currentUser = FirebaseAuth.instance.currentUser;
+        final connectivityResult = await Connectivity().checkConnectivity();
+        if (connectivityResult.contains(ConnectivityResult.none)) {
+          final userState = await _userstatectrl.getUserState();
 
-      if (!userExists || currentUser == null) {
-        // User is not logged in
-        Get.offAllNamed("onboarding");
-      } else if (currentUser.isAnonymous) {
-        // Anonymous user
-        Get.offAllNamed("home");
-      } else if (currentUser.emailVerified) {
-        // Verified email user
-        Get.offAllNamed("home");
-      } else {
-        // Unverified email user
-        Get.offAllNamed("login");
-      }
-    });
+          switch (userState) {
+            case UserState.noUser:
+              Get.offAllNamed("onboarding");
+              break;
+            case UserState.anonymousUser:
+            case UserState.emailSignInUser:
+            case UserState.googleSignInUser:
+              Get.offAllNamed("home");
+              break;
+          }
+        } else {
+          if (!userExists || currentUser == null) {
+            // User is not logged in
+            Get.offAllNamed("onboarding");
+          } else if (currentUser.isAnonymous) {
+            // Anonymous user
+            Get.offAllNamed("home");
+          } else if (currentUser.emailVerified) {
+            // Verified email user
+            Get.offAllNamed("home");
+          } else {
+            // Unverified email user
+            Get.offAllNamed("login");
+          }
+        }
+      },
+    );
   }
 
   @override

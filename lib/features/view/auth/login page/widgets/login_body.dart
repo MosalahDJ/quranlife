@@ -359,7 +359,7 @@ void _showGuestLoginDialog(BuildContext context) {
             () => authnctrl.isLoading.value
                 ? CircularProgressIndicator(
                     valueColor: AlwaysStoppedAnimation<Color>(
-                    Get.isDarkMode ? Colors.white : kmaincolor,
+                    Get.isDarkMode ? kmaincolor4 : kmaincolor,
                   ))
                 : Text(
                     'continue_guest'.tr,
