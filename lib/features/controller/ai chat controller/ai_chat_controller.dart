@@ -20,6 +20,29 @@ class AiChatController extends GetxController {
   final RxBool isLoading = false.obs;
   final RxString errorMessage = ''.obs;
 
+  static const _systemPrompt = """
+أنت مساعد ذكي في تطبيق قرآن لايف، مهمتك الرئيسية هي:
+- الإجابة على الأسئلة الإسلامية ضمن نطاق القرآن والسنة
+- مساعدة المستخدمين في الفتاوى الشرعية الموثقة
+- شرح الأحكام الفقهية بالمصادر المعتمدة
+
+القواعد الأساسية:
+1. عند السؤال عن هويتك:
+   "أنا مساعد ذكي في تطبيق قرآن لايف مخصص لخدمة الإسلام والمسلمين"
+
+2. إذا طرح سؤال خارج الإسلام:
+   "عذرًا، هذا التطبيق مخصص للأسئلة الإسلامية فقط. كيف يمكنني مساعدتك في موضوع شرعي؟"
+
+3. منهجية الإجابة:
+   - اذكر الدليل من القرآن (السورة والآية)
+   - استشهد بالأحاديث الصحيحة مع المصدر
+   - اعتمد على المذاهب الأربعة في المسائل الخلافية
+   - استخدم لغة عربية واضحة وسهلة
+
+4. في الأسئلة الحساسة:
+   "ينبغي الرجوع إلى عالم شرعي متخصص لهذه المسائل"
+""";
+
   void scrollToBottom() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (scrollController.hasClients) {
@@ -33,12 +56,17 @@ class AiChatController extends GetxController {
   }
 
   Future<void> sendMessage() async {
-    if (messageController.text.trim().isEmpty) return;
+    final userMessage = messageController.text.trim();
+    if (userMessage.isEmpty) return;
 
-    final userMessage = messageController.text;
+    if (!_isIslamicQuestion(userMessage)) {
+      messages.add(Message("error_non_islamic".tr, false));
+      messageController.clear();
+      return;
+    }
+
     messages.add(Message(userMessage, true));
     isLoading.value = true;
-
     messageController.clear();
     scrollToBottom();
 
@@ -53,11 +81,23 @@ class AiChatController extends GetxController {
     }
   }
 
+  bool _isIslamicQuestion(String text) {
+    final islamicPattern = RegExp(
+      r'(من أنت|ما هو|صلاة|زكاة|قرآن|حديث|سنة|فقه|عقيدة|سيرة|إسلام|شرع|حلال|حرام|الله|رسول|فتوى|حكم)',
+      caseSensitive: false,
+    );
+    return islamicPattern.hasMatch(text);
+  }
+
   String cleanText(String text) {
     return text
-        .replaceAll(r'\n', '\n') // تحويل نص السطر الجديد إلى سطر جديد فعلي
+        .replaceAll(r'\n', '\n')
         .replaceAll(RegExp(r'<s>\[INST\].*?\[/INST\]'), '')
         .replaceAll(RegExp(r'[\u200B-\u200D\uFEFF]'), '')
+        .replaceAllMapped(
+          RegExp(r'\[المصدر:(.*?)\]'),
+          (match) => '\n\n[المصدر: ${match.group(1)}]',
+        )
         .trim();
   }
 
@@ -68,20 +108,16 @@ class AiChatController extends GetxController {
         headers: {
           "Authorization": "Bearer $_apiKey",
           "Content-Type": "application/json; charset=UTF-8",
-          "HTTP-Accept": "application/json",
         },
         body: jsonEncode({
           "model": "deepseek/deepseek-r1:free",
           "messages": [
-            {
-              "role": "system",
-              "content":
-                  "You are a helpful assistant. Please respond in Arabic language only."
-            },
+            {"role": "system", "content": _systemPrompt},
             {"role": "user", "content": userMessage}
           ],
-          "temperature": 0.7,
-          "max_tokens": 500
+          "temperature": 0.3,
+          "max_tokens": 600,
+          "frequency_penalty": 0.7,
         }),
       );
 
@@ -89,11 +125,8 @@ class AiChatController extends GetxController {
         final data = jsonDecode(utf8.decode(response.bodyBytes));
         String generatedText = data["choices"][0]["message"]["content"];
         return cleanText(generatedText);
-      } else if (response.statusCode == 503) {
-        return "model_loading".tr;
-      } else {
-        return "${'connection_error'.tr} (${response.statusCode})";
       }
+      return "${'connection_error'.tr} (${response.statusCode})";
     } catch (e) {
       return "${'connection_error'.tr} $e";
     }
@@ -103,9 +136,7 @@ class AiChatController extends GetxController {
     try {
       final response = await http.get(
         Uri.parse(_modelUrl),
-        headers: {
-          'Authorization': 'Bearer $_apiKey',
-        },
+        headers: {'Authorization': 'Bearer $_apiKey'},
       );
 
       if (response.statusCode != 200) {
