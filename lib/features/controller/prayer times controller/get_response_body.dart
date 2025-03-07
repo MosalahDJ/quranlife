@@ -160,7 +160,7 @@ class GetResponseBody extends GetxController {
           colorText: Get.isDarkMode
               ? const Color(0xFFFFFFFF)
               : const Color.fromARGB(255, 0, 0, 0),
-          duration: const Duration(seconds: 30),
+          duration: const Duration(seconds: 15),
           margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
           padding: const EdgeInsets.all(20));
       await _gettingresponse(mycurrentdate, endDate);

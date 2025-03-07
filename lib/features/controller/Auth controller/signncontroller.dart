@@ -186,8 +186,8 @@ class SignInController extends GetxController {
     print(e);
 
     String errorMessage = switch (e.code) {
-      'ERROR_WEAK_PASSWORD' => 'weak_password'.tr,
-      'ERROR_EMAIL_ALREADY_IN_USE' => 'email_exists'.tr,
+      'weak-password' => 'weak_password'.tr,
+      'email-already-in-use' => 'email_exists'.tr,
       _ => "${'registration_error'.tr}: \n${e.code}"
     };
 

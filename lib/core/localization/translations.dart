@@ -145,9 +145,9 @@ class Messages extends Translations {
           'community_title': 'Islamic Community',
           'community_subtitle':
               'Quran Life helps you locate nearby mosques and connects you with your brothers and sisters in faith.',
-              'downloading_data': 'Downloading Data...',
-              'please_be_patient': 'Please be patient, it takes a while the first time.',
-
+          'downloading_data': 'Downloading Data...',
+          'please_be_patient':
+              'Please be patient, it takes a while the first time.',
 
           // Home Page Navigation
           'home': 'Home',
@@ -227,7 +227,9 @@ class Messages extends Translations {
           'server_error': 'Server connection error',
           'welcome_message': 'Welcome to the Smart Assistant!',
           'ai_disclaimer':
-              'The AI in this app is a helpful tool but does not replace consulting specialists, as it may make errors in some matters. We always recommend referring to trusted scholars to ensure the accuracy and suitability of the information for your situation.',
+              'The AI in this app is designed to provide information about Islamic history and general awareness.\n'
+                  'It does not issue religious rulings or provide answers based on Quranic texts or Hadith.\n'
+                  'For religious inquiries, we always recommend consulting trusted scholars to ensure the accuracy and suitability of the information for your situation.',
 
           //map
           'location_service_disabled': "Location Service Disabled",
@@ -601,10 +603,9 @@ class Messages extends Translations {
           'community_title': 'المجتمع الإسلامي',
           'community_subtitle':
               'يساعدك تطبيق قرآن لايف في العثور على المساجد القريبة ويربطك بإخوانك وأخواتك في الإيمان.',
-              'downloading_data': 'جاري تنزيل البيانات',
-              'please_be_patient': 'نرجو التحلي بالصبر، قد يستغرق الأمر بعض الوقت في المرة الأولى',
-
-
+          'downloading_data': 'جاري تنزيل البيانات',
+          'please_be_patient':
+              'نرجو التحلي بالصبر، قد يستغرق الأمر بعض الوقت في المرة الأولى',
 
           // Home Page Navigation
           'home': 'الرئيسية',
@@ -685,8 +686,9 @@ class Messages extends Translations {
           'server_error': 'خطأ في الاتصال بالخادم',
           'welcome_message': 'مرحبًا في المساعد الذكي',
           'ai_disclaimer':
-              ' الذكاء الاصطناعي في هذا التطبيق أداة مساعدة ولا يغني عن استشارة المختصين، فقد يخطئ في بعض المسائل. نوصي دائمًا بالرجوع إلى العلماء الموثوقين للتأكد من صحة المعلومات وملاءمتها لوضعكم.',
-
+              'تم تصميم الذكاء الاصطناعي في هذا التطبيق لتقديم معلومات حول التاريخ الإسلامي والتوعية العامة.\n'
+                  'لا يصدر التطبيق فتاوى أو أحكامًا شرعية، ولا يقدم إجابات تعتمد على نصوص القرآن أو الأحاديث النبوية.\n'
+                  'بالنسبة للأسئلة الدينية، نوصي دائمًا بالرجوع إلى علماء موثوقين لضمان دقة المعلومات وملاءمتها لحالتك.',
           //map
           'location_service_disabled': "خدمة تحديد الموقع غير مفعلة",
           'enable_gps_message': "يرجى تفعيل GPS للحصول على موقعك الحالي",
@@ -1061,9 +1063,9 @@ class Messages extends Translations {
           'community_title': 'Communauté Islamique',
           'community_subtitle':
               'Quran Life vous aide à localiser les mosquées à proximité et vous connecte avec vos frères et sœurs dans la foi.',
-              'downloading_data': 'Téléchargement des données...',
-              'please_be_patient': 'Merci de patienter, cela peut prendre un peu de temps la première fois.',
-
+          'downloading_data': 'Téléchargement des données...',
+          'please_be_patient':
+              'Merci de patienter, cela peut prendre un peu de temps la première fois.',
 
           // Home Page Navigation
           'home': 'Accueil',
@@ -1144,8 +1146,9 @@ class Messages extends Translations {
           'server_error': 'Erreur de connexion au serveur',
           'welcome_message': 'Bienvenue dans l\'Assistant Intelligent !',
           'ai_disclaimer':
-              'L\'IA dans cette application est un outil d\'aide mais ne remplace pas la consultation de spécialistes, car elle peut commettre des erreurs. Nous recommandons toujours de consulter des savants de confiance pour vérifier l\'exactitude et la pertinence des informations pour votre situation.',
-
+              'L\'IA de cette application est conçue pour fournir des informations sur l\'histoire islamique et la sensibilisation générale.\n'
+                  'Elle ne délivre pas de fatwas, de décisions religieuses ou de réponses basées sur les textes du Coran ou des Hadiths.\n'
+                  'Pour les questions religieuses, nous recommandons toujours de consulter des érudits de confiance pour garantir l\'exactitude et la pertinence des informations pour votre situation.',
           //map
           'location_service_disabled': "Service de Localisation Désactivé",
           'enable_gps_message':

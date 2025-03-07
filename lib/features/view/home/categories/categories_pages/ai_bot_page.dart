@@ -98,15 +98,6 @@ class AiBotPage extends StatelessWidget {
                 Obx(() => controller.isLoading.value
                     ? _buildSkeletonLayout(context)
                     : const SizedBox.shrink()),
-                Obx(() => controller.errorMessage.value.isNotEmpty
-                    ? Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          controller.errorMessage.value,
-                          style: const TextStyle(color: Colors.red),
-                        ),
-                      )
-                    : const SizedBox.shrink()),
                 _buildMessageInput(),
               ],
             ),
