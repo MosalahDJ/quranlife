@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/fetch_prayer_from_date.dart';
@@ -155,8 +156,10 @@ class GetResponseBody extends GetxController {
 
     if (needsRefresh) {
       _updateDates();
-      Get.snackbar("downloading_data",
-          "please_be_patient",
+      Get.snackbar("downloading_data".tr, "please_be_patient".tr,
+          colorText: Get.isDarkMode
+              ? const Color(0xFFFFFFFF)
+              : const Color.fromARGB(255, 0, 0, 0),
           duration: const Duration(seconds: 20),
           margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
           padding: const EdgeInsets.all(20));
