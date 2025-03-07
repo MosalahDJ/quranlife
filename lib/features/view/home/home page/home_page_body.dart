@@ -198,7 +198,7 @@ class HomePageBody extends StatelessWidget {
                                           dialogType: DialogType.info,
                                           title: 'welcome_message'.tr,
                                           desc: 'ai_disclaimer'.tr,
-                                          btnOkText: 'حسنًا'.tr,
+                                          btnOkText: 'ok'.tr,
                                           btnOkOnPress: () {},
                                         ).show(),
                                       );
