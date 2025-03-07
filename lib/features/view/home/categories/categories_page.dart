@@ -102,6 +102,18 @@ class CategoriesPage extends StatelessWidget {
                                       if (_isanonymous(context)) {
                                         return;
                                       }
+                                      Future.delayed(
+                                        const Duration(seconds: 1),
+                                        () => AwesomeDialog(
+                                          // ignore: use_build_context_synchronously
+                                          context: context,
+                                          dialogType: DialogType.info,
+                                          title: 'welcome_message'.tr,
+                                          desc: 'ai_disclaimer'.tr,
+                                          btnOkText: 'حسنًا'.tr,
+                                          btnOkOnPress: () {},
+                                        ).show(),
+                                      );
                                       Get.to(() => AiBotPage());
                                     },
                                     MdiIcons.robot,

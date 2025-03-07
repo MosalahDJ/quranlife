@@ -222,6 +222,9 @@ class Messages extends Translations {
           'connection_error': 'Sorry, a connection error occurred',
           'model_unavailable': 'Model is currently unavailable',
           'server_error': 'Server connection error',
+          'welcome_message': 'Welcome to the Smart Assistant!',
+          'ai_disclaimer':
+              'The AI in this app is a helpful tool but does not replace consulting specialists, as it may make errors in some matters. We always recommend referring to trusted scholars to ensure the accuracy and suitability of the information for your situation.',
 
           //map
           'location_service_disabled': "Location Service Disabled",
@@ -680,6 +683,9 @@ class Messages extends Translations {
           'connection_error': 'عذراً، حدث خطأ في الاتصال',
           'model_unavailable': 'النموذج غير متاح حالياً',
           'server_error': 'خطأ في الاتصال بالخادم',
+          'welcome_message': 'مرحبًا في المساعد الذكي',
+          'ai_disclaimer':
+              ' الذكاء الاصطناعي في هذا التطبيق أداة مساعدة ولا يغني عن استشارة المختصين، فقد يخطئ في بعض المسائل. نوصي دائمًا بالرجوع إلى العلماء الموثوقين للتأكد من صحة المعلومات وملاءمتها لوضعكم.',
 
           //map
           'location_service_disabled': "خدمة تحديد الموقع غير مفعلة",
@@ -1140,6 +1146,9 @@ class Messages extends Translations {
           'connection_error': 'Désolé, une erreur de connexion s\'est produite',
           'model_unavailable': 'Le modèle n\'est pas disponible actuellement',
           'server_error': 'Erreur de connexion au serveur',
+          'welcome_message': 'Bienvenue dans l\'Assistant Intelligent !',
+          'ai_disclaimer':
+              'L\'IA dans cette application est un outil d\'aide mais ne remplace pas la consultation de spécialistes, car elle peut commettre des erreurs. Nous recommandons toujours de consulter des savants de confiance pour vérifier l\'exactitude et la pertinence des informations pour votre situation.',
 
           //map
           'location_service_disabled': "Service de Localisation Désactivé",

@@ -80,6 +80,7 @@ class AiBotPage extends StatelessWidget {
                                   child: Text(
                                     message.content,
                                     style: TextStyle(
+                                      fontFamily: "Cairo",
                                       color: message.isUser
                                           ? Colors.white
                                           : Colors.black,
@@ -140,7 +141,6 @@ Widget _buildSkeletonLayout(context) {
                       color: Colors.black,
                       fontSize: 16,
                     ),
-                    textDirection: TextDirection.rtl,
                   ),
                 ),
               ),
