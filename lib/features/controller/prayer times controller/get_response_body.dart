@@ -155,9 +155,9 @@ class GetResponseBody extends GetxController {
 
     if (needsRefresh) {
       _updateDates();
-      Get.snackbar("Downloading Data...",
-          "Please be patient it takes a while at first time",
-          duration: const Duration(seconds: 15),
+      Get.snackbar("downloading_data",
+          "please_be_patient",
+          duration: const Duration(seconds: 20),
           margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
           padding: const EdgeInsets.all(20));
       await _gettingresponse(mycurrentdate, endDate);
