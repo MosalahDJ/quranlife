@@ -59,12 +59,6 @@ class AiChatController extends GetxController {
     final userMessage = messageController.text.trim();
     if (userMessage.isEmpty) return;
 
-    if (!_isIslamicQuestion(userMessage)) {
-      messages.add(Message("error_non_islamic".tr, false));
-      messageController.clear();
-      return;
-    }
-
     messages.add(Message(userMessage, true));
     isLoading.value = true;
     messageController.clear();
@@ -79,14 +73,6 @@ class AiChatController extends GetxController {
       isLoading.value = false;
       scrollToBottom();
     }
-  }
-
-  bool _isIslamicQuestion(String text) {
-    final islamicPattern = RegExp(
-      r'(من أنت|ما هو|صلاة|زكاة|قرآن|حديث|سنة|فقه|عقيدة|سيرة|إسلام|شرع|حلال|حرام|الله|رسول|فتوى|حكم)',
-      caseSensitive: false,
-    );
-    return islamicPattern.hasMatch(text);
   }
 
   String cleanText(String text) {

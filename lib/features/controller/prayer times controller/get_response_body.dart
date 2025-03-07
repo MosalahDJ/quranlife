@@ -124,7 +124,7 @@ class GetResponseBody extends GetxController {
       prefs = await SharedPreferences.getInstance();
       if (prefs.getString("responsebody") == null) return true;
 
-      if (prefs.getString("responsebody")!.length < 220000) return true;
+      if (prefs.getString("responsebody")!.length < 36000) return true;
 
       Map<String, dynamic> data = jsonDecode(prefs.getString("responsebody")!);
       List<String> dates = data.keys.toList();
