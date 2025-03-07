@@ -82,7 +82,7 @@ class DeletAccount extends GetxController {
     } on FirebaseAuthException catch (e) {
       String errorMessage;
       switch (e.code) {
-        case 'requires-recent-login':
+        case 'ERROR_SESSION_EXPIRED':
           errorMessage = 'please_login_again_to_delete'.tr;
           break;
         default:
@@ -141,7 +141,7 @@ class DeletAccount extends GetxController {
     } on FirebaseAuthException catch (e) {
       String errorMessage;
       switch (e.code) {
-        case 'requires-recent-login':
+        case 'ERROR_SESSION_EXPIRED':
           errorMessage = 'please_login_again_to_delete'.tr;
           break;
         default:

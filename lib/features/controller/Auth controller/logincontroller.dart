@@ -37,7 +37,7 @@ class LogInController extends GetxController {
             .show();
       }
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'invalid-credential') {
+      if (e.code == 'ERROR_INVALID_EMAIL') {
         AwesomeDialog(
                 context: context,
                 title: 'error'.tr,
@@ -88,8 +88,7 @@ class LogInController extends GetxController {
           final GoogleSignIn googleSignIn = GoogleSignIn();
           if (await googleSignIn.isSignedIn()) {
             await googleSignIn.signOut();
-        await _userstatectrl.saveUserState(UserState.noUser);
-
+            await _userstatectrl.saveUserState(UserState.noUser);
           }
         }
 
@@ -177,10 +176,10 @@ class LogInController extends GetxController {
     } on FirebaseAuthException catch (e) {
       String errorMessage;
       switch (e.code) {
-        case 'requires-recent-login':
+        case 'ERROR_SESSION_EXPIRED':
           errorMessage = 'please_login_again'.tr;
           break;
-        case 'email-already-in-use':
+        case 'ERROR_EMAIL_ALREADY_IN_USE':
           errorMessage = 'email_already_exists'.tr;
           break;
         default:

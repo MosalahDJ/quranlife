@@ -101,14 +101,14 @@ class GoogleLogInController extends GetxController {
       if (e.toString().contains("network_error")) {
         AwesomeDialog(
                 context: context,
-                title: "Network Error",
+                title: "Network Error".tr,
                 body: Text("verify_internet".tr),
                 dialogType: DialogType.error)
             .show();
       } else {
         AwesomeDialog(
                 context: context,
-                title: "Error",
+                title: "Error".tr,
                 body: Text("google_signin_error".tr),
                 dialogType: DialogType.error)
             .show();
