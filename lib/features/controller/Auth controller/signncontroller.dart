@@ -93,11 +93,10 @@ class SignInController extends GetxController {
             for (var doc in userDocs.docs) {
               await doc.reference.delete();
             }
-            
           },
         ).show();
         // Proceed with new account creation
-            await _createNewAccount(context);
+        await _createNewAccount(context);
       } else {
         // If no existing user found, create new account directly
         await _createNewAccount(context);
@@ -125,6 +124,8 @@ class SignInController extends GetxController {
         email: emailcontroller.text,
         password: password.text,
       );
+      await userCredential.user!
+          .updateDisplayName('${name.text} ${lastname.text}');
 
       // Save user data to Firestore
       await _saveUserDataToFirestore(userCredential.user!);
