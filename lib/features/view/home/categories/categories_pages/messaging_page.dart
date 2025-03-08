@@ -1,28 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/core/widgets/gradient_background.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
-import 'package:quranlife/features/controller/fcm%20controllers/fcm_controller.dart';
+import 'package:quranlife/features/controller/fcm%20controllers/messaging_controller.dart';
 
-class MessagingPage extends StatefulWidget {
+class MessagingPage extends StatelessWidget {
   const MessagingPage({super.key});
 
   @override
-  State<MessagingPage> createState() => _MessagingPageState();
-}
-
-class _MessagingPageState extends State<MessagingPage> {
-  final TextEditingController _messageController = TextEditingController();
-  final FCMController _fcmController = Get.find();
-  final ScrollController _scrollController = ScrollController();
-  final currentUser = FirebaseAuth.instance.currentUser;
-
-  @override
   Widget build(BuildContext context) {
+    final controller = Get.put(MessagingController());
+
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
@@ -59,10 +50,7 @@ class _MessagingPageState extends State<MessagingPage> {
               children: [
                 Expanded(
                   child: StreamBuilder<QuerySnapshot>(
-                    stream: FirebaseFirestore.instance
-                        .collection('messages')
-                        .orderBy('timestamp', descending: false)
-                        .snapshots(),
+                    stream: controller.messagesStream,
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
                         return Center(child: Text('error_occurred'.tr));
@@ -73,17 +61,17 @@ class _MessagingPageState extends State<MessagingPage> {
                       }
 
                       WidgetsBinding.instance.addPostFrameCallback((_) {
-                        _scrollToBottom();
+                        controller.scrollToBottom();
                       });
 
                       return ListView.builder(
-                        controller: _scrollController,
+                        controller: controller.scrollController,
                         padding: const EdgeInsets.all(10),
                         itemCount: snapshot.data!.docs.length,
                         itemBuilder: (context, index) {
                           var message = snapshot.data!.docs[index];
-                          bool isCurrentUser =
-                              message['senderId'] == currentUser?.uid;
+                          bool isCurrentUser = controller
+                              .isCurrentUserSender(message['senderId']);
 
                           return Padding(
                             padding: const EdgeInsets.symmetric(vertical: 5),
@@ -141,7 +129,7 @@ class _MessagingPageState extends State<MessagingPage> {
                     },
                   ),
                 ),
-                _buildMessageInput(),
+                _buildMessageInput(controller),
               ],
             ),
           )
@@ -159,7 +147,7 @@ class _MessagingPageState extends State<MessagingPage> {
     );
   }
 
-  Widget _buildMessageInput() {
+  Widget _buildMessageInput(MessagingController controller) {
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: const BoxDecoration(
@@ -173,7 +161,7 @@ class _MessagingPageState extends State<MessagingPage> {
                 color: Colors.black.withOpacity(0.8),
                 fontSize: 16,
               ),
-              controller: _messageController,
+              controller: controller.messageController,
               decoration: InputDecoration(
                 hintText: 'write_message'.tr,
                 hintStyle: TextStyle(
@@ -196,58 +184,10 @@ class _MessagingPageState extends State<MessagingPage> {
             backgroundColor: Get.isDarkMode ? kmaincolor4 : kmaincolor,
             child: IconButton(
                 icon: const Icon(Icons.send, color: Colors.white),
-                onPressed: _sendMessage),
+                onPressed: controller.sendMessage),
           ),
         ],
       ),
     );
-  }
-
-  void _sendMessage() async {
-    if (_messageController.text.trim().isEmpty) return;
-
-    try {
-      await FirebaseFirestore.instance.collection('messages').add({
-        'text': _messageController.text,
-        'timestamp': FieldValue.serverTimestamp(),
-        'senderId': currentUser?.uid,
-        'senderName': currentUser?.displayName,
-        'senderEmail': currentUser?.email,
-        'senderPhotoUrl': currentUser?.photoURL,
-      });
-
-      // Send FCM notification
-      _fcmController.sendmessage(
-        'chat',
-        currentUser?.displayName ?? 'user'.tr,
-        _messageController.text,
-        'chat',
-      );
-
-      _messageController.clear();
-      _scrollController.animateTo(
-        _scrollController.position.maxScrollExtent,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeOut,
-      );
-    } catch (e) {
-      // print('Error sending message: $e');
-      Get.snackbar('error'.tr, 'send_failed'.tr);
-    }
-  }
-
-  void _scrollToBottom() {
-    if (_scrollController.hasClients) {
-      _scrollController.jumpTo(
-        _scrollController.position.maxScrollExtent,
-      );
-    }
-  }
-
-  @override
-  void dispose() {
-    _messageController.dispose();
-    _scrollController.dispose();
-    super.dispose();
   }
 }

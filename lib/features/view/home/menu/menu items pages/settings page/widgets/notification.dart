@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/widgets/shimmer_text.dart';
-import 'package:quranlife/features/controller/notfication%20controller/work_manager_controller.dart';
+import 'package:quranlife/features/controller/fcm%20controllers/fcm_controller.dart';
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
 
 class NotificationSettings extends StatelessWidget {
   NotificationSettings({super.key});
-  final WorkManagerController wkmctrl = Get.find();
+
+  final FCMController fcmctrl = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -26,33 +27,20 @@ class NotificationSettings extends StatelessWidget {
           ),
         ),
       ),
-      body: GetBuilder<WorkManagerController>(
+      body: GetBuilder<FCMController>(
         builder: (controller) => SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildSectionHeader(context, 'notification_settings'.tr),
               _buildNotificationOption(
-                context,
-                NotificationType.adhan,
-                'adhan_notifications'.tr,
-                'adhan_notifications_desc'.tr,
-                Icons.access_time_rounded,
-              ),
-              _buildNotificationOption(
-                context,
-                NotificationType.adhkar,
-                'adhkar_notifications'.tr,
-                'adhkar_notifications_desc'.tr,
-                Icons.favorite_rounded,
-              ),
-              _buildNotificationOption(
-                context,
-                NotificationType.quraan,
-                'quran_notifications'.tr,
-                'quran_notifications_desc'.tr,
-                Icons.book_rounded,
-              ),
+                  context,
+                  'chat_notifications'.tr,
+                  'chat_notifications_desc'.tr,
+                  Icons.chat,
+                  fcmctrl.value.value, (value) {
+                fcmctrl.onchangesubscribtion(value, "chat");
+              }),
             ],
           ),
         ),
@@ -81,31 +69,18 @@ class NotificationSettings extends StatelessWidget {
 
   Widget _buildNotificationOption(
     BuildContext context,
-    NotificationType type,
     String title,
     String description,
     IconData icon,
+    bool switchvalue,
+    ValueSetter onchanged,
   ) {
     final ThemeController themeCtrl = Get.find();
-
-    bool getValue() {
-      switch (type) {
-        case NotificationType.adhan:
-          return wkmctrl.adhansubscribition.value;
-        case NotificationType.adhkar:
-          return wkmctrl.adhkarsubscribition.value;
-        case NotificationType.quraan:
-          return wkmctrl.quraansubscribition.value;
-      }
-    }
 
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        onTap: () {
-          final bool newValue = !getValue();
-          wkmctrl.onChangeSubscription(type, newValue);
-        },
+        onTap: () {},
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
           child: Row(
@@ -155,10 +130,8 @@ class NotificationSettings extends StatelessWidget {
               ),
               Obx(
                 () => Switch(
-                  value: getValue(),
-                  onChanged: (value) {
-                    wkmctrl.onChangeSubscription(type, value);
-                  },
+                  value: switchvalue,
+                  onChanged: onchanged,
                   activeColor: themeCtrl.isDarkMode ? kmaincolor4 : kmaincolor,
                 ),
               ),

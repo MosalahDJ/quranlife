@@ -63,8 +63,10 @@ class FCMController extends GetxController {
     );
   }
 
+  RxBool value = false.obs;
+
   //i use this func for changing subscribtion status
-  onchangesubscribtion(bool value, String topicname) {
+  onchangesubscribtion(value, String topicname) {
     value == false
         ? subscribetotopic(topicname)
         : unsbscribefrometopic(topicname);
@@ -86,14 +88,7 @@ class FCMController extends GetxController {
   //handle notification on message
   onmessage() {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      if (message.notification != null && message.data["type"] == "adhan") {
         Get.snackbar(message.notification!.title!, message.notification!.body!);
-      } else if (message.notification != null &&
-          message.data["type"] == "quraan") {
-        Get.snackbar(message.notification!.title!, message.notification!.body!);
-      } else {
-        Get.snackbar(message.notification!.title!, message.notification!.body!);
-      }
     });
   }
 
@@ -103,13 +98,7 @@ class FCMController extends GetxController {
         await FirebaseMessaging.instance.getInitialMessage();
 
     void handleMessage(RemoteMessage message) {
-      if (message.data['type'] == 'adhan') {
-        Get.toNamed("/salattime");
-      } else if (message.data['type'] == 'quraan') {
-        Get.toNamed("/quraan");
-      } else {
-        Get.toNamed("/adkar");
-      }
+        Get.toNamed("/chat");
     }
 
     // If the message also contains a data property with a "type" of "adhan",

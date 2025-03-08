@@ -3,13 +3,11 @@ import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
 import 'package:quranlife/features/controller/fcm%20controllers/fcm_controller.dart';
-import 'package:quranlife/features/controller/notfication%20controller/sub%20controllers/adhan_noti_controller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/deterimine_prayers_controller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/times_page_controller.dart';
 
 final DeterminePrayersController prayerctrl = Get.find();
 final FCMController notictrl = Get.find();
-final AdhanNotiController adhanctrl = Get.find();
 final DeterminePrayersController dpcctrl = Get.find();
 final TimesPageController timespagectrl = Get.find();
 
@@ -18,7 +16,7 @@ class SalawatTableRow {
   TableRow myrow(
       {required String salatname,
       required String salattime,
-      required RxBool salatvolum,
+      // required RxBool salatvolum,
       required String day}) {
     return TableRow(
       children: [
@@ -99,12 +97,12 @@ class SalawatTableRow {
         Obx(
           () => IconButton(
               onPressed: () {
-                adhanctrl.volumfunc(salatvolum);
+                // adhanctrl.volumfunc(salatvolum);
                 // ignore: avoid_print
               },
               icon: Icon(
-                salatvolum.value ? Icons.volume_up : Icons.volume_off,
-
+                // salatvolum.value ? Icons.volume_up : Icons.volume_off,
+Icons.volume_up,
                 //in this condition I chek if salat time = current prayer then
                 //I check if date "$i" in the list of keys == current date
                 //I use these funcs for making sure it range as same as each other
@@ -137,7 +135,6 @@ class SalawatTableRow {
       myrow(
           salatname: "fajr".tr,
           salattime: "Fajr",
-          salatvolum: adhanctrl.fajrvolum,
           day: fpfctrl.getDateByIndex(i) != null
               ? fpfctrl.getDateByIndex(i)!
               : timespagectrl.formatDate(fpfctrl.currentDate)),
@@ -145,7 +142,6 @@ class SalawatTableRow {
       myrow(
           salatname: "sunrise".tr,
           salattime: "Sunrise",
-          salatvolum: adhanctrl.fajrvolum,
           day: fpfctrl.getDateByIndex(i) != null
               ? fpfctrl.getDateByIndex(i)!
               : timespagectrl.formatDate(fpfctrl.currentDate)),
@@ -153,7 +149,6 @@ class SalawatTableRow {
       myrow(
           salatname: "dhuhr".tr,
           salattime: "Dhuhr",
-          salatvolum: adhanctrl.fajrvolum,
           day: fpfctrl.getDateByIndex(i) != null
               ? fpfctrl.getDateByIndex(i)!
               : timespagectrl.formatDate(fpfctrl.currentDate)),
@@ -161,7 +156,6 @@ class SalawatTableRow {
       myrow(
           salatname: "asr".tr,
           salattime: "Asr",
-          salatvolum: adhanctrl.fajrvolum,
           day: fpfctrl.getDateByIndex(i) != null
               ? fpfctrl.getDateByIndex(i)!
               : timespagectrl.formatDate(fpfctrl.currentDate)),
@@ -169,7 +163,6 @@ class SalawatTableRow {
       myrow(
           salatname: "maghrib".tr,
           salattime: "Maghrib",
-          salatvolum: adhanctrl.fajrvolum,
           day: fpfctrl.getDateByIndex(i) != null
               ? fpfctrl.getDateByIndex(i)!
               : timespagectrl.formatDate(fpfctrl.currentDate)),
@@ -177,7 +170,6 @@ class SalawatTableRow {
       myrow(
           salatname: "isha".tr,
           salattime: "Isha",
-          salatvolum: adhanctrl.fajrvolum,
           day: fpfctrl.getDateByIndex(i) != null
               ? fpfctrl.getDateByIndex(i)!
               : timespagectrl.formatDate(fpfctrl.currentDate)),

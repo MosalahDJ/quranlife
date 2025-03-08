@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-// import 'package:quranlife/features/controller/notification%20controller/fcm_controller.dart';
+// import 'package:quranlife/features/controller/fcm%20controllers/fcm_controller.dart';
 
 class OnboardingPagecontroller extends GetxController {
   PageController pagecontroller = PageController();
@@ -19,7 +19,7 @@ class OnboardingPagecontroller extends GetxController {
         update();
       });
     });
-    // ignore: unnecessary_null_comparison
+    // // ignore: unnecessary_null_comparison
     // if (notictrl.adhansubscribition == null) {
     //   Get.defaultDialog(
     //     textConfirm: "confirm",

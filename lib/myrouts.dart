@@ -4,6 +4,7 @@ import 'package:quranlife/features/view/auth/login%20page/loginpage.dart';
 import 'package:quranlife/features/view/auth/signin%20page/signin_page.dart';
 import 'package:quranlife/features/view/home/adkar%20page/adkar_page.dart';
 import 'package:quranlife/features/view/home/categories/categories_pages/hijri_calender.dart';
+import 'package:quranlife/features/view/home/categories/categories_pages/messaging_page.dart';
 import 'package:quranlife/features/view/home/main_page.dart';
 import 'package:quranlife/features/view/home/menu/menu%20items%20pages/Referal%20Page/referal_page.dart';
 import 'package:quranlife/features/view/home/menu/menu%20items%20pages/about_us%20page/about_us_page.dart';
@@ -69,6 +70,10 @@ class Myrouts {
       GetPage(
         name: "/refferal",
         page: () => RefferalPage(),
+      ),
+      GetPage(
+        name: "/chat",
+        page: () => const MessagingPage(),
       ),
       GetPage(
         name: "/salattime",
