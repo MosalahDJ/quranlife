@@ -83,7 +83,7 @@ class SignInController extends GetxController {
 
       if (userDocs.docs.isNotEmpty) {
         // If user exists in Firestore, show dialog and handle cleanup
-        AwesomeDialog(
+        await AwesomeDialog(
           context: context,
           dialogType: DialogType.info,
           title: 'info'.tr,
@@ -93,10 +93,11 @@ class SignInController extends GetxController {
             for (var doc in userDocs.docs) {
               await doc.reference.delete();
             }
-            // Proceed with new account creation
-            await _createNewAccount(context);
+            
           },
         ).show();
+        // Proceed with new account creation
+            await _createNewAccount(context);
       } else {
         // If no existing user found, create new account directly
         await _createNewAccount(context);
@@ -190,6 +191,9 @@ class SignInController extends GetxController {
       'email-already-in-use' => 'email_exists'.tr,
       _ => "${'registration_error'.tr}: \n${e.code}"
     };
+    print("__________________________________________________________________");
+    print(errorMessage);
+    print("__________________________________________________________________");
 
     AwesomeDialog(
       context: context,

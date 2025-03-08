@@ -83,12 +83,12 @@ class LoginBody extends StatelessWidget {
                         Form(
                           key: txtvalctrl.loginemailstate,
                           child: InformationsForm(
-                            focusnode: loginctrl.emailfnodelog,
+                            focusnode: loginctrl.emailFocusNode,
                             keyboardtype: TextInputType.emailAddress,
                             validator: (val) =>
                                 val!.isEmpty ? "please_enter_email".tr : null,
                             isrequired: true,
-                            textctrl: loginctrl.emailcontroller,
+                            textctrl: loginctrl.emailController,
                             formtitle: "email".tr,
                             hint: "enter_email".tr,
                             prefixicon: Icon(Icons.email_outlined,
@@ -101,11 +101,11 @@ class LoginBody extends StatelessWidget {
                           key: txtvalctrl.loginpasswordstate,
                           child: GetBuilder<LogInController>(
                             builder: (controller) => InformationsForm(
-                              focusnode: loginctrl.passwordfnodelog,
+                              focusnode: loginctrl.passwordFocusNode,
                               suffixbutton: IconButton(
-                                onPressed: loginctrl.visibilityfunc,
+                                onPressed: loginctrl.togglePasswordVisibility,
                                 icon: Icon(
-                                  loginctrl.visibility
+                                  loginctrl.isPasswordVisible
                                       ? Icons.visibility_off
                                       : Icons.visibility,
                                   color:
@@ -117,12 +117,12 @@ class LoginBody extends StatelessWidget {
                                       ? kmaincolor4
                                       : kmaincolor),
                               lines: 1,
-                              obsecure: loginctrl.visibility,
+                              obsecure: loginctrl.isPasswordVisible,
                               validator: (val) => val!.isEmpty
                                   ? "please_enter_password".tr
                                   : null,
                               isrequired: true,
-                              textctrl: loginctrl.passwordcontroller,
+                              textctrl: loginctrl.passwordController,
                               formtitle: "password".tr,
                               hint: "enter_password".tr,
                             ),
@@ -133,9 +133,9 @@ class LoginBody extends StatelessWidget {
                           alignment: Alignment.centerRight,
                           child: TextButton(
                             onPressed: () {
-                              loginctrl.unfocuskeyboardlogin();
+                              loginctrl.unfocusKeyboard();
                               passreset.resetpassword(
-                                  context, loginctrl.emailcontroller.text);
+                                  context, loginctrl.emailController.text);
                             },
                             child: Text(
                               "forgot_password".tr,
@@ -167,7 +167,7 @@ class LoginBody extends StatelessWidget {
                                       .validate() &&
                                   txtvalctrl.loginpasswordstate.currentState!
                                       .validate()) {
-                                loginctrl.unfocuskeyboardlogin();
+                                loginctrl.unfocusKeyboard();
                                 loginctrl.login(context);
                               }
                             },
@@ -264,7 +264,7 @@ class LoginBody extends StatelessWidget {
                           ),
                           TextButton(
                             onPressed: () {
-                              loginctrl.unfocuskeyboardlogin();
+                              loginctrl.unfocusKeyboard();
                               Get.offAll(() => SigninPage(),
                                   duration: const Duration(milliseconds: 500),
                                   transition: Transition.rightToLeft);

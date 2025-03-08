@@ -89,16 +89,16 @@ class _MessagingPageState extends State<MessagingPage> {
                             padding: const EdgeInsets.symmetric(vertical: 5),
                             child: Row(
                               mainAxisAlignment: isCurrentUser
-                                  ? MainAxisAlignment.end
-                                  : MainAxisAlignment.start,
+                                  ? MainAxisAlignment.start
+                                  : MainAxisAlignment.end,
                               children: [
-                                if (!isCurrentUser) _buildUserAvatar(message),
+                                if (isCurrentUser) _buildUserAvatar(message),
                                 Flexible(
                                   child: Container(
                                     padding: const EdgeInsets.all(12),
                                     margin: EdgeInsets.only(
-                                      left: isCurrentUser ? 10 : 8,
-                                      right: isCurrentUser ? 8 : 10,
+                                      left: isCurrentUser ? 8 : 10,
+                                      right: isCurrentUser ? 10 : 8,
                                     ),
                                     decoration: BoxDecoration(
                                       color: isCurrentUser
@@ -107,7 +107,7 @@ class _MessagingPageState extends State<MessagingPage> {
                                       borderRadius: BorderRadius.circular(15),
                                     ),
                                     child: Column(
-                                      crossAxisAlignment: isCurrentUser
+                                      crossAxisAlignment: !isCurrentUser
                                           ? CrossAxisAlignment.end
                                           : CrossAxisAlignment.start,
                                       children: [
@@ -132,7 +132,7 @@ class _MessagingPageState extends State<MessagingPage> {
                                     ),
                                   ),
                                 ),
-                                if (isCurrentUser) _buildUserAvatar(message),
+                                if (!isCurrentUser) _buildUserAvatar(message),
                               ],
                             ),
                           );

@@ -4,223 +4,169 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:quranlife/features/controller/Auth%20controller/user_state_controller.dart';
 
 class LogInController extends GetxController {
-  final TextEditingController emailcontroller = TextEditingController();
-  final TextEditingController passwordcontroller = TextEditingController();
+  // Controllers for user input fields
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  // State management
   final RxBool isLoading = false.obs;
-  GlobalKey mykey = GlobalKey();
-  final _userstatectrl =
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final UserStateController _userStateCtrl =
       Get.put<UserStateController>(UserStateController(), permanent: true);
 
-  Future login(BuildContext context) async {
+  // Focus nodes for form fields
+  final FocusNode emailFocusNode = FocusNode();
+  final FocusNode passwordFocusNode = FocusNode();
+
+  // Toggles password visibility
+  bool isPasswordVisible = true;
+  void togglePasswordVisibility() {
+    isPasswordVisible = !isPasswordVisible;
+    update();
+  }
+
+  // Unfocus keyboard
+  void unfocusKeyboard() {
+    emailFocusNode.unfocus();
+    passwordFocusNode.unfocus();
+  }
+
+  // User login function
+  Future<void> login(BuildContext context) async {
     try {
       isLoading.value = true;
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailcontroller.text,
-        password: passwordcontroller.text,
+
+      // Authenticate user with Firebase
+      final UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
       );
-      if (FirebaseAuth.instance.currentUser!.emailVerified) {
-        await _userstatectrl.saveUserState(UserState.emailSignInUser);
+      final User? user = userCredential.user;
+
+      if (user != null && user.emailVerified) {
+        await _userStateCtrl.saveUserState(UserState.emailSignInUser);
+        await _firestore.collection('users').doc(user.uid).update({
+          'lastLogin': FieldValue.serverTimestamp(),
+        });
+        emailController.clear();
+        passwordController.clear();
         Get.offAllNamed("home");
       } else {
-        AwesomeDialog(
-                context: context,
-                desc: 'verify_email_desc'.tr,
-                title: 'verify_email_title'.tr)
-            .show();
+        _showDialog(context, 'verify_email_title'.tr, 'verify_email_desc'.tr,
+            DialogType.info);
       }
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'ERROR_INVALID_EMAIL') {
-        AwesomeDialog(
-                context: context,
-                title: 'error'.tr,
-                desc: 'wrong_credentials'.tr)
-            .show();
-      } else {
-        AwesomeDialog(context: context, title: 'error'.tr, desc: e.code).show();
-      }
-    } catch (e) {
-      // ignore: avoid_print
-      print(e);
+      _handleAuthError(context, e);
     } finally {
       isLoading.value = false;
     }
   }
 
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  // User logout function
   Future<void> signOut(BuildContext context) async {
-    // Check internet connectivity first
-    final connectivityResult = await Connectivity().checkConnectivity();
-    if (connectivityResult.contains(ConnectivityResult.none)) {
-      // No internet connection, show dialog
-      AwesomeDialog(
-        context: context,
-        title: 'no_internet'.tr,
-        desc: 'internet_required_for_signout'.tr,
-        dialogType: DialogType.warning,
-      ).show();
+    if (await Connectivity().checkConnectivity() == ConnectivityResult.none) {
+      _showDialog(context, 'no_internet'.tr, 'internet_required_for_signout'.tr,
+          DialogType.warning);
       return;
     }
+
     try {
       final User? currentUser = FirebaseAuth.instance.currentUser;
-
       if (currentUser != null) {
         if (currentUser.isAnonymous) {
-          // First delete the Firestore document
-          try {
-            await _firestore.collection('users').doc(currentUser.uid).delete();
-          } catch (firestoreError) {
-            debugPrint('Error deleting Firestore document: $firestoreError');
-          }
-
-          // Then delete anonymous user account
+          await _firestore.collection('users').doc(currentUser.uid).delete();
           await currentUser.delete();
-          await _userstatectrl.saveUserState(UserState.noUser);
         } else {
-          // Sign out from Google if user signed in with Google
-          final GoogleSignIn googleSignIn = GoogleSignIn();
-          if (await googleSignIn.isSignedIn()) {
-            await googleSignIn.signOut();
-            await _userstatectrl.saveUserState(UserState.noUser);
+          if (await GoogleSignIn().isSignedIn()) {
+            await GoogleSignIn().signOut();
           }
         }
-
-        // Sign out from Firebase
         await FirebaseAuth.instance.signOut();
-        await _userstatectrl.saveUserState(UserState.noUser);
+        await _userStateCtrl.saveUserState(UserState.noUser);
       }
-
-      // Navigate to login page
       Get.offAllNamed("login");
     } on FirebaseAuthException catch (e) {
-      AwesomeDialog(context: context, title: 'error'.tr, desc: e.code).show();
+      _showDialog(context, 'error'.tr, e.message ?? 'unknown_error'.tr,
+          DialogType.error);
     }
   }
 
+  // Update user profile in Firestore
   Future<void> updateUserProfile({
     required BuildContext context,
     required String firstName,
     required String lastName,
     required bool isMale,
   }) async {
+    if (firstName.trim().isEmpty || lastName.trim().isEmpty) {
+      _showDialog(
+          context, 'error'.tr, 'all_fields_required'.tr, DialogType.error);
+      return;
+    }
+
+    if (await Connectivity().checkConnectivity() == ConnectivityResult.none) {
+      _showDialog(context, 'no_internet'.tr, 'check_internet_connection'.tr,
+          DialogType.error);
+      return;
+    }
+
+    final User? currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser == null || currentUser.isAnonymous) {
+      _showDialog(context, 'anonymous_user'.tr, 'guest_login_warning'.tr,
+          DialogType.error);
+      return;
+    }
+
     try {
-      // Validate required fields
-      if (firstName.trim().isEmpty || lastName.trim().isEmpty) {
-        AwesomeDialog(
-          context: context,
-          title: 'error'.tr,
-          desc: 'all_fields_required'.tr,
-          dialogType: DialogType.error,
-        ).show();
-        return;
-      }
-
-      // Check if user is logged in
-      final User? currentUser = FirebaseAuth.instance.currentUser;
-      if (currentUser == null) {
-        throw Exception('No user logged in');
-      }
-
-      // Check internet connectivity
-      final connectivityResult = await Connectivity().checkConnectivity();
-      if (connectivityResult.contains(ConnectivityResult.none)) {
-        AwesomeDialog(
-          context: context,
-          title: 'no_internet'.tr,
-          desc: 'check_internet_connection'.tr,
-          dialogType: DialogType.error,
-        ).show();
-        return;
-      }
-
-      if (currentUser.isAnonymous) {
-        AwesomeDialog(
-          context: context,
-          title: 'anonymous_user'.tr,
-          desc: 'guest_login_warning'.tr,
-          dialogType: DialogType.error,
-        ).show();
-        return;
-      }
-
-      // Start loading state
       isLoading.value = true;
-
-      // Update user profile in Firestore
       await _firestore.collection('users').doc(currentUser.uid).update({
         'firstName': firstName,
         'lastName': lastName,
         'email': currentUser.email,
         'gender': isMale ? 'male' : 'female',
         'updatedAt': FieldValue.serverTimestamp(),
-        'uid': currentUser.uid,
         'displayName': '$firstName $lastName',
-        'createdAt': FieldValue.serverTimestamp(),
-        'lastLogin': FieldValue.serverTimestamp(),
       });
-
-      // Show success message
-      AwesomeDialog(
-        context: context,
-        title: 'success'.tr,
-        desc: 'profile_updated_successfully'.tr,
-        dialogType: DialogType.success,
-      ).show();
+      _showDialog(context, 'success'.tr, 'profile_updated_successfully'.tr,
+          DialogType.success);
     } on FirebaseAuthException catch (e) {
-      String errorMessage;
-      switch (e.code) {
-        case 'ERROR_SESSION_EXPIRED':
-          errorMessage = 'please_login_again'.tr;
-          break;
-        case 'ERROR_EMAIL_ALREADY_IN_USE':
-          errorMessage = 'email_already_exists'.tr;
-          break;
-        default:
-          errorMessage = e.message ?? 'unknown_error'.tr;
-      }
-      AwesomeDialog(
-        context: context,
-        title: 'error'.tr,
-        desc: errorMessage,
-        dialogType: DialogType.error,
-      ).show();
-    } catch (e) {
-      AwesomeDialog(
-        context: context,
-        title: 'error'.tr,
-        desc: 'unknown_error'.tr,
-        dialogType: DialogType.error,
-      ).show();
+      _showDialog(context, 'error'.tr, e.message ?? 'unknown_error'.tr,
+          DialogType.error);
     } finally {
       isLoading.value = false;
     }
   }
 
-  bool visibility = true;
-  visibilityfunc() {
-    visibility = !visibility;
-    update();
+  // Handle FirebaseAuth exceptions
+  void _handleAuthError(BuildContext context, FirebaseAuthException e) {
+    String errorMessage = e.code == 'ERROR_INVALID_EMAIL'
+        ? 'wrong_credentials'.tr
+        : e.message ?? 'unknown_error'.tr;
+    _showDialog(context, 'error'.tr, errorMessage, DialogType.error);
   }
 
-  FocusNode emailfnodelog = FocusNode();
-  FocusNode passwordfnodelog = FocusNode();
-
-  unfocuskeyboardlogin() {
-    emailfnodelog.unfocus();
-    passwordfnodelog.unfocus();
+  // Show a dialog using AwesomeDialog
+  void _showDialog(
+      BuildContext context, String title, String desc, DialogType type) {
+    AwesomeDialog(
+      context: context,
+      title: title,
+      desc: desc,
+      dialogType: type,
+    ).show();
   }
 
   @override
   void onClose() {
+    emailController.dispose();
+    passwordController.dispose();
     super.onClose();
-    emailcontroller.dispose();
-    passwordcontroller.dispose();
   }
 }
