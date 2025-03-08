@@ -71,7 +71,9 @@ class LogInController extends GetxController {
 
   // User logout function
   Future<void> signOut(BuildContext context) async {
-    if (await Connectivity().checkConnectivity() == ConnectivityResult.none) {
+    List<ConnectivityResult> conectivity =
+        await Connectivity().checkConnectivity();
+    if (conectivity.contains(ConnectivityResult.none)) {
       _showDialog(context, 'no_internet'.tr, 'internet_required_for_signout'.tr,
           DialogType.warning);
       return;
@@ -110,8 +112,9 @@ class LogInController extends GetxController {
           context, 'error'.tr, 'all_fields_required'.tr, DialogType.error);
       return;
     }
-
-    if (await Connectivity().checkConnectivity() == ConnectivityResult.none) {
+    List<ConnectivityResult> conectivity =
+        await Connectivity().checkConnectivity();
+    if (conectivity.contains(ConnectivityResult.none)) {
       _showDialog(context, 'no_internet'.tr, 'check_internet_connection'.tr,
           DialogType.error);
       return;
