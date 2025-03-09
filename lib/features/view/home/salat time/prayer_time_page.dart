@@ -29,7 +29,14 @@ class PrayerTimesPage extends StatelessWidget {
             actions: [
               IconButton(
                   onPressed: () {
-                    Get.to(NotificationSettings());
+                    Get.snackbar(
+                        "upcoming_feature_title".tr, "upcoming_feature_desc".tr,
+                        backgroundColor: Colors.transparent.withOpacity(0.3),
+                        colorText: const Color(0xFFFFFFFF),
+                        duration: const Duration(seconds: 3),
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 20, horizontal: 15),
+                        padding: const EdgeInsets.all(20));
                   },
                   icon: const Icon(
                     Icons.settings_applications_outlined,

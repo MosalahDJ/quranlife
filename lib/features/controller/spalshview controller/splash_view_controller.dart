@@ -119,7 +119,7 @@ class SplashViewController extends GetxController
                     onPressed: () async {
                       // Replace with your support account URL
                       final Uri url =
-                          Uri.parse('https://twitter.com/YourSupportAccount');
+                          Uri.parse('https://t.me/0655663020');
                       if (await canLaunchUrl(url)) {
                         await launchUrl(url);
                       }

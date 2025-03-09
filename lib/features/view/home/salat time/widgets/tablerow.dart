@@ -97,12 +97,18 @@ class SalawatTableRow {
         Obx(
           () => IconButton(
               onPressed: () {
-                // adhanctrl.volumfunc(salatvolum);
-                // ignore: avoid_print
+                Get.snackbar(
+                    "upcoming_feature_title".tr, "upcoming_feature_desc".tr,
+                    backgroundColor: Colors.transparent.withOpacity(0.3),
+                    colorText: const Color(0xFFFFFFFF),
+                    duration: const Duration(seconds: 3),
+                    margin: const EdgeInsets.symmetric(
+                        vertical: 20, horizontal: 15),
+                    padding: const EdgeInsets.all(20));
               },
               icon: Icon(
                 // salatvolum.value ? Icons.volume_up : Icons.volume_off,
-Icons.volume_up,
+                Icons.volume_up,
                 //in this condition I chek if salat time = current prayer then
                 //I check if date "$i" in the list of keys == current date
                 //I use these funcs for making sure it range as same as each other

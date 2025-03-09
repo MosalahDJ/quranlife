@@ -379,6 +379,9 @@ class Messages extends Translations {
           'support': "Support",
           'help_support': "Help & Support",
           'help_support_desc': "Get help and contact us",
+          'upcoming_feature_title': 'Coming Soon! 🚀',
+          'upcoming_feature_desc':
+              'This feature is under development and will be available soon.',
           // Theme Page Translations
           'system_theme_desc': 'Automatically match system theme',
           'light_theme_desc': 'Light colors for daytime use',
@@ -832,6 +835,11 @@ class Messages extends Translations {
           'support': "الدعم",
           'help_support': "المساعدة والدعم",
           'help_support_desc': "احصل على المساعدة وتواصل معنا",
+          'upcoming_feature_title': 'قريبًا! 🚀',
+          'upcoming_feature_desc':
+              'هذه الميزة قيد التطوير وستكون متاحة قريبًا.',
+
+          //
           'system_theme_desc': 'مطابقة سمة النظام تلقائياً',
           'light_theme_desc': 'ألوان فاتحة للاستخدام النهاري',
           'dark_theme_desc': 'ألوان داكنة لعرض مريح ليلاً',
@@ -1298,6 +1306,10 @@ class Messages extends Translations {
           'support': "Support",
           'help_support': "Aide & Support",
           'help_support_desc': "Obtenir de l'aide et nous contacter",
+          'upcoming_feature_title': 'Bientôt disponible ! �',
+          'upcoming_feature_desc':
+              'Cette fonctionnalité est en cours de développement et sera disponible bientôt.',
+
           // Theme Page Translations
           'system_theme_desc': 'Correspond automatiquement au thème du système',
           'light_theme_desc': 'Couleurs claires pour une utilisation diurne',

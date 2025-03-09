@@ -52,7 +52,14 @@ class SettingPage extends StatelessWidget {
               _buildSettingsCategory(
                 icon: Icons.notifications_outlined,
                 title: 'notifications'.tr,
-                onTap: () => Get.to(() => NotificationSettings()),
+                onTap: () => Get.snackbar(
+                    "upcoming_feature_title".tr, "upcoming_feature_desc".tr,
+                    backgroundColor: Colors.transparent.withOpacity(0.5),
+                    colorText: const Color(0xFFFFFFFF),
+                    duration: const Duration(seconds: 3),
+                    margin: const EdgeInsets.symmetric(
+                        vertical: 20, horizontal: 15),
+                    padding: const EdgeInsets.all(20)),
                 description: 'notifications_desc'.tr,
               ),
               _buildSettingsCategory(
