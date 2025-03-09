@@ -4,8 +4,10 @@ import 'package:quranlife/features/controller/Auth%20controller/signncontroller.
 import 'package:quranlife/features/controller/Auth%20controller/textvalidatecontroller.dart';
 
 class SignInSubmitHandler {
-  final SignInController signinctrl = Get.find();
-  final Txtvalcontroller txtvalctrl = Get.find();
+  final SignInController signinctrl =     Get.put<SignInController>(SignInController());
+
+  final Txtvalcontroller txtvalctrl =     Get.put<Txtvalcontroller>(Txtvalcontroller());
+
 
   void handleSubmit(BuildContext context) {
     signinctrl.unfocuskeyboardsignin();

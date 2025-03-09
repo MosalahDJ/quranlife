@@ -11,7 +11,9 @@ import 'package:quranlife/features/view/auth/login%20page/loginpage.dart';
 import 'package:quranlife/features/view/home/main_page.dart';
 
 class SignInController extends GetxController {
-  final Txtvalcontroller txtvalctrl = Get.find();
+  final Txtvalcontroller txtvalctrl =
+      Get.put<Txtvalcontroller>(Txtvalcontroller());
+
   final _userstatectrl =
       Get.put<UserStateController>(UserStateController(), permanent: true);
 

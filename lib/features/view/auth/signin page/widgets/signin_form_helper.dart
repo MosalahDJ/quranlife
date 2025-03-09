@@ -6,7 +6,8 @@ import 'package:quranlife/features/controller/Auth%20controller/signncontroller.
 
 // Helper class for sign-in form widgets
 class SignInFormHelpers {
-  final SignInController signinctrl = Get.find();
+  final SignInController signinctrl =
+      Get.put<SignInController>(SignInController());
 
   // Creates a standard form field with validation
   Widget buildFormField(

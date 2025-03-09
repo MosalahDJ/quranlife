@@ -10,8 +10,11 @@ import 'package:quranlife/features/view/auth/login%20page/widgets/login_body.dar
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
   final LogInController loginctrl = Get.find();
-  final Txtvalcontroller txtvalctrl = Get.find();
-  final PasswordresetController passreset = Get.find();
+  final Txtvalcontroller txtvalctrl =
+      Get.put<Txtvalcontroller>(Txtvalcontroller());
+
+  final PasswordresetController passreset =     Get.put<PasswordresetController>(PasswordresetController());
+
 
   @override
   Widget build(BuildContext context) {

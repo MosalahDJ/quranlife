@@ -220,6 +220,8 @@ class MenuPageBody extends StatelessWidget {
   }
 
   Widget _buildSettingsSection(BuildContext context) {
+                final DeletAccount deletAccount =     Get.put<DeletAccount>(DeletAccount());
+
     return GetBuilder<ThemeController>(
       builder: (themeController) => Column(
         children: [
@@ -234,7 +236,6 @@ class MenuPageBody extends StatelessWidget {
           _buildSettingsCategory(
               icon: Icons.logout_outlined,
               onTap: () {
-                final DeletAccount deletAccount = Get.find();
                 FirebaseAuth.instance.currentUser!.isAnonymous
                     ? deletAccount.anonymousSignout(context)
                     : logctrl.signOut(context);

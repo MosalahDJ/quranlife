@@ -1,10 +1,6 @@
 import 'package:get/get.dart';
 import 'package:quranlife/features/controller/Auth%20controller/anonymous_sign_in.dart';
-import 'package:quranlife/features/controller/Auth%20controller/delet_account.dart';
-import 'package:quranlife/features/controller/Auth%20controller/googlelogincontroller.dart';
 import 'package:quranlife/features/controller/Auth%20controller/logincontroller.dart';
-import 'package:quranlife/features/controller/Auth%20controller/passwordresset.dart';
-import 'package:quranlife/features/controller/Auth%20controller/signncontroller.dart';
 import 'package:quranlife/features/controller/Url%20Luncher%20Controller/url_luncher_controller.dart';
 import 'package:quranlife/features/controller/adkar%20controller/adkar_categories_controller.dart';
 import 'package:quranlife/features/controller/adkar%20controller/adkar_controller.dart';
@@ -15,7 +11,6 @@ import 'package:quranlife/features/controller/fetching%20data%20controller/haj_c
 import 'package:quranlife/features/controller/fetching%20data%20controller/omra_controller.dart';
 import 'package:quranlife/features/controller/fetching%20data%20controller/wudu_controller.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
-import 'package:quranlife/features/controller/Auth%20controller/textvalidatecontroller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/get_response_body.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/location_controller.dart';
 import 'package:quranlife/features/controller/prayer%20times%20controller/times_page_controller.dart';
@@ -46,12 +41,7 @@ class Mybinding implements Bindings {
     final prefs = await SharedPreferences.getInstance();
     Get.put(LanguageController(prefs), permanent: true);
     //auth injection
-    Get.put<Txtvalcontroller>(Txtvalcontroller());
-    Get.put<SignInController>(SignInController());
     Get.put<LogInController>(LogInController());
-    Get.put<GoogleLogInController>(GoogleLogInController());
-    Get.put<DeletAccount>(DeletAccount());
-    Get.put<PasswordresetController>(PasswordresetController());
     //fcm injection
     Get.put<AccesToken>(AccesToken());
     Get.put<FCMController>(FCMController(), permanent: true);
@@ -65,6 +55,7 @@ class Mybinding implements Bindings {
     Get.put<SavingController>(SavingController());
     //adkar injection
     Get.put<AdkarCategoriesController>(AdkarCategoriesController());
+    Get.put<AdkarController>(AdkarController());
     //categories pages injection
     Get.put<AllahNamesController>(AllahNamesController());
     Get.put<WuduController>(WuduController());

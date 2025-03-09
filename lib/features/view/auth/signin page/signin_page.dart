@@ -8,7 +8,8 @@ import 'package:quranlife/features/view/auth/signin%20page/widgets/signin_body.d
 class SigninPage extends StatelessWidget {
   SigninPage({super.key});
 
-  final SignInController signinctrl = Get.find();
+  final SignInController signinctrl =     Get.put<SignInController>(SignInController());
+
 
   @override
   Widget build(BuildContext context) {

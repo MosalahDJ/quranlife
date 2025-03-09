@@ -19,7 +19,8 @@ class EditProfilePage extends StatelessWidget {
 
   final ThemeController themeCtrl = Get.find();
   final LogInController logCtrl = Get.find();
-  final PasswordresetController passCtrl = Get.find();
+  final PasswordresetController passCtrl =
+      Get.put<PasswordresetController>(PasswordresetController());
 
   final RxBool isMale = true.obs;
 
@@ -95,7 +96,7 @@ class EditProfilePage extends StatelessWidget {
 
   // Add this method to the EditProfilePage class
   Widget _buildDeleteAccountButton(BuildContext context) {
-    final DeletAccount deletAccount = Get.find();
+    final DeletAccount deletAccount = Get.put<DeletAccount>(DeletAccount());
 
     return GetBuilder<ThemeController>(builder: (themeController) {
       return Padding(
