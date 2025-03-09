@@ -65,7 +65,6 @@ class Mybinding implements Bindings {
     Get.put<SavingController>(SavingController());
     //adkar injection
     Get.put<AdkarCategoriesController>(AdkarCategoriesController());
-    Get.put<AdkarController>(AdkarController());
     //categories pages injection
     Get.put<AllahNamesController>(AllahNamesController());
     Get.put<WuduController>(WuduController());

@@ -57,11 +57,11 @@ class _HajandomrapageState extends State<Hajandomrapage> {
                   ),
                   children: [
                 cardwidget(
-                    title: "hajj".tr,
+                    title: "haj".tr,
                     subtitle: "hajguid".tr,
                     ontap: () => Get.to(() => const HajPage())),
                 cardwidget(
-                    title: "umrah".tr,
+                    title: "omarah".tr,
                     subtitle: "omraguid".tr,
                     ontap: () => Get.to(() => const OmraPage())),
               ])),

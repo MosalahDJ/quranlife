@@ -17,7 +17,8 @@ class DuaaPage extends StatefulWidget {
 }
 
 class _DuaaPageState extends State<DuaaPage> {
-  final AdkarController _adkarctrl = Get.find();
+  final AdkarController _adkarctrl =
+      Get.put<AdkarController>(AdkarController());
 
   @override
   void dispose() {
@@ -27,7 +28,8 @@ class _DuaaPageState extends State<DuaaPage> {
 
   @override
   Widget build(BuildContext context) {
-    final statsController = Get.find<StatisticsController>();
+    final statsController =
+        Get.put<StatisticsController>(StatisticsController());
 
     // Filter duaas when page is built
     _adkarctrl.filterAdkarBySection(widget.duaapageID);
