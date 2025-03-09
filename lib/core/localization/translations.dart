@@ -42,7 +42,7 @@ class Messages extends Translations {
           'weak_password': 'The password provided is too weak.',
           'email_exists':
               'An account already exists for this email. Please login instead.',
-          'registration_error': 'Registration error: {}',
+          'registration_error': 'Registration error',
           'no_internet': 'No Internet Connection',
           'internet_required_for_signout':
               'Internet connection is required to sign out',

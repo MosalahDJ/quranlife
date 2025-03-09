@@ -149,7 +149,7 @@ class LogInController extends GetxController {
 
   // Handle FirebaseAuth exceptions
   void _handleAuthError(BuildContext context, FirebaseAuthException e) {
-    String errorMessage = e.code == 'ERROR_INVALID_EMAIL'
+    String errorMessage = e.code == 'invalid-credential'
         ? 'wrong_credentials'.tr
         : e.message ?? 'unknown_error'.tr;
     _showDialog(context, 'error'.tr, errorMessage, DialogType.error);
