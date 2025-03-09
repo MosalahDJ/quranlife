@@ -359,9 +359,11 @@ void _showGuestLoginDialog(BuildContext context) {
           child: Obx(
             () => authnctrl.isLoading.value
                 ? CircularProgressIndicator(
+                    strokeWidth: 3,
+                    strokeAlign: -4,
                     valueColor: AlwaysStoppedAnimation<Color>(
-                    Get.isDarkMode ? kmaincolor4 : kmaincolor,
-                  ))
+                      Get.isDarkMode ? kmaincolor : kmaincolor4,
+                    ))
                 : Text(
                     'continue_guest'.tr,
                     style: const TextStyle(
