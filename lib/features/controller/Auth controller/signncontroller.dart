@@ -76,33 +76,7 @@ class SignInController extends GetxController {
     try {
       isLoading = true;
       update();
-
-      // Get user documents with matching email
-      var userDocs = await _firestore
-          .collection('users')
-          .where('email', isEqualTo: emailcontroller.text)
-          .get();
-
-      if (userDocs.docs.isNotEmpty) {
-        // If user exists in Firestore, show dialog and handle cleanup
-        await AwesomeDialog(
-          context: context,
-          dialogType: DialogType.info,
-          title: 'info'.tr,
-          body: Text('old_account_deleted'.tr),
-          btnOkOnPress: () async {
-            // Delete existing Firestore documents
-            for (var doc in userDocs.docs) {
-              await doc.reference.delete();
-            }
-          },
-        ).show();
-        // Proceed with new account creation
         await _createNewAccount(context);
-      } else {
-        // If no existing user found, create new account directly
-        await _createNewAccount(context);
-      }
     } catch (e) {
       debugPrint('Error in signin: $e');
       AwesomeDialog(
