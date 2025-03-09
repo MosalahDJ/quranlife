@@ -19,6 +19,7 @@ class _AhadithState extends State<Ahadith> {
   @override
   Widget build(BuildContext context) {
     final LanguageController langctrl = Get.find();
+    
 
     return Scaffold(
       extendBodyBehindAppBar: true,

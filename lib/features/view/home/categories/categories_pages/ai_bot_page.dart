@@ -9,12 +9,11 @@ import 'package:quranlife/core/widgets/skeletonizer.dart';
 import '../../../../../features/controller/ai chat controller/ai_chat_controller.dart';
 
 class AiBotPage extends StatelessWidget {
-  final AiChatController controller = Get.find();
-
-  AiBotPage({super.key});
+  const AiBotPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final AiChatController controller = Get.put(AiChatController());
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(

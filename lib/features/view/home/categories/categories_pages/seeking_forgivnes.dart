@@ -18,6 +18,7 @@ class _SeekingForgivnesState extends State<SeekingForgivnes> {
   @override
   Widget build(BuildContext context) {
     final LanguageController langctrl = Get.find();
+    Get.put<SeekingForgivnesController>(SeekingForgivnesController());
 
     return Scaffold(
       extendBodyBehindAppBar: true,

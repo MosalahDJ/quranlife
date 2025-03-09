@@ -9,12 +9,15 @@ import 'package:quranlife/features/view/home/quraan%20page/surah_page.dart';
 import 'package:quranlife/features/view/home/quraan%20page/widgets/ayah_widget.dart';
 
 class SavedAyahs extends StatelessWidget {
-  SavedAyahs({super.key});
-  final QuraanController quranctrl = Get.find();
-  final SavingController savecetrl = Get.find();
+  const SavedAyahs({super.key});
 
   @override
   Widget build(BuildContext context) {
+  final QuraanController quranctrl = Get.find();
+
+  final SavingController savecetrl = Get.put(SavingController());
+
+
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(

@@ -18,6 +18,8 @@ class _PraiseState extends State<Praise> {
   @override
   Widget build(BuildContext context) {
     final LanguageController langctrl = Get.find();
+    Get.put<PraiseController>(PraiseController());
+
 
     return Scaffold(
       extendBodyBehindAppBar: true,

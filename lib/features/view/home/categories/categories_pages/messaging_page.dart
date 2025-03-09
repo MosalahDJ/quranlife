@@ -129,7 +129,7 @@ class MessagingPage extends StatelessWidget {
                     },
                   ),
                 ),
-                _buildMessageInput(controller),
+                _buildMessageInput(context),
               ],
             ),
           )
@@ -147,7 +147,9 @@ class MessagingPage extends StatelessWidget {
     );
   }
 
-  Widget _buildMessageInput(MessagingController controller) {
+  Widget _buildMessageInput(BuildContext context) {
+    final MessagingController controller = Get.find();
+
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: const BoxDecoration(
@@ -184,7 +186,7 @@ class MessagingPage extends StatelessWidget {
             backgroundColor: Get.isDarkMode ? kmaincolor4 : kmaincolor,
             child: IconButton(
                 icon: const Icon(Icons.send, color: Colors.white),
-                onPressed: controller.sendMessage),
+                onPressed: () => controller.sendMessage(context)),
           ),
         ],
       ),

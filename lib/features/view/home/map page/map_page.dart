@@ -4,11 +4,13 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/features/controller/map%20controller/map_controller.dart';
 
-class MapSample extends GetView<MapController> {
+class MapSample extends StatelessWidget {
   const MapSample({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final MapController controller = Get.put(MapController());
+
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: Stack(

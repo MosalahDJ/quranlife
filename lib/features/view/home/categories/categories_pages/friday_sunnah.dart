@@ -18,6 +18,7 @@ class _FridaySunnahState extends State<FridaySunnah> {
   @override
   Widget build(BuildContext context) {
     final LanguageController langctrl = Get.find();
+    Get.put<SunanJumuaController>(SunanJumuaController());
 
     return Scaffold(
       extendBodyBehindAppBar: true,

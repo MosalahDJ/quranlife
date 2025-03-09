@@ -22,6 +22,7 @@ class QuraanPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -38,7 +39,7 @@ class QuraanPage extends StatelessWidget {
                   child: IconButton(
                       onPressed: () {
                         homectrl.unfocuskeyboardhome();
-                        Get.to(() => SavedAyahs());
+                        Get.to(() => const SavedAyahs());
                       },
                       icon: const Icon(
                         Icons.bookmarks,
@@ -105,6 +106,7 @@ Widget _backround() {
 //________________________________________________________________________________________________
 Widget _surahviewPage() {
   final QuraanController quranctrl = Get.find();
+
 
   return Stack(children: [
     //gradient background
@@ -223,7 +225,8 @@ Widget _surahviewPage() {
 
 Widget _juzuaviewPage() {
   final QuraanController quranctrl = Get.find();
-  final JuzuaController juzuactrl = Get.find();
+
+  final JuzuaController juzuactrl = Get.put(JuzuaController());
 
   return Stack(
     children: [
@@ -373,6 +376,7 @@ Widget _ayahviewPage() {
 
 Widget _searchWidget() {
   final QuraanController quranctrl = Get.find();
+
   final MyHomeController homectrl = Get.find();
 
   return Container(

@@ -18,6 +18,7 @@ class _QuranicSupplicationsState extends State<QuranicSupplications> {
   @override
   Widget build(BuildContext context) {
     final LanguageController langctrl = Get.find();
+    Get.put<QuraanicSupplicationController>(QuraanicSupplicationController());
 
     return Scaffold(
       extendBodyBehindAppBar: true,

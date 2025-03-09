@@ -18,6 +18,7 @@ class _ProphetsSupplicationState extends State<ProphetsSupplication> {
   @override
   Widget build(BuildContext context) {
     final LanguageController langctrl = Get.find();
+    Get.put<ProphetsSupplicationController>(ProphetsSupplicationController());
 
     return Scaffold(
       extendBodyBehindAppBar: true,

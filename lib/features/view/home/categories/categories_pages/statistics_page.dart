@@ -28,6 +28,8 @@ class _StatisticsPageState extends State<StatisticsPage>
     )..forward();
   }
 
+  final StatisticsController favoritectrl = Get.put(StatisticsController());
+
   @override
   void dispose() {
     _animationController.dispose();

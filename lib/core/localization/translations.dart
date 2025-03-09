@@ -215,6 +215,8 @@ class Messages extends Translations {
           'error_occurred': 'An error occurred',
           'user': 'User',
           'send_failed': 'Failed to send message',
+          'internet_required_for_sendmessage':
+              'An internet connection is required to send a message.',
           //ai bot page
           'ai_bot': 'AI Assistant',
           'loading': 'Loading...',
@@ -673,6 +675,8 @@ class Messages extends Translations {
           'error_occurred': 'حدث خطأ ما',
           'user': 'مستخدم',
           'send_failed': 'فشل في إرسال الرسالة',
+          'internet_required_for_sendmessage':
+              'يتطلب إرسال الرسالة اتصالاً بالإنترنت.',
           //ai bot page
           'ai_bot': 'المساعد الذكي',
           'loading': 'جاري التحميل...',
@@ -1133,6 +1137,8 @@ class Messages extends Translations {
           'error_occurred': 'Une erreur est survenue',
           'user': 'Utilisateur',
           'send_failed': 'Échec de l\'envoi du message',
+          'internet_required_for_sendmessage':
+              'Une connexion Internet est requise pour envoyer un message.',
           //ai bot page
           'ai_bot': 'Assistant IA',
           'loading': 'Chargement...',

@@ -17,6 +17,7 @@ class Teachingprayer extends StatefulWidget {
 class _TeachingprayerState extends State<Teachingprayer> {
   @override
   Widget build(BuildContext context) {
+    Get.put<TeachingPrayerController>(TeachingPrayerController());
     final LanguageController langctrl = Get.find();
 
     return Scaffold(

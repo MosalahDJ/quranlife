@@ -1,4 +1,6 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,6 +12,17 @@ class MessagingController extends GetxController {
   final FCMController fcmController = Get.find();
   final currentUser = FirebaseAuth.instance.currentUser;
 
+  // Show a dialog using AwesomeDialog
+  void _showDialog(
+      BuildContext context, String title, String desc, DialogType type) {
+    AwesomeDialog(
+      context: context,
+      title: title,
+      desc: desc,
+      dialogType: type,
+    ).show();
+  }
+
   // Stream للرسائل
   Stream<QuerySnapshot> get messagesStream => FirebaseFirestore.instance
       .collection('messages')
@@ -17,8 +30,16 @@ class MessagingController extends GetxController {
       .snapshots();
 
   // إرسال رسالة
-  Future<void> sendMessage() async {
+  Future<void> sendMessage(BuildContext context) async {
     if (messageController.text.trim().isEmpty) return;
+    List<ConnectivityResult> conectivity =
+        await Connectivity().checkConnectivity();
+    if (conectivity.contains(ConnectivityResult.none)) {
+      // ignore: use_build_context_synchronously
+      _showDialog(context, 'no_internet'.tr,
+          'internet_required_for_sendmessage'.tr, DialogType.warning);
+      return;
+    }
 
     try {
       await FirebaseFirestore.instance.collection('messages').add({

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
+import 'package:quranlife/features/controller/floating_animation_controllers/floating_animation_controller.dart';
+import 'package:quranlife/features/controller/home%20controller/fade_animation_controller.dart';
 import 'package:quranlife/features/view/home/adkar%20page/adkar_page.dart';
 import 'package:quranlife/features/view/home/categories/categories_page.dart';
 import 'package:quranlife/features/view/home/menu/menu_page.dart';
@@ -13,6 +15,10 @@ import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 class MainPage extends StatelessWidget {
   MainPage({super.key});
   final MyHomeController homectrl = Get.find();
+  final FadeAnimationController homefadectrl =
+      Get.put(FadeAnimationController());
+  final FloatingAnimationController floatanimctrl =
+      Get.put(FloatingAnimationController());
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +100,7 @@ class MainPage extends StatelessWidget {
           return IndexedStack(
             index: homectrl.selected,
             children: [
-              MenuPage(),
+              const MenuPage(),
               CategoriesPage(),
               HomePageBody(),
               AdkarPage(),

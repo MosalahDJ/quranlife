@@ -36,11 +36,12 @@ class AyahWidget extends StatelessWidget {
   final String? ayahaudio;
 
   final QuraanController quranctrl = Get.find();
-  final AudioplayerController audioctrl = Get.find();
-  final SavingController savectrl = Get.find();
-  final FavoriteController favoritectrl = Get.find();
 
-  final statsController = Get.find<StatisticsController>();
+  final AudioplayerController audioctrl = Get.put(AudioplayerController());
+  final SavingController savectrl = Get.put(SavingController());
+  final FavoriteController favoritectrl = Get.put(FavoriteController());
+  final StatisticsController statsController = Get.put(StatisticsController());
+
   final Key visibilityKey = UniqueKey();
 
   @override

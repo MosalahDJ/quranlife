@@ -11,7 +11,8 @@ import 'package:quranlife/features/view/home/quraan%20page/widgets/ayah_widget.d
 class Favorite extends StatelessWidget {
   Favorite({super.key});
   final QuraanController quranctrl = Get.find();
-  final FavoriteController favoritectrl = Get.find();
+
+  final FavoriteController favoritectrl = Get.put(FavoriteController());
 
   @override
   Widget build(BuildContext context) {

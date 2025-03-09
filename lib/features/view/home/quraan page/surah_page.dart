@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quranlife/core/Utils/constants.dart';
 import 'package:quranlife/core/Utils/size_config.dart';
+import 'package:quranlife/features/controller/quraan%20controller/favorite_controller.dart';
 import 'package:quranlife/features/controller/quraan%20controller/quraan_controller.dart';
 import 'package:quranlife/features/controller/quraan%20controller/saving_controller.dart';
 import 'package:quranlife/features/model/qurandata.dart';
@@ -27,6 +28,7 @@ class _SurahPageState extends State<SurahPage> {
   final Map<int, GlobalKey> _ayahKeys = {};
   final ScrollController _scrollController = ScrollController();
   final QuraanController _quranController = Get.find();
+
   Surah? nextSurah;
 
   // === Lifecycle Methods ===

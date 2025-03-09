@@ -45,10 +45,10 @@ class _GhuslState extends State<Ghusl> {
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage(
-                    'lib/core/assets/images/background_image/arch.jpg'),
-                opacity: 0.2,
-              ),
+                  image: AssetImage(
+                      'lib/core/assets/images/background_image/arch.jpg'),
+                  opacity: 0.2,
+                  repeat: ImageRepeat.repeat),
             ),
           ),
           SafeArea(
