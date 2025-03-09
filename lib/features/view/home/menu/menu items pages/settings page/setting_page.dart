@@ -6,7 +6,6 @@ import 'package:quranlife/features/controller/settings%20controllers/theme_contr
 import 'package:quranlife/features/view/home/menu/menu%20items%20pages/settings%20page/widgets/display_theme.dart';
 import 'package:quranlife/features/view/home/menu/menu%20items%20pages/settings%20page/widgets/edit_profile_page.dart';
 import 'package:quranlife/features/view/home/menu/menu%20items%20pages/settings%20page/widgets/language_page.dart';
-import 'package:quranlife/features/view/home/menu/menu%20items%20pages/settings%20page/widgets/notification.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});

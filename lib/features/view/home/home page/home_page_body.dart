@@ -202,7 +202,7 @@ class HomePageBody extends StatelessWidget {
                                           btnOkOnPress: () {},
                                         ).show(),
                                       );
-                                      Get.to(() => AiBotPage());
+                                      Get.to(() => const AiBotPage());
                                     }, MdiIcons.robot, 'ai_bot'.tr),
                                     mycategory(() {
                                       if (_isanonymous(context)) {

@@ -200,7 +200,7 @@ class MenuPageBody extends StatelessWidget {
               title: 'home'.tr),
           _buildSettingsCategory(
               icon: Icons.book_outlined,
-              onTap: () => Get.to(() => SavedAyahs()),
+              onTap: () => Get.to(() => const SavedAyahs()),
               title: 'my_quran'.tr),
           _buildSettingsCategory(
               icon: Icons.favorite,
@@ -220,7 +220,7 @@ class MenuPageBody extends StatelessWidget {
   }
 
   Widget _buildSettingsSection(BuildContext context) {
-                final DeletAccount deletAccount =     Get.put<DeletAccount>(DeletAccount());
+    final DeletAccount deletAccount = Get.put<DeletAccount>(DeletAccount());
 
     return GetBuilder<ThemeController>(
       builder: (themeController) => Column(
