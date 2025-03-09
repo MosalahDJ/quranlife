@@ -1,4 +1,5 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -8,6 +9,7 @@ import 'package:quranlife/features/controller/settings%20controllers/language_co
 import 'package:quranlife/features/controller/settings%20controllers/theme_controller.dart';
 import 'package:quranlife/features/view/splash%20page/splash_view.dart';
 import 'package:quranlife/myrouts.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -31,12 +33,27 @@ void main() async {
     Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     ),
-    // NotificationController.initialiseNotification(),
     dotenv.load(fileName: ".env"),
   ]);
 
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-  runApp(QuranLifeApp(prefs: prefs));
+  if (kReleaseMode) {
+    await SentryFlutter.init(
+      (options) {
+        options.dsn =
+            'https://ffbe2284578ddb220992bfafac17ac6c@o4508945405313024.ingest.de.sentry.io/4508945417371728';
+      },
+      appRunner: () => runApp(
+        SentryWidget(
+          child: QuranLifeApp(prefs: prefs),
+        ),
+      ),
+    );
+  } else {
+    runApp(QuranLifeApp(
+      prefs: prefs,
+    ));
+  }
 }
 
 class QuranLifeApp extends StatelessWidget {

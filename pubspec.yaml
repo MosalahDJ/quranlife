@@ -64,6 +64,7 @@ dependencies:
   material_design_icons_flutter: ^7.0.7296
   path: ^1.9.0
   restart_app: ^1.3.2
+  sentry_flutter: ^8.13.2
   share_plus: ^10.1.3
   shared_preferences: ^2.2.2
   skeletonizer: ^1.4.3
