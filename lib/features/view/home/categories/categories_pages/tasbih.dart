@@ -12,7 +12,7 @@ class Tasbih extends StatelessWidget {
   Tasbih({super.key});
 
   final TasbihController controller = Get.put(TasbihController());
-  final StatisticsController statctrl = Get.find();
+  final StatisticsController statctrl = Get.put(StatisticsController());
 
   @override
   Widget build(BuildContext context) {

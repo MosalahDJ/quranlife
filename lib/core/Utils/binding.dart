@@ -8,6 +8,7 @@ import 'package:quranlife/features/controller/ahadith%20controller/ahadith_contr
 import 'package:quranlife/features/controller/fetching%20data%20controller/allah_names_controller.dart';
 import 'package:quranlife/features/controller/fetching%20data%20controller/ghusl_controller.dart';
 import 'package:quranlife/features/controller/fetching%20data%20controller/haj_controller.dart';
+import 'package:quranlife/features/controller/fetching%20data%20controller/islamic_ruqya_controller.dart';
 import 'package:quranlife/features/controller/fetching%20data%20controller/omra_controller.dart';
 import 'package:quranlife/features/controller/fetching%20data%20controller/wudu_controller.dart';
 import 'package:quranlife/features/controller/home%20controller/myhomecontroller.dart';
@@ -61,6 +62,7 @@ class Mybinding implements Bindings {
     Get.put<WuduController>(WuduController());
     Get.put<GhuslController>(GhuslController());
     Get.put<AhadithController>(AhadithController());
+    Get.put<IslamicruqyaController>(IslamicruqyaController());
     Get.put<OmraController>(OmraController());
     Get.put<HajController>(HajController());
     //complain injection

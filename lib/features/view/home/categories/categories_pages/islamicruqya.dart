@@ -18,8 +18,7 @@ class _IslamicruqyaState extends State<Islamicruqya> {
   @override
   Widget build(BuildContext context) {
     final LanguageController langctrl = Get.find();
-    final IslamicruqyaController ruqyactrl =
-        Get.put<IslamicruqyaController>(IslamicruqyaController());
+    final IslamicruqyaController ruqyactrl = Get.find();
 
     return Scaffold(
       extendBodyBehindAppBar: true,
