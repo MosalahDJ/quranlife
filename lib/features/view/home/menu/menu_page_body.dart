@@ -234,11 +234,21 @@ class MenuPageBody extends StatelessWidget {
               onTap: () => Get.toNamed("help"),
               title: 'help_feedback'.tr),
           _buildSettingsCategory(
+              widget: deletAccount.isLoading.value
+                  ? CircularProgressIndicator(
+                      strokeWidth: 3,
+                      strokeAlign: -4,
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        Get.isDarkMode ? kmaincolor : kmaincolor4,
+                      ))
+                  : null,
               icon: Icons.logout_outlined,
               onTap: () {
-                FirebaseAuth.instance.currentUser!.isAnonymous
-                    ? deletAccount.anonymousSignout(context)
-                    : logctrl.signOut(context);
+                deletAccount.isLoading.value
+                    ? null
+                    : FirebaseAuth.instance.currentUser!.isAnonymous
+                        ? deletAccount.anonymousSignout(context)
+                        : logctrl.signOut(context);
               },
               title: 'log_out'.tr),
         ],
@@ -250,6 +260,7 @@ class MenuPageBody extends StatelessWidget {
     required IconData icon,
     required String title,
     required VoidCallback onTap,
+    Widget? widget,
   }) {
     return GetBuilder<ThemeController>(
       builder: (themeController) => Material(
@@ -268,10 +279,12 @@ class MenuPageBody extends StatelessWidget {
                         : kmaincolor.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Icon(icon,
-                      color:
-                          themeController.isDarkMode ? kmaincolor4 : kmaincolor,
-                      size: 24),
+                  child: widget ??
+                      Icon(icon,
+                          color: themeController.isDarkMode
+                              ? kmaincolor4
+                              : kmaincolor,
+                          size: 24),
                 ),
                 const SizedBox(width: 16),
                 Text(

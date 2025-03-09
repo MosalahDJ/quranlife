@@ -103,7 +103,9 @@ class EditProfilePage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: TextButton.icon(
           onPressed: () {
-            deletAccount.deleteUserAccount(context);
+            deletAccount.isLoading.value
+                ? null
+                : deletAccount.deleteUserAccount(context);
           },
           icon: Icon(
             Icons.delete_forever,

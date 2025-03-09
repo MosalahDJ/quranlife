@@ -6,6 +6,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:quranlife/features/controller/Auth%20controller/user_state_controller.dart';
 
 class DeletAccount extends GetxController {
@@ -165,4 +166,53 @@ class DeletAccount extends GetxController {
       isLoading.value = false;
     }
   }
+
+  
+  // User logout function
+  Future<void> signOut(BuildContext context) async {
+    List<ConnectivityResult> conectivity =
+        await Connectivity().checkConnectivity();
+    if (conectivity.contains(ConnectivityResult.none)) {
+      _showDialog(context, 'no_internet'.tr, 'internet_required_for_signout'.tr,
+          DialogType.warning);
+      return;
+    }
+
+    try {
+      isLoading.value = true;
+
+      final User? currentUser = FirebaseAuth.instance.currentUser;
+      if (currentUser != null) {
+        if (currentUser.isAnonymous) {
+          await _firestore.collection('users').doc(currentUser.uid).delete();
+          await currentUser.delete();
+        } else {
+          if (await GoogleSignIn().isSignedIn()) {
+            await GoogleSignIn().signOut();
+          }
+        }
+        await FirebaseAuth.instance.signOut();
+        await _userstatectrl.saveUserState(UserState.noUser);
+      }
+      Get.offAllNamed("login");
+    } on FirebaseAuthException catch (e) {
+      _showDialog(context, 'error'.tr, e.message ?? 'unknown_error'.tr,
+          DialogType.error);
+    }finally{
+      isLoading.value = false;
+
+    }
+  }
+
+  // Show a dialog using AwesomeDialog
+  void _showDialog(
+      BuildContext context, String title, String desc, DialogType type) {
+    AwesomeDialog(
+      context: context,
+      title: title,
+      desc: desc,
+      dialogType: type,
+    ).show();
+  }
+
 }

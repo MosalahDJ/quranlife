@@ -80,6 +80,8 @@ class LogInController extends GetxController {
     }
 
     try {
+      isLoading.value = true;
+
       final User? currentUser = FirebaseAuth.instance.currentUser;
       if (currentUser != null) {
         if (currentUser.isAnonymous) {
@@ -97,6 +99,9 @@ class LogInController extends GetxController {
     } on FirebaseAuthException catch (e) {
       _showDialog(context, 'error'.tr, e.message ?? 'unknown_error'.tr,
           DialogType.error);
+    }finally{
+      isLoading.value = false;
+
     }
   }
 

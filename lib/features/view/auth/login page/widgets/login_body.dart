@@ -135,8 +135,10 @@ class LoginBody extends StatelessWidget {
                           child: TextButton(
                             onPressed: () {
                               loginctrl.unfocusKeyboard();
-                              passreset.resetpassword(
-                                  context, loginctrl.emailController.text);
+                              loginctrl.isLoading.value
+                                  ? null
+                                  : passreset.resetpassword(
+                                      context, loginctrl.emailController.text);
                             },
                             child: Text(
                               "forgot_password".tr,
@@ -168,8 +170,12 @@ class LoginBody extends StatelessWidget {
                                       .validate() &&
                                   txtvalctrl.loginpasswordstate.currentState!
                                       .validate()) {
-                                loginctrl.unfocusKeyboard();
-                                loginctrl.login(context);
+                                loginctrl.isLoading.value
+                                    ? null
+                                    : loginctrl.unfocusKeyboard();
+                                loginctrl.isLoading.value
+                                    ? null
+                                    : loginctrl.login(context);
                               }
                             },
                             child: Obx(
@@ -348,7 +354,7 @@ void _showGuestLoginDialog(BuildContext context) {
         ),
         ElevatedButton(
           onPressed: () {
-            authnctrl.signInAnonymously();
+            authnctrl.isLoading.value ? null : authnctrl.signInAnonymously();
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: Get.isDarkMode ? kmaincolor4 : kmaincolor,
