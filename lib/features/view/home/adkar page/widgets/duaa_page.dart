@@ -17,8 +17,7 @@ class DuaaPage extends StatefulWidget {
 }
 
 class _DuaaPageState extends State<DuaaPage> {
-  final AdkarController _adkarctrl =
-      Get.put<AdkarController>(AdkarController());
+  final AdkarController _adkarctrl = Get.find();
 
   @override
   void dispose() {
