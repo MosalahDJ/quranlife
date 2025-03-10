@@ -28,18 +28,18 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  animate_do: ^3.3.4
+  animate_do: ^4.2.0
   audioplayers: ^6.1.1
   awesome_dialog: ^3.2.1
   cloud_firestore: ^5.6.5
   connectivity_plus: ^6.1.3
   cupertino_icons: ^1.0.6
   curved_navigation_bar: ^1.0.6
-  dots_indicator: ^3.0.0
+  dots_indicator: ^4.0.1
   firebase_auth: ^5.0.0
   firebase_core: ^3.0.0
   firebase_messaging: ^15.1.5
-  fl_chart: ^0.65.0
+  fl_chart: ^0.70.2
   flashy_tab_bar2: ^0.0.10
   flutter:
     sdk: flutter
@@ -49,7 +49,7 @@ dependencies:
   flutter_google_maps_webservices: ^1.1.1
   flutter_islamic_icons: ^1.0.2
   flutter_polyline_points: ^2.1.0
-  flutter_timezone: ^3.0.1
+  flutter_timezone: ^4.1.0
   font_awesome_flutter: ^10.8.0
   geocoding: ^3.0.0
   geolocator: ^13.0.1
@@ -76,7 +76,7 @@ dependencies:
 
 dev_dependencies:
   flutter_launcher_icons: ^0.14.1
-  flutter_lints: ^4.0.0
+  flutter_lints: ^5.0.0
 
   #package for adding Native Splash Screen
   flutter_native_splash: ^2.4.1
