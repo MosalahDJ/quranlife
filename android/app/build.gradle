@@ -37,6 +37,10 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << "-Xlint:deprecation"
+    }
+
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "com.MoSalahDev.quranlife"
