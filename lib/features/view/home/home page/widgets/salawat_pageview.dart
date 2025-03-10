@@ -40,8 +40,8 @@ class SalawatPageview extends StatelessWidget {
               textcolor: Get.isDarkMode ? kmaincolor4 : kmaincolor,
               elevation: 2,
               color: Get.isDarkMode
-                  ? kmaincolor2dark.withOpacity(0.5)
-                  : Colors.white.withOpacity(0.7),
+                  ? kmaincolor2dark.withValues(alpha: 0.5)
+                  : Colors.white.withValues(alpha: 0.7),
             ),
 
             //Salawattime

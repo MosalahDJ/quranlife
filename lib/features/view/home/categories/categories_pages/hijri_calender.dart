@@ -69,7 +69,7 @@ class HijriCalender extends StatelessWidget {
                           style: TextStyle(
                             color: Get.isDarkMode
                                 ? kmaincolor4
-                                : Colors.white.withOpacity(0.8),
+                                : Colors.white.withValues(alpha: 0.8),
                             fontSize: 18,
                           ),
                         ),
@@ -81,19 +81,19 @@ class HijriCalender extends StatelessWidget {
                     Card(
                       elevation: 0.1,
                       color: Get.isDarkMode
-                          ? kmaincolor2dark.withOpacity(0.5)
-                          : Colors.white.withOpacity(0.5),
+                          ? kmaincolor2dark.withValues(alpha: 0.5)
+                          : Colors.white.withValues(alpha: 0.5),
                       child: SizedBox(
                           height: Sizeconfig.screenheight! / 1.5,
                           child: IslamicHijriCalendar(
                             defaultBackColor: Colors.transparent,
                             isHijriView: true,
-                            highlightBorder: Colors.white.withOpacity(0.8),
+                            highlightBorder: Colors.white.withValues(alpha: 0.8),
                             highlightTextColor:
                                 Get.isDarkMode ? kmaincolor4 : kmaincolor,
                             defaultTextColor:
                                 Get.isDarkMode ? Colors.white : Colors.black,
-                            defaultBorder: Colors.white.withOpacity(0.5),
+                            defaultBorder: Colors.white.withValues(alpha: 0.5),
                             adjustmentValue: 0,
                             isDisablePreviousNextMonthDates: true,
                           )),
@@ -107,11 +107,11 @@ class HijriCalender extends StatelessWidget {
                           builder: (context, constraints) => Container(
                             decoration: BoxDecoration(
                               color:
-                                  Theme.of(context).cardColor.withOpacity(0.5),
+                                  Theme.of(context).cardColor.withValues(alpha: 0.5),
                               borderRadius: BorderRadius.circular(15),
                               boxShadow: [
                                 BoxShadow(
-                                  color: kmaincolor.withOpacity(0.08),
+                                  color: kmaincolor.withValues(alpha: 0.08),
                                   blurRadius: 15,
                                   offset: const Offset(0, 5),
                                   spreadRadius: 1,

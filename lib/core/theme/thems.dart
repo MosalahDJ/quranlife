@@ -15,7 +15,6 @@ class Themes {
       primaryColor: kmaincolor,
       cardColor: textcolor2,
       dividerColor: kmaincolor4,
-      dialogBackgroundColor: kmaincolor3,
 
       // Component Themes
       appBarTheme: AppBarTheme(backgroundColor: kmaincolor),
@@ -50,7 +49,7 @@ class Themes {
             fontFamily: _fontFamily),
         labelLarge: TextStyle(
             fontSize: 14, color: hintcolor, fontWeight: FontWeight.bold),
-      ));
+      ), dialogTheme: DialogThemeData(backgroundColor: kmaincolor3));
 
   // Dark Theme Configuration
   ThemeData darkmode = ThemeData(
@@ -61,7 +60,6 @@ class Themes {
       primaryColor: kmaincolordark,
       cardColor: kmaincolor2dark,
       dividerColor: kmaincolor4dark,
-      dialogBackgroundColor: kmaincolor3dark,
 
       // Component Themes
       appBarTheme: AppBarTheme(backgroundColor: kmaincolor),
@@ -96,5 +94,5 @@ class Themes {
             fontFamily: _fontFamily),
         labelLarge: TextStyle(
             fontSize: 14, color: textcolordark, fontWeight: FontWeight.bold),
-      ));
+      ), dialogTheme: DialogThemeData(backgroundColor: kmaincolor3dark));
 }

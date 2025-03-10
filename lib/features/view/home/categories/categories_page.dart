@@ -297,8 +297,8 @@ Widget mycategory(
         builder: (_) => Container(
           decoration: BoxDecoration(
             color: Get.isDarkMode
-                ? kmaincolor2dark.withOpacity(0.7)
-                : Colors.white.withOpacity(0.7),
+                ? kmaincolor2dark.withValues(alpha: 0.7)
+                : Colors.white.withValues(alpha: 0.7),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Column(
@@ -308,8 +308,8 @@ Widget mycategory(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: Get.isDarkMode
-                      ? kmaincolor2dark.withOpacity(0.1)
-                      : Colors.grey.withOpacity(0.1),
+                      ? kmaincolor2dark.withValues(alpha: 0.1)
+                      : Colors.grey.withValues(alpha: 0.1),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(

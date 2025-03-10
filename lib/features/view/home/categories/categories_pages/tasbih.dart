@@ -93,7 +93,7 @@ class Tasbih extends StatelessWidget {
     return Container(
       width: Sizeconfig.screenwidth,
       decoration: BoxDecoration(
-        color: kmaincolor3dark.withOpacity(0.8),
+        color: kmaincolor3dark.withValues(alpha: 0.8),
         borderRadius: const BorderRadius.vertical(top: Radius.circular(60)),
       ),
       child: SingleChildScrollView(
@@ -154,13 +154,13 @@ class Tasbih extends StatelessWidget {
                 color: textcolor3,
                 boxShadow: [
                   BoxShadow(
-                    color: kmaincolor3dark.withOpacity(0.3),
+                    color: kmaincolor3dark.withValues(alpha: 0.3),
                     spreadRadius: 5,
                     blurRadius: 15,
                     offset: const Offset(0, 5),
                   ),
                   BoxShadow(
-                    color: Colors.white.withOpacity(0.3),
+                    color: Colors.white.withValues(alpha: 0.3),
                     spreadRadius: -2,
                     blurRadius: 15,
                     offset: const Offset(-5, -5),
@@ -180,12 +180,12 @@ class Tasbih extends StatelessWidget {
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                         colors: [
-                          Colors.white.withOpacity(0.2),
+                          Colors.white.withValues(alpha: 0.2),
                           Colors.transparent,
                         ],
                       ),
                       border: Border.all(
-                        color: Colors.white.withOpacity(0.2),
+                        color: Colors.white.withValues(alpha: 0.2),
                         width: 2,
                       ),
                     ),
@@ -210,7 +210,7 @@ class Tasbih extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             shadows: [
                               Shadow(
-                                color: Colors.black.withOpacity(0.5),
+                                color: Colors.black.withValues(alpha: 0.5),
                                 offset: const Offset(1, 1),
                                 blurRadius: 3,
                               ),
@@ -220,7 +220,7 @@ class Tasbih extends StatelessWidget {
                         const SizedBox(width: 8),
                         Icon(
                           Icons.touch_app_rounded,
-                          color: Colors.white.withOpacity(0.9),
+                          color: Colors.white.withValues(alpha: 0.9),
                           size: 24,
                         ),
                       ],
@@ -248,11 +248,11 @@ class Tasbih extends StatelessWidget {
         ),
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
         decoration: BoxDecoration(
-          color: kmaincolor3.withOpacity(0.8),
+          color: kmaincolor3.withValues(alpha: 0.8),
           borderRadius: BorderRadius.circular(16.0),
           boxShadow: [
             BoxShadow(
-              color: const Color(0xFF00100C).withOpacity(0.15),
+              color: const Color(0xFF00100C).withValues(alpha: 0.15),
               blurRadius: 15,
               offset: const Offset(0, 5),
               spreadRadius: 2,
@@ -280,7 +280,7 @@ class Tasbih extends StatelessWidget {
                   icon: Container(
                     padding: const EdgeInsets.all(8.0),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF00100C).withOpacity(0.1),
+                      color: const Color(0xFF00100C).withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: const Icon(
@@ -337,7 +337,7 @@ class Tasbih extends StatelessWidget {
         color: Colors.transparent,
         borderRadius: const BorderRadius.all(Radius.circular(30)),
         border: Border.all(
-          color: Colors.white.withOpacity(0.3),
+          color: Colors.white.withValues(alpha: 0.3),
           width: 1,
           style: BorderStyle.solid,
         ),
@@ -365,7 +365,7 @@ class Tasbih extends StatelessWidget {
         color: Colors.transparent,
         borderRadius: const BorderRadius.all(Radius.circular(30)),
         border: Border.all(
-          color: Colors.white.withOpacity(0.3),
+          color: Colors.white.withValues(alpha: 0.3),
           width: 1,
           style: BorderStyle.solid,
         ),
@@ -403,7 +403,7 @@ class Tasbih extends StatelessWidget {
         color: Colors.transparent,
         borderRadius: const BorderRadius.all(Radius.circular(30)),
         border: Border.all(
-          color: Colors.white.withOpacity(0.3),
+          color: Colors.white.withValues(alpha: 0.3),
           width: 1,
           style: BorderStyle.solid,
         ),
@@ -464,18 +464,18 @@ class Tasbih extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 20),
       padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
       decoration: BoxDecoration(
-        color: kmaincolor3.withOpacity(0.9),
+        color: kmaincolor3.withValues(alpha: 0.9),
         borderRadius: BorderRadius.circular(30),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF00100C).withOpacity(0.15),
+            color: const Color(0xFF00100C).withValues(alpha: 0.15),
             blurRadius: 15,
             offset: const Offset(0, 5),
             spreadRadius: 2,
           ),
         ],
         border: Border.all(
-          color: Colors.white.withOpacity(0.3),
+          color: Colors.white.withValues(alpha: 0.3),
           width: 1.5,
         ),
       ),
@@ -500,7 +500,7 @@ class Tasbih extends StatelessWidget {
                   Text(
                     "sur".tr,
                     style: TextStyle(
-                      color: const Color(0xFF00100C).withOpacity(0.7),
+                      color: const Color(0xFF00100C).withValues(alpha: 0.7),
                       fontSize: 24,
                       fontFamily: 'Amiri',
                     ),
@@ -530,9 +530,9 @@ class Tasbih extends StatelessWidget {
                   duration: const Duration(milliseconds: 250),
                   builder: (context, value, _) => LinearProgressIndicator(
                     value: value,
-                    backgroundColor: Colors.white.withOpacity(0.3),
+                    backgroundColor: Colors.white.withValues(alpha: 0.3),
                     valueColor: AlwaysStoppedAnimation<Color>(
-                      const Color(0xFF00100C).withOpacity(0.7),
+                      const Color(0xFF00100C).withValues(alpha: 0.7),
                     ),
                     minHeight: 6,
                   ),

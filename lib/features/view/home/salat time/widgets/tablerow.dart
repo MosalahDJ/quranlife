@@ -99,7 +99,7 @@ class SalawatTableRow {
               onPressed: () {
                 Get.snackbar(
                     "upcoming_feature_title".tr, "upcoming_feature_desc".tr,
-                    backgroundColor: Colors.transparent.withOpacity(0.3),
+                    backgroundColor: Colors.transparent.withValues(alpha: 0.3),
                     colorText: const Color(0xFFFFFFFF),
                     duration: const Duration(seconds: 3),
                     margin: const EdgeInsets.symmetric(

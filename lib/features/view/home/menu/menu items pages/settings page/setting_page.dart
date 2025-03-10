@@ -53,7 +53,7 @@ class SettingPage extends StatelessWidget {
                 title: 'notifications'.tr,
                 onTap: () => Get.snackbar(
                     "upcoming_feature_title".tr, "upcoming_feature_desc".tr,
-                    backgroundColor: Colors.transparent.withOpacity(0.5),
+                    backgroundColor: Colors.transparent.withValues(alpha: 0.5),
                     colorText: const Color(0xFFFFFFFF),
                     duration: const Duration(seconds: 3),
                     margin: const EdgeInsets.symmetric(
@@ -91,8 +91,8 @@ class SettingPage extends StatelessWidget {
             fontSize: 16,
             fontWeight: FontWeight.w600,
             color: themeController.isDarkMode
-                ? kmaincolor4.withOpacity(0.8)
-                : kmaincolor.withOpacity(0.8),
+                ? kmaincolor4.withValues(alpha: 0.8)
+                : kmaincolor.withValues(alpha: 0.8),
             letterSpacing: 0.5,
           ),
         ),
@@ -119,8 +119,8 @@ class SettingPage extends StatelessWidget {
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     color: themeController.isDarkMode
-                        ? kmaincolor4.withOpacity(0.1)
-                        : kmaincolor.withOpacity(0.1),
+                        ? kmaincolor4.withValues(alpha: 0.1)
+                        : kmaincolor.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Icon(icon,

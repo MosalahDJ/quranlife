@@ -170,8 +170,8 @@ Widget _surahviewPage() {
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(12)),
                             color: Get.isDarkMode
-                                ? kmaincolor2dark.withOpacity(0.7)
-                                : Colors.white.withOpacity(0.7),
+                                ? kmaincolor2dark.withValues(alpha: 0.7)
+                                : Colors.white.withValues(alpha: 0.7),
                           ),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
@@ -279,8 +279,8 @@ Widget _juzuaviewPage() {
                           child: Ink(
                             decoration: BoxDecoration(
                               color: Get.isDarkMode
-                                  ? kmaincolor2dark.withOpacity(0.7)
-                                  : Colors.white.withOpacity(0.7),
+                                  ? kmaincolor2dark.withValues(alpha: 0.7)
+                                  : Colors.white.withValues(alpha: 0.7),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Container(
@@ -408,7 +408,7 @@ Widget _searchWidget() {
                 enabledBorder: const OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(15))),
                 fillColor: Get.isDarkMode
-                    ? kmaincolor3dark.withOpacity(0.5)
+                    ? kmaincolor3dark.withValues(alpha: 0.5)
                     : Colors.white,
                 filled: true,
                 hintText: 'search'.tr,
@@ -445,7 +445,7 @@ Widget _searchWidget() {
                           decoration: BoxDecoration(
                             color: Get.isDarkMode
                                 ? Colors.black12
-                                : Colors.white.withOpacity(0.7),
+                                : Colors.white.withValues(alpha: 0.7),
                             borderRadius: BorderRadius.circular(15),
                             border: Border.all(
                               color: Get.isDarkMode

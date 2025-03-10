@@ -66,8 +66,8 @@ class RefferalPage extends StatelessWidget {
     return Card(
       elevation: 4,
       color: Get.isDarkMode
-          ? kmaincolor2dark.withOpacity(0.5)
-          : Colors.white.withOpacity(0.7),
+          ? kmaincolor2dark.withValues(alpha: 0.5)
+          : Colors.white.withValues(alpha: 0.7),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -101,8 +101,8 @@ class RefferalPage extends StatelessWidget {
     return Card(
       elevation: 4,
       color: Get.isDarkMode
-          ? kmaincolor2dark.withOpacity(0.5)
-          : Colors.white.withOpacity(0.7),
+          ? kmaincolor2dark.withValues(alpha: 0.5)
+          : Colors.white.withValues(alpha: 0.7),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -140,7 +140,7 @@ class RefferalPage extends StatelessWidget {
                       'Link copied to clipboard',
                       colorText: Get.isDarkMode ? Colors.white : Colors.black,
                       snackPosition: SnackPosition.BOTTOM,
-                      backgroundColor: kmaincolor.withOpacity(0.1),
+                      backgroundColor: kmaincolor.withValues(alpha: 0.1),
                       duration: const Duration(seconds: 2),
                     );
                   },
@@ -157,8 +157,8 @@ class RefferalPage extends StatelessWidget {
     return Card(
       elevation: 4,
       color: Get.isDarkMode
-          ? kmaincolor2dark.withOpacity(0.5)
-          : Colors.white.withOpacity(0.7),
+          ? kmaincolor2dark.withValues(alpha: 0.5)
+          : Colors.white.withValues(alpha: 0.7),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: Padding(
         padding: const EdgeInsets.all(16.0),

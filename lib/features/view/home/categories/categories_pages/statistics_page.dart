@@ -143,16 +143,16 @@ class _StatisticsPageState extends State<StatisticsPage>
     return Card(
       elevation: 4,
       color: Get.isDarkMode
-          ? kmaincolor2dark.withOpacity(0.7)
-          : Colors.white.withOpacity(0.7),
+          ? kmaincolor2dark.withValues(alpha: 0.7)
+          : Colors.white.withValues(alpha: 0.7),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
       child: Container(
         decoration: BoxDecoration(
           color: Get.isDarkMode
-              ? kmaincolor2dark.withOpacity(0.7)
-              : Colors.white.withOpacity(0.7),
+              ? kmaincolor2dark.withValues(alpha: 0.7)
+              : Colors.white.withValues(alpha: 0.7),
           borderRadius: BorderRadius.circular(20),
         ),
         padding: const EdgeInsets.all(16),
@@ -198,8 +198,8 @@ class _StatisticsPageState extends State<StatisticsPage>
     return Card(
       elevation: 4,
       color: Get.isDarkMode
-          ? kmaincolor2dark.withOpacity(0.7)
-          : Colors.white.withOpacity(0.7),
+          ? kmaincolor2dark.withValues(alpha: 0.7)
+          : Colors.white.withValues(alpha: 0.7),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
@@ -208,8 +208,8 @@ class _StatisticsPageState extends State<StatisticsPage>
         padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
           color: Get.isDarkMode
-              ? kmaincolor2dark.withOpacity(0.7)
-              : Colors.white.withOpacity(0.7),
+              ? kmaincolor2dark.withValues(alpha: 0.7)
+              : Colors.white.withValues(alpha: 0.7),
           borderRadius: BorderRadius.circular(20),
         ),
         child: Column(
@@ -286,7 +286,7 @@ class _StatisticsPageState extends State<StatisticsPage>
                   const SizedBox(height: 16),
                   LinearProgressIndicator(
                     value: totalItems / 250, // Assuming 250 is the goal
-                    backgroundColor: Colors.grey.withOpacity(0.2),
+                    backgroundColor: Colors.grey.withValues(alpha: 0.2),
                     valueColor: AlwaysStoppedAnimation<Color>(
                       Get.isDarkMode ? kmaincolor4 : kmaincolor,
                     ),
@@ -318,16 +318,16 @@ class _StatisticsPageState extends State<StatisticsPage>
     return Card(
       elevation: 4,
       color: Get.isDarkMode
-          ? kmaincolor2dark.withOpacity(0.7)
-          : Colors.white.withOpacity(0.7),
+          ? kmaincolor2dark.withValues(alpha: 0.7)
+          : Colors.white.withValues(alpha: 0.7),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
       child: Container(
         decoration: BoxDecoration(
           color: Get.isDarkMode
-              ? kmaincolor2dark.withOpacity(0.7)
-              : Colors.white.withOpacity(0.7),
+              ? kmaincolor2dark.withValues(alpha: 0.7)
+              : Colors.white.withValues(alpha: 0.7),
           borderRadius: BorderRadius.circular(20),
         ),
         width: double.infinity,

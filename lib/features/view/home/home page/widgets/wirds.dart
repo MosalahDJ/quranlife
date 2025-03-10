@@ -136,7 +136,7 @@ class WirdCard extends StatelessWidget {
                                   .textTheme
                                   .bodyLarge
                                   ?.color
-                                  ?.withOpacity(0.87),
+                                  ?.withValues(alpha: 0.87),
                             ),
                       ),
                       const SizedBox(height: 16),

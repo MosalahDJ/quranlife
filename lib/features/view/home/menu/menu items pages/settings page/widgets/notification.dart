@@ -59,8 +59,8 @@ class NotificationSettings extends StatelessWidget {
           fontSize: 16,
           fontWeight: FontWeight.w600,
           color: themeCtrl.isDarkMode
-              ? kmaincolor4.withOpacity(0.8)
-              : kmaincolor.withOpacity(0.8),
+              ? kmaincolor4.withValues(alpha: 0.8)
+              : kmaincolor.withValues(alpha: 0.8),
           letterSpacing: 0.5,
         ),
       ),
@@ -89,8 +89,8 @@ class NotificationSettings extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: themeCtrl.isDarkMode
-                      ? kmaincolor4.withOpacity(0.1)
-                      : kmaincolor.withOpacity(0.1),
+                      ? kmaincolor4.withValues(alpha: 0.1)
+                      : kmaincolor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Icon(

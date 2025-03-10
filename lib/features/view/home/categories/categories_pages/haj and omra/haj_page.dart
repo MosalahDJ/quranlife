@@ -68,7 +68,7 @@ class _HajPageState extends State<HajPage> {
                       borderRadius: BorderRadius.circular(15),
                       boxShadow: [
                         BoxShadow(
-                          color: kmaincolor.withOpacity(0.08),
+                          color: kmaincolor.withValues(alpha: 0.08),
                           blurRadius: 15,
                           offset: const Offset(0, 5),
                           spreadRadius: 1,
@@ -114,7 +114,7 @@ class _HajPageState extends State<HajPage> {
                                           .textTheme
                                           .bodyLarge
                                           ?.color
-                                          ?.withOpacity(0.87),
+                                          ?.withValues(alpha: 0.87),
                                     ),
                               ),
                               // Description if exists
@@ -124,7 +124,7 @@ class _HajPageState extends State<HajPage> {
                                 decoration: BoxDecoration(
                                   color: Get.isDarkMode
                                       ? Colors.grey[400]
-                                      : kmaincolor.withOpacity(0.05),
+                                      : kmaincolor.withValues(alpha: 0.05),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Text(
@@ -153,7 +153,7 @@ class _HajPageState extends State<HajPage> {
                                 decoration: BoxDecoration(
                                   color: Get.isDarkMode
                                       ? Colors.grey[400]
-                                      : kmaincolor.withOpacity(0.05),
+                                      : kmaincolor.withValues(alpha: 0.05),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Column(

@@ -47,8 +47,8 @@ class AdkarPage extends StatelessWidget {
               child: FadeInUp(
                 child: AdkarCollections(
                   adkarcategorycolor: Get.isDarkMode
-                      ? kmaincolor2dark.withOpacity(0.7)
-                      : Colors.white.withOpacity(0.7),
+                      ? kmaincolor2dark.withValues(alpha: 0.7)
+                      : Colors.white.withValues(alpha: 0.7),
                 ),
               ),
             ),

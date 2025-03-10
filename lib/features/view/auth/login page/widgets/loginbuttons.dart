@@ -12,7 +12,7 @@ class LoginButtons extends StatelessWidget {
     return ElevatedButton(
       style: ButtonStyle(
           backgroundColor:
-              WidgetStatePropertyAll(Colors.white.withOpacity(0.5))),
+              WidgetStatePropertyAll(Colors.white.withValues(alpha: 0.5))),
       onPressed: onpress,
       child: Row(
         children: [

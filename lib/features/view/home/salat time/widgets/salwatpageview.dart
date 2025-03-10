@@ -39,11 +39,11 @@ class Salwatpageview extends StatelessWidget {
             color: fpfctrl.prayersdays[day]?[salattime]?.toString() ==
                     dpcctrl.currentPrayertime.value
                 ? Get.isDarkMode
-                    ? kmaincolor3.withOpacity(0.4)
-                    : kmaincolor4.withOpacity(0.7)
+                    ? kmaincolor3.withValues(alpha: 0.4)
+                    : kmaincolor4.withValues(alpha: 0.7)
                 : Get.isDarkMode
-                    ? kmaincolor2dark.withOpacity(0.5)
-                    : Colors.white.withOpacity(0.7),
+                    ? kmaincolor2dark.withValues(alpha: 0.5)
+                    : Colors.white.withValues(alpha: 0.7),
             child: Container(
               decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(10))),

@@ -30,7 +30,7 @@ class PrayerTimesPage extends StatelessWidget {
                   onPressed: () {
                     Get.snackbar(
                         "upcoming_feature_title".tr, "upcoming_feature_desc".tr,
-                        backgroundColor: Colors.transparent.withOpacity(0.3),
+                        backgroundColor: Colors.transparent.withValues(alpha: 0.3),
                         colorText: const Color(0xFFFFFFFF),
                         duration: const Duration(seconds: 3),
                         margin: const EdgeInsets.symmetric(
@@ -72,13 +72,13 @@ class PrayerTimesPage extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 vertical: 16, horizontal: 12),
                             decoration: BoxDecoration(
-                              color: Colors.black.withOpacity(0.5),
+                              color: Colors.black.withValues(alpha: 0.5),
                               borderRadius: BorderRadius.circular(15),
                               border: Border.all(
-                                  color: Colors.white.withOpacity(0.1)),
+                                  color: Colors.white.withValues(alpha: 0.1)),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
+                                  color: Colors.black.withValues(alpha: 0.1),
                                   blurRadius: 10,
                                   spreadRadius: 2,
                                 ),
@@ -114,7 +114,7 @@ class PrayerTimesPage extends StatelessWidget {
                           textcolor2: Colors.white,
                           textcolor: kmaincolor4,
                           elevation: 2,
-                          color: Colors.black.withOpacity(0.5),
+                          color: Colors.black.withValues(alpha: 0.5),
                         ),
 
                         SizedBox(height: Sizeconfig.screenheight! * 0.03),

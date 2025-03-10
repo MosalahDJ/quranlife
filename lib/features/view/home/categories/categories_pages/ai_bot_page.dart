@@ -155,14 +155,14 @@ Widget _buildMessageInput() {
         Expanded(
           child: TextField(
             style: TextStyle(
-              color: Colors.black.withOpacity(0.8),
+              color: Colors.black.withValues(alpha: 0.8),
               fontSize: 16,
             ),
             controller: controller.messageController,
             decoration: InputDecoration(
               hintText: 'write_message'.tr,
               hintStyle: TextStyle(
-                color: Colors.black.withOpacity(0.5),
+                color: Colors.black.withValues(alpha: 0.5),
                 fontSize: 14,
               ),
               border: OutlineInputBorder(

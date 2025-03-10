@@ -42,7 +42,7 @@ class Prayertimestable extends GetView<DeterminePrayersController> {
             padding: const EdgeInsets.only(left: 10),
             decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(15)),
-                boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.4))]),
+                boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.4))]),
             child: Card(
               color: Colors.transparent,
               elevation: 0,

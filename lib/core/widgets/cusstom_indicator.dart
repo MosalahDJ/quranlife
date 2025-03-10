@@ -29,7 +29,7 @@ class CustomIndicator extends StatelessWidget {
             side: BorderSide(color: dotscolor),
           ),
         ),
-        position: indposition!,
+        position: indposition!.toDouble(),
       ),
     );
   }

@@ -9,11 +9,11 @@ class Myskeletonizer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Skeletonizer(
         enabled: true,
-        containersColor: const Color(0xFFE0E0E0).withOpacity(0.1),
+        containersColor: const Color(0xFFE0E0E0).withValues(alpha: 0.1),
         ignoreContainers: false,
         effect: ShimmerEffect(
-          baseColor: const Color(0xFFE0E0E0).withOpacity(0.1),
-          highlightColor: const Color(0xFFF5F5F5).withOpacity(0.8),
+          baseColor: const Color(0xFFE0E0E0).withValues(alpha: 0.1),
+          highlightColor: const Color(0xFFF5F5F5).withValues(alpha: 0.8),
           duration: const Duration(milliseconds: 1500),
         ),
         justifyMultiLineText: true,

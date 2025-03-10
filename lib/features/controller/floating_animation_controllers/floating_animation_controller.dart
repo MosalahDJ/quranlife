@@ -50,7 +50,7 @@ class FloatingAnimationController extends GetxController
                     borderRadius: BorderRadius.circular(100),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(shadowOpacity),
+                        color: Colors.black.withValues(alpha: shadowOpacity),
                         blurRadius: 10,
                         spreadRadius: 2,
                       ),

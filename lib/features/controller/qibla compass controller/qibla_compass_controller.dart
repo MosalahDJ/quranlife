@@ -158,7 +158,7 @@ class QiblaCompassController extends GetxController {
       "calibrate_compass".tr,
       "calibration_instructions".tr,
       duration: const Duration(seconds: 5),
-      backgroundColor: Colors.amber.withOpacity(0.7),
+      backgroundColor: Colors.amber.withValues(alpha: 0.7),
       colorText: Colors.black87,
       snackPosition: SnackPosition.BOTTOM,
     );

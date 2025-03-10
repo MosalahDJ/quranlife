@@ -64,7 +64,7 @@ class _NamePageState extends State<NamePage> {
                         borderRadius: BorderRadius.circular(15),
                         boxShadow: [
                           BoxShadow(
-                            color: kmaincolor.withOpacity(0.08),
+                            color: kmaincolor.withValues(alpha: 0.08),
                             blurRadius: 15,
                             offset: const Offset(0, 5),
                             spreadRadius: 1,
@@ -107,7 +107,7 @@ class _NamePageState extends State<NamePage> {
                                               .textTheme
                                               .bodyLarge
                                               ?.color
-                                              ?.withOpacity(0.87),
+                                              ?.withValues(alpha: 0.87),
                                         ),
                                   ),
                                   //description
@@ -127,7 +127,7 @@ class _NamePageState extends State<NamePage> {
                                               .textTheme
                                               .bodyLarge
                                               ?.color
-                                              ?.withOpacity(0.87),
+                                              ?.withValues(alpha: 0.87),
                                         ),
                                   ),
                                 ],

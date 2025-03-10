@@ -189,7 +189,7 @@ class _SurahPageState extends State<SurahPage> {
       width: Sizeconfig.screenwidth! / 1.05,
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(20)),
-        color: kmaincolor4.withOpacity(0.6),
+        color: kmaincolor4.withValues(alpha: 0.6),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -231,7 +231,7 @@ class _SurahPageState extends State<SurahPage> {
           Shadow(
             offset: const Offset(1, 1),
             blurRadius: 2,
-            color: const Color(0xFF280F01).withOpacity(0.3),
+            color: const Color(0xFF280F01).withValues(alpha: 0.3),
           )
         ],
       ),

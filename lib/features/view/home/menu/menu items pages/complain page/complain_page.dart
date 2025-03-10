@@ -82,8 +82,8 @@ class ComplainPage extends StatelessWidget {
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                       color: Get.isDarkMode
-                          ? kmaincolordark.withOpacity(0.7)
-                          : Colors.white.withOpacity(0.7),
+                          ? kmaincolordark.withValues(alpha: 0.7)
+                          : Colors.white.withValues(alpha: 0.7),
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Column(
@@ -108,8 +108,8 @@ class ComplainPage extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         color: Get.isDarkMode
-            ? kmaincolordark.withOpacity(0.7)
-            : Colors.white.withOpacity(0.7),
+            ? kmaincolordark.withValues(alpha: 0.7)
+            : Colors.white.withValues(alpha: 0.7),
       ),
       margin: const EdgeInsets.all(15),
       padding: const EdgeInsets.all(20),
@@ -130,8 +130,8 @@ class ComplainPage extends StatelessWidget {
             style: TextStyle(
               fontSize: 16,
               color: Get.isDarkMode
-                  ? Colors.white.withOpacity(0.9)
-                  : Colors.black.withOpacity(0.9),
+                  ? Colors.white.withValues(alpha: 0.9)
+                  : Colors.black.withValues(alpha: 0.9),
             ),
           ),
         ],
@@ -149,8 +149,8 @@ class ComplainPage extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 16),
       child: Material(
         color: Get.isDarkMode
-            ? kmaincolordark.withOpacity(0.7)
-            : Colors.white.withOpacity(0.7),
+            ? kmaincolordark.withValues(alpha: 0.7)
+            : Colors.white.withValues(alpha: 0.7),
         borderRadius: BorderRadius.circular(15),
         child: InkWell(
           onTap: onTap,

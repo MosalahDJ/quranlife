@@ -85,8 +85,8 @@ class EditProfilePage extends StatelessWidget {
             fontSize: 16,
             fontWeight: FontWeight.w600,
             color: themeController.isDarkMode
-                ? kmaincolor4.withOpacity(0.8)
-                : kmaincolor.withOpacity(0.8),
+                ? kmaincolor4.withValues(alpha: 0.8)
+                : kmaincolor.withValues(alpha: 0.8),
             letterSpacing: 0.5,
           ),
         ),
@@ -124,7 +124,7 @@ class EditProfilePage extends StatelessWidget {
                 Size(Sizeconfig.screenwidth!, Sizeconfig.screenheight! / 15),
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             backgroundColor: themeController.isDarkMode
-                ? Colors.red.shade900.withOpacity(0.2)
+                ? Colors.red.shade900.withValues(alpha: 0.2)
                 : Colors.red.shade50,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
@@ -212,8 +212,8 @@ class EditProfilePage extends StatelessWidget {
       final fillColor =
           themeController.isDarkMode ? Colors.grey[800] : Colors.grey[50];
       final borderColor = themeController.isDarkMode
-          ? kmaincolor4.withOpacity(0.3)
-          : kmaincolor.withOpacity(0.3);
+          ? kmaincolor4.withValues(alpha: 0.3)
+          : kmaincolor.withValues(alpha: 0.3);
       final hintColor =
           themeController.isDarkMode ? Colors.grey[500] : Colors.grey[400];
       final textColor = themeController.isDarkMode
@@ -321,12 +321,12 @@ class EditProfilePage extends StatelessWidget {
       final borderColor = isSelected
           ? accentColor
           : (themeController.isDarkMode
-              ? Colors.grey.withOpacity(0.5)
-              : Colors.grey.withOpacity(0.3));
+              ? Colors.grey.withValues(alpha: 0.5)
+              : Colors.grey.withValues(alpha: 0.3));
       final bgColor = isSelected
           ? (themeController.isDarkMode
-              ? kmaincolor4.withOpacity(0.1)
-              : kmaincolor.withOpacity(0.1))
+              ? kmaincolor4.withValues(alpha: 0.1)
+              : kmaincolor.withValues(alpha: 0.1))
           : (themeController.isDarkMode
               ? Colors.grey[800]
               : Colors.transparent);
@@ -375,7 +375,7 @@ class EditProfilePage extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
               BoxShadow(
-                color: accentColor.withOpacity(0.3),
+                color: accentColor.withValues(alpha: 0.3),
                 blurRadius: 5,
                 offset: const Offset(0, 3),
               ),

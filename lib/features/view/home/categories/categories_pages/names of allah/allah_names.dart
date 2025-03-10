@@ -70,11 +70,11 @@ class _AllahNamesState extends State<AllahNames> {
                     onTap: () => Get.to(() => NamePage(id: i)),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Theme.of(context).cardColor.withOpacity(0.7),
+                        color: Theme.of(context).cardColor.withValues(alpha: 0.7),
                         borderRadius: BorderRadius.circular(15),
                         boxShadow: [
                           BoxShadow(
-                            color: kmaincolor.withOpacity(0.5),
+                            color: kmaincolor.withValues(alpha: 0.5),
                             blurRadius: 15,
                             offset: const Offset(0, 5),
                             spreadRadius: 1,
@@ -99,7 +99,7 @@ class _AllahNamesState extends State<AllahNames> {
                                           .textTheme
                                           .bodyLarge
                                           ?.color
-                                          ?.withOpacity(0.87),
+                                          ?.withValues(alpha: 0.87),
                                     ),
                           ),
                         ],

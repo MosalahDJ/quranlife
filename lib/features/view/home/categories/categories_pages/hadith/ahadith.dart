@@ -74,11 +74,11 @@ class _AhadithState extends State<Ahadith> {
                                 decoration: BoxDecoration(
                                   color: Theme.of(context)
                                       .cardColor
-                                      .withOpacity(0.7),
+                                      .withValues(alpha: 0.7),
                                   borderRadius: BorderRadius.circular(15),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: kmaincolor.withOpacity(0.08),
+                                      color: kmaincolor.withValues(alpha: 0.08),
                                       blurRadius: 15,
                                       offset: const Offset(0, 5),
                                       spreadRadius: 1,
@@ -107,7 +107,7 @@ class _AhadithState extends State<Ahadith> {
                                                   .textTheme
                                                   .bodyLarge
                                                   ?.color
-                                                  ?.withOpacity(0.87),
+                                                  ?.withValues(alpha: 0.87),
                                             ),
                                       ),
                                       Container(
@@ -115,7 +115,7 @@ class _AhadithState extends State<Ahadith> {
                                         decoration: BoxDecoration(
                                           color: Get.isDarkMode
                                               ? Colors.grey[400]
-                                              : kmaincolor.withOpacity(0.05),
+                                              : kmaincolor.withValues(alpha: 0.05),
                                           borderRadius:
                                               BorderRadius.circular(8),
                                         ),

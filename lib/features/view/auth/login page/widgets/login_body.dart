@@ -73,7 +73,7 @@ class LoginBody extends StatelessWidget {
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.08),
+                          color: Colors.black.withValues(alpha: 0.08),
                           blurRadius: 20,
                           offset: const Offset(0, 10),
                         ),
@@ -212,23 +212,23 @@ class LoginBody extends StatelessWidget {
                           Expanded(
                               child: Divider(
                                   color: Get.isDarkMode
-                                      ? kmaincolor4.withOpacity(0.5)
-                                      : kmaincolor.withOpacity(0.5))),
+                                      ? kmaincolor4.withValues(alpha: 0.5)
+                                      : kmaincolor.withValues(alpha: 0.5))),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: Text(
                               "or_login_with".tr,
                               style: TextStyle(
                                   color: Get.isDarkMode
-                                      ? kmaincolor4.withOpacity(0.8)
-                                      : kmaincolor.withOpacity(0.8)),
+                                      ? kmaincolor4.withValues(alpha: 0.8)
+                                      : kmaincolor.withValues(alpha: 0.8)),
                             ),
                           ),
                           Expanded(
                               child: Divider(
                                   color: Get.isDarkMode
-                                      ? kmaincolor4.withOpacity(0.5)
-                                      : kmaincolor.withOpacity(0.5))),
+                                      ? kmaincolor4.withValues(alpha: 0.5)
+                                      : kmaincolor.withValues(alpha: 0.5))),
                         ],
                       ),
                       SizedBox(height: Sizeconfig.screenheight! * 0.03),
@@ -303,7 +303,7 @@ class LoginBody extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: color,
-        border: Border.all(color: Colors.grey.withOpacity(0.2)),
+        border: Border.all(color: Colors.grey.withValues(alpha: 0.2)),
         borderRadius: BorderRadius.circular(12),
       ),
       child: InkWell(

@@ -63,8 +63,8 @@ class AyahWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
                 color: Get.isDarkMode
-                    ? kmaincolor2dark.withOpacity(0.7)
-                    : Colors.white.withOpacity(0.7),
+                    ? kmaincolor2dark.withValues(alpha: 0.7)
+                    : Colors.white.withValues(alpha: 0.7),
               ),
               height: 50,
               width: Sizeconfig.screenwidth! / 1.07,
@@ -85,8 +85,8 @@ class AyahWidget extends StatelessWidget {
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                               color: Get.isDarkMode
-                                  ? kmaincolor2dark.withOpacity(0.7)
-                                  : Colors.white.withOpacity(0.7),
+                                  ? kmaincolor2dark.withValues(alpha: 0.7)
+                                  : Colors.white.withValues(alpha: 0.7),
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(100))),
                           child: Text(
@@ -231,7 +231,7 @@ InkWell _iconbuttons(IconData icon, VoidCallback onpressed) => InkWell(
         Shadow(
           offset: const Offset(1, 1),
           blurRadius: 2,
-          color: Colors.black26.withOpacity(0.1),
+          color: Colors.black26.withValues(alpha: 0.1),
         )
       ],
     ));

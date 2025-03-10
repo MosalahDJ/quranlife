@@ -275,8 +275,8 @@ class MenuPageBody extends StatelessWidget {
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     color: themeController.isDarkMode
-                        ? kmaincolor4.withOpacity(0.2)
-                        : kmaincolor.withOpacity(0.2),
+                        ? kmaincolor4.withValues(alpha: 0.2)
+                        : kmaincolor.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: widget ??
