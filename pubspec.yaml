@@ -1,0 +1,192 @@
+name: project
+description: "QuranLife is an islamic mobile application for every muslim"
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+# In Windows, build-name is used as the major, minor, and patch parts
+# of the product and file versions while build-number is used as the build suffix.
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.0
+
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
+dependencies:
+  animate_do: ^3.3.4
+  audioplayers: ^6.1.1
+  awesome_dialog: ^3.2.1
+  cloud_firestore: ^5.6.5
+  connectivity_plus: ^6.1.3
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.8
+  curved_navigation_bar: ^1.0.6
+  dots_indicator: ^3.0.0
+  firebase_auth: ^5.0.0
+  firebase_core: ^3.0.0
+  firebase_messaging: ^15.1.5
+  fl_chart: ^0.65.0
+  flashy_tab_bar2: ^0.0.10
+  flutter:
+    sdk: flutter
+  flutter_chat_bubble: ^2.0.2
+  flutter_compass: ^0.8.0
+  flutter_dotenv: ^5.2.1
+  flutter_google_maps_webservices: ^1.1.1
+  flutter_islamic_icons: ^1.0.2
+  flutter_polyline_points: ^2.1.0
+  flutter_timezone: ^3.0.1
+  font_awesome_flutter: ^10.8.0
+  geocoding: ^3.0.0
+  geolocator: ^13.0.1
+  get: ^4.6.6
+  google_maps_flutter: ^2.10.0
+  google_sign_in: ^6.2.1
+  googleapis: ^13.2.0
+  googleapis_auth: ^1.6.0
+  hijri: ^3.0.0
+  http: ^1.2.2
+  islamic_hijri_calendar: ^0.0.4
+  material_design_icons_flutter: ^7.0.7296
+  path: ^1.9.0
+  restart_app: ^1.3.2
+  sentry_flutter: ^8.13.2
+  share_plus: ^10.1.3
+  shared_preferences: ^2.2.2
+  skeletonizer: ^1.4.3
+  sqflite: ^2.4.1
+  timezone: ^0.10.0
+  url_launcher: ^6.3.1
+  vibration: ^3.1.3
+  visibility_detector: ^0.4.0+2
+
+dev_dependencies:
+  flutter_launcher_icons: ^0.14.1
+  flutter_lints: ^4.0.0
+
+  #package for adding Native Splash Screen
+  flutter_native_splash: ^2.4.1
+  flutter_test:
+    sdk: flutter
+
+#adding App Logo
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "lib/core/assets/images/app_logo/newlogo.png"
+
+#adding Native Splash Screen
+flutter_native_splash:
+  color: "#E7D37F"
+  color_dark: "#005B41"
+  image: lib/core/assets/images/app_logo/pnglogo1.png
+  image_dark: lib/core/assets/images/app_logo/pnglogo1.png
+  branding_bottom_padding: 24
+  android_gravity: center
+  android: true
+  ios: true
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The lint set provided by the package is
+  # activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.
+  flutter_lints: ^5.0.0
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  # assets:
+  #   - images/a_dot_burr.jpeg
+  #   - images/a_dot_ham.jpeg
+  assets:
+    - .env
+    - lib/core/assets/images/splash_view_image/
+    - lib/core/assets/images/on_boarding_image/
+    - lib/core/assets/images/login_images/
+    - lib/core/assets/images/homeimages/
+    - lib/core/assets/images/background_image/
+    - lib/core/assets/images/app_logo/
+    - lib/core/assets/images/salat_icons/
+    - lib/core/assets/images/adkar_icons/
+    - lib/core/assets/images/compass/
+    - lib/core/assets/images/profile_picture/
+    - lib/core/assets/json/quran.json
+    - lib/core/assets/json/adhkar.json
+    - lib/core/assets/json/adkartype.json
+    - lib/core/assets/json/names_of_allah.json
+    - lib/core/assets/json/teatchingprayer.json
+    - lib/core/assets/json/wudu.json
+    - lib/core/assets/json/ghusl.json
+    - lib/core/assets/json/sunanjumua.json
+    - lib/core/assets/json/quraanicsuplication.json
+    - lib/core/assets/json/seekingforgivnes.json
+    - lib/core/assets/json/prophets_supplication.json
+    - lib/core/assets/json/praise.json
+    - lib/core/assets/json/ahadit.json
+    - lib/core/assets/json/islamicruqya.json
+    - lib/core/assets/json/haj.json
+    - lib/core/assets/json/omra.json
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/to/resolution-aware-images
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/to/asset-from-package
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  fonts:
+    - family: Poppins-Black
+      fonts:
+        - asset: lib/core/assets/fonts/Poppins-Black.ttf
+    - family: Cairo
+      fonts:
+        - asset: lib/core/assets/fonts/Cairo-Regular.ttf
+        - asset: lib/core/assets/fonts/Cairo-Bold.ttf
+          weight: 700
+        - asset: lib/core/assets/fonts/Cairo-Light.ttf
+          weight: 300
+    - family: Amiri
+      fonts:
+        - asset: lib/core/assets/fonts/Amiri-Regular.ttf
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/to/font-from-package

@@ -1,0 +1,58 @@
+[
+    {
+      "id": 1,
+      "name": "morning_athkar"
+    },
+    {
+      "id": 2,
+      "name": "evening_athkar"
+    },
+    {
+      "id": 3,
+      "name": "waking_up_athkar"
+    },
+    {
+      "id": 4,
+      "name": "pre_wudu_athkar"
+    },
+    {
+      "id": 5,
+      "name": "sleep_athkar"
+    },
+    {
+      "id": 6,
+      "name": "prayer_athkar"
+    },
+    {
+      "id": 7,
+      "name": "adhan_athkar"
+    },
+    {
+      "id": 8,
+      "name": "mosque_athkar"
+    },
+    {
+      "id": 9,
+      "name": "home_athkar"
+    },
+    {
+      "id": 10,
+      "name": "bathroom_athkar"
+    },
+    {
+      "id": 11,
+      "name": "food_athkar"
+    },
+    {
+      "id": 12,
+      "name": "travel_athkar"
+    },
+    {
+      "id": 13,
+      "name": "post_prayer_athkar"
+    },
+    {
+      "id": 14,
+      "name": "misc_athkar"
+    }
+  ]
