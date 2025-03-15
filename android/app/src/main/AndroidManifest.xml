@@ -1,22 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-<uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
-    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
-    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
     <application
-        android:label="QuranLife"
+        android:label="quranlife"
         android:name="${applicationName}"
-        android:icon="@mipmap/launcher_icon">
-    <meta-data android:name="com.google.android.geo.API_KEY"
-               android:value="${MAPS_API_KEY}"/>
+        android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -44,16 +30,6 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-        <receiver android:exported="false" android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver" />
-        <receiver android:exported="false" android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
-                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
-                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
-            </intent-filter>
-        </receiver>
-        <receiver android:exported="false" android:name="com.dexterous.flutterlocalnotifications.ActionBroadcastReceiver" />
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and
@@ -64,10 +40,6 @@
         <intent>
             <action android:name="android.intent.action.PROCESS_TEXT"/>
             <data android:mimeType="text/plain"/>
-        </intent>
-        <intent>
-            <action android:name="android.intent.action.SENDTO" />
-            <data android:scheme="mailto" />
         </intent>
     </queries>
 </manifest>

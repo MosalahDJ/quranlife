@@ -89,11 +89,11 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example" "\0"
+            VALUE "CompanyName", "com.MoSalahDJ.quran_life" "\0"
             VALUE "FileDescription", "quranlife" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "quranlife" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2024 com.example. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2025 com.MoSalahDJ.quran_life. All rights reserved." "\0"
             VALUE "OriginalFilename", "quranlife.exe" "\0"
             VALUE "ProductName", "quranlife" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
